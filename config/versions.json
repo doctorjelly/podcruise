@@ -1,0 +1,52 @@
+{
+  "versions": [
+    {
+      "id": "us",
+      "label": "USA retail",
+      "path": "roms/originals/baserom.us.z64",
+      "role": "canonical",
+      "expected_sha1": "3542d5597c8a56ea8f5c63bceae97a24c4c08d58",
+      "expected_sha256": "8d6f85683b630e25385619af37197d48279366f6609bb6edc1201ff24c08b757"
+    },
+    {
+      "id": "jp",
+      "label": "Japan retail",
+      "path": "roms/originals/baserom.jp.z64",
+      "role": "comparison",
+      "expected_sha1": "9577ccd2d069d0e7e306cf21ddb0e4765a308072",
+      "expected_sha256": "44bf4f65daf5933ac1f903cffff8ee154f3f6613e3a7c806a0390495392644a7"
+    },
+    {
+      "id": "eu",
+      "label": "Europe retail",
+      "path": "roms/originals/baserom.eu.z64",
+      "role": "comparison",
+      "expected_sha1": "899a8245da017289c88e97327fdcd6694b770a25",
+      "expected_sha256": "326b810b24cef38b04b74084bfd487fb6d40ea955dc2a54849de942bde076edc"
+    },
+    {
+      "id": "lrg_rev1",
+      "label": "USA Rev 1 (Limited Run Games)",
+      "path": "roms/originals/baserom.us.rev1.z64",
+      "role": "post_link_reference",
+      "expected_sha1": "f71908f15a14ee124f9b471467432ade87e0951c",
+      "expected_sha256": "314730e75239c074b896af47d53dc0a5746131bcfc8b925795e4933fee5de147"
+    },
+    {
+      "id": "us_rev1_alias1",
+      "label": "USA (Limited Run Games filename)",
+      "path": "roms/originals/baserom.us.rev1.alias1.z64",
+      "role": "duplicate_alias",
+      "expected_sha1": "f71908f15a14ee124f9b471467432ade87e0951c",
+      "expected_sha256": "314730e75239c074b896af47d53dc0a5746131bcfc8b925795e4933fee5de147"
+    },
+    {
+      "id": "us_rev1_alias2",
+      "label": "USA revision 1, third alias",
+      "path": "roms/originals/baserom.us.rev1.alias2.z64",
+      "role": "duplicate_alias",
+      "expected_sha1": "f71908f15a14ee124f9b471467432ade87e0951c",
+      "expected_sha256": "314730e75239c074b896af47d53dc0a5746131bcfc8b925795e4933fee5de147"
+    }
+  ]
+}

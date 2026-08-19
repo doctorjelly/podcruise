@@ -1,0 +1,52 @@
+# Proprietary inputs: never commit ROM images in any byte order.
+*.z64
+*.n64
+*.v64
+*.rom
+
+# Extracted/generated copyrighted material.
+asm/
+assets/
+extracted/
+baserom*
+*.asm
+*.s
+*.bin
+*.raw
+*.dat
+*.elf
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+*.wav
+*.aiff
+*.aif
+*.mp3
+*.ogg
+*.png
+*.jpg
+*.jpeg
+*.tga
+*.bmp
+*.zip
+*.7z
+*.rar
+
+# Build and analysis caches.
+build/
+.cache/
+.splat_cache/
+.venv/
+analysis/generated/
+config/*/undefined_funcs_auto.txt
+config/*/undefined_syms_auto.txt
+
+# Python and editor noise.
+__pycache__/
+*.py[cod]
+.DS_Store
+.idea/
+.vscode/

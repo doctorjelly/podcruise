@@ -1,0 +1,1 @@
+// Intentionally empty during bootstrap; add only independently verified relocations.

@@ -1,0 +1,2 @@
+# Binary splitting/disassembly for N64 matching-decomp projects.
+splat64[mips]==0.50.0
