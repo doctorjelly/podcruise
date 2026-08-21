@@ -1,4 +1,4 @@
-/* Recovered from specification specs/func_80028E78.md (boundary corrected from func_80028E88). */
+/* Independently written from specs/functions/recovered/boundary_state_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct Ent80028E78 {

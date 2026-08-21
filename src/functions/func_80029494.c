@@ -1,4 +1,4 @@
-/* Independently written from scratchpad spec specs/func_80029494.md. */
+/* Independently written from specs/functions/recovered/boundary_state_tranche.md. */
 #include "podcruise/types.h"
 
 extern s32 func_80083D80(s32, f32 *, s32);

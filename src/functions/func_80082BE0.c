@@ -1,4 +1,4 @@
-/* Independently written from scratchpad spec specs/func_80082BE8.md. */
+/* Independently written from specs/functions/recovered/boundary_state_tranche.md. */
 
 #include "podcruise/types.h"
 
@@ -18,10 +18,25 @@ s32 func_80082BE0(void) {
         D_80120C30 = x;
         return 0;
     }
+#ifdef PODCRUISE_JP
+    if (x < 0) {
+        D_80120C30 = x;
+        if ((u32)x < 0x80000041U) {
+            return 0x7FFFFFBF;
+        }
+        return -x;
+    }
+    D_80120C30 = x;
+    if (x >= 0x7FFFFFC0) {
+        return 0x7FFFFFBF;
+    }
+    return x;
+#else
     if (x < 0) {
         D_80120C30 = x;
         return -x;
     }
     D_80120C30 = x;
     return x;
+#endif
 }

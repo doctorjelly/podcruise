@@ -1,4 +1,4 @@
-/* Independently written from scratchpad spec specs/func_800454AC.md. */
+/* Independently written from specs/functions/recovered/boundary_state_tranche.md. */
 
 #include "podcruise/types.h"
 
@@ -29,11 +29,13 @@ typedef struct {
 extern void func_8000AEFC(s16 arg0, s32 arg1, void *arg2, s32 arg3);
 extern void func_8000AB24(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
-void func_800454AC(Owner *owner, Entry **list, f32 value) {
+void func_800454A8(Owner *owner, Entry **list) {
     f32 best;
+    f32 value;
     s32 stop;
     Entry **cursor;
 
+    value = 0.0f;
     best = value;
     stop = 0;
     if (list != 0) {

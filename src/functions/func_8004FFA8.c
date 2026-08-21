@@ -38,7 +38,7 @@ extern void func_80030298(s32 arg0, s32 arg1);
 extern void func_8003FC94(s32 arg0);
 extern void func_80046670(s32 arg0, s32 arg1, s32 slot, s32 arg3);
 extern void func_800517D8(s32 arg0, s32 arg1, s32 arg2, f32 arg3);
-extern void func_80051898();
+extern void func_80051898(s32 arg0);
 extern void func_80063084(s32, s32, f32 *, f32 *, f32, f32);
 extern void func_8004B868(void);
 

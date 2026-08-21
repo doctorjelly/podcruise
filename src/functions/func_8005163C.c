@@ -1,4 +1,4 @@
-/* Independently written from specs/func_8005163C.md. */
+/* Independently written from specs/functions/recovered/boundary_state_tranche.md. */
 
 #include "podcruise/types.h"
 

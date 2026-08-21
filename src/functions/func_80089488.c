@@ -1,4 +1,4 @@
-/* Specification: specs/func_80089488.md (worker-authored) */
+/* Independently written from specs/functions/recovered/boundary_state_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct {

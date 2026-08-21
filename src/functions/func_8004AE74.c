@@ -1,4 +1,4 @@
-/* Recovered per specification specs/func_8004AE74.md (worker batch_03). */
+/* Independently written from specs/functions/recovered/boundary_state_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct Obj8004AE74 {

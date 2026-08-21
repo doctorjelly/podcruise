@@ -1,4 +1,4 @@
-/* Independently written from the specification for the fade-out step routine. */
+/* Independently written from specs/functions/recovered/boundary_state_tranche.md. */
 
 #include "podcruise/types.h"
 
@@ -7,7 +7,7 @@ extern s16 D_800A2608;
 extern s32 D_800A260C;
 extern s32 D_800A4BD8;
 extern s32 D_800A4BDC;
-extern f32 D_800A9DEC;
+extern f32 D_80099DEC;
 extern f32 D_80120BF8;
 
 extern void func_8000A920(s16 index, s32 flag);
@@ -36,7 +36,7 @@ s32 func_800290A4(void) {
         }
         level = 0.0f;
     } else {
-        level -= D_800A9DEC * D_80120BF8;
+        level -= D_80099DEC * D_80120BF8;
     }
 
     if (level < 0.0f) {

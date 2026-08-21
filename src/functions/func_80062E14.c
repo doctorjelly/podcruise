@@ -1,4 +1,4 @@
-/* Independently written from scratchpad spec specs/func_80062E14.md. */
+/* Independently written from specs/functions/recovered/boundary_state_tranche.md. */
 
 #include "podcruise/types.h"
 

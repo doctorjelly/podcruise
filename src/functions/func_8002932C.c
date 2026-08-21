@@ -1,4 +1,4 @@
-/* Recovered from specification specs/func_80029330.md */
+/* Independently written from specs/functions/recovered/boundary_state_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct Ent80029330 {
@@ -20,7 +20,7 @@ extern void func_80063084(s32, s32, f32 *, f32 *, f32, f32);
 extern void func_80063AA0(s32, s32);
 extern Ent80029330 *func_8003F800(u32, s32);
 
-void func_80029330(Obj80029330 *obj) {
+void func_8002932C(Obj80029330 *obj) {
     s32 unused;
     f32 place[3];
     Ent80029330 *entry;

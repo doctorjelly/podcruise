@@ -1,4 +1,4 @@
-/* Independently written from scratchpad spec specs/func_8002FA0C.md. */
+/* Independently written from specs/functions/recovered/boundary_state_tranche.md. */
 
 #include "podcruise/types.h"
 
@@ -11,7 +11,7 @@ extern void func_8002E034(void);
 extern void func_80030574(u32 limit);
 extern void func_80007E80(s32 arg0);
 
-void func_8002FA0C(s32 arg0) {
+void func_8002FA00(s32 arg0) {
     u32 *slot;
     s32 count;
 

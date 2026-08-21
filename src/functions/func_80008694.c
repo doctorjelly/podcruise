@@ -1,4 +1,4 @@
-/* Independently written from $S/specs/func_80008694.md. */
+/* Independently written from specs/functions/recovered/boundary_state_tranche.md. */
 
 #include "podcruise/types.h"
 

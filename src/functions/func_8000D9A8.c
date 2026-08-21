@@ -1,4 +1,4 @@
-/* Independently written from scratchpad specs/func_8000D9B0.md (corrected boundary: entry 0x8000D9A8). */
+/* Independently written from specs/functions/recovered/boundary_state_tranche.md. */
 
 
 #include "podcruise/types.h"

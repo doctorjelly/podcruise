@@ -1,4 +1,4 @@
-/* Implements the specification in $S/specs/func_80089E50.md (entry scan and tally). */
+/* Independently written from specs/functions/recovered/boundary_state_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct Struct80089E50 {

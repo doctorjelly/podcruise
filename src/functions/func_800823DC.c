@@ -1,4 +1,4 @@
-/* Specification: specs/func_800823DC.md (worker-authored) */
+/* Independently written from specs/functions/recovered/boundary_state_tranche.md. */
 #include "podcruise/types.h"
 
 f32 func_800823DC(f32 *a0, f32 *a1) {

@@ -1,4 +1,4 @@
-/* Recovered per specs/func_800862D8.md (worker specification). */
+/* Independently written from specs/functions/recovered/boundary_state_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct Viewport {

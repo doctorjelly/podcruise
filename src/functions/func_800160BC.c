@@ -1,4 +1,4 @@
-/* Specification: specs/func_800160BC.md (worker-authored) */
+/* Independently written from specs/functions/recovered/boundary_state_tranche.md. */
 #include "podcruise/types.h"
 
 void func_800160BC(f32 dst[4][4], f32 src[4][4]) {

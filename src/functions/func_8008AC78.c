@@ -1,4 +1,4 @@
-/* Implements specification $S/specs/func_8008AC78.md (64-bit unsigned divide with remainder). */
+/* Independently written from specs/functions/recovered/boundary_state_tranche.md. */
 #include "podcruise/types.h"
 
 void func_8008AC78(quotient, remainder, value, divisor)

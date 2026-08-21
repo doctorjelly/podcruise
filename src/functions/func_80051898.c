@@ -1,4 +1,4 @@
-/* Specification: specs/func_80051898.md (worker-authored) */
+/* Caller audit: specs/functions/recovered/boundary_state_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct Entity {
@@ -9,15 +9,15 @@ typedef struct Entity {
     u32 unk34;
 } Entity;
 
-extern void func_8002FA00(void);
+extern void func_8002FA00(s32 arg0);
 extern s32 func_8002FB18(u32);
 extern Entity *func_8003F800(u32, s32);
 
-void func_80051898(void) {
+void func_80051898(s32 arg0) {
     Entity *entity;
     s32 i;
 
-    func_8002FA00();
+    func_8002FA00(arg0);
     for (i = 0; i != 60; i++) {
         entity = func_8003F800(0x456C6D6F, i);
         if (entity != 0) {
