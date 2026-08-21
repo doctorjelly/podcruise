@@ -54,3 +54,9 @@ __pycache__/
 # Local agent configuration and session checkpoints; the workflow it
 # implements is documented in docs/MULTI_AGENT_WORKFLOW.md.
 .claude/
+
+# Analysis outputs are generated from local ROMs by `make inventory`, `make
+# match-c`, `make classify`, `make manifest` and `make report`. They are
+# reproducible on any machine that has the inputs, and they are ROM-derived, so
+# they are produced locally rather than committed.
+analysis/

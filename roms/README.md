@@ -14,12 +14,15 @@ copyrighted material.
 
 Analysis is pinned to specific retail builds, identified by cryptographic hash:
 
-| Build | SHA-1 |
-|---|---|
-| USA retail | `3542d5597c8a56ea8f5c63bceae97a24c4c08d58` |
-| Japan retail | `9577ccd2d069d0e7e306cf21ddb0e4765a308072` |
-| Europe retail | `899a8245da017289c88e97327fdcd6694b770a25` |
-| USA revision 1 | `f71908f15a14ee124f9b471467432ade87e0951c` |
+| Build | Expected local name | SHA-1 |
+|---|---|---|
+| USA retail | `baserom.us.z64` | `3542d5597c8a56ea8f5c63bceae97a24c4c08d58` |
+| Japan retail | `baserom.jp.z64` | `9577ccd2d069d0e7e306cf21ddb0e4765a308072` |
+| Europe retail | `baserom.eu.z64` | `899a8245da017289c88e97327fdcd6694b770a25` |
+| USA revision 1 | `baserom.us.rev1.z64` | `f71908f15a14ee124f9b471467432ade87e0951c` |
+
+The local names are the project's own convention. Rename your own copies to
+match; the names carry no information about where a file came from.
 
 These hashes exist so the tooling can confirm it is reading the build it
 expects, and so that a reported byte match is unambiguous about what it matched
