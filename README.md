@@ -3,11 +3,10 @@
 `podcruise` is a clean-room, multi-version decompilation project for the
 Nintendo 64 release of *Star Wars Episode I: Racer*.
 
-The immediate objective is a byte-matching rebuild of the original USA retail
-ROM. The Japan and Europe retail ROMs are treated as independent observations
-of the same source tree: shifted functions, changed constants, and localized
-data help distinguish code boundaries from data and relocation artifacts. The
-2022 Limited Run Games image is retained only as post-link patch evidence.
+USA retail is the canonical matching target. Japan, Europe, and the later USA
+revision are independent build targets and structural evidence for the shared
+source tree. Shifted functions, changed constants, and localized data help
+distinguish code boundaries from data and relocation artifacts.
 
 This repository contains no ROM data. You must supply legally obtained ROMs;
 all recognized ROM filename extensions are ignored by Git.
@@ -21,11 +20,20 @@ all recognized ROM filename extensions are ignored by Git.
   targets, and stack-frame prologues.
 - Relocation-tolerant normalized-window mapping from USA functions into the
   Japan and Europe executables.
-- Initial `splat` configurations for extracting the three original retail
-  builds without committing extracted code or assets.
-- Byte-identical untouched split/rebuild round trips for USA, Japan, and Europe.
-- Three independently specified source candidates, explicitly not yet claimed
-  as byte-matching C.
+- `splat` configurations for all four unique supplied images, without
+  committing extracted code or assets.
+- Byte-identical hybrid rebuilds for all four unique images.
+- 562 functions represented by independently written C, covering 61,476
+  original instruction bytes. `make manifest` generates that ledger into
+  `analysis/source_manifest.json` from the matching configuration and the
+  per-version comparison reports, and fails if any recovered source is left
+  unmeasured.
+- Exact IDO 5.3 matches for 506 of them (49,308 bytes) in USA and LRG, 462
+  (45,392 bytes) in Japan and 458 (44,764 bytes) in Europe, each verified
+  against its own image. Those C functions are substituted in each exact hybrid
+  build. The remaining reviewed candidates are behavior-recovered but not yet
+  byte-matching; see [`docs/CLAUDE_HANDOVER.md`](docs/CLAUDE_HANDOVER.md) for
+  the current backlog.
 
 This is the beginning of a source-matching decompilation, not a claim that the
 game is already decompiled or playable.
@@ -43,14 +51,14 @@ To install and run `splat` in the project-local environment:
 
 ```sh
 make setup
-make split-us
-make roundtrip-us
+make match-c
+make roundtrip-all
 ```
 
-`roundtrip-us` does not decompile any C. It reassembles the untouched local
-split, links it, flattens it back to a ROM, and requires byte identity with the
-validated input. This isolates the build system from later source-recovery
-errors. `make roundtrip-all` performs the same proof for USA, Japan, and Europe.
+`roundtrip-all` compiles and substitutes each build's verified C tranche, links
+the remaining local assembly and opaque data, and requires byte identity with
+all four unique validated inputs. The three third-party filenames are identical
+aliases, so one LRG revision build covers the same bytes in all three files.
 
 Generated assembly, extracted assets, build output, caches, and ROMs stay
 untracked. The committed `analysis/` reports contain only hashes, addresses,
@@ -64,16 +72,16 @@ them. See [`roms/README.md`](roms/README.md) for the expected files and hashes.
 
 ## Strategy
 
-USA retail is the canonical matching target because it is the earliest of the
-three supplied original retail builds. Japan and Europe are comparison targets,
-not patches to be blindly merged. Work proceeds in this order:
+USA retail is the canonical matching target because it is the earliest supplied
+retail build. Other versions are separate targets, not patches to be blindly
+merged. Work proceeds in this order:
 
 1. establish exact ROM identity and segment boundaries;
 2. derive and verify function boundaries across versions;
 3. identify compiler, SDK, library, and overlay behavior;
 4. split code/data with `splat` and preserve a matching-ROM build loop;
 5. replace assembly one function at a time with matching C;
-6. add Japan and Europe as build targets once common source boundaries settle.
+6. expand shared and version-specific source across every supplied build.
 
 The detailed plan and evidence policy are in
 [`docs/ROADMAP.md`](docs/ROADMAP.md).
