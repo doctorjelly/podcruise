@@ -37,6 +37,19 @@ GENERATED_OR_BINARY_SUFFIXES = {
     ".zip",
 }
 FORBIDDEN_PARTS = {"asm", "assets", "extracted"}
+# Absolute paths from an operator's machine, scratch directories and private
+# host names are not IP leaks, but they are still not publishable: they expose
+# a contributor's filesystem layout and infrastructure to anyone who clones
+# the repository. Recovered sources acquired these through generated comments,
+# which is exactly the way they escape review.
+# Assembled from fragments so that this file does not itself contain the
+# literals it forbids, which would make the check flag its own source.
+LOCAL_PATH_MARKERS = tuple(
+    "/" + name for name in
+    ("home/", "Users/", "media/", "tmp/claude", "var/folders/")
+)
+TEXT_SUFFIXES = {".c", ".h", ".md", ".py", ".json", ".yaml", ".yml", ".txt",
+                 ".cfg", ".toml", ".ld", ".mk", ".s", ".sh"}
 MAX_CANDIDATE_SIZE = 5 * 1024 * 1024
 ROM_MAGICS = {
     bytes.fromhex("80371240"),
@@ -77,6 +90,15 @@ def main() -> int:
             with path.open("rb") as handle:
                 if handle.read(4) in ROM_MAGICS:
                     failures.append(f"committable N64 ROM magic: {relative}")
+                    continue
+            if path.suffix.lower() in TEXT_SUFFIXES or not path.suffix:
+                body = path.read_text(encoding="utf-8", errors="replace")
+                for marker in LOCAL_PATH_MARKERS:
+                    if marker in body:
+                        failures.append(
+                            f"committable file contains a local machine path "
+                            f"({marker!r}): {relative}")
+                        break
     if failures:
         for failure in failures:
             print(f"ERROR: {failure}", file=sys.stderr)

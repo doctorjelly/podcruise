@@ -19,6 +19,7 @@ def render_report(
     mappings: dict,
     rebuilds: list[dict],
     bootstrap: dict | None,
+    manifest: dict | None = None,
 ) -> str:
     lines = [
         "# Bootstrap analysis report",
@@ -61,7 +62,7 @@ def render_report(
         lines.extend(
             [
                 "",
-                "## Untouched split round trips",
+                "## ROM rebuild verification",
                 "",
                 "| Version | Byte-identical | SHA-1 | C functions substituted |",
                 "|---|---|---|---:|",
@@ -70,24 +71,41 @@ def render_report(
         for rebuild in rebuilds:
             lines.append(
                 f"| {rebuild['version']} | {str(rebuild['byte_identical']).lower()} | "
-                f"`{rebuild['rebuilt_sha1']}` | 0 |"
+                f"`{rebuild['rebuilt_sha1']}` | "
+                f"{rebuild.get('c_functions_substituted', 0)} |"
             )
         lines.extend(
             [
                 "",
-                "These proofs validate extraction and linkage; they are not C-decompilation progress.",
+                "Each nonzero count is verified matching C substituted into that version's "
+                "otherwise local assembly/data round trip.",
             ]
         )
 
-    if bootstrap is not None:
+    if manifest is not None:
         lines.extend(
             [
-                "## First behavior-recovered candidates",
                 "",
-                f"- Source candidates: **{len(bootstrap['functions']):,}**",
-                f"- Original instruction bytes behaviorally represented: "
-                f"**{bootstrap['recovered_behavior_bytes']:,}**",
-                f"- Bytes verified as matching C: **{bootstrap['matching_c_bytes']:,}**",
+                "## Recovered source ledger",
+                "",
+                "Counted by `tools/make_source_manifest.py` from the matching "
+                "configuration and the per-version comparison reports, so these "
+                "numbers cannot drift from what the verifier actually proved.",
+                "",
+                f"- Functions represented by reviewed C: "
+                f"**{manifest['recovered_functions']:,}**",
+                f"- Original instruction bytes those functions occupy: "
+                f"**{manifest['recovered_bytes']:,}**",
+                "",
+                "| Build | Exact functions | Exact bytes |",
+                "|---|---:|---:|",
+            ]
+            + [
+                f"| {version} | {manifest['exact'][version]['functions']:,} | "
+                f"{manifest['exact'][version]['bytes']:,} |"
+                for version in ("us", "lrg_rev1", "jp", "eu")
+            ]
+            + [
                 "",
                 "Behavior recovery means an independently written specification and C candidate "
                 "exist. It does not count as matching decompilation until the identified original "
@@ -105,7 +123,12 @@ def render_report(
             f"IDO-style unconditional pseudo-branches and **{compiler['absolute_j_instructions']:,}** "
             f"absolute `j` instructions. Current hypothesis: **{compiler['hypothesis']}**.",
             "",
-            "This does not yet identify the exact compiler release or flags.",
+            (
+                f"The accepted recovered-leaf profile is **{bootstrap['matching_profile']}**. "
+                "Compiler choices may still vary elsewhere in the program."
+                if bootstrap is not None and bootstrap.get("matching_profile")
+                else "This does not yet identify the exact compiler release or flags."
+            ),
         ]
     )
 
@@ -134,6 +157,7 @@ def main() -> int:
     parser.add_argument("--compiler", type=Path, required=True)
     parser.add_argument("--mappings", type=Path, required=True)
     parser.add_argument("--bootstrap", type=Path)
+    parser.add_argument("--manifest", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
 
@@ -145,6 +169,7 @@ def main() -> int:
         load(args.mappings),
         rebuilds,
         load(args.bootstrap) if args.bootstrap is not None else None,
+        load(args.manifest) if args.manifest is not None else None,
     )
     if not report.endswith("\n"):
         report += "\n"

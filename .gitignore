@@ -50,3 +50,7 @@ __pycache__/
 .DS_Store
 .idea/
 .vscode/
+
+# Local agent configuration and session checkpoints; the workflow it
+# implements is documented in docs/MULTI_AGENT_WORKFLOW.md.
+.claude/

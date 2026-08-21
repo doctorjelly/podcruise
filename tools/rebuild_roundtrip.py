@@ -6,9 +6,16 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import shutil
 import subprocess
+import sys
 from pathlib import Path
+
+if __package__:
+    from tools.verify_c_matches import load_matching_config
+else:
+    from verify_c_matches import load_matching_config
 
 
 def sha1(path: Path) -> str:
@@ -19,9 +26,9 @@ def sha1(path: Path) -> str:
     return digest.hexdigest()
 
 
-def run(command: list[str], root: Path) -> None:
+def run(command: list[str], root: Path, env: dict[str, str] | None = None) -> None:
     print(" ".join(command), flush=True)
-    subprocess.run(command, cwd=root, check=True)
+    subprocess.run(command, cwd=root, env=env, check=True)
 
 
 def relative_argument(path: Path, root: Path) -> str:
@@ -49,7 +56,9 @@ def first_difference(left: Path, right: Path) -> int | None:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--version", choices=("us", "jp", "eu"), required=True)
+    parser.add_argument(
+        "--version", choices=("us", "jp", "eu", "lrg_rev1"), required=True
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
 
@@ -58,14 +67,28 @@ def main() -> int:
     version = next(item for item in config["versions"] if item["id"] == args.version)
 
     tools = {}
+    local_binutils = root / "build/toolchain/binutils-mips"
     for name in ("as", "ld", "objcopy"):
         executable = f"mips-linux-gnu-{name}"
         resolved = shutil.which(executable)
+        local = local_binutils / "usr/bin" / executable
+        if resolved is None and local.is_file():
+            resolved = str(local.resolve())
         if resolved is None:
             raise SystemExit(
                 f"missing {executable}; on macOS run: brew install mips-linux-gnu-binutils"
             )
         tools[name] = resolved
+
+    tool_env = os.environ.copy()
+    local_library = local_binutils / "usr/lib/x86_64-linux-gnu"
+    if local_library.is_dir():
+        previous = tool_env.get("LD_LIBRARY_PATH")
+        tool_env["LD_LIBRARY_PATH"] = (
+            str(local_library.resolve())
+            if not previous
+            else f"{local_library.resolve()}:{previous}"
+        )
 
     generated = root / "analysis/generated" / args.version
     build = root / "build" / args.version
@@ -74,29 +97,36 @@ def main() -> int:
     asset_objects = object_root / "assets"
     asm_objects.mkdir(parents=True, exist_ok=True)
     asset_objects.mkdir(parents=True, exist_ok=True)
+    generated_linker = (generated / f"podcruise.{args.version}.ld").read_text(
+        encoding="utf-8"
+    )
 
-    header_o = asm_objects / "header.o"
-    main_o = asm_objects / "main.o"
-    ipl3_o = asset_objects / "ipl3.o"
-    remainder_o = asset_objects / "remainder.o"
-    objects = [header_o, ipl3_o, main_o, remainder_o]
-
-    for name, output in (("header", header_o), ("main", main_o)):
+    objects: list[Path] = []
+    for source in sorted((generated / "asm").glob("*.s")):
+        output = asm_objects / f"{source.stem}.o"
+        if relative_argument(output, root) not in generated_linker:
+            continue
         run(
             [
                 tools["as"],
+                "-no-pad-sections",
                 "-march=vr4300",
                 "-mabi=32",
                 "-I",
                 str(generated / "include"),
                 "-o",
                 str(output),
-                str(generated / "asm" / f"{name}.s"),
+                str(source),
             ],
             root,
+            tool_env,
         )
+        objects.append(output)
 
-    for name, output in (("ipl3", ipl3_o), ("remainder", remainder_o)):
+    for source in sorted((generated / "assets").glob("*.bin")):
+        output = asset_objects / f"{source.stem}.o"
+        if relative_argument(output, root) not in generated_linker:
+            continue
         run(
             [
                 tools["ld"],
@@ -105,23 +135,68 @@ def main() -> int:
                 "binary",
                 "-o",
                 str(output),
-                str(generated / "assets" / f"{name}.bin"),
+                str(source),
             ],
             root,
+            tool_env,
         )
+        objects.append(output)
+
+    c_function_count = 0
+    regional_matching_config = root / f"config/c_matching.{args.version}.json"
+    matching_config_path = (
+        regional_matching_config
+        if regional_matching_config.is_file()
+        else root / "config/c_matching.json"
+    )
+    matching_config = load_matching_config(root, matching_config_path)
+    matching_config_argument = matching_config_path.relative_to(root).as_posix()
+    for unit in matching_config["units"]:
+        c_object = build / Path(unit["source"]).with_suffix(".o")
+        relative_c_object = c_object.relative_to(root).as_posix()
+        if relative_c_object not in generated_linker:
+            continue
+        run(
+            [
+                sys.executable,
+                "-m",
+                "tools.build_matching_object",
+                "--config",
+                matching_config_argument,
+                "--unit",
+                unit["id"],
+                "--profile",
+                "ido53_o2",
+                "--output",
+                relative_c_object,
+            ],
+            root,
+            tool_env,
+        )
+        objects.append(c_object)
+        c_function_count += len(unit["functions"])
 
     elf_path = build / f"podcruise.{args.version}.elf"
     map_path = build / f"podcruise.{args.version}.map"
     rom_path = build / f"podcruise.{args.version}.z64"
+    symbol_scripts = [
+        generated / "undefined_funcs_auto.txt",
+        generated / "undefined_syms_auto.txt",
+    ]
+    symbol_version = matching_config.get("symbol_version", args.version)
+    manual_symbols = root / f"config/{symbol_version}/undefined_syms.manual.txt"
+    if manual_symbols.is_file():
+        symbol_scripts.append(manual_symbols)
     run(
         [
             tools["ld"],
             "--no-check-sections",
             "--omagic",
-            "-T",
-            str(generated / "undefined_funcs_auto.txt"),
-            "-T",
-            str(generated / "undefined_syms_auto.txt"),
+            *[
+                argument
+                for script in symbol_scripts
+                for argument in ("-T", str(script))
+            ],
             "-T",
             str(generated / f"podcruise.{args.version}.ld"),
             "-Map",
@@ -131,8 +206,13 @@ def main() -> int:
             *[relative_argument(path, root) for path in objects],
         ],
         root,
+        tool_env,
     )
-    run([tools["objcopy"], "-O", "binary", str(elf_path), str(rom_path)], root)
+    run(
+        [tools["objcopy"], "-O", "binary", str(elf_path), str(rom_path)],
+        root,
+        tool_env,
+    )
 
     source_path = root / version["path"]
     expected_sha1 = version["expected_sha1"]
@@ -154,7 +234,12 @@ def main() -> int:
             "linker": "GNU mips-linux-gnu-ld",
             "binary_export": "GNU mips-linux-gnu-objcopy",
         },
-        "scope": "untouched local assembly and opaque binary round trip; zero C functions",
+        "c_functions_substituted": c_function_count,
+        "scope": (
+            "hybrid source/assembly round trip"
+            if c_function_count
+            else "untouched local assembly and opaque binary round trip"
+        ),
     }
     output_path = root / args.output
     output_path.parent.mkdir(parents=True, exist_ok=True)
