@@ -1,4 +1,4 @@
-/* Independently written from $S/specs/func_800910D4.md. */
+/* Independently written from specs/functions/recovered/medium_control_tranche.md. */
 
 #include "podcruise/types.h"
 

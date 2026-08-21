@@ -1,8 +1,7 @@
-/* Independently written from the specification $S/specs/func_80089870.md. */
+/* Independently written from specs/functions/recovered/medium_control_tranche.md. */
 #include "podcruise/types.h"
 
 extern s32 D_800A69B0;
-extern s32 D_800A69B0_2;
 extern u32 D_80149C70[15];
 extern u8 D_80149CB0;
 extern u8 D_80149CB1;
@@ -29,7 +28,7 @@ s32 func_80089870(void *arg0, void *arg1, void *arg2) {
     if (D_800A69B0 != 0) {
         return 0;
     }
-    D_800A69B0_2 = 1;
+    D_800A69B0 = 1;
     time = func_80090660();
     if (time < 0x165A0BCULL) {
         func_800880E0(queue, &message, 1);

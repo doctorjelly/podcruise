@@ -1,4 +1,4 @@
-/* Recovered from specification $S/specs/func_80062EC8.md */
+/* Independently written from specs/functions/recovered/medium_control_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct Obj80062EC8 {

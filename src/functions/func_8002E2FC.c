@@ -1,4 +1,4 @@
-/* Recovered from specification $S/specs/func_8002E2FC.md */
+/* Independently written from specs/functions/recovered/medium_control_tranche.md. */
 #include "podcruise/types.h"
 
 extern u8 D_800D7420[];

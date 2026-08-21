@@ -1,4 +1,4 @@
-/* Implements specs/func_8006FB00.md (worker specification). */
+/* Independently written from specs/functions/recovered/medium_control_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct Unk8006FB00Sub {

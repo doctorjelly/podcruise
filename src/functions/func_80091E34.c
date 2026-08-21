@@ -1,4 +1,4 @@
-/* Specification: specs/func_80091E34.md (worker-authored) */
+/* Independently written from specs/functions/recovered/medium_control_tranche.md. */
 #include "podcruise/types.h"
 
 typedef union {

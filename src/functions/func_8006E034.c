@@ -1,4 +1,4 @@
-/* Recovered per specs/functions/func_8006E034.md (worker specification). */
+/* Independently written from specs/functions/recovered/medium_control_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct {

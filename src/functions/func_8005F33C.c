@@ -1,4 +1,4 @@
-/* Independently written from specs/func_8005F33C.md. */
+/* Independently written from specs/functions/recovered/medium_control_tranche.md. */
 
 #include "podcruise/types.h"
 #include "podcruise/vector_math.h"

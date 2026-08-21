@@ -1,4 +1,4 @@
-/* Implements specs/func_80039B70.md (display buffer writeback sweep). */
+/* Independently written from specs/functions/recovered/medium_control_tranche.md. */
 #include "podcruise/types.h"
 
 extern u32 D_80000318;
