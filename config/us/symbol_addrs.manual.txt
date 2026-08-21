@@ -1,0 +1,26 @@
+// Reviewed USA globals referenced by matching C.
+D_8009A270 = 0x8009A270; // absolute:True
+D_8009A280 = 0x8009A280; // absolute:True
+D_8009A29C = 0x8009A29C; // absolute:True
+D_8009A324 = 0x8009A324; // absolute:True
+D_8009AD08 = 0x8009AD08; // absolute:True
+D_8009AD0C = 0x8009AD0C; // absolute:True
+D_8009B810 = 0x8009B810; // absolute:True
+D_8009B870 = 0x8009B870; // absolute:True
+D_8009B878 = 0x8009B878; // absolute:True
+D_8009B87C = 0x8009B87C; // absolute:True
+D_8009B880 = 0x8009B880; // absolute:True
+D_800A1CD0 = 0x800A1CD0; // absolute:True
+D_800A21AC = 0x800A21AC; // absolute:True
+D_800A59FC = 0x800A59FC; // absolute:True
+D_800A5A00 = 0x800A5A00; // absolute:True
+D_800A6700 = 0x800A6700; // absolute:True
+D_800A6750 = 0x800A6750; // absolute:True
+D_800A6758 = 0x800A6758; // absolute:True
+D_800A675C = 0x800A675C; // absolute:True
+D_800D2140 = 0x800D2140; // absolute:True
+D_800D6140 = 0x800D6140; // absolute:True
+D_8011AC8C = 0x8011AC8C; // absolute:True
+D_8011C840 = 0x8011C840; // absolute:True
+D_80120DF0 = 0x80120DF0; // absolute:True
+D_801488B8 = 0x801488B8; // absolute:True

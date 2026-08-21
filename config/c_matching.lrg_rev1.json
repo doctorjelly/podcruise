@@ -1,0 +1,6 @@
+{
+  "extends": "config/c_matching.json",
+  "version": "lrg_rev1",
+  "symbol_version": "us",
+  "rom": "roms/originals/baserom.us.rev1.z64"
+}

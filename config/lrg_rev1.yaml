@@ -1,23 +1,23 @@
-name: Star Wars Episode I Racer (USA retail)
-sha1: 3542d5597c8a56ea8f5c63bceae97a24c4c08d58
+name: Star Wars Episode I Racer (USA Rev 1, Limited Run Games)
+sha1: f71908f15a14ee124f9b471467432ade87e0951c
 
 options:
-  basename: podcruise.us
-  target_path: "roms/originals/baserom.us.z64"
-  elf_path: build/us/podcruise.us.elf
+  basename: podcruise.lrg_rev1
+  target_path: "roms/originals/baserom.us.rev1.z64"
+  elf_path: build/lrg_rev1/podcruise.lrg_rev1.elf
   base_path: ..
   platform: n64
 
-  # IDO 5.3 -O2 is exact for reviewed C units; other units remain unconfirmed.
+  # This revision retains the USA layout for every reviewed matching C unit.
   compiler: IDO
 
-  asm_path: analysis/generated/us/asm
-  asset_path: analysis/generated/us/assets
+  asm_path: analysis/generated/lrg_rev1/asm
+  asset_path: analysis/generated/lrg_rev1/assets
   src_path: src
-  build_path: build/us
-  cache_path: .cache/splat/us
-  generated_asm_macros_directory: analysis/generated/us/include
-  ld_script_path: analysis/generated/us/podcruise.us.ld
+  build_path: build/lrg_rev1
+  cache_path: .cache/splat/lrg_rev1
+  generated_asm_macros_directory: analysis/generated/lrg_rev1/include
+  ld_script_path: analysis/generated/lrg_rev1/podcruise.lrg_rev1.ld
   ld_dependencies: true
 
   find_file_boundaries: true
@@ -27,13 +27,15 @@ options:
   use_legacy_include_asm: false
   mips_abi_float_regs: o32
 
+  # The reviewed functions and their references retain USA addresses. Reusing
+  # these address-only maps does not assert that all surrounding code is equal.
   symbol_addrs_path:
     - config/us/symbol_addrs.manual.txt
     - config/us/symbol_addrs.auto.txt
   reloc_addrs_path:
     - config/us/reloc_addrs.txt
-  undefined_funcs_auto_path: analysis/generated/us/undefined_funcs_auto.txt
-  undefined_syms_auto_path: analysis/generated/us/undefined_syms_auto.txt
+  undefined_funcs_auto_path: analysis/generated/lrg_rev1/undefined_funcs_auto.txt
+  undefined_syms_auto_path: analysis/generated/lrg_rev1/undefined_syms_auto.txt
 
 segments:
   - name: header
@@ -44,9 +46,6 @@ segments:
     type: bin
     start: 0x40
 
-  # Bootstrap interval validated against the static-recomp observation. It is
-  # deliberately coarse and includes material still to classify as CPU code,
-  # data, or RSP microcode.
   - name: main
     type: code
     start: 0x1000

@@ -28,7 +28,7 @@
       "id": "lrg_rev1",
       "label": "USA Rev 1 (Limited Run Games)",
       "path": "roms/originals/baserom.us.rev1.z64",
-      "role": "post_link_reference",
+      "role": "comparison_build",
       "expected_sha1": "f71908f15a14ee124f9b471467432ade87e0951c",
       "expected_sha256": "314730e75239c074b896af47d53dc0a5746131bcfc8b925795e4933fee5de147"
     },
