@@ -1,4 +1,4 @@
-/* Recovered from specification $S/specs/func_80045F60.md */
+/* Independently written from specs/functions/recovered/medium_control_math_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct Blk80045F60 {

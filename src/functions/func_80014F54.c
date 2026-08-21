@@ -1,4 +1,4 @@
-/* Implements the specification in specs/func_80014F54.md (arc-tangent of a ratio, in degrees). */
+/* Independently written from specs/functions/recovered/medium_control_math_tranche.md. */
 #include "podcruise/types.h"
 
 extern f32 D_800A87C0;

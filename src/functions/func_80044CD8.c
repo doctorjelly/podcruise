@@ -1,4 +1,4 @@
-/* Specification: scratchpad specs/func_80044CD8.md */
+/* Independently written from specs/functions/recovered/medium_control_math_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct {

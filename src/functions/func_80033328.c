@@ -1,4 +1,4 @@
-/* Recovered per specs/func_80033328.md (worker specification). */
+/* Independently written from specs/functions/recovered/medium_control_math_tranche.md. */
 #include "podcruise/types.h"
 
 extern f64 D_80120BF0;

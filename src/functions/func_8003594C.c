@@ -1,4 +1,4 @@
-/* Specification: specs/func_8003594C.md (worker spec, batch_04) */
+/* Independently written from specs/functions/recovered/medium_control_math_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct {
