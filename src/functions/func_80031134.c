@@ -1,4 +1,4 @@
-/* Recovered from specification specs/func_80031134.md (worker-authored). */
+/* Recovery evidence: specs/functions/recovered/medium_system_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct Rec80031134 {

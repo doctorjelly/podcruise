@@ -1,4 +1,4 @@
-/* Recovered per specification specs/func_80084148.md (display-list triangle walker). */
+/* Recovery evidence: specs/functions/recovered/medium_system_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct {

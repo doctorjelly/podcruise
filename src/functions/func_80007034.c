@@ -1,4 +1,4 @@
-/* Independently written from specs/functions/func_80007034.md. */
+/* Recovery evidence: specs/functions/recovered/medium_system_tranche.md. */
 
 #include "podcruise/types.h"
 

@@ -1,4 +1,4 @@
-/* Implements the specification in specs/func_80086EB4.md */
+/* Recovery evidence: specs/functions/recovered/medium_system_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct {

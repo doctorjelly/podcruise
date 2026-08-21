@@ -1,4 +1,4 @@
-/* Independently written from scratchpad spec specs/func_80016A20.md. */
+/* Recovery evidence: specs/functions/recovered/medium_system_tranche.md. */
 
 #include "podcruise/types.h"
 

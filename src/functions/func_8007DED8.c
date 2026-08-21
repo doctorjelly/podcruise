@@ -1,4 +1,4 @@
-/* Recovered from specification specs/func_8007DED8.md (worker batch 06). */
+/* Recovery evidence: specs/functions/recovered/medium_system_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct Node8007DED8 {

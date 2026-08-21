@@ -1,4 +1,4 @@
-/* Recovered per specs/func_80085FB0.md (perspective frustum matrix build). */
+/* Recovery evidence: specs/functions/recovered/medium_system_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct {
