@@ -1,4 +1,4 @@
-/* Independently written from scratchpad spec specs/func_80037C8C.md. */
+/* Recovered from specs/functions/recovered/medium_core_tranche.md. */
 
 #include "podcruise/types.h"
 
@@ -41,12 +41,6 @@ void func_80037C8C(void *arg0, f32 arg1[4][3], Node80037C8C *arg2) {
     s32 index;
     u32 slot;
     void *child;
-
-
-
-
-
-
     if (D_800A3FE8 == 0) {
         slot = func_80033E08();
         if ((arg2->flags & 3) != 0) {
@@ -67,7 +61,10 @@ void func_80037C8C(void *arg0, f32 arg1[4][3], Node80037C8C *arg2) {
         if (D_800A3FE8 != 0) {
             func_80033F94(arg1);
         } else {
-            gfx = D_80112C90; D_80112C90 = gfx + 1; gfx->hi = 0xDA380000; gfx->lo = slot;
+            gfx = D_80112C90;
+            D_80112C90 = gfx + 1;
+            gfx->hi = 0xDA380000;
+            gfx->lo = slot;
         }
     }
 
@@ -89,7 +86,10 @@ void func_80037C8C(void *arg0, f32 arg1[4][3], Node80037C8C *arg2) {
         if (D_800A3FE8 != 0) {
             func_800344C8();
         } else {
-            gfx = D_80112C90; D_80112C90 = gfx + 1; gfx->hi = 0xD8380002; gfx->lo = 0x40;
+            gfx = D_80112C90;
+            D_80112C90 = gfx + 1;
+            gfx->hi = 0xD8380002;
+            gfx->lo = 0x40;
         }
     }
     D_800A3FD8 = D_800A3FD8 - 1;

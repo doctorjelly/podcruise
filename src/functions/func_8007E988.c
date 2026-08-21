@@ -1,4 +1,4 @@
-/* Recovered from specification specs/func_8007E988.md (worker-authored). */
+/* Recovered from specs/functions/recovered/medium_core_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct Vec3f8007E988 {

@@ -1,4 +1,4 @@
-/* Recovered from specification $S/specs/func_800678A8.md */
+/* Recovered from specs/functions/recovered/medium_core_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct Obj800678A8 {

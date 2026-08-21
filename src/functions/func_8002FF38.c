@@ -1,4 +1,4 @@
-/* Specification: $S/specs/func_8002FF38.md */
+/* Recovered from specs/functions/recovered/medium_core_tranche.md. */
 #include "podcruise/types.h"
 
 #define PTR2INT(p) ((u32)(unsigned long)(p))
@@ -61,7 +61,7 @@ Object8002FF38 *func_8002FF38(s32 index) {
             obj->unk_8 = (s32)PTR2INT(dest);
         }
         dest += size;
-            dest = INT2PTR((PTR2INT(dest) + 0xF) & ~0xF);
+        dest = INT2PTR((PTR2INT(dest) + 0xF) & ~0xF);
         for (; i < obj->unk_C; i++) {
             size = (i + 1 == obj->unk_C ? (s32)(range[3] - range[2]) : obj->unk_10[i + 1].unk_4) - obj->unk_10[i].unk_4;
             func_80011D60(base + (range[2] + obj->unk_10[i].unk_4), dest, size);

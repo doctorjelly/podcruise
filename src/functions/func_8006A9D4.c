@@ -1,4 +1,4 @@
-/* Recovered from specification $S/specs/func_8006A9D4.md */
+/* Recovered from specs/functions/recovered/medium_core_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct Obj8006A9D4 {
@@ -36,7 +36,8 @@ f32 func_8006A9D4(Obj8006A9D4 *self, f32 *pos, s32 arg2, f32 *out) {
     saved[2] = pos[2];
     result = 0.0f;
     self->unk64 &= ~0x200;
-    if (!((((f32)self->unk1998 - 400.0f) / 600.0f) < 1.0) && !(self->unk60 & 0x20) && !(self->unk64 & 0x04000000)) {
+    if (!(((f32)self->unk1998 - 400.0f) / 600.0f < 1.0) &&
+        !(self->unk60 & 0x20) && !(self->unk64 & 0x04000000)) {
         if ((self->unk60 & 0xF) != 2) {
             pos[2] = 0.0f;
         } else {
