@@ -1,4 +1,4 @@
-/* Specification: specs/func_80042970.md (camera follow update) */
+/* Recovered from specs/functions/recovered/medium_state_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct {

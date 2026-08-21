@@ -1,4 +1,4 @@
-/* Recovered from specification $S/specs/func_80092050.md */
+/* Recovered from specs/functions/recovered/medium_state_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct Ctx80092050 {
@@ -34,7 +34,7 @@ s32 func_80092050(void *arg0, s32 arg1, u16 arg2, void *arg3) {
         D_80149CB0 = 2;
         D_800A7EE0 = arg1;
         for (i = 0; i < arg1; i++) {
-            *p = 0; p++;
+            *p++ = 0;
         }
         D_8014D720.unk3C = 1;
         p[0] = 0xFF;
