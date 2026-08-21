@@ -1,4 +1,4 @@
-/* Independently written from specs/functions/func_80068D04.md. */
+/* Recovered from specs/functions/recovered/extended_runtime_tranche.md. */
 
 #include "podcruise/vector_math.h"
 

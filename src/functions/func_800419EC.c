@@ -1,4 +1,4 @@
-/* Recovered from specification $S/specs/func_800419EC.md */
+/* Recovered from specs/functions/recovered/extended_runtime_tranche.md. */
 #include "podcruise/vector_math.h"
 
 typedef struct Pose800419EC {

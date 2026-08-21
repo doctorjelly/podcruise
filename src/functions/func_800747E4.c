@@ -1,4 +1,4 @@
-/* Recovered from specification $S/specs/func_800747E4.md */
+/* Recovered from specs/functions/recovered/extended_runtime_tranche.md. */
 #include "podcruise/vector_math.h"
 
 extern f64 D_800AD988;

@@ -1,4 +1,4 @@
-/* Implements specification specs/func_80010B34.md (marker projection and sprite update). */
+/* Recovered from specs/functions/recovered/extended_runtime_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct {

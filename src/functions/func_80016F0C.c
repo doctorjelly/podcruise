@@ -1,4 +1,4 @@
-/* Specification: scratchpad specs/func_80016F0C.md */
+/* Recovered from specs/functions/recovered/extended_runtime_tranche.md. */
 #include "podcruise/types.h"
 
 extern f64 D_800A87F8;

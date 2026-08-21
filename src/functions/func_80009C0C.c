@@ -1,4 +1,4 @@
-/* Implements specification specs/func_80009C0C.md (periodic audio cue sweep). */
+/* Recovered from specs/functions/recovered/extended_runtime_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct {
