@@ -1,4 +1,4 @@
-/* Specification: specs/func_80096BF0.md (worker spec, batch_04) */
+/* Recovered from specs/functions/recovered/medium_pipeline_tranche.md. */
 #include "podcruise/types.h"
 
 

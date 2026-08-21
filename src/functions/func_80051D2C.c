@@ -1,5 +1,24 @@
-/* Recovered per specs/func_80051D2C.md (worker specification). */
+/* Recovered from specs/functions/recovered/medium_pipeline_tranche.md. */
 #include "podcruise/types.h"
+
+#define FUNC_80051D2C_MODE_3_COUNT_US 0x4F
+#define FUNC_80051D2C_MODE_4_COUNT_US 0x90
+#define FUNC_80051D2C_MODE_5_COUNT_US 0x5B
+#define FUNC_80051D2C_MODE_3_COUNT_JP 0x56
+#define FUNC_80051D2C_MODE_4_COUNT_JP 0x89
+#define FUNC_80051D2C_MODE_5_COUNT_JP 0x90
+
+#ifndef FUNC_80051D2C_MODE_3_COUNT
+#define FUNC_80051D2C_MODE_3_COUNT FUNC_80051D2C_MODE_3_COUNT_US
+#endif
+
+#ifndef FUNC_80051D2C_MODE_4_COUNT
+#define FUNC_80051D2C_MODE_4_COUNT FUNC_80051D2C_MODE_4_COUNT_US
+#endif
+
+#ifndef FUNC_80051D2C_MODE_5_COUNT
+#define FUNC_80051D2C_MODE_5_COUNT FUNC_80051D2C_MODE_5_COUNT_US
+#endif
 
 extern void func_8003EC40(s16 x, s16 y, u8 arg2, u8 arg3, u8 arg4, u8 arg5, u8 *arg6);
 extern void func_80051C80(void *object, u32 tag);
@@ -37,13 +56,13 @@ void func_80051D2C(void *object, s32 reset) {
         count = 0x36;
     }
     if (D_800A599C == 3) {
-        count = 0x4F;
+        count = FUNC_80051D2C_MODE_3_COUNT;
     }
     if (D_800A599C == 4) {
-        count = 0x90;
+        count = FUNC_80051D2C_MODE_4_COUNT;
     }
     if (D_800A599C == 5) {
-        count = 0x5B;
+        count = FUNC_80051D2C_MODE_5_COUNT;
     }
     for (index = 1; index < count; index++) {
         if (D_800A599C == 1) {

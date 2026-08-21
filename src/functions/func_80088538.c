@@ -1,4 +1,4 @@
-/* Specification: specs/func_80088538.md (worker spec, batch_04) */
+/* Recovered from specs/functions/recovered/medium_pipeline_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct Voice80088538 {

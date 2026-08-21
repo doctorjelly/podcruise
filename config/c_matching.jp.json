@@ -22607,6 +22607,177 @@
         "D_80148948": "D_8014BBB8",
         "D_801489C8": "D_8014BC38"
       }
+    },
+    {
+      "id": "func_80005240",
+      "source": "src/functions/func_80005240.c",
+      "link_vram": "0x80005240",
+      "absolute_symbols": {
+        "func_800026BC": "0x800026BC",
+        "func_800020D8": "0x800020D8",
+        "func_800035BC": "0x800035BC",
+        "func_8001571C": "0x8001571C",
+        "func_80017FB8": "0x80017FB8",
+        "func_8001800C": "0x8001800C",
+        "D_8009AF60": "0x8009AF60",
+        "D_8009AF64": "0x8009AF64",
+        "D_8009AF68": "0x8009AF68",
+        "D_8009AF70": "0x8009AF70",
+        "D_800B1B00": "0x800B1B00",
+        "D_800B1B08": "0x800B1B08",
+        "D_800B1B18": "0x800B1B18",
+        "D_800B1B28": "0x800B1B28",
+        "D_800B1B38": "0x800B1B38",
+        "D_800B1B68": "0x800B1B68",
+        "D_800B1B78": "0x800B1B78",
+        "D_800B1B84": "0x800B1B84",
+        "D_800B1B8C": "0x800B1B8C",
+        "D_800B1B90": "0x800B1B90"
+      },
+      "functions": [
+        {"name": "func_80005240", "vram": "0x80005240", "rom": "0x5E40", "size": 716}
+      ],
+      "defines": {
+        "func_800155EC": "func_8001571C",
+        "func_80017E88": "func_80017FB8",
+        "func_80017EDC": "func_8001800C",
+        "D_8009A270": "D_8009AF60",
+        "D_8009A274": "D_8009AF64",
+        "D_8009A278": "D_8009AF68",
+        "D_8009A280": "D_8009AF70",
+        "D_800AE8B0": "D_800B1B00",
+        "D_800AE8B8": "D_800B1B08",
+        "D_800AE8C8": "D_800B1B18",
+        "D_800AE8D8": "D_800B1B28",
+        "D_800AE8E8": "D_800B1B38",
+        "D_800AE918": "D_800B1B68",
+        "D_800AE928": "D_800B1B78",
+        "D_800AE934": "D_800B1B84",
+        "D_800AE93C": "D_800B1B8C",
+        "D_800AE940": "D_800B1B90"
+      }
+    },
+    {
+      "id": "func_80008C58",
+      "source": "src/functions/func_80008C58.c",
+      "link_vram": "0x80008C58",
+      "absolute_symbols": {
+        "func_8000B98C": "0x8000B98C",
+        "func_80017BF0": "0x80017BF0",
+        "func_80082644": "0x80082644",
+        "func_80015600": "0x80015600",
+        "func_80015668": "0x80015668",
+        "func_800154F0": "0x800154F0",
+        "func_80008760": "0x80008760",
+        "D_8009B9F8": "0x8009B9F8",
+        "D_8009B9FC": "0x8009B9FC",
+        "D_800AB038": "0x800AB038",
+        "D_800AB040": "0x800AB040",
+        "D_800AB048": "0x800AB048",
+        "D_800D9BEC": "0x800D9BEC"
+      },
+      "functions": [
+        {"name": "func_80008C58", "vram": "0x80008C58", "rom": "0x9858", "size": 720}
+      ],
+      "defines": {
+        "func_80017AC0": "func_80017BF0",
+        "func_800819A4": "func_80082644",
+        "func_800154D0": "func_80015600",
+        "func_80015538": "func_80015668",
+        "func_800153C0": "func_800154F0",
+        "D_8009AD08": "D_8009B9F8",
+        "D_8009AD0C": "D_8009B9FC",
+        "D_800A81E8": "D_800AB038",
+        "D_800A81F0": "D_800AB040",
+        "D_800A81F8": "D_800AB048",
+        "D_800D697C": "D_800D9BEC"
+      }
+    },
+    {
+      "id": "func_8005299C",
+      "source": "src/functions/func_80051D2C.c",
+      "link_vram": "0x8005299C",
+      "absolute_symbols": {
+        "func_8003F5C0": "0x8003F5C0",
+        "func_800528F0": "0x800528F0",
+        "func_8008B3A4": "0x8008B3A4",
+        "D_800A80B4": "0x800A80B4",
+        "D_800A8144": "0x800A8144",
+        "D_800A821C": "0x800A821C",
+        "D_800A8374": "0x800A8374",
+        "D_800A8598": "0x800A8598",
+        "D_800A87E0": "0x800A87E0",
+        "D_800A87E8": "0x800A87E8",
+        "D_800A87EC": "0x800A87EC",
+        "D_800AFE48": "0x800AFE48",
+        "D_800AFE54": "0x800AFE54",
+        "D_80123E60": "0x80123E60"
+      },
+      "functions": [
+        {"name": "func_8005299C", "vram": "0x8005299C", "rom": "0x5359C", "size": 712}
+      ],
+      "defines": {
+        "func_80051D2C": "func_8005299C",
+        "func_8003EC40": "func_8003F5C0",
+        "func_80051C80": "func_800528F0",
+        "func_8008A6B4": "func_8008B3A4",
+        "D_800A5344": "D_800A80B4",
+        "D_800A53D4": "D_800A8144",
+        "D_800A54AC": "D_800A821C",
+        "D_800A55E8": "D_800A8374",
+        "D_800A5828": "D_800A8598",
+        "D_800A599C": "D_800A87E0",
+        "D_800A59A0": "D_800A87E8",
+        "D_800A59A4": "D_800A87EC",
+        "D_800ACC24": "D_800AFE48",
+        "D_800ACC30": "D_800AFE54",
+        "D_80120BF0": "D_80123E60",
+        "FUNC_80051D2C_MODE_3_COUNT": "FUNC_80051D2C_MODE_3_COUNT_JP",
+        "FUNC_80051D2C_MODE_4_COUNT": "FUNC_80051D2C_MODE_4_COUNT_JP",
+        "FUNC_80051D2C_MODE_5_COUNT": "FUNC_80051D2C_MODE_5_COUNT_JP"
+      }
+    },
+    {
+      "id": "func_80089228",
+      "source": "src/functions/func_80088538.c",
+      "link_vram": "0x80089228",
+      "absolute_symbols": {
+        "D_800A97E0": "0x800A97E0",
+        "D_800B0FD8": "0x800B0FD8",
+        "func_80089178": "0x80089178"
+      },
+      "functions": [
+        {"name": "func_80089228", "vram": "0x80089228", "rom": "0x89E28", "size": 664}
+      ],
+      "defines": {
+        "func_80088538": "func_80089228",
+        "D_800A6990": "D_800A97E0",
+        "D_800ADD88": "D_800B0FD8",
+        "func_80088488": "func_80089178"
+      }
+    },
+    {
+      "id": "func_800978E0",
+      "source": "src/functions/func_80096BF0.c",
+      "link_vram": "0x800978E0",
+      "absolute_symbols": {
+        "D_800AAF10": "0x800AAF10",
+        "D_800AAF24": "0x800AAF24",
+        "func_8008CFE0": "0x8008CFE0",
+        "func_80098B50": "0x80098B50",
+        "__ll_rem": "0x8008B7FC",
+        "__ll_div": "0x8008B838"
+      },
+      "functions": [
+        {"name": "func_800978E0", "vram": "0x800978E0", "rom": "0x984E0", "size": 672}
+      ],
+      "defines": {
+        "func_80096BF0": "func_800978E0",
+        "D_800A80C0": "D_800AAF10",
+        "D_800A80D4": "D_800AAF24",
+        "func_8008C2F0": "func_8008CFE0",
+        "func_80097E60": "func_80098B50"
+      }
     }
   ]
 }

@@ -1,4 +1,4 @@
-/* Specification: scratchpad specs/func_80008C58.md */
+/* Recovered from specs/functions/recovered/medium_pipeline_tranche.md. */
 #include "podcruise/types.h"
 
 extern f32 sqrtf(f32 value);
@@ -8,7 +8,7 @@ extern f32 sqrtf(f32 value);
 
 extern void func_8000B98C(void *matrix, f32 *point);
 extern void func_80017AC0(f32 *plane, f32 *axis, f32 *origin);
-extern f32 func_800819A4(f32 *plane, f32 *point, f32 *result);
+extern void func_800819A4(f32 *plane, f32 *point, f32 *result);
 extern f32 func_800154D0(f32 *vector);
 extern void func_80015538(f32 *out, f32 *left, f32 *right);
 extern f32 func_800153C0(f32 *vector);

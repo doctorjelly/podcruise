@@ -1,4 +1,4 @@
-/* Recovered per specs/func_80005240.md (worker specification). */
+/* Recovered from specs/functions/recovered/medium_pipeline_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct View80005240 {
