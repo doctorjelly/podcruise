@@ -1,4 +1,4 @@
-/* Independently written from specs/func_8007B828.md (worker batch_03). */
+/* Recovery evidence: specs/functions/recovered/medium_runtime_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct {

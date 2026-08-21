@@ -1,4 +1,4 @@
-/* Implements the specification specs/func_80067AB4.md (scratchpad). */
+/* Recovery evidence: specs/functions/recovered/medium_runtime_tranche.md. */
 
 #include "podcruise/types.h"
 

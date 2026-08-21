@@ -1,4 +1,4 @@
-/* Independently written from specs/func_80075FC4.md (worker batch_03). */
+/* Recovery evidence: specs/functions/recovered/medium_runtime_tranche.md. */
 #include "podcruise/types.h"
 
 extern f32 D_800A5CA0[][27];

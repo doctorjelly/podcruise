@@ -20,16 +20,16 @@ and why the earlier `0x99000` interval was wrong.
 
 | Build | Exact functions | Exact bytes | Share of CPU text | Configured units |
 |---|---:|---:|---:|---:|
-| USA retail | 916 | 191,284 | 30.78% | 1,104 |
-| Japan retail | 835 | 167,504 | 26.95% | 868 |
-| Europe retail | 835 | 174,824 | 28.13% | 867 |
-| USA LRG revision | 916 | 191,284 | 30.78% | 1,104 |
+| USA retail | 918 | 192,172 | 30.92% | 1,109 |
+| Japan retail | 837 | 168,392 | 27.09% | 873 |
+| Europe retail | 837 | 175,712 | 28.27% | 872 |
+| USA LRG revision | 918 | 192,172 | 30.92% | 1,109 |
 
 "Configured" counts functions with a reviewed C source under test. The gap
 between configured and exact is behaviour-recovered work: the source compiles,
 and in many cases to the original's exact length, but the bytes do not yet
-match. The USA ledger currently represents 295,080 original bytes in reviewed
-C, or 47.48% of CPU text; only the exact 30.78% is eligible for substitution
+match. The USA ledger currently represents 297,276 original bytes in reviewed
+C, or 47.83% of CPU text; only the exact 30.92% is eligible for substitution
 in the canonical rebuild.
 
 Each figure is produced by `make match-c`, which compiles every unit with the

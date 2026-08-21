@@ -1,4 +1,4 @@
-/* Recovered from specification $S/specs/func_8008C390.md */
+/* Recovery evidence: specs/functions/recovered/medium_runtime_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct Sub8008C390 {

@@ -22012,6 +22012,131 @@
         "D_801217B0": "D_8012A450",
         "func_80038D5C": "func_8003D6CC"
       }
+    },
+    {
+      "id": "func_8006CF94",
+      "source": "src/functions/func_80067AB4.c",
+      "link_vram": "0x8006CF94",
+      "absolute_symbols": {
+        "D_800B6140": "0x800B6140",
+        "func_80036AB4": "0x80036AB4",
+        "func_8006B334": "0x8006B334"
+      },
+      "functions": [
+        {"name": "func_8006CF94", "vram": "0x8006CF94", "rom": "0x6DB94", "size": 444}
+      ],
+      "defines": {
+        "func_80067AB4": "func_8006CF94",
+        "D_800AD4E0": "D_800B6140",
+        "func_800334F4": "func_80036AB4",
+        "func_80065E54": "func_8006B334"
+      }
+    },
+    {
+      "id": "func_8007B4A4",
+      "source": "src/functions/func_80075FC4.c",
+      "link_vram": "0x8007B4A4",
+      "absolute_symbols": {
+        "D_800AAFA0": "0x800AAFA0",
+        "D_800B6634": "0x800B6634",
+        "func_800156F8": "0x800156F8",
+        "func_80015718": "0x80015718",
+        "func_800157B8": "0x800157B8",
+        "func_800157EC": "0x800157EC",
+        "func_80015850": "0x80015850",
+        "func_80015960": "0x80015960",
+        "func_800159C8": "0x800159C8",
+        "func_80015B6C": "0x80015B6C",
+        "func_80017084": "0x80017084",
+        "func_80017A10": "0x80017A10",
+        "func_80017DA8": "0x80017DA8"
+      },
+      "functions": [
+        {"name": "func_8007B4A4", "vram": "0x8007B4A4", "rom": "0x7C0A4", "size": 444}
+      ],
+      "defines": {
+        "func_80075FC4": "func_8007B4A4",
+        "D_800A5CA0": "D_800AAFA0",
+        "D_800AD9D4": "D_800B6634",
+        "func_80015268": "func_800156F8",
+        "func_80015288": "func_80015718",
+        "func_80015328": "func_800157B8",
+        "func_8001535C": "func_800157EC",
+        "func_800153C0": "func_80015850",
+        "func_800154D0": "func_80015960",
+        "func_80015538": "func_800159C8",
+        "func_800156DC": "func_80015B6C",
+        "func_80016BF4": "func_80017084",
+        "func_80017580": "func_80017A10",
+        "func_80017918": "func_80017DA8"
+      }
+    },
+    {
+      "id": "func_80080D08",
+      "source": "src/functions/func_8007B828.c",
+      "link_vram": "0x80080D08",
+      "absolute_symbols": {
+        "D_801255B0": "0x801255B0",
+        "D_801255B8": "0x801255B8",
+        "func_8001864C": "0x8001864C",
+        "func_8004471C": "0x8004471C",
+        "func_80080C24": "0x80080C24"
+      },
+      "functions": [
+        {"name": "func_80080D08", "vram": "0x80080D08", "rom": "0x81908", "size": 444}
+      ],
+      "defines": {
+        "func_8007B828": "func_80080D08",
+        "D_8011C910": "D_801255B0",
+        "D_8011C918": "D_801255B8",
+        "func_800181BC": "func_8001864C",
+        "func_8003FD7C": "func_8004471C",
+        "func_8007B744": "func_80080C24"
+      }
+    },
+    {
+      "id": "func_800918E0",
+      "source": "src/functions/func_8008C390.c",
+      "link_vram": "0x800918E0",
+      "absolute_symbols": {
+        "D_800AD254": "0x800AD254",
+        "func_80091FD0": "0x80091FD0",
+        "func_80091FF0": "0x80091FF0"
+      },
+      "functions": [
+        {"name": "func_800918E0", "vram": "0x800918E0", "rom": "0x924E0", "size": 440}
+      ],
+      "defines": {
+        "func_8008C390": "func_800918E0",
+        "D_800A7F54": "D_800AD254",
+        "func_8008CA80": "func_80091FD0",
+        "func_8008CAA0": "func_80091FF0"
+      }
+    },
+    {
+      "id": "func_8009A644",
+      "source": "src/functions/func_800950F4.c",
+      "link_vram": "0x8009A644",
+      "absolute_symbols": {
+        "D_80152950": "0x80152950",
+        "D_801551D0": "0x801551D0",
+        "D_801551D1": "0x801551D1",
+        "D_80155210": "0x80155210",
+        "func_8008D3D0": "0x8008D3D0",
+        "func_80095D20": "0x80095D20"
+      },
+      "functions": [
+        {"name": "func_8009A644", "vram": "0x8009A644", "rom": "0x9B244", "size": 424}
+      ],
+      "defines": {
+        "func_800950F4": "func_8009A644",
+        "D_80149CB0": "D_80152950",
+        "D_8014C530": "D_801551D0",
+        "D_8014C531": "D_801551D1",
+        "D_8014C570": "D_80155210",
+        "func_80087E80": "func_8008D3D0",
+        "func_800907D0": "func_80095D20"
+      }
     }
   ]
 }
