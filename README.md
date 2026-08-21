@@ -8,13 +8,21 @@ revision are independent build targets and structural evidence for the shared
 source tree. Shifted functions, changed constants, and localized data help
 distinguish code boundaries from data and relocation artifacts.
 
-This repository contains no ROM data. You must supply legally obtained ROMs;
-all recognized ROM filename extensions are ignored by Git.
+**This project does not condone piracy.** *Star Wars Episode I: Racer* is a
+copyrighted work; this repository claims no rights in it, is not affiliated with
+or endorsed by any rightsholder, and distributes no part of it. See
+`docs/IP_POLICY.md` for the full position and its limits.
+
+This repository contains no ROM data, and none of its tooling will obtain any.
+Verification requires retail images that you already lawfully possess; every
+recognized ROM extension is Git-ignored so that none can be committed by
+accident. Nothing in this project describes how to acquire the game, and it is
+not a substitute for owning it.
 
 ## Current state
 
-- Six local ROM files inventoried: USA, Japan, Europe, and three identical
-  filenames for the Limited Run Games revision.
+- Four unique retail builds inventoried by cryptographic hash: USA, Japan,
+  Europe, and the later USA revision.
 - Reproducible N64 header and cryptographic-hash inventory.
 - Independent MIPS function-candidate discovery from entry points, `jal`
   targets, and stack-frame prologues.

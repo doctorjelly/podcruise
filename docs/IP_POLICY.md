@@ -5,6 +5,35 @@ while documenting an interoperability and preservation-oriented reverse-
 engineering process. It is an operational policy, not legal advice or a
 guarantee that a use is lawful in every jurisdiction.
 
+## Position on copyright and piracy
+
+This project does not condone, encourage, or facilitate piracy.
+
+*Star Wars Episode I: Racer* is a copyrighted work. This repository claims no
+rights in it, is not affiliated with or endorsed by any rightsholder, and does
+not distribute the game, any portion of it, or any asset extracted from it. It
+contains no ROM data and no tooling capable of obtaining any. Nothing here
+describes where to acquire the game or how to circumvent any protection
+measure, and none of it is a substitute for owning a lawful copy.
+
+The verification steps require retail images that the operator already
+lawfully possesses, on their own machine. Those images are never uploaded,
+committed, redistributed, or shared by anything in this project. Downloading a
+copy of a game you do not own is copyright infringement in most jurisdictions,
+and this project should not be read as encouragement to do so.
+
+The intent is interoperability research, preservation, and the study of an
+early-generation compiler's output. Whether any particular reverse-engineering
+activity is lawful depends on jurisdiction, on the facts, and on how the work
+is used, and reasonable people disagree about where those lines fall. **The
+authors make no representation that this project, or any use of it, is lawful
+in any jurisdiction. This is an engineering policy, not legal advice.** If you
+intend to rely on this work for anything consequential, consult a lawyer.
+
+If a rightsholder believes any material here infringes, please open an issue or
+contact the repository owner; the intent is to remove it promptly rather than
+to argue.
+
 ## Material allowed in Git
 
 - independently written, general-purpose analysis and build tooling;
