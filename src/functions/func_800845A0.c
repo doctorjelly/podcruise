@@ -44,6 +44,9 @@ void func_800845A0(Node800845A0 *root, Node800845A0 *node, f32 (*mtx)[4], s32 fl
     if (node == 0) {
         return;
     }
+#if defined(__GNUC__)
+    dummy = (Owner800845A0 *)node;
+#endif
     if (func_800182FC(node, 2) == 0) {
         return;
     }

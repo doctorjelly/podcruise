@@ -13,7 +13,8 @@ GLOBAL_STATE_SRCS := $(wildcard src/functions/*.c)
 # make counts literal parentheses inside $(shell ...) even within quotes.
 LPAREN := (
 HOST_TEST_DOUBLES := $(shell grep -oE '^[A-Za-z_][A-Za-z0-9_ *]*func_[0-9A-F]{8}[$(LPAREN)]' tests/test_global_state.c | grep -oE 'func_[0-9A-F]{8}')
-HOST_TEST_SRCS := $(filter-out $(patsubst %,src/functions/%.c,$(HOST_TEST_DOUBLES)),$(GLOBAL_STATE_SRCS))
+HOST_TEST_SRCS := src/bootstrap_state.c \
+	$(filter-out $(patsubst %,src/functions/%.c,$(HOST_TEST_DOUBLES)),$(GLOBAL_STATE_SRCS))
 
 .PHONY: all setup inventory analyze probe map region-symbols bootstrap-evidence manifest classify prototypes report match-c split-us split-jp split-eu split-lrg roundtrip-us roundtrip-jp roundtrip-eu roundtrip-lrg roundtrip-all host-check host-test test safety status
 

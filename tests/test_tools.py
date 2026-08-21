@@ -314,7 +314,8 @@ class MipsAnalysisTests(unittest.TestCase):
         """
         import json
 
-        from tools.classify_non_c import read_bodies, read_references
+        from tools.classify_non_c import (live_asm_sources, read_bodies,
+                                          read_references)
 
         root = Path(__file__).resolve().parent.parent
         asm = root / "analysis/generated/us/asm"
@@ -323,8 +324,9 @@ class MipsAnalysisTests(unittest.TestCase):
         report = json.loads((root / "analysis/c_matches.us.json").read_text())
         exact = {item["name"] for item in report["profiles"][0]["functions"]
                  if item["verified_match"]}
-        bodies = read_bodies(asm)
-        called, _, _ = read_references(asm)
+        sources = live_asm_sources(asm, root / "config/us.yaml")
+        bodies = read_bodies(sources)
+        called, _, _ = read_references(sources)
         for name, (mnemonics, kernel) in bodies.items():
             if name not in exact:
                 continue

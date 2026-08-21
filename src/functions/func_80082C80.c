@@ -25,6 +25,9 @@ void func_80082C80(u8 *root, Mtx80082C80 *out, u8 *node, Mtx80082C80 *parent) {
     if (node == 0) {
         return;
     }
+#if defined(__GNUC__)
+    holder = node;
+#endif
     type = func_80017DA4(node);
     func_800156DC(world.m, parent->m);
 

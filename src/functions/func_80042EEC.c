@@ -65,6 +65,9 @@ void func_80042EEC(Actor *actor) {
     s32 flash;
     s32 flashValue;
 
+#if defined(__GNUC__)
+    (void)D_padStandInRef;
+#endif
     if (D_800A4AB8 != 0) {
         tilt = D_800A4AC8;
         fade = D_800A4AC4;

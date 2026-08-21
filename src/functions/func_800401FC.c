@@ -53,6 +53,9 @@ void func_800401FC(Obj800401FC *object, Ctx800401FC *context) {
     f32 rest;
     f32 random;
 
+#if defined(__GNUC__)
+    (void)D_800AAC30;
+#endif
     (void)sp78;
     changed = 0;
     if (context->unk0300 < 0) {

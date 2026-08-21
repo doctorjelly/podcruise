@@ -6,6 +6,9 @@ s32 func_8006E008(s32 arg0) {
     s32 state;
 
     (void)arg0;
+#if defined(__GNUC__)
+    state = 0;
+#endif
     if (state == 2) {
         result = 1;
     } else {

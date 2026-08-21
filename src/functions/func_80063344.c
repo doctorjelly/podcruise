@@ -43,6 +43,9 @@ void func_80063344(RangeOwner *owner, f32 *low, f32 *high) {
     s32 index;
     f32 scale;
 
+#if defined(__GNUC__)
+    (void)rodataFiller;
+#endif
     index = owner->selector;
     if (index == -1) {
         if ((owner->kind == 1) || (owner->kind == 2) || (owner->kind == 6) || (owner->kind == 3)) {

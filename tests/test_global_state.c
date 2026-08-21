@@ -243,7 +243,7 @@ int main(void) {
     assert(D_800D68C0[0] == 0 && D_800D68C0[79] == 0);
 
     result_80014D4C = 12.5f;
-    assert(func_80014F2C() == 77.5f);
+    assert(func_80014F2C(0.0f) == 77.5f);
     D_800D9DBC = 100;
     D_800A2868 = 1;
     D_800D9DD8[1] = 37;

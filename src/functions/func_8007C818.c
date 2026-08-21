@@ -73,6 +73,9 @@ void func_8007C818(Holder *holder, Actor *actor) {
     f32 scale;
     f32 matrix[4][4];
 
+#if defined(__GNUC__)
+    (void)padPool;
+#endif
     (void)spare0;
     (void)spare1;
     (void)spare2;
