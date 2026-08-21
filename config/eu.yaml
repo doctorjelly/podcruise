@@ -755,7 +755,7 @@ segments:
       - [0x721B4, asm, main_721B4]
       - [0x727B0, c, functions/func_8006C6D0]
       - [0x727E8, asm, main_727E8]
-      - [0x738D0, c, functions/func_8006D7F4]
+      - [0x738D0, c, functions/func_8006D7F0]
       - [0x73ABC, c, functions/func_8006D9DC]
       - [0x73BFC, asm, main_73BFC]
       - [0x740E8, c, functions/func_8006E008]

@@ -20910,7 +20910,7 @@
     },
     {
       "id": "func_8006D7F0",
-      "source": "src/functions/func_8006D7F4.c",
+      "source": "src/functions/func_8006D7F0.c",
       "link_vram": "0x8006D7F0",
       "absolute_symbols": {
         "func_80015538": "0x80015538",

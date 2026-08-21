@@ -754,7 +754,7 @@ segments:
       - [0x6D844, asm, main_6D844]
       - [0x6DE40, c, functions/func_8006C6D0]
       - [0x6DE78, asm, main_6DE78]
-      - [0x6EF60, c, functions/func_8006D7F4]
+      - [0x6EF60, c, functions/func_8006D7F0]
       - [0x6F14C, c, functions/func_8006D9DC]
       - [0x6F28C, asm, main_6F28C]
       - [0x6F778, c, functions/func_8006E008]

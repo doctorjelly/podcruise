@@ -20036,7 +20036,7 @@
     },
     {
       "id": "func_80072CD0",
-      "source": "src/functions/func_8006D7F4.c",
+      "source": "src/functions/func_8006D7F0.c",
       "link_vram": "0x80072CD0",
       "absolute_symbols": {
         "func_800159C8": "0x800159C8",
