@@ -1,6 +1,6 @@
 /*
  * Independently written from specs/functions/bootstrap_state.md.
- * Status: behavior recovered; exact compiler/byte match not yet verified.
+ * Status: byte-matching under ido53_o2; integrated in the exact USA rebuild.
  */
 
 #include "podcruise/bootstrap_state.h"

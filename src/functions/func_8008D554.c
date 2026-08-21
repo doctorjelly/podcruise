@@ -1,0 +1,21 @@
+/* Independently written from scratchpad spec specs/func_8008D554.md. */
+
+#include "podcruise/types.h"
+
+typedef struct {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ s32 unk14;
+    /* 0x18 */ void *unk18;
+    /* 0x1C */ void *unk1C;
+} PcHandler;
+
+extern void func_80095AA0(PcHandler *handler, void (*enter)(void), void (*leave)(void), s32 kind);
+extern void func_8008DD80(void);
+extern void func_8008DD50(void);
+
+void func_8008D554(PcHandler *handler, void *arg1, void *arg2) {
+    func_80095AA0(handler, func_8008DD80, func_8008DD50, 7);
+    handler->unk14 = 0;
+    handler->unk18 = arg2;
+    handler->unk1C = arg1;
+}

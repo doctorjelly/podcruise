@@ -1,6 +1,6 @@
 # Bootstrap state accessors
 
-Status: **behavior recovered; exact C byte match unverified**.
+Status: **byte-matching C; integrated into exact USA and LRG rebuilds**.
 
 These specifications contain independently stated behavior and compact address
 facts. They do not reproduce disassembly or decompiler output.
@@ -47,7 +47,7 @@ names are intentionally temporary.
 
 ## Matching gate
 
-The C in `src/bootstrap_state.c` is the most direct expression of these
-behaviors and passes a host syntax/warning check. It does **not** count as
-matching until an IP-cleared exact IDO toolchain compiles each function to the
-same 12 bytes in the canonical USA build.
+IDO 5.3 with the recorded `ido53_o2` flags compiles each function to the exact
+12 canonical USA bytes, including the return delay slot. An independent LRG
+comparison matches the same-address functions. Both hybrid builds substitute
+this C unit and retain their complete ROM SHA-1 values.
