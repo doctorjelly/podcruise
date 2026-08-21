@@ -1,5 +1,4 @@
-/* Independently written from the specification in specs/func_80081FB0.md
-   (closest point on a triangle, with plane side and radius reject). */
+/* Independently written from specs/functions/recovered/medium_world_tranche.md. */
 
 #include "podcruise/types.h"
 

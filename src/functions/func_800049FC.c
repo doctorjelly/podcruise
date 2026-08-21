@@ -1,4 +1,4 @@
-/* Recovered from specification $S/specs/func_800049FC.md */
+/* Independently written from specs/functions/recovered/medium_world_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct Node800049FC {

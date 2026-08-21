@@ -24193,6 +24193,128 @@
       "functions": [
         {"name": "func_8001CCC4", "vram": "0x8001CCC4", "rom": "0x1D8C4", "size": 920}
       ]
+    },
+    {
+      "id": "func_80006848",
+      "source": "src/functions/func_80006848.c",
+      "link_vram": "0x80006848",
+      "absolute_symbols": {
+        "func_80006704": "0x80006704",
+        "func_80006790": "0x80006790",
+        "D_8009A2A4": "0x8009A2A4",
+        "D_80120BF0": "0x80120BF0"
+      },
+      "functions": [
+        {"name": "func_80006848", "vram": "0x80006848", "rom": "0x7448", "size": 952}
+      ]
+    },
+    {
+      "id": "func_8006AF48",
+      "source": "src/functions/func_8006AF48.c",
+      "link_vram": "0x8006AF48",
+      "absolute_symbols": {
+        "func_80015288": "0x80015288",
+        "func_8001535C": "0x8001535C",
+        "func_800154D0": "0x800154D0",
+        "func_80015538": "0x80015538",
+        "func_800155EC": "0x800155EC",
+        "func_80017824": "0x80017824",
+        "func_8003B184": "0x8003B184",
+        "D_800AD5BC": "0x800AD5BC",
+        "D_800AD5C4": "0x800AD5C4",
+        "D_800AD5C8": "0x800AD5C8",
+        "D_800AD5CC": "0x800AD5CC",
+        "D_800AD5D0": "0x800AD5D0",
+        "D_800AD5D8": "0x800AD5D8",
+        "D_800AD5E0": "0x800AD5E0",
+        "D_80120BF0": "0x80120BF0"
+      },
+      "functions": [
+        {"name": "func_8006AF48", "vram": "0x8006AF48", "rom": "0x6BB48", "size": 956}
+      ]
+    },
+    {
+      "id": "func_80081FB0",
+      "source": "src/functions/func_80081FB0.c",
+      "link_vram": "0x80081FB0",
+      "absolute_symbols": {
+        "func_800179EC": "0x800179EC",
+        "func_800819A4": "0x800819A4",
+        "func_80081A2C": "0x80081A2C",
+        "func_80081BE8": "0x80081BE8"
+      },
+      "functions": [
+        {"name": "func_80081FB0", "vram": "0x80081FB0", "rom": "0x82BB0", "size": 1012}
+      ]
+    },
+    {
+      "id": "func_80037E9C",
+      "source": "src/functions/func_80037E9C.c",
+      "link_vram": "0x80037E9C",
+      "absolute_symbols": {
+        "func_800153C0": "0x800153C0",
+        "func_800154D0": "0x800154D0",
+        "func_80015538": "0x80015538",
+        "func_800155C0": "0x800155C0",
+        "func_800155EC": "0x800155EC",
+        "func_80017DAC": "0x80017DAC",
+        "func_800182FC": "0x800182FC",
+        "func_80033EEC": "0x80033EEC",
+        "func_8003423C": "0x8003423C",
+        "func_800344C8": "0x800344C8",
+        "func_80038388": "0x80038388",
+        "D_800A3FD8": "0x800A3FD8",
+        "D_800A3FE8": "0x800A3FE8",
+        "D_80112C94": "0x80112C94"
+      },
+      "functions": [
+        {"name": "func_80037E9C", "vram": "0x80037E9C", "rom": "0x38A9C", "size": 1016}
+      ]
+    },
+    {
+      "id": "func_800049FC",
+      "source": "src/functions/func_800049FC.c",
+      "link_vram": "0x800049FC",
+      "absolute_symbols": {
+        "func_800035BC": "0x800035BC",
+        "func_80003B44": "0x80003B44",
+        "func_80004704": "0x80004704",
+        "func_800155EC": "0x800155EC",
+        "func_80017E54": "0x80017E54",
+        "func_80017E88": "0x80017E88",
+        "func_80017EDC": "0x80017EDC",
+        "D_8009A270": "0x8009A270",
+        "D_8009A274": "0x8009A274",
+        "D_8009A278": "0x8009A278",
+        "D_800AE8B0": "0x800AE8B0",
+        "D_800AE8E8": "0x800AE8E8",
+        "D_800AE918": "0x800AE918",
+        "D_800AE928": "0x800AE928",
+        "D_800AEC78": "0x800AEC78",
+        "D_800AEC7C": "0x800AEC7C"
+      },
+      "functions": [
+        {"name": "func_800049FC", "vram": "0x800049FC", "rom": "0x55FC", "size": 1024}
+      ]
+    },
+    {
+      "id": "func_8002963C",
+      "source": "src/functions/func_8002963C.c",
+      "link_vram": "0x8002963C",
+      "absolute_symbols": {
+        "func_80046670": "0x80046670",
+        "D_800A21B4": "0x800A21B4",
+        "D_800A2DE0": "0x800A2DE0",
+        "D_80113E60": "0x80113E60",
+        "D_80113E68": "0x80113E68",
+        "D_801198A8": "0x801198A8",
+        "D_8011A050": "0x8011A050",
+        "D_8011A210": "0x8011A210",
+        "D_8011A240": "0x8011A240"
+      },
+      "functions": [
+        {"name": "func_8002963C", "vram": "0x8002963C", "rom": "0x2A23C", "size": 1024}
+      ]
     }
   ]
 }
