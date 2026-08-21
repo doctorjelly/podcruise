@@ -1,4 +1,4 @@
-/* Specification: specs/func_8004A36C.md (indexed effect emitter) */
+/* Recovered from specs/functions/recovered/medium_spatial_tranche.md. */
 #include "podcruise/types.h"
 
 extern void **D_8011A654[];

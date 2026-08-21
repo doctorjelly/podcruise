@@ -1,4 +1,4 @@
-/* Independently written from $S/specs/func_80000B00.md (nearest point on a triangle's edges). */
+/* Recovered from specs/functions/recovered/medium_spatial_tranche.md. */
 
 #include "podcruise/types.h"
 

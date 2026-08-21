@@ -1,4 +1,4 @@
-/* Recovered from specification specs/func_80003BF8.md (batch 08). */
+/* Recovered from specs/functions/recovered/medium_spatial_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct Leaf80003BF8 {

@@ -1,4 +1,4 @@
-/* Independently written from $S/specs/func_8003FDCC.md (nearest-object gather into a sorted list). */
+/* Recovered from specs/functions/recovered/medium_spatial_tranche.md. */
 
 #include "podcruise/types.h"
 

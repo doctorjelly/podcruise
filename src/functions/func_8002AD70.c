@@ -1,4 +1,4 @@
-/* Recovered per specs/func_8002AD70.md (timed random selection with rejection). */
+/* Recovered from specs/functions/recovered/medium_spatial_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct {
