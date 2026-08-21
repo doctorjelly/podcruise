@@ -1,4 +1,4 @@
-/* Independently written from scratchpad spec specs/func_8005065C.md. */
+/* Independently written from specs/functions/recovered/medium_resource_tranche.md. */
 
 #include "podcruise/types.h"
 
