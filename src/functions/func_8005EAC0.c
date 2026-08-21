@@ -1,4 +1,4 @@
-/* Recovered from specification $S/specs/func_8005EAC0.md (batch_06). */
+/* Independently written from specs/functions/recovered/medium_leaf_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct {

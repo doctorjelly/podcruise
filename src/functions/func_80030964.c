@@ -1,4 +1,4 @@
-/* Recovered from specification specs/func_80030964.md (worker batch_15). */
+/* Independently written from specs/functions/recovered/medium_leaf_tranche.md. */
 
 #include "podcruise/types.h"
 

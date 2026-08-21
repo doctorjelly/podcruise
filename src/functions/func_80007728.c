@@ -1,4 +1,4 @@
-/* Independently written from scratchpad spec specs/func_80007728.md. */
+/* Independently written from specs/functions/recovered/medium_leaf_tranche.md. */
 
 #include "podcruise/types.h"
 
@@ -48,4 +48,3 @@ void func_80007728(s32 count) {
         node = next;
     }
 }
-
