@@ -1,4 +1,4 @@
-/* Recovered per specs/func_80085AB4.md (histogram accumulation and weighted mean). */
+/* Recovered from specs/functions/recovered/medium_service_tranche.md. */
 #include "podcruise/types.h"
 
 extern u16 *D_800A68B0;
@@ -16,7 +16,9 @@ f32 func_80085AB4(void) {
     samples = D_800A68B0;
     index = 0;
     do {
-        D_801488C8[index] = 0; D_80148948[index] = 0; index++;
+        index++;
+        D_801488C8[index - 1] = 0;
+        D_80148948[index - 1] = 0;
     } while (&D_80148948[index] < D_801489C8);
 
     for (index = 0; index < D_80114470[1] * D_80114470[0]; index++) {

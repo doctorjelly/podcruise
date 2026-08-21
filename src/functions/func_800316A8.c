@@ -1,4 +1,4 @@
-/* Independently written from $S/specs/func_800316A8.md (per-slot controller poll service). */
+/* Recovered from specs/functions/recovered/medium_service_tranche.md. */
 
 #include "podcruise/types.h"
 

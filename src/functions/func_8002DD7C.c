@@ -1,4 +1,4 @@
-/* Specification: $S/specs/func_8002DD7C.md */
+/* Recovered from specs/functions/recovered/medium_service_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct {
