@@ -1,4 +1,4 @@
-/* Independently written from scratchpad spec specs/func_80024954.md. */
+/* Independently written from specs/functions/recovered/stitched_ui_control_tranche.md. */
 
 #include "podcruise/types.h"
 

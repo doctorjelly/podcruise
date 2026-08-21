@@ -1,4 +1,4 @@
-/* Independently written from scratchpad spec specs/func_8002A7D4.md. */
+/* Independently written from specs/functions/recovered/stitched_ui_control_tranche.md. */
 #include "podcruise/types.h"
 
 extern void func_8000A920(s16 index, s32 flag);

@@ -1,4 +1,4 @@
-/* Independently written from specs/functions/func_8002CC28.md. */
+/* Independently written from specs/functions/recovered/stitched_ui_control_tranche.md. */
 
 #include "podcruise/types.h"
 

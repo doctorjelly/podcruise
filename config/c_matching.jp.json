@@ -24784,6 +24784,76 @@
         "func_80044CD8": "func_800454E8",
         "func_80083190": "func_80083E70"
       }
+    },
+    {
+      "id": "func_8002D1E4",
+      "source": "src/functions/func_8002C780.c",
+      "link_vram": "0x8002D1E4",
+      "absolute_symbols": {
+        "D_8011D4B0": "0x8011D4B0",
+        "D_800A53C4": "0x800A53C4",
+        "D_800A53C8": "0x800A53C8",
+        "D_800A7904": "0x800A7904",
+        "D_800ACE80": "0x800ACE80",
+        "D_800ACE84": "0x800ACE84",
+        "D_80123E68": "0x80123E68",
+        "func_8000A920": "0x8000A920",
+        "func_8000AA04": "0x8000AA04",
+        "func_8000AAC0": "0x8000AAC0",
+        "func_8000AB24": "0x8000AB24"
+      },
+      "functions": [
+        {
+          "name": "func_8002D1E4",
+          "vram": "0x8002D1E4",
+          "rom": "0x2DDE4",
+          "size": 1192
+        }
+      ],
+      "defines": {
+        "func_8002C780": "func_8002D1E4",
+        "D_8011A240": "D_8011D4B0",
+        "D_800A2654": "D_800A53C4",
+        "D_800A2658": "D_800A53C8",
+        "D_800A4B94": "D_800A7904",
+        "D_800A9ED8": "D_800ACE80",
+        "D_800A9EDC": "D_800ACE84",
+        "D_80120BF8": "D_80123E68"
+      }
+    },
+    {
+      "id": "func_8002D68C",
+      "source": "src/functions/func_8002CC28.c",
+      "link_vram": "0x8002D68C",
+      "absolute_symbols": {
+        "D_8011D4B0": "0x8011D4B0",
+        "D_800A53CC": "0x800A53CC",
+        "D_800A53D0": "0x800A53D0",
+        "D_800ACE88": "0x800ACE88",
+        "D_800ACE8C": "0x800ACE8C",
+        "D_80123E68": "0x80123E68",
+        "func_8000A920": "0x8000A920",
+        "func_8000AA04": "0x8000AA04",
+        "func_8000AAC0": "0x8000AAC0",
+        "func_8000AB24": "0x8000AB24"
+      },
+      "functions": [
+        {
+          "name": "func_8002D68C",
+          "vram": "0x8002D68C",
+          "rom": "0x2E28C",
+          "size": 1056
+        }
+      ],
+      "defines": {
+        "func_8002CC28": "func_8002D68C",
+        "D_8011A240": "D_8011D4B0",
+        "D_800A265C": "D_800A53CC",
+        "D_800A2660": "D_800A53D0",
+        "D_800A9EE0": "D_800ACE88",
+        "D_800A9EE4": "D_800ACE8C",
+        "D_80120BF8": "D_80123E68"
+      }
     }
   ]
 }
