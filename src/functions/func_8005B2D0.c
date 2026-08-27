@@ -29,7 +29,6 @@ extern f32 D_800ACFA8;
 extern f32 D_800ACFAC;
 
 s32 func_8005B2D0(Actor8005B2D0 *actor, State8005B2D0 *state) {
-    s32 result;
     s16 *entry;
 
     if (actor->unk1AC == 1 && actor->unk1C0 == 3 &&
@@ -41,11 +40,10 @@ s32 func_8005B2D0(Actor8005B2D0 *actor, State8005B2D0 *state) {
             return 0;
         }
     }
-    result = 0;
     if (!(state->unk64 & 0x2000000)) {
         if (state->unk10C >= 5 || state->unk1A0 < 60.0) {
-            result = 1;
+            return 1;
         }
     }
-    return result;
+    return 0;
 }

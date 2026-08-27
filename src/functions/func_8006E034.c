@@ -27,7 +27,7 @@ extern s32 func_80082BE0(void);
 
 void func_8006E034(Object8006E034 *object) {
     Inner8006E034 *inner;
-    f32 vector[11];
+    f32 vector[10];
 
     inner = (Inner8006E034 *)((u8 *)object + 8);
     if (((object->unk60 & 0x4000) == 0) && ((object->unk60 & 0x2000) == 0) &&

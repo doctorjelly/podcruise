@@ -14,7 +14,7 @@ extern s32 D_800A4BDC;
 extern f32 D_800D6CC0;
 extern f32 D_80120BF8;
 
-extern void func_800469B4(Actor *actor);
+extern void func_800469B4(Actor *actor, s32 mode);
 
 s32 func_80028320(Actor *actor, s32 arg1, s32 arg2) {
     s32 changed;
@@ -50,7 +50,7 @@ s32 func_80028320(Actor *actor, s32 arg1, s32 arg2) {
                 if (D_800A2198 != -1) {
                     if (D_800A4BDC == 0) {
                         if (D_800A4BC0 == 0) {
-                            func_800469B4(actor);
+                            func_800469B4(actor, D_800A2198);
                             return 1;
                         }
                     }

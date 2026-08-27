@@ -73,14 +73,14 @@ extern void func_800469B4(void *, s32);
 extern s32 func_80082BE0(void);
 
 void func_80024954(Panel80024954 *panel) {
-    char text[256];
     s32 green;
+    s32 slot;
+    s32 index;
+    s16 icon;
+    char text[256];
     s32 blue;
     s32 width;
     s32 height;
-    s16 icon;
-    s32 slot;
-    s32 index;
     s32 red;
 
     if (D_800A4BBC != 0) {
@@ -119,7 +119,7 @@ void func_80024954(Panel80024954 *panel) {
     slot = func_8002DB20(panel, D_8011A240.unk30);
     panel->unk5D = D_800A22E8[panel->unk5E][slot];
     if (D_8011A240.unk00 > 0.0f) {
-        func_800494D0(panel, D_800D73E4, D_8011A240.unk00 * 0.5);
+        func_800494D0(panel, *(u8 *)0x800D73E4, D_8011A240.unk00 * 0.5);
     }
     if (D_800A256C != 0) {
         return;
@@ -196,7 +196,7 @@ void func_80024954(Panel80024954 *panel) {
             func_800469B4(panel, 9);
             return;
         }
-        if (panel->unk5E == D_800D73E5) {
+        if (D_800D73E5 == panel->unk5E) {
             if (D_800A4BA4[index] & 0x8000) {
                 if (panel->unk5E < D_8011A240.unk28) {
                     panel->unk5E = panel->unk5E + 1;

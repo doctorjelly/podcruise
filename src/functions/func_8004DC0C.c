@@ -33,8 +33,10 @@ extern void func_80050208(Session *);
 extern void func_80051898(s32);
 extern void func_8005163C(Session *);
 
+#define PADDING_ONE 1
+#define PADDING_THREE 3
 #ifndef PADDING_WORDS
-#define PADDING_WORDS 3
+#define PADDING_WORDS PADDING_THREE
 #endif
 
 static const s32 padding[PADDING_WORDS] = { 0 };

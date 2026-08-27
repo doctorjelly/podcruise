@@ -47,7 +47,15 @@ typedef struct Entry {
     Target *unk1E70;
 } Entry;
 
-static const u32 D_800A85A0[3] = { 0, 0, 0 };
+/* The constant pool that precedes this function's jump table belongs to
+   neighbouring code; in an isolated probe unit this stand-in reserves the
+   same number of words so that the table keeps its ROM address.  The count
+   differs per region because the pools ahead of it differ.  */
+#define POOL_PAD_ONE 1
+#ifndef POOL_PAD_WORDS
+#define POOL_PAD_WORDS 3
+#endif
+static const u32 D_800A85A0[POOL_PAD_WORDS] = { 0 };
 
 extern s32 D_8009B7E0;
 extern s32 D_8009B804;
@@ -62,10 +70,9 @@ extern f32 sqrtf(f32 value);
 
 void func_8000CC1C(s32 selector, f32 value) {
     Entry *entry;
-    f32 pad0;
+    f32 base;
     f32 temp;
-    f32 pad2;
-    f32 pad3;
+    f32 scaled;
 
     (void)D_800A85A0;
     D_8009B804 = 1;
@@ -186,9 +193,11 @@ void func_8000CC1C(s32 selector, f32 value) {
         break;
     case 16:
         if (entry != 0) {
+            (void)&base;
             temp = sqrtf(entry->unk108);
             func_8000C6C8(&temp, value, 1.0f, 10.0f, 500.0f);
-            entry->unk108 = temp * temp;
+            scaled = temp * temp;
+            entry->unk108 = scaled;
         }
         break;
     }

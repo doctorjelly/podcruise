@@ -56,22 +56,22 @@ extern Command *func_80088500(void);
 
 s32 func_8008FF98(Owner *owner, Link *link, Request *request) {
     Entry *entry;
+    Emitter *emitter[1];
     Command *command;
     s32 found;
-    Emitter *emitter[1];
 
     entry = 0;
     link->unk_16 = request->unk_00;
-    link->unk_0C = 0;
     link->unk_1A = request->unk_04;
+    link->unk_0C = 0;
+    link->unk_18 = request->unk_02;
     link->unk_14 = 0;
     link->unk_08 = 0;
-    link->unk_18 = request->unk_02;
     found = func_8008FEB0(owner, &entry, request->unk_00);
     if (entry) {
         if (found != 0) {
-            entry->unk_D8 = 0x200;
             emitter[0] = entry->unk_0C;
+            entry->unk_D8 = 0x200;
             ((Slot *)entry->unk_08)->unk_08 = 0;
             command = func_80088500();
             command->unk_08 = 0xB;

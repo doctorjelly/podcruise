@@ -32,6 +32,9 @@ void func_80084324(Unk80084324Owner *owner, f32 (*transform)[4], s32 mode, f32 *
         if (mode != 0) {
             f32 source[3];
             f32 transformed[3];
+            s32 pad0;
+
+            (void)pad0;
             vertex = node->unk34;
             for (j = 0; j < node->unk3A; j++) {
                 source[0] = (f32)vertex[0];

@@ -1,4 +1,4 @@
-/* Recovered from specification specs/func_80095F34.md (worker batch 04). */
+/* Recovered from specification specs/func_80095F34.md (shape rework, worker shape_10). */
 #include "podcruise/types.h"
 
 typedef struct Cmd80095F34 {
@@ -33,18 +33,19 @@ extern Cmd80095F34 *func_80095DA8(Port80095F34 *port, u32 pos, u32 arg2, u32 cou
 extern u32 func_80088360(u32 address);
 
 Cmd80095F34 *func_80095F34(Port80095F34 *port, Wave80095F34 *wave, u32 arg2, s32 arg3, Cmd80095F34 *cmd) {
-    s32 pad[2];
-    Cmd80095F34 *out;
     Cmd80095F34 *result;
-    f32 frac;
     f32 pos;
     f32 value;
-    s32 whole;
     s32 offset;
     s32 aligned;
+    s32 whole;
+    f32 frac;
+    s32 padA[2];
     s32 length;
+    s32 padB;
+    Cmd80095F34 *out;
 
-    (void)pad;
+    (void)padA; (void)padB;
     if (wave->unk24 != 0) {
         length = wave->unk04 - wave->unk00;
         value = func_80095AC0(wave, arg3) / (f32)length;

@@ -2,9 +2,11 @@
 
 #include "podcruise/types.h"
 
-extern f32 D_800AAAD8;
-extern f32 D_800AAADC;
 extern s32 D_800D6960[];
+/* Stand-in for the neighbouring function's identical literal pair, which in
+   the original object precedes this function's own two constants and is what
+   places them at their canonical, non-16-aligned address. */
+static const f32 poolPadding[2] = {-1e-6f, 1e-6f};
 
 void func_80034650(s16 *destination, f32 source[4][3]) {
     s16 *whole;
@@ -15,11 +17,7 @@ void func_80034650(s16 *destination, f32 source[4][3]) {
     s16 column;
     s32 fixed;
     f32 value;
-    f32 lowerLimit;
-    f32 upperLimit;
 
-    lowerLimit = D_800AAAD8;
-    upperLimit = D_800AAADC;
     whole = destination;
     fraction = destination + 16;
     high = (s16 *)&fixed;
@@ -35,13 +33,13 @@ void func_80034650(s16 *destination, f32 source[4][3]) {
                 if (value > 0.0f) {
                     if (value > 32000.0f) {
                         value = 32000.0f;
-                    } else if (value < upperLimit) {
+                    } else if (value < 1e-6f) {
                         value = 0;
                     }
                 } else {
                     if (value < -32000.0f) {
                         value = -32000.0f;
-                    } else if (value > lowerLimit) {
+                    } else if (value > -1e-6f) {
                         value = 0;
                     }
                 }

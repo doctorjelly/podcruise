@@ -31,12 +31,12 @@ extern f32 func_80014F54(f32, f32);
 extern void func_80063084(s32, s32, f32 *, f32 *, f32, f32);
 
 void func_80050450(PcOwner *owner) {
-    f32 sp60[3];
-    f32 first[3];
-    f32 second[3];
     s32 i;
     s32 id;
     PcEntity *entity;
+    f32 sp60[3];
+    f32 first[3];
+    f32 second[3];
 
     func_80015288(first, D_800A4C00[owner->unk34].first);
     func_80015288(second, D_800A4C00[owner->unk34].second);

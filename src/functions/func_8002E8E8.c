@@ -3,7 +3,7 @@
 
 extern u8 D_800A26D0;
 extern u8 D_800A26D4;
-extern s32 D_800D7490;
+extern volatile s32 D_800D7490;
 extern s32 D_800D7498[];
 extern u8 D_800D74B3[];
 

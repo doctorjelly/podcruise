@@ -26,8 +26,8 @@ extern s32 func_80092050(void *queue, s32 channel, u16 selector, void *buffer);
 s32 func_800926A0(Unk800926A0Object *object, u16 tag, u32 key, u8 *name, u8 *extension, s32 *found) {
     s32 result;
     s32 i;
-    s32 j;
     Unk800926A0Entry entry;
+    s32 j;
     u8 mismatch;
 
     if (!(object->flags & 1)) {

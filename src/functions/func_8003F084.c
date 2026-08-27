@@ -13,9 +13,9 @@ extern void func_8003EC40(s16 x, s16 y, u8 arg2, u8 arg3, u8 arg4, u8 arg5,
 void func_8003F084(s16 x, s16 y, f32 seconds, u8 arg3, u8 arg4, u8 arg5,
                    u8 arg6, void *arg7) {
     char text[256];
-    s32 minutes;
     s32 wholeSeconds;
     s32 hundredths;
+    s32 minutes;
     f32 minutesValue;
     f32 secondsValue;
 

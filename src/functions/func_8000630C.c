@@ -4,7 +4,7 @@
 
 extern void func_80005F54(f32 *result, void *object, f32 position, s32 index);
 extern void func_800175E0(f32 *matrix, f32 angle, f32 x, f32 y, f32 z);
-extern void func_80017B34(void *node, f32 x, f32 y, s32 z);
+extern void func_80017B34(void *node, f32 x, f32 y, f32 z);
 extern void func_80017BA8(void *node, f32 *matrix);
 extern void func_80017C18(void *node, f32 *matrix);
 extern void func_80081814(f32 *matrix, f32 *translation, f32 *rotation, f32 *scale);

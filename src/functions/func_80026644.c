@@ -99,9 +99,8 @@ void func_80026644(Obj *p) {
         func_800494D0(p, D_800D6CD4, D_8011A240 * D_800A9D84);
     }
 
-    i = D_800A2198;
-    if (i == 9) {
-        func_800469B4(p, i);
+    if (D_800A2198 == 9) {
+        func_800469B4(p, D_800A2198);
         return;
     }
 

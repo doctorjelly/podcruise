@@ -12,6 +12,7 @@ extern s32 func_80039340(Rec800396E0 *, void *, s32);
 extern s32 func_8003931C(Rec800396E0 *);
 
 s32 func_800396E0(void *arg0) {
+    f64 pad;
     s32 result = 1;
 
     if (func_80039340(&D_80113680, arg0, 0x3F0) != 0) {
@@ -21,5 +22,6 @@ s32 func_800396E0(void *arg0) {
     } else if (func_8003931C(&D_80113680) != D_80113680.unk00) {
         result = 0;
     }
+    (void)&pad;
     return result;
 }

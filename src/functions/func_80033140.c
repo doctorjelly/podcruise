@@ -9,11 +9,13 @@ extern f32 func_80004FB0(s32, f32 *, f32 *, f32 *);
 s32 func_80033140(f32 *arg0, f32 *arg1, s32 arg2, f32 *arg3) {
     f32 ray[7];
     f32 hitNormal[3];
-    f32 hitPlane[3];
-    f32 moved[3];
-    f32 planeOffset;
-    f32 push;
+    f32 spare1[3];
     s32 result;
+    f32 moved[3];
+    f32 push;
+    f32 spare2;
+    f32 planeOffset;
+    f32 hitPlane[3];
 
     result = 0;
     ray[3] = arg0[0] - arg1[0];
@@ -48,5 +50,6 @@ s32 func_80033140(f32 *arg0, f32 *arg1, s32 arg2, f32 *arg3) {
             result = 1;
         }
     }
+    (void)spare1; (void)spare2;
     return result;
 }
