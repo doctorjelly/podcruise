@@ -18,19 +18,23 @@ Matching-C coverage is measured against main-processor text, ROM `0x1000` to
 denominator, which bytes are excluded as signal-processor microcode or padding,
 and why the earlier `0x99000` interval was wrong.
 
-| Build | Exact functions | Exact bytes | Share of CPU text | Configured units |
-|---|---:|---:|---:|---:|
-| USA retail | 923 | 193,832 | 31.19% | 1,189 |
-| Japan retail | 842 | 170,052 | 27.36% | 951 |
-| Europe retail | 842 | 177,372 | 28.54% | 950 |
-| USA LRG revision | 923 | 193,832 | 31.19% | 1,189 |
+| Build | Exact functions | Exact bytes | Share of CPU text | Configured units | Hybrid substitutions |
+|---|---:|---:|---:|---:|---:|
+| USA retail | 970 | 217,336 | 34.97% | 1,183 | 969 |
+| Japan retail | 882 | 191,692 | 30.84% | 954 | 878 |
+| Europe retail | 883 | 199,816 | 32.15% | 953 | 879 |
+| USA LRG revision | 970 | 217,336 | 34.97% | 1,183 | 964 |
 
-"Configured" counts functions with a reviewed C source under test. The gap
-between configured and exact is behaviour-recovered work: the source compiles,
-and in many cases to the original's exact length, but the bytes do not yet
-match. The USA ledger currently represents 349,176 original bytes in reviewed
-C, or 56.18% of CPU text; only the exact 31.19% is eligible for substitution
-in the canonical rebuild.
+"Configured" counts translation units with reviewed C under compiler test. The
+gap between configured and exact is behaviour-recovered work: the source
+compiles, and in many cases to the original's exact length, but the bytes do
+not yet match. The USA manifest currently covers 1,220 functions and 407,880
+original bytes in reviewed C, or 65.62% of CPU text; only the exact 34.97% is
+eligible for substitution in the canonical rebuild.
+
+The strict manifest audit currently finds 68 source files without matching
+units; 66 still need either a unit or a recorded exception. Those sources are
+not included in the reviewed-C figure above.
 
 Each figure is produced by `make match-c`, which compiles every unit with the
 identified toolchain and compares it against that version's own ROM. A USA

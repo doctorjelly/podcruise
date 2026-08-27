@@ -7657,31 +7657,6 @@
       ]
     },
     {
-      "id": "func_8008E420",
-      "source": "src/functions/func_8008E420.c",
-      "link_vram": "0x8008E420",
-      "flags": [
-        "-G",
-        "0",
-        "-O3",
-        "-mips2",
-        "-non_shared",
-        "-Xcpluscomm",
-        "-signed",
-        "-Wab,-r4300_mul"
-      ],
-      "absolute_symbols": {},
-      "functions": [
-        {
-          "name": "func_8008E420",
-          "vram": "0x8008E420",
-          "rom": "0x8F020",
-          "size": 300,
-          "text_offset": "0x0"
-        }
-      ]
-    },
-    {
       "id": "func_80092850",
       "source": "src/functions/func_80092850.c",
       "link_vram": "0x80092850",

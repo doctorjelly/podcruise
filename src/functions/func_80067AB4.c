@@ -40,7 +40,6 @@ extern void func_80065E54(Body80067AB4 *, void *, f32 *, f32 *, f32 *, f32, f32,
 void func_80067AB4(Body80067AB4 *body, void *context, f32 blend,
                    Triple80067AB4 *result) {
     f32 previous;
-    f32 amount;
     f32 magnitude;
     f32 target;
     f32 ceiling;

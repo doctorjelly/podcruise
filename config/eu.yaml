@@ -1069,7 +1069,7 @@ segments:
       - [0x92824, c, functions/func_8008C6D4]
       - [0x9283C, c, functions/func_8008C6EC]
       - [0x92854, c, functions/func_8008C704]
-      - [0x92888, c, functions/func_8008C738]
+      - [0x92888, asm, main_92888]
       - [0x928B8, asm, main_928B8]
       - [0x928C0, c, functions/func_8008C770]
       - [0x92900, c, functions/func_8008C7B0]

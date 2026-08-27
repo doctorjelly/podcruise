@@ -1,4 +1,4 @@
-/* Recovered per specification specs/func_8008DEA0.md (worker unc_15). */
+/* Independently written from specs/functions/recovered/func_8008DEA0.md. */
 
 #include "podcruise/types.h"
 
@@ -63,14 +63,14 @@ void func_8008DEA0(State8008DEA0 *state, s32 mode, Src8008DEA0 *source) {
         state->unk3C = 0;
         state->unk40 = 1;
         state->unk38 = 0;
-        if (src != NULL) {
+        if (src != 0) {
             state->unk44 = src->unk0;
             if (src->unk8 == 0) {
-                if (src->unkC != NULL) {
+                if (src->unkC != 0) {
                     state->unk24 = src->unkC->unk8;
                 }
             } else if (src->unk8 == 1) {
-                if (src->unkC != NULL) {
+                if (src->unkC != 0) {
                     state->unk24 = src->unkC->unk8;
                 }
             }
@@ -85,7 +85,7 @@ void func_8008DEA0(State8008DEA0 *state, s32 mode, Src8008DEA0 *source) {
             src = state->unk28;
             geom = src->unk10;
             state->unk2C = (geom->unk0 << 4) * geom->unk4;
-            if (src->unkC != NULL) {
+            if (src->unkC != 0) {
                 state->unk1C = src->unkC->unk0;
                 state->unk20 = src->unkC->unk4;
                 state->unk24 = src->unkC->unk8;
@@ -96,7 +96,7 @@ void func_8008DEA0(State8008DEA0 *state, s32 mode, Src8008DEA0 *source) {
         } else if (source->unk8 == 1) {
             state->unk4 = func_8008E074;
             src = state->unk28;
-            if (src->unkC != NULL) {
+            if (src->unkC != 0) {
                 state->unk1C = src->unkC->unk0;
                 state->unk20 = src->unkC->unk4;
                 state->unk24 = src->unkC->unk8;

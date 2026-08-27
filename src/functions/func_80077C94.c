@@ -1,4 +1,4 @@
-/* Independently written from $S/specs/func_80077C94.md (worker specification). */
+/* Independently written from specs/functions/recovered/func_80077C94.md. */
 #include "podcruise/types.h"
 
 typedef struct {
@@ -31,6 +31,12 @@ extern void func_80017874(f32 *);
 extern Item80077C94 *func_800183A8(void *);
 extern s32 func_8007B34C(f32 *, s32, s32, s32, s32, f32, s32);
 
+#if defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wuninitialized"
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
+#endif
+
 void func_80077C94(Craft80077C94 *craft, f32 source[4][4], f32 scaleX, f32 scaleY,
                    f32 scaleZ, f32 angle, s32 arg6) {
     f32 matrix[4][4];
@@ -61,6 +67,8 @@ void func_80077C94(Craft80077C94 *craft, f32 source[4][4], f32 scaleX, f32 scale
     changed = 0;
     dim = 0;
     emphasis = 0;
+
+    /* The original leaves this stack word unwritten when arg6 is zero. */
 
     if (craft == 0) {
         return;
@@ -320,3 +328,7 @@ void func_80077C94(Craft80077C94 *craft, f32 source[4][4], f32 scaleX, f32 scale
         }
     }
 }
+
+#if defined(__GNUC__)
+#pragma GCC diagnostic pop
+#endif

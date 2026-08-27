@@ -1070,7 +1070,7 @@ segments:
       - [0x8DFC4, c, functions/func_8008C6D4]
       - [0x8DFDC, c, functions/func_8008C6EC]
       - [0x8DFF4, c, functions/func_8008C704]
-      - [0x8E028, c, functions/func_8008C738]
+      - [0x8E028, asm, main_8E028]
       - [0x8E058, asm, main_8E058]
       - [0x8E060, c, functions/func_8008C770]
       - [0x8E0A0, c, functions/func_8008C7B0]

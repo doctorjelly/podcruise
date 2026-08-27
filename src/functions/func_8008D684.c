@@ -4,7 +4,7 @@
 extern void func_80095AA0(void *a, void *b, void *c, s32 d);
 extern s32 func_80087FC0(s32 a, s32 b, s32 c, s32 d, s32 e);
 extern void *func_8008E54C(void *object, s16 *state, s32 count, s32 unused, void *out);
-extern void func_8008DEA0(void);
+extern void func_8008DEA0(void *state, s32 mode, void *source);
 
 void func_8008D684(u32 *object, s32 (*setup)(void *), s32 arg2) {
     func_80095AA0(object, func_8008E54C, func_8008DEA0, 0);
