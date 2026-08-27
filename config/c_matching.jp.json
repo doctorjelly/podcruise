@@ -24963,6 +24963,33 @@
           "size": 48
         }
       ]
+    },
+    {
+      "id": "func_80041914",
+      "source": "src/functions/func_8004110C.c",
+      "link_vram": "0x80041914",
+      "flags": [
+        "-G",
+        "0",
+        "-O2",
+        "-mips2",
+        "-non_shared",
+        "-Xcpluscomm",
+        "-signed",
+        "-Wab,-r4300_mul"
+      ],
+      "absolute_symbols": {},
+      "defines": {
+        "func_8004110C": "func_80041914"
+      },
+      "functions": [
+        {
+          "name": "func_80041914",
+          "vram": "0x80041914",
+          "rom": "0x42514",
+          "size": 264
+        }
+      ]
     }
   ]
 }

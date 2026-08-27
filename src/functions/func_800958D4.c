@@ -22,6 +22,7 @@ extern Cell958DC *func_8008D274(Cell958DC **head);
 extern void func_8008D22C(Cell958DC **head, Cell958DC *entry);
 
 void func_800958D4(void) {
+    s32 index;
     Ring958DC *arg0;
 
     arg0 = D_80149D40;
@@ -29,7 +30,8 @@ void func_800958D4(void) {
         return;
     }
     if (arg0->unk08 < arg0->unk10) {
-        arg0->unk14[(arg0->unk0C + arg0->unk08) % arg0->unk10] = D_80149D44;
+        index = (arg0->unk0C + arg0->unk08) % arg0->unk10;
+        arg0->unk14[index] = D_80149D44;
         arg0->unk08 = arg0->unk08 + 1;
         if (arg0->unk00->next != 0) {
             func_8008D22C(&D_800A7BB8, func_8008D274((Cell958DC **)arg0));

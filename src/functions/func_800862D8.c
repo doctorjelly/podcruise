@@ -18,13 +18,13 @@ extern void func_80086178(Viewport *);
 void func_800862D8(s32 index, s32 left, s32 top, s32 right, s32 bottom) {
     Viewport *viewport;
 
+    viewport = &D_80120DF0[index];
     if (D_8009B7E8 != 0) {
         left = 0;
         right = 0x140;
         bottom = 0xF0;
         top = 0;
     }
-    viewport = &D_80120DF0[index];
     viewport->unk20 = left;
     viewport->unk24 = top;
     viewport->unk28 = right;

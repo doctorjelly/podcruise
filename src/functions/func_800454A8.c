@@ -34,6 +34,7 @@ void func_800454A8(Owner *owner, Entry **list) {
     f32 value;
     s32 stop;
     Entry **cursor;
+    Entry *entry;
 
     value = 0.0f;
     best = value;
@@ -41,8 +42,9 @@ void func_800454A8(Owner *owner, Entry **list) {
     if (list != 0) {
         cursor = list;
         while (*cursor != 0 && stop == 0) {
-            if (best < (*cursor)->unk108) {
-                best = (*cursor)->unk108;
+            entry = *cursor;
+            if (best < entry->unk108) {
+                best = entry->unk108;
             }
             cursor++;
         }
