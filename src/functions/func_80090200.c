@@ -1,6 +1,7 @@
 /* Specification: specs/func_80090200.md (worker-authored) */
 #include "podcruise/types.h"
 
+struct Node;
 typedef struct Node {
     /* 0x00 */ s32 unk0;
     /* 0x04 */ s32 unk4;
@@ -11,7 +12,7 @@ typedef struct Node {
 
 typedef struct Sink {
     /* 0x00 */ u8 pad0[8];
-    /* 0x08 */ void (*unk8)(struct Sink *, s32);
+    /* 0x08 */ s32 (*unk8)(struct Sink *, s32, struct Node *);
 } Sink;
 
 typedef struct Device {
@@ -36,7 +37,6 @@ extern s32 func_800883F8(Stream *, s32);
 
 void func_80090200(Stream *arg0, Host *arg1, s16 arg2, s32 arg3) {
     Node *node;
-    Sink *sink;
 
     if (arg1->unk8) {
         node = func_80088500();
@@ -46,8 +46,7 @@ void func_80090200(Stream *arg0, Host *arg1, s16 arg2, s32 arg3) {
             node->unkC = arg2;
             node->unk10 = func_800883F8(arg0, arg3);
             node->unk0 = 0;
-            sink = arg1->unk8->unkC;
-            sink->unk8(sink, 3);
+            arg1->unk8->unkC->unk8(arg1->unk8->unkC, 3, node);
         }
     }
 }

@@ -3,13 +3,12 @@
 #include "podcruise/vector_math.h"
 
 u8 func_800152CC(const PcVec3f *left, const PcVec3f *right) {
-    u8 result = 0;
-    if (left->x == right->x) {
-        if (left->y == right->y) {
-            if (left->z == right->z) {
-                result = 1;
+    if (right->x == left->x) {
+        if (right->y == left->y) {
+            if (right->z == left->z) {
+                return 1;
             }
         }
     }
-    return result;
+    return 0;
 }

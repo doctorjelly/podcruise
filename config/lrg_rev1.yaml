@@ -1156,6 +1156,8 @@ segments:
       - [0x90D6C, asm, main_90D6C]
       - [0x90D70, c, functions/func_80090170]
       - [0x90DF4, asm, main_90DF4]
+      - [0x90E00, c, functions/func_80090200]
+      - [0x90E9C, asm, main_90E9C]
       - [0x90EA0, c, functions/func_800902A0]
       - [0x90F24, asm, main_90F24]
       - [0x90F30, c, functions/func_80090330]

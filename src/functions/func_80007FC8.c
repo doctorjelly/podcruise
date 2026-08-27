@@ -9,7 +9,7 @@ typedef struct {
 
 typedef struct {
     u8 pad0[0xC];
-    Table80007FC8* table;
+    Table80007FC8 *table;
 } Owner80007FC8;
 
 extern s32 D_8009A2BC;
@@ -18,10 +18,11 @@ extern Owner80007FC8 *func_80007CE4(s32 handle);
 extern s32 func_800894D0(s32, s32);
 
 s32 func_80007FC8(s32 arg0) {
-    Owner80007FC8* owner;
-    Table80007FC8* table;
-    s32 result = -1;
+    Owner80007FC8 *owner;
     s32 index;
+    Table80007FC8 *table;
+    s16 count;
+    s32 result = -1;
 
     owner = func_80007CE4(arg0);
     if (owner == 0) {
@@ -29,7 +30,8 @@ s32 func_80007FC8(s32 arg0) {
     }
     index = arg0 & 0x7FFF;
     table = owner->table;
-    if ((index >= 0) && (index < table->count)) {
+    count = table->count;
+    if ((index >= 0) && (index < count)) {
         result = func_800894D0(D_8009A2BC, table->items[index]);
     }
     return result;

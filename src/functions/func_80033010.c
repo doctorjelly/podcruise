@@ -10,10 +10,11 @@ s32 func_80033010(f32 *arg0, f32 *arg1, void *arg2, void *arg3) {
     f32 delta[4];
     f32 point[3];
     f32 hit[4];
-    f32 spare[3];
+    f32 r0;
+    f32 r1;
+    f32 r2;
     s32 result;
 
-    (void)spare;
     result = 0;
     delta[0] = arg0[0] - arg1[0];
     delta[1] = arg0[1] - arg1[1];
@@ -23,9 +24,12 @@ s32 func_80033010(f32 *arg0, f32 *arg1, void *arg2, void *arg3) {
         point[0] = arg1[0];
         point[1] = arg1[1];
         point[2] = arg1[2];
-        delta[0] = delta[0] * (1.0f / delta[3]);
-        delta[1] = delta[1] * (1.0f / delta[3]);
-        delta[2] = delta[2] * (1.0f / delta[3]);
+        r0 = 1.0f / delta[3];
+        delta[0] = delta[0] * r0;
+        r1 = 1.0f / delta[3];
+        delta[1] = delta[1] * r1;
+        r2 = 1.0f / delta[3];
+        delta[2] = delta[2] * r2;
         if (func_80004FB0(arg2, point, hit, arg3) >= 0.0f) {
             arg0[0] = arg1[0];
             arg0[1] = arg1[1];

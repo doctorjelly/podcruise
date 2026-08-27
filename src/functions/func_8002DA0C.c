@@ -13,10 +13,8 @@ unsigned char lane;
 
     phase = (s16)((D_80113E6C[(s32)slot] >> (lane * 2)) % 4);
     state = func_8002D9D0(slot, lane);
-    if (state == 3) {
-        if (phase == 0) {
-            return phase == 0;
-        }
+    if (state == 3 && phase == 0) {
+        return phase == 0;
     }
     return slot < 3 && ((D_80113E68[(s32)slot] & (1 << (lane + 1))) != 0) == 0;
 }

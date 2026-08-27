@@ -1,11 +1,8 @@
-/* Independently written from specs/functions/object_runtime_leaves.md. */
-
+/* Independently written from the scratchpad specification specs/func_80017E88.md. */
 #include "podcruise/object_accessors.h"
-
 s32 func_80017E88(const void *object, s32 selector) {
     s32 result = -1;
     u32 flags;
-
     if (object != 0) {
         if (selector == 1) {
             flags = *(const u32 *)object;
@@ -14,11 +11,10 @@ s32 func_80017E88(const void *object, s32 selector) {
                 result = 1;
             }
             if (flags & 0x40) {
-                if (result != 0) {
-                    result = 3;
-                } else {
+                if (result == 0) {
                     return 2;
                 }
+                result = 3;
             }
         }
     }

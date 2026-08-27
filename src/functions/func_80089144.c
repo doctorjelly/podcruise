@@ -37,7 +37,7 @@ extern s32 func_8008FD60(void *, void *);
 extern void func_80088BFC(void);
 extern void *D_800A6990;
 
-void func_80089144(register Object80089144 *object, Descriptor80089144 *descriptor) {
+void func_80089144(Object80089144 *object, Descriptor80089144 *descriptor) {
     u32 index;
     Element80089144 *element;
     void *pool;
