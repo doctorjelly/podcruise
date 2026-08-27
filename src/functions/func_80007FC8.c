@@ -21,7 +21,6 @@ s32 func_80007FC8(s32 arg0) {
     Owner80007FC8 *owner;
     s32 index;
     Table80007FC8 *table;
-    s16 count;
     s32 result = -1;
 
     owner = func_80007CE4(arg0);
@@ -29,10 +28,12 @@ s32 func_80007FC8(s32 arg0) {
         return -1;
     }
     index = arg0 & 0x7FFF;
-    table = owner->table;
-    count = table->count;
-    if ((index >= 0) && (index < count)) {
-        result = func_800894D0(D_8009A2BC, table->items[index]);
+    if (index >= 0) {
+        table = owner->table;
+        if (index < table->count) {
+            result = func_800894D0(D_8009A2BC, table->items[index]);
+        }
+        return result;
     }
     return result;
 }

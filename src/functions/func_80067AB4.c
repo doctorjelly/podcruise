@@ -74,13 +74,12 @@ void func_80067AB4(Body80067AB4 *body, void *context, f32 blend,
     }
 
     if ((body->unk64 & 0x400) == 0) {
-        amount = body->unk208;
-        if (amount != 0.0f) {
-            target = amount * 80.0f;
-            if (amount < 0.0f) {
-                magnitude = -amount;
+        if (body->unk208 != 0.0f) {
+            target = body->unk208 * 80.0f;
+            if (body->unk208 < 0.0f) {
+                magnitude = -body->unk208;
             } else {
-                magnitude = amount;
+                magnitude = body->unk208;
             }
             result->z = result->z + (target - result->z) * magnitude;
         }

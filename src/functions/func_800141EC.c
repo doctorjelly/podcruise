@@ -1,4 +1,4 @@
-/* Independently written from scratchpad spec specs/func_800141EC.md. */
+/* Specification: scratchpad specs/func_800141EC.md (recovered from assignment func_800141F8). */
 
 #include "podcruise/types.h"
 
@@ -50,14 +50,17 @@ extern void func_800125E4(PcFont *font, s32 index);
 void func_800141EC(character)
 u8 character;
 {
+    register PcFont *font;
     PcGlyph *glyph;
+    s32 index;
     s32 result;
 
-    PC_GFX(0xFA000000, (D_800A1CCC[0] << 24) | (D_800A1CCC[1] << 16) | (D_800A1CCC[2] << 8) | D_800A1CCC[3]);
+    PC_GFX(0xFA000000, ((D_800A1CCC[0] & 0xFF) << 24) | ((D_800A1CCC[1] & 0xFF) << 16) | ((D_800A1CCC[2] & 0xFF) << 8) | (D_800A1CCC[3] & 0xFF));
     D_800D6938 = 1;
     PC_GFX(0xFCFF97FF, 0xFF2DFEFF);
 
-    if (D_800A1D8C->unk00 == 0) {
+    font = D_800A1D8C;
+    if (font->unk00 == 0) {
         PC_GFX(0xE3001001, 0xC000);
         PC_GFX(0xFD100000, (u32)(unsigned long)&D_800A1DD0[0]);
         PC_GFX(0xE8000000, 0);
@@ -65,9 +68,10 @@ u8 character;
         PC_GFX(0xE6000000, 0);
         PC_GFX(0xF0000000, 0x073FC000);
         PC_GFX(0xE7000000, 0);
+        font = D_800A1D8C;
     }
 
-    if (D_800A1D8C->unk00 == 2) {
+    if (font->unk00 == 2) {
         PC_GFX(0xE3001001, 0x8000);
         PC_GFX(0xFD100000, D_800A1D8C->unk48);
         PC_GFX(0xE8000000, 0);
@@ -76,44 +80,38 @@ u8 character;
         PC_GFX(0xF0000000, 0x0703C000);
         PC_GFX(0xE7000000, 0);
         PC_GFX(0xE6000000, 0);
+        font = D_800A1D8C;
     }
 
-    if ((character >= 0x61) && (character < 0x7B) && (D_800A1D8C->unk5B < 0x61)) {
+    if ((character >= 0x61) && (character < 0x7B) && (font->unk5B < 0x61)) {
         character -= 0x20;
     }
 
-    if (D_800A1D8C->unk5C == 0) {
-        result = -2;
-        goto done;
-    }
-    if (character < D_800A1D8C->unk5A) {
-        result = -2;
-        goto done;
-    }
-    if (D_800A1D8C->unk5B < character) {
-        result = -2;
-        goto done;
-    }
-    glyph = &D_800A1D8C->unk5C[character - D_800A1D8C->unk5A];
-    if (glyph->unk08 == -1) {
-        result = -2;
-        goto done;
-    }
-    result = glyph->unk00;
-    D_800D691C = glyph->unk06;
-    D_800D6920 = glyph->unk04;
-    D_800D6924 = glyph->unk0C;
-    D_800D6928 = glyph->unk0E;
-    D_800D692C = glyph->unk08;
-    D_800D6930 = glyph->unk0A;
-    if (D_800A1D8C->unk00 != 0) {
-        D_800D6934 = 0;
+    result = (s32)(long)font->unk5C;
+    if ((result != 0) && (character >= font->unk5A) && (font->unk5B >= character)) {
+        index = character - font->unk5A;
+        glyph = &((PcGlyph *)(long)result)[index];
+        if (glyph->unk08 == -1) {
+            result = -2;
+        } else {
+            result = glyph->unk00;
+            D_800D691C = glyph->unk06;
+            D_800D6920 = glyph->unk04;
+            D_800D6924 = glyph->unk0C;
+            D_800D6928 = glyph->unk0E;
+            D_800D692C = glyph->unk08;
+            D_800D6930 = glyph->unk0A;
+            if (font->unk00 == 0) {
+                D_800D6934 = glyph->unk01;
+            } else {
+                D_800D6934 = 0;
+            }
+        }
     } else {
-        D_800D6934 = glyph->unk01;
+        result = -2;
     }
 
-done:
     if (result >= 0) {
-        func_800125E4(D_800A1D8C, result);
+        func_800125E4(font, result);
     }
 }

@@ -52,7 +52,7 @@ void func_8008FC3C(Head8008FC3C *arg0, void *arg1, s32 arg2) {
         }
         if (arg2 < t->count) {
             node->count = arg2;
-            t->count = t->count - arg2;
+            p->next->count = p->next->count - arg2;
             func_80088050(node, p);
             break;
         }

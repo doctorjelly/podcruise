@@ -12,13 +12,15 @@ extern f32 D_80120BF8;
 void func_80063AE0(void) {
     f32 position;
     f32 span;
+    register f32 radius;
 
     position = D_800A5B38;
-    span = D_800AD424 + D_800AD424;
+    radius = D_800AD424;
+    span = radius + radius;
     position += D_80120BF8;
     if (span < position) {
         position -= span;
     }
-    D_800A5B38 = position;
-    D_800A5B30 = (f32)(func_8004E034(position, D_800AD424) / span + 0.5);
+    *(f32 *)0x800A5B38 = position;
+    D_800A5B30 = (f32)(func_8004E034(position, radius) / span + 0.5);
 }

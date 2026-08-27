@@ -16,7 +16,7 @@ typedef struct Struct80089E50 {
 typedef struct Entry80089E50 {
     /* 0x00 */ s32 unk00;
     /* 0x04 */ u16 unk04;
-    /* 0x06 */ u8 pad06[0x22];
+    /* 0x06 */ u8 pad06[0x2a];
 } Entry80089E50;
 
 extern s32 func_80091280(Struct80089E50 *object);
@@ -27,7 +27,7 @@ s32 func_80089E50(Struct80089E50 *object, s32 *totalOut, s32 *usedOut) {
     Entry80089E50 entry;
     s32 index;
     s32 used;
-    s32 result;
+    register s32 result;
 
     used = 0;
     if (!(object->unk00 & 1)) {

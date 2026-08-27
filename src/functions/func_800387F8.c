@@ -20,7 +20,6 @@ extern s32 func_80038388(s32);
 
 void func_800387F8(s32 *result, Context *context) {
     s32 index;
-    s32 *entry;
 
     D_80112C90 = *result;
     D_80112C94 = context;
@@ -29,8 +28,8 @@ void func_800387F8(s32 *result, Context *context) {
     D_800A3D2C++;
     D_800A3D28 = 0;
 
-    for (entry = &D_80112C50[0]; entry < &D_80112C50[16]; entry++) {
-        *entry = 0;
+    for (index = 0; index < 16; index++) {
+        D_80112C50[index] = 0;
     }
 
     if (D_800D697C & 0x4000) {

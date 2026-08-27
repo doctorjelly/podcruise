@@ -127,8 +127,8 @@ void func_80024954(Panel80024954 *panel) {
 
     if (D_800A21B8[panel->unk5D][0] == -1 || D_800A21B8[panel->unk5D][1] == -1) {
         func_8008A6B4(text, D_800A8F38);
-        green = func_80082BE0();
         red = func_80082BE0();
+        green = func_80082BE0();
         blue = func_80082BE0();
         func_8003EC40(0xA0, 0xCD,
                       (s32)((f32)red / (f32)2147483648.0 * 256.0f),

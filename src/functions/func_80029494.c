@@ -17,7 +17,6 @@ extern f32 D_800D6DCC[];
 extern f32 D_800D6DD0;
 
 void func_80029494(void) {
-    f32 mid;
     void *owner;
 
     owner = D_8011A544;
@@ -35,9 +34,8 @@ void func_80029494(void) {
     if (func_80083D80(*(s32 *)((u8 *)owner + 0xFC), D_800D6DC0, 0) == 0) {
         func_80015288(D_800D6DC0, D_800D6D90);
         func_80015288(D_800D6DCC, D_800D6D9C);
-        mid = (D_800D6D90[1] + D_800D6D90[4]) * 0.5f;
-        D_800D6DD0 = mid;
-        D_800D6DB8 = mid;
+        D_800D6DD0 = (D_800D6D90[1] + D_800D6D90[4]) * 0.5f;
+        D_800D6DB8 = (D_800D6D90[1] + D_800D6D90[4]) * 0.5f;
         D_800D6D90[1] = (D_800D6D90[1] + D_800D6D90[4] * 5.0f) / 6.0f;
     }
 }

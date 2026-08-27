@@ -45,7 +45,7 @@ extern f32 func_800154D0(Vec3f800509E8 *vector);
 extern void func_800155EC(Vec3f800509E8 *output, const Vec3f800509E8 *base, f32 scale, const Vec3f800509E8 *offset);
 extern void func_800156DC(f32 output[4][4], const f32 source[4][4]);
 extern s32 func_80050C00(Obj800509E8 *object, f32 *value, const Vec3f800509E8 *from, const Vec3f800509E8 *to, f32 matrix[4][4], f32 scale);
-extern void func_800469B4(Obj800509E8 *object);
+extern void func_800469B4(Obj800509E8 *object, s32 mode);
 
 void func_800509E8(Obj800509E8 *arg0) {
     s32 mode;
@@ -94,7 +94,7 @@ void func_800509E8(Obj800509E8 *arg0) {
             if (D_800A219C == 0) {
                 D_800A4BC4 = 0;
                 if (D_800A4BDC == 0) {
-                    func_800469B4(arg0);
+                    func_800469B4(arg0, mode);
                 }
             }
         }

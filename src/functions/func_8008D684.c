@@ -3,7 +3,7 @@
 
 extern void func_80095AA0(void *a, void *b, void *c, s32 d);
 extern s32 func_80087FC0(s32 a, s32 b, s32 c, s32 d, s32 e);
-extern void func_8008E54C(void);
+extern void *func_8008E54C(void *object, s16 *state, s32 count, s32 unused, void *out);
 extern void func_8008DEA0(void);
 
 void func_8008D684(u32 *object, s32 (*setup)(void *), s32 arg2) {

@@ -35,6 +35,7 @@ void func_80050450(PcOwner *owner) {
     s32 id;
     PcEntity *entity;
     f32 sp60[3];
+    f32 angle;
     f32 first[3];
     f32 second[3];
 
@@ -46,8 +47,8 @@ void func_80050450(PcOwner *owner) {
         entity = func_8003F800(0x456C6D6F, id);
         if (entity != 0) {
             func_80033590(D_8011A508[i + 28], sp60);
-            func_80063084(id, 0x14, sp60, D_801195F0, entity->unk68,
-                          func_80014F54(D_801195F0[0] - second[0], second[1] - D_801195F0[1]));
+            angle = func_80014F54(D_801195F0[0] - second[0], second[1] - D_801195F0[1]);
+            func_80063084(id, 0x14, sp60, D_801195F0, entity->unk68, angle);
         }
     }
 }

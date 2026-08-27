@@ -15,14 +15,14 @@ s32 func_80006704(PcKeyTrack *track) {
     s32 index;
 
     if (track->keys[track->count - 1] < track->position) {
-        return track->count - 2;
-    }
-    if (track->position < track->keys[0]) {
-        return 0;
-    }
-    index = track->count - 2;
-    while (track->position < track->keys[index]) {
-        index--;
+        index = track->count - 2;
+    } else if (track->position < track->keys[0]) {
+        index = 0;
+    } else {
+        index = track->count - 2;
+        while (track->position < track->keys[index]) {
+            index--;
+        }
     }
     return index;
 }

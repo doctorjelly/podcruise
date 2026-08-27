@@ -26026,6 +26026,103 @@
         "func_80097D70": "func_8009D2C0",
         "func_800947F0": "func_80099D40"
       }
+    },
+    {
+      "id": "func_80002FFC_eu",
+      "source": "src/functions/func_80002FFC.c",
+      "link_vram": "0x80002FFC",
+      "defines": {
+        "func_800179EC": "func_80017E7C",
+        "D_800AE908": "D_800B75A8"
+      },
+      "absolute_symbols": {
+        "func_80002BD4": "0x80002BD4",
+        "func_80002E2C": "0x80002E2C",
+        "func_80017E7C": "0x80017E7C",
+        "func_80001864": "0x80001864",
+        "D_800B75A8": "0x800B75A8"
+      },
+      "functions": [
+        {
+          "name": "func_80002FFC",
+          "vram": "0x80002FFC",
+          "rom": "0x3BFC",
+          "size": 844
+        }
+      ]
+    },
+    {
+      "id": "func_80006704_eu",
+      "source": "src/functions/func_80006704.c",
+      "link_vram": "0x80006704",
+      "absolute_symbols": {},
+      "defines": {
+        "func_80006704": "func_80006704"
+      },
+      "functions": [
+        {
+          "name": "func_80006704",
+          "vram": "0x80006704",
+          "rom": "0x7304",
+          "size": 140
+        }
+      ]
+    },
+    {
+      "id": "func_8003A210",
+      "source": "src/functions/func_800358A0.c",
+      "link_vram": "0x8003A210",
+      "absolute_symbols": {
+        "D_800A9360": "0x800A9360",
+        "D_800A9A44": "0x800A9A44",
+        "D_800DF61C": "0x800DF61C"
+      },
+      "defines": {
+        "func_800358A0": "func_8003A210",
+        "D_800A3D60": "D_800A9360",
+        "D_800A4744": "D_800A9A44",
+        "D_800D697C": "D_800DF61C"
+      },
+      "functions": [
+        {
+          "name": "func_8003A210",
+          "vram": "0x8003A210",
+          "rom": "0x3AE10",
+          "size": 172
+        }
+      ]
+    },
+    {
+      "id": "func_80090450_eu",
+      "source": "src/functions/func_80090450.c",
+      "link_vram": "0x800959A0",
+      "flags": [
+        "-G",
+        "0",
+        "-O3",
+        "-mips2",
+        "-non_shared",
+        "-Xcpluscomm",
+        "-signed",
+        "-Wab,-r4300_mul"
+      ],
+      "defines": {
+        "func_80090450": "func_800959A0",
+        "func_80088450": "func_8008D9A0",
+        "func_80088500": "func_8008DA50"
+      },
+      "absolute_symbols": {
+        "func_8008D9A0": "0x8008D9A0",
+        "func_8008DA50": "0x8008DA50"
+      },
+      "functions": [
+        {
+          "name": "func_800959A0",
+          "vram": "0x800959A0",
+          "rom": "0x965A0",
+          "size": 176
+        }
+      ]
     }
   ]
 }

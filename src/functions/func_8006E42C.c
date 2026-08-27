@@ -54,8 +54,7 @@ s32 func_8006E42C(ObjectE42C *object, s32 index) {
         }
         second = index + 2;
         limit = D_800AD728;
-        ready = limit < D_800D7730[index] || limit < D_800D7730[second];
-        pressed = (D_800D7700[index] & 0x100) != 0 || (D_800D7700[second] & 0x100) != 0;
+        ready = limit < D_800D7730[index] || limit < D_800D7730[second]; pressed = (D_800D7700[index] & 0x100) != 0 || (D_800D7700[second] & 0x100) != 0;
     }
 
     result = 0;

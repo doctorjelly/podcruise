@@ -1,101 +1,71 @@
-/* Specification: scratchpad specs/func_80084EB8.md */
+/* Recovered per specification specs/func_80084EB8.md (framebuffer image setup and screen clear). */
 #include "podcruise/types.h"
 
-typedef struct {
-    u32 w0;
-    u32 w1;
-} Gfx80084EB8;
-
-typedef struct {
-    s32 unk00[8];
-    s32 unk20;
-    s32 unk24;
-    s32 unk28;
-    s32 unk2C;
-    s32 unk30[80];
-} Rect80084EB8;
-
-extern Rect80084EB8 D_80120DF0[];
+extern u32 *D_801217B0;
 extern s16 D_80114470[];
-extern Gfx80084EB8 *D_801217B0;
-extern void *D_800D9DB4;
-extern void *D_80114528;
+extern s32 D_80114528;
+extern s32 D_800D9DB4;
+extern s32 D_80120DF0[];
 extern s32 D_800A4740;
 extern s16 D_801488B8[];
-extern s16 D_801488BE;
-extern u32 func_80088360(void *);
+
+extern s32 func_80088360(s32);
 extern void func_800390AC(void);
 
-#define EMIT(a, b) { gfx = D_801217B0; D_801217B0 = gfx + 1; gfx->w0 = (a); gfx->w1 = (b); }
+#define GFX(w0, w1) { u32 *g = D_801217B0; D_801217B0 = g + 2; g[0] = (u32)(w0); g[1] = (u32)(w1); }
 
 void func_80084EB8(s32 arg0) {
-    Gfx80084EB8 *gfx;
-    Gfx80084EB8 *image;
-    Rect80084EB8 *rect;
-    f64 scaleX;
-    f64 scaleY;
+    s16 rgb[8];
     s32 x0;
     s32 y0;
     s32 x1;
     s32 y1;
-    s32 size;
-    u32 fill;
-    s16 *source;
-    s16 *dest;
-    s16 colors[3];
+    s32 siz;
+    s32 color;
+    s32 i;
+    f64 sx;
+    f64 sy;
 
-    rect = &D_80120DF0[0];
-    scaleX = (f64) D_80114470[0] / 320.0;
-    x0 = rect->unk20 * scaleX;
-    scaleY = (f64) D_80114470[1] / 240.0;
-    y0 = rect->unk24 * scaleY;
-    x1 = rect->unk28 * scaleX;
-    y1 = rect->unk2C * scaleY;
+    sx = (f64)D_80114470[0] / 320.0;
+    x0 = D_80120DF0[8] * sx;
+    sy = (f64)D_80114470[1] / 240.0;
+    y0 = D_80120DF0[9] * sy;
+    x1 = D_80120DF0[10] * sx;
+    y1 = D_80120DF0[11] * sy;
 
     if (D_800A4740 != 0) {
-        EMIT(0xE7000000, 0);
-        EMIT(0xE3000A01, 0x00300000);
-        image = D_801217B0; D_801217B0 = image + 1;
-        image->w0 = 0xFF100000 | ((D_80114470[0] - 1) & 0xFFF);
-        image->w1 = func_80088360(D_80114528);
-        EMIT(0xF7000000, 0xFFFCFFFC);
-        EMIT(0xF6000000 | (((x1 - 1) & 0x3FF) << 14) | (((y1 - 1) & 0x3FF) << 2),
-             ((x0 & 0x3FF) << 14) | ((y0 & 0x3FF) << 2));
+        GFX(0xE7000000, 0)
+        GFX(0xE3000A01, 0x00300000)
+        GFX(0xFF100000 | ((D_80114470[0] - 1) & 0xFFF), func_80088360(D_80114528))
+        GFX(0xF7000000, 0xFFFCFFFC)
+        GFX(0xF6000000 | (((x1 - 1) & 0x3FF) << 14) | (((y1 - 1) & 0x3FF) << 2), ((x0 & 0x3FF) << 14) | ((y0 & 0x3FF) << 2))
     }
 
-    EMIT(0xE7000000, 0);
-    image = D_801217B0; D_801217B0 = image + 1;
+    GFX(0xE7000000, 0)
     if (D_80114470[2] == 0x20) {
-        size = 3;
+        siz = 3;
     } else {
-        size = 2;
+        siz = 2;
     }
-    image->w0 = 0xFF000000 | ((size & 3) << 19) | ((D_80114470[0] - 1) & 0xFFF);
-    image->w1 = func_80088360(D_800D9DB4);
+    GFX(0xFF000000 | ((siz & 3) << 19) | ((D_80114470[0] - 1) & 0xFFF), func_80088360(D_800D9DB4))
 
     if (arg0 == 0) {
         if (D_80114470[2] == 0x10) {
-            source = D_801488B8;
-            dest = colors;
-            do {
-                *dest = *source + 4;
-                source++;
-                if (!(*dest < 0x100)) {
-                    *dest = 0xFF;
-                }
-                dest++;
-            } while (source != &D_801488BE);
-            fill = (((colors[2] >> 2) & 0x3E) | ((colors[0] << 8) & 0xF800)) |
-                   ((colors[1] << 3) & 0x7C0) | 1;
-            fill = fill | (fill << 16);
+            for (i = 0; i < 3; i++) {
+                rgb[i] = D_801488B8[i] + 4;
+                if (rgb[i] >= 0x100) { rgb[i] = 0xFF; }
+            }
+            color = ((rgb[0] << 8) & 0xF800) | ((rgb[1] << 3) & 0x7C0) | ((rgb[2] >> 2) & 0x3E);
+            color = color | 1;
+            color = color | (color << 16);
         } else {
-            fill = 0xFF;
+            color = 0xFF;
         }
-        EMIT(0xF7000000, fill);
-        EMIT(0xF6000000 | (((x1 - 1) & 0x3FF) << 14) | (((y1 - 1) & 0x3FF) << 2),
-             ((x0 & 0x3FF) << 14) | ((y0 & 0x3FF) << 2));
-        EMIT(0xE7000000, 0);
+        GFX(0xF7000000, color)
+        GFX(0xF6000000 | (((x1 - 1) & 0x3FF) << 14) | (((y1 - 1) & 0x3FF) << 2), ((x0 & 0x3FF) << 14) | ((y0 & 0x3FF) << 2))
+        GFX(0xE7000000, 0)
     }
-    EMIT(0xE3000A01, 0);
+
+    GFX(0xE3000A01, 0)
     func_800390AC();
 }

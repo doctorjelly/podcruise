@@ -8,14 +8,14 @@ s32 func_8002FE94(s32 arg0) {
     s32 m;
 
     bit = 0x40000000;
-    m = bit & arg0;
     i = 31;
-    do {
+    m = bit & arg0;
+    while (i != 0) {
         bit >>= 1;
         i--;
         if (m != 0) break;
         m = bit & arg0;
-    } while (i != 0);
+    }
     bit <<= 1;
     if (bit < arg0) bit <<= 1;
     if (bit < 0x10) bit = 0x10;

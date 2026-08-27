@@ -1,7 +1,7 @@
 /* Recovered from specification specs/func_8008BDC0.md (worker batch 12). */
 #include "podcruise/types.h"
 
-typedef void (*Callback8008BDC0)(void);
+typedef void (*Callback8008BDC0)();
 
 typedef struct {
     /* 0x00 */ s32 unk00;
@@ -32,7 +32,7 @@ extern void func_8008B960(void *);
 extern void func_8008CAA0(s32);
 extern void func_800944E0(void);
 extern void func_800945C0(void);
-extern void func_800947F0(void);
+extern void func_800947F0(void *context);
 
 void func_8008BDC0(s32 arg0, void *arg1, void *arg2, s32 arg3) {
     s32 handle;

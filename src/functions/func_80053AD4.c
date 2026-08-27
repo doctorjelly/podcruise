@@ -13,21 +13,21 @@ void func_80053AD4(void *arg0, void *arg1);
 void func_80053AD4(void *arg0, void *arg1) {
     f32 matrices[7][16];
     f32 pad[18];
-    register f32 angle;
-    register f32 stepRest;
     register f32 stepFirst;
+    register f32 stepRest;
+    register f32 angle;
     s32 index;
 
     (void)pad;
-    angle = D_800ACE94;
-    stepRest = D_800ACE9C;
     stepFirst = D_800ACE98;
+    stepRest = D_800ACE9C;
+    angle = D_800ACE94;
     for (index = 0; index < 7; index++) {
         func_8003B184((void *)(*(u8 **)((u8 *)arg1 + 0x84) + 0xAC), matrices[index], angle);
-        if (index >= 2) {
-            angle += stepRest;
-        } else {
+        if (index < 2) {
             angle += stepFirst;
+        } else {
+            angle += stepRest;
         }
     }
 
