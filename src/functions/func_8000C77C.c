@@ -36,7 +36,13 @@ typedef struct Unk8000C77C_Object {
     Unk8000C77C_Inner1 *unk1E70;
 } Unk8000C77C_Object;
 
-static const u32 D_800A8560[1] = { 0x0A000000 };
+/* Stand-in for the neighbouring constants that precede this unit's pool in
+   the original object; only its length is load-bearing. */
+enum { RODATA_LEAD_1 = 1, RODATA_LEAD_3 = 3 };
+#ifndef RODATA_LEAD
+#define RODATA_LEAD RODATA_LEAD_1
+#endif
+static const u32 D_800A8560[RODATA_LEAD] = { 0 };
 
 extern s32 D_8009B7E0;
 extern u8 D_800A82B0[];

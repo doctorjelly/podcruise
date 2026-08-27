@@ -20,7 +20,6 @@ extern void func_800181BC(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 extern void func_8003FD7C(Object *object);
 
 s32 func_80065690(Object *object, s32 *message, s32 arg2) {
-    s32 count;
     s32 i;
 
     (void)arg2;
@@ -28,19 +27,18 @@ s32 func_80065690(Object *object, s32 *message, s32 arg2) {
     case 0x4C6F6164:
         func_8003FD7C(object);
         object->unkF0 = 0;
-        return 1;
+        break;
     case 0x52536574:
         func_8003FD7C(object);
         object->unkF0 = 0;
-        return 1;
+        break;
     case 0x416C6F63:
         object->unk60 = 0;
         object->unk64 = 0;
         object->unkF0 = 0;
         object->unk68 = 0.0f;
-        count = 5;
-        for (i = 0; i != count; i++) {
-            object->unkF4[i] = D_8011C840[object->unk04 * count + i];
+        for (i = 0; i < 5; i++) {
+            object->unkF4[i] = D_8011C840[object->unk04 * 5 + i];
             if (object->unkF4[i] != 0) {
                 if (object->unkF4[i] != 0) {
                     func_800181BC(object->unkF4[i], 2, -4, 0x10, 3);
@@ -53,7 +51,9 @@ s32 func_80065690(Object *object, s32 *message, s32 arg2) {
         for (i = 0; i < 5; i++) {
             object->unkF4[i] = 0;
         }
-        return 1;
+        break;
+    default:
+        return 0;
     }
-    return 0;
+    return 1;
 }

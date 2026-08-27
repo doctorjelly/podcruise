@@ -41,8 +41,10 @@ void func_80089144(Object80089144 *object, Descriptor80089144 *descriptor) {
     u32 index;
     Element80089144 *element;
     void *pool;
+    void *list;
     s16 mode[6];
 
+    list = &object->unk14;
     object->unk3C = -1;
     object->unk48 = 0x3E80;
     object->unk44 = descriptor->count0;
@@ -54,13 +56,13 @@ void func_80089144(Object80089144 *object, Descriptor80089144 *descriptor) {
         element++;
     }
     pool = (void *)func_80087FC0(0, 0, descriptor->unk08, 1, descriptor->count1 * 28);
-    func_8008FDEC(&object->unk14, pool, descriptor->count1);
+    func_8008FDEC(list, pool, descriptor->count1);
     object->unk00 = 0;
     object->unk08 = (void *)func_80088BFC;
     object->unk04 = object;
     object->unk38 = D_800A6990;
-    func_8008FE60(D_800A6990, object);
+    func_8008FE60(object->unk38, object);
     mode[0] = 5;
-    func_8008FC3C(&object->unk14, mode, object->unk48);
-    object->unk4C = func_8008FD60(&object->unk14, &object->unk28);
+    func_8008FC3C(list, mode, object->unk48);
+    object->unk4C = func_8008FD60(list, &object->unk28);
 }

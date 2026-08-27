@@ -26,7 +26,6 @@ void func_8008FC3C(Head8008FC3C *arg0, void *arg1, s32 arg2) {
     Node8008FC3C *t;
     s32 flag;
     s32 prev;
-    s32 c;
 
     flag = 0;
     prev = func_80090500(1);
@@ -51,14 +50,13 @@ void func_8008FC3C(Head8008FC3C *arg0, void *arg1, s32 arg2) {
             func_80088050(node, p);
             break;
         }
-        c = t->count;
-        if (arg2 < c) {
+        if (arg2 < t->count) {
             node->count = arg2;
             t->count = t->count - arg2;
             func_80088050(node, p);
             break;
         }
-        arg2 -= c;
+        arg2 -= t->count;
     }
     func_80090500(prev);
 }

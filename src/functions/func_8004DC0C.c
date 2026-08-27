@@ -33,7 +33,11 @@ extern void func_80050208(Session *);
 extern void func_80051898(s32);
 extern void func_8005163C(Session *);
 
-static const s32 padding[3] = { 0, 0, 0 };
+#ifndef PADDING_WORDS
+#define PADDING_WORDS 3
+#endif
+
+static const s32 padding[PADDING_WORDS] = { 0 };
 
 s32 func_8004DC0C(Session *session, u32 *command, s32 argument) {
     u8 retry;

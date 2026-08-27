@@ -29,7 +29,6 @@ extern void func_800882B0(void *start, s32 length);
 
 void func_800073A4(void) {
     PcDisplayList *list;
-    s32 count;
 
     D_800B05B0++;
     if (D_8009A2C0 == 0) {
@@ -41,8 +40,8 @@ void func_800073A4(void) {
         func_80007488(list);
         func_8002E6E0();
         func_800882B0(list->unk00, list->unk04 * 4);
-        D_8009A2CC = 0;
         D_800AFA60.index = (D_800AFA60.index + 1) % 3;
+        D_8009A2CC = 0;
         D_800AFE88 = D_800AFE88 + 1;
         func_80008530();
     }

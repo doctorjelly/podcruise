@@ -30,6 +30,10 @@ HEADER = re.compile(
 # faithful. Keyed on all three so that any *other* disagreement involving the
 # same callee still fails.
 ACCEPTED = {
+    # The callee ignores its argument, so its definition matches as (void); the
+    # caller must still pass the constant 1 to reproduce the original's K&R
+    # call sequence. Both sides are faithful; the language changed under them.
+    ("func_8002FC80", "func_8002FAC4.c", 1): "K&R call to a callee that ignores its argument",
     ("func_80031BBC", "func_80031B70.c", 2): (
         "passes its own second argument, which the original left in place "
         "rather than setting up; the callee never reads it"),

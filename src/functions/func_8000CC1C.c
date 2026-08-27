@@ -62,7 +62,10 @@ extern f32 sqrtf(f32 value);
 
 void func_8000CC1C(s32 selector, f32 value) {
     Entry *entry;
+    f32 pad0;
     f32 temp;
+    f32 pad2;
+    f32 pad3;
 
     (void)D_800A85A0;
     D_8009B804 = 1;
@@ -159,7 +162,7 @@ void func_8000CC1C(s32 selector, f32 value) {
         break;
     case 12:
         if (entry != 0) {
-            func_8000C6C8(&entry->unk98, value, 0.01f, 0.0f, 1.0f);
+            func_8000C6C8(&entry->unk98, value, 0.01f, 0, 1.0f);
             entry->unk1E70->unk48 = entry->unk98;
         }
         break;
@@ -171,7 +174,7 @@ void func_8000CC1C(s32 selector, f32 value) {
         break;
     case 14:
         if (entry != 0) {
-            func_8000C6C8(&entry->unkA0, value, 0.01f, 0.0f, 1.0f);
+            func_8000C6C8(&entry->unkA0, value, 0.01f, 0, 1.0f);
             entry->unk1E70->unk50 = entry->unkA0;
         }
         break;
@@ -184,7 +187,7 @@ void func_8000CC1C(s32 selector, f32 value) {
     case 16:
         if (entry != 0) {
             temp = sqrtf(entry->unk108);
-            func_8000C6C8(&temp, value, 1.0f, 10.0f, 1000.0f);
+            func_8000C6C8(&temp, value, 1.0f, 10.0f, 500.0f);
             entry->unk108 = temp * temp;
         }
         break;
