@@ -1,4 +1,4 @@
-/* Independently written from the specification for func_80003B44. */
+/* Independently written from the specification specs/func_80003B44.md. */
 
 #include "podcruise/types.h"
 
@@ -23,9 +23,9 @@ void func_80003B44(s32 flags) {
                 func_80016BF4(D_800AE8C8, D_800AE8C8, matrix);
             }
         } else {
-            D_800AE8B8[0] += matrix[3][0];
-            D_800AE8B8[1] += matrix[3][1];
-            D_800AE8B8[2] += matrix[3][2];
+            D_800AE8B8[0] = D_800AE8B8[0] + matrix[3][0];
+            D_800AE8B8[1] = D_800AE8B8[1] + matrix[3][1];
+            D_800AE8B8[2] = D_800AE8B8[2] + matrix[3][2];
         }
     }
 }

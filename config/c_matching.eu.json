@@ -25065,6 +25065,34 @@
           "size": 2560
         }
       ]
+    },
+    {
+      "id": "func_8008C738_eu",
+      "source": "src/functions/func_8008C738.c",
+      "link_vram": "0x80091C88",
+      "absolute_symbols": {},
+      "defines": {
+        "func_8008C738": "func_80091C88"
+      },
+      "flags": [
+        "-G",
+        "0",
+        "-O1",
+        "-mips3",
+        "-o32",
+        "-non_shared",
+        "-Xcpluscomm",
+        "-signed",
+        "-Wab,-r4300_mul"
+      ],
+      "functions": [
+        {
+          "name": "func_80091C88",
+          "vram": "0x80091C88",
+          "rom": "0x92888",
+          "size": 48
+        }
+      ]
     }
   ]
 }

@@ -24,7 +24,7 @@ s32 func_800393DC(void *arg0, u32 arg1, s32 arg2) {
         while (1) {
         }
     }
-    result = func_8008C190(D_800D9C28, (arg1 >> 3) & 0xFF, arg0);
+    result = func_8008C190(D_800D9C28, (arg1 >> 3) & 0xFF, arg0, count);
     func_800392E8();
     return result;
 }

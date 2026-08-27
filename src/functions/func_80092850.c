@@ -1,13 +1,6 @@
 /* Specification: scratchpad specs/func_80092850.md (buffer zero-fill helper). */
 #include "podcruise/types.h"
 
-/*
- * The leading partial word is cleared through a byte-aligned word type, so the
- * compiler is not allowed to assume that the destination starts on a word
- * boundary.  Storing the whole word is safe here: the caller has already been
- * shown to have at least twelve bytes left, so the bytes past the boundary are
- * inside the region that the word loops below clear anyway.
- */
 #pragma pack(1)
 typedef struct {
     u32 value;
@@ -18,6 +11,7 @@ void func_80092850(u8 *cursor, s32 length) {
     s32 head;
     s32 chunk;
     u8 *limit;
+    u8 *end;
 
     if (length >= 12) {
         head = -(s32)(unsigned long)cursor & 3;
@@ -56,10 +50,10 @@ void func_80092850(u8 *cursor, s32 length) {
     }
 
     if (length > 0) {
-        limit = length + cursor;
+        end = length + cursor;
         do {
             *cursor = 0;
             cursor++;
-        } while (cursor != limit);
+        } while (cursor != end);
     }
 }

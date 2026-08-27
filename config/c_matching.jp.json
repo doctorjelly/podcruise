@@ -24935,6 +24935,34 @@
           "size": 2560
         }
       ]
+    },
+    {
+      "id": "func_8008C738_jp",
+      "source": "src/functions/func_8008C738.c",
+      "link_vram": "0x8008D428",
+      "absolute_symbols": {},
+      "defines": {
+        "func_8008C738": "func_8008D428"
+      },
+      "flags": [
+        "-G",
+        "0",
+        "-O1",
+        "-mips3",
+        "-o32",
+        "-non_shared",
+        "-Xcpluscomm",
+        "-signed",
+        "-Wab,-r4300_mul"
+      ],
+      "functions": [
+        {
+          "name": "func_8008D428",
+          "vram": "0x8008D428",
+          "rom": "0x8E028",
+          "size": 48
+        }
+      ]
     }
   ]
 }

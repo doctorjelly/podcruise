@@ -23,6 +23,7 @@ s32 *outHeight;
 {
     s32 width;
     s32 height;
+    s32 code;
     Glyph *glyph;
 
     if (outWidth != 0) {
@@ -32,8 +33,9 @@ s32 *outHeight;
         *outHeight = -1;
     }
     if (font->glyphs != 0) {
-        if (c >= font->first && c <= font->last) {
-            glyph = (Glyph *)((u8 *)&font->glyphs[c] + (font->first * -16));
+        code = c;
+        if (code >= font->first && code <= font->last) {
+            glyph = (Glyph *)((u8 *)&font->glyphs[code] + ((u32)(font->first * 16) * -1));
             width = glyph->unk2;
             height = glyph->unkE;
         }
