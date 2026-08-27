@@ -25,5 +25,5 @@ payload. Other modes and source types make no further change.
 
 ## Status
 
-Behavior recovered only. This source has no matching unit and has not passed
-an exact IDO comparison.
+Behavior recovered only. The source now has a matching unit, but the current
+IDO 5.3 `-O2` comparison does not match the USA bytes.

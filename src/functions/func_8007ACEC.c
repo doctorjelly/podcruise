@@ -1,4 +1,4 @@
-/* Specification: scratchpad specs/func_8007ACEC.md */
+/* Independently written from specs/functions/recovered/func_8007ACEC.md. */
 #include "podcruise/vector_math.h"
 
 typedef struct {

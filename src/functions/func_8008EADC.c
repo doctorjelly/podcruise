@@ -1,4 +1,4 @@
-/* Recovered per specification specs/func_8008EADC.md (audio stream display-list emitter). */
+/* Independently written from specs/functions/recovered/func_8008EADC.md. */
 #include "podcruise/types.h"
 
 struct Source;

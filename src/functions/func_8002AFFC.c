@@ -1,4 +1,4 @@
-/* Recovered from specification specs/func_8002AFFC.md (camera anchor placement). */
+/* Independently written from specs/functions/recovered/func_8002AFFC.md. */
 #include "podcruise/types.h"
 
 typedef struct {

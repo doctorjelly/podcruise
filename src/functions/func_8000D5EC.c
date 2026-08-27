@@ -1,4 +1,4 @@
-/* Independently written from specs/func_8000D5EC.md. */
+/* Independently written from specs/functions/recovered/func_8000D5EC.md. */
 
 #include "podcruise/types.h"
 

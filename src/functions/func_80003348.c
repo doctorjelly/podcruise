@@ -1,4 +1,4 @@
-/* Recovered per specification specs/func_80003348.md (worker scratchpad). */
+/* Independently written from specs/functions/recovered/func_80003348.md. */
 #include "podcruise/types.h"
 
 extern f32 D_800AE908[3];

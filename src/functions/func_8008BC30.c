@@ -1,4 +1,4 @@
-/* Recovered per scratchpad specification specs/func_8008BC30.md. */
+/* Independently written from specs/functions/recovered/func_8008BC30.md. */
 #include "podcruise/types.h"
 
 typedef struct Message8008BC30 {
