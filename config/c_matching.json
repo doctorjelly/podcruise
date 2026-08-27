@@ -25522,6 +25522,141 @@
           "size": 1056
         }
       ]
+    },
+    {
+      "id": "func_8000EEE0",
+      "source": "src/functions/func_8000EEE0.c",
+      "link_vram": "0x8000EEE0",
+      "absolute_symbols": {
+        "func_8000A920": "0x8000A920",
+        "func_8000AAC0": "0x8000AAC0",
+        "func_8000AB24": "0x8000AB24",
+        "func_8000E680": "0x8000E680",
+        "D_800A8688": "0x800A8688",
+        "D_800A868C": "0x800A868C",
+        "D_80114470": "0x80114470"
+      },
+      "functions": [
+        {
+          "name": "func_8000EEE0",
+          "vram": "0x8000EEE0",
+          "rom": "0xFAE0",
+          "size": 508
+        }
+      ]
+    },
+    {
+      "id": "func_8001F5AC",
+      "source": "src/functions/func_8001F5AC.c",
+      "link_vram": "0x8001F5AC",
+      "absolute_symbols": {
+        "D_800A2198": "0x800A2198",
+        "D_800A219C": "0x800A219C",
+        "D_800A21A0": "0x800A21A0",
+        "D_800A21A4": "0x800A21A4",
+        "D_800A21A8": "0x800A21A8",
+        "D_800A21B0": "0x800A21B0",
+        "D_800A2528": "0x800A2528",
+        "D_800A252C": "0x800A252C",
+        "D_800A2DE0": "0x800A2DE0",
+        "D_800A4B94": "0x800A4B94",
+        "D_800A4BA4": "0x800A4BA4",
+        "D_800A4BBC": "0x800A4BBC",
+        "D_800A4BC0": "0x800A4BC0",
+        "D_800A4BC4": "0x800A4BC4",
+        "D_800A4BC8": "0x800A4BC8",
+        "D_800A4BCC": "0x800A4BCC",
+        "D_800A4BDC": "0x800A4BDC",
+        "D_800A4BEC": "0x800A4BEC",
+        "D_800A4C0C": "0x800A4C0C",
+        "D_800A8DE8": "0x800A8DE8",
+        "D_800D6CC0": "0x800D6CC0",
+        "D_800D6CC4": "0x800D6CC4",
+        "D_800D7168": "0x800D7168",
+        "D_80113E60": "0x80113E60",
+        "D_80113E78": "0x80113E78",
+        "D_801198A8": "0x801198A8",
+        "D_8011A240": "0x8011A240",
+        "D_8011A270": "0x8011A270",
+        "D_8011A5D4": "0x8011A5D4",
+        "D_80120BF8": "0x80120BF8",
+        "func_800129B8": "0x800129B8",
+        "func_80014F54": "0x80014F54",
+        "func_80015288": "0x80015288",
+        "func_8001F48C": "0x8001F48C",
+        "func_80028320": "0x80028320",
+        "func_80028498": "0x80028498",
+        "func_80029C24": "0x80029C24",
+        "func_80029D38": "0x80029D38",
+        "func_8002A7D4": "0x8002A7D4",
+        "func_8002CC28": "0x8002CC28",
+        "func_8002D4C4": "0x8002D4C4",
+        "func_8002D6EC": "0x8002D6EC",
+        "func_8002DBD8": "0x8002DBD8",
+        "func_80033590": "0x80033590",
+        "func_8003EC40": "0x8003EC40",
+        "func_800469B4": "0x800469B4",
+        "func_80046DC4": "0x80046DC4",
+        "func_8004850C": "0x8004850C",
+        "func_8004E4F4": "0x8004E4F4",
+        "func_800503E8": "0x800503E8",
+        "func_800511B0": "0x800511B0",
+        "func_800519C0": "0x800519C0",
+        "func_80063084": "0x80063084",
+        "func_80063AA0": "0x80063AA0",
+        "func_80064B44": "0x80064B44",
+        "func_8008A6B4": "0x8008A6B4"
+      },
+      "flags": [
+        "-G",
+        "0",
+        "-O2",
+        "-mips2",
+        "-non_shared",
+        "-Xcpluscomm",
+        "-signed",
+        "-Wab,-r4300_mul"
+      ],
+      "functions": [
+        {
+          "name": "func_8001F5AC",
+          "vram": "0x8001F5AC",
+          "rom": "0x201AC",
+          "size": 2692
+        }
+      ]
+    },
+    {
+      "id": "func_8005B810",
+      "source": "src/functions/func_8005B810.c",
+      "link_vram": "0x8005B810",
+      "absolute_symbols": {
+        "func_80008B14": "0x80008B14",
+        "func_8000A920": "0x8000A920",
+        "func_8000AA04": "0x8000AA04",
+        "func_8000AAC0": "0x8000AAC0",
+        "func_8000AB24": "0x8000AB24",
+        "func_8000EA4C": "0x8000EA4C",
+        "func_80082BE0": "0x80082BE0",
+        "D_800A26F4": "0x800A26F4",
+        "D_800ACFD0": "0x800ACFD0",
+        "D_800ACFD4": "0x800ACFD4",
+        "D_800ACFD8": "0x800ACFD8",
+        "D_800ACFDC": "0x800ACFDC",
+        "D_800ACFE0": "0x800ACFE0",
+        "D_800ACFE4": "0x800ACFE4",
+        "D_800ACFE8": "0x800ACFE8",
+        "D_800ACFEC": "0x800ACFEC",
+        "D_800ACFF0": "0x800ACFF0"
+      },
+      "functions": [
+        {
+          "name": "func_8005B810",
+          "vram": "0x8005B810",
+          "rom": "0x5C410",
+          "size": 2560
+        }
+      ]
     }
   ]
 }

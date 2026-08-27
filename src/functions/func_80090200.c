@@ -38,9 +38,9 @@ void func_80090200(Stream *arg0, Host *arg1, s16 arg2, s32 arg3) {
     Node *node;
     Sink *sink;
 
-    if (arg1->unk8 != 0) {
+    if (arg1->unk8) {
         node = func_80088500();
-        if (node != 0) {
+        if (node) {
             node->unk4 = arg0->unk1C + arg1->unk8->unkD8;
             node->unk8 = 0xB;
             node->unkC = arg2;

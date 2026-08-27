@@ -11,7 +11,8 @@ extern void func_80017C18(void *, f32 *);
 extern f32 func_80014F54(f32, f32);
 
 f32 func_80033BCC(Node *arg0, s32 *arg1) {
-    f32 work[18];
+    void *object;
+    f32 work[17];
 
     if (arg1 == 0) {
         return 0.0f;
@@ -25,9 +26,10 @@ f32 func_80033BCC(Node *arg0, s32 *arg1) {
     if (arg0->unk_04 == 0) {
         return 0.0f;
     }
-    if (arg0->unk_08 == 0) {
+    object = arg0->unk_08;
+    if (object == 0) {
         return 0.0f;
     }
-    func_80017C18(arg0->unk_08, work);
+    func_80017C18(object, work);
     return func_80014F54(-work[4], work[5]);
 }

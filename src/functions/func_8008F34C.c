@@ -1,8 +1,9 @@
-/* Independently written from the specification for func_8008F34C. */
-
+/* Specification: specs/func_8008F34C.md (worker-authored).
+   The unit is -O3 with this routine file-local; the two stand-in callers below
+   exist only to keep it out of line (a single call site is inlined away). */
 #include "podcruise/types.h"
 
-f32 func_8008F34C(f32 value, s32 exponent, s16 rateHigh, u16 rateLow) {
+static f32 func_8008F34C(f32 value, s32 exponent, s16 rateHigh, u16 rateLow) {
     f32 factor;
     f32 accumulated;
     s32 step;
@@ -25,3 +26,6 @@ f32 func_8008F34C(f32 value, s32 exponent, s16 rateHigh, u16 rateLow) {
     }
     return value * accumulated;
 }
+
+f32 caller_a(f32 v, s32 e, s16 h, u16 l) { return func_8008F34C(v, e, h, l); }
+f32 caller_b(f32 v, s32 e, s16 h, u16 l) { return func_8008F34C(v, e, h, l) + func_8008F34C(v, e + 1, h, l); }
