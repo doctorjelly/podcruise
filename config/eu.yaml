@@ -299,7 +299,7 @@ segments:
       - [0x189A8, c, functions/func_80017918]
       - [0x18A7C, c, functions/func_800179EC]
       - [0x18B50, c, functions/func_80017AC0]
-      - [0x18BC4, asm, main_18BC4]
+      - [0x18BC4, c, functions/func_80017B34]
       - [0x18C0C, c, functions/func_80017B7C]
       - [0x18C38, c, functions/func_80017BA8]
       - [0x18CA8, c, functions/func_80017C18]

@@ -24990,6 +24990,26 @@
           "size": 264
         }
       ]
+    },
+    {
+      "id": "func_80017C64",
+      "source": "src/functions/func_80017B34.c",
+      "link_vram": "0x80017C64",
+      "absolute_symbols": {
+        "func_8001747C": "0x8001747C"
+      },
+      "defines": {
+        "func_80017B34": "func_80017C64",
+        "func_8001734C": "func_8001747C"
+      },
+      "functions": [
+        {
+          "name": "func_80017C64",
+          "vram": "0x80017C64",
+          "rom": "0x18864",
+          "size": 72
+        }
+      ]
     }
   ]
 }

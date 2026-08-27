@@ -25120,6 +25120,26 @@
           "size": 264
         }
       ]
+    },
+    {
+      "id": "func_80017FC4",
+      "source": "src/functions/func_80017B34.c",
+      "link_vram": "0x80017FC4",
+      "absolute_symbols": {
+        "func_800177DC": "0x800177DC"
+      },
+      "defines": {
+        "func_80017B34": "func_80017FC4",
+        "func_8001734C": "func_800177DC"
+      },
+      "functions": [
+        {
+          "name": "func_80017FC4",
+          "vram": "0x80017FC4",
+          "rom": "0x18BC4",
+          "size": 72
+        }
+      ]
     }
   ]
 }

@@ -295,7 +295,7 @@ segments:
       - [0x18648, c, functions/func_80017918]
       - [0x1871C, c, functions/func_800179EC]
       - [0x187F0, c, functions/func_80017AC0]
-      - [0x18864, asm, main_18864]
+      - [0x18864, c, functions/func_80017B34]
       - [0x188AC, c, functions/func_80017B7C]
       - [0x188D8, c, functions/func_80017BA8]
       - [0x18948, c, functions/func_80017C18]
