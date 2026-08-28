@@ -1,11 +1,13 @@
-/* Implements the specification in specs/func_800903D0.md */
+/* Independently written from specs/functions/recovered/func_800903D0.md. */
 #include "podcruise/types.h"
 
-struct Node800903D0;
+struct Event800903D0;
+struct Owner800903D0;
 
 typedef struct Handler800903D0 {
     /* 0x00 */ u8 pad00[0x8];
-    /* 0x08 */ void (*unk08)(struct Handler800903D0 *, s32, void *, void *);
+    /* 0x08 */ void (*unk08)(struct Handler800903D0 *, s32,
+                             struct Event800903D0 *, struct Owner800903D0 *);
 } Handler800903D0;
 
 typedef struct Context800903D0 {
@@ -35,16 +37,16 @@ extern Event800903D0 *func_80088500(void);
 
 void func_800903D0(Source800903D0 *arg0, Owner800903D0 *arg1) {
     Event800903D0 *event;
-    s32 value;
+    Handler800903D0 *handler;
 
     if (arg1->unk08 != 0) {
         event = func_80088500();
         if (event != 0) {
-            value = arg0->unk1C + arg1->unk08->unkD8;
+            event->unk04 = arg0->unk1C + arg1->unk08->unkD8;
             event->unk08 = 15;
             event->unk00 = 0;
-            event->unk04 = value;
-            arg1->unk08->unk0C->unk08(arg1->unk08->unk0C, 3, event, arg1);
+            handler = arg1->unk08->unk0C;
+            handler->unk08(handler, 3, event, arg1);
         }
     }
 }

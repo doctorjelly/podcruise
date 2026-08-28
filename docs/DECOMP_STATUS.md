@@ -20,16 +20,16 @@ and why the earlier `0x99000` interval was wrong.
 
 | Build | Exact functions | Exact bytes | Share of CPU text | Configured units | Hybrid substitutions |
 |---|---:|---:|---:|---:|---:|
-| USA retail | 982 | 225,768 | 36.32% | 1,194 | 981 |
+| USA retail | 983 | 225,888 | 36.34% | 1,194 | 982 |
 | Japan retail | 884 | 192,952 | 31.04% | 956 | 884 |
 | Europe retail | 885 | 201,076 | 32.35% | 955 | 885 |
-| USA LRG revision | 982 | 225,768 | 36.32% | 1,194 | 981 |
+| USA LRG revision | 983 | 225,888 | 36.34% | 1,194 | 982 |
 
 "Configured" counts translation units with reviewed C under compiler test. The
 gap between configured and exact is behaviour-recovered work: the source
 compiles, and in many cases to the original's exact length, but the bytes do
 not yet match. The USA manifest currently covers 1,231 functions and 415,920
-original bytes in reviewed C, or 66.92% of CPU text; only the exact 36.32% is
+original bytes in reviewed C, or 66.92% of CPU text; only the exact 36.34% is
 eligible for substitution in the canonical rebuild.
 
 The strict manifest audit currently finds 56 source files without matching
