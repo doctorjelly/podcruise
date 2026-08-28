@@ -16461,7 +16461,7 @@
       "id": "func_8007C818",
       "source": "src/functions/func_8007C818.c",
       "link_vram": "0x8007C818",
-      "rodata_vram": "0x800ADB68",
+      "rodata_vram": "0x800ADB60",
       "flags": [
         "-G",
         "0",

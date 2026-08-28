@@ -1,4 +1,4 @@
-/* Implements the specification in specs/func_8007C818.md (impact effect setup). */
+/* Independently written from specs/functions/recovered/func_8007C818.md. */
 #include "podcruise/types.h"
 
 typedef struct Holder {
