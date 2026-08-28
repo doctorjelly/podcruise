@@ -1,4 +1,4 @@
-/* Independently written from scratchpad spec specs/func_8006BC74.md (two-body collision response). */
+/* Independently written from specs/functions/recovered/func_8006BC74.md. */
 
 #include "podcruise/types.h"
 

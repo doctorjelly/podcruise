@@ -16397,6 +16397,7 @@
       "id": "func_8006BC74",
       "source": "src/functions/func_8006BC74.c",
       "link_vram": "0x8006BC74",
+      "rodata_vram": "0x800AD5F0",
       "absolute_symbols": {
         "D_800AD5EC": "0x800AD5EC",
         "D_800AD5F0": "0x800AD5F0",
