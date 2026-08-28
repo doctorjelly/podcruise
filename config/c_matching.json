@@ -10734,6 +10734,16 @@
       "id": "func_8008DCB0",
       "source": "src/functions/func_8008DCB0.c",
       "link_vram": "0x8008DCB0",
+      "flags": [
+        "-G",
+        "0",
+        "-O3",
+        "-mips2",
+        "-non_shared",
+        "-Xcpluscomm",
+        "-signed",
+        "-Wab,-r4300_mul"
+      ],
       "absolute_symbols": {
         "func_8008D870": "0x8008D870",
         "func_8008DD50": "0x8008DD50",

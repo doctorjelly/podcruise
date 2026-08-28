@@ -57,7 +57,7 @@ extern void func_8008D5A8(void *, void *, s32);
 extern void func_8008D5FC(void *, void *);
 extern void func_8008D684(void *, void *, void *);
 extern void func_8008D72C(void *, void *);
-extern void *func_8008DCB0(void *, s32, void *, void *);
+extern void *func_8008DCB0(void *, s16, void *, void *);
 extern void func_8008DD50(void *, s32, void *);
 extern void func_8008DEA0(void *, s32, void *);
 extern void func_8008E9F0(void *, s32, void *);
