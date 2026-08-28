@@ -1,4 +1,4 @@
-/* Implements specification $S/specs/func_80082624.md */
+/* Independently written from specs/functions/recovered/func_80082624.md. */
 #include "podcruise/vector_math.h"
 
 /* Stand-in for the neighbouring function's constants, which in the original

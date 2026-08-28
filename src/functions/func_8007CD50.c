@@ -1,4 +1,4 @@
-/* Specification: specs/func_8007CD50.md */
+/* Independently written from specs/functions/recovered/func_8007CD50.md. */
 #include "podcruise/types.h"
 
 typedef struct Node8007CD50 {
