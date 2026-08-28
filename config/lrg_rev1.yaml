@@ -446,7 +446,7 @@ segments:
       - [0x309BC, c, functions/func_8002FDBC]
       - [0x309F8, c, functions/func_8002FDF8]
       - [0x30A80, c, functions/func_8002FE80]
-      - [0x30A94, asm, main_30A94]
+      - [0x30A94, c, functions/func_8002FE94]
       - [0x30AE4, c, functions/func_8002FEE4]
       - [0x30B38, asm, main_30B38]
       - [0x30D30, c, functions/func_80030130]

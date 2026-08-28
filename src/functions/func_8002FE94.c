@@ -1,23 +1,21 @@
-/* Independently written from the specification for func_8002FE94. */
+/* Independently written from specs/functions/recovered/func_8002FE94.md. */
 #include "podcruise/types.h"
 
-/* Rounds a signed value up to a power of two, with a floor of sixteen. */
-s32 func_8002FE94(s32 arg0) {
-    s32 bit;
-    s32 i;
-    s32 m;
+/* The incoming counter value is overwritten before use; see the arity note in
+ * the specification. */
+s32 func_8002FE94(s32 value, s32 counter) {
+    s32 power;
+    s32 hit;
 
-    bit = 0x40000000;
-    i = 31;
-    m = bit & arg0;
-    while (i != 0) {
-        bit >>= 1;
-        i--;
-        if (m != 0) break;
-        m = bit & arg0;
+    power = 0x40000000;
+    for (counter = 31; counter != 0;) {
+        hit = power & value;
+        power >>= 1;
+        counter--;
+        if (hit != 0) break;
     }
-    bit <<= 1;
-    if (bit < arg0) bit <<= 1;
-    if (bit < 0x10) bit = 0x10;
-    return bit;
+    power <<= 1;
+    if (power < value) power <<= 1;
+    if (power < 0x10) power = 0x10;
+    return power;
 }
