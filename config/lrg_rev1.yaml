@@ -1208,7 +1208,7 @@ segments:
       - [0x91E80, c, functions/func_80091280]
       - [0x91F54, asm, main_91F54]
       - [0x92768, c, functions/func_80091B68]
-      - [0x92A34, asm, main_92A34]
+      - [0x92A34, c, functions/func_80091E34]
       - [0x92BD0, c, functions/func_80091FD0]
       - [0x92C48, asm, main_92C48]
       - [0x93160, c, functions/func_80092560]

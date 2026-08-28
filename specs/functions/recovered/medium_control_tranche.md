@@ -87,9 +87,10 @@ all four builds. Each locale produces the same comparison result:
 | `func_800801B8` | 408 | 408 | `0x0C` | behavior-recovered |
 | `func_80089870` | 368 | 364 | `0x00` | behavior-recovered |
 | `func_800910D4` | 428 | 428 | `0x81` | behavior-recovered |
-| `func_80091E34` | 412 | 412 | `0x6A` | behavior-recovered |
+| `func_80091E34` | 412 | 412 | none | byte-matching |
 
-IDO 5.3 under `ido53_o2` reproduces all 408 bytes of `func_8006E034`
-exactly in USA retail, the USA LRG revision, Japan, and Europe. The other nine
-units remain assembly in hybrid rebuilds and no byte match is claimed for them.
-Address-based names remain until subsystem semantics are proven.
+IDO 5.3 under `ido53_o2` reproduces all bytes of `func_8006E034` and
+`func_80091E34` exactly in USA retail, the USA LRG revision, Japan, and Europe.
+The other eight units remain assembly in hybrid rebuilds and no byte match is
+claimed for them. Address-based names remain until subsystem semantics are
+proven.

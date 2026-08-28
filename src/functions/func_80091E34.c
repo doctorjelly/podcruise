@@ -25,8 +25,8 @@ extern s32 func_80091354(Obj80091E34 *obj, Entry80091E34 *e, s32 arg2, u8 arg3);
 
 s32 func_80091E34(Obj80091E34 *obj, Key80091E34 key, Entry80091E34 *e) {
     s32 found;
-    s32 start;
     s32 slot;
+    s32 start;
     s32 ret;
     s32 j;
     u8 i;
@@ -43,8 +43,12 @@ s32 func_80091E34(Obj80091E34 *obj, Key80091E34 key, Entry80091E34 *e) {
         if (i == key.p.a || (e->mask[slot] & (1 << (i % 8))) != 0) {
             if (i != e->cur) {
                 ret = func_80091354(obj, e, 0, i);
-                if (ret != 0 && ret != 3) {
-                    return ret;
+                switch (ret) {
+                    case 0:
+                    case 3:
+                        break;
+                    default:
+                        return ret;
                 }
                 e->cur = i;
             }
