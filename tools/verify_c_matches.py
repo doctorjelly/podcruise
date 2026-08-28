@@ -129,6 +129,17 @@ def linker_script(unit: dict) -> str:
     return "\n".join(lines)
 
 
+def section_alignment_args(unit: dict) -> list[str]:
+    """Return objcopy overrides needed to reproduce original section placement."""
+    arguments = ["--set-section-alignment", ".text=4"]
+    if unit.get("rodata_alignment") is not None:
+        alignment = int(unit["rodata_alignment"])
+        if alignment <= 0 or alignment & (alignment - 1):
+            raise ValueError(f"invalid rodata alignment: {alignment}")
+        arguments.extend(["--set-section-alignment", f".rodata={alignment}"])
+    return arguments
+
+
 def compiler_defines(unit: dict) -> list[str]:
     arguments: list[str] = []
     for source_name, target_name in sorted(unit.get("defines", {}).items()):
@@ -230,8 +241,7 @@ def verify_profile(
             run(
                 [
                     str(binutils["objcopy"]),
-                    "--set-section-alignment",
-                    ".text=4",
+                    *section_alignment_args(unit),
                     str(object_path),
                     str(aligned_object_path),
                 ],

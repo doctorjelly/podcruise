@@ -19,4 +19,6 @@ a fixed forward direction, and update that light slot.
 ## Status
 
 Behavior recovered only. The current IDO 5.3 `-O2` comparison does not match
-the USA bytes, so this source cannot yet be substituted.
+the USA bytes, so this source cannot yet be substituted. The current candidate
+has the exact 756-byte length and differs only in four floating-point register
+fields across two local color copies; this is still not an exact byte match.

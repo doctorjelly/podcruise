@@ -19,5 +19,7 @@ camera segment.
 
 ## Status
 
-Behavior recovered only; the current compiler probe does not match the USA
-function byte-for-byte.
+Byte-matching C. IDO 5.3 with the accepted `-O2` profile reproduces all 972
+USA bytes exactly. The object-local jump table begins at `0x800A9E28`, uses
+8-byte alignment, and its two double constants follow at `0x800A9E58` and
+`0x800A9E60`. The same source also matches the USA LRG revision exactly.

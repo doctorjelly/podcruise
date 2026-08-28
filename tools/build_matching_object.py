@@ -17,6 +17,7 @@ from tools.verify_c_matches import (
     resolve_binutils,
     resolve_compiler,
     run,
+    section_alignment_args,
 )
 
 
@@ -99,8 +100,7 @@ def main() -> int:
     run(
         [
             str(binutils["objcopy"]),
-            "--set-section-alignment",
-            ".text=4",
+            *section_alignment_args(unit),
             str(compiler_object),
             str(aligned_object),
         ],

@@ -49,19 +49,18 @@ extern s32 func_80086A20(s32 slot, PcVec3f *ambient, PcVec3f *diffuse, PcVec3f *
 extern f32 D_800ADB54;
 
 void func_8007ACEC(ObjectACEC *object) {
+    s32 i;
     f32 direction[3];
     f32 diffuse[3];
     f32 ambient[3];
-    s32 flags;
     f32 value;
     s32 whole;
-    s32 i;
 
 
     func_80073470(object);
 
-    flags = object->unk60;
-    if (!(flags & 0x800)) {
+    whole = object->unk60;
+    if (!(whole & 0x800)) {
         func_80077054(object);
         if (*object->unk1E70->unk18 == 14) {
             func_800156DC((PcVec3fSlot *)object->unk350[1], (PcVec3fSlot *)object->unk350[5]);
@@ -133,9 +132,9 @@ void func_8007ACEC(ObjectACEC *object) {
             }
             value = value - (f32)whole;
             ambient[2] = 255.0f;
-            diffuse[2] = ambient[2];
             ambient[0] = value * 255.0f;
             ambient[1] = value * 255.0f;
+            diffuse[2] = ambient[2];
             diffuse[1] = ambient[1];
             diffuse[0] = ambient[0];
             func_80086A20(object->unk300, (PcVec3f *)ambient, (PcVec3f *)diffuse, (PcVec3f *)direction);

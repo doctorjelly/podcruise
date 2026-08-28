@@ -17,6 +17,7 @@ from tools.verify_c_matches import (
     linker_script,
     load_matching_config,
     parse_function_symbols,
+    section_alignment_args,
 )
 
 
@@ -203,6 +204,19 @@ class MipsAnalysisTests(unittest.TestCase):
         self.assertIn(".rodata 0x800AAAD0 :", script)
         self.assertNotIn(".rodata", linker_script(
             {"absolute_symbols": {}, "link_vram": "0x80001000"}))
+
+    def test_unit_can_lower_constant_pool_alignment(self) -> None:
+        self.assertEqual(
+            section_alignment_args({"rodata_alignment": 8}),
+            [
+                "--set-section-alignment",
+                ".text=4",
+                "--set-section-alignment",
+                ".rodata=8",
+            ],
+        )
+        with self.assertRaises(ValueError):
+            section_alignment_args({"rodata_alignment": 6})
 
     def test_only_unreachable_instructions_retire_a_function(self) -> None:
         """Guard the compiler-capability facts this classification rests on.

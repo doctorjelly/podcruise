@@ -113,6 +113,8 @@
       "id": "func_8002AFFC",
       "source": "src/functions/func_8002AFFC.c",
       "link_vram": "0x8002AFFC",
+      "rodata_vram": "0x800A9E28",
+      "rodata_alignment": 8,
       "absolute_symbols": {
         "D_800A3200": "0x800A3200",
         "D_80118D90": "0x80118D90",
