@@ -1,7 +1,7 @@
 # Medium spatial tranche
 
-Status: **5 behavior-recovered functions measured in all four builds; none is
-byte-matching C**.
+Status: **1 byte-matching function and 4 behavior-recovered functions measured
+in all four builds**.
 
 ## Verified facts
 
@@ -67,15 +67,17 @@ address. USA, Japan, Europe, and LRG give the same measurements:
 
 | Function | Target bytes | C bytes | First difference | Status |
 | --- | ---: | ---: | ---: | --- |
-| `func_8004A36C` | 584 | 584 | `0xD7` | behavior-recovered |
+| `func_8004A36C` | 584 | 584 | none | byte-matching |
 | `func_80003BF8` | 596 | 600 | `0x03` | behavior-recovered |
 | `func_80000B00` | 640 | 580 | `0x03` | behavior-recovered |
 | `func_8003FDCC` | 644 | 620 | `0x03` | behavior-recovered |
 | `func_8002AD70` | 652 | 632 | `0x04` | behavior-recovered |
 
-`func_8004A36C` has the correct length and differs in only three instruction
-words, all stack-address operands. Several direct local-layout expressions were
-tested with the exact verifier, but none matched, so the clear behavior source
-is retained. No function in this tranche is eligible for hybrid-build
-substitution, and no byte match is claimed. Address-based names remain because
-the wider subsystem semantics are not yet established.
+For `func_8004A36C`, placing the existing `sweep` and `target` declarations
+between the basis and output-vector declarations reproduces the original local
+stack allocation. IDO 5.3 with the recorded profile then reproduces all 584
+bytes exactly in USA and LRG; targeted exact comparisons also pass for the
+relocated Japan and Europe bodies. The other four functions remain
+behavior-recovered only and are not eligible for hybrid-build substitution.
+Address-based names remain because the wider subsystem semantics are not yet
+established.

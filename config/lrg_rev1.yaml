@@ -693,6 +693,7 @@ segments:
       - [0x485A4, c, functions/func_800479A4]
       - [0x48678, c, functions/func_80047A78]
       - [0x489B0, asm, main_489B0]
+      - [0x4AF6C, c, functions/func_8004A36C]
       - [0x4B1B4, c, functions/func_8004A5B4]
       - [0x4B2A4, c, functions/func_8004A6A4]
       - [0x4B380, c, functions/func_8004A780]

@@ -26,10 +26,10 @@ void func_8004A36C(s32 index, f32 spread, f32 lift, f32 scale) {
     f32 copy[3];
     f32 work[12];
     f32 basis[4][4];
-    f32 origin[3];
-    f32 start[3];
     f32 sweep;
     void *target;
+    f32 origin[3];
+    f32 start[3];
 
     (void)padA;
     target = *D_8011A654[index];
