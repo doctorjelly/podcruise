@@ -391,6 +391,7 @@ segments:
       - [0x2A824, asm, main_2A824]
       - [0x2BBFC, c, functions/func_8002AFFC]
       - [0x2BFC8, asm, main_2BFC8]
+      - [0x2E198, c, functions/func_8002D598]
       - [0x2E2EC, c, functions/func_8002D6EC]
       - [0x2E568, c, functions/func_8002D968]
       - [0x2E5D0, c, functions/func_8002D9D0]

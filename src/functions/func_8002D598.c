@@ -1,4 +1,4 @@
-/* Specification: specs/func_8002D598.md (scratchpad) */
+/* Independently written from specs/functions/recovered/func_8002D598.md. */
 #include "podcruise/types.h"
 
 extern u8 D_800A98E4[];
