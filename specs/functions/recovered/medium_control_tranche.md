@@ -82,12 +82,14 @@ all four builds. Each locale produces the same comparison result:
 | `func_80039B70` | 360 | 356 | `0x35` | behavior-recovered |
 | `func_8005F33C` | 412 | 424 | `0x09` | behavior-recovered |
 | `func_80062EC8` | 444 | 440 | `0x23` | behavior-recovered |
-| `func_8006E034` | 408 | 408 | `0x2F` | behavior-recovered |
+| `func_8006E034` | 408 | 408 | none | byte-matching |
 | `func_8006FB00` | 384 | 388 | `0x5F` | behavior-recovered |
 | `func_800801B8` | 408 | 408 | `0x0C` | behavior-recovered |
 | `func_80089870` | 368 | 364 | `0x00` | behavior-recovered |
 | `func_800910D4` | 428 | 428 | `0x81` | behavior-recovered |
 | `func_80091E34` | 412 | 412 | `0x6A` | behavior-recovered |
 
-These units remain assembly in hybrid rebuilds. No byte match is claimed, and
-address-based names remain until subsystem semantics are proven.
+IDO 5.3 under `ido53_o2` reproduces all 408 bytes of `func_8006E034`
+exactly in USA retail, the USA LRG revision, Japan, and Europe. The other nine
+units remain assembly in hybrid rebuilds and no byte match is claimed for them.
+Address-based names remain until subsystem semantics are proven.
