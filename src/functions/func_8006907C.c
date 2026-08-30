@@ -1,4 +1,4 @@
-/* Independently written from scratchpad spec specs/func_8006907C.md. */
+/* Independently written from specs/functions/recovered/func_8006907C.md. */
 
 #include "podcruise/types.h"
 
@@ -35,6 +35,9 @@ extern f32 D_800AD538;
 extern f64 D_80120BF0;
 
 f32 sqrtf(f32);
+#if defined(__sgi)
+#pragma intrinsic (sqrtf)
+#endif
 extern f32 func_800153C0(f32 *vector);
 extern void func_800155EC(f32 *output, f32 *base, f32 scale, f32 *offset);
 extern s32 func_80033140(f32 *arg0, f32 *arg1, s32 arg2, f32 *arg3);

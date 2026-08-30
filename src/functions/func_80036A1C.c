@@ -1,4 +1,4 @@
-/* Recovered from the specification in specs/func_80036A1C.md (worker batch 05). */
+/* Independently written from specs/functions/recovered/func_80036A1C.md. */
 #include "podcruise/types.h"
 
 extern f32 D_80112E60[4][4];
