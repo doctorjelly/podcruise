@@ -138,8 +138,11 @@ roundtrip-lrg: split-lrg
 
 roundtrip-all: roundtrip-us roundtrip-jp roundtrip-eu roundtrip-lrg
 
+# Newer GCC diagnoses preserved IDO-era checks on derived addresses. Keep the
+# warning visible, but do not make that host-only diagnostic fail the build.
 host-check:
-	$(CC) -std=c11 -Wall -Wextra -Werror -I include -fsyntax-only \
+	$(CC) -std=c11 -Wall -Wextra -Werror -Wno-error=address \
+		-I include -fsyntax-only \
 		src/bootstrap_state.c $(GLOBAL_STATE_SRCS)
 
 # -Wno-error=return-type: at least one recovered function reproduces an
@@ -152,7 +155,7 @@ host-test:
 	mkdir -p build/host
 	$(PYTHON) tools/gen_host_stubs.py
 	$(CC) -std=c11 -Wall -Wextra -Werror -Wno-error=return-type \
-		-Wno-unused-const-variable -I include \
+		-Wno-error=address -Wno-unused-const-variable -I include \
 		$(HOST_TEST_SRCS) tests/test_global_state.c tests/host_link_stubs.c \
 		-o build/host/test_global_state -lm
 	build/host/test_global_state

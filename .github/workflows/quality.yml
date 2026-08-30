@@ -13,6 +13,6 @@ jobs:
         with:
           python-version: "3.12"
       - name: Unit tests and host C check
-        run: make test
+        run: make -s test
       - name: Confirm no ROM is tracked
-        run: python tools/check_repository_safety.py
+        run: make -s safety
