@@ -48,6 +48,11 @@ u8 D_800A26FC;
 s32 D_800DB910[256];
 s32 *D_800A2DD4;
 u32 D_800A48D4;
+s32 D_80114540;
+s32 D_80114544;
+s32 D_80114548;
+s32 D_8011454C;
+u32 D_800A48D0;
 s32 D_8009A290;
 s32 D_8009A28C;
 s32 D_8009A2A0;
@@ -56,6 +61,34 @@ s32 D_800D9DBC;
 u8 D_800D9C70[32];
 u8 D_8014C3B8[32];
 u8 D_8014C4D8[32];
+
+typedef struct TestGfx8003BAB0 {
+    u32 w0;
+    u32 w1;
+} TestGfx8003BAB0;
+
+typedef struct TestStrip8003BAB0 {
+    s16 span;
+    s16 crossSpan;
+    void *data;
+} TestStrip8003BAB0;
+
+typedef struct TestResource8003BAB0 {
+    s16 width;
+    s16 height;
+    u8 type;
+    u8 format;
+    u8 pad06[2];
+    void *palette;
+    s16 stripCount;
+    s16 defaultCrossSpan;
+    TestStrip8003BAB0 *strips;
+} TestResource8003BAB0;
+
+void (func_8003BAB0)(
+    TestGfx8003BAB0 **, TestResource8003BAB0 *, TestStrip8003BAB0 *,
+    f32, f32, f32, f32, s32, s32, s32, s32, s32, s32, s16, s16,
+    f32, f32, s32);
 
 static s32 calls_80007218;
 static s32 calls_8000F5A0;
@@ -599,6 +632,57 @@ int main(void) {
     assert(pointer_words[0] == 17 && pointer_words[1] == 0);
     func_8003D488(0xABCD);
     assert(D_800A48D4 == 0xABCD);
+    {
+        TestGfx8003BAB0 commands[12] = {{0}};
+        TestGfx8003BAB0 *gfxOutput = commands;
+        TestStrip8003BAB0 strip = {
+            16, 8, (void *)(unsigned long)0x12345678
+        };
+        TestResource8003BAB0 resource = {
+            16, 8, 0, 2, {0, 0}, 0, 1, 8, &strip
+        };
+
+        D_80114548 = 0;
+        D_8011454C = 0;
+        D_80114540 = 320;
+        D_80114544 = 240;
+        D_800A48D0 = 0x12345678;
+        func_8003BAB0(
+            &gfxOutput, &resource, &strip, 10.0f, 20.0f, 30.0f, 40.0f,
+            0, 0, 0x40, 0x80, 0x400, 0x400, 0, 0, 0.0f, 0.0f, 0);
+        assert(gfxOutput == commands + 4);
+        assert(commands[0].w0 == 0xE40780A0);
+        assert(commands[0].w1 == 0x00028050);
+        assert(commands[1].w0 == 0xE1000000);
+        assert(commands[1].w1 == 0x00400080);
+        assert(commands[2].w0 == 0xF1000000);
+        assert(commands[2].w1 == 0x04000400);
+        assert(commands[3].w0 == 0xE7000000 && commands[3].w1 == 0);
+
+        gfxOutput = commands;
+        D_800A48D0 = 0;
+        func_8003BAB0(
+            &gfxOutput, &resource, &strip, 10.0f, 20.0f, 30.0f, 40.0f,
+            0, 0, 0x40, 0x80, 0x400, 0x400, 0, 0, 0.0f, 0.0f, 0);
+        assert(gfxOutput == commands + 11);
+        assert(commands[0].w0 == 0xFD100000);
+        assert(commands[0].w1 == 0x12345678);
+        assert(commands[1].w0 == 0xF5100000);
+        assert(commands[1].w1 == 0x07080200);
+        assert(commands[3].w0 == 0xF3000000);
+        assert(commands[3].w1 == 0x0707F200);
+        assert(commands[5].w0 == 0xF5100800);
+        assert(commands[5].w1 == 0x00080200);
+        assert(commands[6].w0 == 0xF2000000);
+        assert(commands[6].w1 == 0x0003C01C);
+        assert(D_800A48D0 == 0x12345678);
+
+        gfxOutput = commands;
+        func_8003BAB0(
+            &gfxOutput, &resource, &strip, 320.0f, 20.0f, 330.0f, 40.0f,
+            0, 0, 0, 0, 0x400, 0x400, 0, 0, 0.0f, 0.0f, 0);
+        assert(gfxOutput == commands);
+    }
     assert(func_80073708(object.bytes) == 0);
     output = 99;
     assert(func_8007F22C(object.bytes, &output) == 0 && output == 0);

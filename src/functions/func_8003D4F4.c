@@ -36,7 +36,7 @@ extern f32 D_800AAB1C;
 extern void func_80014CC0(f32, f32 *, f32 *);
 extern void func_8003BAB0(
     Gfx8003D4F4 **, Resource8003D4F4 *, Strip8003D4F4 *, f32,
-    f32, f32, f32, s16, s16, s32, s32, s32, s32, s32, s32,
+    f32, f32, f32, s32, s32, s32, s32, s32, s32, s32, s32,
     f32, f32, s32);
 
 #define EMIT_COMMAND(first, second)             \
