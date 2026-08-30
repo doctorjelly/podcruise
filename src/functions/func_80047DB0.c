@@ -1,4 +1,4 @@
-/* Specification: specs/func_80047DB0.md */
+/* Independently written from specs/functions/recovered/func_80047DB0.md. */
 #include "podcruise/types.h"
 
 typedef struct {

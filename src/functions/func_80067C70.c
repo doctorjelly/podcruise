@@ -1,4 +1,4 @@
-/* Specification: specs/func_80067C70.md */
+/* Independently written from specs/functions/recovered/func_80067C70.md. */
 #include "podcruise/types.h"
 
 extern f32 sqrtf(f32 value);
