@@ -4871,6 +4871,39 @@
       ]
     },
     {
+      "id": "func_8002F550",
+      "source": "src/functions/func_8002F550.c",
+      "link_vram": "0x8002F550",
+      "absolute_symbols": {
+        "D_80000300": "0x80000300",
+        "D_800A2830": "0x800A2830",
+        "D_800A6A60": "0x800A6A60",
+        "D_800A6EC0": "0x800A6EC0",
+        "D_800A7320": "0x800A7320",
+        "D_800D7A00": "0x800D7A00",
+        "D_800D9BB0": "0x800D9BB0",
+        "D_800D9BD0": "0x800D9BD0",
+        "D_80114488": "0x80114488",
+        "D_801144D8": "0x801144D8",
+        "func_8002F750": "0x8002F750",
+        "func_8008A2F0": "0x8008A2F0",
+        "func_8008A3B0": "0x8008A3B0",
+        "func_8008B810": "0x8008B810",
+        "func_8008B960": "0x8008B960",
+        "func_8008BAB0": "0x8008BAB0",
+        "func_8008BDC0": "0x8008BDC0",
+        "func_8008BFB0": "0x8008BFB0"
+      },
+      "functions": [
+        {
+          "name": "func_8002F550",
+          "vram": "0x8002F550",
+          "rom": "0x30150",
+          "size": 512
+        }
+      ]
+    },
+    {
       "id": "func_8008A750",
       "source": "src/functions/func_8008A750.c",
       "link_vram": "0x8008A750",
