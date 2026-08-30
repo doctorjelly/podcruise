@@ -1,4 +1,4 @@
-/* Independently written from scratchpad spec specs/func_80046DC4.md. */
+/* Independently written from specs/functions/recovered/func_80046DC4.md. */
 
 #include "podcruise/types.h"
 

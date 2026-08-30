@@ -1,4 +1,4 @@
-/* Independently written from specs/functions/racer_state_initializer.md. */
+/* Independently written from specs/functions/recovered/func_80072AD0.md. */
 
 #include "podcruise/types.h"
 

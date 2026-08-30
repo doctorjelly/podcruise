@@ -1,4 +1,4 @@
-/* Independently written from specs/func_80041F40.md (chase-camera update). */
+/* Independently written from specs/functions/recovered/func_80041F40.md. */
 
 #include "podcruise/types.h"
 
