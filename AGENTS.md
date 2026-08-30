@@ -10,6 +10,9 @@ correctness, provenance, IP policy, exact-match evidence, or required tests.
 - Keep command output quiet and bounded. Prefer `make -s`, focused test targets,
   compact JSON summaries, and low tool-output limits. Report failures by the
   decisive lines, not the entire log.
+- Redirect full round-trip output to a temporary log and inspect only its tail;
+  the generated build currently prints hundreds of commands even under
+  `make -s`. Preserve the command's exit status and retain the log on failure.
 - Batch deterministic work. Rank, filter, compare, or aggregate several
   candidates in one local operation and return a short table.
 - Minimize model turns. Group independent read-only checks, avoid reopening
