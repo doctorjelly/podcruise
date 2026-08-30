@@ -1,4 +1,4 @@
-/* Independently written from scratchpad spec specs/func_8004E034.md. */
+/* Independently written from specs/functions/recovered/func_8004E034.md. */
 
 #include "podcruise/types.h"
 
@@ -8,10 +8,11 @@ f32 func_8004E034(f32 arc, f32 radius) {
     f32 result;
     f32 angle;
     f32 sine;
-    f32 cosine;
+    volatile f32 cosine;
 
     angle = arc / radius * 180.0f;
-    func_80014CC0(angle, &sine, &cosine);
-    result = (1.0f - cosine) / (f32)2.0 * radius;
-    return result;
+    func_80014CC0(angle, &sine, (f32 *)&cosine);
+    result = cosine;
+    result = (1.0f - result) / (f32)2.0;
+    return result * radius;
 }
