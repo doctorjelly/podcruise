@@ -21,7 +21,7 @@ typedef struct Object80043B6C {
 extern f64 D_80120BF0;
 extern s32 D_800A4AB0;
 
-extern void func_80043598(Object80043B6C *object);
+extern void func_80043598(void *object);
 extern void func_80008B14(s32 arg0, s16 arg1, f32 arg2, f32 arg3, s32 arg4);
 extern void func_800319F4(s32 arg0, s32 arg1);
 extern s32 func_80051FF4(void);

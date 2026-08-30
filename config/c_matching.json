@@ -15125,6 +15125,43 @@
       ]
     },
     {
+      "id": "func_80043598",
+      "source": "src/functions/func_80043598.c",
+      "link_vram": "0x80043598",
+      "rodata_vram": "0x800AACD0",
+      "absolute_symbols": {
+        "D_800A5998": "0x800A5998",
+        "D_800A4AD8": "0x800A4AD8",
+        "D_800A4ADC": "0x800A4ADC",
+        "D_800A4AE0": "0x800A4AE0",
+        "D_80120BF0": "0x80120BF0",
+        "func_80082BE0": "0x80082BE0",
+        "func_80041D14": "0x80041D14",
+        "func_80041F40": "0x80041F40",
+        "func_80042970": "0x80042970",
+        "func_80041258": "0x80041258",
+        "func_800419EC": "0x800419EC",
+        "func_80016F0C": "0x80016F0C",
+        "func_80082624": "0x80082624",
+        "func_800156DC": "0x800156DC",
+        "func_8000BB78": "0x8000BB78",
+        "func_80017F28": "0x80017F28",
+        "func_8001811C": "0x8001811C",
+        "func_80042EEC": "0x80042EEC",
+        "func_800117F0": "0x800117F0",
+        "func_80011814": "0x80011814",
+        "func_80042BB8": "0x80042BB8"
+      },
+      "functions": [
+        {
+          "name": "func_80043598",
+          "vram": "0x80043598",
+          "rom": "0x44198",
+          "size": 804
+        }
+      ]
+    },
+    {
       "id": "func_800438BC",
       "source": "src/functions/func_800438BC.c",
       "link_vram": "0x800438BC",
