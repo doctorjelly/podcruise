@@ -15,7 +15,7 @@ typedef struct {
 extern s32 D_8009A2BC;
 
 extern Owner80007FC8 *func_80007CE4(s32 handle);
-extern s32 func_800894D0(s32, s32);
+extern s32 func_800894D0(void *, void *);
 
 s32 func_80007FC8(s32 arg0) {
     Owner80007FC8 *owner;
@@ -31,7 +31,8 @@ s32 func_80007FC8(s32 arg0) {
     if (index >= 0) {
         table = owner->table;
         if (index < table->count) {
-            result = func_800894D0(D_8009A2BC, table->items[index]);
+            result = func_800894D0((void *)(unsigned long)(u32)D_8009A2BC,
+                                   (void *)(unsigned long)(u32)table->items[index]);
         }
         return result;
     }

@@ -5022,6 +5022,20 @@
       ]
     },
     {
+      "id": "func_800894D0",
+      "source": "src/functions/func_800894D0.c",
+      "link_vram": "0x800894D0",
+      "absolute_symbols": {},
+      "functions": [
+        {
+          "name": "func_800894D0",
+          "vram": "0x800894D0",
+          "rom": "0x8A0D0",
+          "size": 156
+        }
+      ]
+    },
+    {
       "id": "func_8002F550",
       "source": "src/functions/func_8002F550.c",
       "link_vram": "0x8002F550",
