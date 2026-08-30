@@ -68,7 +68,7 @@ extern void func_80065CD0(f32 *, f32 *, f32 *, f32 *);
 extern void func_80065E18(Obj8006B568 *);
 extern void func_8006907C(Obj8006B568 *, f32 *, f32 *, f32 *);
 extern void func_8006B304(Obj8006B568 *);
-extern s32 func_8006C708(Obj8006B568 *);
+extern s32 func_8006C708(void *);
 extern f32 func_80081700(f32, f32);
 
 void func_8006B568(Obj8006B568 *obj) {

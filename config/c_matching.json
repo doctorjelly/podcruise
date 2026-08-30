@@ -10930,6 +10930,28 @@
       ]
     },
     {
+      "id": "func_8006C708",
+      "source": "src/functions/func_8006C708.c",
+      "link_vram": "0x8006C708",
+      "rodata_vram": "0x800AD600",
+      "rodata_alignment": 8,
+      "absolute_symbols": {},
+      "functions": [
+        {
+          "name": "func_8006C708",
+          "vram": "0x8006C708",
+          "rom": "0x6D308",
+          "size": 288
+        },
+        {
+          "name": "func_8006C828",
+          "vram": "0x8006C828",
+          "rom": "0x6D428",
+          "size": 296
+        }
+      ]
+    },
+    {
       "id": "func_8006C950",
       "source": "src/functions/func_8006C950.c",
       "link_vram": "0x8006C950",
