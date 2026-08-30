@@ -1,4 +1,4 @@
-/* Independently written from the specification $S/specs/func_8006C0D4.md. */
+/* Independently written from specs/functions/recovered/func_8006C0D4.md. */
 
 #include "podcruise/types.h"
 

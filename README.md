@@ -31,7 +31,7 @@ not a substitute for owning it.
 - `splat` configurations for all four unique supplied images, without
   committing extracted code or assets.
 - Byte-identical hybrid rebuilds for all four unique images.
-- 1,274 functions represented by independently written C, covering 454,272
+- 1,279 functions represented by independently written C, covering 462,060
   original instruction bytes. `make manifest` generates that ledger into
   `analysis/source_manifest.json` from the matching configuration and the
   per-version comparison reports, and fails if any recovered source is left

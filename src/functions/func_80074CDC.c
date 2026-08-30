@@ -1,4 +1,4 @@
-/* Independently written from $S/specs/func_80074CDC.md (control-surface update). */
+/* Independently written from specs/functions/recovered/func_80074CDC.md. */
 
 #include "podcruise/types.h"
 

@@ -1,4 +1,4 @@
-/* Specification: scratchpad specs/func_80026B3C.md (worker-authored). */
+/* Independently written from specs/functions/recovered/func_80026B3C.md. */
 #include "podcruise/types.h"
 
 /* Stand-in for the two single-precision pool entries that precede this
