@@ -131,6 +131,8 @@ segments:
       - [0x7C34, asm, main_7C34]
       - [0x818C, c, functions/func_8000758C]
       - [0x8194, asm, main_8194]
+      - [0x8310, c, functions/func_80007710]
+      - [0x8328, asm, main_8328]
       - [0x8418, c, functions/func_80007818]
       - [0x847C, c, functions/func_8000787C]
       - [0x84B4, c, functions/func_800078B4]

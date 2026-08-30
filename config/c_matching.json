@@ -4980,6 +4980,23 @@
       ]
     },
     {
+      "id": "func_80007710",
+      "source": "src/functions/func_80007710.c",
+      "link_vram": "0x80007710",
+      "absolute_symbols": {
+        "D_800AFAC0": "0x800AFAC0",
+        "func_80007594": "0x80007594"
+      },
+      "functions": [
+        {
+          "name": "func_80007710",
+          "vram": "0x80007710",
+          "rom": "0x8310",
+          "size": 24
+        }
+      ]
+    },
+    {
       "id": "func_8002F550",
       "source": "src/functions/func_8002F550.c",
       "link_vram": "0x8002F550",

@@ -41,7 +41,7 @@ extern Anchor80007218 D_800AFAC0;
 extern s32 D_800A81A8;
 extern s32 D_8009A2B8;
 
-extern void func_80007710(void);
+extern u32 func_80007710(void **destination);
 extern s32 func_80006FE4(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 extern void func_80007034(PcBoot80007218 *object);
 extern void func_80007B10(void);
