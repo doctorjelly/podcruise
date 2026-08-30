@@ -799,7 +799,7 @@ segments:
       - [0x646A0, c, functions/func_80063AA0]
       - [0x646E0, asm, main_646E0]
       - [0x64760, c, functions/func_80063B60]
-      - [0x6490C, asm, main_6490C]
+      - [0x6490C, c, functions/func_80063D0C]
       - [0x64A08, c, functions/func_80063E08]
       - [0x64A4C, c, functions/func_80063E4C]
       - [0x64AF4, c, functions/func_80063EF4]

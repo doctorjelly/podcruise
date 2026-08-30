@@ -27363,6 +27363,40 @@
           "size": 172
         }
       ]
+    },
+    {
+      "id": "func_80063D0C",
+      "source": "src/functions/func_80063D0C.c",
+      "link_vram": "0x80063D0C",
+      "absolute_symbols": {
+        "D_800A5100": "0x800A5100"
+      },
+      "functions": [
+        {
+          "name": "func_80063D0C",
+          "vram": "0x80063D0C",
+          "rom": "0x6490C",
+          "size": 252
+        }
+      ]
+    },
+    {
+      "id": "func_8005B764",
+      "source": "src/functions/func_8005B764.c",
+      "link_vram": "0x8005B764",
+      "rodata_vram": "0x800BCFB4",
+      "absolute_symbols": {
+        "func_8003F800": "0x8003F800",
+        "func_80053220": "0x80053220"
+      },
+      "functions": [
+        {
+          "name": "func_8005B764",
+          "vram": "0x8005B764",
+          "rom": "0x5C364",
+          "size": 172
+        }
+      ]
     }
   ]
 }
