@@ -1,6 +1,6 @@
 # Vector-math leaf tranche
 
-Status: **19 behavior-recovered functions; 13 byte-matching and 6 behavior-only**.
+Status: **19 behavior-recovered functions; 16 byte-matching and 3 behavior-only**.
 
 These specifications were independently derived from the supplied binaries.
 The address-based function names remain because the original authored names are
@@ -91,6 +91,14 @@ first two compile four bytes shorter because the recovered source does not
 induce an original pipeline `nop`; the third has the expected 60-byte size but
 uses a different floating-point schedule. These are direct compiler-comparison
 facts, not byte-match claims.
+
+`func_800152CC` is now exact in canonical USA. Its previous 84-byte matcher
+range stopped before the shared false-return tail even though the reviewed
+boundary table above already recorded the full 92-byte body. Comparing that
+full span proves that the existing C emits every original byte. The USA hybrid
+build now substitutes it; the comparison builds remain out of scope here.
+
+`func_80015630` is also exact in all four builds.
 
 `func_800156DC` is now exact in all four builds. The recovered source is a
 nested pair of counted loops over a four-by-four single-precision array, and
