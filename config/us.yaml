@@ -1100,6 +1100,7 @@ segments:
       - [0x8B350, asm, main_8B350]
       - [0x8B4C0, c, functions/func_8008A8C0]
       - [0x8B680, asm, main_8B680]
+      - [0x8B6E0, c, functions/func_8008AAE0]
       - [0x8B70C, c, functions/func_8008AB0C]
       - [0x8B748, c, functions/func_8008AB48]
       - [0x8B784, c, functions/func_8008AB84]

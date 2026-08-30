@@ -27421,6 +27421,58 @@
           "size": 456
         }
       ]
+    },
+    {
+      "id": "func_8008AAE0",
+      "source": "src/functions/func_8008AAE0.c",
+      "link_vram": "0x8008AAE0",
+      "flags": [
+        "-G",
+        "0",
+        "-O2",
+        "-mips3",
+        "-32",
+        "-non_shared",
+        "-Xcpluscomm",
+        "-signed",
+        "-Wab,-r4300_mul"
+      ],
+      "absolute_symbols": {},
+      "functions": [
+        {
+          "name": "func_8008AAE0",
+          "vram": "0x8008AAE0",
+          "rom": "0x8B6E0",
+          "size": 44
+        }
+      ]
+    },
+    {
+      "id": "func_8008C638",
+      "source": "src/functions/func_8008C638.c",
+      "link_vram": "0x8008C638",
+      "rodata_vram": "0x800ADE78",
+      "rodata_alignment": 8,
+      "flags": [
+        "-G",
+        "0",
+        "-O2",
+        "-mips3",
+        "-32",
+        "-non_shared",
+        "-Xcpluscomm",
+        "-signed",
+        "-Wab,-r4300_mul"
+      ],
+      "absolute_symbols": {},
+      "functions": [
+        {
+          "name": "func_8008C638",
+          "vram": "0x8008C638",
+          "rom": "0x8D238",
+          "size": 156
+        }
+      ]
     }
   ]
 }
