@@ -4871,6 +4871,27 @@
       ]
     },
     {
+      "id": "func_8008A750",
+      "source": "src/functions/func_8008A750.c",
+      "link_vram": "0x8008A750",
+      "absolute_symbols": {
+        "D_800ADDD0": "0x800ADDD0",
+        "D_800ADDF8": "0x800ADDF8",
+        "D_800ADE00": "0x800ADE00",
+        "D_800ADE08": "0x800ADE08",
+        "D_800ADE10": "0x800ADE10",
+        "D_800AE110": "0x800AE110"
+      },
+      "functions": [
+        {
+          "name": "func_8008A750",
+          "vram": "0x8008A750",
+          "rom": "0x8B350",
+          "size": 360
+        }
+      ]
+    },
+    {
       "id": "func_8008A8C0",
       "source": "src/functions/func_8008A8C0.c",
       "link_vram": "0x8008A8C0",
