@@ -1,4 +1,4 @@
-/* Specification: scratchpad/specs/func_800665A4.md */
+/* Independently written from specs/functions/recovered/func_800665A4.md. */
 #include "podcruise/types.h"
 
 typedef struct Vec3f {

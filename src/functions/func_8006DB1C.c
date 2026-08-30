@@ -1,4 +1,4 @@
-/* Specification: scratchpad/specs/func_8006DB1C.md */
+/* Independently written from specs/functions/recovered/func_8006DB1C.md. */
 #include "podcruise/types.h"
 
 typedef struct PodMode {

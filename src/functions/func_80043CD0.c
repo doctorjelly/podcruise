@@ -1,4 +1,4 @@
-/* Independently written from specification specs/func_80043CD0.md. */
+/* Independently written from specs/functions/recovered/func_80043CD0.md. */
 #include "podcruise/types.h"
 
 typedef union PcWord {

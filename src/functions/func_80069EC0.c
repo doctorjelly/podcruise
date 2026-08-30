@@ -1,4 +1,4 @@
-/* Specification: scratchpad specs/func_80069EC0.md (batch_06 worker spec) */
+/* Independently written from specs/functions/recovered/func_80069EC0.md. */
 #include "podcruise/types.h"
 
 typedef struct {
