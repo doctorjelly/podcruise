@@ -1,4 +1,4 @@
-/* Independently written from scratchpad spec specs/func_80049C14.md. */
+/* Independently written from specs/functions/recovered/func_80049C14.md. */
 
 #include "podcruise/types.h"
 #include "podcruise/vector_math.h"

@@ -1,4 +1,4 @@
-/* Implements $S/specs/func_8006FEE8.md (per-frame racer state update). */
+/* Independently written from specs/functions/recovered/func_8006FEE8.md. */
 #include "podcruise/types.h"
 
 typedef struct Vec3f8006FEE8 {
