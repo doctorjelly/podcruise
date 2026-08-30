@@ -80,6 +80,10 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
 - For large routines, compare the canonical and compiled `jal` target lists
   programmatically before asking for another prose audit. Equal call order and
   count cheaply exposes missing, duplicated, or invented helper operations.
+- Give low-cost agents narrow address windows or concrete tables to verify;
+  asking one to wrap an entire `m2c` draft usually saves no review tokens. For
+  stack temporaries, derive overlapping matrix/vector aliases from helper
+  argument ranges before accepting an inferred scalar layout.
 - Stop blind reshaping when differences are broad register allocation or
   scheduling. Record the blocker briefly and move to actual source recovery or
   another high-probability candidate.
