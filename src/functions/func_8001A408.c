@@ -141,11 +141,11 @@ void func_8001A408(Menu8001A408 *menu) {
     if (menu->compact51 == 0) {
         base = 18.0f;
         func_8000AA04(0x4F, 0x0C,
-                      (s16)(base - D_800D7278.first * 100.0f));
+                      (s16)(base - D_800D7278.first * 320.0f));
         func_8000A920(0x4F, 1);
         func_8000AB24(0x4F, 0xFF, 0xFF, 0xFF, 0xFE);
         func_8000AA04(0x50, 0x9B,
-                      (s16)(base - D_800D7278.first * 100.0f));
+                      (s16)(base - D_800D7278.first * 320.0f));
         func_8000A920(0x50, 1);
         func_8000AB24(0x50, 0xFF, 0xFF, 0xFF, 0xFE);
         if (D_800D7278.first <= 0.0f) {
