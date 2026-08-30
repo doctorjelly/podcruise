@@ -1,7 +1,7 @@
 /* Recovered from specification specs/func_8008BDC0.md (worker batch 12). */
 #include "podcruise/types.h"
 
-typedef void (*Callback8008BDC0)();
+typedef void (*Callback8008BDC0)(void *);
 
 typedef struct {
     /* 0x00 */ s32 unk00;
@@ -9,8 +9,8 @@ typedef struct {
     /* 0x08 */ void *unk08;
     /* 0x0C */ void *unk0C;
     /* 0x10 */ void *unk10;
-    /* 0x14 */ Callback8008BDC0 unk14;
-    /* 0x18 */ Callback8008BDC0 unk18;
+    /* 0x14 */ void *unk14;
+    /* 0x18 */ void *unk18;
 } Context8008BDC0;
 
 extern Context8008BDC0 D_800A7B80;
@@ -30,7 +30,7 @@ extern s32 func_8008CA80(void);
 extern void func_8008B810(void *, s32, Callback8008BDC0, Context8008BDC0 *, void *, s32);
 extern void func_8008B960(void *);
 extern void func_8008CAA0(s32);
-extern void func_800944E0(void);
+extern s32 func_800944E0(s32, u32, u32, u32);
 extern void func_800945C0(void);
 extern void func_800947F0(void *context);
 
@@ -59,8 +59,8 @@ void func_8008BDC0(s32 arg0, void *arg1, void *arg2, s32 arg3) {
         D_800A7B80.unk08 = arg1;
         D_800A7B80.unk0C = D_8014C390;
         D_800A7B80.unk10 = D_8014C4D8;
-        D_800A7B80.unk14 = func_800944E0;
-        D_800A7B80.unk18 = func_800945C0;
+        D_800A7B80.unk14 = (void *)func_800944E0;
+        D_800A7B80.unk18 = (void *)func_800945C0;
         func_8008B810(D_8014B1E0, 0, func_800947F0, &D_800A7B80, D_8014C390, arg0);
         func_8008B960(D_8014B1E0);
         func_8008CAA0(handle);

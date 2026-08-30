@@ -53,6 +53,11 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
 
 - Triage 5-10 USA candidates at once. Prefer verified boundaries, compact
   behavior, and localized compiler differences.
+- Before delegating, subtract every recovered ROM interval from the candidate
+  list and resolve each surviving label to an exact assembly file and line
+  span. This avoids spending model tokens on interior labels. Merge adjacent
+  prefix fragments when live registers prove that the later prologue is a
+  false split.
 - For one function, inspect only its USA assembly slice, callers/callees,
   globals, spec, source, and exact compiler summary. Use JP/EU only when the USA
   evidence is ambiguous; ignore LRG unless the user restores it to scope.

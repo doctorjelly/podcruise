@@ -67,7 +67,7 @@ extern void func_80017C18(const f32 *source, f32 *destination);
 extern void func_80015288(f32 *output, f32 *source);
 extern void func_800503E8(void *arg0, s32 arg1, s32 arg2, s32 arg3);
 extern s32 func_8008A6B4(char *buffer, const char *format, ...);
-extern s32 func_8002D4C4(s32 arg0);
+extern void func_8002D4C4(s32 arg0);
 extern void func_8002AFFC(void *arg0, s32 code, s32 arg2);
 extern void func_8003EC40(s16 arg0, s16 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5, const char *arg6);
 extern void func_800469B4(void *arg0, s32 arg1);

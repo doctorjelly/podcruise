@@ -49,7 +49,7 @@ extern s32 func_8000AA04(s16, s16, s16);
 extern s32 func_8000AAC0(s16, f32, f32);
 extern s32 func_8000AB24(s16, s32, s32, s32, s32);
 extern s32 func_8002BBA4(MenuContext *, s32, s32, s32, s32, s32, u8 *);
-extern s32 func_8002D4C4(s32);
+extern void func_8002D4C4(s32);
 extern s32 func_800399F0(void);
 extern s32 func_80087814(s16, s16, s16, s16);
 

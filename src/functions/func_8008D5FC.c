@@ -18,7 +18,7 @@ typedef struct {
 } Obj8008D5FC;
 
 extern u32 *func_8008EADC(void *stream, s16 *state, s32 count, s32 arg3, u32 *list);
-extern void func_8008E9F0(void);
+extern s32 func_8008E9F0(void *, s32, void *);
 extern void func_80095AA0(Obj8008D5FC *, void *, void *, s32);
 extern s32 func_80087FC0(s32, s32, s32, s32, s32);
 

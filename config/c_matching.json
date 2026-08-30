@@ -29305,6 +29305,105 @@
           "size": 2980
         }
       ]
+    },
+    {
+      "id": "func_8002D4C4",
+      "source": "src/functions/func_8002D4C4.c",
+      "link_vram": "0x8002D4C4",
+      "absolute_symbols": {
+        "D_80113685": "0x80113685",
+        "func_80008B14": "0x80008B14"
+      },
+      "functions": [
+        {
+          "name": "func_8002D4C4",
+          "vram": "0x8002D4C4",
+          "rom": "0x2E0C4",
+          "size": 212
+        }
+      ]
+    },
+    {
+      "id": "func_8008EE04",
+      "source": "src/functions/func_8008EE04.c",
+      "link_vram": "0x8008EE04",
+      "absolute_symbols": {},
+      "functions": [
+        {
+          "name": "func_8008EE04",
+          "vram": "0x8008EE04",
+          "rom": "0x8FA04",
+          "size": 224
+        }
+      ]
+    },
+    {
+      "id": "func_800944E0",
+      "source": "src/functions/func_800944E0.c",
+      "link_vram": "0x800944E0",
+      "absolute_symbols": {
+        "D_80000308": "0x80000308",
+        "func_80088360": "0x80088360"
+      },
+      "functions": [
+        {
+          "name": "func_800944E0",
+          "vram": "0x800944E0",
+          "rom": "0x950E0",
+          "size": 224
+        }
+      ]
+    },
+    {
+      "id": "func_8008DD80",
+      "source": "src/functions/func_8008DD80.c",
+      "link_vram": "0x8008DD80",
+      "absolute_symbols": {},
+      "functions": [
+        {
+          "name": "func_8008DD80",
+          "vram": "0x8008DD80",
+          "rom": "0x8E980",
+          "size": 288
+        }
+      ]
+    },
+    {
+      "id": "func_8008E9F0",
+      "source": "src/functions/func_8008E9F0.c",
+      "link_vram": "0x8008E9F0",
+      "absolute_symbols": {},
+      "functions": [
+        {
+          "name": "func_8008E9F0",
+          "vram": "0x8008E9F0",
+          "rom": "0x8F5F0",
+          "size": 236
+        }
+      ]
+    },
+    {
+      "id": "func_8007F430",
+      "source": "src/functions/func_8007F430.c",
+      "link_vram": "0x8007F430",
+      "absolute_symbols": {
+        "D_8011DCF8": "0x8011DCF8",
+        "func_800153EC": "0x800153EC",
+        "func_800183A8": "0x800183A8",
+        "func_8003A568": "0x8003A568",
+        "func_8003B02C": "0x8003B02C",
+        "func_8007EE4C": "0x8007EE4C",
+        "func_8007EE98": "0x8007EE98",
+        "func_8007F24C": "0x8007F24C"
+      },
+      "functions": [
+        {
+          "name": "func_8007F430",
+          "vram": "0x8007F430",
+          "rom": "0x80030",
+          "size": 304
+        }
+      ]
     }
   ]
 }
