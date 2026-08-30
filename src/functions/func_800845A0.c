@@ -1,4 +1,4 @@
-/* spec: specs/func_800845A0.md */
+/* Independently written from specs/functions/recovered/func_800845A0.md. */
 #include "podcruise/types.h"
 
 typedef struct Node800845A0 {
