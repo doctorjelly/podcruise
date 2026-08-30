@@ -1,4 +1,4 @@
-/* Independently written from $S/specs/func_80027150.md (worker specification). */
+/* Independently written from specs/functions/recovered/func_80027150.md. */
 #include "podcruise/types.h"
 
 typedef struct {

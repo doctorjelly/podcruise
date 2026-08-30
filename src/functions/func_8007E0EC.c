@@ -1,4 +1,4 @@
-/* Recovered from specification specs/func_8007E0EC.md (scratchpad). */
+/* Independently written from specs/functions/recovered/func_8007E0EC.md. */
 #include "podcruise/types.h"
 
 typedef struct MatrixWork {

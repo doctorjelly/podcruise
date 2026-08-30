@@ -1,4 +1,4 @@
-/* Recovered from specification specs/func_800834F0.md (scratchpad). */
+/* Independently written from specs/functions/recovered/func_800834F0.md. */
 #include "podcruise/types.h"
 
 typedef struct Vertex {
