@@ -27060,13 +27060,6 @@
       "absolute_symbols": {},
       "functions": [
         {
-          "name": "func_8008E420",
-          "vram": "0x8008E420",
-          "rom": "0x8F020",
-          "size": 300,
-          "text_offset": "0x0"
-        },
-        {
           "name": "func_8008E54C",
           "vram": "0x8008E54C",
           "rom": "0x8F14C",
@@ -27471,6 +27464,45 @@
           "vram": "0x8008C638",
           "rom": "0x8D238",
           "size": 156
+        }
+      ]
+    },
+    {
+      "id": "func_8008E420",
+      "source": "src/functions/func_8008E420.c",
+      "link_vram": "0x8008E420",
+      "flags": [
+        "-G",
+        "0",
+        "-O3",
+        "-mips2",
+        "-non_shared",
+        "-Xcpluscomm",
+        "-signed",
+        "-Wab,-r4300_mul"
+      ],
+      "absolute_symbols": {},
+      "functions": [
+        {
+          "name": "func_8008E420",
+          "vram": "0x8008E420",
+          "rom": "0x8F020",
+          "size": 300,
+          "text_offset": "0x0"
+        }
+      ]
+    },
+    {
+      "id": "func_80016260",
+      "source": "src/functions/func_80016260.c",
+      "link_vram": "0x80016260",
+      "absolute_symbols": {},
+      "functions": [
+        {
+          "name": "func_80016260",
+          "vram": "0x80016260",
+          "rom": "0x16E60",
+          "size": 1412
         }
       ]
     }

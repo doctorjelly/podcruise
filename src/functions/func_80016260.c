@@ -1,4 +1,4 @@
-/* Recovered per specs/func_80016260.md (batch 06). */
+/* Independently written from specs/functions/recovered/func_80016260.md. */
 #include "podcruise/types.h"
 
 s32 func_80016260(f32 a[][4], f32 b[][4], s32 *indx) {

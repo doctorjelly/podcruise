@@ -14,9 +14,9 @@
  * registers and overwrites four of them without saving them.  Reproducing
  * that requires the routine to stay file-local and to have a caller in the
  * same file; func_8008E420_call_context below is a minimal stand-in for that
- * caller.  The real caller is func_8008E54C, and once that function is
- * recovered the two belong in a single translation unit and the stand-in
- * should be deleted.
+ * caller. The behavior-recovered real caller is kept in its combined unit,
+ * while this stand-in remains the exact integration carrier until that caller
+ * also matches.
  *
  * The two macros below are load-bearing for the byte match, in two separate
  * ways.  FIELD keeps the width mask even where the following shift makes it
