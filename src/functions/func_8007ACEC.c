@@ -32,7 +32,7 @@ typedef struct {
 
 extern s32 func_80073470(void *object);
 extern s32 func_80077054(void *object);
-extern s32 func_800784F8(void *object);
+extern void func_800784F8(void *object);
 extern s32 func_80079824(void *object);
 extern s32 func_80076180(void *object, s32 arg1, f32 arg2, f32 arg3);
 extern s32 func_80075BA8(void *object);

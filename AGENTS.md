@@ -73,6 +73,13 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   never commit the generated draft.
 - Run the isolated matching-object comparison during iteration. Do not run a
   full regional match or ROM round trip after every failed variant.
+- Keep behavior-only units in the compiler-test manifest but leave their USA
+  split as assembly. Change the split to C only after an exact comparison;
+  otherwise the integration guard will reject the unit after an expensive
+  rebuild.
+- For large routines, compare the canonical and compiled `jal` target lists
+  programmatically before asking for another prose audit. Equal call order and
+  count cheaply exposes missing, duplicated, or invented helper operations.
 - Stop blind reshaping when differences are broad register allocation or
   scheduling. Record the blocker briefly and move to actual source recovery or
   another high-probability candidate.
