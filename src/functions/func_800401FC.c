@@ -1,4 +1,4 @@
-/* Recovered from specification $S/specs/func_800401FC.md */
+/* Independently written from specs/functions/recovered/func_800401FC.md. */
 #include "podcruise/types.h"
 
 typedef struct Obj800401FC {
