@@ -1,4 +1,4 @@
-/* Recovered from specification specs/functions/func_8004850C.md (batch_07). */
+/* Independently written from specs/functions/recovered/func_8004850C.md. */
 #include "podcruise/types.h"
 
 typedef struct Vec3f8004850C {
@@ -53,7 +53,7 @@ extern void func_80028D60(void);
 void func_8004850C(s32 argument) {
     f32 pivot[3];
     f32 spare[4];
-    f32 work[12];
+    f32 work[16];
     f32 basis[4][4];
     f32 place[6];
     f32 anchor[3];
