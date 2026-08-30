@@ -1114,6 +1114,7 @@ segments:
       - [0x8B7EC, c, functions/func_8008ABEC]
       - [0x8B848, c, functions/func_8008AC48]
       - [0x8B878, asm, main_8B878]
+      - [0x8B8D8, c, functions/func_8008ACD8]
       - [0x8B974, c, functions/func_8008AD74]
       - [0x8B9A0, c, functions/func_8008ADA0]
       - [0x8B9AC, asm, main_8B9AC]

@@ -31,12 +31,12 @@ not a substitute for owning it.
 - `splat` configurations for all four unique supplied images, without
   committing extracted code or assets.
 - Byte-identical hybrid rebuilds for all four unique images.
-- 1,320 functions represented by independently written C, covering 516,352
+- 1,321 functions represented by independently written C, covering 516,508
   original instruction bytes. `make manifest` generates that ledger into
   `analysis/source_manifest.json` from the matching configuration and the
   per-version comparison reports, and fails if any recovered source is left
   unmeasured.
-- Exact IDO 5.3 matches for 1,005 of them (229,248 bytes) in the canonical USA
+- Exact IDO 5.3 matches for 1,006 of them (229,404 bytes) in the canonical USA
   image. The current regional reports contain 888 matches (194,404 bytes) for
   Japan, 889 (202,528 bytes) for Europe, and 993 (226,680 bytes) for the later
   USA revision. The remaining reviewed candidates are behavior-recovered but

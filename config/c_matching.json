@@ -4997,6 +4997,31 @@
       ]
     },
     {
+      "id": "func_8008ACD8",
+      "source": "src/functions/func_8008ACD8.c",
+      "link_vram": "0x8008ACD8",
+      "absolute_symbols": {},
+      "functions": [
+        {
+          "name": "func_8008ACD8",
+          "vram": "0x8008ACD8",
+          "rom": "0x8B8D8",
+          "size": 156
+        }
+      ],
+      "flags": [
+        "-G",
+        "0",
+        "-O1",
+        "-mips3",
+        "-32",
+        "-non_shared",
+        "-Xcpluscomm",
+        "-signed",
+        "-Wab,-r4300_mul"
+      ]
+    },
+    {
       "id": "func_8002F550",
       "source": "src/functions/func_8002F550.c",
       "link_vram": "0x8002F550",
