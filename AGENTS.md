@@ -75,3 +75,7 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   `git diff --check` once before committing.
 - Never claim byte-matching C without the exact compiler comparison and
   byte-identical canonical USA integration evidence.
+- After a new exact match, confirm the USA split names the C subsegment, the
+  rebuild substitution count increases, and the linker map uses its C object.
+  A byte-identical ROM alone can hide a stale split that still assembled the
+  original body; checking the count and map avoids a second full rebuild.

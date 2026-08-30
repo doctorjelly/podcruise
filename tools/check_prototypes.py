@@ -6,7 +6,7 @@ call should have passed is often already in the right register. The byte
 comparison therefore cannot catch this class at all, and five real defects were
 found here after their functions had been verified byte-identical.
 
-Two disagreements are deliberate and are listed below. The original was built
+The disagreements listed below are deliberate. The original was built
 from unprototyped C, so a caller could pass more arguments than the callee
 accepted; where the caller's own bytes prove it did, reproducing the
 disagreement is faithful and forcing agreement would be wrong.
@@ -46,6 +46,10 @@ ACCEPTED = {
         "caller writes a third one at +0x18. Dropping the extra argument "
         "shortens the caller from its original 148 bytes to 140, so the "
         "disagreement is what the original build did"),
+    ("func_8002B3C8", "func_8002AD70.c", 1): (
+        "the caller loads its selector into a1 at 0x8002ADF0, leaves it live "
+        "through the call at 0x8002AE14, and passes only a0 in the source-level "
+        "call; the two-argument callee reads that retained a1 value"),
 }
 
 
