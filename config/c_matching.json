@@ -30243,6 +30243,35 @@
           "size": 4540
         }
       ]
+    },
+    {
+      "id": "func_80012BF0",
+      "source": "src/functions/func_80012BF0.c",
+      "link_vram": "0x80012BF0",
+      "absolute_symbols": {
+        "D_800A1CA4": "0x800A1CA4",
+        "D_800A1CA8": "0x800A1CA8",
+        "D_800A1CCC": "0x800A1CCC",
+        "D_800A1CD0": "0x800A1CD0",
+        "D_800A1CD4": "0x800A1CD4",
+        "D_800A1CD8": "0x800A1CD8",
+        "D_800A1D1C": "0x800A1D1C",
+        "D_800A1D8C": "0x800A1D8C",
+        "D_800D6910": "0x800D6910",
+        "D_801217B0": "0x801217B0",
+        "func_80011F04": "0x80011F04",
+        "func_80011F38": "0x80011F38",
+        "func_800125E4": "0x800125E4",
+        "func_800129E4": "0x800129E4"
+      },
+      "functions": [
+        {
+          "name": "func_80012BF0",
+          "vram": "0x80012BF0",
+          "rom": "0x137F0",
+          "size": 4560
+        }
+      ]
     }
   ]
 }
