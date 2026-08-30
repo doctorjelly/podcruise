@@ -27183,6 +27183,93 @@
           "size": 940
         }
       ]
+    },
+    {
+      "id": "func_80008718",
+      "source": "src/functions/func_80008718.c",
+      "link_vram": "0x80008718",
+      "absolute_symbols": {},
+      "functions": [
+        {
+          "name": "func_80008718",
+          "vram": "0x80008718",
+          "rom": "0x9318",
+          "size": 56
+        }
+      ]
+    },
+    {
+      "id": "func_800963B4",
+      "source": "src/functions/func_800963B4.c",
+      "link_vram": "0x800963B4",
+      "absolute_symbols": {},
+      "functions": [
+        {
+          "name": "func_800963B4",
+          "vram": "0x800963B4",
+          "rom": "0x96FB4",
+          "size": 24
+        }
+      ]
+    },
+    {
+      "id": "func_8008DD50",
+      "source": "src/functions/func_8008DD50.c",
+      "link_vram": "0x8008DD50",
+      "absolute_symbols": {},
+      "functions": [
+        {
+          "name": "func_8008DD50",
+          "vram": "0x8008DD50",
+          "rom": "0x8E950",
+          "size": 48
+        }
+      ]
+    },
+    {
+      "id": "func_8008F950",
+      "source": "src/functions/func_8008F950.c",
+      "link_vram": "0x8008F950",
+      "absolute_symbols": {},
+      "functions": [
+        {
+          "name": "func_8008F950",
+          "vram": "0x8008F950",
+          "rom": "0x90550",
+          "size": 48
+        }
+      ]
+    },
+    {
+      "id": "func_8002DC7C",
+      "source": "src/functions/func_8002DC7C.c",
+      "link_vram": "0x8002DC7C",
+      "absolute_symbols": {
+        "D_80113688": "0x80113688",
+        "D_80113E60": "0x80113E60"
+      },
+      "functions": [
+        {
+          "name": "func_8002DC7C",
+          "vram": "0x8002DC7C",
+          "rom": "0x2E87C",
+          "size": 120
+        }
+      ]
+    },
+    {
+      "id": "func_8000803C",
+      "source": "src/functions/func_8000803C.c",
+      "link_vram": "0x8000803C",
+      "absolute_symbols": {},
+      "functions": [
+        {
+          "name": "func_8000803C",
+          "vram": "0x8000803C",
+          "rom": "0x8C3C",
+          "size": 84
+        }
+      ]
     }
   ]
 }

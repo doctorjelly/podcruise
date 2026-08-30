@@ -9,12 +9,12 @@ typedef struct {
     /* 0x1C */ void *unk1C;
 } PcHandler;
 
-extern void func_80095AA0(PcHandler *handler, void (*enter)(void), void (*leave)(void), s32 kind);
+extern void func_80095AA0(PcHandler *handler, void *enter, void *leave, s32 kind);
 extern void func_8008F980(void);
-extern void func_8008F950(void);
+extern s32 func_8008F950(PcHandler *handler, s32 kind, void *value);
 
 void func_8008D5A8(PcHandler *handler, void *arg1, void *arg2) {
-    func_80095AA0(handler, func_8008F980, func_8008F950, 6);
+    func_80095AA0(handler, (void *)func_8008F980, (void *)func_8008F950, 6);
     handler->unk14 = 0;
     handler->unk18 = arg2;
     handler->unk1C = arg1;

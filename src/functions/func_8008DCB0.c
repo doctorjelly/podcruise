@@ -13,13 +13,13 @@ typedef struct Owner {
 } Owner;
 
 extern void func_8008D870(void *, void *, void *);
-extern void func_800963B4(void *, s32, Element *);
-extern void func_8008DD50(void *, s32, void *);
+extern s32 func_800963B4(void **, s32, Element *);
+extern s32 func_8008DD50(void *, s32, void *);
 void *func_8008DCB0(Owner *owner, s16 index, void *arg2, void *arg3) {
     Element *element;
     func_8008D870(owner->unk_34[index].unk_20, arg2, arg3);
     element = &owner->unk_34[index];
-    func_800963B4(element->unk_20, 1, element);
+    func_800963B4((void **)element->unk_20, 1, element);
     func_8008DD50(owner->unk_30, 2, owner->unk_34[index].unk_20);
     return owner->unk_34[index].unk_20;
 }
