@@ -4952,6 +4952,20 @@
       ]
     },
     {
+      "id": "func_8006E2FC",
+      "source": "src/functions/func_8006E2FC.c",
+      "link_vram": "0x8006E2FC",
+      "absolute_symbols": {},
+      "functions": [
+        {
+          "name": "func_8006E2FC",
+          "vram": "0x8006E2FC",
+          "rom": "0x6EEFC",
+          "size": 304
+        }
+      ]
+    },
+    {
       "id": "func_8002F550",
       "source": "src/functions/func_8002F550.c",
       "link_vram": "0x8002F550",
