@@ -65,6 +65,12 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   neighboring routines for the same callback, global, or hardware register
   block. Reusing already-proven local structure offsets is cheaper and more
   reliable than decoding an isolated body from scratch.
+- For a large branch-heavy routine, use a local open-source control-flow aid
+  such as `m2c` from an ignored virtual environment before spending model
+  tokens narrating every instruction. Supply missing jump tables only in
+  `/tmp`, treat the output as an untrusted mechanical draft, and independently
+  check its delay slots, types, helper contracts, and every retained branch;
+  never commit the generated draft.
 - Run the isolated matching-object comparison during iteration. Do not run a
   full regional match or ROM round trip after every failed variant.
 - Stop blind reshaping when differences are broad register allocation or
