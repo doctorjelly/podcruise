@@ -10,7 +10,7 @@ typedef struct {
 } PcHandler;
 
 extern void func_80095AA0(PcHandler *handler, void *enter, void *leave, s32 kind);
-extern void func_8008F980(void);
+extern u32 *func_8008F980(void *, s32, s32, s32, u32 *);
 extern s32 func_8008F950(PcHandler *handler, s32 kind, void *value);
 
 void func_8008D5A8(PcHandler *handler, void *arg1, void *arg2) {

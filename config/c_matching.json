@@ -27302,6 +27302,20 @@
           "size": 148
         }
       ]
+    },
+    {
+      "id": "func_8008F980",
+      "source": "src/functions/func_8008F980.c",
+      "link_vram": "0x8008F980",
+      "absolute_symbols": {},
+      "functions": [
+        {
+          "name": "func_8008F980",
+          "vram": "0x8008F980",
+          "rom": "0x90580",
+          "size": 216
+        }
+      ]
     }
   ]
 }
