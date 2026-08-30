@@ -30090,6 +30090,25 @@
           "size": 604
         }
       ]
+    },
+    {
+      "id": "func_800963CC",
+      "source": "src/functions/func_800963CC.c",
+      "link_vram": "0x800963CC",
+      "absolute_symbols": {
+        "func_80095B68": "0x80095B68",
+        "func_80095C20": "0x80095C20",
+        "func_80095DA8": "0x80095DA8",
+        "func_80095F34": "0x80095F34"
+      },
+      "functions": [
+        {
+          "name": "func_800963CC",
+          "vram": "0x800963CC",
+          "rom": "0x96FCC",
+          "size": 832
+        }
+      ]
     }
   ]
 }
