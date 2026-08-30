@@ -1,6 +1,8 @@
 # Contributing
 
 All contributions must comply with [`docs/IP_POLICY.md`](docs/IP_POLICY.md).
+By submitting a contribution, you agree to license your contribution under the
+repository's [MIT License](LICENSE), to the extent you hold the relevant rights.
 
 Before committing:
 

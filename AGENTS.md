@@ -61,6 +61,8 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
 - Stop blind reshaping when differences are broad register allocation or
   scheduling. Record the blocker briefly and move to actual source recovery or
   another high-probability candidate.
+- Confirm the true function body through the `jr` delay slot before shaping C;
+  do not try to make the compiler emit post-return alignment padding.
 - As a default token cap, stop after three evidence-driven source variants when
   the remaining difference is only register coloring or scheduling.
 - Batch successful functions into one tranche. Then run the canonical USA round

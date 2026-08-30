@@ -104,6 +104,6 @@ The locally generated ROM/ELF/map files remain under ignored `build/`; only a
 small JSON result containing hashes and match status may be committed.
 
 The dependency and compiler-provenance boundary is recorded in
-[`TOOLCHAIN.md`](TOOLCHAIN.md). No project-wide source license is selected by
-this bootstrap commit; that is a maintainer decision to make before inviting
-public reuse or contributions.
+[`TOOLCHAIN.md`](TOOLCHAIN.md). The MIT license applies only to independently
+authored Podcruise contributions and does not purport to license the game,
+ROM-derived content, or any other rights held by third parties.

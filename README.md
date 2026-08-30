@@ -31,17 +31,17 @@ not a substitute for owning it.
 - `splat` configurations for all four unique supplied images, without
   committing extracted code or assets.
 - Byte-identical hybrid rebuilds for all four unique images.
-- 562 functions represented by independently written C, covering 61,476
+- 1,264 functions represented by independently written C, covering 441,008
   original instruction bytes. `make manifest` generates that ledger into
   `analysis/source_manifest.json` from the matching configuration and the
   per-version comparison reports, and fails if any recovered source is left
   unmeasured.
-- Exact IDO 5.3 matches for 506 of them (49,308 bytes) in USA and LRG, 462
-  (45,392 bytes) in Japan and 458 (44,764 bytes) in Europe, each verified
-  against its own image. Those C functions are substituted in each exact hybrid
-  build. The remaining reviewed candidates are behavior-recovered but not yet
-  byte-matching; see [`docs/CLAUDE_HANDOVER.md`](docs/CLAUDE_HANDOVER.md) for
-  the current backlog.
+- Exact IDO 5.3 matches for 1,000 of them (227,880 bytes) in the canonical USA
+  image. The current regional reports contain 888 matches (194,404 bytes) for
+  Japan, 889 (202,528 bytes) for Europe, and 993 (226,680 bytes) for the later
+  USA revision. The remaining reviewed candidates are behavior-recovered but
+  not yet byte-matching; see [`docs/DECOMP_STATUS.md`](docs/DECOMP_STATUS.md)
+  for the precise terminology and current ledger.
 
 This is the beginning of a source-matching decompilation, not a claim that the
 game is already decompiled or playable.
@@ -123,3 +123,10 @@ No affiliation with Lucasfilm, LucasArts, Nintendo, or Disney is implied.
 
 This operational policy reduces avoidable IP exposure; it is not a legal
 opinion or a guarantee about every jurisdiction or use.
+
+## License
+
+The independently authored Podcruise source, tools, and documentation are
+available under the [MIT License](LICENSE). That license covers only rights
+held by Podcruise contributors. It grants no rights to *Star Wars Episode I:
+Racer*, its ROM, assets, or any other third-party material.

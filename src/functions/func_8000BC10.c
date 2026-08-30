@@ -1,4 +1,4 @@
-/* Independently written from specs/functions/scene_node_transform_update.md. */
+/* Independently written from specs/functions/recovered/func_8000BC10.md. */
 
 #include "podcruise/types.h"
 

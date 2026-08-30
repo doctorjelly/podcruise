@@ -41,12 +41,12 @@ project artifacts.
 
 ## Matching compiler status
 
-IDO 5.3 with the `ido53_o2` profile exactly reproduces 506 reviewed functions
-totaling 49,308 bytes in USA and LRG. Japan substitutes a separately verified
-462 functions (45,392 bytes) and Europe 458 (44,764 bytes); every hybrid
-retains its input ROM SHA-1. The configured verifier also measures the
-behavior-only candidates, which are excluded from those match counts and listed
-in `docs/CLAUDE_HANDOVER.md`.
+IDO 5.3 with the `ido53_o2` profile exactly reproduces 1,000 reviewed functions
+totaling 227,880 bytes in the canonical USA image. Current regional reports
+contain 888 exact functions (194,404 bytes) for Japan, 889 (202,528 bytes) for
+Europe, and 993 (226,680 bytes) for the later USA revision. The configured
+verifier also measures behavior-only candidates, which are excluded from those
+match counts and reported in `docs/DECOMP_STATUS.md`.
 
 The profile flags are `-G 0 -O2 -mips2 -non_shared -Xcpluscomm -signed
 -Wab,-r4300_mul`. The last of those is the VR4300 multiply workaround: the
