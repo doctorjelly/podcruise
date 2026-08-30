@@ -27316,6 +27316,22 @@
           "size": 216
         }
       ]
+    },
+    {
+      "id": "func_8000ABD4",
+      "source": "src/functions/func_8000ABD4.c",
+      "link_vram": "0x8000ABD4",
+      "absolute_symbols": {
+        "D_800D21AC": "0x800D21AC"
+      },
+      "functions": [
+        {
+          "name": "func_8000ABD4",
+          "vram": "0x8000ABD4",
+          "rom": "0xB7D4",
+          "size": 56
+        }
+      ]
     }
   ]
 }

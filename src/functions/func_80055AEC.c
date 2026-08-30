@@ -1,5 +1,5 @@
 #include "podcruise/types.h"
-extern u16 *func_8000ABD4(s32);
+extern u16 *func_8000ABD4(s16);
 void func_80055AEC(s32 arg0, f32 arg1) {
     u16 *entry;
     s32 index;

@@ -188,7 +188,7 @@ segments:
       - [0xB6C0, c, functions/func_8000AAC0]
       - [0xB6F8, c, functions/func_8000AAF8]
       - [0xB724, c, functions/func_8000AB24]
-      - [0xB7D4, asm, main_B7D4]
+      - [0xB7D4, c, functions/func_8000ABD4]
       - [0xB80C, c, functions/func_8000AC0C]
       - [0xB834, c, functions/func_8000AC34]
       - [0xB860, c, functions/func_8000AC60]
