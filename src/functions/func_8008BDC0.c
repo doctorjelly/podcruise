@@ -31,7 +31,7 @@ extern void func_8008B810(void *, s32, Callback8008BDC0, Context8008BDC0 *, void
 extern void func_8008B960(void *);
 extern void func_8008CAA0(s32);
 extern s32 func_800944E0(s32, u32, u32, u32);
-extern void func_800945C0(void);
+extern s32 func_800945C0(void *, s32, u32, u32, u32);
 extern void func_800947F0(void *context);
 
 void func_8008BDC0(s32 arg0, void *arg1, void *arg2, s32 arg3) {

@@ -61,6 +61,10 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
 - For one function, inspect only its USA assembly slice, callers/callees,
   globals, spec, source, and exact compiler summary. Use JP/EU only when the USA
   evidence is ambiguous; ignore LRG unless the user restores it to scope.
+- Before treating a runtime layout as opaque, search recovered callers and
+  neighboring routines for the same callback, global, or hardware register
+  block. Reusing already-proven local structure offsets is cheaper and more
+  reliable than decoding an isolated body from scratch.
 - Run the isolated matching-object comparison during iteration. Do not run a
   full regional match or ROM round trip after every failed variant.
 - Stop blind reshaping when differences are broad register allocation or

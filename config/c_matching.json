@@ -29505,6 +29505,52 @@
           "size": 404
         }
       ]
+    },
+    {
+      "id": "func_800945C0",
+      "source": "src/functions/func_800945C0.c",
+      "link_vram": "0x800945C0",
+      "flags": [
+        "-G",
+        "0",
+        "-O1",
+        "-mips2",
+        "-non_shared",
+        "-Xcpluscomm",
+        "-signed",
+        "-Wab,-r4300_mul"
+      ],
+      "absolute_symbols": {
+        "D_800A7BA0": "0x800A7BA0",
+        "func_80088360": "0x80088360"
+      },
+      "functions": [
+        {
+          "name": "func_800945C0",
+          "vram": "0x800945C0",
+          "rom": "0x951C0",
+          "size": 548
+        }
+      ]
+    },
+    {
+      "id": "func_80096158",
+      "source": "src/functions/func_80096158.c",
+      "link_vram": "0x80096158",
+      "rodata_vram": "0x800AE140",
+      "rodata_alignment": 8,
+      "absolute_symbols": {
+        "D_800A6990": "0x800A6990",
+        "func_8008D7D0": "0x8008D7D0"
+      },
+      "functions": [
+        {
+          "name": "func_80096158",
+          "vram": "0x80096158",
+          "rom": "0x96D58",
+          "size": 604
+        }
+      ]
     }
   ]
 }
