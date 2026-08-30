@@ -71,6 +71,10 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   `/tmp`, treat the output as an untrusted mechanical draft, and independently
   check its delay slots, types, helper contracts, and every retained branch;
   never commit the generated draft.
+- When a control-flow aid reports a missing jump table, read only the bounded
+  table words from the local canonical ROM and synthesize labels in `/tmp`.
+  Avoid dumping the surrounding data segment: a compact index-to-target list
+  is enough to recover the switch and is much cheaper to review.
 - Run the isolated matching-object comparison during iteration. Do not run a
   full regional match or ROM round trip after every failed variant.
 - Keep behavior-only units in the compiler-test manifest but leave their USA
