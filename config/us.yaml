@@ -161,7 +161,7 @@ segments:
       - [0x9858, asm, main_9858]
       - [0x9B28, c, functions/func_80008F30]
       - [0x9B58, c, functions/func_80008F58]
-      - [0x9B6C, asm, main_9B6C]
+      - [0x9B6C, c, functions/func_80008F6C]
       - [0x9D34, c, functions/func_80009134]
       - [0x9DB0, c, functions/func_800091B0]
       - [0x9E78, c, functions/func_80009278]

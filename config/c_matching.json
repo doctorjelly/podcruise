@@ -27397,6 +27397,30 @@
           "size": 172
         }
       ]
+    },
+    {
+      "id": "func_80008F6C",
+      "source": "src/functions/func_80008F6C.c",
+      "link_vram": "0x80008F6C",
+      "rodata_vram": "0x800A8200",
+      "absolute_symbols": {
+        "D_8009A6F0": "0x8009A6F0",
+        "D_8009A758": "0x8009A758",
+        "D_8009A7A4": "0x8009A7A4",
+        "D_8009A818": "0x8009A818",
+        "D_8009A824": "0x8009A824",
+        "D_8009A8F4": "0x8009A8F4",
+        "D_8009AA48": "0x8009AA48",
+        "D_8009AB1C": "0x8009AB1C"
+      },
+      "functions": [
+        {
+          "name": "func_80008F6C",
+          "vram": "0x80008F6C",
+          "rom": "0x9B6C",
+          "size": 456
+        }
+      ]
     }
   ]
 }
