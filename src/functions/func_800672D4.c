@@ -1,4 +1,4 @@
-/* Independently written from $S/specs/func_800672D4.md. */
+/* Independently written from specs/functions/recovered/func_800672D4.md. */
 #include "podcruise/types.h"
 
 typedef struct Racer {

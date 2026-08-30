@@ -1,4 +1,4 @@
-/* Recovered per specs/func_8006B568.md */
+/* Independently written from specs/functions/recovered/func_8006B568.md. */
 #include "podcruise/types.h"
 
 typedef struct Obj8006B568 {
