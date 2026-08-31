@@ -140,5 +140,9 @@ neighboring unit's confirmed `-O1 -mips3 -o32` profile.
 | `func_80082BE0` | 160 / 152 USA/EU; 224 / 208 JP | `0x13` USA/EU; `0x3` JP | behavior-recovered |
 | `func_8008AC78` | 96 / 88 | `0x14` | behavior-recovered |
 
+For `func_80029494`, retaining `100.0f` in a named local restores four
+canonical stack-spill words, but nine instruction words still differ from USA;
+the byte-match claim therefore remains explicitly withheld.
+
 Only the build-specific bold claims are eligible for C substitution in the
 corresponding hybrid build.

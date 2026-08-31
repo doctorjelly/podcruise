@@ -18,7 +18,8 @@ a fixed forward direction, and update that light slot.
 
 ## Status
 
-Behavior recovered only. The current IDO 5.3 `-O2` comparison does not match
-the USA bytes, so this source cannot yet be substituted. The current candidate
-has the exact 756-byte length and differs only in four floating-point register
-fields across two local color copies; this is still not an exact byte match.
+**Byte-matching C: USA and LRG.** IDO 5.3 `-O2` reproduces all 756 bytes in
+both builds. Keeping the two equal red/green diffuse copies on one source line
+reproduces the original scheduler's floating-point register assignment. Japan
+and Europe remain structural evidence only; no byte-match claim is made for
+them here.

@@ -105,6 +105,10 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   general permuter. Keep the simplest exact ordering and independently rerun
   the linked-object verifier; this recovered two matches in seconds while
   scheduler-only cases showed no benefit.
+- When only adjacent independent copies have swapped IDO registers, test the
+  small statement-order space and same-line grouping before a random search.
+  Source line grouping is codegen-significant for IDO; one order plus one
+  same-line pair recovered `func_8007ACEC` exactly without broad permutation.
 - For a mixed aggregate/scalar frame, first sweep one local through the existing
   declaration order and count differing words; do not permute the full factorial
   space. Once stack offsets match, split only the remaining compound expression

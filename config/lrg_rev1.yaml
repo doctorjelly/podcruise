@@ -886,6 +886,7 @@ segments:
       - [0x76D80, asm, main_76D80]
       - [0x7A314, c, functions/func_80079714]
       - [0x7A424, asm, main_7A424]
+      - [0x7B8EC, c, functions/func_8007ACEC]
       - [0x7BBE0, c, functions/func_8007AFE0]
       - [0x7BBE8, c, functions/func_8007AFE8]
       - [0x7BC6C, c, functions/func_8007B06C]

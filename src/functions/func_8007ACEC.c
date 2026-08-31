@@ -134,9 +134,8 @@ void func_8007ACEC(ObjectACEC *object) {
             ambient[2] = 255.0f;
             ambient[0] = value * 255.0f;
             ambient[1] = value * 255.0f;
+            diffuse[0] = ambient[0]; diffuse[1] = ambient[1];
             diffuse[2] = ambient[2];
-            diffuse[1] = ambient[1];
-            diffuse[0] = ambient[0];
             func_80086A20(object->unk300, (PcVec3f *)ambient, (PcVec3f *)diffuse, (PcVec3f *)direction);
         }
     }
