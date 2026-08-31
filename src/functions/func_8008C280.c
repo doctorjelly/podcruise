@@ -1,4 +1,4 @@
-/* Specification: specs/func_8008C280.md (worker scratchpad) */
+/* Independently written from specs/functions/recovered/func_8008C280.md. */
 #include "podcruise/types.h"
 
 extern void func_800905F0(void);
@@ -15,7 +15,7 @@ s32 func_8008C280(s32 arg0) {
     if (status != 0) {
         result = 0;
     } else {
-        switch (value[0] & 0xC000) {
+        switch ((u16)(value[0] & 0xC000)) {
             case 0x8000:
                 result = 1;
                 break;
