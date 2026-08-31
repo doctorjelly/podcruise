@@ -21,6 +21,7 @@ typedef struct {
 
 void func_80050208(Slots80050208 *state) {
     s32 index;
+    int entry;
 
     state->unk64 = 0;
     state->unk68 = -1;
@@ -30,15 +31,20 @@ void func_80050208(Slots80050208 *state) {
     state->unk6F = 0;
     state->unk70 = 1;
     state->unk71 = 12;
+
+    /* These no-op expressions preserve IDO's original constant registers. */
+    state += 0;
     state->unk8E = 3;
     state->unk8F = 2;
     state->unk90 = 2;
 
-    state->unk72[2] = 2;
+    state->unk72[(entry = 2, entry)] = 2;
     state->unk72[1] = 1;
     state->unk72[0] = 0;
 
     for (index = 3; index < 23; index++) {
         state->unk72[index] = index;
+        if ((!state) != 0) {
+        }
     }
 }

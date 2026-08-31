@@ -727,6 +727,7 @@ segments:
       - [0x50390, asm, main_50390]
       - [0x50A30, c, functions/func_8004FE30]
       - [0x50B7C, asm, main_50B7C]
+      - [0x50E08, c, functions/func_80050208]
       - [0x50E90, c, functions/func_80050290]
       - [0x50FE8, c, functions/func_800503E8]
       - [0x51050, c, functions/func_80050450]

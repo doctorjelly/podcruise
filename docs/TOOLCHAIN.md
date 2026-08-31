@@ -1,6 +1,6 @@
 # Toolchain provenance
 
-Audit date: 2026-08-19.
+Audit date: 2026-08-30.
 
 This document separates tools used on the maintainer's machine from material
 distributed by this repository. A tool's presence in the local environment
@@ -15,6 +15,7 @@ does not put its executable or source into Git.
 | `rabbitizer` | 1.16.2 | MIT; upstream `Decompollaborate/rabbitizer` | Transitive instruction decoder; not vendored |
 | GNU MIPS binutils | 2.34 | GNU licenses; Ubuntu cross-binutils package, SHA-256 `db48a1c39796ad63e20e915f08cfc0a6f0c78eda5b1ca82f5f0c87bc4c184b02` | Extracted under ignored `build/toolchain`; not vendored |
 | IDO static recompilation | Decompals v1.2, IDO 5.3/7.1 | Maintainer-approved local-only release tools | Archives and executables remain ignored; project scripts never download them |
+| `decomp-permuter` | commit `fb516c435c6f362fbced66e171545324306b607b` | MIT; upstream `simonlindholm/decomp-permuter` | Optional local matching aid; source, target objects, and outputs are not vendored |
 | host C compiler | Apple Clang 17 family | Apple toolchain installation | Syntax and warnings only; not a matching compiler |
 
 `requirements-lock.txt` records every Python distribution and exact version in
@@ -35,14 +36,15 @@ project artifacts.
   library, or documentation is committed or downloaded by project scripts.
 - No code or authored symbol names are imported from `sp00nznet/racer`, because
   that repository had no explicit license at the audit date.
-- `asm-differ`, `m2c`, and `decomp-permuter` are roadmap candidates, not current
-  dependencies. Each must receive its own version and license review before it
-  becomes required tooling.
+- `asm-differ` and `m2c` are roadmap candidates, not current dependencies.
+  Each must receive its own version and license review before it becomes
+  required tooling. `decomp-permuter` has been reviewed and used locally, but
+  remains optional and is not distributed by this repository.
 
 ## Matching compiler status
 
-IDO 5.3 with the `ido53_o2` profile exactly reproduces 1,008 reviewed functions
-totaling 229,988 bytes in the canonical USA image. Current regional reports
+IDO 5.3 with the `ido53_o2` profile exactly reproduces 1,010 reviewed functions
+totaling 230,344 bytes in the canonical USA image. Current regional reports
 contain 888 exact functions (194,404 bytes) for Japan, 889 (202,528 bytes) for
 Europe, and 993 (226,680 bytes) for the later USA revision. The configured
 verifier also measures behavior-only candidates, which are excluded from those

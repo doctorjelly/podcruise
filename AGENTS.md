@@ -95,6 +95,10 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   do not try to make the compiler emit post-return alignment padding.
 - As a default token cap, stop after three evidence-driven source variants when
   the remaining difference is only register coloring or scheduling.
+- Rank same-size candidates by differing instruction words and check their
+  recovery notes before trying variants. Skip documented register-only dead
+  ends; pilot any automated permutation search on one representative function
+  with a fixed time limit before scaling it to a batch.
 - Batch successful functions into one tranche. Then run the canonical USA round
   trip, `make -s test`, `make -s safety`, ROM inventory, and
   `git diff --check` once before committing.
