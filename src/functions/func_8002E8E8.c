@@ -1,8 +1,8 @@
-/* Implements specification specs/func_8002E8E8.md (channel availability scan). */
+/* Independently written from specs/functions/recovered/func_8002E8E8.md. */
 #include "podcruise/types.h"
 extern u8 D_800A26D0;
 extern u8 D_800A26D4;
-extern volatile s32 D_800D7490;
+extern s32 D_800D7490;
 extern s32 D_800D7498[];
 extern u8 D_800D74B3[];
 extern void func_8002E770(void);
@@ -24,5 +24,5 @@ void func_8002E8E8(void) {
         }
     }
     D_800D7490 = selected;
-    if (none == selected) { D_800A26D4 = 0; }
+    if (none == D_800D7490) { D_800A26D4 = 0; }
 }
