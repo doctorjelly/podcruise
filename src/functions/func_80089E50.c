@@ -1,4 +1,4 @@
-/* Independently written from specs/functions/recovered/boundary_state_tranche.md. */
+/* Independently written from specs/functions/recovered/func_80089E50.md. */
 #include "podcruise/types.h"
 
 typedef struct Struct80089E50 {
@@ -16,7 +16,7 @@ typedef struct Struct80089E50 {
 typedef struct Entry80089E50 {
     /* 0x00 */ s32 unk00;
     /* 0x04 */ u16 unk04;
-    /* 0x06 */ u8 pad06[0x2a];
+    /* 0x06 */ u8 pad06[0x1a];
 } Entry80089E50;
 
 extern s32 func_80091280(Struct80089E50 *object);
@@ -24,9 +24,9 @@ extern s32 func_80091FD0(Struct80089E50 *object, u8 mode);
 extern s32 func_80092050(s32 first, s32 second, u16 index, Entry80089E50 *entry);
 
 s32 func_80089E50(Struct80089E50 *object, s32 *totalOut, s32 *usedOut) {
-    Entry80089E50 entry;
     s32 index;
     s32 used;
+    Entry80089E50 entry;
     register s32 result;
 
     used = 0;

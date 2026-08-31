@@ -122,7 +122,7 @@ neighboring unit's confirmed `-O1 -mips3 -o32` profile.
 | `func_80012B5C` | 148 / 148 | `0x4E` USA/EU; `0x2B` JP | behavior-recovered |
 | `func_80062E14` | 180 / 192 | `0x2B` | behavior-recovered |
 | `func_8004AE74` | 236 / 236 | none | **byte-matching C: USA/JP/EU/LRG** |
-| `func_80089E50` | 288 / 288 | `0x3` | behavior-recovered |
+| `func_80089E50` | 288 / 288 | none (USA) | **byte-matching C: USA** |
 | `func_8005163C` | 412 / 404 | `0x18` | behavior-recovered |
 | `func_800160BC` | 420 / 420 | `0x3B` | behavior-recovered |
 | `func_8007FD98` | 40 / 40 | none | **byte-matching C: USA/JP/EU/LRG** |
@@ -140,4 +140,5 @@ neighboring unit's confirmed `-O1 -mips3 -o32` profile.
 | `func_80082BE0` | 160 / 152 USA/EU; 224 / 208 JP | `0x13` USA/EU; `0x3` JP | behavior-recovered |
 | `func_8008AC78` | 96 / 88 | `0x14` | behavior-recovered |
 
-Only the two bold rows are eligible for C substitution in the hybrid builds.
+Only the build-specific bold claims are eligible for C substitution in the
+corresponding hybrid build.
