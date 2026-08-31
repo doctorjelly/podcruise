@@ -105,6 +105,11 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   general permuter. Keep the simplest exact ordering and independently rerun
   the linked-object verifier; this recovered two matches in seconds while
   scheduler-only cases showed no benefit.
+- For a mixed aggregate/scalar frame, first sweep one local through the existing
+  declaration order and count differing words; do not permute the full factorial
+  space. Once stack offsets match, split only the remaining compound expression
+  into sequential assignments. This bounded two-stage search recovered
+  `func_8007B06C` while keeping compiler experiments small.
 - Run `decomp-permuter` without a pseudo-terminal, use `--quiet`, and redirect
   its full progress stream to `/tmp`. Its carriage-return status line can
   otherwise expand into tens of thousands of useless transcript tokens; only

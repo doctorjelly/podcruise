@@ -21015,9 +21015,9 @@
       "absolute_symbols": {
         "func_8008A6B4": "0x8008A6B4",
         "func_8003EC40": "0x8003EC40",
-        "D_800AAB9C": "0x800AAB98",
-        "D_800AAB6C": "0x800AAB50",
-        "D_800AAB7C": "0x800AAB60"
+        "D_800AAB9C": "0x800AAB9C",
+        "D_800AAB6C": "0x800AAB6C",
+        "D_800AAB7C": "0x800AAB7C"
       },
       "functions": [
         {

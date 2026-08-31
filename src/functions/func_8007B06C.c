@@ -1,4 +1,4 @@
-/* Recovered per scratchpad spec specs/func_8007B06C.md. */
+/* Independently written from specs/functions/recovered/func_8007B06C.md. */
 #include "podcruise/types.h"
 
 typedef struct PcScrollState PcScrollState;
@@ -25,17 +25,17 @@ extern void func_80017BA8(void *destination, const void *source);
 extern void func_8003E0A0(PcScrollState *state, f32 stepU, f32 stepV);
 
 void func_8007B06C(Obj8007B06C *obj) {
-    struct { f32 m[4][4]; } mtx;
-    f32 k2 = 2.0f;
-    f32 k35 = 3.5f;
-    f32 k05 = 0.5f;
-    f32 k6 = 6.0f;
-    f32 ratio;
-    f32 scale;
-    s32 a;
-    s32 b;
-    s32 c;
     s32 d;
+    s32 c;
+    s32 b;
+    s32 a;
+    f32 scale;
+    f32 k6 = 6.0f;
+    f32 k05 = 0.5f;
+    f32 k35 = 3.5f;
+    f32 ratio;
+    f32 k2 = 2.0f;
+    struct { f32 m[4][4]; } mtx;
 
     if (obj->unk78 == 0) {
         return;
@@ -59,7 +59,9 @@ void func_8007B06C(Obj8007B06C *obj) {
         func_8000E9BC((u8 **)obj->unk74, 0, 0, a, b, c, d);
         func_8003E0A0(obj->unk74, 0.0f, (k2 * k35 + k05) * (f32)D_80120BF0);
     }
-    scale = k6 * (1.0f - ratio) + 0.5f;
+    scale = k6;
+    scale *= 1.0f - ratio;
+    scale += 0.5f;
     func_80017918(mtx.m, 2.0f, scale, scale, obj->unk20);
     func_80017BA8(obj->unk78, &mtx);
 }

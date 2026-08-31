@@ -1,4 +1,4 @@
-/* Specification: specs/func_8003F1C0.md */
+/* Independently written from specs/functions/recovered/func_8003F1C0.md. */
 #include "podcruise/types.h"
 
 extern f32 D_800AAB9C;
