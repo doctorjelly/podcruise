@@ -868,6 +868,8 @@ segments:
       - [0x70AD0, asm, main_70AD0]
       - [0x70FA0, c, functions/func_800703A0]
       - [0x710A8, asm, main_710A8]
+      - [0x71364, c, functions/func_80070764]
+      - [0x717BC, asm, main_717BC]
       - [0x71A98, c, functions/func_80070E98]
       - [0x71F4C, c, functions/func_8007134C]
       - [0x72420, c, functions/func_80071820]

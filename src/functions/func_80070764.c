@@ -49,9 +49,10 @@ void func_80070764(Pod *pod, s32 flags) {
     f32 gapB[2];
     f32 position[3];
     f32 tail[2];
-    s32 sound;
+    s32 random;
     s32 channel;
     f32 chance;
+    s32 sound;
     f32 unit;
 
     (void)head;
@@ -111,8 +112,9 @@ void func_80070764(Pod *pod, s32 flags) {
         } else {
             sound = 0x36;
         }
+        random = func_80082BE0();
         func_80008BC4(sound, 7,
-                      (f32)((f64)((f32)func_80082BE0() / 2147483648.0f) * D_800AD810 + D_800AD818),
+                      (f32)((f64)((f32)random / 2147483648.0f) * D_800AD810 + D_800AD818),
                       1.0f, position, 0, 0, 10.0f, 500.0f);
 
         chance = (f32)func_80082BE0() / 2147483648.0f;
@@ -123,8 +125,9 @@ void func_80070764(Pod *pod, s32 flags) {
         } else {
             sound = 0x36;
         }
+        random = func_80082BE0();
         func_80008BC4(sound, 7,
-                      (f32)((f64)((f32)func_80082BE0() / 2147483648.0f) * D_800AD828 + D_800AD830),
+                      (f32)((f64)((f32)random / 2147483648.0f) * D_800AD828 + D_800AD830),
                       1.0f, position, 0, 0, 10.0f, 500.0f);
 
         if (!(D_80000318 < 0x800000) || (pod->unk0060 & 0x120)) {

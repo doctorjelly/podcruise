@@ -147,9 +147,9 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
 - When a nested helper call leaves only stack-argument stores and reloads out
   of order, first assign the helper result to a naturally typed local and use
   that local in the outer call. This preserved the code shape while recovering
-  both repeated schedules in `func_8007134C` and `func_80070E98`. For the
-  latter, sweeping only the spilled scalar through the declaration order then
-  recovered its final stack offset.
+  repeated schedules in `func_8007134C`, `func_80070E98`, and `func_80070764`.
+  For the latter two, sweeping only the spilled scalar through the declaration
+  order then recovered the final stack offset.
 - Batch successful functions into one tranche. Then run the canonical USA round
   trip, `make -s test`, `make -s safety`, ROM inventory, and
   `git diff --check` once before committing.
