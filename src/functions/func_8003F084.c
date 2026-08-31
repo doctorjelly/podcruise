@@ -1,4 +1,4 @@
-/* Independently written from specs/functions/func_8003F084.md. */
+/* Independently written from specs/functions/recovered/func_8003F084.md. */
 
 #include "podcruise/types.h"
 
@@ -25,7 +25,8 @@ void func_8003F084(s16 x, s16 y, f32 seconds, u8 arg3, u8 arg4, u8 arg5,
     wholeSeconds = (s32)secondsValue;
     hundredths =
         (s32)(((secondsValue - (f32)wholeSeconds) + D_800AAB98) * 100.0f);
-    if (hundredths == 100) {
+    if ((s32)(((secondsValue - (f32)wholeSeconds) + D_800AAB98) * 100.0f) ==
+        100) {
         wholeSeconds = wholeSeconds + 1;
         hundredths = 0;
         if (wholeSeconds == 60) {

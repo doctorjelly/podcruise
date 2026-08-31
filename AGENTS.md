@@ -123,6 +123,9 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   its full progress stream to `/tmp`. Its carriage-return status line can
   otherwise expand into tens of thousands of useless transcript tokens; only
   surface the base score, improved candidates, and final result.
+- Use `--stack-diffs` from the start for functions with stack locals or arrays.
+  The default scorer ignores stack offsets and can report a misleading zero;
+  catching that before integration avoids an entire failed ROM rebuild.
 - Make permuter inputs self-contained instead of depending on project headers;
   its preprocessing pass uses `cpp -nostdinc`. A few local typedefs avoid a
   failed run and keep the search setup cheap. Treat zero-score output as a hint,

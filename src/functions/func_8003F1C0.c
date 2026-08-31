@@ -20,7 +20,8 @@ void func_8003F1C0(s32 x, s32 y, f32 seconds, s32 c1, s32 c2, s32 c3, s32 c4, ch
     secondsValue = (minutesValue - (f32)minutes) * (f32)60.0;
     secondsPart = (s32)secondsValue;
     fraction = (s32)((secondsValue - (f32)secondsPart + D_800AAB9C) * 1000.0f);
-    if (fraction == 1000) {
+    if ((s32)((secondsValue - (f32)secondsPart + D_800AAB9C) * 1000.0f) ==
+        1000) {
         secondsPart = secondsPart + 1;
         fraction = 0;
         if (secondsPart == 60) {
