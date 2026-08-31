@@ -128,6 +128,10 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   failed run and keep the search setup cheap. Treat zero-score output as a hint,
   then independently verify the readable minimal change through the project
   compiler harness.
+- Before a permutation run, disassemble the temporary target and compare its
+  `.text` size and first/last words with the ROM slice. This binutils build can
+  zero section contents when rename and flag changes are combined; a malformed
+  target wastes the whole search and can produce meaningless scores.
 - Batch successful functions into one tranche. Then run the canonical USA round
   trip, `make -s test`, `make -s safety`, ROM inventory, and
   `git diff --check` once before committing.

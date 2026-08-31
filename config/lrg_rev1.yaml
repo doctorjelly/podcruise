@@ -400,7 +400,7 @@ segments:
       - [0x2E6D0, c, functions/func_8002DAD0]
       - [0x2E720, c, functions/func_8002DB20]
       - [0x2E7D8, c, functions/func_8002DBD8]
-      - [0x2E87C, asm, main_2E87C]
+      - [0x2E87C, c, functions/func_8002DC7C]
       - [0x2E8F4, c, functions/func_8002DCF4]
       - [0x2E97C, asm, main_2E97C]
       - [0x2EBB0, c, functions/func_8002DFB0]
