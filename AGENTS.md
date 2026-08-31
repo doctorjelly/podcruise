@@ -139,6 +139,11 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   allocation, seed the permuter from that form. A behavior-neutral redundant
   expression after an already-proven dereference can reproduce IDO's original
   register allocation; independently verify the smallest readable winner.
+- When a loop differs only in loads scheduled around its back edge or break
+  delay slot, make the next iteration's non-volatile bound an explicit local
+  and refresh it once per completed iteration. This small source-shape test
+  recovered `func_8008A420`; it is cheaper than a broad permutation run and
+  still preserves helper-visible bound changes.
 - Batch successful functions into one tranche. Then run the canonical USA round
   trip, `make -s test`, `make -s safety`, ROM inventory, and
   `git diff --check` once before committing.

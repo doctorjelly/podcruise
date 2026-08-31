@@ -1,6 +1,6 @@
 # Medium control and math tranche
 
-Status: **10 measured USA functions; four are byte-matching C for USA and LRG,
+Status: **10 measured USA functions; five are byte-matching C for USA and LRG,
 and three of those are also verified in Japan and Europe**.
 
 ## Verified facts
@@ -92,7 +92,7 @@ same outcomes at their relocated addresses.
 | --- | --- | --- | --- |
 | `func_80045F60` | 444 / 444 | none | **byte-matching C: USA/JP/EU/LRG** |
 | `func_80033328` | 460 / 460 | none | **byte-matching C: USA/JP/EU/LRG** |
-| `func_8008A420` | 472 / 472 | `0x14C` | behavior-recovered |
+| `func_8008A420` | 472 / 472 | none | **byte-matching C: USA/LRG** |
 | `func_80014D4C` | 480 / 480 | none | **byte-matching C: USA/JP/EU/LRG** |
 | `func_80089F70` | 480 / 468 | `0x26` | behavior-recovered |
 | `func_80014F54` | 504 / 500 | `0x5` | behavior-recovered |

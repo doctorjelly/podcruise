@@ -1111,7 +1111,7 @@ segments:
       - [0x8AF58, asm, main_8AF58]
       - [0x8AF60, c, functions/func_8008A360]
       - [0x8AFB0, c, functions/func_8008A3B0]
-      - [0x8B020, asm, main_8B020]
+      - [0x8B020, c, functions/func_8008A420]
       - [0x8B1F8, c, functions/func_8008A5F8]
       - [0x8B288, asm, main_8B288]
       - [0x8B290, c, functions/func_8008A690]

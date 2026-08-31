@@ -50,6 +50,7 @@ s32 func_8008A420(Obj8008A420 *obj, u16 n, void *p, s32 arg3, s32 arg4) {
     s32 ret;
     u8 last;
     u8 lo;
+    u8 limit;
 
     if (n == 0 || p == 0) {
         return 5;
@@ -70,7 +71,8 @@ s32 func_8008A420(Obj8008A420 *obj, u16 n, void *p, s32 arg3, s32 arg4) {
     }
     last = entry.unk06.byte.hi;
     lo = entry.unk06.byte.lo;
-    while (last < obj->unk64) {
+    limit = obj->unk64;
+    while (last < limit) {
         ret = func_80091354(obj, table, 0, last);
         if (ret != 0) {
             return ret;
@@ -86,6 +88,7 @@ s32 func_8008A420(Obj8008A420 *obj, u16 n, void *p, s32 arg3, s32 arg4) {
         if (cur.half == 1) {
             break;
         }
+        limit = obj->unk64;
         last = cur.byte.hi;
         lo = cur.byte.lo;
     }
