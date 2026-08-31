@@ -1,4 +1,4 @@
-/* Recovered from specification $S/specs/func_80053AD4.md */
+/* Recovered from specs/functions/recovered/func_80053AD4.md */
 #include "podcruise/types.h"
 
 extern f32 D_800ACE94;
@@ -13,21 +13,24 @@ void func_80053AD4(void *arg0, void *arg1);
 void func_80053AD4(void *arg0, void *arg1) {
     f32 matrices[7][16];
     f32 pad[18];
-    register f32 stepFirst;
     register f32 stepRest;
+    register f32 stepFirst;
     register f32 angle;
     s32 index;
 
     (void)pad;
-    stepFirst = D_800ACE98;
-    stepRest = D_800ACE9C;
     angle = D_800ACE94;
+    stepRest = D_800ACE98;
+    stepFirst = stepRest;
+    stepRest = D_800ACE9C;
     for (index = 0; index < 7; index++) {
         func_8003B184((void *)(*(u8 **)((u8 *)arg1 + 0x84) + 0xAC), matrices[index], angle);
-        if (index < 2) {
-            angle += stepFirst;
-        } else {
+        if (index >= 2) {
             angle += stepRest;
+        } else {
+            /* Semantically neutral; preserves IDO's original register schedule. */
+            angle += 0;
+            angle += stepFirst;
         }
     }
 

@@ -759,6 +759,8 @@ segments:
       - [0x53E20, c, functions/func_80053220]
       - [0x53F00, c, functions/func_80053300]
       - [0x53F7C, asm, main_53F7C]
+      - [0x546D4, c, functions/func_80053AD4]
+      - [0x54808, asm, main_54808]
       - [0x57064, c, functions/func_80056464]
       - [0x57444, asm, main_57444]
       - [0x58AD4, c, functions/func_80057ED4]

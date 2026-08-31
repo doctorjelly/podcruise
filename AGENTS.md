@@ -123,6 +123,11 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   its full progress stream to `/tmp`. Its carriage-return status line can
   otherwise expand into tens of thousands of useless transcript tokens; only
   surface the base score, improved candidates, and final result.
+- Make permuter inputs self-contained instead of depending on project headers;
+  its preprocessing pass uses `cpp -nostdinc`. A few local typedefs avoid a
+  failed run and keep the search setup cheap. Treat zero-score output as a hint,
+  then independently verify the readable minimal change through the project
+  compiler harness.
 - Batch successful functions into one tranche. Then run the canonical USA round
   trip, `make -s test`, `make -s safety`, ROM inventory, and
   `git diff --check` once before committing.
