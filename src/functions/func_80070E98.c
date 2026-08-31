@@ -47,10 +47,11 @@ void func_80070E98(Obj80070E98 *obj, s32 arg1) {
     f32 matrixB[16];
     f32 spare1[16];
     s32 index;
-    s32 kind;
     void *source;
     f32 limit;
     f32 value;
+    s32 random;
+    s32 kind;
 
     (void)arg1;
     (void)spare0;
@@ -96,8 +97,9 @@ void func_80070E98(Obj80070E98 *obj, s32 arg1) {
     } else {
         kind = 0x36;
     }
+    random = func_80082BE0();
     func_80008BC4(kind, 7,
-                  (f32)((f64)((f32)func_80082BE0() / (f32)2147483648.0) * D_800AD858 + D_800AD860),
+                  (f32)((f64)((f32)random / (f32)2147483648.0) * D_800AD858 + D_800AD860),
                   1.0f, position, 0, 0, 10.0f, 500.0f);
 
     value = (f32)func_80082BE0() / (f32)2147483648.0;
@@ -108,8 +110,9 @@ void func_80070E98(Obj80070E98 *obj, s32 arg1) {
     } else {
         kind = 0x36;
     }
+    random = func_80082BE0();
     func_80008BC4(kind, 7,
-                  (f32)((f64)((f32)func_80082BE0() / (f32)2147483648.0) * D_800AD870 + D_800AD878),
+                  (f32)((f64)((f32)random / (f32)2147483648.0) * D_800AD870 + D_800AD878),
                   1.0f, position, 0, 0, 10.0f, 500.0f);
 
     limit = D_800AD880;

@@ -144,6 +144,12 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   and refresh it once per completed iteration. This small source-shape test
   recovered `func_8008A420`; it is cheaper than a broad permutation run and
   still preserves helper-visible bound changes.
+- When a nested helper call leaves only stack-argument stores and reloads out
+  of order, first assign the helper result to a naturally typed local and use
+  that local in the outer call. This preserved the code shape while recovering
+  both repeated schedules in `func_8007134C` and `func_80070E98`. For the
+  latter, sweeping only the spilled scalar through the declaration order then
+  recovered its final stack offset.
 - Batch successful functions into one tranche. Then run the canonical USA round
   trip, `make -s test`, `make -s safety`, ROM inventory, and
   `git diff --check` once before committing.

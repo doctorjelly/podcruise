@@ -1,4 +1,4 @@
-/* Recovered per scratchpad specification specs/func_8007134C.md. */
+/* Independently written from specs/functions/recovered/func_8007134C.md. */
 #include "podcruise/types.h"
 
 typedef struct Unk8007134CSub {
@@ -75,6 +75,7 @@ void func_8007134C(Unk8007134C *object, s32 arg1) {
     f32 limit;
     s32 index;
     s32 sound;
+    s32 random;
 
     (void)spare;
 
@@ -124,8 +125,9 @@ void func_8007134C(Unk8007134C *object, s32 arg1) {
     } else {
         sound = 0x36;
     }
+    random = func_80082BE0();
     func_80008BC4(sound, 7,
-                  (f32)((f64)((f32)func_80082BE0() / (f32)2147483648.0) * D_800AD890 + D_800AD898),
+                  (f32)((f64)((f32)random / (f32)2147483648.0) * D_800AD890 + D_800AD898),
                   1.0f, position, 0, 0, 10.0f, 500.0f);
     roll = (f32)func_80082BE0() / (f32)2147483648.0;
     if (roll < D_800AD8A0) {
@@ -135,8 +137,9 @@ void func_8007134C(Unk8007134C *object, s32 arg1) {
     } else {
         sound = 0x36;
     }
+    random = func_80082BE0();
     func_80008BC4(sound, 7,
-                  (f32)((f64)((f32)func_80082BE0() / (f32)2147483648.0) * D_800AD8A8 + D_800AD8B0),
+                  (f32)((f64)((f32)random / (f32)2147483648.0) * D_800AD8A8 + D_800AD8B0),
                   1.0f, position, 0, 0, 10.0f, 500.0f);
     limit = D_800AD8B8;
     for (index = 0; index < 6; index++) {
