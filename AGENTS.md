@@ -13,6 +13,7 @@ correctness, provenance, IP policy, exact-match evidence, or required tests.
 - Redirect full round-trip output to a temporary log; the generated build
   prints hundreds of commands even under `make -s`. Extract only decisive
   success/error lines with `rg` because even the final linker line is enormous.
+  Do not use `tail` on that log: the linker command is commonly one giant line.
   Preserve the command's exit status and retain the log on failure.
 - Batch deterministic work. Rank, filter, compare, or aggregate several
   candidates in one local operation and return a short table.
