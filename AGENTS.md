@@ -109,6 +109,11 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   small statement-order space and same-line grouping before a random search.
   Source line grouping is codegen-significant for IDO; one order plus one
   same-line pair recovered `func_8007ACEC` exactly without broad permutation.
+- Treat source-line grouping as a small, measured search dimension for IDO
+  scheduling: separating independent short-circuit assignments can stop work
+  from being hoisted across the first branch, while grouping a conditional
+  selection with its next constant load can reverse two otherwise-independent
+  instructions. Together these changes recovered `func_8006E42C` exactly.
 - For a mixed aggregate/scalar frame, first sweep one local through the existing
   declaration order and count differing words; do not permute the full factorial
   space. Once stack offsets match, split only the remaining compound expression
@@ -127,3 +132,6 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   rebuild substitution count increases, and the linker map uses its C object.
   A byte-identical ROM alone can hide a stale split that still assembled the
   original body; checking the count and map avoids a second full rebuild.
+- When a new C subsegment interrupts a larger assembly segment, add an assembly
+  resume boundary at the function's exact end. Without it, splat silently omits
+  the remaining assembly range and wastes a full rebuild on a linker failure.

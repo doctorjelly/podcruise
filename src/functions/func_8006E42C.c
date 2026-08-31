@@ -1,4 +1,4 @@
-/* Specification: scratchpad specs/func_8006E42C.md */
+/* Independently written from specs/functions/recovered/func_8006E42C.md. */
 #include "podcruise/types.h"
 
 typedef struct {
@@ -47,14 +47,11 @@ s32 func_8006E42C(ObjectE42C *object, s32 index) {
     pressed = D_800D7700[index] & 1;
 
     if (D_8009B7D8 & 0x2000000) {
-        if (object->unk1E70->unk10 == 0) {
-            index = 0;
-        } else {
-            index = 1;
-        }
+        if (object->unk1E70->unk10 == 0) { index = 0; } else { index = 1; } limit = D_800AD728;
         second = index + 2;
-        limit = D_800AD728;
-        ready = limit < D_800D7730[index] || limit < D_800D7730[second]; pressed = (D_800D7700[index] & 0x100) != 0 || (D_800D7700[second] & 0x100) != 0;
+        ready = limit < D_800D7730[index] || limit < D_800D7730[second];
+        pressed = (D_800D7700[index] & 0x100) != 0 ||
+                  (D_800D7700[second] & 0x100) != 0;
     }
 
     result = 0;
