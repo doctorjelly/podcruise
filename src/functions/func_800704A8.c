@@ -1,4 +1,4 @@
-/* Recovered from specification: func_800704A8 (worker batch_05). */
+/* Implements specs/functions/recovered/func_800704A8.md. */
 #include "podcruise/types.h"
 
 extern void func_8003B184(void *request, void *context, f32 offset);
