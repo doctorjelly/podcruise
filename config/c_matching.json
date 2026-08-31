@@ -11355,6 +11355,16 @@
       "id": "func_80090450",
       "source": "src/functions/func_80090450.c",
       "link_vram": "0x80090450",
+      "flags": [
+        "-G",
+        "0",
+        "-O3",
+        "-mips2",
+        "-non_shared",
+        "-Xcpluscomm",
+        "-signed",
+        "-Wab,-r4300_mul"
+      ],
       "absolute_symbols": {
         "func_80088450": "0x80088450",
         "func_80088500": "0x80088500"

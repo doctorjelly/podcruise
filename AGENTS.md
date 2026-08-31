@@ -62,6 +62,10 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
 - For one function, inspect only its USA assembly slice, callers/callees,
   globals, spec, source, and exact compiler summary. Use JP/EU only when the USA
   evidence is ambiguous; ignore LRG unless the user restores it to scope.
+- Before reshaping a USA source that is already exact in Japan or Europe,
+  compare the regional unit flags. An identical normalized body may expose a
+  missing per-file optimization level; this recovered `func_80090450` by
+  copying its proven `-O3` setting instead of spending more variants on C.
 - Before treating a runtime layout as opaque, search recovered callers and
   neighboring routines for the same callback, global, or hardware register
   block. Reusing already-proven local structure offsets is cheaper and more

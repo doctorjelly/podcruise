@@ -1233,6 +1233,8 @@ segments:
       - [0x90FC4, asm, main_90FC4]
       - [0x90FD0, c, functions/func_800903D0]
       - [0x91048, asm, main_91048]
+      - [0x91050, c, functions/func_80090450]
+      - [0x91100, asm, main_91100]
       - [0x911A0, c, functions/func_800905A0]
       - [0x911F0, c, functions/func_800905F8]
       - [0x91234, c, functions/func_80090634]
