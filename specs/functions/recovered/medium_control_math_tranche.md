@@ -1,7 +1,7 @@
 # Medium control and math tranche
 
-Status: **10 newly measured USA functions; three are byte-matching C in all
-four builds**.
+Status: **10 measured USA functions; four are byte-matching C for USA and LRG,
+and three of those are also verified in Japan and Europe**.
 
 ## Verified facts
 
@@ -96,9 +96,12 @@ same outcomes at their relocated addresses.
 | `func_80014D4C` | 480 / 480 | none | **byte-matching C: USA/JP/EU/LRG** |
 | `func_80089F70` | 480 / 468 | `0x26` | behavior-recovered |
 | `func_80014F54` | 504 / 500 | `0x5` | behavior-recovered |
-| `func_8003594C` | 676 / 676 | `0x53` | behavior-recovered |
+| `func_8003594C` | 676 / 676 | none | **byte-matching C: USA/LRG** |
 | `func_8008528C` | 1,316 / 1,312 | `0x1` | behavior-recovered |
 | `func_800321F0` | 3,388 / 3,356 | `0x0` | behavior-recovered |
 | `func_80044CD8` | 812 / 812 | `0x5` | behavior-recovered |
 
-Only the three bold rows are eligible for C substitution in the hybrid builds.
+All four bold rows are eligible for USA and LRG hybrid-build substitution. The
+three rows explicitly marked USA/JP/EU/LRG are also verified for the Japan and
+Europe hybrid builds; no Japan or Europe byte match is claimed here for
+`func_8003594C`.

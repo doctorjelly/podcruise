@@ -100,6 +100,11 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   recovery notes before trying variants. Skip documented register-only dead
   ends; pilot any automated permutation search on one representative function
   with a fixed time limit before scaling it to a batch.
+- When every mismatch is a local stack offset, exhaustively test only the small
+  declaration-order space in `/tmp` before changing behavior or invoking the
+  general permuter. Keep the simplest exact ordering and independently rerun
+  the linked-object verifier; this recovered two matches in seconds while
+  scheduler-only cases showed no benefit.
 - Run `decomp-permuter` without a pseudo-terminal, use `--quiet`, and redirect
   its full progress stream to `/tmp`. Its carriage-return status line can
   otherwise expand into tens of thousands of useless transcript tokens; only

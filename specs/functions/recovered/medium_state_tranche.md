@@ -1,7 +1,7 @@
 # Medium state tranche
 
-Status: **5 behavior-recovered functions measured in all four builds; none is
-byte-matching C**.
+Status: **5 behavior-recovered functions measured in all four builds;
+`func_80041D14` is byte-matching C for USA and LRG**.
 
 ## Verified facts
 
@@ -65,17 +65,19 @@ instruction before configuring the regional compiler checks.
 ## Compiler status
 
 Exact IDO 5.3 `-O2 -mips2` comparisons place every function at its canonical
-address. USA, Japan, Europe, and LRG give the same measurement pattern:
+address. The table reports canonical USA results:
 
 | Function | Target bytes | C bytes | First difference | Status |
 | --- | ---: | ---: | ---: | --- |
 | `func_80092050` | 512 | 508 | `0xB3` | behavior-recovered |
 | `func_800509E8` | 536 | 536 | `0x1C5` | behavior-recovered |
-| `func_80041D14` | 556 | 556 | `0x6F` | behavior-recovered |
+| `func_80041D14` | 556 | 556 | none | **byte-matching** |
 | `func_800511B0` | 560 | 556 | `0x03` | behavior-recovered |
 | `func_80042970` | 584 | 588 | `0x33` | behavior-recovered |
 
 The table-stride audit corrected `func_800511B0` from a 44-byte entry model to
-the 32-byte stride used by the original shifts. None of these functions is
-eligible for hybrid-build substitution, and no byte match is claimed.
+the 32-byte stride used by the original shifts. `func_80041D14` is eligible for
+USA and LRG hybrid-build substitution only after an exact linked-object
+comparison; the other four functions remain behavior-recovered and no byte
+match is claimed for them.
 Address-based names remain because the subsystem semantics are not yet proven.

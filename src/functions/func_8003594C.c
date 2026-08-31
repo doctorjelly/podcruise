@@ -31,8 +31,8 @@ extern u32 D_800D697C;
 
 void func_8003594C(Obj8003594C *object, Src8003594C *source) {
     u8 scratch[64];
-    u8 *slots[2];
     s32 index;
+    u8 *slots[2];
 
     (void)scratch;
 

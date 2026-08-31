@@ -68,11 +68,11 @@ extern void func_80017824(void *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4,
                           void *arg5);
 
 void func_80041D14(Rider80041D14 *rider) {
+    Craft80041D14 *craft;
     s32 flag;
     f64 spare;
     f32 mtx[4][4];
     Angles80041D14 angles;
-    Craft80041D14 *craft;
     f32 scale;
 
     (void)spare;
