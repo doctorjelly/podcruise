@@ -20,7 +20,7 @@ and why the earlier `0x99000` interval was wrong.
 
 | Build | Exact functions | Exact bytes | Share of CPU text | Configured units | Hybrid substitutions |
 |---|---:|---:|---:|---:|---:|
-| USA retail | 1,008 | 229,988 | 37.00% | 1,303 | 1,008 |
+| USA retail | 1,009 | 230,208 | 37.04% | 1,303 | 1,009 |
 | Japan retail | 888 | 194,404 | 31.28% | 956 | 887 |
 | Europe retail | 889 | 202,528 | 32.58% | 955 | 888 |
 | USA LRG revision | 993 | 226,680 | 36.47% | 1,205 | 991 |

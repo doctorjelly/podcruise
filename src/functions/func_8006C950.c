@@ -1,4 +1,4 @@
-/* Implements specs/func_8006C950.md (per-channel scaled level update). */
+/* Independently written from specs/functions/recovered/func_8006C950.md. */
 #include "podcruise/types.h"
 
 typedef struct Unk8006C950 {
@@ -18,8 +18,9 @@ void func_8006C950(Unk8006C950 *arg0) {
     f32 scale;
     f32 bias;
 
+    scale = D_800AD610;
+    bias = scale;
     scale = D_800AD614;
-    bias = D_800AD610;
     for (index = 0; index != 6; index++) {
         if ((arg0->unk2A0[index] & 8) != 0) {
             func_80071820(arg0, index,
