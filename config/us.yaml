@@ -947,7 +947,7 @@ segments:
       - [0x80F50, c, functions/func_80080350]
       - [0x80F5C, c, functions/func_8008035C]
       - [0x81008, c, functions/func_80080408]
-      - [0x81098, asm, main_81098]
+      - [0x81098, c, functions/func_80080498]
       - [0x813E0, c, functions/func_800807E0]
       - [0x814E0, c, functions/func_800808E0]
       - [0x8161C, asm, main_8161C]

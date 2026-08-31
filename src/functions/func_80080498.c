@@ -1,4 +1,4 @@
-/* Independently written from specs/func_80080498.md. */
+/* Independently written from specs/functions/recovered/func_80080498.md. */
 
 #include "podcruise/types.h"
 
@@ -42,6 +42,9 @@ void func_80080498(Obj *obj, f32 *arg1, s32 *arg2, s32 *arg3) {
     *arg3 = 0;
     saved = obj->unkBC;
     func_8003B02C(obj->unkAC, frame);
+    /* Redundant after the dereference above; preserves IDO register allocation. */
+    if (obj && obj) {
+    }
     vector[0] = obj->unk50 - obj->unk16C;
     vector[1] = obj->unk54 - obj->unk170;
     vector[2] = obj->unk58 - obj->unk174;
@@ -81,10 +84,7 @@ void func_80080498(Obj *obj, f32 *arg1, s32 *arg2, s32 *arg3) {
     } while (finished == 0);
 
     step = D_800ADC68;
-    /* the first flag only ever holds zero or one here, and the original's
-       register allocation is only reproduced when the gate compares it
-       against one rather than against zero. */
-    if (*arg2 == 1) {
+    if (*arg2 != 0) {
         return;
     }
     if (obj->unkD0 != 0) {

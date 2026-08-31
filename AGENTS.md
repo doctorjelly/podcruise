@@ -132,6 +132,10 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   `.text` size and first/last words with the ROM slice. This binutils build can
   zero section contents when rename and flag changes are combined; a malformed
   target wastes the whole search and can produce meaningless scores.
+- If a semantically preferred branch fixes the last opcode but changes register
+  allocation, seed the permuter from that form. A behavior-neutral redundant
+  expression after an already-proven dereference can reproduce IDO's original
+  register allocation; independently verify the smallest readable winner.
 - Batch successful functions into one tranche. Then run the canonical USA round
   trip, `make -s test`, `make -s safety`, ROM inventory, and
   `git diff --check` once before committing.
