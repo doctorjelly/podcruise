@@ -43,10 +43,10 @@ project artifacts.
 
 ## Matching compiler status
 
-IDO 5.3 with the `ido53_o2` profile exactly reproduces 1,029 reviewed functions
-totaling 240,336 bytes in the canonical USA image. Current regional reports
+IDO 5.3 with the `ido53_o2` profile exactly reproduces 1,030 reviewed functions
+totaling 240,476 bytes in the canonical USA image. Current regional reports
 contain 889 exact functions (194,692 bytes) for Japan, 890 (202,816 bytes) for
-Europe, and 1,029 (240,336 bytes) for the later USA revision. The configured
+Europe, and 1,030 (240,476 bytes) for the later USA revision. The configured
 verifier also measures behavior-only candidates, which are excluded from those
 match counts and reported in `docs/DECOMP_STATUS.md`.
 

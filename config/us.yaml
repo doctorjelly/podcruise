@@ -1272,6 +1272,8 @@ segments:
       - [0x9458C, asm, main_9458C]
       - [0x94590, c, functions/func_80093990]
       - [0x945C4, asm, main_945C4]
+      - [0x945D0, c, functions/func_800939D0]
+      - [0x9465C, asm, main_9465C]
       - [0x94660, c, functions/func_80093A60]
       - [0x9468C, asm, main_9468C]
       - [0x94690, c, functions/func_80093A90]

@@ -9892,7 +9892,16 @@
       "id": "func_800939D0",
       "source": "src/functions/func_800939D0.c",
       "link_vram": "0x800939D0",
-      "flags_preset": "o1",
+      "flags": [
+        "-G",
+        "0",
+        "-O1",
+        "-mips2",
+        "-non_shared",
+        "-Xcpluscomm",
+        "-signed",
+        "-Wab,-r4300_mul"
+      ],
       "absolute_symbols": {
         "func_80093A60": "0x80093A60",
         "func_80088360": "0x80088360"
