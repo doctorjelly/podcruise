@@ -99,6 +99,10 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   recovery notes before trying variants. Skip documented register-only dead
   ends; pilot any automated permutation search on one representative function
   with a fixed time limit before scaling it to a batch.
+- Run `decomp-permuter` without a pseudo-terminal, use `--quiet`, and redirect
+  its full progress stream to `/tmp`. Its carriage-return status line can
+  otherwise expand into tens of thousands of useless transcript tokens; only
+  surface the base score, improved candidates, and final result.
 - Batch successful functions into one tranche. Then run the canonical USA round
   trip, `make -s test`, `make -s safety`, ROM inventory, and
   `git diff --check` once before committing.

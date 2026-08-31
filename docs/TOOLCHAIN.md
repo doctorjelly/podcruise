@@ -45,8 +45,8 @@ project artifacts.
 
 IDO 5.3 with the `ido53_o2` profile exactly reproduces 1,012 reviewed functions
 totaling 230,744 bytes in the canonical USA image. Current regional reports
-contain 888 exact functions (194,404 bytes) for Japan, 889 (202,528 bytes) for
-Europe, and 993 (226,680 bytes) for the later USA revision. The configured
+contain 889 exact functions (194,692 bytes) for Japan, 890 (202,816 bytes) for
+Europe, and 1,012 (230,744 bytes) for the later USA revision. The configured
 verifier also measures behavior-only candidates, which are excluded from those
 match counts and reported in `docs/DECOMP_STATUS.md`.
 
