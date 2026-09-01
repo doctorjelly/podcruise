@@ -215,6 +215,11 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   `.text` size and first/last words with the ROM slice. This binutils build can
   zero section contents when rename and flag changes are combined; a malformed
   target wastes the whole search and can produce meaningless scores.
+- A raw target object wrapped at VMA zero can retain a nonzero permuter score
+  solely from how absolute `jal` targets are rendered. One 60-second pilot
+  bottomed at score 40, but its minimal candidate passed the canonical linked
+  verifier exactly. Independently verify each major improvement instead of
+  continuing a search merely because its raw-object score is not zero.
 - If a semantically preferred branch fixes the last opcode but changes register
   allocation, seed the permuter from that form. A behavior-neutral redundant
   expression after an already-proven dereference can reproduce IDO's original
