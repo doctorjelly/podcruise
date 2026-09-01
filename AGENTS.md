@@ -102,6 +102,10 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   neighboring routines for the same callback, global, or hardware register
   block. Reusing already-proven local structure offsets is cheaper and more
   reliable than decoding an isolated body from scratch.
+- For adjacent command-handler dispatchers, compare when the attached callback
+  target is loaded and the emitted case-block order before trying register
+  tweaks. A typed owner alias, case-local callback loads, and source cases in
+  canonical block order recovered two exact handlers with only two variants.
 - For a large branch-heavy routine, use a local open-source control-flow aid
   such as `m2c` from an ignored virtual environment before spending model
   tokens narrating every instruction. Supply missing jump tables only in
