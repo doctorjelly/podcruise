@@ -116,6 +116,11 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   table words from the local canonical ROM and synthesize labels in `/tmp`.
   Avoid dumping the surrounding data segment: a compact index-to-target list
   is enough to recover the switch and is much cheaper to review.
+- Verify a proposed jump-table VRAM by translating it back to a ROM offset and
+  checking that the bounded words are actual branch targets. Also account for
+  signed `%lo` relocation carry when reading a `lui`/load pair; correcting one
+  off-by-64-KiB table address plus its four-byte alignment recovered
+  `func_8005B764` without source permutation.
 - Run the isolated matching-object comparison during iteration. Do not run a
   full regional match or ROM round trip after every failed variant.
 - Keep behavior-only units in the compiler-test manifest but leave their USA

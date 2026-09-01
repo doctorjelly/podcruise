@@ -771,7 +771,7 @@ segments:
       - [0x5BED0, c, functions/func_8005B2D0]
       - [0x5BFF0, c, functions/func_8005B3F0]
       - [0x5C308, c, functions/func_8005B708]
-      - [0x5C364, asm, main_5C364]
+      - [0x5C364, c, functions/func_8005B764]
       - [0x5C410, c, functions/func_8005B810]
       - [0x5CE10, c, functions/func_8005C210]
       - [0x5CF6C, asm, main_5CF6C]
