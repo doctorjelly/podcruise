@@ -16,12 +16,16 @@ return and an identical full normalized body in Japan and Europe.
 | `80033328` | `0x033F28` | 460 | `800334EC` / `nop` | 2 |
 | `8008A420` | `0x08B020` | 472 | `8008A5F0` / restore 368-byte frame | 0 |
 | `80014D4C` | `0x01594C` | 480 | `80014F24` / restore 8-byte frame | 12 |
-| `80089F70` | `0x08AB70` | 480 | `8008A13C` / restore 352-byte frame | 0 |
+| `80089F70` | `0x08AB70` | 468 | `8008A13C` / restore 352-byte frame | 0 |
 | `80014F54` | `0x015B54` | 504 | `80015144` / move result into `$f0` | 36 |
 | `8003594C` | `0x03654C` | 676 | `80035BE8` / restore 88-byte frame | 2 |
 | `8008528C` | `0x085E8C` | 1,316 | `800857A8` / `nop` | 1 |
 | `800321F0` | `0x032DF0` | 3,388 | seven audited returns; see below | 1 |
 | `80044CD8` | `0x0458D8` | 812 | `80044FFC` / restore 304-byte frame | 1 |
+
+`func_80089F70` ends at its return delay slot at `0x8008A140`; the three
+`nop`s through `0x8008A14F` are alignment padding before `func_8008A150`, not
+part of the function body.
 
 `func_800321F0` is one switch routine, not three functions. Its returns and
 executed delay slots are `800323C8` / store field `0x00`, `80032590` / store
@@ -94,7 +98,7 @@ same outcomes at their relocated addresses.
 | `func_80033328` | 460 / 460 | none | **byte-matching C: USA/JP/EU/LRG** |
 | `func_8008A420` | 472 / 472 | none | **byte-matching C: USA/LRG** |
 | `func_80014D4C` | 480 / 480 | none | **byte-matching C: USA/JP/EU/LRG** |
-| `func_80089F70` | 480 / 468 | `0x26` | behavior-recovered |
+| `func_80089F70` | 468 / 468 | `0x26` | behavior-recovered |
 | `func_80014F54` | 504 / 500 | `0x5` | behavior-recovered |
 | `func_8003594C` | 676 / 676 | none | **byte-matching C: USA/LRG** |
 | `func_8008528C` | 1,316 / 1,312 | `0x1` | behavior-recovered |

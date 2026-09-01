@@ -53,10 +53,10 @@ void func_80062EC8(Obj80062EC8 *object, s32 arg1, s32 arg2, s32 arg3) {
         func_80015268(object->unk50, 0.0, 0.0, 0.0);
         func_80015268(object->unk5C, 0.0, 0.0, 0.0);
         object->unk88 = -1;
+        object->unk08 = arg3;
         object->unk14 = 0;
         object->unk10 = 0.0f;
         object->unk18 = 0.0f;
-        object->unk08 = arg3;
         object->unk1C = ((f32)func_80082BE0() / (f32)2147483648.0) * 5.0f + 3.0f;
         func_80015268(object->unk20, 0.0, 0.0, 0.0);
         object->unk2C = 0.0f;
@@ -77,9 +77,9 @@ void func_80062EC8(Obj80062EC8 *object, s32 arg1, s32 arg2, s32 arg3) {
         object->unk94 = 1.0f;
         object->unk80 = -1.0f;
         object->unk84 = -1.0f;
+        object->unkAC = ((f32)func_80082BE0() / (f32)2147483648.0) * (f32)2.0 + 3.0f;
         object->unkB0 = 0;
         object->unkB4 = 0;
         object->unkB8 = -1;
-        object->unkAC = ((f32)func_80082BE0() / (f32)2147483648.0) * (f32)2.0 + 3.0f;
     }
 }

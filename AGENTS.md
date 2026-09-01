@@ -161,6 +161,11 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   decisions from the state field. This recovered a 952-byte function in one
   variant and is cheaper than trying to force one extra instruction by
   scheduling changes.
+- When C is one instruction shorter and reuses a sentinel across a helper call,
+  compare initialization order around that call. Moving the evidenced field
+  group after the call can expose the call clobber and force the ROM's second
+  sentinel load; paired with nearby store ordering, this recovered a 444-byte
+  initializer in two variants.
 - Three isolated Luna Low re-audits of documented late mismatches cost
   2,050-3,998 tokens each and recovered nothing; one also misstated compiled
   size until the parent reran the verifier. Exclude already-recorded scheduler

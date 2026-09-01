@@ -1,7 +1,7 @@
 # Medium control tranche
 
-Status: **10 behavior-recovered functions, measured in all four builds; none
-is byte-matching C yet**.
+Status: **3 byte-matching and 7 behavior-recovered functions in canonical
+USA**.
 
 ## Verified facts
 
@@ -73,15 +73,15 @@ instruction count as USA. LRG has the exact USA bytes.
 
 ## Compiler status
 
-IDO 5.3 under `ido53_o2` places every C function at its canonical address in
-all four builds. Each locale produces the same comparison result:
+IDO 5.3 under `ido53_o2` places every C function at its canonical USA address.
+Exact comparison against the canonical USA ROM reports:
 
 | Function | Target bytes | C bytes | First difference | Status |
 | --- | ---: | ---: | ---: | --- |
 | `func_8002E2FC` | 440 | 456 | `0x05` | behavior-recovered |
 | `func_80039B70` | 360 | 356 | `0x35` | behavior-recovered |
 | `func_8005F33C` | 412 | 424 | `0x09` | behavior-recovered |
-| `func_80062EC8` | 444 | 440 | `0x23` | behavior-recovered |
+| `func_80062EC8` | 444 | 444 | none | **byte-matching** |
 | `func_8006E034` | 408 | 408 | none | byte-matching |
 | `func_8006FB00` | 384 | 388 | `0x5F` | behavior-recovered |
 | `func_800801B8` | 408 | 408 | `0x0C` | behavior-recovered |
@@ -91,6 +91,8 @@ all four builds. Each locale produces the same comparison result:
 
 IDO 5.3 under `ido53_o2` reproduces all bytes of `func_8006E034` and
 `func_80091E34` exactly in USA retail, the USA LRG revision, Japan, and Europe.
-The other eight units remain assembly in hybrid rebuilds and no byte match is
-claimed for them. Address-based names remain until subsystem semantics are
-proven.
+`func_80062EC8` is now exact in canonical USA after expressing two initialization
+groups in their evidenced order around the random helper calls. No regional
+compiler-match claim is added for it. The other seven units remain assembly in
+the USA hybrid rebuild and no byte match is claimed for them. Address-based
+names remain until subsystem semantics are proven.
