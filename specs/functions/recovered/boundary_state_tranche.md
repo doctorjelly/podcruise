@@ -130,7 +130,7 @@ neighboring unit's confirmed `-O1 -mips3 -o32` profile.
 | `func_8005163C` | 412 / 404 | `0x18` | behavior-recovered |
 | `func_800160BC` | 420 / 420 | `0x3B` | behavior-recovered |
 | `func_8007FD98` | 40 / 40 | none | **byte-matching C: USA/JP/EU/LRG** |
-| `func_8002932C` | 360 / 360 | `0x9` | behavior-recovered |
+| `func_8002932C` | 360 / 360 | none | **byte-matching C: USA** |
 | `func_8002FA00` | 196 / 188 | `0x1` | behavior-recovered |
 | `func_800454A8` | 224 / 224 | `0x26` | behavior-recovered |
 | `func_800958D4` | 188 / 188 | `0x19` | behavior-recovered |
@@ -152,6 +152,11 @@ For `func_80062E14`, the source retains the original's two redundant tests of
 `D_800A4BE0` and routes every recognized tag through one shared true-result
 tail. IDO 5.3 `-O2` then reproduces all 180 USA bytes, including both
 branch-likely delay slots and the final return delay-slot `nop`.
+
+For `func_8002932C`, retaining a behavior-neutral address expression after the
+corresponding indexed global dereference reproduces the ROM's saved-register
+allocation. Exact IDO 5.3 `-O2` comparison confirms all 360 USA bytes; no
+regional compiler-match claim is made.
 
 Only the build-specific bold claims are eligible for C substitution in the
 corresponding hybrid build.

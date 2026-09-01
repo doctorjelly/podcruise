@@ -393,6 +393,8 @@ segments:
       - [0x29098, asm, main_29098]
       - [0x29960, c, functions/func_80028D60]
       - [0x29A78, asm, main_29A78]
+      - [0x29F2C, c, functions/func_8002932C]
+      - [0x2A094, asm, main_2A094]
       - [0x2A63C, c, functions/func_80029A3C]
       - [0x2A824, asm, main_2A824]
       - [0x2BBFC, c, functions/func_8002AFFC]

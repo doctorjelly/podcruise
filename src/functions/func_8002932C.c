@@ -42,6 +42,9 @@ void func_8002932C(Obj80029330 *obj) {
         if (entry != 0) {
             if (index != obj->unk40 && entry->unk8 != 1) {
                 if (D_8011A508[index] != 0) {
+                    /* Preserve the evidenced address expression for IDO's allocator. */
+                    if (D_8011A508) {
+                    }
                     func_80063AA0(index, 0x11);
                 }
             } else if (D_8011A508[index] != 0) {
