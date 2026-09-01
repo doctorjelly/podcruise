@@ -24648,6 +24648,16 @@
       "id": "func_8008C390",
       "source": "src/functions/func_8008C390.c",
       "link_vram": "0x8008C390",
+      "flags": [
+        "-G",
+        "0",
+        "-O1",
+        "-mips2",
+        "-non_shared",
+        "-Xcpluscomm",
+        "-signed",
+        "-Wab,-r4300_mul"
+      ],
       "absolute_symbols": {
         "D_800A7F54": "0x800A7F54",
         "func_8008CA80": "0x8008CA80",

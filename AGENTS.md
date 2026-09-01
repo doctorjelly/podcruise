@@ -66,6 +66,11 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   compare the regional unit flags. An identical normalized body may expose a
   missing per-file optimization level; this recovered `func_80090450` by
   copying its proven `-O3` setting instead of spending more variants on C.
+- When per-file optimization is uncertain, run one temporary whole-ledger
+  IDO 5.3 `-O1`/`-O3` sweep and diff its exact set against the accepted report.
+  This is cheaper than asking agents to retry every function; the first sweep
+  isolated `func_8008C390` as an exact `-O1` unit and ruled out all `-O3`
+  nonmatches at once.
 - Before treating a runtime layout as opaque, search recovered callers and
   neighboring routines for the same callback, global, or hardware register
   block. Reusing already-proven local structure offsets is cheaper and more

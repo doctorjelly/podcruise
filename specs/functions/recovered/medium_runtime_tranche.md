@@ -1,6 +1,6 @@
 # Medium runtime tranche
 
-Status: **5 functions measured in all four builds: 2 byte-matching and 3
+Status: **5 functions measured: canonical USA has 3 byte-matching and 2
 behavior-recovered**.
 
 ## Verified facts
@@ -56,16 +56,18 @@ has the exact USA bytes.
 ## Compiler status
 
 Exact compiler comparisons place all five sources at their canonical address.
-USA, Japan, Europe, and LRG have the same IDO 5.3 result:
+The table records the canonical USA result:
 
 | Function | Target bytes | C bytes | First difference | Status |
 | --- | ---: | ---: | ---: | --- |
 | `func_80067AB4` | 444 | 440 | `0x03` | behavior-recovered |
 | `func_80075FC4` | 444 | 444 | none | **byte-matching** |
 | `func_8007B828` | 444 | 444 | none | **byte-matching** |
-| `func_8008C390` | 440 | 348 | `0x03` | behavior-recovered |
+| `func_8008C390` | 440 | 440 | none | **byte-matching (`-O1`)** |
 | `func_800950F4` | 424 | 436 | `0x03` | behavior-recovered |
 
-Only the two exact functions are eligible to replace assembly. The other
-three remain behavioral recoveries. Address-based names remain until subsystem
-semantics justify replacements.
+The three exact USA functions are eligible to replace assembly. Japan and
+Europe still measure `func_8008C390` under their default `-O2` units and are
+not claimed exact. The later USA revision inherits the same verified `-O1`
+match. The other two USA functions remain behavioral recoveries. Address-based
+names remain until subsystem semantics justify replacements.
