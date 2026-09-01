@@ -12,7 +12,7 @@ extern u32 D_800D9DD0;
 
 struct PcEntity **func_80030964(s32 *stream) {
     struct PcEntity *entity;
-    struct PcEntity **list;
+    struct PcEntity **list[1];
     struct PcEntity **cursor;
     s32 *word;
     u32 lowest;
@@ -33,19 +33,21 @@ struct PcEntity **func_80030964(s32 *stream) {
         }
     }
     if (*word == 0x416E696D) {
-        cursor = (struct PcEntity **)(word + 1);
-        list = cursor;
-        entity = *cursor;
-        while (entity != 0) {
-            func_80005BB8(entity);
-            if ((u32)(unsigned long)*cursor < lowest) {
-                lowest = (u32)(unsigned long)*cursor;
-            }
-            cursor++;
-            entity = *cursor;
+        list[0] = (struct PcEntity **)(word + 1);
+        cursor = list[0];
+        if (*cursor != 0) {
+            do {
+                entity = *cursor;
+                func_80005BB8(entity);
+                if ((u32)(unsigned long)*cursor < lowest) {
+                    lowest = (u32)(unsigned long)*cursor;
+                }
+                cursor++;
+                entity = *cursor;
+            } while (entity != 0);
         }
     } else {
-        list = 0;
+        list[0] = 0;
     }
 
     if (lowest == 0xFFFFFFFFU) {
@@ -54,5 +56,5 @@ struct PcEntity **func_80030964(s32 *stream) {
         D_800D9DD0 = D_800D9DC4 - lowest;
         D_800D9DC8 -= D_800D9DD0;
     }
-    return list;
+    return list[0];
 }

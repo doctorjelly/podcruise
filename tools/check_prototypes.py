@@ -30,6 +30,10 @@ HEADER = re.compile(
 # faithful. Keyed on all three so that any *other* disagreement involving the
 # same callee still fails.
 ACCEPTED = {
+    # func_80021F84 calls this through a K&R-era declaration that names no
+    # parameters; the callee genuinely takes one. Both sides reproduce their
+    # original bytes, so the declaration is faithful rather than wrong.
+    ("func_8002D598", "func_80021F84.c", 0): "K&R call site declaring no parameters",
     # The callee ignores its argument, so its definition matches as (void); the
     # caller must still pass the constant 1 to reproduce the original's K&R
     # call sequence. Both sides are faithful; the language changed under them.

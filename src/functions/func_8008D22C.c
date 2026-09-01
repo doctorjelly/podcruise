@@ -1,4 +1,4 @@
-/* Independently written from the specification for func_8008D22C. */
+/* Independently written from the specification in specs/func_8008D22C.md. */
 #include "podcruise/types.h"
 
 /* Cell of a singly linked list kept in non-increasing order of the signed

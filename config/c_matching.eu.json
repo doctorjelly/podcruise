@@ -26220,6 +26220,49 @@
           "size": 148
         }
       ]
+    },
+    {
+      "id": "func_8009D310",
+      "source": "src/functions/func_80097DC0.c",
+      "link_vram": "0x8009D310",
+      "flags": [
+        "-G",
+        "0",
+        "-O2",
+        "-mips2",
+        "-non_shared",
+        "-Xcpluscomm",
+        "-signed",
+        "-Wab,-r4300_mul",
+        "-Wo,-loopunroll,0"
+      ],
+      "defines": {
+        "func_80097DC0": "func_8009D310",
+        "D_8014D760": "D_80156400",
+        "D_8014D774": "D_80156414",
+        "D_800A7B9C": "D_800ACE9C",
+        "D_8014D7D4": "D_80156474",
+        "func_80092850": "func_80097DA0",
+        "func_8008CA80": "func_80091FD0",
+        "func_8008CAA0": "func_80091FF0"
+      },
+      "absolute_symbols": {
+        "D_80156400": "0x80156400",
+        "D_80156414": "0x80156414",
+        "D_800ACE9C": "0x800ACE9C",
+        "D_80156474": "0x80156474",
+        "func_80097DA0": "0x80097DA0",
+        "func_80091FD0": "0x80091FD0",
+        "func_80091FF0": "0x80091FF0"
+      },
+      "functions": [
+        {
+          "name": "func_8009D310",
+          "vram": "0x8009D310",
+          "rom": "0x9DF10",
+          "size": 152
+        }
+      ]
     }
   ]
 }

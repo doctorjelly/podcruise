@@ -1,5 +1,5 @@
 /* Independently written from the scratchpad specification specs/func_80017E88.md. */
-#include "podcruise/object_accessors.h"
+#include "podcruise/types.h"
 
 s32 func_80017E88(const void *object, s32 selector) {
     s32 result;

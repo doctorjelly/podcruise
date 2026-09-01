@@ -19,6 +19,7 @@ void func_80027D24(s32 arg0, s32 arg1) {
     s32 index;
     s32 cap;
     s32 i;
+    s32 draw;
 
     (void)arg0;
     (void)arg1;
@@ -37,7 +38,9 @@ void func_80027D24(s32 arg0, s32 arg1) {
         return;
     }
 
-    amount = ((s32)((f32)func_80082BE0() / (f32)2147483648.0 * 52.0f) + 0x19) & 0xFF;
+    draw = (s32)((f32)func_80082BE0() / (f32)2147483648.0 * 52.0f);
+    draw += 25;
+    amount = draw & 0xFF;
     while (total >= amount) {
         index = (s32)((f32)func_80082BE0() / (f32)2147483648.0 * 7.0f);
         if (D_80113E60[index + 0x1D] > 0) {
@@ -49,7 +52,9 @@ void func_80027D24(s32 arg0, s32 arg1) {
             }
         }
         total -= amount;
-        amount = ((s32)((f32)func_80082BE0() / (f32)2147483648.0 * 52.0f) + 0x19) & 0xFF;
+        draw = (s32)((f32)func_80082BE0() / (f32)2147483648.0 * 52.0f);
+        draw += 25;
+        amount = draw & 0xFF;
     }
 
     for (i = 0; i < 7; i++) {
@@ -67,12 +72,14 @@ void func_80027D24(s32 arg0, s32 arg1) {
         D_80113E85 = 255;
         D_80113E86 = 255;
         i = 3;
-        D_80113E60[i + 0x24] = 255;
-        D_80113E60[i + 0x25] = 255;
-        D_80113E60[i + 0x26] = 255;
         D_80113E60[i + 0x27] = 255;
+        D_80113E60[i + 0x26] = 255;
+        D_80113E60[i + 0x25] = 255;
+        D_80113E60[i + 0x24] = 255;
     } else {
-        amount = ((s32)((f32)func_80082BE0() / (f32)2147483648.0 * 52.0f) + 0x19) & 0xFF;
+        draw = (s32)((f32)func_80082BE0() / (f32)2147483648.0 * 52.0f);
+        draw += 25;
+        amount = draw & 0xFF;
         while (cap >= amount) {
             index = (s32)((f32)func_80082BE0() / (f32)2147483648.0 * 7.0f);
             value = D_80113E60[index + 0x24];
@@ -83,11 +90,13 @@ void func_80027D24(s32 arg0, s32 arg1) {
                     D_80113E60[index + 0x24] = 255;
                 } else {
                     taken = amount;
-                    D_80113E60[index + 0x24] = value + amount;
+                    D_80113E60[index + 0x24] = value + taken;
                 }
                 cap -= taken;
             }
-            amount = ((s32)((f32)func_80082BE0() / (f32)2147483648.0 * 52.0f) + 0x19) & 0xFF;
+            draw = (s32)((f32)func_80082BE0() / (f32)2147483648.0 * 52.0f);
+            draw += 25;
+            amount = draw & 0xFF;
         }
     }
     func_800399F0();

@@ -1,20 +1,31 @@
+/* Independently written from specs/func_80055AEC.md (assigned as func_80055AF4). */
+
 #include "podcruise/types.h"
-extern u16 *func_8000ABD4(s16);
-void func_80055AEC(s32 arg0, f32 arg1) {
-    u16 *entry;
-    s32 index;
-    s32 level;
-    if (arg1 < 0.0f) { arg1 = 0.0f; } else if (arg1 > 1.0f) { arg1 = 1.0f; }
-    entry = func_8000ABD4((s16) arg0);
-    if (entry != 0) {
-        for (index = 0; index < 256; index++) {
-            level = (*entry & 0xF800) >> 8;
-            if ((level > 0) && ((level - ((*entry & 0x3E) << 2)) < (s32) ((f32) -242 + arg1 * (f32) 492))) {
-                *entry = *entry | 1;
-            } else {
-                *entry = *entry & ~1;
-            }
-            entry++;
+
+extern u16 *func_8000ABD4(s16 index);
+
+#define STEP(pixels, level) { scale = 492; bias = -242; value = *(pixels); if (((s32)(value & 0xF800) >> 8) > 0 && (((s32)(value & 0xF800) >> 8) - ((value & 0x3E) << 2)) < (s32)((f32)bias + (level) * (f32)scale)) { *(pixels) = value | 1; } else { *(pixels) = value & ~1; } (pixels)++; }
+
+void func_80055AEC(s32 index, f32 level) {
+    u16 *pixels;
+    s32 i;
+    s32 scale;
+    s32 bias;
+    u16 value;
+
+    if (level < 0.0f) {
+        level = 0.0f;
+    } else if (level > 1.0f) {
+        level = 1.0f;
+    }
+
+    pixels = func_8000ABD4(index);
+    if (pixels != 0) {
+        for (i = 0; i < 256; i += 4) {
+            STEP(pixels, level)
+            STEP(pixels, level)
+            STEP(pixels, level)
+            STEP(pixels, level)
         }
     }
 }

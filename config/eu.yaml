@@ -1219,6 +1219,8 @@ segments:
       - [0x9DEBC, asm, main_9DEBC]
       - [0x9DEC0, c, functions/func_80097D70]
       - [0x9DF0C, asm, main_9DF0C]
+      - [0x9DF10, c, functions/func_80097DC0]
+      - [0x9DFA8, asm, main_9DFA8]
       - [0x9DFB0, c, functions/func_80097E60]
       - [0x9E0B0, c, functions/func_80097F60]
       - [0x9E134, asm, main_9E134]

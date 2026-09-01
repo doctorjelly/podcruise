@@ -51,16 +51,18 @@ extern void func_80088110(Region80007218 *region, u32 base, s32 size);
 extern s32 func_80088150(u32 rate);
 
 void func_80007218(void) {
-    PcBoot80007218 boot;
     Region80007218 *region;
     Entry80007218 *entry;
     u32 i;
+    PcBoot80007218 boot;
     u32 n;
 
     n = 0x21768;
-    for (i = 0; i < n; i++) {
+    i = 0;
+    do {
         D_800B05B8[i] = 0;
-    }
+        i++;
+    } while (i < n);
     region = &D_800D1D28;
     D_800D1D20 = ((u32)(unsigned long)D_800B05B8 + 0x3F) & ~0x3F;
     func_80088110(region, D_800D1D20, 0x21728);
@@ -72,14 +74,12 @@ void func_80007218(void) {
         entry++;
     } while (entry < &D_800AFE88);
     func_80088020(D_800AFAC8);
-    entry = D_800AFAC8;
-    do {
-        if (entry < &D_800AFE74) {
-            func_80088050(entry + 1, entry);
+    for (i = 0; i < 48; i++) {
+        if (&D_800AFAC8[i] < &D_800AFE74) {
+            func_80088050(&D_800AFAC8[i + 1], &D_800AFAC8[i]);
         }
-        entry->unk10 = func_80006FE4((s32)(unsigned long)&D_800A81A8, (s32)(unsigned long)region, 1, 0x400);
-        entry++;
-    } while (entry != &D_800AFE88);
+        D_800AFAC8[i].unk10 = func_80006FE4((s32)(unsigned long)&D_800A81A8, (s32)(unsigned long)region, 1, 0x400);
+    }
     D_800AFAC0.unk00 = 0;
     D_800AFAC0.unk04 = D_800AFAC8;
 

@@ -1,15 +1,19 @@
 /* Implements specification $S/specs/func_80094ED0.md */
 #include "podcruise/types.h"
 
-typedef struct Data12 {
-    u8 b[12];
-} Data12;
+typedef struct ContStatus {
+    u16 type;
+    u8 status;
+    u8 errnum;
+} ContStatus;
 
-typedef struct Buf {
-    u16 unk0;
-    u8 unk2;
-    u8 unk3;
-} Buf;
+typedef struct EepFormat {
+    u8 txsize;
+    u8 rxsize;
+    u8 cmd;
+    u8 addr;
+    u8 data[8];
+} EepFormat;
 
 struct PifRam80094ED0 {
     u32 ramarray[15];
@@ -22,58 +26,58 @@ extern u8 D_80149CB0;
 
 extern void func_800905F0(void);
 extern void func_80090634(void);
-extern s32 func_800950F4(void *, u16 *);
+extern s32 func_800950F4(void *, ContStatus *);
 extern void func_80095048(u8 address, u8 *buffer);
 extern void func_800907D0(s32 direction, void *block);
 extern void func_80087E80(void *queue, void *message, s32 mode);
 
-s32 func_80094ED0(arg0, arg1, arg2)
-void *arg0;
-u8 arg1;
-u8 *arg2;
+s32 func_80094ED0(mq, address, buffer)
+void *mq;
+u8 address;
+u8 *buffer;
 {
-    s32 result;
-    u16 type;
-    u8 *ptr;
-    Data12 tmp;
-    Buf buf;
+    s32 ret;
+    int x;
+    u8 *ptr = D_8014C534;
+    EepFormat eepromformat;
+    ContStatus sdata;
 
     func_800905F0();
-    result = func_800950F4(arg0, (u16 *)&buf);
-    if (result == 0) {
-        type = buf.unk0 & 0xC000;
-        switch (type) {
-            default:
-                result = 8;
-                break;
+    ret = func_800950F4(mq, &sdata);
+
+    if (ret == 0) {
+        switch (sdata.type & 0xC000) {
             case 0x8000:
-                if (arg1 >= 0x40) {
-                    result = -1;
+                if (address >= 0x40) {
+                    ret = -1;
                 }
                 break;
             case 0xC000:
-                if ((arg1 + 0) >= 0x100) {
-                    result = -1;
+                if ((address + 0) >= 0x100) {
+                    ret = -1;
                 }
+                break;
+            default:
+                ret = 8;
                 break;
         }
     }
-    if (result != 0) {
+    if (ret != 0) {
         func_80090634();
-        return result;
+        return ret;
     }
-    while ((buf.unk2 & 0x80) != 0) {
-        func_800950F4(arg0, (u16 *)&buf);
+    while (sdata.status & 0x80) {
+        func_800950F4(mq, &sdata);
     }
-    func_80095048(arg1, arg2);
+    func_80095048(address, buffer);
     func_800907D0(1, &D_8014C530);
-    func_80087E80(arg0, 0, 1);
+    func_80087E80(mq, 0, 1);
     func_800907D0(0, &D_8014C530);
     D_80149CB0 = 5;
-    func_80087E80(arg0, 0, 1);
-    ptr = D_8014C534;
-    tmp = *(Data12 *)ptr;
-    result = (tmp.b[1] & 0xC0) >> 4;
+    func_80087E80(mq, 0, 1);
+    eepromformat = *(EepFormat *)ptr;
+    ret = (eepromformat.rxsize & 0xC0) >> 4;
     func_80090634();
-    return result;
+    (void)x;
+    return ret;
 }

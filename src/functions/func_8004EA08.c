@@ -39,7 +39,8 @@ typedef struct {
     s32 unk58;
     s16 unk5C;
     u8 pad5E[2];
-    f32 unk60[6];
+    f32 unk60[5];
+    f32 unk74;
     s32 unk78;
     s32 unk7C;
     u8 pad80[4];
@@ -152,7 +153,6 @@ void func_8004EA08(State8004EA08 *state) {
     s32 index;
     s32 total;
     s32 count;
-    s32 ordinal;
     s32 random;
     f32 unit;
     f32 sign;
@@ -165,15 +165,15 @@ void func_8004EA08(State8004EA08 *state) {
     D_8011A240.unk0C = 0.0f;
     D_8011A240.unk10 = 0;
     D_8011A240.unk14 = 0;
-    D_8011A240.unk20 = 0;
-    D_8011A240.unk24 = 0;
-    D_8011A240.unk28 = 0;
     D_8011A240.unk2C = 0;
     D_8011A240.unk30 = 0;
     D_8011A240.unk34 = 0;
     D_8011A240.unk38 = 0.0f;
     D_8011A240.unk3C = 0;
     D_8011A240.unk40 = 0;
+    D_8011A240.unk20 = 0;
+    D_8011A240.unk24 = 0;
+    D_8011A240.unk28 = 0;
 
     for (index = 0; index < 151; index++) {
         D_8011A2A8[index] = 0;
@@ -194,12 +194,12 @@ void func_8004EA08(State8004EA08 *state) {
     state->unk1C = 3;
     state->unk20 = 0;
     state->unk24 = 0;
-    state->unk28 = 0;
     state->unk2C = 0;
+    state->unk28 = 0;
     state->unk30 = 0;
     state->unk34 = 0;
-    state->unk38 = -1;
     state->unk3C = -1;
+    state->unk38 = -1;
     state->unk40 = -1;
     func_80015268(state->unk44, 0.0f, 0.0f, 0.0f);
     state->unk50 = 0;
@@ -207,11 +207,6 @@ void func_8004EA08(State8004EA08 *state) {
     state->unk54 = 0.0f;
     state->unk58 = 0.0f;
     state->unk5C = 1;
-    state->unk5D = 0;
-    state->unk5E = 0;
-    state->unk5F = 0;
-    state->unk60 = 0;
-    state->unk89 = 4;
     state->unk92 = 800;
     state->unk94 = 700;
     state->unk96 = 600;
@@ -224,6 +219,11 @@ void func_8004EA08(State8004EA08 *state) {
     state->unkA4 = 0;
     state->unkA6 = 0;
     state->unkA8 = 0;
+    state->unk5D = 0;
+    state->unk5E = 0;
+    state->unk5F = 0;
+    state->unk60 = 0;
+    state->unk89 = 4;
     state->unkB4 = 0;
     state->unkB8 = 0;
     state->unkBC = 0;
@@ -244,6 +244,7 @@ void func_8004EA08(State8004EA08 *state) {
         record->unk11 = 0xFF;
         record->unk14 = -1;
         record->unk18 = 0;
+        record->unk84 = 0;
         record->unk1C[0] = 0.0f;
         record->unk1C[1] = 0.0f;
         record->unk1C[2] = 0.0f;
@@ -261,15 +262,12 @@ void func_8004EA08(State8004EA08 *state) {
         record->unk1C[14] = 0.0f;
         record->unk58 = 0;
         record->unk5C = 0;
-        record->unk60[0] = 0.0f;
-        record->unk60[1] = 0.0f;
-        record->unk60[2] = 0.0f;
-        record->unk60[3] = 0.0f;
-        record->unk60[4] = 0.0f;
-        record->unk60[5] = 0.0f;
+        record->unk74 = 0.0f;
         record->unk78 = 0;
         record->unk7C = 0;
-        record->unk84 = 0;
+        for (index = 0; index < 5; index++) {
+            record->unk60[index] = 0.0f;
+        }
     }
 
     total = 0;
@@ -317,33 +315,31 @@ void func_8004EA08(State8004EA08 *state) {
                              (10.0 + 5.0 * (f64)unit) +
                              (f64)group->unk10);
 
-        count = group->last - group->first + 1;
         for (index = group->first; index <= group->last; index++) {
-            ordinal = index - group->first;
             item = &D_80119670[index];
 
             unit = (f32)func_80082BE0() / 2147483648.0f;
             item->values[3] = (f32)(
-                (f64)unit * (360.0 / (f64)count) +
-                (f64)ordinal * 360.0 / (f64)count);
+                (f64)unit * (360.0 / (f64)(group->last - group->first + 1)) +
+                (f64)(index - group->first) * 360.0 / (f64)(group->last - group->first + 1));
 
             random = func_80082BE0();
             sign = func_80051934();
             unit = (f32)random / 2147483648.0f;
             item->values[4] = (f32)((f64)sign *
-                (45.0 + 15.0 * (f64)unit - 20.0 * (f64)ordinal));
+                (45.0 + 15.0 * (f64)unit - 20.0 * (f64)(index - group->first)));
 
             random = func_80082BE0();
             sign = func_80051934();
             unit = (f32)random / 2147483648.0f;
             item->values[0] = (f32)((f64)sign *
-                (65.0 + 10.0 * (f64)unit + 40.0 * (f64)ordinal));
+                (65.0 + 10.0 * (f64)unit + 40.0 * (f64)(index - group->first)));
 
             random = func_80082BE0();
             sign = func_80051934();
             unit = (f32)random / 2147483648.0f;
             item->values[1] = (f32)((f64)sign *
-                (65.0 + 10.0 * (f64)unit + 40.0 * (f64)ordinal));
+                (65.0 + 10.0 * (f64)unit + 40.0 * (f64)(index - group->first)));
 
             unit = (f32)func_80082BE0() / 2147483648.0f;
             item->values[2] = (f32)((f64)sign *
@@ -352,7 +348,7 @@ void func_8004EA08(State8004EA08 *state) {
             unit = (f32)func_80082BE0() / 2147483648.0f;
             item->values[5] = (f32)(
                 (f32)((f64)unit * 0.01 + 0.005 +
-                      0.01 * (f64)ordinal) * 15.0f);
+                      0.01 * (f64)(index - group->first)) * 15.0f);
         }
     }
 

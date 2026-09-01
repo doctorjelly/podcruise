@@ -65,7 +65,7 @@ void func_8004E4F4(Mode *arg0) {
     s32 mid;
     f32 sp80;
     f32 sp7C;
-    s32 angle;
+    register f32 back;
 
     for (i = 0; i < 35; i++) {
         func_80015268(&D_801198A8[i].unk4, 0.0f, 0.0f, 0.0f);
@@ -96,8 +96,7 @@ void func_8004E4F4(Mode *arg0) {
         if (D_8011A240.unk2C > 0) {
             i = 0;
             do {
-            angle = 90 - (i - mid) * 10;
-            func_80014CC0((f32)angle, &sp80, &sp7C);
+            func_80014CC0((f32)(90 - (i - mid) * 10), &sp80, &sp7C);
             D_801198A8[i].unk4 = 256.0f * sp7C + 12.0f;
             D_801198A8[i].unk8 = 256.0f * sp80 + -116.0f;
             D_801198A8[i].unkC = 106.0f;
@@ -132,6 +131,7 @@ void func_8004E4F4(Mode *arg0) {
     }
 
     if (arg0->unk38 == 2) {
+        back = D_800AB2DC;
         for (i = 0; i < D_8011A240.unk2C + 1; i++) {
             D_8011A050[i].unk8 = 40.0f;
             D_8011A050[i].unk2C = 0.0f;
@@ -140,7 +140,7 @@ void func_8004E4F4(Mode *arg0) {
             D_8011A050[i].unkC = (f32)(i / 2) * D_800AB2E0 + 9.0f;
             if (i == D_8011A240.unk2C) {
                 D_8011A050[i].unk28 = 90.0f;
-                D_8011A050[i].unkC = D_8011A050[i].unkC - D_800AB2DC;
+                D_8011A050[i].unkC -= back;
             }
         }
     }

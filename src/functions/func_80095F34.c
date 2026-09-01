@@ -1,4 +1,4 @@
-/* Recovered from specification specs/func_80095F34.md (shape rework, worker shape_10). */
+/* Recovered from specification specs/func_80095F34.md (shape rework, worker shape_04). */
 #include "podcruise/types.h"
 
 typedef struct Cmd80095F34 {
@@ -42,10 +42,10 @@ Cmd80095F34 *func_80095F34(Port80095F34 *port, Wave80095F34 *wave, u32 arg2, s32
     f32 frac;
     s32 padA[2];
     s32 length;
-    s32 padB;
     Cmd80095F34 *out;
+    Cmd80095F34 *next;
 
-    (void)padA; (void)padB;
+    (void)padA;
     if (wave->unk24 != 0) {
         length = wave->unk04 - wave->unk00;
         value = func_80095AC0(wave, arg3) / (f32)length;
@@ -59,11 +59,10 @@ Cmd80095F34 *func_80095F34(Port80095F34 *port, Wave80095F34 *wave, u32 arg2, s32
         out = func_80095DA8(port, offset - (aligned * 2), 0x280, whole + aligned, cmd);
         result = out + 2;
         out->w0 = 0x08000000 | (((aligned * 2) + 0x280) & 0xFFFF);
-        out->w1 = (arg2 << 16) | ((arg3 * 2) & 0xFFFF);
-        out++;
-        out->w0 = (0x05000000 | ((wave->unk24->unk24 & 0xFF) << 16)) |
+        next = out + 1; out->w1 = (arg2 << 16) | ((arg3 * 2) & 0xFFFF);
+        next->w0 = (0x05000000 | ((wave->unk24->unk24 & 0xFF) << 16)) |
                         ((s32)(frac * 32768.0f) & 0xFFFF);
-        out->w1 = func_80088360(wave->unk24->unk14);
+        next->w1 = func_80088360(wave->unk24->unk14);
         wave->unk24->unk24 = 0;
         wave->unk18 = wave->unk18 + whole - arg3;
     } else {

@@ -1,12 +1,13 @@
-/* Independently written from specs/func_80004160.md. */
+/* Recovered from specification specs/func_80004160.md. */
 
 #include "podcruise/vector_math.h"
 
 extern f32 func_800154D0(f32 *vector);
 extern void func_80015538(PcVec3f *output, const PcVec3f *left,
                           const PcVec3f *right);
+
 extern f32 sqrtf(f32 value);
-#ifdef __sgi
+#if defined(__sgi)
 #pragma intrinsic (sqrtf)
 #endif
 
@@ -18,98 +19,93 @@ extern PcVec3f D_800AE8C8;
 extern s32 D_800AE8D8;
 extern f32 D_800AE8DC;
 
-s32 func_80004160(PcVec3f *position, f32 bias, PcVec3f *axis, f32 first,
-                  f32 second, PcVec3f *normal, PcVec3f *contact,
-                  PcVec3f *centre) {
-    PcVec3f delta;
-    PcVec3f slid;
-    PcVec3f spare;
-    PcVec3f plane;
-    PcVec3f firstOffset;
-    PcVec3f secondOffset;
-    PcVec3f edge;
+s32 func_80004160(PcVec3f *a, f32 b, PcVec3f *c, f32 d, f32 e, PcVec3f *f,
+                  PcVec3f *g, PcVec3f *h) {
+    PcVec3f t;
+    PcVec3f r;
+    PcVec3f pad0;
+    PcVec3f v;
+    PcVec3f w;
+    PcVec3f y;
+    PcVec3f u;
     f32 dot;
-    f32 length;
-    PcVec3f firstPoint;
-    PcVec3f secondPoint;
-    PcVec3f firstCross;
-    PcVec3f secondCross;
+    f32 pad1;
+    PcVec3f x;
+    PcVec3f z;
+    PcVec3f p;
+    PcVec3f q;
+    f32 len;
 
-    (void)&spare;
+    (void)pad0;
+    (void)pad1;
+
     if (D_800AE8B0 < D_800AE8DC) {
-        normal->x = D_800AE8C8.x;
-        normal->y = D_800AE8C8.y;
-        normal->z = D_800AE8C8.z;
-        delta.x = position->x - D_800AE8B8.x;
-        delta.y = position->y - D_800AE8B8.y;
-        delta.z = position->z - D_800AE8B8.z;
-        func_800154D0((f32 *)&delta);
-        func_80015538(&edge, &delta, axis);
-        func_80015538(&plane, &edge, axis);
-        length = func_800153C0(&plane);
-        if (length < D_800A813C) {
-            dot = delta.x * axis->x + delta.y * axis->y + delta.z * axis->z;
+        f->x = D_800AE8C8.x; f->y = D_800AE8C8.y; f->z = D_800AE8C8.z;
+        t.x = a->x - D_800AE8B8.x;
+        t.y = a->y - D_800AE8B8.y;
+        t.z = a->z - D_800AE8B8.z;
+        func_800154D0(&t.x);
+        func_80015538(&u, &t, c);
+        func_80015538(&v, &u, c);
+        len = func_800153C0(&v);
+        if (len < D_800A813C) {
+            dot = c->z * t.z + (t.x * c->x + t.y * c->y);
             if (dot < 0.0f) {
-                func_800155C0(&delta, -(first - sqrtf(D_800AE8B0)), normal);
+                func_800155C0(&t, -(d - sqrtf(D_800AE8B0)), f);
             } else {
-                func_800155C0(&delta, -second - sqrtf(D_800AE8B0), normal);
+                func_800155C0(&t, -e - sqrtf(D_800AE8B0), f);
             }
-            position->x = position->x + delta.x;
-            position->y = position->y + delta.y;
-            position->z = position->z + delta.z;
-            contact->x = -normal->x;
-            contact->y = -normal->y;
-            contact->z = -normal->z;
+            a->x = a->x + t.x;
+            a->y = a->y + t.y;
+            a->z = a->z + t.z;
+            g->x = -f->x;
+            g->y = -f->y;
+            g->z = -f->z;
         } else {
-            func_800155C0(&plane, 1.0f / length, &plane);
-            func_800155C0(&firstOffset, sqrtf(D_800AE8DC - first * first),
-                          &plane);
-            func_800155EC(&firstPoint, &firstOffset, first, axis);
-            func_800155C0(&secondOffset, sqrtf(D_800AE8DC - second * second),
-                          &plane);
-            func_800155EC(&secondPoint, &secondOffset, second, axis);
-            func_80015538(&firstCross, &firstPoint, &delta);
-            func_80015538(&secondCross, &secondPoint, &delta);
-            if (firstCross.x * secondCross.x + firstCross.y * secondCross.y +
-                    secondCross.z * firstCross.z <
-                0.0f) {
-                func_800155C0(&delta, bias - sqrtf(D_800AE8B0), &delta);
-                position->x = position->x + delta.x;
-                position->y = position->y + delta.y;
-                position->z = position->z + delta.z;
-                contact->x = -normal->x;
-                contact->y = -normal->y;
-                contact->z = -normal->z;
+            func_800155C0(&v, 1.0f / len, &v);
+            func_800155C0(&w, sqrtf(D_800AE8DC - d * d), &v);
+            func_800155EC(&x, &w, d, c);
+            func_800155C0(&y, sqrtf(D_800AE8DC - e * e), &v);
+            func_800155EC(&z, &y, e, c);
+            func_80015538(&p, &x, &t);
+            func_80015538(&q, &z, &t);
+            dot = q.z * p.z + (p.x * q.x + p.y * q.y);
+            if (dot < 0.0f) {
+                func_800155C0(&t, b - sqrtf(D_800AE8B0), &t);
+                a->x = a->x + t.x;
+                a->y = a->y + t.y;
+                a->z = a->z + t.z;
+                g->x = -f->x;
+                g->y = -f->y;
+                g->z = -f->z;
             } else {
-                if (0.0f < axis->x * normal->x + axis->y * normal->y +
-                               axis->z * normal->z) {
-                    slid.x = secondPoint.x + position->x;
-                    slid.y = secondPoint.y + position->y;
-                    slid.z = secondPoint.z + position->z;
-                    contact->x = secondPoint.x;
-                    contact->y = secondPoint.y;
-                    contact->z = secondPoint.z;
+                dot = f->z * c->z + (c->x * f->x + c->y * f->y);
+                if (0.0f < dot) {
+                    r.x = z.x + a->x;
+                    r.y = z.y + a->y;
+                    r.z = z.z + a->z;
+                    g->x = z.x;
+                    g->y = z.y;
+                    g->z = z.z;
                 } else {
-                    slid.x = firstPoint.x + position->x;
-                    slid.y = firstPoint.y + position->y;
-                    slid.z = firstPoint.z + position->z;
-                    contact->x = secondPoint.x;
-                    contact->y = secondPoint.y;
-                    contact->z = secondPoint.z;
+                    r.x = x.x + a->x;
+                    r.y = x.y + a->y;
+                    r.z = x.z + a->z;
+                    g->x = z.x;
+                    g->y = z.y;
+                    g->z = z.z;
                 }
-                func_800154D0((f32 *)contact);
-                func_800155EC(position, position,
-                              (D_800AE8B8.x * normal->x +
-                               D_800AE8B8.y * normal->y +
-                               D_800AE8B8.z * normal->z) -
-                                  (slid.x * normal->x + slid.y * normal->y +
-                                   normal->z * slid.z),
-                              normal);
+                func_800154D0(&g->x);
+                func_800155EC(a, a,
+                              (D_800AE8B8.x * f->x + D_800AE8B8.y * f->y +
+                               D_800AE8B8.z * f->z) -
+                                  (f->z * r.z + (r.x * f->x + r.y * f->y)),
+                              f);
             }
         }
-        centre->x = D_800AE8B8.x;
-        centre->y = D_800AE8B8.y;
-        centre->z = D_800AE8B8.z;
+        h->x = D_800AE8B8.x;
+        h->y = D_800AE8B8.y;
+        h->z = D_800AE8B8.z;
         if (D_800AE8D8 != 0) {
             D_8009A280 = D_800AE8D8;
         }
