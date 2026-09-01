@@ -1,4 +1,4 @@
-/* See specs/func_800857B0.md (worker specification): screen fill-rectangle emitter. */
+/* Implements specs/functions/recovered/remaining_medium_audit_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct {

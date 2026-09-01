@@ -1,4 +1,4 @@
-/* Specification: specs/func_800745AC.md */
+/* Implements specs/functions/recovered/remaining_medium_audit_tranche.md. */
 #include "podcruise/types.h"
 
 extern f32 D_800AD97C;

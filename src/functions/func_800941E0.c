@@ -1,4 +1,4 @@
-/* Recovered per specs: func_800941E0 (see scratchpad specs/func_800941E0.md). */
+/* Implements specs/functions/recovered/remaining_medium_audit_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct {
