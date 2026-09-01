@@ -470,7 +470,7 @@ segments:
       - [0x311E8, asm, main_311E8]
       - [0x3167C, c, functions/func_80030A7C]
       - [0x31768, c, functions/func_80030B68]
-      - [0x31790, asm, main_31790]
+      - [0x31790, c, functions/func_80030B90]
       - [0x31808, c, functions/func_80030C08]
       - [0x31898, c, functions/func_80030C98]
       - [0x31AA0, c, functions/func_80030EA0]

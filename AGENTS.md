@@ -238,6 +238,11 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   allocation, seed the permuter from that form. A behavior-neutral redundant
   expression after an already-proven dereference can reproduce IDO's original
   register allocation; independently verify the smallest readable winner.
+- When an immediate comparison differs only because IDO uses `$at` instead of
+  a general register, materialize the limit as a naturally typed local and try
+  one behavior-neutral empty comparison involving both original operands. This
+  extended the allocator lifetime without emitting code and recovered
+  `func_80030B90`; it is cheaper than a broad register-color search.
 - When a loop differs only in loads scheduled around its back edge or break
   delay slot, make the next iteration's non-volatile bound an explicit local
   and refresh it once per completed iteration. This small source-shape test
