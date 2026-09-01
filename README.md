@@ -46,6 +46,13 @@ not a substitute for owning it.
 This is the beginning of a source-matching decompilation, not a claim that the
 game is already decompiled or playable.
 
+![USA exact-matching C progress over time](docs/decomp_progress.svg)
+
+The chart tracks exact USA matching-C coverage only. Its
+[milestone data](docs/decomp_progress.tsv) is regenerated from Git history with
+`make progress-chart`; [function token measurements](docs/function_token_log.tsv)
+are logged separately when the runtime exposes defensible usage totals.
+
 ## Quick start
 
 ```sh

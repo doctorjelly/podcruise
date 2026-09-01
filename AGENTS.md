@@ -51,6 +51,12 @@ correctness, provenance, IP policy, exact-match evidence, or required tests.
   longer relevant. Measure cached, reasoning, and total tokens when available.
 - Avoid Pro mode and high reasoning for routine work. Increase effort only when
   a measured quality gain justifies the additional tokens.
+- When cumulative goal usage is available, record it before and after an
+  isolated function attempt in `docs/function_token_log.tsv`. Never divide a
+  concurrent or batched token total among functions as though it were measured;
+  use a tranche row or leave the function total blank.
+- Run `make progress-chart` whenever exact USA coverage changes so the README
+  plot and its tracked milestone TSV stay reproducible from Git history.
 
 Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/guides/latest-model).
 

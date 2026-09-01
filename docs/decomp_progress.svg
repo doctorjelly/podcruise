@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="460" viewBox="0 0 960 460" role="img">
+<title>USA exact-matching C progress over time</title>
+<desc>Step chart from zero to one hundred percent, based on committed decompilation status milestones.</desc>
+<rect width="100%" height="100%" fill="#0d1117"/>
+<text x="76" y="28" fill="#f0f6fc" font-family="sans-serif" font-size="20" font-weight="600">USA exact-matching C progress</text>
+<line x1="76" y1="390.0" x2="932" y2="390.0" stroke="#30363d"/>
+<text x="64" y="394.0" text-anchor="end" fill="#8b949e" font-family="sans-serif" font-size="12">0%</text>
+<line x1="76" y1="322.0" x2="932" y2="322.0" stroke="#30363d"/>
+<text x="64" y="326.0" text-anchor="end" fill="#8b949e" font-family="sans-serif" font-size="12">20%</text>
+<line x1="76" y1="254.0" x2="932" y2="254.0" stroke="#30363d"/>
+<text x="64" y="258.0" text-anchor="end" fill="#8b949e" font-family="sans-serif" font-size="12">40%</text>
+<line x1="76" y1="186.0" x2="932" y2="186.0" stroke="#30363d"/>
+<text x="64" y="190.0" text-anchor="end" fill="#8b949e" font-family="sans-serif" font-size="12">60%</text>
+<line x1="76" y1="118.0" x2="932" y2="118.0" stroke="#30363d"/>
+<text x="64" y="122.0" text-anchor="end" fill="#8b949e" font-family="sans-serif" font-size="12">80%</text>
+<line x1="76" y1="50.0" x2="932" y2="50.0" stroke="#30363d"/>
+<text x="64" y="54.0" text-anchor="end" fill="#8b949e" font-family="sans-serif" font-size="12">100%</text>
+<line x1="76.0" y1="390" x2="76.0" y2="396" stroke="#8b949e"/>
+<text x="76.0" y="414" text-anchor="middle" fill="#8b949e" font-family="sans-serif" font-size="11">Aug 20</text>
+<line x1="104.1" y1="390" x2="104.1" y2="396" stroke="#8b949e"/>
+<text x="104.1" y="414" text-anchor="middle" fill="#8b949e" font-family="sans-serif" font-size="11">Aug 21</text>
+<line x1="611.8" y1="390" x2="611.8" y2="396" stroke="#8b949e"/>
+<text x="611.8" y="414" text-anchor="middle" fill="#8b949e" font-family="sans-serif" font-size="11">Aug 27</text>
+<line x1="777.8" y1="390" x2="777.8" y2="396" stroke="#8b949e"/>
+<text x="777.8" y="414" text-anchor="middle" fill="#8b949e" font-family="sans-serif" font-size="11">Aug 29</text>
+<line x1="825.1" y1="390" x2="825.1" y2="396" stroke="#8b949e"/>
+<text x="825.1" y="414" text-anchor="middle" fill="#8b949e" font-family="sans-serif" font-size="11">Aug 30</text>
+<line x1="898.1" y1="390" x2="898.1" y2="396" stroke="#8b949e"/>
+<text x="898.1" y="414" text-anchor="middle" fill="#8b949e" font-family="sans-serif" font-size="11">Aug 31</text>
+<path d="M 76.0 286.1 H 87.4 V 285.3 H 88.5 V 284.9 H 104.1 V 284.7 H 105.9 V 284.0 H 611.8 V 271.1 H 614.6 V 270.4 H 618.5 V 269.9 H 620.0 V 269.7 H 622.0 V 269.1 H 623.0 V 268.5 H 623.6 V 268.2 H 624.5 V 267.0 H 626.9 V 266.7 H 627.5 V 266.5 H 629.4 V 266.4 H 630.4 V 266.4 H 631.5 V 266.3 H 777.8 V 266.2 H 780.2 V 266.0 H 781.8 V 266.0 H 784.0 V 266.0 H 784.7 V 265.8 H 785.5 V 265.6 H 786.3 V 265.4 H 787.7 V 265.4 H 825.1 V 265.1 H 827.0 V 264.8 H 827.8 V 264.6 H 832.8 V 264.6 H 833.2 V 264.6 H 833.6 V 264.5 H 834.9 V 264.2 H 853.0 V 264.1 H 855.1 V 264.0 H 855.9 V 263.9 H 856.5 V 263.8 H 871.9 V 263.7 H 898.1 V 263.0 H 902.0 V 262.8 H 906.0 V 262.4 H 908.5 V 262.0 H 912.3 V 261.8 H 913.7 V 261.8 H 915.1 V 261.3 H 917.0 V 261.2 H 920.5 V 260.9 H 922.4 V 260.7 H 923.9 V 260.5 H 925.3 V 259.1 H 925.8 V 258.5 H 927.9 V 258.5 H 928.8 V 258.4 H 929.4 V 258.1 H 932.0 V 257.5" fill="none" stroke="#58a6ff" stroke-width="3" stroke-linejoin="round"/>
+<circle cx="932.0" cy="257.5" r="5" fill="#58a6ff"/>
+<text x="924.0" y="245.5" text-anchor="end" fill="#f0f6fc" font-family="sans-serif" font-size="13" font-weight="600">38.98%</text>
+<text x="932" y="442" text-anchor="end" fill="#8b949e" font-family="sans-serif" font-size="12">1,034 functions / 242,260 bytes exact</text>
+</svg>

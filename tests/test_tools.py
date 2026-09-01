@@ -323,6 +323,12 @@ class MipsAnalysisTests(unittest.TestCase):
                     self.assertLessEqual(earlier[1], later[0],
                                          f"{earlier[2]} overlaps {later[2]}")
 
+    def test_progress_chart_parses_exact_usa_row(self) -> None:
+        from tools.update_progress_chart import parse_status
+
+        status = "| USA retail | 1,034 | 242,260 | 38.98% | 1,306 | 1,034 |"
+        self.assertEqual(parse_status(status), (1034, 242260, 38.98))
+
     def test_no_proven_compiler_output_is_classified_non_c(self) -> None:
         """The strongest available check on the non-C rule.
 

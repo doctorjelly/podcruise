@@ -1,0 +1,2 @@
+recorded_at	commit	work_item	result	exact_bytes_added	model	reasoning	token_scope	tokens_before	tokens_after	tokens_spent	notes
+2026-08-31T17:51:01-07:00	feba6fb	__thread_baseline__	baseline	0	mixed	mixed	thread-cumulative	20943532	20943532	0	Historical per-function usage is unavailable; measure deltas from this baseline without retroactive allocation.

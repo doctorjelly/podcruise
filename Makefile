@@ -18,7 +18,7 @@ HOST_TEST_DOUBLES := $(shell grep -oE '^[A-Za-z_][A-Za-z0-9_ *]*func_[0-9A-F]{8}
 HOST_TEST_SRCS := src/bootstrap_state.c \
 	$(filter-out $(patsubst %,src/functions/%.c,$(HOST_TEST_DOUBLES)),$(GLOBAL_STATE_SRCS))
 
-.PHONY: all setup inventory analyze probe map region-symbols bootstrap-evidence manifest classify prototypes report match-c split-us split-jp split-eu split-lrg roundtrip-us roundtrip-jp roundtrip-eu roundtrip-lrg roundtrip-all host-check host-test test safety status
+.PHONY: all setup inventory analyze probe map region-symbols bootstrap-evidence manifest progress-chart classify prototypes report match-c split-us split-jp split-eu split-lrg roundtrip-us roundtrip-jp roundtrip-eu roundtrip-lrg roundtrip-all host-check host-test test safety status
 
 all: inventory analyze probe map region-symbols bootstrap-evidence report
 
@@ -89,6 +89,9 @@ manifest:
 	$(PYTHON) tools/make_source_manifest.py \
 		--output analysis/source_manifest.json \
 		--strict
+
+progress-chart:
+	$(PYTHON) tools/update_progress_chart.py
 
 report: inventory analyze probe map region-symbols bootstrap-evidence manifest
 	$(PYTHON) tools/make_report.py \
