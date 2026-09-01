@@ -1,2 +1,5 @@
 recorded_at	commit	work_item	result	exact_bytes_added	model	reasoning	token_scope	tokens_before	tokens_after	tokens_spent	notes
 2026-08-31T17:51:01-07:00	feba6fb	__thread_baseline__	baseline	0	mixed	mixed	thread-cumulative	20943532	20943532	0	Historical per-function usage is unavailable; measure deltas from this baseline without retroactive allocation.
+2026-08-31T17:58:54-07:00	87f4525	func_80029494	no_match	0	gpt-5.6-luna	low	isolated-function-tranche	21028054	21031508	3454	One Luna Low audit plus parent orchestration; no source variant retained.
+2026-08-31T17:59:46-07:00	87f4525	func_8008FC3C	no_match	0	gpt-5.6-luna	low	isolated-function-tranche	21033675	21037673	3998	One Luna Low audit plus parent orchestration; localized insertion-loop scheduling mismatch remained.
+2026-08-31T18:00:36-07:00	87f4525	func_80097DC0	no_match	0	gpt-5.6-luna	low	isolated-function-tranche	21041042	21043092	2050	Parent verifier corrected the agent's size report to 156 versus 152; late pointer/store layout mismatch remained.

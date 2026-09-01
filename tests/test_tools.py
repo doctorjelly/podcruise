@@ -329,6 +329,20 @@ class MipsAnalysisTests(unittest.TestCase):
         status = "| USA retail | 1,034 | 242,260 | 38.98% | 1,306 | 1,034 |"
         self.assertEqual(parse_status(status), (1034, 242260, 38.98))
 
+    def test_function_token_log_deltas_are_consistent(self) -> None:
+        import csv
+
+        root = Path(__file__).resolve().parent.parent
+        with (root / "docs/function_token_log.tsv").open(encoding="utf-8") as stream:
+            rows = list(csv.DictReader(stream, delimiter="\t"))
+        self.assertTrue(rows)
+        for row in rows:
+            self.assertEqual(
+                int(row["tokens_spent"]),
+                int(row["tokens_after"]) - int(row["tokens_before"]),
+                row["work_item"],
+            )
+
     def test_no_proven_compiler_output_is_classified_non_c(self) -> None:
         """The strongest available check on the non-C rule.
 

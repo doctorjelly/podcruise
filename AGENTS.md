@@ -119,6 +119,11 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   recovery notes before trying variants. Skip documented register-only dead
   ends; pilot any automated permutation search on one representative function
   with a fixed time limit before scaling it to a batch.
+- Three isolated Luna Low re-audits of documented late mismatches cost
+  2,050-3,998 tokens each and recovered nothing; one also misstated compiled
+  size until the parent reran the verifier. Exclude already-recorded scheduler
+  or register-allocation blockers before delegation, and keep parent compiler
+  verification mandatory. Measurements live in `docs/function_token_log.tsv`.
 - When every mismatch is a local stack offset, exhaustively test only the small
   declaration-order space in `/tmp` before changing behavior or invoking the
   general permuter. Keep the simplest exact ordering and independently rerun
