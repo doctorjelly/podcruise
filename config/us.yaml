@@ -142,7 +142,7 @@ segments:
       - [0x8710, c, functions/func_80007B10]
       - [0x88E4, c, functions/func_80007CE4]
       - [0x8944, c, functions/func_80007D44]
-      - [0x8A80, asm, main_8A80]
+      - [0x8A80, c, functions/func_80007E80]
       - [0x8B5C, c, functions/func_80007F5C]
       - [0x8BC8, asm, main_8BC8]
       - [0x8C3C, c, functions/func_8000803C]

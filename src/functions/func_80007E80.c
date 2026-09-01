@@ -1,4 +1,4 @@
-/* Implements specs/func_80007E80.md (release two slot tables, then drain). */
+/* Implements specs/functions/recovered/func_80007E80.md. */
 #include "podcruise/types.h"
 
 extern s32 D_8009A32C[23];
@@ -17,7 +17,7 @@ void func_80007E80(s32 arg0) {
     (void)arg0;
     released = 0;
     for (i = 0; i != 23; i++) {
-        if (D_8009A32C[i] != 0) {
+        if (D_8009A32C[i] != released * 0) {
             released = 1;
             func_80007A80();
             func_80007A44();

@@ -49,6 +49,10 @@ correctness, provenance, IP policy, exact-match evidence, or required tests.
   only explicit success/failure lines. One LRG round trip emitted 2,280 lines
   (419 KB) even though the only decision-bearing line was the final exact-hash
   result; filtering that output materially reduces transcript tokens.
+- Redirect `make -s report` too: its successful path enumerates more than one
+  hundred bootstrap probes even when the only useful result is the compact
+  manifest/rebuild summary. Inspect the generated report and tracked diff
+  instead of sending that enumeration through the model transcript.
 - Do not paste stable instructions repeatedly. In API-backed workflows, keep
   reusable prompt prefixes stable for caching, use prior-response state or
   compaction, and select current-turn reasoning context when old reasoning is no
