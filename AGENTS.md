@@ -144,6 +144,12 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   recovery notes before trying variants. Skip documented register-only dead
   ends; pilot any automated permutation search on one representative function
   with a fixed time limit before scaling it to a batch.
+- After the close same-size candidates hit the three-variant cap, sample small
+  size mismatches instead of continuing register-color searches. One 164/168
+  candidate became exact when its source mutated the unsigned length parameter
+  directly, kept the 64 KiB chunk as a signed local, and advanced the cursor
+  before the helper call; the instruction-count mismatch exposed a missing
+  semantic source distinction rather than a scheduler problem.
 - Three isolated Luna Low re-audits of documented late mismatches cost
   2,050-3,998 tokens each and recovered nothing; one also misstated compiled
   size until the parent reran the verifier. Exclude already-recorded scheduler
