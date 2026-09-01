@@ -1,4 +1,4 @@
-/* Independently written from the specification in specs/func_8003E59C.md. */
+/* Implements specs/functions/recovered/late_mismatch_audit_tranche.md. */
 #include "podcruise/types.h"
 
 extern s32 D_800A4984;

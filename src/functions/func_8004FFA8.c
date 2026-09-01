@@ -1,4 +1,4 @@
-/* Recovered per scratchpad spec specs/func_8004FFA8.md */
+/* Implements specs/functions/recovered/late_mismatch_audit_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct PcCamSetup {

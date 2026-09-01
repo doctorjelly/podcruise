@@ -1,4 +1,4 @@
-/* Recovered from specification scratchpad specs/func_800519C0.md. */
+/* Implements specs/functions/recovered/late_mismatch_audit_tranche.md. */
 
 #include "podcruise/types.h"
 

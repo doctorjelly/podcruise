@@ -1,4 +1,4 @@
-/* Independently written from specs/functions/func_80081360.md. */
+/* Implements specs/functions/recovered/late_mismatch_audit_tranche.md. */
 
 #include "podcruise/types.h"
 
@@ -30,9 +30,7 @@ void func_80081360(void) {
     if (D_800A6758 != 0) {
         func_80081260();
         microseconds = (func_800811DC() * 64) / 3000;
-        D_800A26A0 = microseconds;
-        D_800A26A8 = microseconds;
-        D_800A26B0 = microseconds;
+        D_800A26B0 = D_800A26A8 = D_800A26A0 = microseconds;
         now = func_8008126C();
         D_80120C20[0] = now;
         D_80120C00[0] = now;
