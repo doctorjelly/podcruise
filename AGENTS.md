@@ -278,3 +278,70 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
 - When a new C subsegment interrupts a larger assembly segment, add an assembly
   resume boundary at the function's exact end. Without it, splat silently omits
   the remaining assembly range and wastes a full rebuild on a linker failure.
+
+## Dispatch economics, measured
+
+These come from per-worker token measurements recorded in
+`docs/function_token_log.tsv`, not from estimation.
+
+- A worker's cost is dominated by fixed overhead, not by the function it works
+  on. Measured single-function workers spend 0.7M-4.1M input against
+  1.5K-19K output, and roughly 95 percent of that input is cached prompt
+  prefix: the shared brief, the assignment, and the disassembly slice, re-read
+  rather than re-reasoned. Two consequences follow.
+- Because the overhead is per worker, halving the functions per worker roughly
+  doubles the cost per function. Assigning one function per worker buys honest
+  per-function measurement and pays for it in throughput; recover the
+  throughput by running more workers concurrently, not by re-batching. Twelve
+  single-function workers produced six exact matches; the same wall-clock at 42
+  concurrent workers is the correct response to a low yield.
+- Report cached and uncached input separately or the cost is unreadable. A
+  single "input tokens" figure is ~95 percent cache reads and will make every
+  attempt look equally expensive regardless of how much reasoning it required.
+- When measuring from a transcript, take the maximum of each `requestId` rather
+  than the sum. Streamed responses repeat a request's usage record up to
+  sixteen times; summing them overstates output several fold. Deduplicating by
+  request also matters because a compacted session replays its history under a
+  new session id, so per-file totals double-count.
+
+## Three populations, three prompts
+
+Unrecovered functions are not one queue. Separating them measurably improved
+yield, because each needs different instructions.
+
+- **Correct size, wrong bytes.** The program shape is already right and only
+  register allocation or scheduling differs. The search is over spelling. Tell
+  the worker not to rewrite the logic, give it the recorded first difference,
+  and point it at the register-phase levers. This is the cheapest population
+  and should be dispatched first.
+- **Wrong size.** The shape itself differs, so statement structure, control
+  flow spelling, per-unit flags, or unit composition are in scope before any
+  register-phase lever. The size delta is the evidence: a total delta of 20
+  bytes across a function usually means one or two statements, not a rewrite.
+- **Never attempted.** Full recovery from disassembly. Rank these largest
+  first; the small tail is mostly label-scan artifacts rather than functions.
+- A failed attempt in one population often promotes a function into a cheaper
+  one: a fresh recovery that misses frequently still lands at the correct size.
+  Count promotions as wave output, not just exact matches, or the loop looks
+  less productive than it is.
+
+## Orchestration hazards proven in practice
+
+- Two orchestrators can run against this tree without either detecting the
+  other; it happened for a full day. Nothing was lost, and the reason is worth
+  keeping: worker results are durable files and the merge re-derives
+  configuration from them, so a lost update self-heals on the next cycle. Keep
+  merges idempotent over durable inputs. Before starting a long run, check
+  `ps` and `tmux ls` rather than assuming a single writer.
+- A validation tool that aborts on the first bad input reports nothing about
+  the good ones. One malformed unit once destroyed measurement for all four
+  ROMs; record a per-item failure and continue.
+- Distinguish failures that produce wrong numbers from those that produce a
+  wrong ROM. A split that begins before the function its source defines
+  deletes the preceding function's assembly and replaces it with nothing: it
+  fails loudly at link time only when the gap is large enough to orphan a
+  referenced symbol, and otherwise places object text at the wrong address and
+  still links.
+- Believe a worker that reports its assigned label is not a function. Padding
+  and interior branch targets recur in generated candidate lists; feed those
+  reports back into the generator so the same artifact is not reassigned.
