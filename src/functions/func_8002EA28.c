@@ -1,4 +1,4 @@
-/* Recovered from specification: specs/func_8002EA28.md (worker batch_01) */
+/* Implements specs/functions/recovered/timing_and_input_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct {

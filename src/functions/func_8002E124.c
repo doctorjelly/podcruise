@@ -1,4 +1,4 @@
-/* Recovered from specification specs/functions/recovered/func_8002E124.md */
+/* Implements specs/functions/recovered/timing_and_input_tranche.md. */
 #include "podcruise/types.h"
 
 extern u64 D_800A26A8;
