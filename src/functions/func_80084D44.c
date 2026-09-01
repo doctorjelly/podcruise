@@ -1,4 +1,4 @@
-/* Implements the specification in scratchpad specs/func_80084D44.md */
+/* Implements specs/functions/recovered/func_80084D44.md. */
 #include "podcruise/types.h"
 
 typedef struct {
