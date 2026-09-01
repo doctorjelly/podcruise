@@ -220,6 +220,11 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   bottomed at score 40, but its minimal candidate passed the canonical linked
   verifier exactly. Independently verify each major improvement instead of
   continuing a search merely because its raw-object score is not zero.
+- Prefer a one-minute permutation pilot when the scorer reports zero stack,
+  reorder, insertion, and deletion penalties and only register differences.
+  Reusing that filter recovered a 344-byte function with 46,413 uncached input
+  tokens and 9,500 output tokens for the full audited turn; do not apply the
+  same search to broad semantic or scheduling mismatches.
 - If a semantically preferred branch fixes the last opcode but changes register
   allocation, seed the permuter from that form. A behavior-neutral redundant
   expression after an already-proven dereference can reproduce IDO's original
