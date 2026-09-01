@@ -225,6 +225,11 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   Reusing that filter recovered a 344-byte function with 46,413 uncached input
   tokens and 9,500 output tokens for the full audited turn; do not apply the
   same search to broad semantic or scheduling mismatches.
+- After an allocator-only match, compare unresolved sibling routines by exact
+  size and differing-word offsets before launching another search. Two adjacent
+  344-byte initializers shared the same ten-word register swap, so the first
+  function's exhausted-loop invariant recovered the sibling in one compiler
+  check.
 - If a semantically preferred branch fixes the last opcode but changes register
   allocation, seed the permuter from that form. A behavior-neutral redundant
   expression after an already-proven dereference can reproduce IDO's original
