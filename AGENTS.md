@@ -91,6 +91,10 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   This is cheaper than asking agents to retry every function; the first sweep
   isolated `func_8008C390` as an exact `-O1` unit and ruled out all `-O3`
   nonmatches at once.
+- The corresponding full unresolved-unit MIPS III/ABI sweep found only
+  `func_8008C638`, exact under `-O1 -mips3 -32`; do not repeat that sweep on
+  unchanged sources. Reuse the result and reserve new flag sweeps for newly
+  recovered units or genuinely new compiler evidence.
 - Before treating a runtime layout as opaque, search recovered callers and
   neighboring routines for the same callback, global, or hardware register
   block. Reusing already-proven local structure offsets is cheaper and more

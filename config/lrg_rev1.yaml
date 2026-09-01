@@ -1158,7 +1158,7 @@ segments:
       - [0x8D160, c, functions/func_8008C560]
       - [0x8D17C, c, functions/func_8008C57C]
       - [0x8D198, c, functions/func_8008C598]
-      - [0x8D238, asm, main_8D238]
+      - [0x8D238, c, functions/func_8008C638]
       - [0x8D2D4, c, functions/func_8008C6D4]
       - [0x8D2EC, c, functions/func_8008C6EC]
       - [0x8D304, c, functions/func_8008C704]
