@@ -30,9 +30,8 @@ the defaults.
 
 ## Status
 
-Behavior recovered, not byte-matching. An exact linked IDO 5.3 `-O2`
-comparison emits the correct 304-byte size. The first difference is offset
-`0xC4`; only the mode-one multiplier's materialization, scheduling, and result
-register differ, while the mode-zero and mode-two instruction spans match.
-Three evidence-driven source forms did not reproduce that local compiler shape,
-so no exact claim is made.
+Byte-matching C in canonical USA. An exact linked IDO 5.3 `-O2` comparison
+reproduces all 304 bytes. Expressing the mode-one copy as division by `1.0f`
+preserves the behavior while causing IDO to materialize the reciprocal and emit
+the ROM's multiply, schedule, and floating-point registers. No regional
+compiler-match claim is made.

@@ -867,6 +867,7 @@ segments:
       - [0x6EC08, c, functions/func_8006E008]
       - [0x6EC34, c, functions/func_8006E034]
       - [0x6EDCC, asm, main_6EDCC]
+      - [0x6EEFC, c, functions/func_8006E2FC]
       - [0x6F02C, c, functions/func_8006E42C]
       - [0x6F2F8, asm, main_6F2F8]
       - [0x70608, c, functions/func_8006FA08]

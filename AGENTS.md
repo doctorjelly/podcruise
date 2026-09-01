@@ -166,6 +166,10 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   group after the call can expose the call clobber and force the ROM's second
   sentinel load; paired with nearby store ordering, this recovered a 444-byte
   initializer in two variants.
+- When the ROM multiplies a value by a materialized `1.0f` but the behavioral C
+  copies it or converts a known-one integer, test division by `1.0f`. IDO lowers
+  the exact reciprocal to the otherwise puzzling multiply; this recovered a
+  304-byte mode dispatcher in one variant.
 - Three isolated Luna Low re-audits of documented late mismatches cost
   2,050-3,998 tokens each and recovered nothing; one also misstated compiled
   size until the parent reran the verifier. Exclude already-recorded scheduler

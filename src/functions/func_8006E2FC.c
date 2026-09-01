@@ -49,7 +49,7 @@ void func_8006E2FC(u8 *arg0, u8 *colorA, u8 *colorB, f32 *factor) {
         colorB[1] = 128;
         colorB[2] = 0;
         colorB[3] = 200;
-        *factor = object->unk214 * (f32)mode;
+        *factor = object->unk214 / 1.0f;
         break;
     case 2:
         colorA[0] = 255;
