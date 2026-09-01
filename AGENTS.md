@@ -10,6 +10,10 @@ correctness, provenance, IP policy, exact-match evidence, or required tests.
 - Keep command output quiet and bounded. Prefer `make -s`, focused test targets,
   compact JSON summaries, and low tool-output limits. Report failures by the
   decisive lines, not the entire log.
+- After `file` identifies binary data, never pass it to a text viewer; use a
+  narrowly filtered `strings`, `readelf`, or `objdump` query instead.
+- Filter downloaded HTML before it reaches the transcript and cap the result;
+  never print an entire search or documentation page just to find one detail.
 - Redirect full round-trip output to a temporary log; the generated build
   prints hundreds of commands even under `make -s`. Extract only decisive
   success/error lines with `rg` because even the final linker line is enormous.

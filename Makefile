@@ -3,7 +3,9 @@ VENV_PYTHON := .venv/bin/python
 US_ROM := roms/originals/baserom.us.z64
 JP_ROM := roms/originals/baserom.jp.z64
 EU_ROM := roms/originals/baserom.eu.z64
-GLOBAL_STATE_SRCS := $(wildcard src/functions/*.c)
+# Matching-unit wrappers include their component sources to preserve original
+# object layout. Compile the components directly in the host-only test build.
+GLOBAL_STATE_SRCS := $(filter-out src/functions/unit_%.c,$(wildcard src/functions/*.c))
 
 # tests/test_global_state.c defines observable stand-ins for some callees so
 # that a caller's interactions can be asserted. Once a callee is recovered for

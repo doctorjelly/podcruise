@@ -292,6 +292,10 @@ class MipsAnalysisTests(unittest.TestCase):
                 spans = []
                 for unit in units:
                     self.assertTrue((root / unit["source"]).is_file(), unit["source"])
+                    included_sources = unit.get("included_sources", [])
+                    self.assertIn(len(included_sources), (0, len(unit["functions"])))
+                    for source in included_sources:
+                        self.assertTrue((root / source).is_file(), source)
                     # splat places a C split at the function's own address and
                     # expects the source to define the symbol for that address.
                     # A corrected boundary that keeps the old name leaves the

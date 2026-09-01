@@ -7,7 +7,7 @@ extern u8 D_800D7A00[];
 extern void func_800183C0(void);
 extern void func_80088150(s32);
 extern void func_8008B580(void);
-extern void func_8008B810(void *, s32, void *, s32, void *, s32);
+extern void func_8008B810(void *, s32, void *, void *, void *, s32);
 extern void func_8008B960(void *);
 extern void func_8002F550(void *);
 

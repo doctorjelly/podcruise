@@ -102,7 +102,13 @@ def main() -> int:
     claimed_sources: set[str] = set()
     for unit in us["units"]:
         claimed_sources.add(unit["source"])
-        for function in unit["functions"]:
+        included_sources = unit.get("included_sources", [])
+        if included_sources and len(included_sources) != len(unit["functions"]):
+            raise SystemExit(
+                f"{unit['id']}: included_sources must correspond to functions"
+            )
+        claimed_sources.update(included_sources)
+        for index, function in enumerate(unit["functions"]):
             key = (function["name"], function["vram"])
             exact = [
                 version for version in ("us", "lrg_rev1")
@@ -113,7 +119,8 @@ def main() -> int:
                 "vram": function["vram"],
                 "rom": function["rom"],
                 "size": int(function["size"]),
-                "source": unit["source"],
+                "source": (included_sources[index]
+                           if included_sources else unit["source"]),
                 "unit": unit["id"],
                 "flags": unit.get("flags"),
                 "exact_versions": exact,
