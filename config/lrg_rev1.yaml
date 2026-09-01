@@ -1190,6 +1190,8 @@ segments:
       - [0x8E980, asm, main_8E980]
       - [0x8F020, c, functions/func_8008E420]
       - [0x8F14C, asm, main_8F14C]
+      - [0x8F5F0, c, functions/func_8008E9F0]
+      - [0x8F6DC, asm, main_8F6DC]
       - [0x8F8F0, c, functions/func_8008ECF0]
       - [0x8F918, c, functions/func_8008ED18]
       - [0x8FA04, asm, main_8FA04]

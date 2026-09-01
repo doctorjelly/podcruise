@@ -95,6 +95,9 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   `func_8008C638`, exact under `-O1 -mips3 -32`; do not repeat that sweep on
   unchanged sources. Reuse the result and reserve new flag sweeps for newly
   recovered units or genuinely new compiler evidence.
+- A full IDO 7.1 sweep of all unresolved units across eight O1/O2/O3,
+  MIPS II/MIPS III, and ABI combinations produced no exact matches. Do not
+  repeat it on unchanged sources; spend those tokens on source recovery.
 - Before treating a runtime layout as opaque, search recovered callers and
   neighboring routines for the same callback, global, or hardware register
   block. Reusing already-proven local structure offsets is cheaper and more

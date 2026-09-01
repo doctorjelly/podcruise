@@ -30314,6 +30314,7 @@
       "id": "func_8008E9F0",
       "source": "src/functions/func_8008E9F0.c",
       "link_vram": "0x8008E9F0",
+      "rodata_vram": "0x800ADEF0",
       "absolute_symbols": {},
       "functions": [
         {
