@@ -29,7 +29,6 @@ void func_80006848(Obj80006848 *obj) {
     f32 upper;
     f32 lower;
     f32 step;
-    u32 mode;
     f32 *keys;
 
     obj->unk100 = obj->unk100 & 0xBFFFFFFF;
@@ -46,8 +45,7 @@ void func_80006848(Obj80006848 *obj) {
         obj->unk114 = (f32)((f64)obj->unk114 + D_80120BF0 * (f64)obj->unk110 * (f64)D_8009A2A4);
     }
 
-    mode = obj->unk100 & 0x06000000;
-    if (mode != 0) {
+    if ((obj->unk100 & 0x06000000) != 0) {
         if (obj->unkF0 <= obj->unk114 && obj->unk114 <= obj->unkF4) {
             if (obj->unk100 & 0x02000000) {
                 obj->unk100 = obj->unk100 & 0xFDFFFFFF;
@@ -56,14 +54,13 @@ void func_80006848(Obj80006848 *obj) {
                 obj->unk100 = obj->unk100 & 0xFBFFFFFF;
                 obj->unk100 = obj->unk100 & ~0x10;
             }
-            mode = obj->unk100 & 0x06000000;
         } else {
             upper = step = obj->unkFC;
             lower = 0.0f;
         }
     }
 
-    if (mode == 0) {
+    if ((obj->unk100 & 0x06000000) == 0) {
         upper = obj->unkF4;
         lower = obj->unkF0;
         step = obj->unkF8;

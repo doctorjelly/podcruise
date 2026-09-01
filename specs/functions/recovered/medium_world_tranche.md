@@ -1,7 +1,6 @@
 # Medium world-state tranche
 
-Status: **6 behavior-recovered functions measured in all four builds; none is
-byte-matching C**.
+Status: **1 byte-matching and 5 behavior-recovered functions**.
 
 ## Verified facts
 
@@ -67,16 +66,19 @@ USA bytes. This is shared-source evidence, not a compiler-match claim.
 
 ## Exact compiler comparison
 
-IDO 5.3 `-O2 -mips2` places every unit at its canonical regional address and
-produces the same result in all four builds.
+IDO 5.3 `-O2 -mips2` places every unit at its canonical USA address. Exact
+comparison against the canonical USA ROM reports:
 
 | Function | Target bytes | C bytes | First difference | Status |
 | --- | ---: | ---: | ---: | --- |
-| `func_80006848` | 952 | 948 | `0x119` | behavior-recovered |
+| `func_80006848` | 952 | 952 | none | **byte-matching** |
 | `func_8006AF48` | 956 | 964 | `0x19` | behavior-recovered |
 | `func_80081FB0` | 1,012 | 1,028 | `0x05` | behavior-recovered |
 | `func_80037E9C` | 1,016 | 1,016 | `0x2F` | behavior-recovered |
 | `func_800049FC` | 1,024 | 1,024 | `0x93` | behavior-recovered |
 | `func_8002963C` | 1,024 | 1,024 | `0x05` | behavior-recovered |
 
-None is eligible for hybrid-build substitution, and no byte match is claimed.
+`func_80006848` is eligible for USA hybrid-build substitution. Its C evaluates
+the `0x06000000` mode bits directly before and after the flag-mutating block;
+this preserves the ROM's second flag read and mask materialization. The other
+five functions remain behavior-recovered and no byte match is claimed for them.
