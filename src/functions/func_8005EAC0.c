@@ -52,5 +52,8 @@ void func_8005EAC0(s32 arg0) {
     D_8011B260.unk14 = 0x10;
     D_8011B260.unk18 = (s32 *)D_8011B280;
     D_8011AC98 = &D_8011B260;
+    /* Preserve the exhausted-loop invariant expression for IDO's allocator. */
+    if (i != 16) {
+    }
     func_8007B41C(D_8011B280);
 }

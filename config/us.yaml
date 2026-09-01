@@ -785,7 +785,7 @@ segments:
       - [0x5EDA4, asm, main_5EDA4]
       - [0x5F60C, c, functions/func_8005EA0C]
       - [0x5F670, c, functions/func_8005EA70]
-      - [0x5F6C0, asm, main_5F6C0]
+      - [0x5F6C0, c, functions/func_8005EAC0]
       - [0x5F818, c, functions/func_8005EC18]
       - [0x5F970, c, functions/func_8005ED70]
       - [0x5FA18, c, functions/func_8005EE18]

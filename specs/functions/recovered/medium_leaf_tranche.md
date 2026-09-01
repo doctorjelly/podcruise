@@ -1,7 +1,7 @@
 # Medium leaf tranche
 
-Status: **10 behavior-recovered functions, measured in all four builds; none
-is byte-matching C yet**.
+Status: **1 byte-matching and 9 behavior-recovered functions in canonical
+USA; all 10 are measured in all four builds**.
 
 ## Verified facts
 
@@ -96,8 +96,11 @@ is the same in each build:
 | `func_80045004` | 320 | 232 | `0x03` | behavior-recovered |
 | `func_8004F254` | 260 | 248 | `0x03` | behavior-recovered |
 | `func_8005B2D0` | 288 | 288 | `0xC6` | behavior-recovered |
-| `func_8005EAC0` | 344 | 344 | `0x4D` | behavior-recovered |
+| `func_8005EAC0` | 344 | 344 | none | **byte-matching C: USA** |
 | `func_8008FF98` | 320 | 320 | `0x18` | behavior-recovered |
 
-These units remain assembly in hybrid rebuilds. No byte match is claimed.
-Address-based names remain because the subsystem identities are not yet proven.
+`func_8005EAC0` reproduces all 344 USA bytes after retaining the exhausted-loop
+invariant expression that selects the ROM's saved-register allocation. No
+regional compiler-match claim is made. The other nine units remain assembly in
+the USA hybrid rebuild. Address-based names remain because the subsystem
+identities are not yet proven.
