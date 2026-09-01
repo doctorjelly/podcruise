@@ -337,11 +337,28 @@ class MipsAnalysisTests(unittest.TestCase):
             rows = list(csv.DictReader(stream, delimiter="\t"))
         self.assertTrue(rows)
         for row in rows:
-            self.assertEqual(
-                int(row["tokens_spent"]),
-                int(row["tokens_after"]) - int(row["tokens_before"]),
-                row["work_item"],
-            )
+            if row["goal_tokens_spent"]:
+                self.assertEqual(
+                    int(row["goal_tokens_spent"]),
+                    int(row["goal_tokens_after"]) - int(row["goal_tokens_before"]),
+                    row["work_item"],
+                )
+            if row["raw_total_tokens"]:
+                self.assertEqual(
+                    int(row["raw_total_tokens"]),
+                    int(row["input_tokens"]) + int(row["output_tokens"]),
+                    row["work_item"],
+                )
+                self.assertEqual(
+                    int(row["uncached_input_tokens"]),
+                    int(row["input_tokens"]) - int(row["cached_input_tokens"]),
+                    row["work_item"],
+                )
+                self.assertLessEqual(
+                    int(row["reasoning_output_tokens"]),
+                    int(row["output_tokens"]),
+                    row["work_item"],
+                )
 
     def test_no_proven_compiler_output_is_classified_non_c(self) -> None:
         """The strongest available check on the non-C rule.

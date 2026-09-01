@@ -55,6 +55,12 @@ correctness, provenance, IP policy, exact-match evidence, or required tests.
   isolated function attempt in `docs/function_token_log.tsv`. Never divide a
   concurrent or batched token total among functions as though it were measured;
   use a tranche row or leave the function total blank.
+- Codex rollout `token_count` events can provide the raw per-turn split. Record
+  input, cached input, cache-write input, output, and reasoning-output deltas
+  across that task's `task_started`/`task_complete` interval. Extract only the
+  numeric fields; never commit session transcripts. `output_tokens` already
+  includes its reasoning-token subset, and cached input must remain separate
+  from uncached input when applying prices.
 - Run `make progress-chart` whenever exact USA coverage changes so the README
   plot and its tracked milestone TSV stay reproducible from Git history.
 
