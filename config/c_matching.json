@@ -10279,6 +10279,16 @@
       "id": "func_80090660",
       "source": "src/functions/func_80090660.c",
       "link_vram": "0x80090660",
+      "flags": [
+        "-G",
+        "0",
+        "-O1",
+        "-mips2",
+        "-non_shared",
+        "-Xcpluscomm",
+        "-signed",
+        "-Wab,-r4300_mul"
+      ],
       "absolute_symbols": {
         "D_8014C510": "0x8014C510",
         "D_8014C518": "0x8014C518",
@@ -30241,6 +30251,7 @@
       "id": "func_8002D4C4",
       "source": "src/functions/func_8002D4C4.c",
       "link_vram": "0x8002D4C4",
+      "rodata_vram": "0x800A9EF0",
       "absolute_symbols": {
         "D_80113685": "0x80113685",
         "func_80008B14": "0x80008B14"

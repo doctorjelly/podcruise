@@ -11,9 +11,9 @@ void func_8002D4C4(s32 kind) {
     f32 scale;
     s32 emphasized;
 
-    intensity = (f32)D_80113685 / 255.0f;
-    scale = 1.0f;
+    scale = 0.125f;
     emphasized = 0;
+    intensity = (f32)D_80113685 / 255.0f;
 
     switch (kind) {
     case 0x4B:
@@ -23,12 +23,23 @@ void func_8002D4C4(s32 kind) {
     case 0x4D:
         scale = 0.25f;
         break;
+    case 0x57:
+        scale = 0.25f;
+        intensity = (f32)((f64)intensity * 0.75);
+        break;
     case 0x4F:
         emphasized = 1;
         break;
-    case 0x57:
-        scale = 0.25f;
-        intensity = (f32)((f64)intensity * 1.5);
+    case 0x4C:
+    case 0x4E:
+    case 0x50:
+    case 0x51:
+    case 0x52:
+    case 0x53:
+    case 0x54:
+    case 0x55:
+    case 0x56:
+    default:
         break;
     }
 
