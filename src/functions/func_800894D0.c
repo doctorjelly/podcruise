@@ -29,24 +29,23 @@ s32 func_800894D0(void *arg0, void *arg1) {
     Table800894D0 *table;
     Item800894D0 *item;
     Slot800894D0 *slots;
-    Slot800894D0 *slot;
     s32 count;
     s16 index;
 
     table = arg0;
     item = arg1;
-    count = table->count44;
     slots = table->slots40;
-    for (index = 0; index < count; index++) {
-        slot = &slots[index];
-        if (slot->owner1C == 0) {
-            slot->owner1C = item;
-            slot->state20 = 5;
-            slot->flags28 = 0;
-            slot->byte2E = 0x40;
-            slot->byte2F = 0;
-            slot->value24 = 1.0f;
-            slot->angle2C = (s16)(((item->value0D << 15) - item->value0D) / 127);
+    index = 0;
+    count = table->count44;
+    for (; index < count; index++) {
+        if (slots[index].owner1C == 0) {
+            slots[index].owner1C = item;
+            slots[index].state20 = 5;
+            slots[index].flags28 = 0;
+            slots[index].byte2E = 0x40;
+            slots[index].byte2F = 0;
+            slots[index].value24 = 1.0f;
+            slots[index].angle2C = (s16)(item->value0D * 32767 / 127);
             return index;
         }
     }

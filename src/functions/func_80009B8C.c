@@ -13,7 +13,8 @@ extern s32 func_80051FF4(void);
 void func_80009B8C(u32 selection) {
     if ((func_8003F7B8(0x54657374) <= 0) || (func_80051FF4() != 0)) {
         D_8009AF24 = 0.0f;
-        D_8009AEF0 = D_8009AF08[selection % 12];
+        selection = selection % 12;
+        D_8009AEF0 = D_8009AF08[selection];
         D_8009AF20 = D_800A822C;
     }
 }

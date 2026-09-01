@@ -26167,6 +26167,59 @@
           "size": 176
         }
       ]
+    },
+    {
+      "id": "func_80009B8C_eu",
+      "source": "src/functions/func_80009B8C.c",
+      "link_vram": "0x80009B8C",
+      "defines": {
+        "func_80009B8C": "func_80009B8C",
+        "func_8003F7B8": "func_80044158",
+        "func_80051FF4": "func_80056CA4",
+        "D_8009AEF0": "D_800A0440",
+        "D_8009AF08": "D_800A0458",
+        "D_8009AF20": "D_800A0470",
+        "D_8009AF24": "D_800A0474",
+        "D_800A822C": "D_800AD52C"
+      },
+      "absolute_symbols": {
+        "func_80044158": "0x80044158",
+        "func_80056CA4": "0x80056CA4",
+        "D_800A0440": "0x800A0440",
+        "D_800A0458": "0x800A0458",
+        "D_800A0470": "0x800A0470",
+        "D_800A0474": "0x800A0474",
+        "D_800AD52C": "0x800AD52C"
+      },
+      "functions": [
+        {
+          "name": "func_80009B8C",
+          "vram": "0x80009B8C",
+          "rom": "0xA78C",
+          "size": 128
+        }
+      ]
+    },
+    {
+      "id": "func_80029298_eu",
+      "source": "src/functions/func_80029298.c",
+      "link_vram": "0x8002B974",
+      "absolute_symbols": {
+        "D_800A9F00": "0x800A9F00"
+      },
+      "rodata_vram": "0x800B1A40",
+      "defines": {
+        "func_80029298": "func_8002B974",
+        "D_800A4C00": "D_800A9F00"
+      },
+      "functions": [
+        {
+          "name": "func_8002B974",
+          "vram": "0x8002B974",
+          "rom": "0x2C574",
+          "size": 148
+        }
+      ]
     }
   ]
 }

@@ -1,4 +1,4 @@
-/* Independently written from specs/functions/runtime_leaves.md. */
+/* Independently written from $S/specs/func_8008D274.md. */
 
 #include "podcruise/types.h"
 

@@ -12,13 +12,13 @@ typedef struct {
 } PcEntry80029298;
 
 extern PcEntry80029298 D_800A4C00[];
-extern PcEntry80029298 D_800A5100[];
 
 void func_80029298(f32 offset) {
     PcEntry80029298 *entry;
+    s32 i;
 
-    entry = D_800A4C00;
-    do {
+    for (i = 0; i < 40; i++) {
+        entry = &D_800A4C00[i];
         switch (entry->phase + 1) {
             case 1:
                 entry->value0 = -60.0f + offset;
@@ -35,6 +35,5 @@ void func_80029298(f32 offset) {
                 entry->value0 = -157.0f + offset;
                 break;
         }
-        entry++;
-    } while (entry != D_800A5100);
+    }
 }

@@ -9,6 +9,9 @@ as one tranche row naming all of them, for the same reason.
 Usage:
     python3 tools/log_function_tokens.py <workflow-run-dir> [--commit SHA] [--apply]
 """
+
+# Python 3.9 evaluates annotations at definition time.
+from __future__ import annotations
 import argparse
 import collections
 import os

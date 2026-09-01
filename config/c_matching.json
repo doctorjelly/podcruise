@@ -31069,6 +31069,88 @@
           "size": 5680
         }
       ]
+    },
+    {
+      "id": "func_8002F440_us",
+      "source": "src/functions/func_8002F440.c",
+      "link_vram": "0x8002F440",
+      "absolute_symbols": {
+        "D_800AE8B0": "0x800AE8B0",
+        "D_80149C60": "0x80149C60"
+      },
+      "functions": [
+        {
+          "name": "func_8002F440",
+          "vram": "0x8002F440",
+          "rom": "0x30040",
+          "size": 64
+        }
+      ]
+    },
+    {
+      "id": "func_8002F480",
+      "source": "src/functions/func_8002F480.c",
+      "link_vram": "0x8002F480",
+      "flags": [
+        "-G",
+        "0",
+        "-O2",
+        "-mips2",
+        "-non_shared",
+        "-Xcpluscomm",
+        "-signed",
+        "-Wab,-r4300_mul"
+      ],
+      "absolute_symbols": {
+        "D_80000318": "0x80000318",
+        "D_8014D7E0": "0x8014D7E0"
+      },
+      "functions": [
+        {
+          "name": "func_8002F480",
+          "vram": "0x8002F480",
+          "rom": "0x30080",
+          "size": 80
+        }
+      ]
+    },
+    {
+      "id": "func_8002F4D0",
+      "source": "src/functions/func_8002F4D0.c",
+      "link_vram": "0x8002F4D0",
+      "absolute_symbols": {
+        "D_800D6960": "0x800D6960",
+        "D_800D7750": "0x800D7750",
+        "D_800D7A00": "0x800D7A00",
+        "func_800183C0": "0x800183C0",
+        "func_80088150": "0x80088150",
+        "func_8008B580": "0x8008B580",
+        "func_8008B810": "0x8008B810",
+        "func_8008B960": "0x8008B960",
+        "func_8002F550": "0x8002F550"
+      },
+      "functions": [
+        {
+          "name": "func_8002F4D0",
+          "vram": "0x8002F4D0",
+          "rom": "0x300D0",
+          "size": 128
+        }
+      ]
+    },
+    {
+      "id": "func_8002F9E0",
+      "source": "src/functions/func_8002F9E0.c",
+      "link_vram": "0x8002f9e0",
+      "absolute_symbols": {},
+      "functions": [
+        {
+          "name": "func_8002F9E0",
+          "vram": "0x8002f9e0",
+          "rom": "0x305e0",
+          "size": 28
+        }
+      ]
     }
   ]
 }

@@ -1,4 +1,4 @@
-/* Independently written from specs/functions/recovered/stitched_ui_control_tranche.md. */
+/* Independently written from scratchpad spec specs/func_80024954.md. */
 
 #include "podcruise/types.h"
 
@@ -73,15 +73,12 @@ extern void func_800469B4(void *, s32);
 extern s32 func_80082BE0(void);
 
 void func_80024954(Panel80024954 *panel) {
-    s32 green;
     s32 slot;
     s32 index;
     s16 icon;
-    char text[256];
-    s32 blue;
-    s32 width;
     s32 height;
-    s32 red;
+    char text[256];
+    s32 width;
 
     if (D_800A4BBC != 0) {
         D_800A4BBC = 0;
@@ -127,13 +124,10 @@ void func_80024954(Panel80024954 *panel) {
 
     if (D_800A21B8[panel->unk5D][0] == -1 || D_800A21B8[panel->unk5D][1] == -1) {
         func_8008A6B4(text, D_800A8F38);
-        red = func_80082BE0();
-        green = func_80082BE0();
-        blue = func_80082BE0();
         func_8003EC40(0xA0, 0xCD,
-                      (s32)((f32)red / (f32)2147483648.0 * 256.0f),
-                      (s32)((f32)green / (f32)2147483648.0 * 256.0f),
-                      (s32)((f32)blue / (f32)2147483648.0 * 256.0f),
+                      (s32)((f32)func_80082BE0() / (f32)2147483648.0 * 256.0f),
+                      (s32)((f32)func_80082BE0() / (f32)2147483648.0 * 256.0f),
+                      (s32)((f32)func_80082BE0() / (f32)2147483648.0 * 256.0f),
                       0xFF, (u8 *)text);
     }
     func_8008A6B4(text, D_800A8F58, func_8002D598(panel->unk5D));

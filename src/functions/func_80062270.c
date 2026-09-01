@@ -44,7 +44,7 @@ extern f64 D_800AD330;
 extern f64 D_800AD338;
 extern f64 D_800AD340;
 extern f64 D_800AD348;
-extern PcVec3f D_80118D90;
+extern PcVec3f D_80118D60[];
 extern s32 D_80118EF8;
 extern f32 D_80120BF8;
 
@@ -76,11 +76,11 @@ extern void func_80063EF4(Object80062270 *);
 extern s32 func_80082BE0(void);
 
 void func_80062270(Object80062270 *object) {
-    PcVec3f delta;
+    f32 time;
     f32 low;
     f32 high;
-    f32 time;
     s32 mode;
+    PcVec3f delta;
 
     low = 0.0f;
     high = 0.0f;
@@ -217,7 +217,7 @@ void func_80062270(Object80062270 *object) {
         if (high <= func_80033B94(object->list34)) {
             object->elapsedA8 = 0.0f;
             object->durationAC =
-                (f32)func_80082BE0() / 2147483648.0f * 2.0f + 3.0f;
+                (f32)func_80082BE0() / 2147483648.0f * (f32)2.0 + 3.0f;
             func_80060DE4(object, 17);
             return;
         }
@@ -241,8 +241,8 @@ void func_80062270(Object80062270 *object) {
                               -116.0f - object->position44.y);
             if (func_800152CC(&object->target50, &D_800A513C)) {
                 object->desiredAngle6C =
-                    func_80014F54(object->position44.x - D_80118D90.x,
-                                  D_80118D90.y - object->position44.y);
+                    func_80014F54(object->position44.x - D_80118D60[4].x,
+                                  D_80118D60[4].y - object->position44.y);
             }
             func_80060DE4(object, 34);
         }
@@ -319,14 +319,17 @@ void func_80062270(Object80062270 *object) {
         break;
     }
 
-    if (object->state14 == 27) {
-        return;
-    }
-    if (object->mode08 == 2) {
-        func_80033780(object->node30, object->scale94,
-                      object->angle68 -
-                          func_80033BCC(object->node30, object->list34));
-    } else {
-        func_80033780(object->node30, object->scale94, object->angle68);
+    mode = object->mode08;
+    if (object->state14 != 27) {
+        switch (mode) {
+        case 2:
+            func_80033780(object->node30, object->scale94,
+                          object->angle68 -
+                              func_80033BCC(object->node30, object->list34));
+            break;
+        default:
+            func_80033780(object->node30, object->scale94, object->angle68);
+            break;
+        }
     }
 }

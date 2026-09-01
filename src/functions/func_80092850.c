@@ -10,8 +10,6 @@ typedef struct {
 void func_80092850(u8 *cursor, s32 length) {
     s32 head;
     s32 chunk;
-    u8 *limit;
-    u8 *end;
 
     if (length >= 12) {
         head = -(s32)(unsigned long)cursor & 3;
@@ -21,10 +19,10 @@ void func_80092850(u8 *cursor, s32 length) {
             cursor += head;
         }
 
-        chunk = length & ~0x1F;
+        chunk = length & -32;
         length -= chunk;
         if (chunk != 0) {
-            limit = chunk + cursor;
+            chunk += (s32)(unsigned long)cursor;
             do {
                 ((u32 *)cursor)[0] = 0;
                 ((u32 *)cursor)[1] = 0;
@@ -35,25 +33,25 @@ void func_80092850(u8 *cursor, s32 length) {
                 ((u32 *)cursor)[6] = 0;
                 ((u32 *)cursor)[7] = 0;
                 cursor += 32;
-            } while (cursor != limit);
+            } while ((s32)(unsigned long)cursor != chunk);
         }
 
-        chunk = length & ~3;
+        chunk = length & -4;
         length -= chunk;
         if (chunk != 0) {
-            limit = chunk + cursor;
+            chunk += (s32)(unsigned long)cursor;
             do {
                 *(u32 *)cursor = 0;
                 cursor += 4;
-            } while (cursor != limit);
+            } while ((s32)(unsigned long)cursor != chunk);
         }
     }
 
     if (length > 0) {
-        end = length + cursor;
+        length += (s32)(unsigned long)cursor;
         do {
             *cursor = 0;
             cursor++;
-        } while (cursor != end);
+        } while ((s32)(unsigned long)cursor != length);
     }
 }
