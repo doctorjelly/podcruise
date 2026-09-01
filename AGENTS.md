@@ -146,9 +146,10 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
 - As a default token cap, stop after three evidence-driven source variants when
   the remaining difference is only register coloring or scheduling.
 - Rank same-size candidates by differing instruction words and check their
-  recovery notes before trying variants. Skip documented register-only dead
-  ends; pilot any automated permutation search on one representative function
-  with a fixed time limit before scaling it to a batch.
+  recovery notes and `docs/function_token_log.tsv` before trying variants.
+  Skip documented register-only dead ends and previously exhausted audits;
+  pilot any automated permutation search on one representative function with a
+  fixed time limit before scaling it to a batch.
 - After the close same-size candidates hit the three-variant cap, sample small
   size mismatches instead of continuing register-color searches. One 164/168
   candidate became exact when its source mutated the unsigned length parameter
