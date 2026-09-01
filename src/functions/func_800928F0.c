@@ -1,4 +1,4 @@
-/* Recovered from specification specs/func_800928F0.md (worker batch 04). */
+/* Specification: specs/functions/recovered/func_800928F0.md. */
 #include "podcruise/types.h"
 
 extern s32 D_800A7EE0;
@@ -30,9 +30,10 @@ s32 func_800928F0(void *arg0, s32 arg1, u16 arg2, u8 *arg3, s32 arg4) {
     if (D_80149CB0 != 3 || D_800A7EE0 != arg1) {
         D_80149CB0 = 3;
         D_800A7EE0 = arg1;
-        for (index = 0; index < arg1; index++) {
-            *p = 0;
-            p++;
+        index = 0;
+        while (index < arg1) {
+            index++;
+            *p++ = 0;
         }
         p[0] = 0xFF;
         p[1] = 0x23;
