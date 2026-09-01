@@ -1,7 +1,7 @@
 # Boundary and state tranche
 
 Status: **23 newly measured USA functions plus regional completion for
-`func_800862D8`; two functions are byte-matching C in every build**.
+`func_800862D8`; three functions are byte-matching C in every build**.
 
 ## Verified boundaries
 
@@ -15,7 +15,7 @@ return and/or a distinct prologue, plus complete JP/EU body evidence.
 | `80008630` | `0x009230` | 100 | `8000868C` / `2C620001` | 0 |
 | `80008694` | `0x009294` | 100 | `800086F0` / `2C620001` | 0 |
 | `800823DC` | `0x082FDC` | 64 | `80082414` / `46107000` | 0 |
-| `80089488` | `0x08A088` | 72 | `800894C0` / `nop` | 0 |
+| `80089488` | `0x08A088` | 64 | `800894C0` / `nop` | 0 |
 | `80012B5C` | `0x01375C` | 148 | `80012BE8` / restore 8-byte frame | 0 |
 | `80062E14` | `0x063A14` | 180 | `80062EC0` / `nop` | 0 |
 | `8004AE74` | `0x04BA74` | 236 | `8004AF58` / `nop` | 0 |
@@ -37,6 +37,10 @@ return and/or a distinct prologue, plus complete JP/EU body evidence.
 | `80082BE0` | `0x0837E0` | 160 | `80082C70` / `nop` | 286 |
 | `8008AC78` | `0x08B878` | 96 | `8008ACD0` / `nop` | 0 |
 
+For `func_80089488`, the words at `0x800894C8` and `0x800894CC` are
+post-return alignment padding. The executed body ends with the `jr` delay slot
+at `0x800894C4`; the independent next function begins at `0x800894D0`.
+
 Seven prior source filenames began at an internal prologue rather than the real
 entry. Review moved `80029330`, `8002FA0C`, `800454AC`, `8007FD9C`, and
 `800958DC` to `8002932C`, `8002FA00`, `800454A8`, `8007FD98`, and `800958D4`.
@@ -50,7 +54,7 @@ complete functions already start at `80046764` and `800862D8`.
 | `func_80008630` | Interpret requests 0, 1, and -1 as set, clear, and toggle operations on one global mode bit, then report whether that mode is clear. |
 | `func_80008694` | Apply the same set/clear/toggle protocol to the adjacent global mode bit and report its cleared state. |
 | `func_800823DC` | Evaluate a scalar plane-style expression from two float vectors, returning the second vector's third component plus the residual divided by the first vector's third component. |
-| `func_80089488` | Add a signed delta to the word at offset 4 of each fixed-size entry, using the signed count stored in the first entry, and return the loop count. |
+| `func_80089488` | Add a signed delta to the word at offset 4 of each fixed-size entry, using the signed count stored in the first entry. The routine has no defined return value. |
 | `func_80012B5C` | Seed nullable metric outputs with -1, locate a glyph when the font table and inclusive character range are valid, and publish its width and height. The original unconditionally reloads two stack locals at exit, so invalid glyph input leaves caller-visible indeterminate values; callers must satisfy the glyph precondition. |
 | `func_80062E14` | Recognize five four-byte resource tags. Dispatch the Load and Reset tags to the resource helper and return true for every recognized tag, false otherwise. |
 | `func_8004AE74` | When the object's enable bit and global thresholds permit, invoke state-transition helpers for state 8, an optional secondary flag, and an indexed owner record. |
@@ -118,7 +122,7 @@ neighboring unit's confirmed `-O1 -mips3 -o32` profile.
 | `func_80008630` | 100 / 100 | `0x4` | behavior-recovered |
 | `func_80008694` | 100 / 100 | `0x4` | behavior-recovered |
 | `func_800823DC` | 64 / 64 | `0xD` | behavior-recovered |
-| `func_80089488` | 72 / 64 | `0x5` | behavior-recovered |
+| `func_80089488` | 64 / 64 | none | **byte-matching C: USA/JP/EU/LRG** |
 | `func_80012B5C` | 148 / 148 | `0x4E` USA/EU; `0x2B` JP | behavior-recovered |
 | `func_80062E14` | 180 / 192 | `0x2B` | behavior-recovered |
 | `func_8004AE74` | 236 / 236 | none | **byte-matching C: USA/JP/EU/LRG** |

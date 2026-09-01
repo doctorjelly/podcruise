@@ -7,14 +7,10 @@ typedef struct {
     s32 unk4;
 } Entry80089488;
 
-s32 func_80089488(Entry80089488 *entries, s32 delta) {
+void func_80089488(Entry80089488 *entries, s32 delta) {
     s32 count;
-    Entry80089488 *entry;
 
-    entry = entries;
     for (count = 0; count < entries->unk2; count++) {
-        entry->unk4 = entry->unk4 + delta;
-        entry++;
+        entries[count].unk4 = entries[count].unk4 + delta;
     }
-    return count;
 }

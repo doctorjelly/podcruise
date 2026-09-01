@@ -23984,7 +23984,7 @@
           "name": "func_8008E9D8",
           "vram": "0x8008E9D8",
           "rom": "0x8F5D8",
-          "size": 72
+          "size": 64
         }
       ],
       "defines": {

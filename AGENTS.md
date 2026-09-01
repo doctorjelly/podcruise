@@ -119,6 +119,10 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   another high-probability candidate.
 - Confirm the true function body through the `jr` delay slot before shaping C;
   do not try to make the compiler emit post-return alignment padding.
+- When an uncalled body ends with a value in `$v0`, do not infer a C return type
+  from that register alone. Test `void` after excluding post-return padding;
+  this two-check audit recovered `func_80089488` exactly and was cheaper than
+  trying to recolor its counter and cursor locals.
 - As a default token cap, stop after three evidence-driven source variants when
   the remaining difference is only register coloring or scheduling.
 - Rank same-size candidates by differing instruction words and check their

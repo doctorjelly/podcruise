@@ -1,4 +1,4 @@
-/* Implements the specification in specs/func_80075648.md (randomised orientation setup). */
+/* Implements specs/functions/recovered/func_80075648.md. */
 #include "podcruise/types.h"
 
 extern f32 D_800AD9B8;
@@ -24,7 +24,6 @@ extern s32 func_80082BE0(void);
 
 void func_80075648(u8 *obj, s32 index, f32 *fallback, f32 amount) {
     f32 m[4][4];
-    u32 tag[2];
 
     if (D_8011C7A0 != 0) {
         if (D_8011C7A4 != 0) {
@@ -33,6 +32,7 @@ void func_80075648(u8 *obj, s32 index, f32 *fallback, f32 amount) {
                 f32 base;
                 f32 denom;
                 s32 i;
+                u32 tag[2];
 
                 tag[0] = 0x42697473;
                 func_8003FA24(0x54657374, tag);

@@ -23852,7 +23852,7 @@
           "name": "func_8008A178",
           "vram": "0x8008A178",
           "rom": "0x8AD78",
-          "size": 72
+          "size": 64
         }
       ],
       "defines": {
