@@ -169,6 +169,11 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   small statement-order space and same-line grouping before a random search.
   Source line grouping is codegen-significant for IDO; one order plus one
   same-line pair recovered `func_8007ACEC` exactly without broad permutation.
+- When a tag dispatcher is only a few instructions too large, compare whether
+  its cases return independently or converge on a shared result label. Keep
+  redundant source predicates when the ROM contains their loads and
+  branch-likely delay slots; shared true/false tails recovered
+  `func_80062E14` while preserving those otherwise pointless tests.
 - Treat source-line grouping as a small, measured search dimension for IDO
   scheduling: separating independent short-circuit assignments can stop work
   from being hoisted across the first branch, while grouping a conditional

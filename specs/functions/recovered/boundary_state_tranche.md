@@ -124,7 +124,7 @@ neighboring unit's confirmed `-O1 -mips3 -o32` profile.
 | `func_800823DC` | 64 / 64 | `0xD` | behavior-recovered |
 | `func_80089488` | 64 / 64 | none | **byte-matching C: USA/JP/EU/LRG** |
 | `func_80012B5C` | 148 / 148 | `0x4E` USA/EU; `0x2B` JP | behavior-recovered |
-| `func_80062E14` | 180 / 192 | `0x2B` | behavior-recovered |
+| `func_80062E14` | 180 / 180 | none (USA) | **byte-matching C: USA** |
 | `func_8004AE74` | 236 / 236 | none | **byte-matching C: USA/JP/EU/LRG** |
 | `func_80089E50` | 288 / 288 | none (USA) | **byte-matching C: USA** |
 | `func_8005163C` | 412 / 404 | `0x18` | behavior-recovered |
@@ -147,6 +147,11 @@ neighboring unit's confirmed `-O1 -mips3 -o32` profile.
 For `func_80029494`, retaining `100.0f` in a named local restores four
 canonical stack-spill words, but nine instruction words still differ from USA;
 the byte-match claim therefore remains explicitly withheld.
+
+For `func_80062E14`, the source retains the original's two redundant tests of
+`D_800A4BE0` and routes every recognized tag through one shared true-result
+tail. IDO 5.3 `-O2` then reproduces all 180 USA bytes, including both
+branch-likely delay slots and the final return delay-slot `nop`.
 
 Only the build-specific bold claims are eligible for C substitution in the
 corresponding hybrid build.
