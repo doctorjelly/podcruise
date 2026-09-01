@@ -11,13 +11,13 @@ the canonical ROM.
 
 | Function | ROM | Bytes | `jr ra` / delay slot | Direct USA callers |
 | --- | ---: | ---: | --- | ---: |
-| `func_80092050` | `0x092C50` | 512 | `80092244` / restore the 56-byte frame | 19 |
+| `func_80092050` | `0x092C50` | 508 | `80092244` / restore the 56-byte frame | 19 |
 | `func_800509E8` | `0x0515E8` | 536 | `80050BF8` / `nop` | 1 |
 | `func_80041D14` | `0x042914` | 556 | `80041F38` / restore the 160-byte frame | 1 |
 | `func_800511B0` | `0x051DB0` | 560 | `800513D8` / restore the 64-byte frame | 3 |
 | `func_80042970` | `0x043570` | 584 | `80042BB0` / `nop` | 1 |
 
-`func_80092050` has one alignment `nop` after its return delay slot and before
+`func_80092050` has one alignment `nop` after its 508-byte body and before
 the next entry at `80092250`. The other four entries end at their return delay
 slot. The USA callers are `80089EFC`, `8008A028`, `8008A4CC`, `8008B494`,
 `8008B500`, `80090CDC`, `80090D44`, `80090DB4`, `80090EB8`, `80091000`,
@@ -69,7 +69,7 @@ address. The table reports canonical USA results:
 
 | Function | Target bytes | C bytes | First difference | Status |
 | --- | ---: | ---: | ---: | --- |
-| `func_80092050` | 512 | 508 | `0xB3` | behavior-recovered |
+| `func_80092050` | 508 | 508 | `0xB3` | behavior-recovered |
 | `func_800509E8` | 536 | 536 | `0x1C5` | behavior-recovered |
 | `func_80041D14` | 556 | 556 | none | **byte-matching** |
 | `func_800511B0` | 560 | 556 | `0x03` | behavior-recovered |
