@@ -1,4 +1,4 @@
-/* Recovered from specs/func_8005EC18.md (worker specification). */
+/* Independently written from specs/functions/recovered/func_8005EC18.md. */
 #include "podcruise/types.h"
 
 typedef struct {
@@ -50,5 +50,8 @@ void func_8005EC18(s32 arg0) {
     D_8011B880.unk14 = 40;
     D_8011B880.unk18 = D_8011B8A0;
     D_8011AC9C = &D_8011B880;
+    /* Preserve the exhausted-loop invariant expression for IDO's allocator. */
+    if (i != 40) {
+    }
     func_80065804(D_8011B8A0);
 }
