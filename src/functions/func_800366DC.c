@@ -1,5 +1,4 @@
-/* Recovered from the worker specification for func_800366DC (assigned as func_800366E4;
-   the true entry is eight bytes earlier).  Builds the two-light block for an object. */
+/* Specification: specs/functions/recovered/func_800366DC.md. */
 #include "podcruise/types.h"
 
 typedef struct {
