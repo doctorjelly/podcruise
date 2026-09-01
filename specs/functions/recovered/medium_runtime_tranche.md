@@ -71,3 +71,9 @@ Europe still measure `func_8008C390` under their default `-O2` units and are
 not claimed exact. The later USA revision inherits the same verified `-O1`
 match. The other two USA functions remain behavioral recoveries. Address-based
 names remain until subsystem semantics justify replacements.
+
+For `func_80067AB4`, writing the nonzero test as a scalar condition restores
+the canonical 444-byte instruction count and separate zero materializations.
+The frame remains 64 rather than 72 bytes and 16 instruction words still
+differ through floating-point register allocation, so that form is not an
+exact match and was reverted.

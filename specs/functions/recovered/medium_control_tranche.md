@@ -96,3 +96,8 @@ groups in their evidenced order around the random helper calls. No regional
 compiler-match claim is added for it. The other seven units remain assembly in
 the USA hybrid rebuild and no byte match is claimed for them. Address-based
 names remain until subsystem semantics are proven.
+
+For `func_80039B70`, moving the buffer initialization ahead of the setup calls
+changes the first difference to `0x05`, while a `for` rewrite changes it to
+`0x41`; neither reproduces the missing instruction or exact scheduling, so the
+documented `do` loop remains.

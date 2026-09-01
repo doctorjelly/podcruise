@@ -104,3 +104,8 @@ invariant expression that selects the ROM's saved-register allocation. No
 regional compiler-match claim is made. The other nine units remain assembly in
 the USA hybrid rebuild. Address-based names remain because the subsystem
 identities are not yet proven.
+
+For `func_80007728`, explicit queue and message-pointer locals reproduce the
+canonical 72-byte frame but still use only `$s0`-`$s3`; the ROM preserves the
+receive count in `$s4` and uses `$s1`/`$s2` for those two locals. Qualifier and
+declaration-order variants did not change that allocation and were reverted.

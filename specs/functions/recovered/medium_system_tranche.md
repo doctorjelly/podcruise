@@ -92,3 +92,9 @@ address. USA, Japan, Europe, and LRG produce the same result for this tranche:
 Only the three exact functions replace assembly in hybrid rebuilds. The seven
 nonmatching sources remain behavioral recoveries. Address-based names remain
 because subsystem semantics are not yet proven.
+
+For `func_80084148`, switching the dispatcher from `commands->word0` to its
+copied local was independently rejected: IDO emits 480 bytes for the 476-byte
+body and differs at the prologue. For `func_80086EB4`, reordering the scale
+expression leaves the same `0x31` first difference. Both experiments were
+reverted.

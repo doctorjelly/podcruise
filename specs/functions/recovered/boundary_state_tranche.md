@@ -148,6 +148,12 @@ For `func_80029494`, retaining `100.0f` in a named local restores four
 canonical stack-spill words, but nine instruction words still differ from USA;
 the byte-match claim therefore remains explicitly withheld.
 
+For `func_80050F88`, the baseline already reproduces the ROM's 56-byte frame
+and every local stack offset. Direct-global and separate-angle forms remove the
+premature angle spill but disturb that proven layout or leave the function one
+instruction short. Assignment-expression variants also remained nonmatching,
+so the compact behavior-recovered source is retained.
+
 For `func_80062E14`, the source retains the original's two redundant tests of
 `D_800A4BE0` and routes every recognized tag through one shared true-result
 tail. IDO 5.3 `-O2` then reproduces all 180 USA bytes, including both

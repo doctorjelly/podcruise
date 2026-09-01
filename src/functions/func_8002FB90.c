@@ -1,4 +1,4 @@
-/* Recovered from the specification in specs/func_8002FB90.md (worker notes). */
+/* Independently written from specs/functions/recovered/func_8002FB90.md. */
 #include "podcruise/types.h"
 extern s32 func_8008A6B4(u8 *destination, u8 *format, s32 value);
 extern s32 D_800A285C;

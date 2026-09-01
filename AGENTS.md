@@ -179,6 +179,12 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   size until the parent reran the verifier. Exclude already-recorded scheduler
   or register-allocation blockers before delegation, and keep parent compiler
   verification mandatory. Measurements live in `docs/function_token_log.tsv`.
+- Treat an agent's prose claim of an exact match as an unverified candidate.
+  In one bounded audit the retained one-line edit was reported exact, but the
+  parent harness compiled 480 bytes against a 476-byte target and rejected it
+  at the prologue. Run the isolated matching-object command yourself before
+  reviewing or integrating the candidate; this is cheaper than a failed full
+  ledger and ROM rebuild.
 - When every mismatch is a local stack offset, exhaustively test only the small
   declaration-order space in `/tmp` before changing behavior or invoking the
   general permuter. Keep the simplest exact ordering and independently rerun
