@@ -1,4 +1,4 @@
-/* Specification: specs/func_80089144.md (scratchpad) */
+/* Implements specs/functions/recovered/small_mismatch_audit_tranche.md. */
 #include "podcruise/types.h"
 
 typedef struct {

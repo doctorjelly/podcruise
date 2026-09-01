@@ -185,6 +185,12 @@ Official basis: [OpenAI model guidance](https://developers.openai.com/api/docs/g
   at the prologue. Run the isolated matching-object command yourself before
   reviewing or integrating the candidate; this is cheaper than a failed full
   ledger and ROM rebuild.
+- Compute compiler symbol size, isolated-section padding, return boundaries,
+  and word-diff counts mechanically in the parent; do not spend follow-up agent
+  tokens requesting derived measurements. In one four-function tranche, three
+  follow-ups still returned two impossible return boundaries and several
+  padding-as-code or byte-as-word counts, while `readelf`, `objdump`, and `cmp`
+  resolved all four locally in one bounded pass.
 - When every mismatch is a local stack offset, exhaustively test only the small
   declaration-order space in `/tmp` before changing behavior or invoking the
   general permuter. Keep the simplest exact ordering and independently rerun

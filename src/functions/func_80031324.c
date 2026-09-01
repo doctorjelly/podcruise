@@ -1,4 +1,4 @@
-/* Independently written from the specification for func_80031324. */
+/* Implements specs/functions/recovered/small_mismatch_audit_tranche.md. */
 
 #include "podcruise/types.h"
 

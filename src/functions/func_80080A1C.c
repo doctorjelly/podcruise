@@ -1,4 +1,4 @@
-/* Independently written from scratchpad spec specs/func_80080A1C.md. */
+/* Implements specs/functions/recovered/small_mismatch_audit_tranche.md. */
 
 #include "podcruise/types.h"
 
