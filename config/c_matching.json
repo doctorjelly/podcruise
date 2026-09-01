@@ -7733,6 +7733,17 @@
       "id": "func_80011838",
       "source": "src/functions/func_80011838.c",
       "link_vram": "0x80011838",
+      "flags": [
+        "-G",
+        "0",
+        "-O2",
+        "-mips2",
+        "-non_shared",
+        "-Xcpluscomm",
+        "-signed",
+        "-Wab,-r4300_mul",
+        "-Wo,-loopunroll,0"
+      ],
       "absolute_symbols": {
         "D_800D6140": "0x800D6140",
         "D_800D68C0": "0x800D68C0"

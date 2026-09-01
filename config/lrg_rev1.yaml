@@ -261,7 +261,7 @@ segments:
       - [0x123E4, c, functions/func_800117E4]
       - [0x123F0, c, functions/func_800117F0]
       - [0x12414, c, functions/func_80011814]
-      - [0x12438, asm, main_12438]
+      - [0x12438, c, functions/func_80011838]
       - [0x12488, c, functions/func_80011888]
       - [0x124F8, c, functions/func_800118F8]
       - [0x12518, c, functions/func_80011918]

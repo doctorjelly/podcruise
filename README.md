@@ -36,9 +36,9 @@ not a substitute for owning it.
   `analysis/source_manifest.json` from the matching configuration and the
   per-version comparison reports, and fails if any recovered source is left
   unmeasured.
-- Exact IDO 5.3 matches for 1,035 of them (242,324 bytes) in the canonical USA
+- Exact IDO 5.3 matches for 1,036 of them (242,404 bytes) in the canonical USA
   image. The current regional reports contain 893 matches (196,460 bytes) for
-  Japan, 894 (204,584 bytes) for Europe, and 1,035 (242,324 bytes) for the later
+  Japan, 894 (204,584 bytes) for Europe, and 1,036 (242,404 bytes) for the later
   USA revision. The remaining reviewed candidates are behavior-recovered but
   not yet byte-matching; see [`docs/DECOMP_STATUS.md`](docs/DECOMP_STATUS.md)
   for the precise terminology and current ledger.

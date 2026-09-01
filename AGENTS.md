@@ -45,6 +45,10 @@ correctness, provenance, IP policy, exact-match evidence, or required tests.
 - Use code/programmatic tool orchestration for predictable filtering, ranking,
   and comparison so large intermediate results are reduced before the model
   sees them. Keep semantic judgment and final verification with the agent.
+- Redirect deterministic full-build output to a temporary log, then surface
+  only explicit success/failure lines. One LRG round trip emitted 2,280 lines
+  (419 KB) even though the only decision-bearing line was the final exact-hash
+  result; filtering that output materially reduces transcript tokens.
 - Do not paste stable instructions repeatedly. In API-backed workflows, keep
   reusable prompt prefixes stable for caching, use prior-response state or
   compaction, and select current-turn reasoning context when old reasoning is no
