@@ -58,7 +58,7 @@ void func_80026644(Obj *obj) {
     f32 point[3];
     Ent *ent;
     f32 base;
-    register f32 height;
+    f32 height;
 
     if (D_800A4BBC != 0) {
         D_800A4BBC = 0;

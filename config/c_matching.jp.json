@@ -26061,6 +26061,33 @@
           "size": 152
         }
       ]
+    },
+    {
+      "id": "func_80017FB8",
+      "source": "src/functions/func_80017E88.c",
+      "link_vram": "0x80017FB8",
+      "flags": [
+        "-G",
+        "0",
+        "-O2",
+        "-mips2",
+        "-non_shared",
+        "-Xcpluscomm",
+        "-signed",
+        "-Wab,-r4300_mul"
+      ],
+      "absolute_symbols": {},
+      "defines": {
+        "func_80017E88": "func_80017FB8"
+      },
+      "functions": [
+        {
+          "name": "func_80017FB8",
+          "vram": "0x80017FB8",
+          "rom": "0x18BB8",
+          "size": 84
+        }
+      ]
     }
   ]
 }

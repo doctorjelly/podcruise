@@ -38,11 +38,13 @@ extern void func_800399F0(void);
 
 void func_800280D8(s32 arg0) {
     s32 index;
+    s32 *doneFlag;
 
     (void)arg0;
+    doneFlag = &D_800A25F4;
     func_8003E1EC(D_800A969C, 3.0f);
     if (D_800A25F4 == 0) {
-        *(s32 *)0x800A25F4 = 1; /* raw address: the original rematerialises this store address */
+        *doneFlag = 1;
         D_80113680.unk_08 |= 0x20;
         D_80113680.unk_0C[0] = 0xFF;
         D_80113680.unk_0C[1] = 0xFF;

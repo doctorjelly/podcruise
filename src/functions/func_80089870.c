@@ -1,4 +1,4 @@
-/* Independently written from specs/functions/recovered/medium_control_tranche.md. */
+/* Independently written from the specification in specs/func_80089870.md. */
 #include "podcruise/types.h"
 
 extern s32 D_800A69B0;
@@ -19,12 +19,12 @@ extern s32 func_800907D0(s32, void *);
 
 s32 func_80089870(void *arg0, void *arg1, void *arg2) {
     void *message;
-    s32 result[1];
-    volatile unsigned long long time;
+    s32 result;
+    unsigned long long time;
     s32 timer[8];
     s32 queue[6];
 
-    result[0] = 0;
+    result = 0;
     if (D_800A69B0 != 0) {
         return 0;
     }
@@ -37,13 +37,13 @@ s32 func_80089870(void *arg0, void *arg1, void *arg2) {
     }
     D_80149CB1 = 4;
     func_80089AB0(0);
-    result[0] = func_800907D0(1, D_80149C70);
+    result = func_800907D0(1, D_80149C70);
     func_80087E80(arg0, &message, 1);
-    result[0] = func_800907D0(0, D_80149C70);
+    result = func_800907D0(0, D_80149C70);
     func_80087E80(arg0, &message, 1);
     func_800899E0(arg1, arg2);
     D_80149CB0 = 0;
     func_800905A0();
     func_800880E0(D_80149CD8, D_80149CF0, 1);
-    return result[0];
+    return result;
 }

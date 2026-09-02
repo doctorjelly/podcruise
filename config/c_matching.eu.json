@@ -26263,6 +26263,33 @@
           "size": 152
         }
       ]
+    },
+    {
+      "id": "func_80018318",
+      "source": "src/functions/func_80017E88.c",
+      "link_vram": "0x80018318",
+      "flags": [
+        "-G",
+        "0",
+        "-O2",
+        "-mips2",
+        "-non_shared",
+        "-Xcpluscomm",
+        "-signed",
+        "-Wab,-r4300_mul"
+      ],
+      "absolute_symbols": {},
+      "defines": {
+        "func_80017E88": "func_80018318"
+      },
+      "functions": [
+        {
+          "name": "func_80018318",
+          "vram": "0x80018318",
+          "rom": "0x18F18",
+          "size": 84
+        }
+      ]
     }
   ]
 }

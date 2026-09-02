@@ -1,5 +1,6 @@
 /* Independently written from specs/func_800952A0.md (worker batch_03).
- * Behavior-level recovery: reviewed C, 351 of 352 instructions, not byte-exact. */
+ * Behavior-level recovery: exact length (1408 bytes, 352 instructions) and matching
+ * structure; not byte-exact — see the spec for the residual register-class note. */
 
 #include "podcruise/types.h"
 
@@ -164,12 +165,12 @@ s32 func_800952A0(void) {
     }
 
         count = control->counter;
-        if (count == -1 && control->command == 2 && control->slot == 1) {
+        if (count == -1 && (u32)control->command == 2 && (u32)control->slot == 1) {
             first = &control->records[0];
             if (first->words[4] == 0) {
                 u32 *block = *(u32 **)&first->words[2];
 
-                if ((block[3] | block[0] | block[1] | block[2]) != 0) {
+                if ((block[0] | block[1] | block[2] | block[3]) != 0) {
                     first->words[0] = 0x17;
                     func_80095820();
                     return 1;

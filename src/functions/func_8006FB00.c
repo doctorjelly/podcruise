@@ -65,8 +65,8 @@ void func_8006FB00(Unk8006FB00 *arg0) {
     if (arg0->unk60 & 0x80) {
         arg0->unk18C = arg0->unk18C * arg0->unk1AC;
     }
-    if (0.0f < arg0->unk264) {
-        arg0->unk18C = 0.0f;
+    if ((f32)0 < arg0->unk264) {
+        arg0->unk18C = (f32)0;
     }
     scale = arg0->unk22C;
     limit = arg0->unk74 * scale;

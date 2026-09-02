@@ -100,10 +100,10 @@ void func_8006ABD0(Obj6ABD0 *obj, Vec3f6A *origin) {
             }
         }
 
+        magnitude = (75.0f - distance) / 70.0f * obj->unk074;
+        vector[2] = 0.0f;
         vector[0] = offsets[0].y;
         vector[1] = -offsets[0].x;
-        vector[2] = 0.0f;
-        magnitude = (75.0f - distance) / 70.0f * obj->unk074;
         if (func_800154D0(vector) < D_800AD5B8) {
             magnitude = 1.0f;
         } else {

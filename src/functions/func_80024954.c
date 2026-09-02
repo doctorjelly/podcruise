@@ -1,4 +1,4 @@
-/* Recovered per specs/func_80024954.md (boundary corrected: entry is func_80024954, not func_80024960). */
+/* Recovered per scratchpad specs/func_80024954.md (assigned as func_80024960; boundary corrected: the entry is func_80024954). */
 #include "podcruise/types.h"
 
 typedef struct {
@@ -28,6 +28,7 @@ extern s32 D_800A4BBC;
 extern s32 D_800A256C;
 extern s32 D_80119658;
 extern s32 D_800A4BA4[];
+extern s32 D_800A4BA8[];
 extern s8 D_800A21C1[];
 extern s32 D_800A21B8[];
 extern s32 D_800A22E8[][7];
@@ -74,10 +75,10 @@ extern void func_800469B4(Obj *, s32);
 void func_80024954(Obj *obj) {
     char text[272];
     s32 *cursor;
-    s32 flags;
     s32 value;
-    s32 green;
     s32 red;
+    s16 idx;
+    s32 green;
 
     if (D_800A4BBC != 0) {
         D_800A4BBC = 0;
@@ -115,7 +116,7 @@ void func_80024954(Obj *obj) {
 
     obj->unk5D = D_800A22E8[obj->unk5E][func_8002DB20(obj, D_8011A240.unk30)];
     if (0.0f < D_8011A240.unk0) {
-        func_800494D0(obj, *(u8 *)0x800D73E4, D_8011A240.unk0 / 2.0);
+        func_800494D0(obj, (&D_800D73E5)[-1], D_8011A240.unk0 / 2.0);
     }
 
     if (D_800A256C != 0) {
@@ -124,29 +125,32 @@ void func_80024954(Obj *obj) {
 
     if (D_800A21B8[obj->unk5D * 3] == -1 || D_800A21B8[obj->unk5D * 3 + 1] == -1) {
         func_8008A6B4(text, D_800A8F38);
-        red = func_80082BE0();
-        green = func_80082BE0();
         value = func_80082BE0();
-        func_8003EC40(0xA0, 0xCD, (s32)((f32)red / (f32)2147483648.0 * 256.0f),
+        green = func_80082BE0();
+        func_8003EC40(0xA0, 0xCD, (s32)((f32)value / (f32)2147483648.0 * 256.0f),
                       (s32)((f32)green / (f32)2147483648.0 * 256.0f),
-                      (s32)((f32)value / (f32)2147483648.0 * 256.0f), 0xFF, text);
+                      (s32)((f32)func_80082BE0() / (f32)2147483648.0 * 256.0f), 0xFF, text);
     }
 
     func_8008A6B4(text, D_800A8F58, func_8002D598(obj->unk5D));
     func_8003EC40(0xA0, 0x36, 0, 0xFF, 0, 0xFF, text);
     red = func_800129B8(text, 0);
-    green = func_800129B8(text, 0);
-    func_8002CC28((s32)(160.0 - (f64)red / 2.0), 0x37, green);
+    value = func_800129B8(text, 0);
+    func_8002CC28((s32)(160.0 - (f64)red / 2.0), 0x37, value);
 
-    value = obj->unk5E;
-    if (value == 0) {
+    switch (obj->unk5E) {
+    case 0:
         func_8003EC40(0xA0, 0x22, 0x32, 0xFF, 0xFF, 0xFF, D_800A8F60);
-    } else if (value == 1) {
+        break;
+    case 1:
         func_8003EC40(0xA0, 0x22, 0x44, 0xFF, 0x3E, 0xFF, D_800A8F84);
-    } else if (value == 2) {
+        break;
+    case 2:
         func_8003EC40(0xA0, 0x22, 0xA3, 0xBE, 0x11, 0xFF, D_800A8FA8);
-    } else if (value == 3) {
+        break;
+    case 3:
         func_8003EC40(0xA0, 0x22, 0x9D, 0x59, 0x20, 0xFF, D_800A8FCC);
+        break;
     }
 
     if (obj->unk6C != 0) {
@@ -161,11 +165,11 @@ void func_80024954(Obj *obj) {
     func_8003EC40(0xA0, 0x18, 0x32, 0xFF, 0xFF, 0xFF, text);
 
     func_8001C404(obj, D_800D73E5);
-    green = (s16)(D_800A21C1[obj->unk5D * 12] + 0x45);
-    func_8000A920((s16)green, 1);
-    func_8000AA04((s16)green, 0xA0, 0x91);
-    func_8000AAC0((s16)green, 1.0f, 1.0f);
-    func_8000AB24((s16)green, 0xFF, 0xFF, 0xFF, 0xFF);
+    idx = D_800A21C1[obj->unk5D * 12] + 0x45;
+    func_8000A920(idx, 1);
+    func_8000AA04(idx, 0xA0, 0x91);
+    func_8000AAC0(idx, 1.0f, 1.0f);
+    func_8000AB24(idx, 0xFF, 0xFF, 0xFF, 0xFF);
     func_8003EC40(0xE0, 0x8A, 0, 0xFF, 0, 0xFF,
                   (char *)&D_800D6DD8[D_800A21C1[obj->unk5D * 12] * 92 + 0x1C]);
     func_8002C780(0x2D, 0x54, 0x1E);
@@ -175,23 +179,23 @@ void func_80024954(Obj *obj) {
     }
     func_80064B44(0, 1.0f, 1);
 
-    for (cursor = &D_800A4BA4[0]; cursor != &D_800A4BA4[1]; cursor++) {
-        flags = *cursor;
-        if ((flags & 1) != 0 && D_80119658 == 0) {
+    cursor = &D_800A4BA4[0];
+    do {
+        if ((*cursor & 1) != 0 && D_80119658 == 0) {
             func_8002D4C4(0x55);
             func_8004BAC8(obj, 0);
             func_800469B4(obj, 0xD);
             D_800A256C = 1;
             return;
         }
-        if ((flags & 2) != 0 && (flags & 1) == 0 && D_80119658 == 0) {
+        if ((*cursor & 2) != 0 && (*cursor & 1) == 0 && D_80119658 == 0) {
             func_8002D4C4(0x4D);
             func_8004BAC8(obj, 0);
             func_800469B4(obj, 9);
             return;
         }
         if (obj->unk5E == D_800D73E5) {
-            if ((flags & 0x8000) != 0) {
+            if ((*cursor & 0x8000) != 0) {
                 value = obj->unk5E;
                 if (value < D_8011A240.unk28) {
                     obj->unk5E = value + 1;
@@ -201,9 +205,8 @@ void func_80024954(Obj *obj) {
                 } else {
                     func_8002D4C4(0x4B);
                 }
-                flags = *cursor;
             }
-            if ((flags & 0x4000) != 0) {
+            if ((*cursor & 0x4000) != 0) {
                 value = obj->unk5E;
                 if (value > 0) {
                     obj->unk5E = value - 1;
@@ -215,5 +218,6 @@ void func_80024954(Obj *obj) {
                 }
             }
         }
-    }
+        cursor++;
+    } while (cursor != D_800A4BA8);
 }

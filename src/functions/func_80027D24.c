@@ -13,10 +13,11 @@ extern u8 D_80113E86;
 void func_80027D24(s32 arg0, s32 arg1) {
     s32 total;
     s32 count;
-    u8 amount;
+    s32 amount;
     s32 taken;
     s32 value;
     s32 index;
+    u8 *slot;
     s32 cap;
     s32 i;
     s32 draw;
@@ -41,12 +42,13 @@ void func_80027D24(s32 arg0, s32 arg1) {
     draw = (s32)((f32)func_80082BE0() / (f32)2147483648.0 * 52.0f);
     draw += 25;
     amount = draw & 0xFF;
-    while (total >= amount) {
+    while (total >= (u8)draw) {
         index = (s32)((f32)func_80082BE0() / (f32)2147483648.0 * 7.0f);
         if (D_80113E60[index + 0x1D] > 0) {
             value = D_80113E60[index + 0x24];
+            taken = amount;
             if (amount < value) {
-                D_80113E60[index + 0x24] = value - amount;
+                D_80113E60[index + 0x24] = value - taken;
             } else {
                 D_80113E60[index + 0x24] = 0;
             }
@@ -80,17 +82,18 @@ void func_80027D24(s32 arg0, s32 arg1) {
         draw = (s32)((f32)func_80082BE0() / (f32)2147483648.0 * 52.0f);
         draw += 25;
         amount = draw & 0xFF;
-        while (cap >= amount) {
+        while (cap >= (u8)draw) {
             index = (s32)((f32)func_80082BE0() / (f32)2147483648.0 * 7.0f);
-            value = D_80113E60[index + 0x24];
+            slot = &D_80113E60[index];
+            value = slot[0x24];
             if (value < 255) {
+                taken = amount;
                 if (255 - value < amount) {
                     amount = amount + value - 255;
                     taken = amount & 0xFF;
-                    D_80113E60[index + 0x24] = 255;
+                    slot[0x24] = 255;
                 } else {
-                    taken = amount;
-                    D_80113E60[index + 0x24] = value + taken;
+                    slot[0x24] = value + taken;
                 }
                 cap -= taken;
             }

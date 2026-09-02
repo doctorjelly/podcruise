@@ -1,4 +1,4 @@
-/* Implements specs/functions/recovered/small_mismatch_audit_tranche.md. */
+/* Implements specs/func_80040050.md (podcruise). */
 #include "podcruise/types.h"
 
 typedef struct Sub80040050 {

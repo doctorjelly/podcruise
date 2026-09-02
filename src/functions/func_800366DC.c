@@ -1,4 +1,4 @@
-/* Recovered from specification specs/func_800366DC.md (uncovered-split worker unc_06). */
+/* Recovered from specification specs/func_800366DC.md (uncovered-split worker unc_03). */
 #include "podcruise/types.h"
 
 typedef struct {
@@ -22,7 +22,6 @@ void func_800366DC(u8 *light) {
     f32 offset[3];
     f32 first[3];
     f32 second[3];
-    f32 value;
 
     if (D_800A3FE8 == 0) {
         return;
@@ -62,18 +61,12 @@ void func_800366DC(u8 *light) {
         func_80015538(second, first, offset);
     }
 
-    value = first[0] * 128.0f;
-    light[8] = (s32)(value < 127.0f ? value : 127.0f);
-    value = first[1] * 128.0f;
-    light[9] = (s32)(value < 127.0f ? value : 127.0f);
-    value = first[2] * 128.0f;
-    light[10] = (s32)(value < 127.0f ? value : 127.0f);
-    value = second[0] * 128.0f;
-    light[24] = (s32)(value < 127.0f ? value : 127.0f);
-    value = second[1] * 128.0f;
-    light[25] = (s32)(value < 127.0f ? value : 127.0f);
-    value = second[2] * 128.0f;
-    light[26] = (s32)(value < 127.0f ? value : 127.0f);
+    light[8] = (s32)(first[0] * 128.0f < 127.0f ? first[0] * 128.0f : 127.0f);
+    light[9] = (s32)(first[1] * 128.0f < 127.0f ? first[1] * 128.0f : 127.0f);
+    light[10] = (s32)(first[2] * 128.0f < 127.0f ? first[2] * 128.0f : 127.0f);
+    light[24] = (s32)(second[0] * 128.0f < 127.0f ? second[0] * 128.0f : 127.0f);
+    light[25] = (s32)(second[1] * 128.0f < 127.0f ? second[1] * 128.0f : 127.0f);
+    light[26] = (s32)(second[2] * 128.0f < 127.0f ? second[2] * 128.0f : 127.0f);
 
     light[0] = 0;
     light[1] = 0;

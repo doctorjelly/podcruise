@@ -1,8 +1,8 @@
-/* Specification: $S/specs/func_800290A4.md (fade ticker for overlay -103). */
+/* Recovered from specification specs/func_800290A4.md (screen fade-out step). */
 #include "podcruise/types.h"
 
-extern void func_8000A920(s32, s32);
-extern void func_8000AB24(s32, s32, s32, s32, s32);
+extern s32 func_8000AB24(s32, s32, s32, s32, s32);
+extern s32 func_8000A920(s32, s32);
 
 extern f32 D_800A2604;
 extern s16 D_800A2608;
@@ -13,27 +13,28 @@ extern f32 D_800A9DEC;
 extern f32 D_80120BF8;
 
 s32 func_800290A4(void) {
-    s32 finished;
+    s32 done;
     f32 level;
-    s32 delay;
-    s16 count;
+    s32 count;
+    s16 timer;
 
-    finished = 0;
+    done = 0;
     level = D_800A2604;
-    if ((level == 255.0f) || (D_800A260C > 0)) {
-        func_8000AB24(-103, 0, 0, 0, 0xFF);
-        delay = D_800A260C - 1;
-        D_800A260C = delay;
-        if (delay > 0) {
-            return 0;
+
+    if (level == 255.0f || D_800A260C > 0) {
+        func_8000AB24(-0x67, 0, 0, 0, 0xFF);
+        count = D_800A260C - 1;
+        D_800A260C = count;
+        if (count > 0) {
+            return done;
         }
     }
 
     if (level <= 0.0f) {
-        count = D_800A2608 - 1;
-        D_800A2608 = count;
-        if (count <= 0) {
-            finished = 1;
+        timer = (s16)(D_800A2608 - 1);
+        D_800A2608 = timer;
+        if (timer <= 0) {
+            done = 1;
         }
         level = 0.0f;
     } else {
@@ -46,15 +47,15 @@ s32 func_800290A4(void) {
     }
 
     D_800A2604 = level;
-    func_8000AB24(-103, 0, 0, 0, (u32)level);
+    func_8000AB24(-0x67, 0, 0, 0, (s32)(u32)level);
 
-    if (finished != 0) {
-        func_8000A920(-103, 0);
-        D_800A4BD8 = 1;
-        D_800A4BDC = 0;
-        D_800A260C = 3;
-        D_800A2604 = 255.0f;
-        return 1;
+    if (done == 0) {
+        return 0;
     }
-    return 0;
+    func_8000A920(-0x67, 0);
+    D_800A4BD8 = 1;
+    D_800A4BDC = 0;
+    D_800A260C = 3;
+    D_800A2604 = 255.0f;
+    return 1;
 }

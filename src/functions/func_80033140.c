@@ -8,14 +8,14 @@ extern f32 func_80004FB0(s32, f32 *, f32 *, f32 *);
 
 s32 func_80033140(f32 *arg0, f32 *arg1, s32 arg2, f32 *arg3) {
     f32 ray[7];
-    f32 hitNormal[3];
-    f32 spare1[3];
+    f32 hitNormal[4];
+    f32 recip;
+    f32 spare1[2];
     s32 result;
     f32 moved[3];
     f32 push;
     f32 spare2;
-    f32 planeOffset;
-    f32 hitPlane[3];
+    f32 hitPlane[4];
 
     result = 0;
     ray[3] = arg0[0] - arg1[0];
@@ -26,13 +26,14 @@ s32 func_80033140(f32 *arg0, f32 *arg1, s32 arg2, f32 *arg3) {
         ray[0] = arg1[0];
         ray[1] = arg1[1];
         ray[2] = arg1[2];
-        ray[3] = ray[3] * (1.0f / ray[6]);
-        ray[4] = ray[4] * (1.0f / ray[6]);
-        ray[5] = ray[5] * (1.0f / ray[6]);
+        recip = 1.0f / ray[6];
+        ray[3] = ray[3] * recip;
+        ray[4] = ray[4] * recip;
+        ray[5] = ray[5] * recip;
         if (0.0f <= func_80004FB0(arg2, ray, hitNormal, hitPlane)) {
-            planeOffset = hitPlane[2] * hitNormal[2] +
+            hitPlane[3] = hitPlane[2] * hitNormal[2] +
                           (hitNormal[0] * hitPlane[0] + hitNormal[1] * hitPlane[1]);
-            push = (planeOffset -
+            push = (hitPlane[3] -
                     (hitPlane[2] * arg0[2] +
                      (arg0[0] * hitPlane[0] + arg0[1] * hitPlane[1]))) + 2.0f;
             moved[0] = hitPlane[0] * push;

@@ -34,14 +34,10 @@ extern s16 D_800D6CC4;
 
 void func_80029C24(void) {
     u8 kind;
-    s32 productA;
-    s32 productB;
 
     kind = D_800A2DE0[D_801198A8[D_8011A270].unk00].unk03;
-    productA = D_80113E60.unk24[kind] * D_800A2DE0[D_8011A050[kind].unk00].unk04;
-    productB = D_801198A8[D_8011A270].unk01 * D_800A2DE0[D_801198A8[D_8011A270].unk00].unk04;
-    D_800D6CC8 = (s32)((f32)productA * D_800A9E08) + 1;
-    D_800D6CCC = (s32)((f32)productB * D_800A9E08) + 1;
+    D_800D6CC8 = (s32)((f32)(D_800A2DE0[D_8011A050[kind].unk00].unk04 * D_80113E60.unk24[kind]) * D_800A9E08) + 1;
+    D_800D6CCC = (s32)((f32)(D_800A2DE0[D_801198A8[D_8011A270].unk00].unk04 * D_801198A8[D_8011A270].unk01) * D_800A9E08) + 1;
 
     if (D_80113E60.unk18 + D_800D6CC8 < D_800D6CCC) {
         D_800D6CC4 = 1;
