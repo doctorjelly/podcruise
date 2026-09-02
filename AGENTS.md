@@ -345,3 +345,29 @@ yield, because each needs different instructions.
 - Believe a worker that reports its assigned label is not a function. Padding
   and interior branch targets recur in generated candidate lists; feed those
   reports back into the generator so the same artifact is not reassigned.
+
+## Measured yield by population and effort
+
+One wave of 42 single-function workers, 14 per population, attributed by
+checking which assigned functions became exact rather than by reading worker
+prose:
+
+| population | effort | assigned | exact | rate |
+|---|---|---:|---:|---:|
+| correct size, wrong bytes | medium | 14 | 2 | 14% |
+| wrong size | low | 14 | 2 | 14% |
+| never attempted (small tail) | low | 14 | 0 | 0% |
+
+- Raising the correct-size population from low to medium moved it from 0 of 14
+  to 2 of 14. A null result from that population at low effort is a resourcing
+  signal, not proof the functions are unrecoverable.
+- The wrong-size population reached the same rate at low effort. Where both are
+  available, spend low-effort workers on wrong-size candidates before spending
+  medium-effort workers on correct-size ones; the match costs less.
+- The never-attempted tail, once its members average roughly 120 bytes, stops
+  producing matches *or* promotions. That is the signal to stop funding the
+  stream and re-derive its boundaries instead: the remaining labels are mostly
+  padding and interior branch targets rather than functions.
+- Attribute yield by testing which assigned functions changed state. Counting
+  occurrences of "exact" in worker reports is not attribution; a report saying
+  a function is *not* exact matches the same search.
