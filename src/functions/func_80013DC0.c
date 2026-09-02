@@ -38,6 +38,7 @@ void func_80013DC0(u8 *text) {
     u8 character;
     u8 *body;
     s16 saved[2];
+    s32 offset;
     register s32 index;
 
     func_80011E54(0);
@@ -63,13 +64,14 @@ void func_80013DC0(u8 *text) {
         index = 3;
     }
 
-    body = text + index;
+    offset = index;
     index = 0;
     saved[0] = D_800A1CD0[0];
     saved[1] = D_800A1CD0[1];
     EMIT(0xFA000000, (u32)((D_800A1CCC[0] << 24) | (D_800A1CCC[1] << 16) | (D_800A1CCC[2] << 8) | D_800A1CCC[3]))
     EMIT(0xFCFF97FF, 0xFF2DFEFF)
 
+    body = text + offset;
     page = D_800A1D8C;
     if (page->unk00 == 0) {
         EMIT(0xE3001001, 0xC000)

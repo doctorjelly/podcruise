@@ -65,15 +65,15 @@ s32 func_80028E78(Unknown80028E78 *arg0) {
             func_80039B70();
             func_800399F0();
             func_800469B4(arg0, D_800A2198);
-            return 0;
+        } else {
+            func_8000A920(-103, 0);
+            D_800A4BD8 = 1;
+            D_800A4BDC = 0;
+            func_80039CD8(1);
+            func_80039B70();
+            func_800399F0();
+            return 1;
         }
-        func_8000A920(-103, 0);
-        D_800A4BD8 = 1;
-        D_800A4BDC = 0;
-        func_80039CD8(1);
-        func_80039B70();
-        func_800399F0();
-        return 1;
     }
     return 0;
 }

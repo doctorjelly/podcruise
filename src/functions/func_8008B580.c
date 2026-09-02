@@ -9,7 +9,7 @@ extern s32 D_80149EC0;
 extern s32 D_80000300;
 extern s32 D_8000030C;
 extern u8 D_8000031C[];
-extern u64 D_800A7B40;
+u64 D_800A7B40;
 extern u32 D_800A7B48;
 extern u32 func_8008CB00[];
 

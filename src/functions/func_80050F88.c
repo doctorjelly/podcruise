@@ -56,14 +56,14 @@ void func_80050F88(Obj *obj) {
         return;
     }
     func_80015288(&scratch, &D_80118D90);
-    /* The spin angle is accumulated in the cosine slot; func_80014CC0
+    /* The spin angle is accumulated through the cosine slot; func_80014CC0
        overwrites that slot before the value is read as a cosine, and the
-       original reserved no separate local for it. */
-    cosine = D_800A5278[0] + 40.0f * D_80120BF8;
-    D_800A5278[0] = cosine;
+       original reserved no separate local for it. The new angle is written
+       into the global as part of the same assignment so that the value is
+       still held in a register for the wrap test and the wrap store. */
+    cosine = D_800A5278[0] = D_800A5278[0] + 40.0f * D_80120BF8;
     if (cosine > 360.0f) {
-        cosine = cosine - 360.0f;
-        D_800A5278[0] = cosine;
+        D_800A5278[0] = cosine - 360.0f;
     }
     if (D_800A4BF8 != 0 || D_800A5294 != 5 ||
         !func_800152CC(&D_800A527C, &D_80118E10) ||

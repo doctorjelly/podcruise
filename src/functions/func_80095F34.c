@@ -1,4 +1,4 @@
-/* Recovered from specification specs/func_80095F34.md (shape rework, worker shape_04). */
+/* Recovered from specification specs/func_80095F34.md (shape rework, worker shape_01). */
 #include "podcruise/types.h"
 
 typedef struct Cmd80095F34 {
@@ -66,7 +66,8 @@ Cmd80095F34 *func_80095F34(Port80095F34 *port, Wave80095F34 *wave, u32 arg2, s32
         wave->unk24->unk24 = 0;
         wave->unk18 = wave->unk18 + whole - arg3;
     } else {
-        result = func_80095DA8(port, port->unk18 + ((-wave->unk04) * 2), arg2, arg3, cmd);
+        offset = port->unk18 + ((-wave->unk04) * 2);
+        result = func_80095DA8(port, offset, arg2, arg3, cmd);
     }
     return result;
 }

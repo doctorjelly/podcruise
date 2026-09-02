@@ -24,11 +24,11 @@ s32 func_80033140(f32 *arg0, f32 *arg1, s32 arg2, f32 *arg3) {
     ray[6] = func_800153C0(&ray[3]);
     if (D_800AA474 < ray[6]) {
         ray[0] = arg1[0];
-        ray[1] = arg1[1];
-        ray[2] = arg1[2];
         recip = 1.0f / ray[6];
         ray[3] = ray[3] * recip;
+        ray[1] = arg1[1];
         ray[4] = ray[4] * recip;
+        ray[2] = arg1[2];
         ray[5] = ray[5] * recip;
         if (0.0f <= func_80004FB0(arg2, ray, hitNormal, hitPlane)) {
             hitPlane[3] = hitPlane[2] * hitNormal[2] +

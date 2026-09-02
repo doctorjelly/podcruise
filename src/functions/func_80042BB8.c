@@ -1,4 +1,4 @@
-/* Recovered from specification specs/func_80042BB8.md (worker batch 04). */
+/* Recovered from specification specs/func_80042BB8.md (worker batch 04, reworked in batch 25). */
 #include "podcruise/types.h"
 
 typedef struct Part80042BB8 {
@@ -39,8 +39,9 @@ extern s32 func_80051FF4(void);
 
 void func_80042BB8(Actor80042BB8 *actor) {
     f32 second[4][4];
-    f32 spare[4];
     f32 first[4][4];
+    s16 alpha;
+    f32 spare[3];
     Part80042BB8 *part;
     f32 spread;
     f32 fade;
@@ -56,7 +57,7 @@ void func_80042BB8(Actor80042BB8 *actor) {
         fade = D_800A4AF0 + D_80120BF0 * (3.0f / (f32)func_80051FF4());
     }
     D_800A4AF0 = fade;
-    if (D_800A4AF0 > 1.0f) {
+    if (fade > 1.0f) {
         D_800A4AF0 = -1.0f;
     }
     part = actor->unk0F4;
@@ -73,6 +74,7 @@ void func_80042BB8(Actor80042BB8 *actor) {
         if (part->unk254 != 0) {
             func_800181BC(part->unk254, 2, 3, 0x10, 2);
         }
+        alpha = 255;
         value = D_800A4AF0;
         if (value < 0.0f) {
             D_800A4AF0 = value;
@@ -81,7 +83,7 @@ void func_80042BB8(Actor80042BB8 *actor) {
             D_800A4AF0 = value;
             level = value;
         }
-        func_8000EA4C(part->unk254, 0, 0, 0x59, 0x8C, 0x36, (s32)(255 * (1.0f - level)));
+        func_8000EA4C(part->unk254, 0, 0, 0x59, 0x8C, 0x36, (s32)(alpha * (1.0f - level)));
         func_80017874(second);
         func_8001535C(second[1], part->unk258, part->unk050);
         second[1][2] = 0.0f;

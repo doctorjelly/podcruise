@@ -35,15 +35,16 @@ extern void func_8002E2FC(void);
 extern void func_800349C4(void);
 extern void func_80034DA8(void);
 extern s32 func_80035354(s32 request, s16 index);
-extern void func_80035598(u32 flags);
+extern void func_80035598(s32 token);
 extern void func_800374C4(Node80038388 *node);
 extern void func_80037BF8(f32 *result, f32 *source, f32 *offset);
-extern void func_80037C8C(void *mode, f32 matrix[4][3], Node80038388 *node);
+extern void func_80037C8C(s32 mode, f32 matrix[4][3], Node80038388 *node);
 extern void func_80037E9C(Node80038388 *node);
 extern s32 func_80038294(Node80038388 *node);
 
 void func_80038388(Node80038388 *node) {
-    s32 count;
+    s32 n;
+    s32 count[1];
     f32 matrix[4][3];
     s32 token;
     Node80038388 *child;
@@ -75,6 +76,7 @@ void func_80038388(Node80038388 *node) {
     if (kind != 0x3064) {
         if (D_800A3FE8 == 0) {
             if (node->unk0C & 0x20) {
+                none = -1;
                 D_80112DD8 = none;
                 if (D_800A3FE8 != 0) {
                     if (D_800A3FF4 != 0) {
@@ -109,14 +111,14 @@ void func_80038388(Node80038388 *node) {
                     matrix[3][2] = node->unk1C.matrix[3][2];
                     func_80037BF8(&matrix[0][0], (f32 *)&node->unk1C,
                                   &node->unk4C[0][0]);
-                    func_80037C8C((void *)1, matrix, node);
+                    func_80037C8C(1, matrix, node);
                 } else {
-                    func_80037C8C((void *)1, node->unk1C.matrix, node);
+                    func_80037C8C(1, node->unk1C.matrix, node);
                 }
             }
             break;
         case 0xD064:
-            func_80037C8C((void *)0, node->unk1C.matrix, node);
+            func_80037C8C(0, node->unk1C.matrix, node);
             break;
         case 0x5066:
             index = func_80038294(node);
@@ -134,11 +136,12 @@ void func_80038388(Node80038388 *node) {
             }
             break;
         case 0x5065:
-            count = func_80017DAC(node);
+            count[0] = func_80017DAC(node);
             if (node->unk1C.index != -2) {
                 if (node->unk1C.index == none) {
-                    if (count > 0) {
-                        for (i = 0; i != count; i++) {
+                    if (count[0] > 0) {
+                        i = 0;
+                        do {
                             child = node->unk18[i];
                             if (child != 0) {
                                 if ((func_800182FC(child, 2) &
@@ -150,9 +153,10 @@ void func_80038388(Node80038388 *node) {
                                     }
                                 }
                             }
-                        }
+                            i++;
+                        } while (i != count[0]);
                     }
-                } else if (node->unk1C.index >= 0 && node->unk1C.index < count) {
+                } else if (node->unk1C.index >= 0 && node->unk1C.index < count[0]) {
                     child = node->unk18[node->unk1C.index];
                     if (child != 0) {
                         if ((func_800182FC(child, 2) & D_80112C94->required) ==
@@ -167,9 +171,10 @@ void func_80038388(Node80038388 *node) {
             }
             break;
         case 0x5064:
-            count = func_80017DAC(node);
+            n = func_80017DAC(node);
+            count[0] = n;
             {
-                for (i = 0; i < count; i++) {
+                for (i = 0; i < n; i++) {
                     child = node->unk18[i];
                     if (child != 0) {
                         if ((func_800182FC(child, 2) & D_80112C94->required) ==

@@ -19,37 +19,27 @@ extern u32 func_80088360(void *address);
 
 Gfx *func_80095C20(Buffer *buffer, s16 *start, s32 offset, s32 length, Gfx *list) {
     Gfx *gfx;
-    s16 *end;
     s16 *stop;
-    Buffer *buf;
-    s32 off;
-    s32 len;
     s32 head;
     s32 tail;
+    s16 *end;
 
     gfx = list;
-    buf = buffer;
-    off = offset;
-    len = length;
-    end = buf->base + buf->count;
-    if (start < buf->base) {
-        start += buf->count;
+    end = buffer->base + buffer->count;
+    if (start < buffer->base) {
+        start += buffer->count;
     }
-    stop = start + len;
+    stop = start + length;
     if (end < stop) {
-        gfx->w0 = 0x08000000;
         head = (end - start) * 2;
-        gfx->w1 = ((u32)off << 16) | ((u32)head & 0xFFFF);
-        gfx++;
+        EMIT(0x08000000, (((u32)offset & 0xFFFF) << 16) | ((u32)head & 0xFFFF))
         EMIT(0x06000000, func_80088360(start))
         tail = (stop - end) * 2;
-        EMIT(0x08000000, ((u32)(off + head) << 16) | ((u32)tail & 0xFFFF))
-        EMIT(0x06000000, func_80088360(buf->base))
-        EMIT(0x08000000, (u32)(len * 2) & 0xFFFF)
+        EMIT(0x08000000, ((((u32)(head + offset)) & 0xFFFF) << 16) | ((u32)tail & 0xFFFF))
+        EMIT(0x06000000, func_80088360(buffer->base))
+        EMIT(0x08000000, (u32)(length << 1) & 0xFFFF)
     } else {
-        gfx->w0 = 0x08000000;
-        gfx->w1 = ((u32)off << 16) | ((u32)(len * 2) & 0xFFFF);
-        gfx++;
+        EMIT(0x08000000, (((u32)offset & 0xFFFF) << 16) | ((u32)(length << 1) & 0xFFFF))
         EMIT(0x06000000, func_80088360(start))
     }
     return gfx;

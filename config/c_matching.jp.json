@@ -26195,6 +26195,37 @@
           "size": 308
         }
       ]
+    },
+    {
+      "id": "func_80096910",
+      "source": "src/functions/func_80095C20.c",
+      "link_vram": "0x80096910",
+      "absolute_symbols": {
+        "func_80089050": "0x80089050"
+      },
+      "defines": {
+        "func_80095C20": "func_80096910",
+        "func_80088360": "func_80089050"
+      },
+      "flags": [
+        "-G",
+        "0",
+        "-O3",
+        "-mips2",
+        "-non_shared",
+        "-Xcpluscomm",
+        "-signed",
+        "-Wab,-r4300_mul",
+        "-Wo,-loopunroll,0"
+      ],
+      "functions": [
+        {
+          "name": "func_80096910",
+          "vram": "0x80096910",
+          "rom": "0x97510",
+          "size": 392
+        }
+      ]
     }
   ]
 }

@@ -1206,6 +1206,8 @@ segments:
       - [0x973AC, asm, main_973AC]
       - [0x973B0, c, functions/func_80095AC0]
       - [0x97458, asm, main_97458]
+      - [0x97510, c, functions/func_80095C20]
+      - [0x97698, asm, main_97698]
       - [0x98000, c, functions/func_80096710]
       - [0x98074, asm, main_98074]
       - [0x98080, c, functions/func_80096790]

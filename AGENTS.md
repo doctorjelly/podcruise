@@ -358,9 +358,20 @@ prose:
 | wrong size | low | 14 | 2 | 14% |
 | never attempted (small tail) | low | 14 | 0 | 0% |
 
-- Raising the correct-size population from low to medium moved it from 0 of 14
-  to 2 of 14. A null result from that population at low effort is a resourcing
-  signal, not proof the functions are unrecoverable.
+- Neither the population split nor the effort level survived four waves of
+  testing, and the record of that is more useful than the table above. Pooled
+  across four waves, 10 of 154 single-function workers produced an exact match,
+  about 6.5 percent. Every per-wave sub-rate observed -- 0, 4, 7, 11 and 14
+  percent -- lies within the noise of that single figure at these sample sizes.
+  Correct-size at medium effort read 0, 2, 2 and 3 matches from 14, 14, 28 and
+  14 workers; wrong-size read 2, 1, 1 and 1 from 14, 28, 14 and 28. **Capacity
+  was reallocated three times on differences that were sampling noise, twice in
+  opposite directions.** Treat roughly 6-7 percent as the working rate for a
+  single-function worker on the remaining population, hold a stable
+  configuration, and prefer low effort: medium costs more per worker and no
+  wave has shown it recovering that cost. Reallocate only on a difference large
+  enough to survive counts this small, which in practice means a change in
+  method rather than a change in dispatch weighting.
 - The wrong-size population also reached 14% in that wave, and acting on it was
   a mistake worth recording. Its share was doubled to 28 workers on the next
   wave and the rate fell to 4% (1 of 28), while correct-size at medium held at

@@ -58,7 +58,7 @@ s32 func_800129E4(u8 *arg0, Font *arg1) {
         if (c != 0 && !done) {
             glyph = 0;
             base = arg1->unk5C;
-            idx = c;
+            idx = ch;
             if (c >= 0x61 && c < 0x7B && arg1->unk5B < 0x61) {
                 idx = c - 0x20;
             }
@@ -76,7 +76,7 @@ s32 func_800129E4(u8 *arg0, Font *arg1) {
                 }
             }
             if (base != 0 && idx >= arg1->unk5A && idx <= arg1->unk5B) {
-                glyph = (Glyph *)(base + (idx - arg1->unk5A) * 16);
+                glyph = &((Glyph *)base)[idx - arg1->unk5A];
             }
             if (glyph != 0) {
                 total += glyph->unk02;

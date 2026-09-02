@@ -1,4 +1,4 @@
-/* Recovered from specification: specs/func_8004E4F4.md (worker batch 05) */
+/* Recovered from specification: specs/func_8004E4F4.md (shape rework, batch 28) */
 #include "podcruise/types.h"
 
 typedef struct {
@@ -132,11 +132,12 @@ void func_8004E4F4(Mode *arg0) {
 
     if (arg0->unk38 == 2) {
         back = D_800AB2DC;
-        for (i = 0; i < D_8011A240.unk2C + 1; i++) {
+        mid = D_8011A240.unk2C + 1;
+        for (i = 0; i < mid; i++) {
+            D_8011A050[i].unk4 = (f32)(i % 2) * D_800AB2E8 + D_800AB2E4;
             D_8011A050[i].unk8 = 40.0f;
             D_8011A050[i].unk2C = 0.0f;
             D_8011A050[i].unk28 = 0.0f;
-            D_8011A050[i].unk4 = (f32)(i % 2) * D_800AB2E8 + D_800AB2E4;
             D_8011A050[i].unkC = (f32)(i / 2) * D_800AB2E0 + 9.0f;
             if (i == D_8011A240.unk2C) {
                 D_8011A050[i].unk28 = 90.0f;

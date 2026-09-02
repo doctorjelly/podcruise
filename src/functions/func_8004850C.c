@@ -1,4 +1,4 @@
-/* Independently written from specs/functions/recovered/func_8004850C.md. */
+/* Independently written from the specification in scratchpad specs/func_8004850C.md. */
 #include "podcruise/types.h"
 
 typedef struct Vec3f8004850C {
@@ -51,18 +51,18 @@ extern void func_800181BC(void *, s32, s32, s32, s32);
 extern void func_80028D60(void);
 
 void func_8004850C(s32 argument) {
-    f32 pivot[3];
-    f32 spare[4];
-    f32 work[16];
-    f32 basis[4][4];
-    f32 place[6];
-    f32 anchor[3];
-    Vec3f8004850C snapshot;
-    f32 origin[4];
     f32 offset[3];
+    f32 work[4][4];
+    f32 basis[4][4];
     void *target;
     s32 index;
     f32 scale;
+    f32 place[3];
+    f32 anchor[3];
+    Vec3f8004850C snapshot;
+    f32 alpha;
+    f32 origin[3];
+    f32 pivot[3];
 
     (void)argument;
     snapshot = D_800A51D0;
@@ -73,32 +73,27 @@ void func_8004850C(s32 argument) {
         if (target == 0) {
             continue;
         }
-        scale = D_800AAFA8;
-        if (target != 0) {
-            func_800181BC(target, 2, -4, 0x10, 3);
-        }
+        scale = D_800AAFA8; if (target != 0) { func_800181BC(target, 2, -4, 0x10, 3); }
         func_80015288(anchor, D_801198A8[index].unk04);
         func_80015268(place, D_801198A8[index].unk28, D_801198A8[index].unk2C, 0.0f);
-        func_800174B8(work, anchor);
+        func_800174B8(work[0], anchor);
         if (index == D_8011A270 && (D_800A21A4 != 0 || D_800A4BEC != 0)) {
-            f32 alpha;
-
             alpha = D_800AAFAC * D_800AAFB0;
             func_800156DC(basis, D_80118D60);
-            func_800156DC((f32 (*)[4])work, D_80118D60);
-            func_80015288(spare, D_801198A8[index].unk04);
+            func_800156DC(work, D_80118D60);
+            func_80015288(work[3], D_801198A8[index].unk04);
             if (D_800A21A4 != 0 && D_800A4BEC == 0) {
-                func_800178C4(work, work, D_800A4B50 * 4.0f, basis[2][0], basis[2][1], basis[2][2]);
-                func_800178C4(work, work, 45.0f, basis[1][0], basis[1][1], basis[1][2]);
-                func_800178C4(work, work, D_800A4B50 * -1.0f, basis[2][0], basis[2][1], basis[2][2]);
+                func_800178C4(work[0], work[0], D_800A4B50 * 4.0f, basis[2][0], basis[2][1], basis[2][2]);
+                func_800178C4(work[0], work[0], 45.0f, basis[1][0], basis[1][1], basis[1][2]);
+                func_800178C4(work[0], work[0], D_800A4B50 * -1.0f, basis[2][0], basis[2][1], basis[2][2]);
             } else if (D_800A4BEC != 0) {
-                func_8001745C(work, D_801198A8[index].unk28, 0.0f, 0.0f);
+                func_8001745C(work[0], D_801198A8[index].unk28, 0, 0.0f);
             }
             scale = alpha;
-            func_80015288(spare, D_801198A8[index].unk04);
+            func_80015288(work[3], D_801198A8[index].unk04);
         }
-        func_80017918(work, scale, scale, scale, work);
-        func_80017BA8(target, work);
+        func_80017918(work[0], scale, scale, scale, work[0]);
+        func_80017BA8(target, work[0]);
         if (target != 0) {
             func_800181BC(target, 2, 3, 0x10, 2);
         }
@@ -117,14 +112,14 @@ void func_8004850C(s32 argument) {
             func_800155EC(offset, offset, 30.0f, D_80118D70);
             func_800155EC(offset, offset, 3.5f, D_80118D80);
             func_80015288(pivot, offset);
-            func_80015268(origin, 0.0f, 0.0f, 0.0f);
-            func_800174B8(work, pivot);
-            func_800178C4(work, work, D_800A4B50 * 4.0f, basis[2][0], basis[2][1], basis[2][2]);
-            func_800178C4(work, work, 45.0f, basis[1][0], basis[1][1], basis[1][2]);
-            func_800178C4(work, work, D_800A4B50 * -1.0f, basis[2][0], basis[2][1], basis[2][2]);
-            func_80017918(work, D_800AAFB4, D_800AAFB4, D_800AAFB4, work);
-            func_80015288(spare, offset);
-            func_80017BA8(target, work);
+            func_80015268(origin, 0, 0, 0);
+            func_800174B8(work[0], pivot);
+            func_800178C4(work[0], work[0], D_800A4B50 * 4.0f, basis[2][0], basis[2][1], basis[2][2]);
+            func_800178C4(work[0], work[0], 45.0f, basis[1][0], basis[1][1], basis[1][2]);
+            func_800178C4(work[0], work[0], D_800A4B50 * -1.0f, basis[2][0], basis[2][1], basis[2][2]);
+            func_80017918(work[0], D_800AAFB4, D_800AAFB4, D_800AAFB4, work[0]);
+            func_80015288(work[3], offset);
+            func_80017BA8(target, work[0]);
             if (target != 0) {
                 func_800181BC(target, 2, 3, 0x10, 2);
             }

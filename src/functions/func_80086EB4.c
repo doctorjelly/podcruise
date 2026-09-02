@@ -26,7 +26,6 @@ extern u32 *D_801217B0;
 #define PERSPNORM(s) PUSH(0xDB0E0000, (u32)(s))
 
 void func_80086EB4(s32 arg0) {
-    s32 *index;
     u32 *gfx;
     View *view;
     f64 xScale;
@@ -36,12 +35,14 @@ void func_80086EB4(s32 arg0) {
     s32 lrx;
     s32 lry;
 
-    index = &arg0;
-    VIEWPORT((view = &D_80120DF0[*index])->vp);
+    view = &D_80120DF0[arg0];
+    VIEWPORT(view->vp);
     xScale = (f64)D_80114470[0] / 320.0;
-    ulx = (s32)((f64)view->ulx * xScale); lrx = (s32)((f64)view->lrx * xScale);
+    ulx = (s32)((f64)view->ulx * xScale);
     yScale = (f64)D_80114470[1] / 240.0;
-    uly = (s32)((f64)view->uly * yScale); lry = (s32)((f64)view->lry * yScale);
+    uly = (s32)((f64)view->uly * yScale);
+    lrx = (s32)((f64)view->lrx * xScale);
+    lry = (s32)((f64)view->lry * yScale);
     SCISSOR(ulx, uly, lrx, lry);
     PERSPNORM(view->perspNorm);
     func_80038D5C(&D_801217B0);
