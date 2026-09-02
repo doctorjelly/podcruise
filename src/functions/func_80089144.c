@@ -1,6 +1,10 @@
 /* Implements specs/functions/recovered/small_mismatch_audit_tranche.md. */
 #include "podcruise/types.h"
 
+#ifndef D_800A6990_ADDRESS
+#define D_800A6990_ADDRESS 0x800A6990
+#endif
+
 typedef struct {
     u32 unk00[7];
     u32 unk1C;
@@ -35,31 +39,31 @@ extern void func_8008FE60(void *, Object80089144 *);
 extern void func_8008FC3C(void *, s16 *, s32);
 extern s32 func_8008FD60(void *, void *);
 extern void func_80088BFC(void *);
-extern void *D_800A6990;
 
 void func_80089144(Object80089144 *object, Descriptor80089144 *descriptor) {
     u32 index;
     Element80089144 *element;
-    void *pool;
     s16 mode[6];
+    void *pool;
+    void *scene;
 
+    object->unk44 = descriptor->count0;
     object->unk3C = -1;
     object->unk48 = 0x3E80;
-    object->unk44 = descriptor->count0;
     element = func_80087FC0(0, 0, descriptor->unk08, 1,
                             descriptor->count0 * sizeof(Element80089144));
     object->unk40 = element;
     for (index = 0; index < descriptor->count0; index++) {
-        element->unk1C = 0;
-        element++;
+        element[index].unk1C = 0;
     }
     pool = (void *)func_80087FC0(0, 0, descriptor->unk08, 1, descriptor->count1 * 28);
     func_8008FDEC(&object->unk14, pool, descriptor->count1);
+    scene = *(void **)D_800A6990_ADDRESS;
     object->unk00 = 0;
     object->unk08 = (void *)func_80088BFC;
     object->unk04 = object;
-    object->unk38 = D_800A6990;
-    func_8008FE60(D_800A6990, object);
+    object->unk38 = scene;
+    func_8008FE60(scene, object);
     mode[0] = 5;
     func_8008FC3C(&object->unk14, mode, object->unk48);
     object->unk4C = func_8008FD60(&object->unk14, &object->unk28);

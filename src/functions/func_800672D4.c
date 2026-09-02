@@ -1,4 +1,4 @@
-/* Independently written from specs/functions/recovered/func_800672D4.md. */
+/* Independently written from the specification in specs/func_800672D4.md (worker scratchpad). */
 #include "podcruise/types.h"
 
 typedef struct Racer {
@@ -38,7 +38,7 @@ typedef struct Message {
 } Message;
 
 extern void func_8003F99C(Racer *racer, Message *message);
-extern void func_80081700(f32 a, f32 b);
+extern f32 func_80081700(f32 a, f32 b);
 extern f64 D_80120BF0;
 extern f32 D_800AD4C4;
 extern f32 D_800AD4C8;
@@ -53,8 +53,9 @@ void func_800672D4(Racer *racer, f32 *output, f32 amount) {
     f32 previous;
     f32 rate;
     f32 force;
-    Message message;
+    f32 boost;
     f32 scratch[3];
+    Message message;
     f32 spare[3];
     f32 direction[3];
 
@@ -71,12 +72,12 @@ void func_800672D4(Racer *racer, f32 *output, f32 amount) {
         direction[2] = racer->unk19C;
     }
 
-    span = racer->unk094 - racer->unk0A4;
     base = amount - racer->unk0A4;
+    span = racer->unk094 - racer->unk0A4;
     reach = base;
     pitch = racer->unk028;
     grip = racer->unk0A8;
-    lean = ((pitch < 0.0f) ? -pitch : pitch) * grip;
+    lean = ((pitch < 0) ? -pitch : pitch) * grip;
     if (3.0f < lean) {
         reach = base - (lean - 3.0f);
     }
@@ -100,14 +101,14 @@ void func_800672D4(Racer *racer, f32 *output, f32 amount) {
         if (0.0f <= racer->unk1A0) {
             racer->unk1B4 = (f32)(racer->unk1B4 + D_80120BF0);
         } else {
-            racer->unk1B4 = (f32)(racer->unk1B4 + 2.0 * D_80120BF0);
+            racer->unk1B4 = (f32)(racer->unk1B4 + 2.0f * D_80120BF0);
         }
     } else {
-        racer->unk1B4 = racer->unk1B4 + (1.0f - (12.0f - reach) / (12.0f - span)) * (f32)D_80120BF0;
+        racer->unk1B4 = racer->unk1B4 + (f32)D_80120BF0 * (1.0f - (12.0f - reach) / (12.0f - span));
         if (span < reach) {
             if (racer->unk1B4 < 0.0f) {
-                func_80081700(4.0f, (f32)D_80120BF0);
-                racer->unk1B4 = racer->unk1B4 * 12.0f;
+                boost = func_80081700(4.0f, (f32)D_80120BF0);
+                racer->unk1B4 = boost * racer->unk1B4;
             }
         }
     }

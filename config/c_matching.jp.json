@@ -26154,6 +26154,47 @@
           "size": 304
         }
       ]
+    },
+    {
+      "id": "func_80089E34",
+      "source": "src/functions/func_80089144.c",
+      "link_vram": "0x80089E34",
+      "absolute_symbols": {
+        "func_80088CB0": "0x80088CB0",
+        "func_80090ADC": "0x80090ADC",
+        "func_80090B50": "0x80090B50",
+        "func_8009092C": "0x8009092C",
+        "func_80090A50": "0x80090A50",
+        "func_800898EC": "0x800898EC"
+      },
+      "defines": {
+        "func_80089144": "func_80089E34",
+        "func_80087FC0": "func_80088CB0",
+        "func_8008FDEC": "func_80090ADC",
+        "func_8008FE60": "func_80090B50",
+        "func_8008FC3C": "func_8009092C",
+        "func_8008FD60": "func_80090A50",
+        "func_80088BFC": "func_800898EC"
+      },
+      "flags": [
+        "-G",
+        "0",
+        "-O3",
+        "-mips2",
+        "-non_shared",
+        "-Xcpluscomm",
+        "-signed",
+        "-Wab,-r4300_mul",
+        "-DD_800A6990_ADDRESS=0x800A97E0"
+      ],
+      "functions": [
+        {
+          "name": "func_80089E34",
+          "vram": "0x80089E34",
+          "rom": "0x8AA34",
+          "size": 308
+        }
+      ]
     }
   ]
 }

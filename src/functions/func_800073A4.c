@@ -2,7 +2,7 @@
 #include "podcruise/types.h"
 
 typedef struct {
-    /* 0x00 */ void *unk00;
+    /* 0x00 */ u32 unk00;
     /* 0x04 */ s16 unk04;
 } PcDisplayList;
 
@@ -13,19 +13,19 @@ typedef struct {
 } PcFrameSet;
 
 extern PcFrameSet D_800AFA60;
-extern void *D_8009A2C8;
+extern s32 D_8009A2C8;
 extern s32 D_8009A2C0;
 extern volatile s32 D_8009A2CC;
 extern s32 D_800AFE88;
 extern s32 D_800B05B0;
 
 extern void func_80007488(PcDisplayList *list);
-extern void func_80007728(void *arg0);
+extern void func_80007728(s32 handle);
 extern void func_80008090(void);
 extern void func_80008530(void);
 extern void func_8002E644(void);
 extern void func_8002E6E0(void);
-extern void func_800882B0(void *start, s32 length);
+extern s32 func_800882B0(u32 address, u32 length);
 
 void func_800073A4(void) {
     PcDisplayList *list;

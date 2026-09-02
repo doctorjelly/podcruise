@@ -1,4 +1,4 @@
-/* Independently written from specs/functions/recovered/medium_control_tranche.md. */
+/* Independently written from scratchpad spec specs/func_800910D4.md. */
 
 #include "podcruise/types.h"
 
@@ -32,18 +32,15 @@ extern s32 func_80090C20(Device *device, Descriptor *source, Descriptor *target)
 extern s32 func_80090F70(Device *device, Descriptor *descriptor);
 extern s32 func_80091FD0(Device *device, s32 mode);
 extern s32 func_80092050(s32 handleA, s32 handleB, u16 selector, void *context);
-extern void *func_80092250(void *source, void *target, s32 length);
+extern void func_80092250(void *source, void *target, s32 length);
 
 s32 func_800910D4(Device *device) {
     u16 first;
     u16 second;
     Descriptor primary;
-    s32 pad; /* an otherwise unused local the original reserved a slot for */
-    Descriptor secondary;
     Descriptor *chosen;
+    Descriptor secondary;
     s32 result;
-
-    (void)pad;
 
     if (device->unk65 != 0) {
         result = func_80091FD0(device, 0);
@@ -87,10 +84,10 @@ s32 func_800910D4(Device *device) {
     func_80092250(chosen, &device->unk0C, 0x20);
     device->unk4C = chosen->unk1B;
     device->unk64 = chosen->unk1A;
-    device->unk50 = 0x10;
-    device->unk54 = 8;
     device->unk60 = device->unk64 * 2 + 3;
     device->unk58 = device->unk64 * 8 + 8;
+    device->unk50 = 0x10;
+    device->unk54 = 8;
     device->unk5C = device->unk58 + device->unk64 * 8;
 
     result = func_80092050(device->unk04, device->unk08, 7, &device->unk2C);

@@ -15,13 +15,16 @@ void func_8008D22C(PodRankedNode *head, PodRankedNode *entry) {
     PodRankedNode *previous;
     PodRankedNode *current;
     s32 rank;
+    s32 currentRank;
 
     previous = head;
     current = head->link;
     rank = entry->rank;
-    while (current->rank >= rank) {
+    currentRank = current->rank;
+    while (currentRank >= rank) {
         previous = current;
         current = current->link;
+        currentRank = current->rank;
     }
     entry->link = previous->link;
     previous->link = entry;

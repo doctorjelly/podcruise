@@ -46,10 +46,10 @@ extern void func_8003B02C(Track8007F098 *track, Matrix8007F098 *matrix);
 
 void func_8007F098(Track8007F098 *track, f32 scale, void *space, s16 *samples) {
     Locals8007F098 locals;
-    Object8007F098 *object;
     Item8007F098 *item;
     s32 lane;
     s32 tableIndex;
+    Object8007F098 *object;
     s16 previousIndex;
     s16 currentSample;
     s32 conflict;
@@ -72,10 +72,10 @@ void func_8007F098(Track8007F098 *track, f32 scale, void *space, s16 *samples) {
     func_80000520(0);
 
     lane = func_8003A568(track, 0);
+    conflict = 0;
     tableIndex = (s32)(((f32)lane + track->position) * scale);
     currentSample = samples[lane];
     D_8011DCF8[tableIndex] = object;
-    conflict = 0;
     if (object != 0) {
         previousIndex = object->tableIndex;
         if (previousIndex == 0) {

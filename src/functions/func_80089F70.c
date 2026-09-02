@@ -51,6 +51,7 @@ s32 func_80089F70(Obj80089F70 *obj, s32 idx, Out80089F70 *out) {
     Link80089F70 table[128];
     Entry80089F70 entry;
     Link80089F70 cur;
+    s32 last;
 
     if (idx >= obj->unk50 || idx < 0) {
         return 5;
@@ -76,15 +77,15 @@ s32 func_80089F70(Obj80089F70 *obj, s32 idx, Out80089F70 *out) {
         return 5;
     }
     count = 0;
-    idx = 0xFF;
+    last = 0xFF;
     cur = entry.unk06;
     for (;;) {
         if ((s32)cur.half < obj->unk60) {
             break;
         }
-        if (idx != cur.byte.hi) {
-            idx = cur.byte.hi;
-            ret = func_80091354(obj, table, 0, cur.byte.hi);
+        if (last != cur.byte.hi) {
+            last = cur.byte.hi;
+            ret = func_80091354(obj, table, 0, last);
             if (ret != 0) {
                 return ret;
             }

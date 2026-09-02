@@ -34,8 +34,10 @@ s32 func_80028E78(Unknown80028E78 *arg0) {
     done = 0;
     D_800A4BD8 = 0;
     if (value >= 255.0f) {
-        D_800A2600 = D_800A2600 - 1;
-        if (D_800A2600 <= 0) {
+        s16 counter;
+        counter = D_800A2600 - 1;
+        D_800A2600 = counter;
+        if (counter <= 0) {
             done = 1;
         }
         value = 255.0f;

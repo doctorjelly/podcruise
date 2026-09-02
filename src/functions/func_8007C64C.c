@@ -1,4 +1,4 @@
-/* Recovery evidence: specs/functions/recovered/medium_system_tranche.md. */
+/* Recovery evidence: specs/func_8007C64C.md (scratchpad spec). */
 #include "podcruise/types.h"
 
 typedef struct {
@@ -45,11 +45,9 @@ void func_8007C64C(PcView *view, PcSubject *subject) {
     f32 distance;
     PcNode *node;
     f32 matrix[4][4];
-    void *previous;
 
-    previous = view->unk03C;
-    if (previous != 0) {
-        func_800181BC(previous, 2, -4, 0x10, 3);
+    if (view->unk03C != 0) {
+        func_800181BC(view->unk03C, 2, -4, 0x10, 3);
     }
 
     view->unk00C |= 2;
@@ -62,8 +60,8 @@ void func_8007C64C(PcView *view, PcSubject *subject) {
     matrix[3][0] = view->unk04C[0];
     matrix[3][1] = view->unk04C[1];
     matrix[3][2] = view->unk04C[2];
-    matrix[3][0] = matrix[3][0] + 8.0f;
     matrix[3][2] = matrix[3][2] - 24.0f;
+    matrix[3][0] = matrix[3][0] + 8.0f;
 
     offset[0] = subject->unk050 - subject->unk16C;
     offset[1] = subject->unk054 - subject->unk170;

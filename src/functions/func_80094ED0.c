@@ -59,7 +59,6 @@ u8 *buffer;
                 break;
             default:
                 ret = 8;
-                break;
         }
     }
     if (ret != 0) {

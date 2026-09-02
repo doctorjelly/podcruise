@@ -1,4 +1,4 @@
-/* Independently written from specs/functions/recovered/medium_control_math_tranche.md. */
+/* Independently written from specs/func_80014F54.md (worker specification). */
 #include "podcruise/types.h"
 
 extern f32 D_800A87C0;
@@ -21,6 +21,7 @@ f32 func_80014F54(f32 x, f32 y) {
     f32 t3;
     f32 t5;
     f32 t7;
+    f32 s;
     f32 result;
     s32 swapped;
 
@@ -45,7 +46,8 @@ f32 func_80014F54(f32 x, f32 y) {
             t3 = t * t2;
             t5 = t3 * t2;
             t7 = t5 * t2;
-            result = (f32)((f64)((t - t3 * D_800A87D0 + t5 * D_800A87D4 - t7 * D_800A87D8 + t7 * t2 * D_800A87DC) * 180.0f) / D_800A87E0);
+            s = t - t3 * D_800A87D0 + t5 * D_800A87D4 - t7 * D_800A87D8 + t7 * t2 * D_800A87DC;
+            result = (f32)((f64)(s * 180.0f) / D_800A87E0);
         }
         if (swapped != 0) {
             result = 90.0f - result;

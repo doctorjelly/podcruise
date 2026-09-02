@@ -42,7 +42,7 @@ extern s32 D_800A81A8;
 extern s32 D_8009A2B8;
 
 extern u32 func_80007710(void **destination);
-extern s32 func_80006FE4(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+extern s32 func_80006FE4(void *arg0, void *arg1, s32 arg2, s32 arg3);
 extern void func_80007034(PcBoot80007218 *object);
 extern void func_80007B10(void);
 extern void func_80088020(Entry80007218 *list);
@@ -58,30 +58,30 @@ void func_80007218(void) {
     u32 n;
 
     n = 0x21768;
-    i = 0;
-    do {
+    for (i = 0; i < n; ) {
         D_800B05B8[i] = 0;
         i++;
-    } while (i < n);
+    }
     region = &D_800D1D28;
     D_800D1D20 = ((u32)(unsigned long)D_800B05B8 + 0x3F) & ~0x3F;
     func_80088110(region, D_800D1D20, 0x21728);
 
-    entry = D_800AFAC8;
-    do {
-        entry->unk00 = 0;
-        entry->unk04 = 0;
-        entry++;
-    } while (entry < &D_800AFE88);
-    func_80088020(D_800AFAC8);
     for (i = 0; i < 48; i++) {
+        D_800AFAC8[i].unk00 = 0;
+        D_800AFAC8[i].unk04 = 0;
+    }
+    func_80088020(D_800AFAC8);
+    i = 0;
+    do {
         if (&D_800AFAC8[i] < &D_800AFE74) {
             func_80088050(&D_800AFAC8[i + 1], &D_800AFAC8[i]);
         }
-        D_800AFAC8[i].unk10 = func_80006FE4((s32)(unsigned long)&D_800A81A8, (s32)(unsigned long)region, 1, 0x400);
-    }
+        D_800AFAC8[i].unk10 = func_80006FE4(&D_800A81A8, region, 1, 0x400);
+        i++;
+    } while (i < 48);
+    entry = D_800AFAC8;
     D_800AFAC0.unk00 = 0;
-    D_800AFAC0.unk04 = D_800AFAC8;
+    D_800AFAC0.unk04 = entry;
 
     boot.unk00 = 8;
     boot.unk04 = 8;
