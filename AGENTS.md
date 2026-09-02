@@ -361,9 +361,14 @@ prose:
 - Raising the correct-size population from low to medium moved it from 0 of 14
   to 2 of 14. A null result from that population at low effort is a resourcing
   signal, not proof the functions are unrecoverable.
-- The wrong-size population reached the same rate at low effort. Where both are
-  available, spend low-effort workers on wrong-size candidates before spending
-  medium-effort workers on correct-size ones; the match costs less.
+- The wrong-size population also reached 14% in that wave, and acting on it was
+  a mistake worth recording. Its share was doubled to 28 workers on the next
+  wave and the rate fell to 4% (1 of 28), while correct-size at medium held at
+  14% (2 of 14) a second time. The first figure was the easier members of the
+  population, not a stable rate. **One wave is not enough evidence to move
+  capacity between populations; require the rate to reproduce before
+  reallocating.** On present evidence, correct-size at medium effort is the
+  productive allocation.
 - The never-attempted tail, once its members average roughly 120 bytes, stops
   producing matches *or* promotions. That is the signal to stop funding the
   stream and re-derive its boundaries instead: the remaining labels are mostly
