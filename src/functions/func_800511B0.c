@@ -1,4 +1,4 @@
-/* Recovered from specs/functions/recovered/medium_state_tranche.md. */
+/* Independently written from the specification in specs/func_800511B0.md. */
 #include "podcruise/types.h"
 
 typedef struct {
@@ -49,8 +49,8 @@ extern f32 func_80051934(void);
 extern s32 func_80082BE0(void);
 
 void func_800511B0(Owner800511B0 *owner, s32 mode) {
-    Vec3f800511B0 delta;
     Vec3f800511B0 step;
+    Vec3f800511B0 delta;
     f32 pick;
 
     if (mode != 0) {

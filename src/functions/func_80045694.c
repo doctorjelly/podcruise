@@ -93,12 +93,11 @@ void func_80045694(PcStage *stage) {
     f32 vecB[3];
     s32 kind;
     s32 i;
-    f32 zeroLevel;
+    f32 level;
 
     triple = D_800A4B14;
     quad = D_800A4B20;
     unit = D_800AAD14;
-    zeroLevel = 0.0f;
 
     for (i = 0; i < 6; i++) {
         kind = stage->unkD4[i];
@@ -158,8 +157,9 @@ void func_80045694(PcStage *stage) {
             if (model->unkEC != 0) {
                 func_800181BC(model->unkEC, 2, 0xFFFFFFFC, 0x10, 3);
             }
+            level = D_800AAD18;
             model->unkF8->unk10 |= 1;
-            func_80017520(matrix, D_800AAD18, D_800AAD18, unit);
+            func_80017520(matrix, level, level, unit);
             func_80017BA8(model->unkF8, matrix);
             if (model->unkF8 != 0) {
                 func_800181BC(model->unkF8, 2, 3, 0x10, 2);
@@ -180,14 +180,14 @@ void func_80045694(PcStage *stage) {
             stage->unk1094[i][1].unk18 = &model->unkF8;
             stage->unk1094[i][2].unk14 = 1;
             stage->unk1094[i][2].unk18 = &model->unk100;
-            func_80015268(vecA, zeroLevel, zeroLevel, zeroLevel);
-            func_80015268(vecB, zeroLevel, zeroLevel, zeroLevel);
+            func_80015268(vecA, 0.0f, 0.0f, 0.0f);
+            func_80015268(vecB, 0.0f, 0.0f, 0.0f);
             stage->unk1710[i][0].unk14 = 1;
             stage->unk1710[i][0].unk18 = &model->unk28;
-            func_800834F0(model->unk28, vecA, vecB, 0.3f, 1.0f, 0.0f, 50.0f, 0);
+            func_800834F0(model->unk28, vecA, vecB, 0.3f, 1.0f, 0.0, 50.0f, 0);
             stage->unk1710[i][1].unk14 = 1;
             stage->unk1710[i][1].unk18 = &model->unk2C;
-            func_800834F0(model->unk2C, vecA, vecB, 0.3f, 1.0f, 0.0f, 50.0f, 0);
+            func_800834F0(model->unk2C, vecA, vecB, 0.3f, 1.0f, 0.0, 50.0f, 0);
             if (stage->unkEC[i]->unk30 != 0) {
                 if (model->unkEC != 0) {
                     func_800181BC(model->unkEC, 2, 3, 0x10, 2);

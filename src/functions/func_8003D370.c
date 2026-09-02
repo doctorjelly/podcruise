@@ -6,7 +6,11 @@ extern PcDisplayWord *D_801217B0;
 extern u32 D_800A4960;
 void func_8003D370(void) {
     PcDisplayWord *g;
+    u32 d;
+    PcDisplayWord *h;
 
+    d = D_800A4960; (void)d;
+    h = D_801217B0; (void)h;
     g = D_801217B0++; g->command = 0xD7000000; g->payload = 0x80008000;
     g = D_801217B0++; g->command = 0xFCFFFFFF; g->payload = 0xFFFE793C;
     g = D_801217B0++; g->command = 0xE2001D00; g->payload = 0;

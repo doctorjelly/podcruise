@@ -107,8 +107,8 @@ void func_8006ABD0(Obj6ABD0 *obj, Vec3f6A *origin) {
         if (func_800154D0(vector) < D_800AD5B8) {
             magnitude = 1.0f;
         } else {
-            magnitude = magnitude * -(vector[0] * obj->unk020 + vector[1] * obj->unk024 +
-                                      vector[2] * obj->unk028);
+            magnitude = -(vector[2] * obj->unk028 + (vector[1] * obj->unk024 +
+                          vector[0] * obj->unk020)) * magnitude;
         }
 
         zero = 0.0f;

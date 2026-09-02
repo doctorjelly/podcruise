@@ -16,12 +16,11 @@ extern f32 D_800A87EC;
 f32 func_80014F54(f32 x, f32 y) {
     f32 ax;
     f32 ay;
-    f32 ratio;
-    f32 r2;
-    f32 r3;
-    f32 r5;
-    f32 r7;
-    f32 r9;
+    f32 t;
+    f32 t2;
+    f32 t3;
+    f32 t5;
+    f32 t7;
     f32 result;
     s32 swapped;
 
@@ -35,19 +34,18 @@ f32 func_80014F54(f32 x, f32 y) {
         ay = (y < 0.0f) ? -y : y;
         if (ay < ax) {
             swapped = 1;
-            ratio = ay / ax;
+            t = ay / ax;
         } else {
-            ratio = ax / ay;
+            t = ax / ay;
         }
-        if (ratio < D_800A87C0 && ratio >= D_800A87CC) {
+        if (t < D_800A87C0 && t >= D_800A87CC) {
             result = 0.0f;
         } else {
-            r2 = ratio * ratio;
-            r3 = ratio * r2;
-            r5 = r3 * r2;
-            r7 = r5 * r2;
-            r9 = r7 * r2;
-            result = (f32)((f64)((ratio - r3 * D_800A87D0 + r5 * D_800A87D4 - r7 * D_800A87D8 + r9 * D_800A87DC) * 180.0f) / D_800A87E0);
+            t2 = t * t;
+            t3 = t * t2;
+            t5 = t3 * t2;
+            t7 = t5 * t2;
+            result = (f32)((f64)((t - t3 * D_800A87D0 + t5 * D_800A87D4 - t7 * D_800A87D8 + t7 * t2 * D_800A87DC) * 180.0f) / D_800A87E0);
         }
         if (swapped != 0) {
             result = 90.0f - result;

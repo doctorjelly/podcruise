@@ -32,15 +32,15 @@ extern void func_8007F24C(Cursor8007F430 *, f32 *);
 extern f32 func_800153EC(const f32 *, const f32 *);
 
 void func_8007F430(void *arg0, f32 scale, s32 arg2, s32 arg3) {
-    Track8007F430 *track;
-    Cursor8007F430 cursor;
-    Cursor8007F430 *active;
-    Object8007F430 *object;
-    Item8007F430 *item;
     f32 first[16];
     f32 second[16];
-    f32 target[3];
+    Track8007F430 *track;
+    Item8007F430 *item;
+    Object8007F430 *object;
     s32 index;
+    Cursor8007F430 *active;
+    Cursor8007F430 cursor;
+    f32 target[3];
 
     track = arg0;
     (void)arg2;
@@ -61,9 +61,9 @@ void func_8007F430(void *arg0, f32 scale, s32 arg2, s32 arg3) {
 
     func_8007EE98(active, object->value);
     func_8003B02C(track, first);
-    target[0] = first[4] * -0.5f + first[12];
-    target[1] = first[5] * -0.5f + first[13];
-    target[2] = first[6] * -0.5f + first[14];
+    target[0] = first[12] + first[4] * -0.5f;
+    target[1] = first[13] + first[5] * -0.5f;
+    target[2] = first[14] + first[6] * -0.5f;
     func_8007F24C(active, target);
     func_8003B02C(active, second);
     func_800153EC(&first[12], &second[12]);

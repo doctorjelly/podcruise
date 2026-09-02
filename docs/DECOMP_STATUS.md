@@ -20,10 +20,10 @@ and why the earlier `0x99000` interval was wrong.
 
 | Build | Exact functions | Exact bytes | Share of CPU text | Configured units | Hybrid substitutions |
 |---|---:|---:|---:|---:|---:|
-| USA retail | 1,062 | 248,600 | 40.00% | 1,352 | 1,058 |
-| Japan retail | 903 | 199,768 | 32.14% | 986 | 903 |
-| Europe retail | 905 | 208,040 | 33.47% | 986 | 905 |
-| USA LRG revision | 1,062 | 248,600 | 40.00% | 1,352 | 1,056 |
+| USA retail | 1,065 | 249,712 | 40.18% | 1,352 | 1,061 |
+| Japan retail | 906 | 200,880 | 32.32% | 988 | 906 |
+| Europe retail | 908 | 209,152 | 33.65% | 988 | 908 |
+| USA LRG revision | 1,065 | 249,712 | 40.18% | 1,352 | 1,059 |
 
 "Configured" counts translation units with reviewed C under compiler test. The
 gap between configured and exact is behavior-recovered work: the source

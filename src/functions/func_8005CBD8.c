@@ -99,7 +99,7 @@ s32 func_8005CBD8(PcWord5C *self, Msg5CBD8 *message, f32 *arg2) {
             self[0x98 / 4].f = 0.0f;
             self[0x9C / 4].f = 0.0f;
             self[0xA0 / 4].f = 1.0f;
-            self[0xC / 4].f = 0.0f;
+            self[0xC / 4].f = 0.0;
             for (index = 2; index < 6; index++) {
                 self[0x10 / 4 + index].s = 0;
             }
@@ -109,26 +109,26 @@ s32 func_8005CBD8(PcWord5C *self, Msg5CBD8 *message, f32 *arg2) {
             self[0x1A8 / 4].s = 0;
             self[0x1E0 / 4].s = 0;
             self[0x124 / 4].s = 2;
-            self[0x164 / 4].f = 1.0f;
-            self[0x168 / 4].f = 0.0f;
-            self[0x16C / 4].f = 0.0f;
-            self[0x170 / 4].f = 0.0f;
-            self[0x174 / 4].f = 0.0f;
-            self[0x178 / 4].f = 1.0f;
-            self[0x17C / 4].f = 0.0f;
-            self[0x180 / 4].f = 0.0f;
-            self[0x184 / 4].f = 0.0f;
-            self[0x188 / 4].f = 0.0f;
-            self[0x18C / 4].f = 1.0f;
-            self[0x190 / 4].f = 0.0f;
-            self[0x194 / 4].f = 0.0f;
-            self[0x198 / 4].f = 0.0f;
-            self[0x19C / 4].f = 0.0f;
             self[0x1A0 / 4].f = 1.0f;
-            self[0x1D8 / 4].f = 0.0f;
-            self[0x1DC / 4].f = 0.0f;
-            self[0x1E4 / 4].f = 0.0f;
-            self[0x12C / 4].f = 0.0f;
+            self[0x19C / 4].f = 0.0f;
+            self[0x198 / 4].f = 0.0f;
+            self[0x194 / 4].f = 0.0f;
+            self[0x190 / 4].f = 0.0f;
+            self[0x18C / 4].f = 1.0f;
+            self[0x188 / 4].f = 0.0f;
+            self[0x184 / 4].f = 0.0f;
+            self[0x180 / 4].f = 0.0f;
+            self[0x17C / 4].f = 0.0f;
+            self[0x178 / 4].f = 1.0f;
+            self[0x174 / 4].f = 0.0f;
+            self[0x170 / 4].f = 0.0f;
+            self[0x16C / 4].f = 0.0f;
+            self[0x168 / 4].f = 0.0f;
+            self[0x164 / 4].f = 1.0f;
+            self[0x1D8 / 4].f = 0.0;
+            self[0x1DC / 4].f = 0.0;
+            self[0x1E4 / 4].f = 0.0;
+            self[0x12C / 4].f = 0.0;
             /* fallthrough */
         case 0x52536574:
             func_8002F1E4();
@@ -171,8 +171,6 @@ s32 func_8005CBD8(PcWord5C *self, Msg5CBD8 *message, f32 *arg2) {
                     func_80051C80(self, 0x52537472);
                     return 1;
                 }
-            } else {
-                return 1;
             }
             break;
 

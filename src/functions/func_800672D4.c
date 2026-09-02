@@ -45,16 +45,16 @@ extern f32 D_800AD4C8;
 
 void func_800672D4(Racer *racer, f32 *output, f32 amount) {
     f32 span;
-    f32 base;
     f32 lean;
+    f32 base;
     f32 reach;
     f32 pitch;
     f32 grip;
     f32 previous;
     f32 rate;
     f32 force;
-    f32 scratch[4];
     Message message;
+    f32 scratch[3];
     f32 spare[3];
     f32 direction[3];
 

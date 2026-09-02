@@ -20,34 +20,40 @@ extern void func_8002FAC4(u8 *top);
 extern u8 *func_8002FAFC(void);
 extern s32 func_8002FC58(void);
 extern void func_800304AC(s32 index, s32 *first, s32 *second);
-extern void func_800827C0(void *argument);
+extern void func_800827C0(u32 argument);
 
 void *func_800305E8(s32 index) {
     s32 count;
     s32 padA[3];
     s32 header[3];
+    s32 i;
+    s32 pad0;
     void *result;
     u8 *data;
     u8 *scratch;
-    u8 *mark;
-    s32 size;
-    s32 packed;
-    s32 started;
-    s32 limit;
-    s32 i;
     u32 *cursor;
     u32 word;
-    s32 padB[5];
-    u8 *base[1];
+    s32 pad1;
+    s32 pad2;
+    u8 *mark;
+    s32 started;
+    s32 size;
+    s32 packed;
+    s32 offset;
+    s32 pad4;
     u32 *bitmap[1];
+    u8 *base[1];
 
     (void)padA;
-    (void)padB;
+    (void)pad0;
+    (void)pad1;
+    (void)pad2;
+    (void)pad4;
     D_800A2848 = 1;
     D_800D9DC8 = 0;
+    bitmap[0] = D_80114528;
     D_800D9DCC = 0;
     D_800D9DD0 = 0;
-    bitmap[0] = D_80114528;
     base[0] = D_141E200;
     func_80011D60(base[0], (u8 *)&count, 4);
     if (index < 0 || index >= count) {
@@ -73,14 +79,14 @@ void *func_800305E8(s32 index) {
             D_800A2864 = 1;
             return 0;
         }
-        func_80011CDC(header[1] + 0xC + base[0], scratch, packed);
+        offset = header[1] + 0xC;
+        func_80011CDC(base[0] + offset, scratch, packed);
         func_80011940(scratch, data);
         func_8002FAC4(data + size);
+    } else if (func_8002FC58() < size + 8) {
+        D_800A2864 = 1;
+        return 0;
     } else {
-        if (func_8002FC58() < size + 8) {
-            D_800A2864 = 1;
-            return 0;
-        }
         func_80011CDC(header[1] + base[0], data, size);
         func_8002FAC4(data + size);
     }
@@ -89,9 +95,8 @@ void *func_800305E8(s32 index) {
     D_800D9DC4 = (s32)(unsigned long)func_8002FAFC();
     started = (s32)(unsigned long)func_8002FAFC();
     result = data;
-    limit = size >> 2;
     cursor = (u32 *)data;
-    for (i = 0; i < limit; i++) {
+    for (i = 0; i < (size >> 2); i++) {
         word = bitmap[0][i >> 5] & (1U << (31 - (i & 31)));
         if (word != 0) {
             if ((*cursor & 0xFF000000) == 0x0A000000) {
@@ -110,7 +115,7 @@ void *func_800305E8(s32 index) {
         *(u32 *)data == 0x50757070) {
         result = data + 4;
     } else {
-        func_800827C0((void *)(unsigned long)*(u32 *)data);
+        func_800827C0(*(u32 *)data);
     }
 
     D_800D9DCC = (s32)(unsigned long)func_8002FAFC() - started;

@@ -201,7 +201,7 @@ void func_800573E8(u8 *arg0, u8 *arg1) {
                                       (u8)t30, (u8 *)D_800ACCB4);
                     }
                 } else {
-                    if ((s32)(f144 * 36.0f) % 2 != 0) {
+                    if ((s32)(f144 * 36.0f) % 2) {
                         s178 = 1;
                     }
                 }
@@ -219,14 +219,14 @@ void func_800573E8(u8 *arg0, u8 *arg1) {
     t30 = (s16)(f1D4 + 17.0f);
     if (s174 == 0 && s154 < 2) {
         t38 = (s16)f1D8;
-        func_8003F084((s16)f1D8, (s16)t34, *(f32 *)(arg0 + 0x74), 0xFF, 0xFF,
+        func_8003F084(t38, t34, *(f32 *)(arg0 + 0x74), 0xFF, 0xFF,
                       0xFF, 0xBE, D_800ACCC8);
-        func_8003EC40(t38, (s16)t30, 0xFF, 0xFF, 0xFF, 0xBE,
+        func_8003EC40(t38, t30, 0xFF, 0xFF, 0xFF, 0xBE,
                       (u8 *)D_800ACCD0);
     }
 
     if (*(s32 *)(arg1 + 0x124) == 6 || *(s32 *)(arg1 + 0x124) == 7) {
-        func_8003F084(0x121, (s16)t34, *(f32 *)(arg0 + 0x74), 0xFF, 0xFF, 0xFF,
+        func_8003F084(0x121, t34, *(f32 *)(arg0 + 0x74), 0xFF, 0xFF, 0xFF,
                       0xBE, D_800ACCDC);
     }
 
@@ -244,13 +244,13 @@ void func_800573E8(u8 *arg0, u8 *arg1) {
     func_8008A6B4(buf, D_800ACCE4, count);
     if (D_800A52BC >= 2 && s178 != 0) {
         t38 = (s16)f1D8;
-        func_8003EC40(t38, (s16)t34, 0xFF, 0x3F, 0x3F, 0xFF, (u8 *)buf);
-        func_8003EC40(t38, (s16)t30, 0xFF, 0x3F, 0x3F, 0xFF,
+        func_8003EC40(t38, t34, 0xFF, 0x3F, 0x3F, 0xFF, (u8 *)buf);
+        func_8003EC40(t38, t30, 0xFF, 0x3F, 0x3F, 0xFF,
                       (u8 *)D_800ACCF4);
     } else {
         t38 = (s16)f1D8;
-        func_8003EC40(t38, (s16)t34, 0xFF, 0xFF, 0xFF, 0xBE, (u8 *)buf);
-        func_8003EC40(t38, (s16)t30, 0xFF, 0xFF, 0xFF, 0xBE,
+        func_8003EC40(t38, t34, 0xFF, 0xFF, 0xFF, 0xBE, (u8 *)buf);
+        func_8003EC40(t38, t30, 0xFF, 0xFF, 0xFF, 0xBE,
                       (u8 *)D_800ACCFC);
     }
 
@@ -259,9 +259,9 @@ void func_800573E8(u8 *arg0, u8 *arg1) {
         if (*(s16 *)(arg0 + 0x5C) > 0) {
             func_8008A6B4(buf, D_800ACD04, *(s16 *)(arg0 + 0x5C),
                           *(s32 *)(arg1 + 0x1BC));
-            func_8003EC40(0x116, (s16)t34, 0xFF, 0xFF, 0xFF, 0xBE, (u8 *)buf);
+            func_8003EC40(0x116, t34, 0xFF, 0xFF, 0xFF, 0xBE, (u8 *)buf);
         }
-        func_8003EC40(0x116, (s16)t30, 0xFF, 0xFF, 0xFF, 0xBE,
+        func_8003EC40(0x116, t30, 0xFF, 0xFF, 0xFF, 0xBE,
                       (u8 *)D_800ACD14);
     }
 

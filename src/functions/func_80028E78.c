@@ -28,21 +28,19 @@ extern s32 func_80060DE4();
 
 s32 func_80028E78(Unknown80028E78 *arg0) {
     f32 value;
-    s16 count;
     s32 done;
 
     value = D_800A25FC;
     done = 0;
     D_800A4BD8 = 0;
     if (value >= 255.0f) {
-        count = D_800A2600 - 1;
-        D_800A2600 = count;
-        if (count <= 0) {
+        D_800A2600 = D_800A2600 - 1;
+        if (D_800A2600 <= 0) {
             done = 1;
         }
         value = 255.0f;
     } else {
-        value = D_800A9DE8 * D_80120BF8 + value;
+        value = value + D_800A9DE8 * D_80120BF8;
     }
     if (value > 255.0f) {
         value = 255.0f;

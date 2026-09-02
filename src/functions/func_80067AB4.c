@@ -1,4 +1,4 @@
-/* Recovery evidence: specs/functions/recovered/medium_runtime_tranche.md. */
+/* Independently written from the specification in specs/func_80067AB4.md (worker note). */
 
 #include "podcruise/types.h"
 
@@ -39,12 +39,12 @@ extern void func_80065E54(Body80067AB4 *, void *, f32 *, f32 *, f32 *, f32, f32,
 
 void func_80067AB4(Body80067AB4 *body, void *context, f32 blend,
                    Triple80067AB4 *result) {
+    f32 half;
+    f32 mean;
     f32 previous;
     f32 magnitude;
     f32 target;
     f32 ceiling;
-    f32 half;
-    f32 mean;
 
     half = body->unk94 * 1.5f;
     mean = (body->unk94 + (f32)2.0 * body->unkA4) / 3.0f;
@@ -75,7 +75,7 @@ void func_80067AB4(Body80067AB4 *body, void *context, f32 blend,
     if ((body->unk64 & 0x400) == 0) {
         if (body->unk208 != 0.0f) {
             target = body->unk208 * 80.0f;
-            if (body->unk208 < 0.0f) {
+            if (body->unk208 < (f32)0.0) {
                 magnitude = -body->unk208;
             } else {
                 magnitude = body->unk208;

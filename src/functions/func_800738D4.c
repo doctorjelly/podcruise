@@ -1,4 +1,4 @@
-/* Independently written from specs/functions/recovered/medium_resource_tranche.md. */
+/* Independently written from specs/func_800738D4.md (this worker's specification). */
 
 #include "podcruise/types.h"
 
@@ -55,7 +55,8 @@ void func_800738D4(Craft800738D4 *craft, s32 mode, f32 *from, f32 *to) {
     if ((craft->unk60 & 0xF) == 2) {
         D_800A6664 = 1000.0f;
     }
-    amount = D_800A6664 - (f32)craft->unk04 * D_800AD930;
+    length = D_800AD930;
+    amount = D_800A6664 - (f32)craft->unk04 * length;
     if (0.0f < amount) {
         amount = amount * amount;
     }
@@ -72,7 +73,7 @@ void func_800738D4(Craft800738D4 *craft, s32 mode, f32 *from, f32 *to) {
     if (1.0f < spread) {
         spread = 1.0f;
     }
-    strength = amount * D_800AD930;
+    strength = amount * length;
     if (1.0f < strength) {
         strength = 1.0f;
     }
