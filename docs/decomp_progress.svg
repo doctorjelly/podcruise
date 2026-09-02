@@ -17,20 +17,20 @@
 <text x="64" y="54.0" text-anchor="end" fill="#8b949e" font-family="sans-serif" font-size="12">100%</text>
 <line x1="76.0" y1="390" x2="76.0" y2="396" stroke="#8b949e"/>
 <text x="76.0" y="414" text-anchor="middle" fill="#8b949e" font-family="sans-serif" font-size="11">Aug 20</text>
-<line x1="101.7" y1="390" x2="101.7" y2="396" stroke="#8b949e"/>
-<text x="101.7" y="414" text-anchor="middle" fill="#8b949e" font-family="sans-serif" font-size="11">Aug 21</text>
-<line x1="564.8" y1="390" x2="564.8" y2="396" stroke="#8b949e"/>
-<text x="564.8" y="414" text-anchor="middle" fill="#8b949e" font-family="sans-serif" font-size="11">Aug 27</text>
-<line x1="716.4" y1="390" x2="716.4" y2="396" stroke="#8b949e"/>
-<text x="716.4" y="414" text-anchor="middle" fill="#8b949e" font-family="sans-serif" font-size="11">Aug 29</text>
-<line x1="759.5" y1="390" x2="759.5" y2="396" stroke="#8b949e"/>
-<text x="759.5" y="414" text-anchor="middle" fill="#8b949e" font-family="sans-serif" font-size="11">Aug 30</text>
-<line x1="826.1" y1="390" x2="826.1" y2="396" stroke="#8b949e"/>
-<text x="826.1" y="414" text-anchor="middle" fill="#8b949e" font-family="sans-serif" font-size="11">Aug 31</text>
-<line x1="875.7" y1="390" x2="875.7" y2="396" stroke="#8b949e"/>
-<text x="875.7" y="414" text-anchor="middle" fill="#8b949e" font-family="sans-serif" font-size="11">Sep 01</text>
-<path d="M 76.0 286.1 H 86.4 V 285.3 H 87.4 V 284.9 H 101.7 V 284.7 H 103.2 V 284.0 H 564.8 V 271.1 H 567.5 V 270.4 H 571.0 V 269.9 H 572.4 V 269.7 H 574.2 V 269.1 H 575.1 V 268.5 H 575.7 V 268.2 H 576.5 V 267.0 H 578.7 V 266.7 H 579.2 V 266.5 H 581.0 V 266.4 H 581.9 V 266.4 H 582.9 V 266.3 H 716.4 V 266.2 H 718.5 V 266.0 H 720.0 V 266.0 H 722.0 V 266.0 H 722.7 V 265.8 H 723.4 V 265.6 H 724.1 V 265.4 H 725.4 V 265.4 H 759.5 V 265.1 H 761.2 V 264.8 H 762.0 V 264.6 H 766.6 V 264.6 H 766.9 V 264.6 H 767.2 V 264.5 H 768.4 V 264.2 H 785.0 V 264.1 H 786.9 V 264.0 H 787.6 V 263.9 H 788.1 V 263.8 H 802.2 V 263.7 H 826.1 V 263.0 H 829.6 V 262.8 H 833.3 V 262.4 H 835.6 V 262.0 H 839.1 V 261.8 H 840.3 V 261.8 H 841.7 V 261.3 H 843.4 V 261.2 H 846.5 V 260.9 H 848.3 V 260.7 H 849.7 V 260.5 H 850.9 V 259.1 H 851.4 V 258.5 H 853.3 V 258.5 H 854.2 V 258.4 H 854.7 V 258.1 H 857.0 V 257.5 H 860.4 V 257.4 H 861.9 V 257.4 H 863.5 V 257.2 H 865.0 V 257.1 H 866.6 V 257.0 H 867.5 V 256.9 H 869.6 V 256.8 H 870.9 V 256.7 H 871.7 V 256.6 H 874.0 V 256.1 H 874.9 V 255.8 H 875.7 V 255.7 H 876.9 V 255.5 H 877.5 V 255.3 H 878.3 V 255.1 H 879.4 V 255.0 H 880.2 V 254.9 H 915.0 V 254.6 H 928.6 V 254.0 H 930.6 V 253.4 H 932.0 V 252.4" fill="none" stroke="#58a6ff" stroke-width="3" stroke-linejoin="round"/>
-<circle cx="932.0" cy="252.4" r="5" fill="#58a6ff"/>
-<text x="924.0" y="240.4" text-anchor="end" fill="#f0f6fc" font-family="sans-serif" font-size="13" font-weight="600">40.48%</text>
-<text x="932" y="442" text-anchor="end" fill="#8b949e" font-family="sans-serif" font-size="12">1,069 functions / 251,628 bytes exact</text>
+<line x1="101.6" y1="390" x2="101.6" y2="396" stroke="#8b949e"/>
+<text x="101.6" y="414" text-anchor="middle" fill="#8b949e" font-family="sans-serif" font-size="11">Aug 21</text>
+<line x1="563.7" y1="390" x2="563.7" y2="396" stroke="#8b949e"/>
+<text x="563.7" y="414" text-anchor="middle" fill="#8b949e" font-family="sans-serif" font-size="11">Aug 27</text>
+<line x1="714.9" y1="390" x2="714.9" y2="396" stroke="#8b949e"/>
+<text x="714.9" y="414" text-anchor="middle" fill="#8b949e" font-family="sans-serif" font-size="11">Aug 29</text>
+<line x1="757.9" y1="390" x2="757.9" y2="396" stroke="#8b949e"/>
+<text x="757.9" y="414" text-anchor="middle" fill="#8b949e" font-family="sans-serif" font-size="11">Aug 30</text>
+<line x1="824.4" y1="390" x2="824.4" y2="396" stroke="#8b949e"/>
+<text x="824.4" y="414" text-anchor="middle" fill="#8b949e" font-family="sans-serif" font-size="11">Aug 31</text>
+<line x1="873.9" y1="390" x2="873.9" y2="396" stroke="#8b949e"/>
+<text x="873.9" y="414" text-anchor="middle" fill="#8b949e" font-family="sans-serif" font-size="11">Sep 01</text>
+<path d="M 76.0 286.1 H 86.4 V 285.3 H 87.4 V 284.9 H 101.6 V 284.7 H 103.2 V 284.0 H 563.7 V 271.1 H 566.4 V 270.4 H 569.9 V 269.9 H 571.2 V 269.7 H 573.1 V 269.1 H 573.9 V 268.5 H 574.5 V 268.2 H 575.4 V 267.0 H 577.5 V 266.7 H 578.0 V 266.5 H 579.8 V 266.4 H 580.7 V 266.4 H 581.7 V 266.3 H 714.9 V 266.2 H 717.1 V 266.0 H 718.6 V 266.0 H 720.5 V 266.0 H 721.2 V 265.8 H 721.9 V 265.6 H 722.7 V 265.4 H 723.9 V 265.4 H 757.9 V 265.1 H 759.7 V 264.8 H 760.4 V 264.6 H 765.0 V 264.6 H 765.3 V 264.6 H 765.7 V 264.5 H 766.9 V 264.2 H 783.4 V 264.1 H 785.3 V 264.0 H 786.0 V 263.9 H 786.5 V 263.8 H 800.5 V 263.7 H 824.4 V 263.0 H 827.9 V 262.8 H 831.6 V 262.4 H 833.9 V 262.0 H 837.3 V 261.8 H 838.6 V 261.8 H 839.9 V 261.3 H 841.6 V 261.2 H 844.8 V 260.9 H 846.5 V 260.7 H 847.9 V 260.5 H 849.2 V 259.1 H 849.6 V 258.5 H 851.5 V 258.5 H 852.4 V 258.4 H 852.9 V 258.1 H 855.3 V 257.5 H 858.6 V 257.4 H 860.1 V 257.4 H 861.7 V 257.2 H 863.2 V 257.1 H 864.8 V 257.0 H 865.7 V 256.9 H 867.8 V 256.8 H 869.1 V 256.7 H 869.9 V 256.6 H 872.1 V 256.1 H 873.1 V 255.8 H 873.9 V 255.7 H 875.1 V 255.5 H 875.7 V 255.3 H 876.5 V 255.1 H 877.6 V 255.0 H 878.3 V 254.9 H 913.0 V 254.6 H 926.6 V 254.0 H 928.7 V 253.4 H 930.0 V 252.4 H 932.0 V 252.1" fill="none" stroke="#58a6ff" stroke-width="3" stroke-linejoin="round"/>
+<circle cx="932.0" cy="252.1" r="5" fill="#58a6ff"/>
+<text x="924.0" y="240.1" text-anchor="end" fill="#f0f6fc" font-family="sans-serif" font-size="13" font-weight="600">40.55%</text>
+<text x="932" y="442" text-anchor="end" fill="#8b949e" font-family="sans-serif" font-size="12">1,070 functions / 252,020 bytes exact</text>
 </svg>
