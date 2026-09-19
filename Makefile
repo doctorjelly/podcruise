@@ -15,8 +15,11 @@ GLOBAL_STATE_SRCS := $(filter-out src/functions/unit_%.c,$(wildcard src/function
 # make counts literal parentheses inside $(shell ...) even within quotes.
 LPAREN := (
 HOST_TEST_DOUBLES := $(shell grep -oE '^[A-Za-z_][A-Za-z0-9_ *]*func_[0-9A-F]{8}[$(LPAREN)]' tests/test_global_state.c | grep -oE 'func_[0-9A-F]{8}')
+# Retained alternate source candidates define canonical symbols too; compile
+# only the configured candidate in the aggregate host link.
+HOST_TEST_ALTERNATES := src/functions/func_80021F84.c src/functions/func_80027D34.c
 HOST_TEST_SRCS := src/bootstrap_state.c \
-	$(filter-out $(patsubst %,src/functions/%.c,$(HOST_TEST_DOUBLES)),$(GLOBAL_STATE_SRCS))
+	$(filter-out $(HOST_TEST_ALTERNATES) $(patsubst %,src/functions/%.c,$(HOST_TEST_DOUBLES)),$(GLOBAL_STATE_SRCS))
 
 .PHONY: all setup inventory analyze probe map region-symbols bootstrap-evidence manifest progress-chart classify prototypes report match-c split-us split-jp split-eu split-lrg roundtrip-us roundtrip-jp roundtrip-eu roundtrip-lrg roundtrip-all host-check host-test test safety status
 

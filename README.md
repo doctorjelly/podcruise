@@ -34,11 +34,11 @@ not a substitute for owning it.
 - 1,348 functions represented by independently written C, covering 616,960
   original instruction bytes. `make manifest` generates that ledger into
   `analysis/source_manifest.json` from the matching configuration and the
-  per-version comparison reports, and fails if any recovered source is left
-  unmeasured.
-- Exact IDO 5.3 matches for 1,052 of them (246,972 bytes) in the canonical USA
-  image. The current regional reports contain 893 matches (196,460 bytes) for
-  Japan, 894 (204,584 bytes) for Europe, and 1,042 (243,532 bytes) for the later
+  per-version comparison reports, and fails if any unconfigured source lacks
+  a recorded reason.
+- Exact IDO 5.3 matches for 1,066 of them (251,720 bytes) in the canonical USA
+  image. The current regional reports contain 911 matches (203,028 bytes) for
+  Japan, 913 (211,300 bytes) for Europe, and 1,066 (251,720 bytes) for the later
   USA revision. The remaining reviewed candidates are behavior-recovered but
   not yet byte-matching; see [`docs/DECOMP_STATUS.md`](docs/DECOMP_STATUS.md)
   for the precise terminology and current ledger.

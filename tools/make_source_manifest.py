@@ -21,6 +21,16 @@ VERSIONS = ("us", "jp", "eu", "lrg_rev1")
 # Sources that deliberately have no USA matching unit, with the reason. Every
 # other recovered source must be measured, so --strict fails on anything else.
 UNMEASURED = {
+    "src/functions/func_80021F84.c": (
+        "legacy alternate for func_80024954 retained under an outdated "
+        "filename; it defines func_80024954, while the corrected "
+        "func_80021F84 source is func_80021F8C.c"
+    ),
+    "src/functions/func_80027D34.c": (
+        "legacy alternate for the corrected func_80027D24 boundary; the "
+        "configured source is func_80027D24.c, and this nonmatching alternate "
+        "is retained for future source-shape comparison"
+    ),
     "src/functions/func_80034824.c": "Japan-only stub; no USA function at this address",
     "src/functions/func_80038734.c": "Europe-only stub; no USA function at this address",
     "src/functions/func_80092250.c": (

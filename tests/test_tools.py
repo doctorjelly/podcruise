@@ -3,6 +3,7 @@ from __future__ import annotations
 import unittest
 from pathlib import Path
 
+from tools.audit_c_unit import word_differences
 from tools.analyze_mips import jal_target, post_return_candidate, sign16
 from tools.build_matching_object import contiguous_span
 from tools.compiler_probe import probe
@@ -22,6 +23,15 @@ from tools.verify_c_matches import (
 
 
 class MipsAnalysisTests(unittest.TestCase):
+    def test_audit_word_differences_separate_size_from_content(self) -> None:
+        first = bytes.fromhex("11223344 AABBCCDD")
+        second = bytes.fromhex("11223344 00000000")
+        self.assertEqual(word_differences(first, second), (1, 0, 0))
+        self.assertEqual(word_differences(first, first[:4]), (0, 1, 0))
+        self.assertEqual(word_differences(first[:4], first), (0, 0, 1))
+        with self.assertRaises(ValueError):
+            word_differences(first, b"\x00")
+
     def test_signed_immediate(self) -> None:
         self.assertEqual(sign16(0x0010), 16)
         self.assertEqual(sign16(0xFFF0), -16)
@@ -351,11 +361,13 @@ class MipsAnalysisTests(unittest.TestCase):
                 )
                 self.assertEqual(
                     int(row["uncached_input_tokens"]),
-                    int(row["input_tokens"]) - int(row["cached_input_tokens"]),
+                    int(row["input_tokens"])
+                    - int(row["cached_input_tokens"])
+                    - int(row["cache_write_input_tokens"] or 0),
                     row["work_item"],
                 )
                 self.assertLessEqual(
-                    int(row["reasoning_output_tokens"]),
+                    int(row["reasoning_output_tokens"] or 0),
                     int(row["output_tokens"]),
                     row["work_item"],
                 )
