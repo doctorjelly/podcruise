@@ -25,7 +25,7 @@ extern s32 D_800D60A0[];
 
 void func_8000F5A0(void) {
     u16 *buffer;
-    u16 *end[1]; /* held out of a register: the original keeps this bound live */
+    u16 *end[1];
     u16 *sample;
     s32 width;
     s32 height;
