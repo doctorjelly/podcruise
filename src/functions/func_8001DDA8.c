@@ -56,6 +56,7 @@ extern u8 D_800A8D44[];
 
 extern f32 func_80014F54(f32, f32);
 extern f32 func_80014D4C(f32);
+extern f32 func_800154D0(f32 *);
 extern void func_8003ECB0(s32, s32, u8 *);
 extern s32 func_8008A6B4(char *, const char *, ...);
 extern void func_8002BBA4(Menu *, s32, s32, s32, s32, s32, char *);
@@ -88,6 +89,7 @@ void func_8001DDA8(Menu *menu) {
         }
         func_8001535C(&vector, &D_80118D90, &D_80118E50);
         D_800D70C4 = func_800153C0(&vector);
+        func_800154D0(&vector.x);
         D_800D70C8 = func_80014F54(-vector.x, vector.y);
         D_800D70CC = func_80014D4C(vector.z);
         if (D_800D70C8 < 0.0f) {

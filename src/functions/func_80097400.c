@@ -28,7 +28,7 @@ extern void func_80096E90(Struct80097400 *state, u8 code, u8 *digits,
                           s16 nsig, s16 xexp);
 extern Struct80097F60 func_80097F60(s32 numerator, s32 denominator);
 
-void func_80097400(Struct80097400 *state, s32 conversion) {
+void func_80097400(Struct80097400 *state, u8 conversion) {
     u8 digits[32];
     Struct80097F60 split;
     f64 value;
@@ -36,8 +36,8 @@ void func_80097400(Struct80097400 *state, s32 conversion) {
     u8 *cursor;
     u16 *halves;
     s32 binary;
-    s32 kind;
-    s32 exponent;
+    s16 kind;
+    s16 exponent;
     s32 remaining;
     s32 whole;
     s32 place;
@@ -72,6 +72,8 @@ void func_80097400(Struct80097400 *state, s32 conversion) {
         halves[0] = (u16)((halves[0] & 0x800F) | 0x3FF0);
         exponent = binary - 0x3FE;
         kind = -1;
+    } else if (binary < 0) {
+        kind = 2;
     }
 
     keep = 0;
