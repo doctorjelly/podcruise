@@ -19,17 +19,17 @@
 <text x="76.0" y="414" text-anchor="middle" fill="#8b949e" font-family="sans-serif" font-size="11">Aug 20</text>
 <line x1="86.4" y1="390" x2="86.4" y2="396" stroke="#8b949e"/>
 <text x="86.4" y="414" text-anchor="middle" fill="#8b949e" font-family="sans-serif" font-size="11">Aug 21</text>
-<line x1="273.8" y1="390" x2="273.8" y2="396" stroke="#8b949e"/>
-<text x="273.8" y="414" text-anchor="middle" fill="#8b949e" font-family="sans-serif" font-size="11">Aug 27</text>
-<line x1="352.6" y1="390" x2="352.6" y2="396" stroke="#8b949e"/>
-<text x="352.6" y="414" text-anchor="middle" fill="#8b949e" font-family="sans-serif" font-size="11">Aug 30</text>
-<line x1="379.6" y1="390" x2="379.6" y2="396" stroke="#8b949e"/>
-<text x="379.6" y="414" text-anchor="middle" fill="#8b949e" font-family="sans-serif" font-size="11">Aug 31</text>
-<line x1="399.6" y1="390" x2="399.6" y2="396" stroke="#8b949e"/>
-<text x="399.6" y="414" text-anchor="middle" fill="#8b949e" font-family="sans-serif" font-size="11">Sep 01</text>
+<line x1="273.7" y1="390" x2="273.7" y2="396" stroke="#8b949e"/>
+<text x="273.7" y="414" text-anchor="middle" fill="#8b949e" font-family="sans-serif" font-size="11">Aug 27</text>
+<line x1="352.5" y1="390" x2="352.5" y2="396" stroke="#8b949e"/>
+<text x="352.5" y="414" text-anchor="middle" fill="#8b949e" font-family="sans-serif" font-size="11">Aug 30</text>
+<line x1="379.4" y1="390" x2="379.4" y2="396" stroke="#8b949e"/>
+<text x="379.4" y="414" text-anchor="middle" fill="#8b949e" font-family="sans-serif" font-size="11">Aug 31</text>
+<line x1="399.5" y1="390" x2="399.5" y2="396" stroke="#8b949e"/>
+<text x="399.5" y="414" text-anchor="middle" fill="#8b949e" font-family="sans-serif" font-size="11">Sep 01</text>
 <line x1="932.0" y1="390" x2="932.0" y2="396" stroke="#8b949e"/>
 <text x="932.0" y="414" text-anchor="middle" fill="#8b949e" font-family="sans-serif" font-size="11">Sep 19</text>
-<path d="M 76.0 286.1 H 80.2 V 285.3 H 80.6 V 284.9 H 86.4 V 284.7 H 87.0 V 284.0 H 273.8 V 271.1 H 274.9 V 270.4 H 276.3 V 269.9 H 276.9 V 269.7 H 277.6 V 269.1 H 278.0 V 268.5 H 278.2 V 268.2 H 278.5 V 267.0 H 279.4 V 266.7 H 279.6 V 266.5 H 280.3 V 266.4 H 280.7 V 266.4 H 281.1 V 266.3 H 335.1 V 266.2 H 336.0 V 266.0 H 336.6 V 266.0 H 337.4 V 266.0 H 337.7 V 265.8 H 338.0 V 265.6 H 338.3 V 265.4 H 338.8 V 265.4 H 352.6 V 265.1 H 353.3 V 264.8 H 353.6 V 264.6 H 355.5 V 264.6 H 355.6 V 264.6 H 355.7 V 264.5 H 356.2 V 264.2 H 362.9 V 264.1 H 363.7 V 264.0 H 364.0 V 263.9 H 364.2 V 263.8 H 369.9 V 263.7 H 379.6 V 263.0 H 381.0 V 262.8 H 382.5 V 262.4 H 383.4 V 262.0 H 384.8 V 261.8 H 385.3 V 261.8 H 385.8 V 261.3 H 386.5 V 261.2 H 387.8 V 260.9 H 388.5 V 260.7 H 389.1 V 260.5 H 389.6 V 259.1 H 389.8 V 258.5 H 390.6 V 258.5 H 390.9 V 258.4 H 391.1 V 258.1 H 392.1 V 257.5 H 393.4 V 257.4 H 394.0 V 257.4 H 394.7 V 257.2 H 395.3 V 257.1 H 395.9 V 257.0 H 396.3 V 256.9 H 397.1 V 256.8 H 397.7 V 256.7 H 398.0 V 256.6 H 398.9 V 256.1 H 399.3 V 255.8 H 399.6 V 255.7 H 400.1 V 255.5 H 400.3 V 255.3 H 400.7 V 255.1 H 401.1 V 255.0 H 401.4 V 254.9 H 415.5 V 254.6 H 421.0 V 254.0 H 421.8 V 253.4 H 422.4 V 252.4 H 423.2 V 252.1 H 932.0 V 252.3" fill="none" stroke="#58a6ff" stroke-width="3" stroke-linejoin="round"/>
+<path d="M 76.0 286.1 H 80.2 V 285.3 H 80.6 V 284.9 H 86.4 V 284.7 H 87.0 V 284.0 H 273.7 V 271.1 H 274.8 V 270.4 H 276.2 V 269.9 H 276.8 V 269.7 H 277.5 V 269.1 H 277.9 V 268.5 H 278.1 V 268.2 H 278.5 V 267.0 H 279.3 V 266.7 H 279.5 V 266.5 H 280.2 V 266.4 H 280.6 V 266.4 H 281.0 V 266.3 H 335.0 V 266.2 H 335.9 V 266.0 H 336.5 V 266.0 H 337.3 V 266.0 H 337.6 V 265.8 H 337.8 V 265.6 H 338.2 V 265.4 H 338.7 V 265.4 H 352.5 V 265.1 H 353.2 V 264.8 H 353.5 V 264.6 H 355.3 V 264.6 H 355.5 V 264.6 H 355.6 V 264.5 H 356.1 V 264.2 H 362.8 V 264.1 H 363.5 V 264.0 H 363.8 V 263.9 H 364.0 V 263.8 H 369.7 V 263.7 H 379.4 V 263.0 H 380.8 V 262.8 H 382.3 V 262.4 H 383.3 V 262.0 H 384.7 V 261.8 H 385.2 V 261.8 H 385.7 V 261.3 H 386.4 V 261.2 H 387.7 V 260.9 H 388.4 V 260.7 H 388.9 V 260.5 H 389.4 V 259.1 H 389.6 V 258.5 H 390.4 V 258.5 H 390.8 V 258.4 H 391.0 V 258.1 H 391.9 V 257.5 H 393.3 V 257.4 H 393.9 V 257.4 H 394.5 V 257.2 H 395.1 V 257.1 H 395.8 V 257.0 H 396.2 V 256.9 H 397.0 V 256.8 H 397.5 V 256.7 H 397.8 V 256.6 H 398.8 V 256.1 H 399.1 V 255.8 H 399.5 V 255.7 H 399.9 V 255.5 H 400.2 V 255.3 H 400.5 V 255.1 H 401.0 V 255.0 H 401.3 V 254.9 H 415.3 V 254.6 H 420.9 V 254.0 H 421.7 V 253.4 H 422.2 V 252.4 H 423.0 V 252.1 H 932.0 V 252.3" fill="none" stroke="#58a6ff" stroke-width="3" stroke-linejoin="round"/>
 <circle cx="932.0" cy="252.3" r="5" fill="#58a6ff"/>
 <text x="924.0" y="240.3" text-anchor="end" fill="#f0f6fc" font-family="sans-serif" font-size="13" font-weight="600">40.50%</text>
 <text x="932" y="442" text-anchor="end" fill="#8b949e" font-family="sans-serif" font-size="12">1,066 functions / 251,720 bytes exact</text>
