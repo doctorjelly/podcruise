@@ -32,8 +32,8 @@ s32 func_8003FDCC(s32 tag, Vec3f *origin, f32 limit, Entity *exclude, s32 capaci
     Group **cursor;
     Group *group;
     Entity *entity;
-    f32 delta[3];
     f32 distance;
+    f32 delta[3];
     s32 found;
     s32 index;
     s32 slot;
@@ -53,10 +53,9 @@ s32 func_8003FDCC(s32 tag, Vec3f *origin, f32 limit, Entity *exclude, s32 capaci
                         delta[2] = entity->z - origin->z;
                         distance = delta[0] * delta[0] + delta[1] * delta[1] + delta[2] * delta[2];
                         if (distance < limit) {
-                            for (slot = 0; slot < found; slot++) {
-                                if (!(distances[slot] < distance)) {
-                                    break;
-                                }
+                            slot = 0;
+                            while (slot < found && distances[slot] < distance) {
+                                slot++;
                             }
                             if (slot < capacity) {
                                 if (found < capacity) {
@@ -68,9 +67,7 @@ s32 func_8003FDCC(s32 tag, Vec3f *origin, f32 limit, Entity *exclude, s32 capaci
                                 for (; last > slot; last--) {
                                     results[last] = results[last - 1];
                                     distances[last] = distances[last - 1];
-                                    offsets[last].x = offsets[last - 1].x;
-                                    offsets[last].y = offsets[last - 1].y;
-                                    offsets[last].z = offsets[last - 1].z;
+                                    offsets[last].x = offsets[last - 1].x; offsets[last].y = offsets[last - 1].y; offsets[last].z = offsets[last - 1].z;
                                 }
                                 distances[slot] = distance;
                                 results[slot] = entity;
