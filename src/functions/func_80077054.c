@@ -263,10 +263,10 @@ void func_80077054(void *arg) {
 
     turn = FF(arg, 0x1E54) * FF(arg, 0x194) + FF(arg, 0x1E58) * FF(arg, 0x198);
     turn = (FF(arg, 0x19C) * FF(arg, 0x1E5C) + turn) * -2.0f;
-    if (3.140625 < (f64)turn) {
+    if (50.0 < (f64)turn) {
         turn = 50.0f;
     }
-    if ((f64)turn < -3.140625) {
+    if ((f64)turn < -50.0) {
         turn = -50.0f;
     }
     func_80017824(work, turn, 1.0f, 0.0f, 0.0f, work);

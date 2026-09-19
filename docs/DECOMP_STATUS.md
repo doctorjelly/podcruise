@@ -55,3 +55,11 @@ its C and ROM have 46 direct calls each, but the compiled body is 2,320 versus
 2,484 bytes. `func_8004BE90` now links its jump table at the ROM's
 `0x800AB13C` address (4-byte alignment); its compiled body remains 3,000 versus
 3,008 bytes. Neither correction increases matching-C coverage.
+
+Two further USA source candidates now follow the ROM's behavior but still do
+not match its bytes. `func_80077054` clamps a turn against `+50.0` and `-50.0`
+in double precision, not `+3.140625` and `-3.140625`; its compiled body is
+3,112 versus 3,136 bytes. `func_800718DC` uses `D_800AD900` as the threshold
+for the `KPow` path and `D_800AD8F0` for the other relevant hit paths; its
+compiled body is 4,484 versus 4,596 bytes, with seven direct calls still
+merged away by its shared C case blocks. Both remain assembly-backed.

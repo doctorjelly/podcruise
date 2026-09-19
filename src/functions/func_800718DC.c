@@ -446,7 +446,8 @@ s32 func_800718DC(Racer *self, s32 *message, HitInfo *info) {
             func_80071820(self, slots[index], alpha);
         }
     }
-    if (!((f64)self->unk1998 < D_800AD8F0)) {
+    if (!((f64)self->unk1998 <
+          ((kind == 0x4B506F77) ? D_800AD900 : D_800AD8F0))) {
         return 1;
     }
     if (kind == 0x4B506F77) {
