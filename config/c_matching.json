@@ -27449,6 +27449,8 @@
       "id": "func_8004BE90",
       "source": "src/functions/func_8004BE90.c",
       "link_vram": "0x8004BE90",
+      "rodata_vram": "0x800AB13C",
+      "rodata_alignment": 4,
       "absolute_symbols": {
         "func_80051898": "0x80051898",
         "func_8000A44C": "0x8000A44C",

@@ -148,6 +148,7 @@ void func_80076180(Owner *owner, Panel *panel, f32 requestX, f32 requestY) {
     node = panel->unk70;
     if (node != 0) {
         scale = ((f32)func_80082BE0() / 2147483648.0f) * 0.20000004f + 1.0f;
+        func_80082BE0();
         brightness = 1.0f;
         if (amountX < 0.25f) {
             scale = scale * amountX;
@@ -188,6 +189,7 @@ void func_80076180(Owner *owner, Panel *panel, f32 requestX, f32 requestY) {
     node = panel->unkA8;
     if (node != 0) {
         scale = ((f32)func_80082BE0() / 2147483648.0f) * 0.20000004f + 1.0f;
+        func_80082BE0();
         brightness = 1.0f;
         if ((f64)amountY < 0.25) {
             scale = scale * amountY;
@@ -230,6 +232,7 @@ void func_80076180(Owner *owner, Panel *panel, f32 requestX, f32 requestY) {
         scroll = func_8000E8C4(node);
         func_80082BE0();
         scale = ((f32)func_80082BE0() / 2147483648.0f) * 0.25f + 1.0f;
+        func_80082BE0();
         scale = scale * amountX;
         if (boosted) {
             scale = ((f32)func_80082BE0() / 2147483648.0f) * 0.6999998f + 3.5f;
@@ -254,6 +257,7 @@ void func_80076180(Owner *owner, Panel *panel, f32 requestX, f32 requestY) {
         scroll = func_8000E8C4(node);
         func_80082BE0();
         scale = ((f32)func_80082BE0() / 2147483648.0f) * 0.25f + 1.0f;
+        func_80082BE0();
         scale = scale * amountY;
         if (boosted) {
             scale = ((f32)func_80082BE0() / 2147483648.0f) * 0.6999998f + 3.5f;

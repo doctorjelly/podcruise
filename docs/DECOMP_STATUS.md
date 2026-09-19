@@ -48,3 +48,10 @@ never assumed to carry to Japan or Europe.
 The current USA worktree passed `make roundtrip-us` byte-identically with 1,069
 C substitutions. The other three builds passed prior `make roundtrip-all`
 checks, but were not rerun after this source change.
+
+Two current USA candidates remain assembly-backed despite ROM-supported
+corrections. `func_80076180` now preserves four previously omitted RNG advances:
+its C and ROM have 46 direct calls each, but the compiled body is 2,320 versus
+2,484 bytes. `func_8004BE90` now links its jump table at the ROM's
+`0x800AB13C` address (4-byte alignment); its compiled body remains 3,000 versus
+3,008 bytes. Neither correction increases matching-C coverage.
