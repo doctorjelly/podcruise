@@ -21,4 +21,8 @@ original position.
 ## Status
 
 Behavior recovered only; the current IDO 5.3 `-O2` comparison does not match
-the USA bytes.
+the USA bytes. Bounded audit remained non-exact after two evidence-driven
+toggle spellings: baseline `512/496`, 71 differing words, +4 words; direct
+global assignments `512/496`, 68 differing words, +4 words. The remaining
+size expansion and relocated jump-table/pool relationship were not resolved
+without unsupported source changes.
