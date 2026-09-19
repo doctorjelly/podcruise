@@ -66,7 +66,7 @@ address. The USA measurements are:
 | `func_8002FF38` | 504 | 504 | `0x64` | behavior-recovered |
 | `func_80037C8C` | 528 | 528 | `0x8D` | behavior-recovered |
 | `func_800678A8` | 524 | 524 | `0x22` | behavior-recovered |
-| `func_8006A9D4` | 508 | 512 | `0x10` | behavior-recovered |
+| `func_8006A9D4` | 508 | 508 | `0x18D` | behavior-recovered |
 | `func_8007E988` | 500 | 500 | `0x4C` | behavior-recovered |
 
 Japan, Europe, and LRG also fail their exact compiler comparisons. These units
@@ -74,3 +74,10 @@ therefore remain assembly-backed in every hybrid build. Their source describes
 reviewed behavior, but no byte-match claim or assembly substitution is made.
 Address-based names remain because subsystem semantics are not yet strong
 enough to justify authored replacements.
+
+The current USA `func_80037C8C` differs in 17 instruction words. Swapping its
+independent final display-list stores to match the ROM's apparent order made
+the compiler result worse (20 differing words), so that variant was reverted.
+The current USA `func_8006A9D4` differs in six words, all floating-point load
+register choices in its final three additions. Reversing all three commutative
+source operands left the same six-word difference; that variant was reverted.
