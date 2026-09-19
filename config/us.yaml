@@ -555,6 +555,7 @@ segments:
       - [0x387F0, c, functions/func_80037BF0]
       - [0x387F8, c, functions/func_80037BF8]
       - [0x3888C, asm, main_3888C]
+      - [0x38A9C, c, functions/func_80037E9C]
       - [0x38E94, c, functions/func_80038294]
       - [0x38F88, asm, main_38F88]
       - [0x393F8, c, functions/func_800387F8]

@@ -42,13 +42,13 @@ extern void func_80038388(Node80037E9C *);
 void func_80037E9C(Node80037E9C *node) {
     s32 pushed;
     s32 count;
+    s32 i;
+    Node80037E9C *child;
     f32 out[4][3];
     f32 mtx[4][3];
     f32 delta[3];
     f32 temp[3];
     f32 scale;
-    s32 i;
-    Node80037E9C *child;
 
     if (D_800A3FE8 != 0) {
         if (node->unk1E == 0) {

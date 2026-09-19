@@ -74,11 +74,14 @@ comparison against the canonical USA ROM reports:
 | `func_80006848` | 952 | 952 | none | **byte-matching** |
 | `func_8006AF48` | 956 | 964 | `0x19` | behavior-recovered |
 | `func_80081FB0` | 1,012 | 1,028 | `0x05` | behavior-recovered |
-| `func_80037E9C` | 1,016 | 1,016 | `0x2F` | behavior-recovered |
+| `func_80037E9C` | 1,016 | 1,016 | none | **byte-matching** |
 | `func_800049FC` | 1,024 | 1,024 | `0x93` | behavior-recovered |
 | `func_8002963C` | 1,024 | 1,024 | `0x05` | behavior-recovered |
 
-`func_80006848` is eligible for USA hybrid-build substitution. Its C evaluates
-the `0x06000000` mode bits directly before and after the flag-mutating block;
-this preserves the ROM's second flag read and mask materialization. The other
-five functions remain behavior-recovered and no byte match is claimed for them.
+`func_80006848` and `func_80037E9C` are eligible for USA hybrid-build
+substitution. The former evaluates the `0x06000000` mode bits directly before
+and after the flag-mutating block, preserving the ROM's second flag read and
+mask materialization. The latter places its two trailing scalar declarations
+before the aggregate locals, reproducing every canonical stack offset. The
+other four functions remain behavior-recovered; no byte match is claimed for
+them.

@@ -182,9 +182,11 @@ def main() -> int:
         except StopIteration as error:
             raise SystemExit(f"missing compiler profile {profile_id} in {args.matches}") from error
         for result in profile["functions"]:
+            if not result["verified_match"]:
+                continue
             source = root / result["source"]
             source_current = source.is_file() and hashlib.sha256(source.read_bytes()).hexdigest() == result["source_sha256"]
-            if result["verified_match"] and source_current:
+            if source_current:
                 matches[result["name"]] = result
 
     target_offsets: dict[tuple[str, str], int] = {}
