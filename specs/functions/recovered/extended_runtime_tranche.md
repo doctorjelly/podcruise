@@ -38,8 +38,11 @@ trailing alignment padding. The sixteen `func_80016F0C` calls are in
 The C sources were written independently from the reviewed behavior and retain
 address-based names because broader subsystem semantics are not yet secure.
 `func_80010B34` deliberately retains an odd same-result conditional: both ROM
-branches pass the same stack output address, and simplifying the source would
-erase observed control flow.
+branches pass the same stack output address. The current IDO output still
+erases that branch, so the source is not an exact match.
+Moving that conditional directly into the `func_8000EBE8` argument did not
+restore the ROM branch: the isolated build remained 840/876 bytes with nine
+missing words and worsened from 175 to 178 differing words. It was reverted.
 
 ## Calls and addressed globals
 

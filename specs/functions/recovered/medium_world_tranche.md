@@ -78,6 +78,12 @@ comparison against the canonical USA ROM reports:
 | `func_800049FC` | 1,024 | 1,024 | `0x93` | behavior-recovered |
 | `func_8002963C` | 1,024 | 1,024 | `0x05` | behavior-recovered |
 
+For `func_8006AF48`, the initial clamp's ROM retains its lower and upper
+float bounds simultaneously, but introducing explicit `f32` locals in either
+initialization order compiled to 964 bytes with 224 differing words (first
+`0x03`), worse than the unchanged source's 222 words (first `0x19`). The
+experiments were reverted; do not retry this local-order hypothesis.
+
 `func_80006848` and `func_80037E9C` are eligible for USA hybrid-build
 substitution. The former evaluates the `0x06000000` mode bits directly before
 and after the flag-mutating block, preserving the ROM's second flag read and
