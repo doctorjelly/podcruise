@@ -63,3 +63,10 @@ in double precision, not `+3.140625` and `-3.140625`; its compiled body is
 for the `KPow` path and `D_800AD8F0` for the other relevant hit paths; its
 compiled body is 4,484 versus 4,596 bytes, with seven direct calls still
 merged away by its shared C case blocks. Both remain assembly-backed.
+
+Further ROM-backed corrections remain nonmatching: `func_8004EA08` now makes
+the sixth independent sign draw for its generated item (`2,128/2,124` compiled/
+ROM bytes); `func_8001D05C` now copies an 18-byte zero initializer from the
+canonical `0x800A8BF4` data address (`3,304/3,308` bytes); and
+`func_80021294` links its switch table at `0x800A9C7C` (`3,184/3,312`
+bytes). Their USA split entries still name assembly, not matching C.

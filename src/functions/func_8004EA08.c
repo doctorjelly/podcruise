@@ -341,7 +341,9 @@ void func_8004EA08(State8004EA08 *state) {
             item->values[1] = (f32)((f64)sign *
                 (65.0 + 10.0 * (f64)unit + 40.0 * (f64)(index - group->first)));
 
-            unit = (f32)func_80082BE0() / 2147483648.0f;
+            random = func_80082BE0();
+            sign = func_80051934();
+            unit = (f32)random / 2147483648.0f;
             item->values[2] = (f32)((f64)sign *
                 (5.0 + 40.0 * (f64)unit));
 

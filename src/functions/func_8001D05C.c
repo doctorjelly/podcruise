@@ -62,7 +62,7 @@ extern s32 func_80082BE0(void);
 extern void func_8008A6B4(char *, const char *, ...);
 
 void func_8001D05C(void *arg) {
-    char text[28] = "                 ";
+    char text[18] = "";
     f32 point[3];
     f32 view[4][4];
     f32 place[4][4];

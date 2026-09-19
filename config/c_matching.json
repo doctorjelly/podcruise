@@ -27026,6 +27026,8 @@
       "id": "func_8001D05C",
       "source": "src/functions/func_8001D05C.c",
       "link_vram": "0x8001D05C",
+      "rodata_vram": "0x800A8BF4",
+      "rodata_alignment": 4,
       "flags": [
         "-G",
         "0",
@@ -27372,6 +27374,8 @@
       "id": "func_80021294",
       "source": "src/functions/func_80021294.c",
       "link_vram": "0x80021294",
+      "rodata_vram": "0x800A9C7C",
+      "rodata_alignment": 4,
       "absolute_symbols": {
         "func_8008A6B4": "0x8008A6B4",
         "func_80015268": "0x80015268",
