@@ -173,7 +173,7 @@ void func_8004BE90(PcRaceState *state) {
         do {
             racer = (s32)(((f32)func_80082BE0() / 2147483648.0f) * 22.0f) + 1;
         } while (((1 << racer) & D_80113680.unk10) == 0);
-        record = (PcRacerRecord *)(racer * stride + (u8 *)D_800A31E0);
+        record = (PcRacerRecord *)((u8 *)D_800A31E0 + racer * stride);
         func_800517D8(record->unk30, 0x38, 2, record->unk20);
         if ((D_80113680.unk10 << 13) != 0) {
             func_800517D8(0x6D, 0x39, 1, -1.0f);
@@ -181,7 +181,7 @@ void func_8004BE90(PcRaceState *state) {
             do {
                 racer = (s32)(((f32)func_80082BE0() / 2147483648.0f) * 23.0f);
             } while (((1 << racer) & D_80113680.unk10) != 0);
-            record = (PcRacerRecord *)(racer * stride + (u8 *)D_800A31E0);
+            record = (PcRacerRecord *)((u8 *)D_800A31E0 + racer * stride);
             func_800517D8(record->unk30, 0x39, 2, record->unk20);
         }
         func_800517D8(0xEF, 0x16, 7, -1.0f);
@@ -200,7 +200,7 @@ void func_8004BE90(PcRaceState *state) {
         func_8000AB24(0x5F, 0x32, 0xFF, 0xFF, 0xFE);
         func_80051898(3);
         for (index = 0; index != 1; index++) {
-            record = (PcRacerRecord *)(state->entries[index] * stride + (u8 *)D_800A31E0);
+            record = (PcRacerRecord *)((u8 *)D_800A31E0 + state->entries[index] * stride);
             func_800517D8(record->unk30, index + 0x1C, 2, record->unk20);
         }
     } else {
@@ -212,7 +212,7 @@ void func_8004BE90(PcRaceState *state) {
             func_8004B568();
             for (index = 0; index < state->count; index++) {
                 racer = state->entries[index];
-                record = (PcRacerRecord *)(racer * stride + (u8 *)D_800A31E0);
+                record = (PcRacerRecord *)((u8 *)D_800A31E0 + racer * stride);
                 func_80046670(record->unk04, record->unk08, index + 0xF, 0);
                 target = D_8011A508[index + 0xF];
                 if (target != 0) {
@@ -234,7 +234,7 @@ void func_8004BE90(PcRaceState *state) {
                 func_80046670(0x31, -1, index + 0x5D, 1);
             }
             for (index = 0; index < state->count; index++) {
-                record = (PcRacerRecord *)(state->entries[index] * stride + (u8 *)D_800A31E0);
+                record = (PcRacerRecord *)((u8 *)D_800A31E0 + state->entries[index] * stride);
                 func_800517D8(record->unk30, index + 0x1C, 2, record->unk20);
             }
             index = 0;
@@ -257,7 +257,7 @@ void func_8004BE90(PcRaceState *state) {
             func_8002963C(state);
             func_800517D8(0x6E, 0x15, 3, -1.0f);
             for (index = 0; index < state->count; index++) {
-                record = (PcRacerRecord *)(state->entries[index] * stride + (u8 *)D_800A31E0);
+                record = (PcRacerRecord *)((u8 *)D_800A31E0 + state->entries[index] * stride);
                 func_800517D8(record->unk30, index + 0x1C, 2, record->unk20);
             }
             for (index = 0; index < 4 - D_80113E60.unk1C; index++) {
@@ -286,7 +286,7 @@ void func_8004BE90(PcRaceState *state) {
                 } else {
                     racer = D_800A21C2[state->unk5D * 12];
                 }
-                record = (PcRacerRecord *)(racer * stride + (u8 *)D_800A31E0);
+                record = (PcRacerRecord *)((u8 *)D_800A31E0 + racer * stride);
                 func_800517D8(record->unk30, index + 0x1C, 2, record->unk20);
                 func_80046670(record->unk04, record->unk08, index + 0xF, 0);
                 target = D_8011A508[index + 0xF];
@@ -297,7 +297,7 @@ void func_8004BE90(PcRaceState *state) {
             break;
         case 16:
             for (index = 0; index != 3; index++) {
-                record = (PcRacerRecord *)(state->slots[index] * stride + (u8 *)D_800A31E0);
+                record = (PcRacerRecord *)((u8 *)D_800A31E0 + state->slots[index] * stride);
                 func_800517D8(record->unk30, index + 0x1C, 2, record->unk20);
                 func_80046670(0x7C, -1, index + 0x4D, 0);
             }
@@ -312,7 +312,7 @@ void func_8004BE90(PcRaceState *state) {
                 func_8000A44C((s16)(index + 0x7F), slot);
             }
             racer = D_800A21C2[state->unk5D * 12];
-            record = (PcRacerRecord *)(racer * stride + (u8 *)D_800A31E0);
+            record = (PcRacerRecord *)((u8 *)D_800A31E0 + racer * stride);
             func_80046670(record->unk04, record->unk08, 0xF, 0);
             target = D_8011A544;
             if (target != 0) {

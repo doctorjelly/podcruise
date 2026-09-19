@@ -54,7 +54,11 @@ corrections. `func_80076180` now preserves four previously omitted RNG advances:
 its C and ROM have 46 direct calls each, but the compiled body is 2,320 versus
 2,484 bytes. `func_8004BE90` now links its jump table at the ROM's
 `0x800AB13C` address (4-byte alignment); its compiled body remains 3,000 versus
-3,008 bytes. Neither correction increases matching-C coverage.
+3,008 bytes. A bounded source-shape audit aligned the first record-base
+addition with the ROM, leaving 396 differing words. The menu-slot counter is
+still folded into constants by IDO, accounting for the eight-byte size gap;
+the later differences include broad scheduling and allocation. These
+corrections do not increase matching-C coverage.
 
 Two further USA source candidates now follow the ROM's behavior but still do
 not match its bytes. `func_80077054` clamps a turn against `+50.0` and `-50.0`
