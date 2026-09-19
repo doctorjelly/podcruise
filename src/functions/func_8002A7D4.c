@@ -32,14 +32,14 @@ extern s16 D_800D6CC4;
 extern s32 D_80113E60[];
 
 void func_8002A7D4(s8 *arg0) {
-    char text[48];
-    char line[32];
     s32 base;
     s32 y;
     s32 column;
     s32 span;
     s16 row;
     s32 i;
+    char text[24];
+    char line[32];
 
     base = (s16)(s32)(D_800D6CC0 - 5.0f);
 
