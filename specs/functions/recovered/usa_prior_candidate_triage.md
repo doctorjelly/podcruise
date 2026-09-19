@@ -1,9 +1,9 @@
 # Prior USA source-shape triage: unchanged candidates
 
-These 16 C units are still assembly-backed in USA. Astra identified them as
+These 22 C units are still assembly-backed in USA. Astra identified them as
 previously audited rather than fresh work; no source experiment was repeated
 in this tranche. Their source files have no tracked changes from `074d9f7`
-through `29fe1a4` and no current worktree edits. This is a historical
+through `aa97eca` and no current worktree edits. This is a historical
 classification, not a new exact comparison or claim that compiler blockers
 are permanent. Reopen a candidate only with new ROM or source evidence.
 
@@ -25,3 +25,9 @@ are permanent. Reopen a candidate only with new ROM or source evidence.
 | `func_80081FB0` | Two earlier tranches found no retained lever. |
 | `func_80084EB8` | Earlier triage found no retained lever. |
 | `func_80036314` | Repeated audits found no new semantic distinction. |
+| `func_80028498` | Earlier eight-function tranche found no localized lever. |
+| `func_80004160` | Boundary and calls validated; no justified layout change. |
+| `func_8001C404` | Multiple tranches found no new semantic distinction. |
+| `func_8004F358` | Focused wrong-size audit found no retained correction. |
+| `func_8008E54C` | Earlier eight-function tranche found no localized lever. |
+| `func_8000F0DC` | Earlier wrong-size tranche found no bounded hypothesis. |
