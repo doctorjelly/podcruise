@@ -200,11 +200,8 @@ void func_8001A408(Menu8001A408 *menu) {
         u32 buttons = D_800A4BA4[index];
 
         if ((buttons & 1) || (buttons & 0x200)) {
-            if (D_800A238C == 3 && func_8002E8D4(1) == 0) {
-                func_8002D4C4(0x4B);
-                break;
-            }
-            if (D_800A238C != 3 && index != 0) {
+            if ((D_800A238C == 3 && func_8002E8D4(1) == 0) ||
+                (D_800A238C != 3 && index != 0)) {
                 func_8002D4C4(0x4B);
                 break;
             }
