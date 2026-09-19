@@ -93,7 +93,7 @@ void func_80076B34(Obj *arg0) {
                 sp14C.z = b->unk388;
                 func_800155EC(&sp14C, &sp14C, -2.0f, &b->unk360);
                 if (arg0->unk1E70->unk18[0] == 14) {
-                    func_800155EC(&sp140, &sp14C, (i == 0) ? -2.0f : 2.0f, &b->unk350);
+                    func_800155EC(&sp14C, &sp14C, (i == 0) ? -2.0f : 2.0f, &b->unk350);
                 }
                 func_800155C0(&sp140, -20.0f, &b->unk360);
                 if (sp138[i] != 0) {
