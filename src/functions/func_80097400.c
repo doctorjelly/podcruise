@@ -207,5 +207,5 @@ void func_80097400(Struct80097400 *state, u8 conversion) {
         }
     }
 
-    func_80096E90(state, (u8)conversion, cursor, (s16)exponent, (s16)keep);
+    func_80096E90(state, (u8)conversion, cursor, (s16)keep, (s16)exponent);
 }

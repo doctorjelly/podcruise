@@ -13,6 +13,8 @@ match or C substitution is claimed.
 | `func_8000F5A0` | 1164/1224 | 287, plus 15 extra | Scalar framebuffer-end pointer worsened the C body to 1268 bytes (26 extra words); source shape restored. |
 | `func_80097400` | 1356/1288 | 314, plus 17 missing | ROM-backed byte/halfword types and redundant classification branch retained; now 1336 bytes, 332 differing words, 5 missing. |
 | `func_8001DDA8` | 2328/2212 | 536, plus 29 missing | Missing vector-normalization call restored; now 2220 bytes, 551 differing words, 27 missing. |
+| `func_80066144` | 1120/1140 | 277, plus 5 extra | Active-array-size reduction changed only the first differing byte; dropping an explicit `f64` cast yielded 1132 bytes/267 differing words, and an unsuffixed literal restored the baseline. All variants reverted. |
+| `func_80048F74` | 1372/1352 | 326, plus 5 missing | Moving the key block ahead of locals or the order array after scalars left size and word differences unchanged; both variants reverted. |
 
 In `func_8002D048`, the ROM's default unsigned-float conversion has three
 distinct exits to `0x8002D2C4`; IDO merges them in the current C at
