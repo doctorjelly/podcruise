@@ -1,7 +1,7 @@
 # Medium state tranche
 
 Status: **5 behavior-recovered functions measured in all four builds;
-`func_80041D14` is byte-matching C for USA and LRG**.
+`func_80041D14` and `func_80092050` are byte-matching C for USA**.
 
 ## Verified facts
 
@@ -69,7 +69,7 @@ address. The table reports canonical USA results:
 
 | Function | Target bytes | C bytes | First difference | Status |
 | --- | ---: | ---: | ---: | --- |
-| `func_80092050` | 508 | 508 | `0xB3` | behavior-recovered |
+| `func_80092050` | 508 | 508 | none | **byte-matching C: USA** |
 | `func_800509E8` | 536 | 536 | `0x1C5` | behavior-recovered |
 | `func_80041D14` | 556 | 556 | none | **byte-matching** |
 | `func_800511B0` | 560 | 556 | `0x03` | behavior-recovered |
@@ -77,7 +77,16 @@ address. The table reports canonical USA results:
 
 The table-stride audit corrected `func_800511B0` from a 44-byte entry model to
 the 32-byte stride used by the original shifts. `func_80041D14` is eligible for
-USA and LRG hybrid-build substitution only after an exact linked-object
-comparison; the other four functions remain behavior-recovered and no byte
-match is claimed for them.
+USA and LRG hybrid-build substitution after exact linked-object comparison;
+the other three nonmatching functions remain behavior-recovered without a
+byte-match claim.
+
+The USA `func_80092050` source now groups the clear-loop header and first
+store on one line to preserve IDO scheduling. Testing the checksum difference
+as a Boolean subtraction makes IDO emit the ROM's branch operand order;
+`func_80093B60` returns an 8-bit value, so the subtraction range is safe.
+The independently rerun linked comparison is 508/508 bytes with zero differing
+words. The USA split names its C object, the canonical rebuild substitutes
+1,070 C functions, and the USA ROM remains byte-identical. This claim does
+not extend to Japan, Europe, or LRG without their own exact comparison.
 Address-based names remain because the subsystem semantics are not yet proven.

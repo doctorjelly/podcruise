@@ -20,7 +20,7 @@ and why the earlier `0x99000` interval was wrong.
 
 | Build | Exact functions | Exact bytes | Share of CPU text | Configured functions | Hybrid substitutions |
 |---|---:|---:|---:|---:|---:|
-| USA retail | 1,069 | 254,816 | 41.00% | 1,348 | 1,069 |
+| USA retail | 1,070 | 255,324 | 41.08% | 1,348 | 1,070 |
 | Japan retail | 913 | 204,688 | 32.93% | 990 | 911 |
 | Europe retail | 915 | 212,960 | 34.26% | 990 | 913 |
 | USA LRG revision | 1,069 | 254,816 | 41.00% | 1,348 | 1,064 |
@@ -33,7 +33,7 @@ and again as standalone units. No matching source or USA substitution was lost.
 translation units. The gap between configured and exact is nonmatching C,
 including candidates with current compile/link failures. The USA manifest
 covers 1,348 functions and 616,960 original bytes in reviewed C, or 99.26% of
-CPU text; only the exact 41.00% is eligible for substitution in the canonical
+CPU text; only the exact 41.08% is eligible for substitution in the canonical
 rebuild.
 
 The strict manifest audit finds four explained, unconfigured source files: two
@@ -45,7 +45,7 @@ Exact counts come from per-version linked-byte comparison reports, rerun on
 the current worktree and deduplicated by function address. A USA match is
 never assumed to carry to Japan or Europe.
 
-The current USA worktree passed `make roundtrip-us` byte-identically with 1,069
+The current USA worktree passed `make roundtrip-us` byte-identically with 1,070
 C substitutions. The other three builds passed prior `make roundtrip-all`
 checks, but were not rerun after this source change.
 

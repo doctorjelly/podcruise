@@ -33,8 +33,7 @@ s32 func_80092050(void *arg0, s32 arg1, u16 arg2, void *arg3) {
     if ((D_80149CB0 != 2) || (arg1 != D_800A7EE0)) {
         D_80149CB0 = 2;
         D_800A7EE0 = arg1;
-        for (i = 0; i < arg1; i++) {
-            *p++ = 0;
+        for (i = 0; i < arg1; i++) { *p++ = 0;
         }
         D_8014D720.unk3C = 1;
         p[0] = 0xFF;
@@ -55,7 +54,7 @@ s32 func_80092050(void *arg0, s32 arg1, u16 arg2, void *arg3) {
         func_80087E80(arg0, 0, 1);
         status = (p[2] & 0xC0) >> 4;
         if (status == 0) {
-            if (func_80093B60(&p[6]) != p[0x26]) {
+            if (p[0x26] - func_80093B60(&p[6])) {
                 status = func_80090880(arg0, arg1);
                 if (status != 0) {
                     break;

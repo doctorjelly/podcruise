@@ -1280,6 +1280,8 @@ segments:
       - [0x92A34, c, functions/func_80091E34]
       - [0x92BD0, c, functions/func_80091FD0]
       - [0x92C48, asm, main_92C48]
+      - [0x92C50, c, functions/func_80092050]
+      - [0x92E4C, asm, main_92E4C]
       - [0x93160, c, functions/func_80092560]
       - [0x9329C, asm, main_9329C]
       - [0x932A0, c, functions/func_800926A0]
