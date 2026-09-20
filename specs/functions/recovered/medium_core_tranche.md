@@ -81,3 +81,7 @@ the compiler result worse (20 differing words), so that variant was reverted.
 The current USA `func_8006A9D4` differs in six words, all floating-point load
 register choices in its final three additions. Reversing all three commutative
 source operands left the same six-word difference; that variant was reverted.
+Loading each object component through one reused `f32` scalar widened the
+comparison to 13 words, while grouping the three additions on one source line
+left six words different. Both variants were reverted; the local spelling
+search is exhausted without new evidence about the floating-point allocator.
