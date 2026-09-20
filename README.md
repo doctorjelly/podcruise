@@ -36,12 +36,11 @@ not a substitute for owning it.
   `analysis/source_manifest.json` from the matching configuration and the
   per-version comparison reports, and fails if any unconfigured source lacks
   a recorded reason.
-- Exact IDO 5.3 matches for 1,066 of them (251,720 bytes) in the canonical USA
-  image. The current regional reports contain 911 matches (203,028 bytes) for
-  Japan, 913 (211,300 bytes) for Europe, and 1,066 (251,720 bytes) for the later
-  USA revision. The remaining reviewed candidates are behavior-recovered but
-  not yet byte-matching; see [`docs/DECOMP_STATUS.md`](docs/DECOMP_STATUS.md)
-  for the precise terminology and current ledger.
+- Exact IDO 5.3 matches for 1,070 of them (255,324 bytes, 41.08% of main-CPU
+  text) in the canonical USA image. The USA hybrid rebuild substitutes those
+  functions and remains byte-identical to the retail ROM. Regional matches are
+  tracked independently; see [`docs/DECOMP_STATUS.md`](docs/DECOMP_STATUS.md)
+  for the current per-version ledger and matching terminology.
 
 This is the beginning of a source-matching decompilation, not a claim that the
 game is already decompiled or playable.
