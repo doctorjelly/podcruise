@@ -88,6 +88,7 @@ Cmd *func_8008E54C(Obj *a, s16 *b, s32 n, s32 unused, Cmd *out) {
     s32 aligned;
     s32 total;
     s32 limit;
+    s32 room;
     s32 bytes;
     s32 delta;
     s32 flag;
@@ -130,14 +131,14 @@ Cmd *func_8008E54C(Obj *a, s16 *b, s32 n, s32 unused, Cmd *out) {
         sample = *b;
         delta = len * 2;
         while (len < n) {
-            aligned = (((blocks + 1) << 5) + sample) & ~31;
             n -= len;
+            aligned = (((blocks + 1) << 5) + sample) & ~31;
             sample += delta;
             if (a->unk24 != -1 && a->unk24 != 0) {
                 a->unk24 = a->unk24 - 1;
             }
-            limit = a->unk20 - a->unk1C;
-            len = ((u32)n < (u32)limit) ? n : limit;
+            room = a->unk20 - a->unk1C;
+            len = ((u32)n < (u32)room) ? n : room;
             avail = len + a->unk3C - 16;
             if (avail < 0) {
                 avail = 0;

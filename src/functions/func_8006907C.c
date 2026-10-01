@@ -47,34 +47,41 @@ extern void func_80068D04(Obj6907C *object, f32 amount, f32 *direction,
                           f32 *velocity);
 extern f32 func_80081700(f32 arg0, f32 arg1);
 
+typedef struct Vec6907C {
+    f32 x;
+    f32 y;
+    f32 z;
+} Vec6907C;
+
 void func_8006907C(Obj6907C *object, f32 *arg1, f32 *position, f32 *direction) {
-    f32 velocity[3];
+    Vec6907C velocity;
     f32 amount;
-    f32 dot;
     f32 length;
+    f32 planar;
     f32 previous[3];
     f32 scratch[3];
-    f32 pad[4];
-    f32 planar;
+    f32 speed;
+    f32 dot;
+    f32 pad[3];
 
     (void)pad;
     amount = func_80068410(object);
     dot = func_800689A0(object);
     amount = amount + dot;
-    func_80068D04(object, amount, direction, velocity);
+    func_80068D04(object, amount, direction, (f32 *)&velocity);
 
     if (!(object->unk064 & 0x400) && !(object->unk060 & 0x2000000)) {
-        if (0.0f < velocity[2]) {
-            length = velocity[0] * velocity[0] + velocity[1] * velocity[1];
-            if (length * D_800AD534 < velocity[2] * velocity[2]) {
-                velocity[2] = sqrtf(length) / 5.0f;
+        if (0.0f < velocity.z) {
+            speed = velocity.y * velocity.y + velocity.x * velocity.x;
+            if (speed * D_800AD534 < velocity.z * velocity.z) {
+                velocity.z = sqrtf(speed) / 5.0f;
             }
         }
     }
 
-    velocity[0] = velocity[0] + object->unk1DC;
-    velocity[1] = velocity[1] + object->unk1E0;
-    velocity[2] = velocity[2] + object->unk1E4;
+    velocity.x = velocity.x + object->unk1DC;
+    velocity.y = velocity.y + object->unk1E0;
+    velocity.z = velocity.z + object->unk1E4;
 
     object->unk1D0 *= func_80081700(4.0f, (f32)D_80120BF0);
     object->unk1D4 *= func_80081700(4.0f, (f32)D_80120BF0);
@@ -87,11 +94,11 @@ void func_8006907C(Obj6907C *object, f32 *arg1, f32 *position, f32 *direction) {
         if (D_800AD538 < object->unk18C || D_800AD538 < -object->unk18C ||
             !(object->unk060 & 0x2000)) {
             direction = &object->unk1C4;
-            dot = (velocity[0] * object->unk1C4 + velocity[1] * object->unk1C8) + object->unk1CC * velocity[2];
+            dot = object->unk1CC * velocity.z + (velocity.x * object->unk1C4 + velocity.y * object->unk1C8);
             if (dot < 0.0f) {
-                velocity[0] = object->unk1C4 + velocity[0];
-                velocity[1] = object->unk1C8 + velocity[1];
-                velocity[2] = object->unk1CC + velocity[2];
+                velocity.x = object->unk1C4 + velocity.x;
+                velocity.y = object->unk1C8 + velocity.y;
+                velocity.z = object->unk1CC + velocity.z;
             } else {
                 length = func_800153C0(direction);
                 if (1.0f < length) {
@@ -106,17 +113,17 @@ void func_8006907C(Obj6907C *object, f32 *arg1, f32 *position, f32 *direction) {
                     if (dot < 1.0f) {
                         dot = 1.0f;
                     }
-                    func_800155EC(velocity, velocity, dot, direction);
+                    func_800155EC((f32 *)&velocity, (f32 *)&velocity, dot, direction);
                 } else {
-                    velocity[0] = object->unk1C4 + velocity[0];
-                    velocity[1] = object->unk1C8 + velocity[1];
-                    velocity[2] = object->unk1CC + velocity[2];
+                    velocity.x = object->unk1C4 + velocity.x;
+                    velocity.y = object->unk1C8 + velocity.y;
+                    velocity.z = object->unk1CC + velocity.z;
                 }
             }
         }
     }
 
-    func_800155EC(position, arg1, (f32)D_80120BF0, velocity);
+    func_800155EC(position, arg1, (f32)D_80120BF0, (f32 *)&velocity);
 
     if ((f32)(((f32)object->unk1998 - 400.0f) / 600.0f) < 1.0 ||
         (object->unk060 & 0x20) || (object->unk064 & 0x4000000)) {
