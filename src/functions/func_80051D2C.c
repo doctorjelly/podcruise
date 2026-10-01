@@ -40,10 +40,10 @@ void func_80051D2C(void *object, s32 reset) {
     s32 count;
     s32 index;
     s32 row;
-    u8 *value;
+    u8 shade;
     u8 text[0x114];
     u8 *entry;
-    u8 shade;
+    u8 *value;
     u8 tint;
 
     if (reset != 0) {
@@ -92,6 +92,7 @@ void func_80051D2C(void *object, s32 reset) {
         } else {
             row += 0xC;
         }
+        if (value == 0) { }
         if (row >= -9 && row < 0xFA) {
             if (entry[0] == 0) {
                 func_8008A6B4(text, D_800ACC24, value);

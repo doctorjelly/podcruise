@@ -36,9 +36,9 @@ void func_8008B580(void) {
     handle = func_80093C10();
     func_80093C00(handle | 0x20000000);
     func_80093C20(0x01000800);
-    while (func_80093C30(0x1FC007FC, &status) != 0) {
+    while (func_80093C30(0x1FC007FC, &status)) {
     }
-    while (func_80093C80(0x1FC007FC, status | 8) != 0) {
+    while (func_80093C80(0x1FC007FC, status | 8)) {
     }
 
     *(Block8008B580 *)0x80000000UL = *(Block8008B580 *)func_8008CB00;
@@ -51,7 +51,7 @@ void func_8008B580(void) {
     func_80093D50();
     func_80093890(4, &memoryEnd);
     memoryEnd = memoryEnd & ~0xF;
-    if (memoryEnd != 0) {
+    if (memoryEnd) {
         D_800A7B40 = memoryEnd;
     }
     D_800A7B40 = func_8008AB48(func_8008AC48(D_800A7B40, 3), 4);

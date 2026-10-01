@@ -52,8 +52,8 @@ void func_800672D4(Racer *racer, f32 *output, f32 amount) {
     f32 grip;
     f32 previous;
     f32 force;
-    f32 boost;
     f32 slip;
+    f32 boost;
     f32 scratch[3];
     Message message;
     f32 spare[3];
@@ -118,15 +118,16 @@ void func_800672D4(Racer *racer, f32 *output, f32 amount) {
     if (slip < 0.0f) {
         if (0.0f <= racer->unk1A0) {
             if (0.0f < racer->unk1B0) {
-                racer->unk1B0 = racer->unk1B0 * (slip * D_800AD4C8 + 1.0f);
+                boost = slip * D_800AD4C8 + 1.0f;
+                racer->unk1B0 = racer->unk1B0 * boost;
             }
         }
     }
 
     if (reach < racer->unk1B0) {
+        force = racer->unk1B4 * 8.0f;
         previous = (f32)(racer->unk1B0 / D_80120BF0);
         racer->unk1B0 = reach;
-        force = racer->unk1B4 * 8.0f;
         if (0.0f < racer->unk1B4) {
             racer->unk1B4 = -(racer->unk1B4 / 5.0f);
         }

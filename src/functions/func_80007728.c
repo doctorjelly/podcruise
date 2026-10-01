@@ -18,20 +18,14 @@ extern void func_80088020(Node80007728 *node);
 extern void func_80088050(Node80007728 *node, Node80007728 *after);
 
 void func_80007728(s32 count) {
-    Node80007728 *node;
     s32 index;
     s32 scratch;
+    Node80007728 *node;
     Node80007728 *next;
     Node80007728 *tail;
-    s32 saved_count;
 
-    saved_count = count;
-
-    for (index = 0; index < saved_count; index++) {
+    for (index = 0; index < count; index++) {
         func_80087E80(D_800B0498, &scratch, 0);
-    }
-
-    if (count) {
     }
 
     node = D_800AFAC0[0];
@@ -44,9 +38,12 @@ void func_80007728(s32 count) {
             if (tail != 0) { func_80088050(node, tail); }
             else {
                 D_800AFAC0[1] = node;
-                node->unk0 = 0; node->unk4 = 0;
+                node->unk0 = 0;
+                node->unk4 = 0;
             }
         }
         node = next;
+    }
+    if (count) {
     }
 }

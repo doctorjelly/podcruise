@@ -30,49 +30,52 @@ extern void func_8002FAC4(u8 *top);
 Object8002FF38 *func_8002FF38(s32 index) {
     Object8002FF38 *obj;
     s32 size;
-    u8 *dest;
+    u32 dest;
     u8 *base;
     s32 i;
     s32 total;
     u32 range[4];
+    s32 offset;
 
-    dest = func_8002FAFC();
+    dest = PTR2INT(func_8002FAFC());
     base = D_13307F0;
     func_80011D60(base, (u8 *)&total, 4);
     if (index < 0 || index >= total) {
         return (Object8002FF38 *)0;
     }
-    func_80011D60(base + index * 4 + 4, (u8 *)&range[2], 8);
-    func_80011D60(base + range[2], dest, 0x14);
-    obj = (Object8002FF38 *)dest;
+    func_80011D60(4 + base + index * 4, (u8 *)&range[2], 8);
+    offset = range[2];
+    func_80011D60(base + offset, INT2PTR(dest), 0x14);
+    obj = (Object8002FF38 *)INT2PTR(dest);
     if (obj->unk_4 != 2 || obj->unk_8 != 0) {
         size = obj->unk_C * 8;
         dest += 0x14;
-        {
-            s32 offset = range[2] + 0x14;
-            func_80011D60(base + offset, dest, size);
-        }
-        obj->unk_10 = (Entry8002FF38 *)dest;
+        offset = range[2] + 0x14;
+        func_80011D60(base + offset, INT2PTR(dest), size);
+        obj->unk_10 = (Entry8002FF38 *)INT2PTR(dest);
         for (i = 0; i < obj->unk_C; i++) {
         }
-        i = 0;
         if (obj->unk_8 != 0) {
             dest += size;
-            dest = INT2PTR((PTR2INT(dest) + 0xF) & ~0xF);
+            dest += 0xF;
+            dest &= ~0xF;
+            offset = range[2] + obj->unk_8;
             size = obj->unk_10->unk_4 - obj->unk_8;
-            func_80011D60(base + (range[2] + obj->unk_8), dest, size);
-            obj->unk_8 = (s32)PTR2INT(dest);
+            func_80011D60(base + offset, INT2PTR(dest), size);
+            obj->unk_8 = (s32)dest;
         }
         dest += size;
-        dest = INT2PTR((PTR2INT(dest) + 0xF) & ~0xF);
-        for (; i < obj->unk_C; i++) {
+        dest += 0xF;
+        dest &= ~0xF;
+        for (i = 0; i < obj->unk_C; i++) {
             size = (i + 1 == obj->unk_C ? (s32)(range[3] - range[2]) : obj->unk_10[i + 1].unk_4) - obj->unk_10[i].unk_4;
-            func_80011D60(base + (range[2] + obj->unk_10[i].unk_4), dest, size);
-            obj->unk_10[i].unk_4 = (s32)PTR2INT(dest);
-            dest += size;
-            dest = INT2PTR((PTR2INT(dest) + 0xF) & ~0xF);
+            offset = range[2] + obj->unk_10[i].unk_4;
+            func_80011D60(base + offset, INT2PTR(dest), size);
+            obj->unk_10[i].unk_4 = (s32)dest;
+            dest += size + 0xF;
+            dest &= ~0xF;
         }
     }
-    func_8002FAC4(dest);
+    func_8002FAC4(INT2PTR(dest));
     return obj;
 }
