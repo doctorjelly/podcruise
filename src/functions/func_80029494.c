@@ -19,6 +19,7 @@ extern f32 D_800D6DD0;
 void func_80029494(void) {
     f32 k100 = 100.0f;
     void *owner;
+    f32 half;
 
     owner = D_8011A544;
     if (func_80083D80(*(s32 *)((u8 *)owner + 0x100), D_800D6D90, 0) == 0) {
@@ -32,11 +33,12 @@ void func_80029494(void) {
         func_80015288(D_800D6DA8, D_800D6D90);
         func_80015288(D_800D6DB4, D_800D6D9C);
     }
+    half = 0.5f;
     if (func_80083D80(*(s32 *)((u8 *)owner + 0xFC), D_800D6DC0, 0) == 0) {
         func_80015288(D_800D6DC0, D_800D6D90);
         func_80015288(D_800D6DCC, D_800D6D9C);
-        D_800D6DD0 = (D_800D6D90[1] + D_800D6D90[4]) * 0.5f;
-        D_800D6DB8 = (D_800D6D90[1] + D_800D6D90[4]) * 0.5f;
+        D_800D6DD0 = (D_800D6D90[1] + D_800D6D90[4]) * half;
+        D_800D6DB8 = D_800D6DD0;
         D_800D6D90[1] = (D_800D6D90[1] + D_800D6D90[4] * 5.0f) / 6.0f;
     }
 }

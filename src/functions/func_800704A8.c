@@ -44,8 +44,8 @@ void func_800704A8(void *object, f32 offset) {
     REAL(0x118) = 0.0f;
     REAL(0x11C) = 0.0f;
     REAL(0x110) = 0.0f;
-    REAL(0x124) = 1.0f;
-    REAL(0x120) = 1.0f;
+    REAL(0x124) = (f32)1.0;
+    REAL(0x120) = (f32)1.0;
     if (offset < 0.0f) {
         REAL(0xE8) = REAL(0xE0);
     }
@@ -89,8 +89,8 @@ void func_800704A8(void *object, f32 offset) {
     REAL(0x264) = 0.0f;
     REAL(0x184) = 0.0f;
     REAL(0x188) = 0.0f;
-    REAL(0x19AC) = 1.0f;
-    REAL(0x19B4) = 1.0f;
+    REAL(0x19AC) = (f32)1.0;
+    REAL(0x19B4) = (f32)1.0;
     REAL(0x268) = 60.0f;
-    REAL(0x19B0) = 0.0f;
+    REAL(0x19B0) = (f32)0.0;
 }

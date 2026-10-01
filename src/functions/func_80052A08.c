@@ -35,7 +35,7 @@ void func_80052A08(Screen *screen, s32 request) {
 
     if (request != 0) {
         screen->unk1E0 = request;
-        screen->unk1E4 = 0.0f;
+        screen->unk1E4 = 1.0f * 0.0f;
     }
 
     top = 8;

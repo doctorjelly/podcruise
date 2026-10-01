@@ -33,11 +33,11 @@ void func_800845A0(Node800845A0 *root, Node800845A0 *node, f32 (*mtx)[4], s32 fl
                    s32 mode, f32 *best, f32 *reference, f32 *outPoint, s32 extra) {
     s32 type;
     s32 i;
-    f32 local[4][4];
     Node800845A0 *child;
     s32 count;
-    f32 *m;
     Owner800845A0 *dummy;
+    f32 *m;
+    f32 local[4][4];
     f32 work[4][4];
     Owner800845A0 *owner;
 
