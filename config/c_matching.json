@@ -16317,21 +16317,11 @@
       "source": "src/functions/func_800941E0.c",
       "link_vram": "0x800941E0",
       "absolute_symbols": {
-        "func_80088360": "0x80088360",
         "D_800A7B7C": "0x800A7B7C",
         "D_800A7F50": "0x800A7F50",
-        "D_800A7F54": "0x800A7F54"
+        "D_800A7F54": "0x800A7F54",
+        "func_80088360": "0x80088360"
       },
-      "flags": [
-        "-G",
-        "0",
-        "-O2",
-        "-mips2",
-        "-non_shared",
-        "-Xcpluscomm",
-        "-signed",
-        "-Wab,-r4300_mul"
-      ],
       "functions": [
         {
           "name": "func_800941E0",

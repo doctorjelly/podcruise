@@ -53,15 +53,14 @@ void func_800941E0(void) {
     u32 vStart;
     ViFieldRegs *fld;
     u32 field;
-    u32 physical;
     u32 raw;
 
     next = D_800A7F54;
     mode = next->modep;
     field = *(u32 *)0xA4400010 & 1;
-    physical = func_80088360(next->framep);
     fld = &mode->fldRegs[field];
-    origin = fld->origin + physical;
+    origin = func_80088360(next->framep);
+    origin = fld->origin + origin;
 
     if (next->state & 2) {
         next->xScale |= mode->xScale & ~0xFFF;

@@ -1344,6 +1344,8 @@ segments:
       - [0x94DC8, asm, main_94DC8]
       - [0x94DD0, c, functions/func_800941D0]
       - [0x94DDC, asm, main_94DDC]
+      - [0x94DE0, c, functions/func_800941E0]
+      - [0x950D8, asm, main_950D8]
       - [0x950E0, c, functions/func_800944E0]
       - [0x951C0, c, functions/func_800945C0]
       - [0x953E4, asm, main_953E4]
