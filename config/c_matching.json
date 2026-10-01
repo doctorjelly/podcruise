@@ -9105,24 +9105,14 @@
       "id": "func_80009B8C",
       "source": "src/functions/func_80009B8C.c",
       "link_vram": "0x80009B8C",
-      "flags": [
-        "-G",
-        "0",
-        "-O1",
-        "-mips2",
-        "-non_shared",
-        "-Xcpluscomm",
-        "-signed",
-        "-Wab,-r4300_mul"
-      ],
       "absolute_symbols": {
-        "func_8003F7B8": "0x8003F7B8",
-        "func_80051FF4": "0x80051FF4",
         "D_8009AEF0": "0x8009AEF0",
         "D_8009AF08": "0x8009AF08",
         "D_8009AF20": "0x8009AF20",
         "D_8009AF24": "0x8009AF24",
-        "D_800A822C": "0x800A822C"
+        "D_800A822C": "0x800A822C",
+        "func_8003F7B8": "0x8003F7B8",
+        "func_80051FF4": "0x80051FF4"
       },
       "functions": [
         {
@@ -12490,22 +12480,21 @@
       "flags": [
         "-G",
         "0",
-        "-O2",
+        "-O3",
         "-mips2",
         "-non_shared",
         "-Xcpluscomm",
         "-signed",
-        "-Wab,-r4300_mul",
-        "-Wo,-loopunroll,0"
+        "-Wab,-r4300_mul"
       ],
       "absolute_symbols": {
+        "D_800A6990": "0x800A6990",
         "func_80087FC0": "0x80087FC0",
-        "func_8008FDEC": "0x8008FDEC",
-        "func_8008FE60": "0x8008FE60",
+        "func_80088BFC": "0x80088BFC",
         "func_8008FC3C": "0x8008FC3C",
         "func_8008FD60": "0x8008FD60",
-        "func_80088BFC": "0x80088BFC",
-        "D_800A6990": "0x800A6990"
+        "func_8008FDEC": "0x8008FDEC",
+        "func_8008FE60": "0x8008FE60"
       },
       "functions": [
         {
@@ -21514,19 +21503,10 @@
       "id": "func_80097DC0",
       "source": "src/functions/func_80097DC0.c",
       "link_vram": "0x80097DC0",
-      "flags": [
-        "-G",
-        "0",
-        "-O2",
-        "-mips2",
-        "-non_shared",
-        "-Xcpluscomm",
-        "-signed",
-        "-Wab,-r4300_mul"
-      ],
       "absolute_symbols": {
-        "D_8014D760": "0x8014D760",
         "D_800A7B9C": "0x800A7B9C",
+        "D_8014D760": "0x8014D760",
+        "D_8014D774": "0x8014D774",
         "D_8014D7D4": "0x8014D7D4",
         "func_8008CA80": "0x8008CA80",
         "func_8008CAA0": "0x8008CAA0",
@@ -24283,6 +24263,16 @@
           "rom": "0x8A470",
           "size": 368
         }
+      ],
+      "flags": [
+        "-G",
+        "0",
+        "-O1",
+        "-mips2",
+        "-non_shared",
+        "-Xcpluscomm",
+        "-signed",
+        "-Wab,-r4300_mul"
       ]
     },
     {
