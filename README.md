@@ -36,7 +36,7 @@ not a substitute for owning it.
   `analysis/source_manifest.json` from the matching configuration and the
   per-version comparison reports, and fails if any unconfigured source lacks
   a recorded reason.
-- Exact IDO 5.3 matches for 1,138 of them (304,892 bytes, 49.05% of main-CPU
+- Exact IDO 5.3 matches for 1,139 of them (306,304 bytes, 49.28% of main-CPU
   text) in the canonical USA image. The USA hybrid rebuild substitutes those
   functions and remains byte-identical to the retail ROM. Regional matches are
   tracked independently; see [`docs/DECOMP_STATUS.md`](docs/DECOMP_STATUS.md)
