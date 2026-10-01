@@ -92,7 +92,9 @@ void func_800738D4(Craft800738D4 *craft, s32 mode, f32 *from, f32 *to) {
     func_80015538(matrix[0], direction, up);
     func_80015288(matrix[2], direction);
     func_80015288(matrix[1], up);
-    matrix[0][3] = matrix[1][3] = matrix[2][3] = 0.0f;
+    matrix[0][3] = 0.0f;
+    matrix[1][3] = 0.0f;
+    matrix[2][3] = 0.0f;
     matrix[3][3] = 1.0f;
     func_800155C0(matrix[3], 0.5f, from);
     func_800155EC(matrix[3], matrix[3], 0.5f, to);

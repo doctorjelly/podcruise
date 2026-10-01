@@ -66,23 +66,21 @@ extern PcRacer80059E54 *D_8011B1BC;
 
 void func_80059E54(PcSession80059E54 *session, PcRacer80059E54 *racer,
                    void *object) {
-    u8 green;
-    s32 mode;
-    u8 blue;
-    s32 colX;
     s32 valueX;
+    s32 colX;
+    u8 blue;
     u8 red;
-    s32 row;
-    s32 iconX;
+    u8 green;
+    f32 value;
     s32 baseY;
     s32 rowY;
     const char *label;
     char text[0x20];
-    f32 value;
+    s32 row;
 
     (void)object;
-    mode = func_80051FF4();
-    if (mode == 2) {
+    row = func_80051FF4();
+    if (row == 2) {
         rowY = 0xD7;
         if (racer == D_8011B1BC) {
             rowY = 0x69;
@@ -144,8 +142,8 @@ void func_80059E54(PcSession80059E54 *session, PcRacer80059E54 *racer,
         rowY += 14;
     }
 
-    red = 0x32;
     green = 0xFF;
+    red = 0x32;
     value = racer->unk74;
     if (value <= session->unk1D4) {
         session->unk1D4 = value;
@@ -236,21 +234,21 @@ void func_80059E54(PcSession80059E54 *session, PcRacer80059E54 *racer,
 
         if (D_800A52BC < 2 && racer->unk5C < 4) {
             valueX -= 0x14;
-            iconX = 0x140 - valueX;
+            row = 0x140 - valueX;
             rowY += 0x14;
-            func_80087814((s16)(iconX - 0x11), (s16)(rowY - 0x21),
-                          (s16)(iconX + 0x11), (s16)(rowY + 0x21));
+            func_80087814((s16)(row - 0x11), (s16)(rowY - 0x21),
+                          (s16)(row + 0x11), (s16)(rowY + 0x21));
             if (racer->unk5C == 1) {
                 func_8000A920(0xA9, 1);
-                func_8000AA04(0xA9, (s16)iconX, (s16)(rowY - 0x14));
+                func_8000AA04(0xA9, (s16)row, (s16)(rowY - 0x14));
             }
             if (racer->unk5C == 2) {
                 func_8000A920(0xAA, 1);
-                func_8000AA04(0xAA, (s16)iconX, (s16)(rowY - 0x14));
+                func_8000AA04(0xAA, (s16)row, (s16)(rowY - 0x14));
             }
             if (racer->unk5C == 3) {
                 func_8000A920(0xAB, 1);
-                func_8000AA04(0xAB, (s16)iconX, (s16)(rowY - 0x14));
+                func_8000AA04(0xAB, (s16)row, (s16)(rowY - 0x14));
             }
         }
 

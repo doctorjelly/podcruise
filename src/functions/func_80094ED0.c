@@ -21,15 +21,14 @@ struct PifRam80094ED0 {
 };
 
 extern struct PifRam80094ED0 D_8014C530;
-extern u8 D_8014C534[12];
 extern u8 D_80149CB0;
 
 extern void func_800905F0(void);
 extern void func_80090634(void);
 extern s32 func_800950F4(void *, ContStatus *);
 extern void func_80095048(u8 address, u8 *buffer);
-extern void func_800907D0(s32 direction, void *block);
-extern void func_80087E80(void *queue, void *message, s32 mode);
+extern s32 func_800907D0(s32 direction, void *block);
+extern s32 func_80087E80(void *queue, void *message, s32 mode);
 
 s32 func_80094ED0(mq, address, buffer)
 void *mq;
@@ -38,7 +37,7 @@ u8 *buffer;
 {
     s32 ret;
     int x;
-    u8 *ptr = D_8014C534;
+    u8 *ptr = (u8 *)&D_8014C530;
     EepFormat eepromformat;
     ContStatus sdata;
 
@@ -69,11 +68,12 @@ u8 *buffer;
         func_800950F4(mq, &sdata);
     }
     func_80095048(address, buffer);
-    func_800907D0(1, &D_8014C530);
+    ret = func_800907D0(1, &D_8014C530);
     func_80087E80(mq, 0, 1);
-    func_800907D0(0, &D_8014C530);
+    ret = func_800907D0(0, &D_8014C530);
     D_80149CB0 = 5;
     func_80087E80(mq, 0, 1);
+    ptr += 4;
     eepromformat = *(EepFormat *)ptr;
     ret = (eepromformat.rxsize & 0xC0) >> 4;
     func_80090634();

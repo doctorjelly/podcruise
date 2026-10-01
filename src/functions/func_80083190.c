@@ -13,12 +13,12 @@ extern s32 func_80017DA4(Node80083190 *node);
 extern void func_80015724(f32 (*dst)[4], f32 (*src)[4], f32 (*acc)[4]);
 
 void func_80083190(Node80083190 **list, f32 (*out)[4]) {
+    s32 i;
+    f32 (*src)[3];
     Node80083190 *obj;
     f32 pad1[17];
     f32 matrix[4][4];
-    f32 (*src)[3];
     s32 type;
-    s32 i;
 
     (void)pad1;
     out[0][1] = 0.0f;

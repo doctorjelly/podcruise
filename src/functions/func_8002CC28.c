@@ -30,13 +30,13 @@ void func_8002CC28(s32 arg0, s32 arg1, s32 arg2) {
     if (D_8011A240.unk18 == 0) {
         value = D_800A9EE0 * -1.0f;
     }
-    value = D_800A265C + value * D_80120BF8; if (value > 254.0f) { value = 254.0f; } D_800A265C = value; if (value < 0.0f) { D_800A265C = 0.0f; }
+    value *= D_80120BF8; value += D_800A265C; if (value > 254.0f) { value = 254.0f; } D_800A265C = value; if (value < 0.0f) { D_800A265C = 0.0f; }
 
     value = D_800A9EE0;
     if (D_8011A240.unk1C == 0) {
         value = D_800A9EE0 * -1.0f;
     }
-    value = D_800A2660 + value * D_80120BF8; if (value > 254.0f) { value = 254.0f; } D_800A2660 = value; if (value < 0.0f) { D_800A2660 = 0.0f; }
+    value *= D_80120BF8; value += D_800A2660; if (value > 254.0f) { value = 254.0f; } D_800A2660 = value; if (value < 0.0f) { D_800A2660 = 0.0f; }
 
     func_8000A920(0xAB, 1);
     func_8000AA04(0xAB, 0x13, arg1 - 14);

@@ -77,7 +77,10 @@ static s32 func_8008EEE4(s32 steps, f64 target, f64 current, u16 *fraction) {
                / ((f64)1.0f * scale);
     accumulator = 1.0;
     factor = 1.0 + logvalue;
-    while (count != 0) {
+    for (;;) {
+        if (count == 0) {
+            break;
+        }
         if ((count & 1) != 0) {
             accumulator *= factor;
         }

@@ -12,12 +12,10 @@ typedef struct {
 } TaskBlock;
 
 extern PcGfx * volatile D_801217B0;
-extern PcGfx *D_801217B4;
+extern PcGfx * volatile D_801217B4;
 extern TaskBlock *D_801488C0;
-extern s32 D_80135030;
-extern s32 D_80135034;
-extern s32 D_801488B0;
-extern s32 D_801488B4;
+extern s32 D_80135030[2];
+extern s32 D_801488B0[2];
 extern s32 D_800A268C;
 extern s32 D_800A2690;
 
@@ -48,12 +46,12 @@ s32 flag;
     func_80088AD0();
 
     count = D_801217B0 - D_801217B4;
-    if ((D_80135030 != 0) || (D_80135034 != 0) || (D_801488B0 != 0) || (D_801488B4 != 0)) {
+    if ((D_80135030[0] != 0) || (D_80135030[1] != 0) || (D_801488B0[0] != 0) || (D_801488B0[1] != 0)) {
         count = D_801217B0 - D_801217B4;
-        D_80135030 = 0;
-        D_80135034 = 0;
-        D_801488B0 = 0;
-        D_801488B4 = 0;
+        D_80135030[0] = 0;
+        D_80135030[1] = 0;
+        D_801488B0[0] = 0;
+        D_801488B0[1] = 0;
     }
     D_801488C0->unk34 = count * 8;
 

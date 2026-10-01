@@ -119,7 +119,7 @@ void func_800695D4(Obj *obj, f32 arg1, f32 arg2, f32 arg3, Vec3 *arg4, Vec3 *arg
             if (D_800AD554 < d) {
                 d = ((1.0f - d) / D_800AD558) * D_800AD554;
             }
-            if (vec[1].x * vec[0].y < vec[0].x * vec[1].y) {
+            if (vec[1].x * vec[0].y < vec[1].y * vec[0].x) {
                 f = ((vec[0].x * arg5->x + vec[0].y * arg5->y + vec[0].z * arg5->z) * d) / 0.5f;
             } else {
                 f = -((vec[0].x * arg5->x + vec[0].y * arg5->y + vec[0].z * arg5->z) * d) / 0.5f;

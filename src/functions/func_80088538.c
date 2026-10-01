@@ -42,7 +42,8 @@ u32 *func_80088538(u32 *commands, s32 *countOut, void *state, s32 samples) {
     s32 delta;
     s32 delta2;
     s32 chunk;
-    s32 spare[11];
+    s32 now;
+    s32 spare[10];
 
     (void)spare;
     mixer = D_800A6990;
@@ -58,16 +59,18 @@ u32 *func_80088538(u32 *commands, s32 *countOut, void *state, s32 samples) {
     node = mixer->head;
     delta = 0x7FFFFFFF;
     while (node != 0) {
-        if ((node->unk10 - mixer->unk20) < delta) {
+        now = mixer->unk20;
+        if ((node->unk10 - now) < delta) {
             best[0] = node;
-            delta = node->unk10 - mixer->unk20;
+            delta = node->unk10 - (now = mixer->unk20);
         }
         node = node->next;
     }
 
     position = best[0]->unk10;
     mixer->unk1C = position;
-    if ((position - mixer->unk20) < samples) {
+    now = mixer->unk20;
+    if ((position - now) < samples) {
         do {
             mixer->unk1C &= ~0xF;
             best[0]->unk10 += (s32)(f32)(((f64)((f32)best[0]->step(best[0]) * (f32)mixer->unk44) / 1000000.0) + 0.5);
@@ -78,13 +81,14 @@ u32 *func_80088538(u32 *commands, s32 *countOut, void *state, s32 samples) {
             while (node != 0) {
                 if ((node->unk10 - mixer->unk20) < delta2) {
                     best[0] = node;
-                    delta2 = node->unk10 - mixer->unk20;
+                    delta2 = node->unk10 - (now = mixer->unk20);
                 }
                 node = node->next;
             }
             position = best[0]->unk10;
             mixer->unk1C = position;
-        } while ((position - mixer->unk20) < samples);
+            now = mixer->unk20;
+        } while ((position - now) < samples);
     }
 
     mixer->unk1C &= ~0xF;

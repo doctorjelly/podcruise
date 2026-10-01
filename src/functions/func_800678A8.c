@@ -33,12 +33,10 @@ void func_800678A8(Obj800678A8 *obj, void *arg1, void *arg2) {
     f32 sp54[3];
     f32 sp48[3];
     f32 mag;
-    f32 base;
     f32 dot;
 
     mag = (obj->unk208 < 0.0f) ? -obj->unk208 : obj->unk208;
-    base = obj->unkA8;
-    sp9C = base - ((base * 0.75f) * mag);
+    sp9C = obj->unkA8 - (mag * (obj->unkA8 * 0.75f));
     if (sp9C < 1.5f) {
         sp9C = 1.5f;
     }
@@ -54,7 +52,7 @@ void func_800678A8(Obj800678A8 *obj, void *arg1, void *arg2) {
     }
     if (count > 0) {
         if (50.0f < obj->unk1A0) {
-            dot = (obj->unk40[2] * sp78[2]) + ((sp78[0] * obj->unk40[0]) + (sp78[1] * obj->unk40[1]));
+            dot = (sp78[0] * obj->unk40[0]) + (sp78[1] * obj->unk40[1]) + (sp78[2] * obj->unk40[2]);
             if (dot < 0.5f) {
                 if (-dot < 0.5f) {
                     func_80067718(obj, obj->unk1A0 * D_800AD4DC, 0.3f, sp90, sp78, 1);

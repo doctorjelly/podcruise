@@ -63,6 +63,7 @@ void func_8004850C(s32 argument) {
     f32 alpha;
     f32 origin[3];
     f32 pivot[3];
+    s32 slot;
 
     (void)argument;
     snapshot = D_800A51D0;
@@ -100,7 +101,7 @@ void func_8004850C(s32 argument) {
     }
 
     if (D_800A21A4 != 0 && D_800A4BC4 != 0 && D_800A219C == 0) {
-        target = *D_8011A740[D_800A2DE3[D_801198A8[D_8011A270].unk00 * 16]];
+        slot = D_800A2DE3[D_801198A8[D_8011A270].unk00 * 16]; target = *D_8011A740[slot];
         if (target != 0) {
             if (target != 0) {
                 func_800181BC(target, 2, -4, 0x10, 3);

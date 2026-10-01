@@ -29,14 +29,14 @@ extern s32 func_80092050(void *arg0, s32 arg1, u16 arg2, void *arg3);
 extern s32 func_800928F0(void *arg0, s32 arg1, u16 arg2, u8 *arg3, s32 arg4);
 
 s32 func_80090C20(Context *context, Packet *source, Packet *destination) {
-    s32 attempt;
+    s32 result;
+    u8 *walk;
+    u8 *code;
     u8 high[32];
     u8 low[32];
     u8 *invert;
-    u8 *walk;
-    u8 *code;
     u16 codes[4];
-    s32 result;
+    s32 attempt;
 
     attempt = 0;
     destination->unk00 = -1;
@@ -60,7 +60,7 @@ s32 func_80090C20(Context *context, Packet *source, Packet *destination) {
         if (result != 0) {
             return result;
         }
-        high[0] = attempt | 0x80;
+        high[0] = (attempt & 0xFF) | 0x80;
         for (invert = &high[1]; invert < &high[32]; invert++) {
             *invert = ~*invert;
         }
@@ -110,8 +110,8 @@ s32 func_80090C20(Context *context, Packet *source, Packet *destination) {
         }
     }
 
+    destination->unk18 = (source->unk18 & 0xFFFE) | (attempt > 0 ? 1 : 0);
     destination->unk1A = attempt;
-    destination->unk18 = (attempt > 0 ? 1 : 0) | (source->unk18 & 0xFFFE);
     destination->unk1B = source->unk1B;
     func_80090B24((u16 *)destination, &destination->unk1C, &destination->unk1E);
 

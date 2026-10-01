@@ -23,29 +23,29 @@ extern void func_800304AC(s32 index, s32 *first, s32 *second);
 extern void func_800827C0(u32 argument);
 
 void *func_800305E8(s32 index) {
-    s32 padA[3];
-    u32 *cursor;
     s32 count;
+    u8 *data;
+    u8 *base[1];
+    u8 *scratch;
+    s32 header[3];
     s32 i;
     s32 pad4;
-    u32 *bitmap[1];
-    s32 offset;
-    s32 header[3];
-    s32 packed;
-    u8 *data;
-    u8 *scratch;
-    s32 started;
-    u8 *mark;
     void *result;
+    u32 *bitmap;
+    s32 offset;
+    u32 *cursor;
+    s32 padA[3];
+    u8 *mark;
+    s32 started;
     s32 size;
+    s32 packed;
     u32 word;
-    u8 *base[1];
 
     (void)padA;
     (void)pad4;
     D_800A2848 = 1;
     D_800D9DC8 = 0;
-    bitmap[0] = D_80114528;
+    bitmap = D_80114528;
     D_800D9DCC = 0;
     D_800D9DD0 = 0;
     base[0] = D_141E200;
@@ -55,7 +55,7 @@ void *func_800305E8(s32 index) {
     }
     func_80011D60(base[0] + index * 8 + 4, (u8 *)header, 0xC);
     size = header[2] - header[1];
-    func_80011CDC(header[0] + base[0], bitmap[0], header[1] - header[0]);
+    func_80011CDC(header[0] + base[0], bitmap, header[1] - header[0]);
 
     mark = func_8002FAFC();
     data = (u8 *)(((unsigned long)mark + 7) & ~7UL);
@@ -92,7 +92,7 @@ void *func_800305E8(s32 index) {
     cursor = (u32 *)data;
     for (i = 0; i < (size >> 2); i++) {
         s32 shift = 31 - (i & 31);
-        word = bitmap[0][i >> 5] & (1U << shift);
+        word = bitmap[i >> 5] & (1U << shift);
         if (word != 0) {
             u32 masked = *cursor & 0xFFFFFF;
             u32 field = *cursor & 0xFF000000;

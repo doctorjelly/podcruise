@@ -16,6 +16,8 @@ void func_8003B860(PcGfx **listp, s32 ulx, s32 lrx, s32 uly, s32 lry, s32 x, s32
     s32 vx;
     s32 vy;
     u32 w;
+    u32 tt;
+    u32 bb;
 
     gfx = *listp;
 
@@ -65,10 +67,12 @@ void func_8003B860(PcGfx **listp, s32 ulx, s32 lrx, s32 uly, s32 lry, s32 x, s32
     w = ((vx & 0xFFFF) << 16) | (vy & 0xFFFF);
     PC_CMD(0x02180006, w)
 
-    PC_CMD(0x02140000, ((u32)uls << 16) | ((u32)ult & 0xFFFF))
-    PC_CMD(0x02140002, ((u32)lrs << 16) | ((u32)ult & 0xFFFF))
-    PC_CMD(0x02140004, ((u32)lrs << 16) | ((u32)lrt & 0xFFFF))
-    PC_CMD(0x02140006, ((u32)uls << 16) | ((u32)lrt & 0xFFFF))
+    tt = (u32)ult & 0xFFFF;
+    bb = (u32)lrt & 0xFFFF;
+    PC_CMD(0x02140000, ((u32)uls << 16) | tt)
+    PC_CMD(0x02140002, ((u32)lrs << 16) | tt)
+    PC_CMD(0x02140004, ((u32)lrs << 16) | bb)
+    PC_CMD(0x02140006, ((u32)uls << 16) | bb)
     PC_CMD(0x06000402, 0x604)
 
     *listp = gfx;

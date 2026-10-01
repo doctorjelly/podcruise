@@ -95,7 +95,7 @@ void func_80065E54(Actor *actor, Vec3f *arg1, Vec3f *arg2, Vec3f *arg3, f32 *arg
             }
             if (actor->unk2FC < 0.0f) {
                 if (arg8[1] < -10.0f) {
-                    dy = dy - (20.0f * actor->unk2FC) * (f32)D_80120BF0;
+                    dy -= (20.0f * actor->unk2FC) * (f32)D_80120BF0;
                 }
             }
         }

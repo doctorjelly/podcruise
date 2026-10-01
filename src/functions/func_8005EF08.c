@@ -79,8 +79,7 @@ void func_8005EF08(CtxEF08 *ctx) {
     s32 flags;
     void *player;
 
-    cursor = D_8011AC80;
-    end = (void **)&D_8011ACBC;
+    cursor = D_8011AC80; end = (void **)&D_8011ACBC;
     do {
         *cursor = 0;
         cursor++;

@@ -23,9 +23,7 @@ void func_8003E59C(void) {
     register f32 scale;
     f32 full;
     register s32 previous;
-    register s16 *point;
     volatile f32 *level;
-    register u8 *kinds;
     register s32 index;
     register u32 mode;
 
@@ -46,12 +44,9 @@ void func_8003E59C(void) {
         level = D_800A59B0;
         mode = 0x2E;
         func_80011F04(0, 255, 0, full * alpha1 * level[0]);
-        previous = 0;
-        point = D_80118958;
-        kinds = D_80118C50;
-        for (index = 0; index < D_800A4984; index++) {
-            if (previous != kinds[0]) {
-                previous = kinds[0] & 0xFF;
+        for (index = 0, previous = 0; index < D_800A4984; index++) {
+            if (previous != D_80118C50[index]) {
+                previous = D_80118C50[index] & 0xFF;
                 if (previous == 1) {
                     func_80011F04(0, 255, 255, full * level[0]);
                 } else if (previous == 2) {
@@ -68,9 +63,7 @@ void func_8003E59C(void) {
                     }
                 }
             }
-            func_80014568(point[0], point[1], 0x70);
-            kinds++;
-            point += 2;
+            func_80014568(D_80118958[index * 2], D_80118958[index * 2 + 1], 0x70);
         }
         func_80014C98();
         D_800A4984 = 0;

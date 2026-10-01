@@ -26,7 +26,6 @@ void func_8005F33C(u8 *owner, Mover *mover, s32 position) {
     f32 fspan;
     f32 fremain;
     s32 index;
-    s32 work;
     f32 half;
     f32 k20 = 20.0f;
     s32 span;
@@ -53,14 +52,13 @@ void func_8005F33C(u8 *owner, Mover *mover, s32 position) {
             total += span;
         } while (position >= span);
     }
-    work = position;
     if (total > 0) {
         span -= total;
     }
 
     findex = (f32)index;
     fspan = (f32)span;
-    fremain = (f32)work;
+    fremain = (f32)position;
     rotation = findex * -30.0f;
     half = (fspan - 1.0f) * 0.5f;
     amount = fremain * k20 + half * -k20;

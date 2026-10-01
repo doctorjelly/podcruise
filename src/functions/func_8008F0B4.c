@@ -158,8 +158,7 @@ static Acmd *func_8008F0B4(Obj *obj, s16 *dmemIn, s16 *dmemBase, s32 count,
             c->w1 = 0;
         }
         {
-            Acmd *c = p++;
-            c->w0 = ((u32)obj->unk1E & 0xFFFF) | 0x09040000;
+            Acmd *c = p++; c->w0 = ((u32)obj->unk1E & 0xFFFF) | 0x09040000;
             c->w1 = 0;
         }
         {
@@ -167,25 +166,18 @@ static Acmd *func_8008F0B4(Obj *obj, s16 *dmemIn, s16 *dmemBase, s32 count,
             c->w1 = ((u32)obj->unk26 << 16) | (u32)(u16)obj->unk24;
         }
         {
-            Acmd *c = p++;
-            c->w0 = ((u32)obj->unk2E & 0xFFFF) | 0x09000000;
+            Acmd *c = p++; c->w0 = ((u32)obj->unk2E & 0xFFFF) | 0x09000000;
             c->w1 = ((u32)obj->unk2C << 16) | (u32)(u16)obj->unk2A;
         }
         {
-            Acmd *c = p++;
-            c->w0 = ((u32)obj->unk20 & 0xFFFF) | 0x09080000;
-            c->w1 = (u32)obj->unk22 & 0xFFFF;
+            Acmd *c = p++; c->w0 = ((u32)obj->unk20 & 0xFFFF) | 0x09080000; c->w1 = (u32)obj->unk22 & 0xFFFF;
         }
         {
-            Acmd *c = p++;
-            c->w0 = 0x03090000;
-            c->w1 = func_80088360(obj->unk14);
+            Acmd *c = p++; c->w0 = 0x03090000; c->w1 = func_80088360(obj->unk14);
         }
     } else {
         {
-            Acmd *c = p++;
-            c->w0 = 0x03080000;
-            c->w1 = func_80088360(obj->unk14);
+            Acmd *c = p++; c->w0 = 0x03080000; c->w1 = func_80088360(obj->unk14);
         }
     }
 
