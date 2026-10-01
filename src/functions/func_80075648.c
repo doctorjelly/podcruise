@@ -38,9 +38,13 @@ void func_80075648(u8 *obj, s32 index, f32 *fallback, f32 amount) {
                 func_8003FA24(0x54657374, tag);
                 *(s32 *)(obj + 0x324) = index;
                 func_80017874(m);
-                range = D_800AD9BC;
-                base = D_800AD9B8;
                 denom = 2147483648.0f;
+                base = D_800AD9B8;
+                range = D_800AD9BC;
+                if (denom) {
+                }
+                if (range) {
+                }
                 for (i = 0; i < 3; i++) {
                     m[0][i] = (f32)func_80082BE0() / denom * range + base;
                     if (func_80082BE0() & 1) {

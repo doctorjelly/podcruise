@@ -76,8 +76,8 @@ void func_80024954(Obj *obj) {
     char text[272];
     s32 *cursor;
     s32 red;
-    s32 green;
     s32 value;
+    s32 green;
     s16 idx;
 
     if (D_800A4BBC != 0) {
@@ -123,12 +123,12 @@ void func_80024954(Obj *obj) {
         return;
     }
 
-    if (D_800A21B8[obj->unk5D * 3] == -1 || D_800A21B8[obj->unk5D * 3 + 1] == -1) {
+    if (*(s32 *)((u8 *)D_800A21B8 + obj->unk5D * 12) == -1 || *(s32 *)((u8 *)D_800A21B8 + obj->unk5D * 12 + 4) == -1) {
         func_8008A6B4(text, D_800A8F38);
-        value = func_80082BE0();
         green = func_80082BE0();
-        func_8003EC40(0xA0, 0xCD, (s32)((f32)value / (f32)2147483648.0 * 256.0f),
-                      (s32)((f32)green / (f32)2147483648.0 * 256.0f),
+        red = func_80082BE0();
+        func_8003EC40(0xA0, 0xCD, (s32)((f32)green / (f32)2147483648.0 * 256.0f),
+                      (s32)((f32)red / (f32)2147483648.0 * 256.0f),
                       (s32)((f32)func_80082BE0() / (f32)2147483648.0 * 256.0f), 0xFF, text);
     }
 
