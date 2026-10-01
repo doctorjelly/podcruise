@@ -62,7 +62,7 @@ void func_80073CD0(Ctx73CD0 *ctx, f32 pan) {
     Obj73CD0 *owner;
     s16 idx[2];
     s32 muted;
-    f32 top;
+    f32 pad9[1];
     f32 scaleA;
     f32 ratio;
     s32 band;
@@ -71,11 +71,14 @@ void func_80073CD0(Ctx73CD0 *ctx, f32 pan) {
 
     (void)pad2;
     (void)pad3;
+    (void)pad9;
     muted = 0;
     low = 50.0f;
-    top = 73.0f;
+    high = 73.0f;
     base = D_800A36BC[*ctx->owner->kind][0];
-    scaleA = (((1.0f - (base - low) / (top - low)) * 0.5f) + 0.75f);
+    base = (base - low) / (high - low);
+    base = 1.0f - base;
+    scaleA = base * 0.5f + 0.75f;
     func_80009C0C(D_800A59FC, D_800A5A00, func_8008035C(&ctx->source), ctx->value);
 
     if (ctx->stateA & 0x5800) {
@@ -138,7 +141,7 @@ void func_80073CD0(Ctx73CD0 *ctx, f32 pan) {
         if (((f32)func_80082BE0() / (f32)2147483648.0) < D_800AD948) {
             func_80082BE0();
         }
-        amount = amount * (((1.0f - (base - low) / (top - low)) * 0.5f) + 0.75f);
+        amount = amount * scaleA;
         if (ctx->stateB & 0x4000) {
             amount = amount * 1.5f;
         } else if (ctx->stateB & 0x200) {
@@ -169,15 +172,15 @@ void func_80073CD0(Ctx73CD0 *ctx, f32 pan) {
             } else {
                 soundId = 0xAC;
             }
-            amount = D_800AD94C * pan;
-            if (1.0f < amount) {
-                amount = 1.0f;
+            ratio = D_800AD94C * pan;
+            if (1.0f < ratio) {
+                ratio = 1.0f;
             }
             if (ctx->stateB & 0x200) {
-                amount = amount * D_800AD950;
+                ratio = ratio * D_800AD950;
             }
             if (muted == 0) {
-                func_80008BC4(soundId, 6, D_800AD954 * (((1.0f - (base - low) / (top - low)) * 0.5f) + 0.75f), amount, &ctx->anchor, 1, 0,
+                func_80008BC4(soundId, 6, D_800AD954 * scaleA, ratio, &ctx->anchor, 1, 0,
                               10.0f, 500.0f);
             }
         }
@@ -186,7 +189,7 @@ void func_80073CD0(Ctx73CD0 *ctx, f32 pan) {
     if (ctx->stateA & 0x200) {
         if (1.0f == *level) {
             if (muted == 0) {
-                func_80008BC4(0x80, 6, 0.25f * (((1.0f - (base - low) / (top - low)) * 0.5f) + 0.75f), pan, &ctx->anchor, 0, 1, 10.0f, 500.0f);
+                func_80008BC4(0x80, 6, 0.25f * scaleA, pan, &ctx->anchor, 0, 1, 10.0f, 500.0f);
             }
         }
         *level = (f32)((f64)*level - D_80120BF0);
@@ -196,7 +199,7 @@ void func_80073CD0(Ctx73CD0 *ctx, f32 pan) {
     } else {
         if (0.0f == *level) {
             if (muted == 0) {
-                func_80008BC4(0x7F, 6, 0.25f * (((1.0f - (base - low) / (top - low)) * 0.5f) + 0.75f), pan, &ctx->anchor, 0, 1, 10.0f, 500.0f);
+                func_80008BC4(0x7F, 6, 0.25f * scaleA, pan, &ctx->anchor, 0, 1, 10.0f, 500.0f);
             }
         }
         *level = (f32)((f64)*level + D_80120BF0);

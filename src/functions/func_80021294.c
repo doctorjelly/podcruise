@@ -5,8 +5,6 @@
 typedef struct {
     u8 pad00[0x34];
     s32 mode;
-    s32 gate;
-    s32 *button_source;
     u8 pad38[0x38];
     s8 count;
     s8 pad71;
@@ -64,20 +62,24 @@ extern f32 func_80015470(const PcVec3f *from, const PcVec3f *to);
 extern void func_8001745C(f32 *matrix, f32 first, f32 second, f32 third);
 
 void func_80021294(PcTuneState *state) {
+    f32 yaw;
+    f32 *cam;
+    s32 gate;
+    s32 stepped;
+    f32 text_y;
+    f32 previous;
+    s32 index;
     f32 matrix[4][4];
     PcVec3f offset;
+    s32 mode;
+    s32 *flags;
     f32 pitch;
-    f32 yaw;
-    f32 previous;
-    s32 stepped;
     s32 moved;
     s32 saturated;
-    s32 index;
-    s32 mode;
-    s32 gate;
-    s32 *button_source;
-    s32 row;
 
+    /* pointer views of the camera globals keep IDO from hoisting their addresses */
+    cam = &D_800D7388;
+    flags = &D_800A2544;
     moved = 0;
     saturated = 0;
     stepped = 0;
@@ -92,32 +94,33 @@ void func_80021294(PcTuneState *state) {
         state->mode = 20;
         func_8002AFFC(state, 20, 0);
         func_8001535C(&offset, &D_80118D90, &D_80118E50);
-        D_800D7388 = func_800153C0(&offset);
+        cam[0] = func_800153C0(&offset);
         func_800154D0(&offset.x);
-        D_800D739C = func_80014F54(-offset.x, offset.y);
+        cam[5] = func_80014F54(-offset.x, offset.y);
         pitch = func_80014D4C(offset.z);
-        yaw = D_800D739C;
+        yaw = cam[5];
         if (yaw < 0.0f) {
             yaw = yaw + 360.0f;
         }
-        D_800D739C = yaw;
+        cam[5] = yaw;
         if (yaw > 360.0f) {
-            D_800D739C = yaw - 360.0f;
+            cam[5] = yaw - 360.0f;
         }
         if (pitch < -90.0f) {
             pitch = pitch + 180.0f;
         }
-        D_800D73A0 = pitch;
+        cam[6] = pitch;
         if (pitch > 90.0f) {
-            D_800D73A0 = pitch - 180.0f;
+            cam[6] = pitch - 180.0f;
         }
+        D_800A4BF4 = 0.0f;
         D_800A2540 = 0;
         D_800A4BBC = 0;
         D_800A4BC0 = 0;
-        D_800A2544 = 1;
+        flags[0] = 1;
     }
 
-    if (D_800A2544 != 0) {
+    if (flags[0] != 0) {
         D_800A4BF4 = D_800A4BF4 + D_80120BF8;
         if (D_800A4BF4 >= 5.0f) {
             D_800A4BF4 = 5.0f;
@@ -143,6 +146,11 @@ void func_80021294(PcTuneState *state) {
     case 25:
         func_8008A6B4(D_800D7288, D_800A8E34);
         break;
+    case 30:
+        mode = state->entries[0];
+        func_8008A6B4(D_800D7288, D_800A8E44, D_800A31E0[(mode * 13) + 5],
+                      D_800A31E0[(mode * 13) + 6]);
+        break;
     case 26:
         func_8008A6B4(D_800D7288, D_800A8E50);
         break;
@@ -155,32 +163,25 @@ void func_80021294(PcTuneState *state) {
     case 29:
         func_8008A6B4(D_800D7288, D_800A8E74);
         break;
-    case 30:
-        row = state->entries[0];
-        func_8008A6B4(D_800D7288, D_800A8E44, D_800A31E0[(row * 13) + 5],
-                      D_800A31E0[(row * 13) + 6]);
-        break;
     }
 
-    func_8003EC40(160, (s16)(s32)(185.0f + 10.0f), 0, 255, 0, 255,
+    text_y = 185.0f;
+    func_8003EC40(160, (s16)(s32)(text_y + 10.0f), 0, 255, 0, 255,
                   (s32)(long)D_800D7288);
 
-    button_source = D_800A4BA4;
-    for (index = 0; index < state->count; index++, button_source++) {
+    for (index = 0; index < state->count; index++) {
         f32 distance;
-        s32 buttons;
-        s32 held;
 
-        distance = D_800D7388;
-        buttons = *button_source;
-        if (buttons & 1) {
+        distance = cam[0];
+        mode = D_800A4BA4[index];
+        if (mode & 1) {
             func_8002D4C4(0x55);
             D_800A2540 = 1;
             func_800469B4(state, 3);
             return;
         }
-        if ((buttons & 2) && !(buttons & 1)) {
-            D_800D7388 = distance;
+        if ((mode & 2) && !(mode & 1)) {
+            cam[0] = distance;
             func_8002D4C4(0x4D);
             D_800A2540 = 1;
             D_800A4BF0 = 0.0f;
@@ -190,8 +191,8 @@ void func_80021294(PcTuneState *state) {
 
         previous = distance;
         if ((f64)D_800D7720[index] > 0.1 || (f64)D_800D7720[index] < -0.1) {
-            if (D_800A2544 == 0) {
-                D_800D739C = (f32)((f64)D_800D739C +
+            if (flags[0] == 0) {
+                cam[5] = (f32)((f64)cam[5] +
                                    (f64)(140.0f * D_80120BF8 *
                                          D_800D7720[index]) * 1.5);
                 moved = 1;
@@ -199,22 +200,22 @@ void func_80021294(PcTuneState *state) {
             if (D_800A4BF4 == 5.0f) {
                 saturated = 1;
             }
-            D_800A2544 = 0;
+            flags[0] = 0;
         }
 
-        gate = D_800A2544;
+        gate = flags[0];
         if ((f64)D_800D7730[index] > 0.1 || (f64)D_800D7730[index] < -0.1) {
-            if (gate == 0) {
-                pitch = (f32)((f64)D_800D73A0 +
+            if ((gate != 0) == 0) {
+                pitch = (f32)((f64)cam[6] +
                               (f64)(45.0f * D_80120BF8 * D_800D7730[index]) *
                                   1.5);
                 moved = 1;
                 if (pitch > 89.0f) {
                     pitch = 89.0f;
                 }
-                D_800D73A0 = pitch;
+                cam[6] = pitch;
                 if (pitch < -89.0f) {
-                    D_800D73A0 = -89.0f;
+                    cam[6] = -89.0f;
                 }
             }
             gate = 0;
@@ -223,9 +224,9 @@ void func_80021294(PcTuneState *state) {
             }
         }
 
-        held = D_800A4B94[index];
-        if (held & 4) {
-            if (gate == 0) {
+        mode = D_800A4B94[index];
+        if (mode & 4) {
+            if ((gate != 0) == 0) {
                 distance = distance - 800.0f * D_80120BF8;
                 if (distance < 100.0f) {
                     distance = 100.0f;
@@ -237,17 +238,17 @@ void func_80021294(PcTuneState *state) {
                 saturated = 1;
             }
         }
-        D_800A2544 = gate;
-        D_800D7388 = distance;
-        if (held & 8) {
-            D_800A2544 = 0;
-            D_800D7388 = distance;
-            if (gate == 0) {
+        flags[0] = gate;
+        cam[0] = distance;
+        if (mode & 8) {
+            flags[0] = 0;
+            cam[0] = distance;
+            if ((gate != 0) == 0) {
                 distance = distance + 800.0f * D_80120BF8;
-                D_800D7388 = distance;
+                cam[0] = distance;
                 moved = 1;
                 if (distance > 1336.0f) {
-                    D_800D7388 = 1336.0f;
+                    cam[0] = 1336.0f;
                 }
             }
             if (D_800A4BF4 == 5.0f) {
@@ -256,20 +257,20 @@ void func_80021294(PcTuneState *state) {
         }
 
         if ((D_800A4B94[0] & 0x10) && D_800A4BC0 != 3) {
-            mode = state->mode + 1;
-            state->mode = mode;
-            D_800A2544 = 0;
+            state->mode = state->mode + 1;
+            mode = state->mode;
+            flags[0] = 0;
             stepped = 1;
             if (mode == 22) {
                 if (D_800A31E4[state->entries[index] * 13] == 30) {
-                    mode = mode + 4;
-                    state->mode = mode;
+                    state->mode = mode + 4;
+                    mode = state->mode;
                 }
             }
             if (mode == 24) {
                 if (D_800A31E4[state->entries[index] * 13] == 40) {
-                    mode = mode + 2;
-                    state->mode = mode;
+                    state->mode = mode + 2;
+                    mode = state->mode;
                 }
             }
             if (mode < 30) {
@@ -288,9 +289,9 @@ void func_80021294(PcTuneState *state) {
         }
 
         if ((D_800A4B94[0] & 0x20) && D_800A4BC0 != 3) {
-            mode = state->mode - 1;
-            state->mode = mode;
-            D_800A2544 = 0;
+            state->mode = state->mode - 1;
+            mode = state->mode;
+            flags[0] = 0;
             stepped = 1;
             if (mode == 25) {
                 if (D_800A31E4[state->entries[index] * 13] == 30) {
@@ -300,8 +301,8 @@ void func_80021294(PcTuneState *state) {
             }
             if (mode == 25) {
                 if (D_800A31E4[state->entries[index] * 13] != 40) {
-                    mode = mode - 2;
-                    state->mode = mode;
+                    state->mode = mode - 2;
+                    mode = state->mode;
                 }
             }
             if (D_80113E7C < mode - 25) {
@@ -325,58 +326,61 @@ void func_80021294(PcTuneState *state) {
         }
 
         if (moved || D_800A4BC0 == 3) {
-            func_8001745C(&matrix[0][0], D_800D739C, D_800D73A0, 0.0f);
-            func_800155EC(&D_80118D90, &D_80118E50, D_800D7388,
+            pitch = cam[6];
+            yaw = cam[5];
+            func_8001745C(&matrix[0][0], yaw, pitch, 0.0f);
+            distance = cam[0];
+            func_800155EC(&D_80118D90, &D_80118E50, distance,
                           (PcVec3f *)&matrix[1][0]);
             if (D_80118D98 < -147.0f) {
                 func_800155EC(&D_80118D90, &D_80118E50,
-                              D_800D7388 *
+                              cam[0] *
                                   ((D_80118E58 - -147.0f) /
                                    (D_80118E58 - D_80118D98)),
                               (PcVec3f *)&matrix[1][0]);
             }
             if (1066.0f < D_80118D98) {
                 func_800155EC(&D_80118D90, &D_80118E50,
-                              D_800D7388 *
+                              cam[0] *
                                   ((D_80118E58 - 1066.0f) /
                                    (D_80118E58 - D_80118D98)),
                               (PcVec3f *)&matrix[1][0]);
             }
-            distance = D_800D7388;
+            distance = cam[0];
             if (distance != previous) {
                 distance = func_80015470(&D_80118D90, &D_80118E50);
             }
-            D_800D7388 = distance;
+            cam[0] = distance;
             if (moved) {
-                moved = 0;
                 func_800156DC(D_80118E60, D_80118E20);
             }
+            moved = 0;
         }
     }
 
     if (saturated) {
         D_800A4BF4 = 0.0f;
-        D_800A2544 = 0;
+        flags[0] = 0;
         func_8002AFFC(state, state->mode, 1);
         func_8001535C(&offset, &D_80118D90, &D_80118E50);
-        D_800D7388 = func_800153C0(&offset);
+        cam[0] = func_800153C0(&offset);
         func_800154D0(&offset.x);
-        D_800D739C = func_80014F54(-offset.x, offset.y);
+        cam[5] = func_80014F54(-offset.x, offset.y);
         pitch = func_80014D4C(offset.z);
-        yaw = D_800D739C;
+        yaw = cam[5];
         if (yaw < 0.0f) {
             yaw = yaw + 360.0f;
         }
-        D_800D739C = yaw;
+        cam[5] = yaw;
         if (yaw > 360.0f) {
-            D_800D739C = yaw - 360.0f;
+            cam[5] = yaw - 360.0f;
         }
         if (pitch < -90.0f) {
             pitch = pitch + 180.0f;
         }
-        D_800D73A0 = pitch;
+        cam[6] = pitch;
         if (pitch > 90.0f) {
-            D_800D73A0 = pitch - 180.0f;
+            cam[6] = pitch - 180.0f;
         }
     }
 }

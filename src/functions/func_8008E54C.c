@@ -80,37 +80,35 @@ Cmd *func_8008E54C(Obj *a, s16 *b, s32 n, s32 unused, Cmd *out);
 Cmd *func_8008E54C(Obj *a, s16 *b, s32 n, s32 unused, Cmd *out) {
     Cmd *cursor;
     s32 len;
-    s32 pad;
+    s32 sample;
     s32 avail;
     s32 blocks;
     s32 blocks9;
-    s32 sample;
+    s32 used;
     s32 aligned;
     s32 total;
-    s32 excess;
     s32 limit;
     s32 bytes;
     s32 delta;
     s32 flag;
     s32 cond;
     Buf *buf;
-    s32 used;
 
     (void)unused;
+    cursor = out;
     flag = 0;
     if (n == 0) {
         return out;
     }
 
-    out->w0 = FIELD(11, 24, 8) | FIELD(a->unk2C, 0, 24);
-    out->w1 = (u32)(a->unk28->w10 + 8) & 0x1FFFFFFF;
-    cursor = out + 1;
+    COMMAND(cursor++, FIELD(11, 24, 8) | FIELD(a->unk2C, 0, 24),
+            (u32)(a->unk28->w10 + 8) & 0x1FFFFFFF);
 
     used = a->unk38;
     cond = ((u32)a->unk20 < (u32)(used + n)) && (a->unk24 != 0);
     len = cond ? (a->unk20 - used) : n;
-    pad = (a->unk3C != 0) ? (16 - a->unk3C) : 0;
-    avail = len - pad;
+    sample = (a->unk3C != 0) ? (16 - a->unk3C) : 0;
+    avail = len - sample;
     if (avail < 0) {
         avail = 0;
     }
@@ -132,12 +130,12 @@ Cmd *func_8008E54C(Obj *a, s16 *b, s32 n, s32 unused, Cmd *out) {
         sample = *b;
         delta = len * 2;
         while (len < n) {
-            aligned = (((blocks + 1) * 32) + sample) & ~31;
+            aligned = (((blocks + 1) << 5) + sample) & ~31;
             n -= len;
+            sample += delta;
             if (a->unk24 != -1 && a->unk24 != 0) {
                 a->unk24 = a->unk24 - 1;
             }
-            sample += delta;
             limit = a->unk20 - a->unk1C;
             len = ((u32)n < (u32)limit) ? n : limit;
             avail = len + a->unk3C - 16;
@@ -161,19 +159,19 @@ Cmd *func_8008E54C(Obj *a, s16 *b, s32 n, s32 unused, Cmd *out) {
 
     buf = a->unk28;
     total = a->unk44 + blocks9;
-    excess = (total - (s32)buf->w0) - (s32)buf->w4;
-    if (excess < 0) {
-        excess = 0;
+    len = (total - (s32)buf->w0) - (s32)buf->w4;
+    if (len < 0) {
+        len = 0;
     }
-    limit = (excess / 9) * 16;
-    bytes = blocks * 16 + pad;
+    limit = (len / 9) * 16;
+    bytes = blocks * 16 + sample;
     if (bytes < limit) {
         limit = bytes;
     }
-    pad = blocks9 - excess;
+    len = blocks9 - len;
     if ((limit - (limit & 0xF)) < n) {
         flag = 1;
-        cursor = func_8008E420(cursor, pad, a, (u32)a->unk40,
+        cursor = func_8008E420(cursor, len, a, (u32)a->unk40,
                                (s16)*b, 0, blocks * 16 - limit);
         if (a->unk3C != 0) {
             *b = (s16)(*b + a->unk3C * 2);
@@ -195,10 +193,8 @@ Cmd *func_8008E54C(Obj *a, s16 *b, s32 n, s32 unused, Cmd *out) {
         } else {
             delta = 0;
         }
-        cursor->w0 = FIELD(2, 24, 8) | FIELD(*b + delta, 0, 24);
-        cursor->w1 = (u32)(limit * 2);
-        cursor++;
-        return cursor;
+        COMMAND(cursor++, FIELD(2, 24, 8) | FIELD(*b + delta, 0, 24),
+                (u32)(limit * 2));
     }
     return cursor;
 }
