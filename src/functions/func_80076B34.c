@@ -77,6 +77,7 @@ void func_80076B34(Obj *arg0) {
     Obj *b;
     Obj *tail;
 
+    tail = (Obj *)((u8 *)arg0 + 8);
     sp138[1] = 0;
     sp138[0] = 0;
     if (arg0->unk344 != 0) {
@@ -119,17 +120,18 @@ void func_80076B34(Obj *arg0) {
         }
     }
 
-    tail = (Obj *)((u8 *)arg0 + 8);
-    target = tail->unk314[0];
-    if (target == 0) {
+    b = tail->unk314[0];
+    if (b == 0) {
         return;
     }
+    target = b;
     if (target->unk60 != 8) {
         return;
     }
     if (3.0f < target->unk68) {
         if (arg0->unk344 != 0) {
-            b = (Obj *)&((Blk *)arg0)[1];
+            i = 1;
+            b = (Obj *)&((Blk *)arg0)[i];
             sp14C.x = b->unk380;
             sp14C.y = b->unk384;
             sp14C.z = b->unk388;
@@ -154,7 +156,7 @@ void func_80076B34(Obj *arg0) {
             do {
                 if (arg0 != sp110[i] && !(sp110[i]->unk60 & 0x7800) && !(sp110[i]->unk64 & 0x2000000)) {
                     index = (s32)((f32)func_80082BE0() / 2147483648.0f * 3.0f);
-                    if (sp110[i]->unk30.z * arg0->unk30.z + (arg0->unk30.y * sp110[i]->unk30.y + arg0->unk30.x * sp110[i]->unk30.x) < 0.0f) {
+                    if (arg0->unk30.x * sp110[i]->unk30.x + arg0->unk30.y * sp110[i]->unk30.y + sp110[i]->unk30.z * arg0->unk30.z < 0.0f) {
                         index = index + 3;
                     }
                     sp110[i]->unk2A0[index] |= 8;

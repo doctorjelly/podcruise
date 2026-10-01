@@ -35,7 +35,6 @@ void func_80013DC0(u8 *text) {
     Page80013DC0 *page;
     GfxWord80013DC0 *g;
     u8 *cursor;
-    u8 character;
     u8 *body;
     s16 saved[2];
     s32 offset;
@@ -46,16 +45,10 @@ void func_80013DC0(u8 *text) {
     D_800D691A = -0x3E8;
     D_800D6910 = 0;
 
-    if (text[0] != 0) {
-        cursor = text;
-        character = text[0];
-        do {
-            if ((character == 0x7E) && (cursor[1] == 0x62)) {
-                D_800D6910 = 1;
-            }
-            character = cursor[1];
-            cursor++;
-        } while ((character != 0) && (D_800D6910 == 0));
+    for (cursor = text; *cursor != 0 && D_800D6910 == 0; cursor++) {
+        if (cursor[0] == 0x7E && cursor[1] == 0x62) {
+            D_800D6910 = 1;
+        }
     }
 
     index = 0;

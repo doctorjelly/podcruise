@@ -68,6 +68,8 @@ void func_800573E8(u8 *arg0, u8 *arg1) {
     s32 t34;
     s32 t30;
     s32 t2C;
+    s16 sy;
+    s16 sy2;
 
     (void)pad2;
     (void)pad4;
@@ -163,7 +165,7 @@ void func_800573E8(u8 *arg0, u8 *arg1) {
                 if (D_800A52BC < 2) {
                     f144 = (f144 - 0.5f) + (f144 - 0.5f);
                     if (0.0f < f144) {
-                        t30 = (s32)(f144 * 17.0f) * 4;
+                        t30 = (s32)(f144 * 255.0f) * 4;
                         if (t30 >= 0x100) {
                             t30 = 0xFF;
                         }
@@ -215,42 +217,41 @@ void func_800573E8(u8 *arg0, u8 *arg1) {
         }
     }
 
-    t34 = (s16)f1D4;
-    t30 = (s16)(f1D4 + 17.0f);
+    sy = (s16)f1D4;
+    sy2 = (s16)(f1D4 + 17.0f);
     if (s174 == 0 && s154 < 2) {
         t38 = (s16)f1D8;
-        func_8003F084(t38, t34, *(f32 *)(arg0 + 0x74), 0xFF, 0xFF,
+        func_8003F084(t38, sy, *(f32 *)(arg0 + 0x74), 0xFF, 0xFF,
                       0xFF, 0xBE, D_800ACCC8);
-        func_8003EC40(t38, t30, 0xFF, 0xFF, 0xFF, 0xBE,
+        func_8003EC40(t38, sy2, 0xFF, 0xFF, 0xFF, 0xBE,
                       (u8 *)D_800ACCD0);
     }
 
     if (*(s32 *)(arg1 + 0x124) == 6 || *(s32 *)(arg1 + 0x124) == 7) {
-        func_8003F084(0x121, t34, *(f32 *)(arg0 + 0x74), 0xFF, 0xFF, 0xFF,
+        func_8003F084(0x121, sy, *(f32 *)(arg0 + 0x74), 0xFF, 0xFF, 0xFF,
                       0xBE, D_800ACCDC);
     }
 
-    count = *(s32 *)(arg0 + 0x78);
-    limit = *(s32 *)(arg1 + 0x1C8);
     if (*(s32 *)(arg1 + 0x124) == 1) {
         f1D8 = 62.0f;
     } else {
         f1D8 = 42.0f;
     }
-    count = count + 1;
+    count = *(s32 *)(arg0 + 0x78) + 1;
+    limit = *(s32 *)(arg1 + 0x1C8);
     if (limit < count) {
         count = limit;
     }
     func_8008A6B4(buf, D_800ACCE4, count);
     if (D_800A52BC >= 2 && s178 != 0) {
         t38 = (s16)f1D8;
-        func_8003EC40(t38, t34, 0xFF, 0x3F, 0x3F, 0xFF, (u8 *)buf);
-        func_8003EC40(t38, t30, 0xFF, 0x3F, 0x3F, 0xFF,
+        func_8003EC40(t38, sy, 0xFF, 0x3F, 0x3F, 0xFF, (u8 *)buf);
+        func_8003EC40(t38, sy2, 0xFF, 0x3F, 0x3F, 0xFF,
                       (u8 *)D_800ACCF4);
     } else {
         t38 = (s16)f1D8;
-        func_8003EC40(t38, t34, 0xFF, 0xFF, 0xFF, 0xBE, (u8 *)buf);
-        func_8003EC40(t38, t30, 0xFF, 0xFF, 0xFF, 0xBE,
+        func_8003EC40(t38, sy, 0xFF, 0xFF, 0xFF, 0xBE, (u8 *)buf);
+        func_8003EC40(t38, sy2, 0xFF, 0xFF, 0xFF, 0xBE,
                       (u8 *)D_800ACCFC);
     }
 
@@ -259,9 +260,9 @@ void func_800573E8(u8 *arg0, u8 *arg1) {
         if (*(s16 *)(arg0 + 0x5C) > 0) {
             func_8008A6B4(buf, D_800ACD04, *(s16 *)(arg0 + 0x5C),
                           *(s32 *)(arg1 + 0x1BC));
-            func_8003EC40(0x116, t34, 0xFF, 0xFF, 0xFF, 0xBE, (u8 *)buf);
+            func_8003EC40(0x116, sy, 0xFF, 0xFF, 0xFF, 0xBE, (u8 *)buf);
         }
-        func_8003EC40(0x116, t30, 0xFF, 0xFF, 0xFF, 0xBE,
+        func_8003EC40(0x116, sy2, 0xFF, 0xFF, 0xFF, 0xBE,
                       (u8 *)D_800ACD14);
     }
 

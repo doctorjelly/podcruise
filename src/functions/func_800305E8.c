@@ -75,7 +75,7 @@ void *func_800305E8(s32 index) {
             return 0;
         }
         scratch = (u8 *)(unsigned long)((u32)(D_800D9DBC - packed) & ~7U);
-        if (scratch < data + size) {
+        if ((u32)(unsigned long)scratch < (u32)(unsigned long)data + (u32)size) {
             D_800A2864 = 1;
             return 0;
         }

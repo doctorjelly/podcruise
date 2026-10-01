@@ -31,16 +31,17 @@ extern Node800845A0 *D_80120DA0[];
 
 void func_800845A0(Node800845A0 *root, Node800845A0 *node, f32 (*mtx)[4], s32 flag,
                    s32 mode, f32 *best, f32 *reference, f32 *outPoint, s32 extra) {
-    s32 dead[4];
-    Owner800845A0 *dummy;
-    Owner800845A0 *owner;
-    f32 local[4][4];
-    f32 work[4][4];
     s32 type;
-    s32 count;
     s32 i;
+    f32 local[4][4];
+    Node800845A0 *child;
+    s32 count;
+    f32 *m;
+    Owner800845A0 *dummy;
+    f32 work[4][4];
+    Owner800845A0 *owner;
 
-    (void)dead;
+    m = node->u.matrix;
     if (node == 0) {
         return;
     }
@@ -71,27 +72,27 @@ void func_800845A0(Node800845A0 *root, Node800845A0 *node, f32 (*mtx)[4], s32 fl
             } else {
                 owner = dummy;
             }
-            work[0][0] = node->u.matrix[0];
-            work[0][1] = node->u.matrix[1];
-            work[0][2] = node->u.matrix[2];
-            work[1][0] = node->u.matrix[3];
-            work[1][1] = node->u.matrix[4];
-            work[1][2] = node->u.matrix[5];
-            work[2][0] = node->u.matrix[6];
-            work[2][1] = node->u.matrix[7];
-            work[2][2] = node->u.matrix[8];
-            work[3][0] = node->u.matrix[9];
-            work[3][1] = node->u.matrix[10];
-            work[3][2] = node->u.matrix[11];
+            work[0][0] = m[0];
+            work[0][1] = m[1];
+            work[0][2] = m[2];
+            work[1][0] = m[3];
+            work[1][1] = m[4];
+            work[1][2] = m[5];
+            work[2][0] = m[6];
+            work[2][1] = m[7];
+            work[2][2] = m[8];
+            work[3][0] = m[9];
+            work[3][1] = m[10];
+            work[3][2] = m[11];
             work[0][3] = 0.0f;
             work[1][3] = 0.0f;
             work[2][3] = 0.0f;
             work[3][3] = 1.0f;
             if ((node->unk0C & 0x10) != 0) {
                 for (i = 0; i < 3; i++) {
-                    work[3][i] += -owner->offset[0] * node->u.matrix[i];
-                    work[3][i] += -owner->offset[1] * node->u.matrix[i + 3];
-                    work[3][i] += -owner->offset[2] * node->u.matrix[i + 6];
+                    work[3][i] += -owner->offset[0] * m[i];
+                    work[3][i] += -owner->offset[1] * m[i + 3];
+                    work[3][i] += -owner->offset[2] * m[i + 6];
                     work[3][i] += owner->offset[i];
                 }
             }
@@ -114,8 +115,9 @@ void func_800845A0(Node800845A0 *root, Node800845A0 *node, f32 (*mtx)[4], s32 fl
         if (count == -1) {
             break;
         }
-        if (node->children[count] != 0) {
-            func_800845A0(root, node->children[count], local, flag, mode, best, reference, outPoint, extra);
+        child = node->children[count];
+        if (child != 0) {
+            func_800845A0(root, child, local, flag, mode, best, reference, outPoint, extra);
         }
         break;
     case 0x5065:

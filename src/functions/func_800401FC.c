@@ -38,7 +38,7 @@ extern f64 D_80120BF0;
 
 static const f32 D_800AAC30[2] = {0.0f, 0.0f};
 
-#define TRUNCF(x) ((x) < (f32)0 ? (s32)((x) - 0.999999f) : (s32)(x))
+#define TRUNCF(x) ((x) < 0.0f ? (s32)((x) - 0.999999f) : (s32)(x))
 
 void func_800401FC(Obj800401FC *object, Ctx800401FC *context) {
     s32 changed;
@@ -131,9 +131,9 @@ void func_800401FC(Obj800401FC *object, Ctx800401FC *context) {
             rest = 50.0f - (sum - (f32)TRUNCF(quotient) * 100.0f);
         }
         blend = rest / 50.0f;
-        object->unk300[0] = object->unk34C[0] * blend;
-        object->unk300[1] = object->unk34C[1] * blend;
         object->unk300[2] = object->unk34C[2] * blend;
+        object->unk300[1] = object->unk34C[1] * blend;
+        object->unk300[0] = object->unk34C[0] * blend;
     }
 
     if (object->unk2E4 & 1) {

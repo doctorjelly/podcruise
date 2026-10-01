@@ -17,7 +17,7 @@ extern s32 D_80120E18;
 extern s32 D_80120E1C;
 
 #define GFX_CMD(a, b) { Gfx *gp = D_801217B0++; gp->w0 = (u32)(a); gp->w1 = (u32)(b); }
-#define FILL_RECT(ulx, uly, lrx, lry) GFX_CMD(0xF6000000 | (((lrx) & 0x3FF) << 14) | (((lry) & 0x3FF) << 2), (((ulx) & 0x3FF) << 14) | (((uly) & 0x3FF) << 2))
+#define FILL_RECT(ulx, uly, lrx, lry) GFX_CMD(fill | (((lrx) & 0x3FF) << 14) | (((lry) & 0x3FF) << 2), (((ulx) & 0x3FF) << 14) | (((uly) & 0x3FF) << 2))
 
 void func_800879B8(void) {
     u32 i;
@@ -28,6 +28,7 @@ void func_800879B8(void) {
     s32 y1;
     f32 sx;
     f32 sy;
+    u32 fill = 0xF6000000;
 
     GFX_CMD(0xE7000000, 0);
     GFX_CMD(0xE3000A01, 0);
@@ -35,8 +36,9 @@ void func_800879B8(void) {
 
     rect = D_80148B60;
     for (i = 0; i < (u32)D_800A6978; i++) {
-        FILL_RECT(rect[0] - 1, rect[1] - 1, rect[2] + 1, rect[3] + 1);
+        s16 *r = rect;
         rect += 4;
+        FILL_RECT(r[0] - 1, r[1] - 1, r[2] + 1, r[3] + 1);
     }
 
     sx = (f32)D_80114470 / 320.0f;

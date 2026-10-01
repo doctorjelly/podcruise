@@ -48,72 +48,59 @@ void func_80010080(s16 *arg0, s32 arg1) {
             D_800D5B98[index] = -1000;
             D_800D5BE8[index] = -1000;
         }
-        if (D_800D5AA8[index] == -9999) {
-            continue;
-        }
-        distance = func_80015470(D_800D59B8[index], D_800A3FDC);
-        if (!(distance > 40.0f)) {
-            continue;
-        }
-        if (!(distance < fade)) {
-            continue;
-        }
-        if (distance < 400.0f) {
-            alpha = 255.0f;
-        } else {
-            alpha = ((fade - distance) * (f32)255.0) / D_800A86A4;
-        }
-        if (alpha > 128.0f) {
-            alpha = 128.0f;
-        }
-        if (func_8002F054() != 0) {
-            alpha = alpha / (f32)2.0;
-        }
-        func_8000EBE8(arg0, D_800D59B8[index], &screenX, &screenY, &scale,
-                      &depth, 0);
-        if (!(screenX > -4.0f)) {
-            continue;
-        }
-        if (D_800D5AA8[index] >= 0) {
-            screenY = screenY - 13.0f;
-            screenX = screenX - 4.0f;
-        } else {
-            screenY = screenY - 20.0f;
-            screenX = screenX - 8.0f;
-        }
-        if (!(screenX < (f32)D_80114470)) {
-            continue;
-        }
-        if (!(screenY > 0.0f)) {
-            continue;
-        }
-        if (!(screenY < (f32)D_80114472)) {
-            continue;
-        }
-        if (arg1 == 0) {
-            D_800D5AF8[index] = (s32)screenX;
-            D_800D5B48[index] = (s32)screenY;
-        } else {
-            D_800D5B98[index] = (s32)screenX;
-            D_800D5BE8[index] = (s32)screenY;
-        }
-        limit = (s32)(((scale * (f32)arg0[10]) + (f32)arg0[14]) * 256.0f);
-        if (arg1 == 0) {
-            maximum = func_8001004C(D_800D5FD0[index]);
-        } else {
-            maximum = func_8001004C(D_800D6020[index]);
-        }
-        if (limit >= 0 && limit >= maximum) {
-            continue;
-        }
-        if (D_800D5AA8[index] >= 0) {
-            func_8008A6B4(text, D_800A8670, D_800D5AA8[index]);
-            func_8000E7F0((s16)(s32)screenX, (s16)(s32)screenY, 255, 255, 255,
-                          (u32)alpha, text);
-        } else {
-            func_8008A6B4(text, D_800A8678, -D_800D5AA8[index]);
-            func_8000E7F0((s16)(s32)screenX, (s16)(s32)screenY, 255, 255, 0,
-                          ((u32)alpha & 0xFF) + 0x28, text);
+        if (D_800D5AA8[index] != -9999) {
+            distance = func_80015470(D_800D59B8[index], D_800A3FDC);
+            if (distance > 40.0f && distance < fade) {
+                if (distance < 400.0f) {
+                    alpha = 255.0f;
+                } else {
+                    alpha = ((fade - distance) * (f32)255.0) / D_800A86A4;
+                }
+                if (alpha > 128.0f) {
+                    alpha = 128.0f;
+                }
+                if (func_8002F054() != 0) {
+                    alpha = alpha / (f32)2.0;
+                }
+                func_8000EBE8(arg0, D_800D59B8[index], &screenX, &screenY, &scale,
+                              &depth, 0);
+                if (screenX > -4.0f) {
+                    if (D_800D5AA8[index] >= 0) {
+                        screenY = screenY - 13.0f;
+                        screenX = screenX - 4.0f;
+                    } else {
+                        screenY = screenY - 20.0f;
+                        screenX = screenX - 8.0f;
+                    }
+                    if (screenX < (f32)D_80114470 && screenY > 0.0f &&
+                        screenY < (f32)D_80114472) {
+                        if (arg1 == 0) {
+                            D_800D5AF8[index] = (s32)screenX;
+                            D_800D5B48[index] = (s32)screenY;
+                        } else {
+                            D_800D5B98[index] = (s32)screenX;
+                            D_800D5BE8[index] = (s32)screenY;
+                        }
+                        limit = (s32)(((scale * (f32)arg0[10]) + (f32)arg0[14]) * 256.0f);
+                        if (arg1 == 0) {
+                            maximum = func_8001004C(D_800D5FD0[index]);
+                        } else {
+                            maximum = func_8001004C(D_800D6020[index]);
+                        }
+                        if (!(limit >= 0 && limit >= maximum)) {
+                            if (D_800D5AA8[index] >= 0) {
+                                func_8008A6B4(text, D_800A8670, D_800D5AA8[index]);
+                                func_8000E7F0((s16)(s32)screenX, (s16)(s32)screenY, 255, 255, 255,
+                                              (u32)alpha, text);
+                            } else {
+                                func_8008A6B4(text, D_800A8678, -D_800D5AA8[index]);
+                                func_8000E7F0((s16)(s32)screenX, (s16)(s32)screenY, 255, 255, 0,
+                                              ((u32)alpha & 0xFF) + 0x28, text);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -74,15 +74,106 @@ extern void func_80086730(s32, f32, f32, f32, f32, f32);
 
 void func_8005337C(Owner8005337C *owner) {
     u32 message[14];
-    s32 mode;
     s32 index;
 
-    mode = D_800A5998;
-    if (mode == 0) {
+    if (D_800A5998 == 0) {
         func_80053300(owner);
     }
 
     switch (owner->flags08 & 0xF) {
+        case 4:
+            if (func_80053220(0x201) != 0 || (owner->flags08 & 0x60) != 0) {
+                func_800530CC(owner);
+                func_80009F6C();
+                break;
+            }
+
+            if (owner->handle130 != 0) {
+                if (owner->active154 != 0) {
+                    if (!(owner->flags08 & 0x80)) {
+                        owner->flags08 |= 0x80;
+                        owner->timer0C = 0.0f;
+                    } else {
+                        owner->timer0C =
+                            (f32)((f64)owner->timer0C + D_80120BF0);
+                    }
+                } else {
+                    owner->timer0C = (f32)((f64)owner->timer0C - D_80120BF0);
+                }
+            }
+
+            if (owner->handle130 == 0 ||
+                (owner->active154 != 0 && owner->timer0C > 0.5f)) {
+                func_8000AB24(-0x67, 0, 0, 0, 0xFF);
+                owner->flags08 = (owner->flags08 & ~0xF) | 5;
+                owner->timer0C = D_800ACE88;
+                func_80052A08(owner, 3);
+                func_80086730(1, 100.0f, -1.0f, -1.0f, -1.0f, -1.0f);
+                message[0] = 0x53776565;
+                message[1] = 1;
+                func_8003FA24(0x634D616E, message);
+                func_80007A44();
+                *(f32 *)0x800A59AC = 2.0f;
+            }
+            break;
+
+        case 5: {
+            Hang8005337C *hang;
+            s32 choice;
+            s32 found;
+            f32 cooldown;
+
+            if (func_80053220(0x201) != 0) {
+                func_800530CC(owner);
+                func_80009F6C();
+            } else {
+                owner->timer0C = (f32)((f64)owner->timer0C - D_80120BF0);
+                if (owner->timer0C < 0.0f) {
+                    func_800530CC(owner);
+                }
+            }
+
+            cooldown = D_800A59AC;
+            if (cooldown > 0.0f) {
+                cooldown = (f32)((f64)cooldown - D_80120BF0);
+                *(f32 *)0x800A59AC = cooldown;
+            }
+            if (cooldown <= 0.0f && func_80051FF4() < 2 &&
+                owner->count1BC >= 2 && func_80009524(0, 0x200000) == 0) {
+                found = 0;
+                hang = func_8003F800(0x48616E67, 0);
+                for (index = 0; index < hang->count71; index++) {
+                    if (hang->values72[index] == D_800A533C) {
+                        found = 1;
+                    }
+                }
+
+                choice = D_800A530C[D_800A533C];
+                if (choice == 0 ||
+                    (f64)((f32)func_80082BE0() / 2147483648.0f) < 0.5 ||
+                    !found) {
+                    func_80009704(5, 0, 1, 5, 0, D_800A52DC[D_800A533C]);
+                } else if (choice > 0) {
+                    func_800092EC(5, 0, choice);
+                } else {
+                    func_800092EC(7, 0, -choice);
+                }
+                func_8000953C(0, 0x200000);
+            }
+            break;
+        }
+
+        case 3:
+            owner->timer0C = (f32)((f64)owner->timer0C + D_80120BF0);
+            while (owner->timer0C > 3.0f) {
+                owner->timer0C -= 3.0f;
+            }
+            if (func_80053220(1) != 0 || (owner->flags08 & 0x60) != 0) {
+                func_800530CC(owner);
+                func_80009F6C();
+            }
+            break;
+
         case 0:
             func_8007EB7C(owner->effect1AC, 1);
             owner->timer0C = (f32)((f64)owner->timer0C - D_80120BF0);
@@ -140,101 +231,6 @@ void func_8005337C(Owner8005337C *owner) {
                 func_80051C80(owner, 0x46696E69);
             }
             break;
-
-        case 3:
-            owner->timer0C = (f32)((f64)owner->timer0C + D_80120BF0);
-            while (owner->timer0C > 3.0f) {
-                owner->timer0C -= 3.0f;
-            }
-            if (func_80053220(1) != 0 || (owner->flags08 & 0x60) != 0) {
-                func_800530CC(owner);
-                func_80009F6C();
-            }
-            break;
-
-        case 4:
-            if (func_80053220(0x201) != 0 || (owner->flags08 & 0x60) != 0) {
-                func_800530CC(owner);
-                func_80009F6C();
-                break;
-            }
-
-            if (owner->handle130 != 0) {
-                if (owner->active154 != 0) {
-                    if (!(owner->flags08 & 0x80)) {
-                        owner->flags08 |= 0x80;
-                        owner->timer0C = 0.0f;
-                    } else {
-                        owner->timer0C =
-                            (f32)((f64)owner->timer0C + D_80120BF0);
-                    }
-                } else {
-                    owner->timer0C = (f32)((f64)owner->timer0C - D_80120BF0);
-                }
-            }
-
-            if (owner->handle130 != 0 &&
-                (owner->active154 == 0 || owner->timer0C <= 0.5f)) {
-                break;
-            }
-
-            func_8000AB24(-0x67, 0, 0, 0, 0xFF);
-            owner->flags08 = (owner->flags08 & ~0xF) | 5;
-            owner->timer0C = D_800ACE88;
-            func_80052A08(owner, 3);
-            func_80086730(1, 100.0f, -1.0f, -1.0f, -1.0f, -1.0f);
-            message[0] = 0x53776565;
-            message[1] = 1;
-            func_8003FA24(0x634D616E, message);
-            func_80007A44();
-            D_800A59AC = 2.0f;
-            break;
-
-        case 5: {
-            Hang8005337C *hang;
-            s16 choice;
-            s32 found;
-
-            if (func_80053220(0x201) != 0) {
-                func_800530CC(owner);
-                func_80009F6C();
-            } else {
-                owner->timer0C = (f32)((f64)owner->timer0C - D_80120BF0);
-                if (owner->timer0C < 0.0f) {
-                    func_800530CC(owner);
-                }
-            }
-
-            if (D_800A59AC > 0.0f) {
-                D_800A59AC = (f32)((f64)D_800A59AC - D_80120BF0);
-            }
-            if (D_800A59AC > 0.0f || func_80051FF4() >= 2 ||
-                owner->count1BC < 2 || func_80009524(0, 0x200000) != 0) {
-                break;
-            }
-
-            found = 0;
-            hang = func_8003F800(0x48616E67, 0);
-            for (index = 0; index < hang->count71; index++) {
-                if (hang->values72[index] == D_800A533C) {
-                    found = 1;
-                }
-            }
-
-            choice = D_800A530C[D_800A533C];
-            if (choice != 0 &&
-                (f64)((f32)func_80082BE0() / 2147483648.0f) >= 0.5 && found) {
-                if (choice > 0) {
-                    func_800092EC(5, 0, choice);
-                } else {
-                    func_800092EC(7, 0, -choice);
-                }
-            } else {
-                func_80009704(5, 0, 1, 5, 0, D_800A52DC[D_800A533C]);
-            }
-            func_8000953C(0, 0x200000);
-            break;
-        }
 
         case 6:
             if (owner->timer0C < 0.0f) {

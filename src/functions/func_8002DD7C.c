@@ -21,7 +21,6 @@ extern s32 func_8002D968(u8 *, u8 *);
 extern s32 func_80082BE0(void);
 
 void func_8002DD7C(Obj8002DD7C *arg0) {
-    s8 *scan;
     u8 total;
     s32 useA;
     s32 index;
@@ -51,14 +50,13 @@ void func_8002DD7C(Obj8002DD7C *arg0) {
         if (useA != 0) {
             mask = D_80113680[index + 12];
         }
-        found = 0;
         if ((mask & (1 << bit)) != 0) {
             i = 0;
+            found = 0;
             if (total > 0) {
-                scan = D_80119668;
                 do {
                     i++;
-                    if (D_800A22E8[index][bit] == *scan++) {
+                    if (D_800A22E8[index][bit] == D_80119668[i - 1]) {
                         found = 1;
                         break;
                     }

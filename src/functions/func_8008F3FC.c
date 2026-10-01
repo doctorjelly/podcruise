@@ -114,7 +114,7 @@ static s32 func_8008EEE4_stand_in(f64 c, f64 b, s32 a, s16 *d) {
     n = (s32)((1.0 / (f64)a) * (f64)0x40000000);
     func_8008ED18(b / c, &z);
     i = (s32)(z * 16.0);
-    x = tab[i] + z;
+    x = tab[i] + z + b;
     y = 1.0;
     while (n != 0) {
         if (n & 1) {
@@ -226,19 +226,20 @@ static f32 func_8008F34C(f32 value, s32 exponent, s16 rateHigh, u16 rateLow) {
 }
 
 Acmd *func_8008F3FC(Obj *obj, s32 arg1, s32 count, s32 time, Acmd *cmd) {
+    s16 dmemBase;
     union {
         f32 f;
         s32 i;
     } bits;
-    s16 dmemIn;
-    s16 dmemBase;
+    s32 cur;
     Event *event;
     Event *note;
     Event *done;
+    Event *next;
+    s16 dmemIn;
     s32 delta;
-    s32 cur;
-    Acmd *out;
     Obj *o;
+    Acmd *out;
 
     (void)arg1;
     o = obj;
@@ -247,7 +248,7 @@ Acmd *func_8008F3FC(Obj *obj, s32 arg1, s32 count, s32 time, Acmd *cmd) {
     dmemIn = 0;
     dmemBase = 0;
 
-    while (obj->unk3C != 0) {
+    while (o->unk3C != 0) {
         event = o->unk3C;
         delta = event->time - cur;
         if (count < delta) {
@@ -352,8 +353,9 @@ Acmd *func_8008F3FC(Obj *obj, s32 arg1, s32 count, s32 time, Acmd *cmd) {
         dmemIn += delta * 2;
         count -= delta;
         done = o->unk3C;
-        o->unk3C = done->next;
-        if (done->next == 0) {
+        next = done->next;
+        o->unk3C = next;
+        if (next == 0) {
             o->unk40 = 0;
         }
         func_800884E8(done);

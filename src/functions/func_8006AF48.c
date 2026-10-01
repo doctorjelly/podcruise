@@ -61,8 +61,9 @@ void func_8006AF48(Obj8006AF48 *obj, PcVec3f *arg1) {
     PcVec3f workA;
     f32 matrix[16];
 
-    if (obj->unk104 < D_800AD5BC) {
-        obj->unk104 = D_800AD5BC;
+    adjust = D_800AD5BC;
+    if (obj->unk104 < adjust) {
+        obj->unk104 = adjust;
     }
     if (obj->unk104 > 2.0f) {
         obj->unk104 = 2.0f;
@@ -74,13 +75,9 @@ void func_8006AF48(Obj8006AF48 *obj, PcVec3f *arg1) {
     workA.z = matrix[14];
     func_8003B184(obj->unkAC, matrix, obj->unk104);
     adjust = D_800AD5C4;
-    if (((workA.z - matrix[14]) * (workA.z - matrix[14]) +
-                ((workA.x - matrix[12]) * (workA.x - matrix[12]) +
-                 (workA.y - matrix[13]) * (workA.y - matrix[13]))) < D_800AD5C8) {
+    if (((workA.x - matrix[12]) * (workA.x - matrix[12]) + (workA.y - matrix[13]) * (workA.y - matrix[13]) + (workA.z - matrix[14]) * (workA.z - matrix[14])) < D_800AD5C8) {
         obj->unk104 = obj->unk104 + adjust;
-    } else if (D_800AD5CC < ((workA.z - matrix[14]) * (workA.z - matrix[14]) +
-                ((workA.x - matrix[12]) * (workA.x - matrix[12]) +
-                 (workA.y - matrix[13]) * (workA.y - matrix[13])))) {
+    } else if (D_800AD5CC < ((workA.x - matrix[12]) * (workA.x - matrix[12]) + (workA.y - matrix[13]) * (workA.y - matrix[13]) + (workA.z - matrix[14]) * (workA.z - matrix[14]))) {
         obj->unk104 = obj->unk104 - adjust;
     }
 

@@ -83,9 +83,9 @@ void func_8004BE90(PcRaceState *state) {
     s32 *target;
     s32 index;
     s32 slot;
+    s32 stride;
     s32 racer;
     s32 mode;
-    s32 stride;
 
     mode = 3;
     stride = 0x34;
@@ -219,11 +219,11 @@ void func_8004BE90(PcRaceState *state) {
                     target[0x3C] = racer;
                 }
             }
-            func_80046670(0x3C, -1, 0x55, 0);
-            func_80046670(0x44, -1, 0x56, 0);
-            slot = 0x57;
-            func_80046670(0x45, -1, slot++, 0);
-            func_80046670(0x44, -1, slot, 0);
+            index = 0x55;
+            func_80046670(0x3C, -1, index++, 0);
+            func_80046670(0x44, -1, index++, 0);
+            func_80046670(0x45, -1, index++, 0);
+            func_80046670(0x44, -1, index, 0);
             for (index = 0; index < 4; index++) {
                 func_80046670(0x46, -1, index + 0x59, 0);
                 func_80046670(0x130, -1, index + 7, 0);

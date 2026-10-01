@@ -48,7 +48,7 @@ s32 func_80028E78(Unknown80028E78 *arg0) {
         value = 255.0f;
         D_800A2600 = 3;
     }
-    D_800A25FC = value;
+    (*(f32 *)0x800A25FC) = value;
     func_8000AB24(-103, 0, 0, 0, (u32)value);
     if (done != 0) {
         D_800A25FC = 0.0f;

@@ -45,7 +45,7 @@ void func_800419EC(u8 *obj) {
             *(f32 *)(obj + 0x1B8) = D_800AAC58;
             blend = 1.0f;
         } else {
-            blend = 1.0 - *(f32 *)(obj + 0x70) / 1.0;
+            blend = 1.0 - *(f32 *)(obj + 0x70) / (f32)1.0;
         }
         func_8001535C(&axis, (PcVec3f *)(obj + 0x168), (PcVec3f *)(obj + 0x15C));
         func_800154D0((f32 *)&axis);

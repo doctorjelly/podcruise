@@ -40,6 +40,7 @@ void func_80074CDC(u8 *obj) {
     if (*(s32 *)(obj + 0x344) == 0) {
         return;
     }
+    i = 0;
     idx = *(s32 *)(*(u8 **)(*(u8 **)(obj + 0x1E70) + 0x18));
 
     *(f32 *)(obj + 0x199C) = *(f32 *)(obj + 0x199C) + (f32)D_80120BF0;
@@ -77,7 +78,7 @@ void func_80074CDC(u8 *obj) {
     power = *(f32 *)(obj + 0x19AC) * coef;
 
     if (*(s32 *)(*(u8 **)(obj + 0x344) + 0x4) != 0) {
-        func_80014CC0(*(f32 *)(obj + 0x199C) * D_800AD9A0 * 360.0f, &sc[1], &sc[0]);
+        func_80014CC0(*(f32 *)(obj + i * 4 + 0x199C) * D_800AD9A0 * 360.0f, &sc[1], &sc[0]);
         part = obj + 0x40;
         out = (f32 *)(part + 0x380);
         func_800155EC(out, out, power * sc[1], (f32 *)(part + 0x370));
@@ -92,7 +93,7 @@ void func_80074CDC(u8 *obj) {
 
     coef = D_800AD9A8;
     mixed = coef * D_800AD9AC;
-    i = 1;
+    i++;
     if (*(s32 *)(*(u8 **)(obj + 0x344) + 0x8) != 0) {
         func_80014CC0(*(f32 *)(obj + i * 4 + 0x199C) * mixed * 360.0f, &sc[1], &sc[0]);
         part = obj + 0x80;
@@ -108,7 +109,7 @@ void func_80074CDC(u8 *obj) {
     }
     power = *(f32 *)(obj + 0x19AC) * coef;
     mixed = coef * D_800AD9B4;
-    i = i + 1;
+    i++;
 
     if (*(s32 *)(*(u8 **)(obj + 0x344) + 0x14) != 0) {
         func_80014CC0(*(f32 *)(obj + i * 4 + 0x199C) * mixed * 360.0f, &sc[1], &sc[0]);

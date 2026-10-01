@@ -72,12 +72,13 @@ extern s32 func_8006C708(void *);
 extern f32 func_80081700(f32, f32);
 
 void func_8006B568(Obj8006B568 *obj) {
-    f32 result[3];
-    s32 handleA;
-    s32 handleB;
-    s32 detached;
-    f32 *origin;
+    f32 v;
     f32 *offset;
+    s32 handleB;
+    f32 *origin;
+    f32 result[3];
+    s32 detached;
+    s32 handleA;
 
     handleA = func_80005B44(5);
     if (obj->unk1A0 > 150.0f) {
@@ -134,8 +135,9 @@ void func_8006B568(Obj8006B568 *obj) {
         func_80033328(&obj->unk1EC, offset, obj->unk1F0, obj->unk70 * obj->unk22C, obj->unk1F4,
                       obj->unk1F8 + obj->unk1FC);
     }
-    obj->unk1F4 = obj->unk1F4 * func_80081700(1.5f, (f32)D_80120BF0);
-    if ((obj->unk1F4 < 0.5f) && (-obj->unk1F4 < 0.5f)) {
+    v = obj->unk1F4 * func_80081700(1.5f, (f32)D_80120BF0);
+    obj->unk1F4 = v;
+    if ((v < 0.5f) && (-v < 0.5f)) {
         obj->unk1F4 = 0.0f;
     }
     if (detached != 0) {

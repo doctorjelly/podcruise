@@ -77,7 +77,9 @@ void func_80019BB4(Controller80019BB4 *controller) {
             case 0:
                 if (D_800A2384 > 0) {
                     D_800A2384--;
-                } else {
+                    break;
+                }
+                {
                     y = 0x1E;
                     func_8003ECB0(0x1E, y, D_800A8850);
                     y += 0x14;

@@ -13,8 +13,8 @@ extern u8 D_80113E86;
 void func_80027D24(s32 arg0, s32 arg1) {
     s32 total;
     s32 count;
-    s32 amount;
-    s32 taken;
+    u8 amount;
+    u8 taken;
     s32 value;
     s32 index;
     u8 *slot;
@@ -41,13 +41,13 @@ void func_80027D24(s32 arg0, s32 arg1) {
 
     draw = (s32)((f32)func_80082BE0() / (f32)2147483648.0 * 52.0f);
     draw += 25;
-    amount = draw & 0xFF;
+    amount = draw;
     while (total >= (u8)draw) {
         index = (s32)((f32)func_80082BE0() / (f32)2147483648.0 * 7.0f);
         if (D_80113E60[index + 0x1D] > 0) {
             value = D_80113E60[index + 0x24];
             taken = amount;
-            if (amount < value) {
+            if (taken < value) {
                 D_80113E60[index + 0x24] = value - taken;
             } else {
                 D_80113E60[index + 0x24] = 0;
@@ -56,7 +56,7 @@ void func_80027D24(s32 arg0, s32 arg1) {
         total -= amount;
         draw = (s32)((f32)func_80082BE0() / (f32)2147483648.0 * 52.0f);
         draw += 25;
-        amount = draw & 0xFF;
+        amount = draw;
     }
 
     for (i = 0; i < 7; i++) {
@@ -81,7 +81,7 @@ void func_80027D24(s32 arg0, s32 arg1) {
     } else {
         draw = (s32)((f32)func_80082BE0() / (f32)2147483648.0 * 52.0f);
         draw += 25;
-        amount = draw & 0xFF;
+        amount = draw;
         while (cap >= (u8)draw) {
             index = (s32)((f32)func_80082BE0() / (f32)2147483648.0 * 7.0f);
             slot = &D_80113E60[index];
@@ -99,7 +99,7 @@ void func_80027D24(s32 arg0, s32 arg1) {
             }
             draw = (s32)((f32)func_80082BE0() / (f32)2147483648.0 * 52.0f);
             draw += 25;
-            amount = draw & 0xFF;
+            amount = draw;
         }
     }
     func_800399F0();

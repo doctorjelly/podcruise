@@ -23,7 +23,7 @@ extern u32 D_800A3DB8[];
 extern u32 D_800A4010[];
 extern u32 D_800D697C;
 extern Gfx *D_80112C90;
-extern u32 D_80112DD8;
+extern s32 D_80112DD8;
 extern u32 D_80112E14;
 extern s32 D_80112E18;
 extern s16 D_80112E1C;
@@ -34,9 +34,6 @@ extern void func_80035BF0(RenderConfig *, s32);
 void func_80038950(Gfx **arg0) {
     Gfx *gfx;
     s32 range;
-    s32 near;
-    s32 hi;
-    s32 lo;
 
     D_80112DD8 = 0x00200405;
     D_80112DE0 = D_800A3D68;
@@ -55,11 +52,8 @@ void func_80038950(Gfx **arg0) {
     GFX_CMD(gfx++, 0xE3001A01, D_80114470[7]);
 
     if (!(D_800D697C & 0x40)) {
-        near = D_800A3D4C;
-        range = D_800A3D50 - near;
-        hi = 128000 / range;
-        lo = (((-near) << 8) + 128000) / range;
-        GFX_CMD(gfx++, 0xDB080000, (hi << 16) | (lo & 0xFFFF));
+        range = D_800A3D50 - D_800A3D4C;
+        GFX_CMD(gfx++, 0xDB080000, ((128000 / range) << 16) | ((((-D_800A3D4C) << 8) + 128000) / range & 0xFFFF));
         GFX_CMD(gfx++, 0xF8000000,
                 (((D_800A3D44[0] & 0xFF) << 24) | ((D_800A3D44[1] & 0xFF) << 16) |
                  ((D_800A3D44[2] & 0xFF) << 8) | (D_800A3D44[3] & 0xFF)));

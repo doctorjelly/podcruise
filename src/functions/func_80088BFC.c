@@ -122,8 +122,8 @@ void func_80088BFC(Player80088BFC *player) {
     u8 amount;
     f32 rate;
     Post80088BFC post;
-    register s32 count;
-    s16 scaled;
+    s32 total0;
+    volatile s16 scaled;
     Scratch80088BFC scratch;
     s16 sum;
     s32 total;
@@ -131,6 +131,7 @@ void func_80088BFC(Player80088BFC *player) {
     Event80088BFC *event;
     Voice80088BFC *voice;
     Program80088BFC *program;
+    Sample80088BFC *sample;
 
     event = &player->unk28;
     for (;;) {
@@ -147,10 +148,11 @@ void func_80088BFC(Player80088BFC *player) {
                         break;
                     }
                     note.unk02 = 0;
-                    note.unk04 = 0;
                     note.unk00 = voice->unk20;
+                    note.unk04 = 0;
                     func_8008FF98(player->unk38, voice, &note);
-                    scaled = program->unk00->unk0C * voice->unk2C / 0x7F;
+                    sample = program->unk00;
+                    scaled = sample->unk0C * voice->unk2C / 0x7F;
                     sum = voice->unk2E + program->unk0C - 0x40;
                     if (sum <= 0) {
                         sum = 0;
@@ -161,22 +163,22 @@ void func_80088BFC(Player80088BFC *player) {
                         amount = 0x7F;
                     }
                     rate = voice->unk24;
-                    count = program->unk00->unk00;
+                    total = sample->unk00;
                     func_800900E0(player->unk38, voice, program->unk08);
                     voice->unk28 = 1;
                     func_80090170(player->unk38, voice, amount);
-                    func_80090200(player->unk38, voice, scaled, count);
+                    func_80090200(player->unk38, voice, scaled, total);
                     func_800902A0(player->unk38, voice, rate);
                     func_80090330(player->unk38, voice, voice->unk2F);
                     post.unk00 = 6;
                     post.unk04 = voice;
                     value = (f32)program->unk00->unk00 / voice->unk24;
                     if (2147483647.0 < value) {
-                        total = 0x7FFFFFFF;
+                        total0 = 0x7FFFFFFF;
                     } else {
-                        total = (s32)value;
+                        total0 = (s32)value;
                     }
-                    func_8008FC3C(&player->unk14, &post, total);
+                    func_8008FC3C(&player->unk14, &post, total0);
                 }
                 break;
             case 1:
@@ -206,7 +208,7 @@ void func_80088BFC(Player80088BFC *player) {
                 }
                 break;
             case 2:
-                voice->unk2E = event->unk08;
+                voice->unk2E = *(u8 *)&event->unk08;
                 if (voice->unk28 == 1) {
                     if (program == 0) {
                         break;
@@ -233,17 +235,16 @@ void func_80088BFC(Player80088BFC *player) {
                 }
                 break;
             case 8:
-                voice->unk2F = event->unk08;
+                voice->unk2F = *(u8 *)&event->unk08;
                 if (voice->unk28 == 1) {
                     func_80090330(player->unk38, voice, voice->unk2F);
                 }
                 break;
             case 3:
-                voice->unk2C = event->unk08;
+                voice->unk2C = *(s16 *)&event->unk08;
                 if (voice->unk28 == 1) {
                     if (program != 0) {
-                        scaled = program->unk00->unk0D * voice->unk2C / 0x7F;
-                        func_80090200(player->unk38, voice, scaled, 1000);
+                        func_80090200(player->unk38, voice, program->unk00->unk0D * voice->unk2C / 0x7F, 1000);
                     }
                 }
                 break;
@@ -251,10 +252,11 @@ void func_80088BFC(Player80088BFC *player) {
                 if (program->unk00->unk04 != -1) {
                     value = (f32)program->unk00->unk04 / voice->unk24;
                     if (2147483647.0 < value) {
-                        total = 0x7FFFFFFF;
+                        total0 = 0x7FFFFFFF;
                     } else {
-                        total = (s32)value;
+                        total0 = (s32)value;
                     }
+                    total = total0;
                     func_80090200(player->unk38, voice, program->unk00->unk0D * voice->unk2C / 0x7F, total);
                     post.unk00 = 1;
                     post.unk04 = voice;

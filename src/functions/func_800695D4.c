@@ -56,7 +56,6 @@ void func_800695D4(Obj *obj, f32 arg1, f32 arg2, f32 arg3, Vec3 *arg4, Vec3 *arg
     (void)arg2;
     (void)dead1;
     (void)dead2;
-    (void)q;
 
     d = obj->unk19C * arg4->z + (arg4->x * obj->unk194 + arg4->y * obj->unk198);
     if ((f64)d < D_800AD540 || (f64)d > D_800AD548) {
@@ -111,10 +110,11 @@ void func_800695D4(Obj *obj, f32 arg1, f32 arg2, f32 arg3, Vec3 *arg4, Vec3 *arg
             vec[0].z = -arg4->z;
         }
         func_800154D0(&vec[1]);
-        d = vec[0].x * vec[1].x + vec[0].y * vec[1].y + vec[0].z * vec[1].z;
-        if (d < 0.0f) {
+        q = vec[0].x * vec[1].x + vec[0].y * vec[1].y + vec[0].z * vec[1].z;
+        if (q < 0.0f) {
             f = 0.0f;
         } else {
+            d = q;
             if (D_800AD554 < d) {
                 d = ((1.0f - d) / D_800AD558) * D_800AD554;
             }
@@ -129,7 +129,7 @@ void func_800695D4(Obj *obj, f32 arg1, f32 arg2, f32 arg3, Vec3 *arg4, Vec3 *arg
             obj->unk1F8 = 0.0f;
         } else {
             v = v / D_800AD560;
-            obj->unk1F8 = f * (v * v) * 600.0f;
+            obj->unk1F8 = 600.0f * f * (v * v);
         }
     }
 }

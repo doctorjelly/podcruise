@@ -49,10 +49,7 @@ f32 func_80066144(Obj80066144 *object, PcVec3f *origin, s32 unused, f32 offset, 
     PcVec3f points[6];
     PcVec3f direction;
     Record80066144 *record;
-    f32 lower;
-    f32 upper;
     f32 best;
-    f32 result;
     f32 travel;
     s32 count;
     s32 i;
@@ -93,8 +90,6 @@ f32 func_80066144(Obj80066144 *object, PcVec3f *origin, s32 unused, f32 offset, 
     }
 
     if ((f64)(((f32)object->unk1998 - 40.0f) / 60.0f) < 1.0) {
-        lower = D_800AD494;
-        upper = D_800AD498;
         for (i = 0; i != 4; i++) {
             if (0.0f < depths[i]) {
                 func_80017874(&matrix[0][0]);
@@ -110,9 +105,9 @@ f32 func_80066144(Obj80066144 *object, PcVec3f *origin, s32 unused, f32 offset, 
                 matrix[3][1] = hits[i].y;
                 matrix[3][2] = hits[i].z;
                 func_800156DC((PcVec3fSlot *)object->unk1290[i], (const PcVec3fSlot *)matrix);
-                func_80017918(object->unk1290[i], upper, upper, upper, object->unk1290[i]);
+                func_80017918(object->unk1290[i], D_800AD498, D_800AD498, D_800AD498, object->unk1290[i]);
             } else {
-                object->unk1290[i][3][2] = lower;
+                object->unk1290[i][3][2] = D_800AD494;
             }
         }
     } else {
@@ -128,12 +123,11 @@ f32 func_80066144(Obj80066144 *object, PcVec3f *origin, s32 unused, f32 offset, 
     }
     if (best < 0.0f) {
         if (offset < 0.0f) {
-            result = D_800AD4A0;
+            return D_800AD4A0;
         } else {
-            result = offset;
+            return offset;
         }
     } else {
-        result = best - 2.0f;
+        return best - 2.0f;
     }
-    return result;
 }

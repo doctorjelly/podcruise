@@ -29,30 +29,27 @@ s16 red;
 s16 green;
 s16 blue;
 {
+    f64 scaleX;
+    s16 c[3];
+    s32 size;
+    s32 y0;
     Gfx800857B0 *gfx;
+    s32 xy[2];
+    s32 x0;
     Gfx800857B0 *image;
     Rect800857B0 *rect;
-    f64 scaleX;
-    f64 scaleY;
-    s32 x0;
-    s32 y0;
-    s32 x1;
-    s32 y1;
-    s32 size;
     u32 fill;
-    s32 r;
-    s32 g;
-    s32 b;
+    f64 scaleY;
 
     rect = &D_80120DF0[index];
-    x1 = rect->unk28;
-    y1 = rect->unk2C;
+    xy[0] = rect->unk2C;
+    xy[1] = rect->unk28;
     scaleX = (f64)D_80114470[0] / 320.0;
     scaleY = (f64)D_80114470[1] / 240.0;
     x0 = rect->unk20 * scaleX;
     y0 = rect->unk24 * scaleY;
-    x1 = x1 * scaleX;
-    y1 = y1 * scaleY;
+    xy[1] = xy[1] * scaleX;
+    xy[0] = xy[0] * scaleY;
 
     EMIT(0xE7000000, 0);
     EMIT(0xE3000A01, 0x00300000);
@@ -67,26 +64,26 @@ s16 blue;
     image->w1 = func_80088360(D_800D9DB4);
 
     if (D_80114470[2] == 0x10) {
-        r = (s16)(red + 4);
-        if (r >= 0x100) {
-            r = 0xFF;
+        c[0] = red + 4;
+        if (c[0] >= 0x100) {
+            c[0] = 0xFF;
         }
-        g = (s16)(green + 4);
-        if (g >= 0x100) {
-            g = 0xFF;
+        c[1] = green + 4;
+        if (c[1] >= 0x100) {
+            c[1] = 0xFF;
         }
-        b = (s16)(blue + 4);
-        if (b >= 0x100) {
-            b = 0xFF;
+        c[2] = blue + 4;
+        if (c[2] >= 0x100) {
+            c[2] = 0xFF;
         }
-        fill = (((b >> 2) & 0x3E) | ((r << 8) & 0xF800)) | ((g << 3) & 0x7C0) | 1;
+        fill = (((c[2] >> 2) & 0x3E) | ((c[0] << 8) & 0xF800)) | ((c[1] << 3) & 0x7C0) | 1;
         fill = fill | (fill << 16);
     } else {
         fill = 0xFF;
     }
 
     EMIT(0xF7000000, fill);
-    EMIT(0xF6000000 | (((x1 - 1) & 0x3FF) << 14) | (((y1 - 1) & 0x3FF) << 2), ((x0 & 0x3FF) << 14) | ((y0 & 0x3FF) << 2));
+    EMIT(0xF6000000 | (((xy[1] - 1) & 0x3FF) << 14) | (((xy[0] - 1) & 0x3FF) << 2), ((x0 & 0x3FF) << 14) | ((y0 & 0x3FF) << 2));
     EMIT(0xE7000000, 0);
     EMIT(0xE3000A01, 0);
     EMIT(0xE7000000, 0);

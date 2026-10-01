@@ -15,7 +15,7 @@ void func_800745AC(u8 *obj) {
 
     target = 0.0f;
     if (*(f32 *)(obj + 0x2FC) < 0.0f) {
-        target = *(f32 *)(obj + 0x2FC) * 100.0f;
+        target = *(f32 *)(obj + 0x2FC) * -15.0f;
     }
     if (*(f32 *)(obj + 0x1A0) < 100.0f) {
         target = 0.0f;
@@ -26,9 +26,9 @@ void func_800745AC(u8 *obj) {
 
     a = *(f32 *)(obj + 0x204) / 45.0f;
     b = -a;
-    if (a < 0.0f || 2.0f < a) {
+    if (a < 0.0f || 2 < a) {
         a = 0.0f;
-    } else if (1.0f < a) {
+    } else if (1 < a) {
         a = 2.0f - a;
     }
     if (b < 0.0f || 2.0f < b) {
@@ -39,7 +39,7 @@ void func_800745AC(u8 *obj) {
 
     if (*(s32 *)(*(u8 **)(obj + 0x344) + 0x4) != 0) {
         part[0] = obj + 0x40;
-        func_80017824(part[0] + 0x350, (a * 0.5f + 1.0f) * level, 1.0f, 0.0f, 0.0f, part[0] + 0x350);
+        func_80017824(part[0] + 0x350, (a * 0.5f + 1) * level, 1.0f, 0.0f, 0.0f, part[0] + 0x350);
         *(f32 *)(part[0] + 0x388) = *(f32 *)(part[0] + 0x388) + level * D_800AD980;
     }
     if (*(s32 *)(*(u8 **)(obj + 0x344) + 0x8) != 0) {

@@ -195,17 +195,15 @@ void func_8006C0D4(PcCraft *craft) {
     }
 
     if (airborne == 0) {
-        flags = craft->unk060;
-        if ((flags & 0x04000000) != 0) {
+        if ((craft->unk060 & 0x04000000) != 0) {
             if (blend < 12.0f) {
-                craft->unk060 = flags & 0xFBFFFFFF;
+                craft->unk060 = craft->unk060 & 0xFBFFFFFF;
             }
         }
     }
 
     craft->unk1ED8 = 0.0f;
-    flags = craft->unk060;
-    if ((flags & 0x20) != 0) {
+    if ((*(volatile u32 *)&craft->unk060 & 0x20) != 0) {
         func_80031C04(craft);
     }
     func_80005B1C(5, handle5);

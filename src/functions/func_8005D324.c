@@ -51,7 +51,9 @@ void func_8005D324(s32 arg0, s32 arg1) {
     s32 palette;
     s32 limit;
     s32 index;
+    s32 *pa = &arg0;
 
+    (void)pa; /* address-taken: arg0 is reloaded per test */
     if (D_800A52BC >= 2) {
         func_80011928();
         return;
@@ -149,11 +151,11 @@ void func_8005D324(s32 arg0, s32 arg1) {
             green = 0xE6;
             blue = 0xB4;
             if (arg1 != 3) {
+                alpha = 0x64;
                 scale = D_800AD040;
                 red = 0x80;
                 green = 0x73;
                 blue = 0x5A;
-                alpha = 0x64;
             }
         } else if (arg0 == 6) {
             position[0] = D_800AD044;

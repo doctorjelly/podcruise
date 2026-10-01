@@ -99,8 +99,8 @@ Command800963CC *func_800963CC(
 
     for (index = 0; index < sequence->voiceCount; index++) {
         voice = &sequence->voices[index];
-        start = sequence->cursor - voice->start;
-        mirrorEnd = sequence->cursor - voice->end;
+        start = &sequence->cursor[-(s32)voice->start];
+        mirrorEnd = &sequence->cursor[-(s32)voice->end];
 
         if (start == previousBoundary) {
             swap = rightOffset;
@@ -151,7 +151,7 @@ Command800963CC *func_800963CC(
         previousBoundary = sequence->cursor + voice->end;
     }
 
-    newCursor = sequence->cursor + sampleCount;
+    newCursor = (s16 *)((u8 *)sequence->cursor + doubledCount);
     ringEnd = sequence->ringBase + sequence->ringLength;
     sequence->cursor = newCursor;
     if (ringEnd < newCursor) {

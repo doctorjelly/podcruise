@@ -41,12 +41,13 @@ void func_80042BB8(Actor80042BB8 *actor) {
     f32 second[4][4];
     f32 first[4][4];
     s16 alpha;
-    f32 spare[3];
+    f32 spare[2];
     Part80042BB8 *part;
     f32 spread;
     f32 fade;
     f32 level;
     f32 value;
+    f32 *g = &D_800A4AF0;
 
     (void)spare;
     if (func_80051FF4() == 1) {
@@ -56,7 +57,7 @@ void func_80042BB8(Actor80042BB8 *actor) {
         spread = 1.5f;
         fade = D_800A4AF0 + D_80120BF0 * (3.0f / (f32)func_80051FF4());
     }
-    D_800A4AF0 = fade;
+    *g = fade;
     if (fade > 1.0f) {
         D_800A4AF0 = -1.0f;
     }
