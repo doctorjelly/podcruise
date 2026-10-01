@@ -163,8 +163,7 @@ static Acmd *func_8008F0B4(Obj *obj, s16 *dmemIn, s16 *dmemBase, s32 count,
             c->w1 = 0;
         }
         {
-            Acmd *c = p++;
-            c->w0 = ((u32)obj->unk28 & 0xFFFF) | 0x09020000;
+            Acmd *c = p++; c->w0 = ((u32)obj->unk28 & 0xFFFF) | 0x09020000;
             c->w1 = ((u32)obj->unk26 << 16) | (u32)(u16)obj->unk24;
         }
         {

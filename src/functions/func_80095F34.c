@@ -60,8 +60,7 @@ Cmd80095F34 *func_80095F34(Port80095F34 *port, Wave80095F34 *wave, u32 arg2, s32
         result = out + 2;
         out->w0 = 0x08000000 | (((aligned * 2) + 0x280) & 0xFFFF);
         next = out + 1; out->w1 = (arg2 << 16) | ((arg3 * 2) & 0xFFFF);
-        next->w0 = (0x05000000 | ((wave->unk24->unk24 & 0xFF) << 16)) |
-                        ((s32)(frac * 32768.0f) & 0xFFFF);
+        next->w0 = ((wave->unk24->unk24 & 0xFF) << 16) | ((s32)(frac * 32768.0f) & 0xFFFF) | 0x05000000;
         next->w1 = func_80088360(wave->unk24->unk14);
         wave->unk24->unk24 = 0;
         wave->unk18 = wave->unk18 + whole - arg3;

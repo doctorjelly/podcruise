@@ -19,6 +19,7 @@ typedef struct {
 u32 *func_8008F980(void *handler_arg, s32 arg1, s32 arg2, s32 arg3,
                    u32 *output) {
     PcHandler8008F980 *handler = handler_arg;
+    PcEntry8008F980 **entries = handler->entries;
     s32 i;
     u32 *cursor;
 
@@ -29,7 +30,7 @@ u32 *func_8008F980(void *handler_arg, s32 arg1, s32 arg2, s32 arg3,
     cursor = output + 4;
 
     for (i = 0; i < handler->count; i++) {
-        PcEntry8008F980 *entry = handler->entries[i];
+        PcEntry8008F980 *entry = entries[i];
 
         cursor = entry->emit(entry, arg1, arg2, arg3, cursor);
     }

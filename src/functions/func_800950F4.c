@@ -11,9 +11,12 @@ typedef struct {
     u8 unk3;
 } Out;
 
-extern s32 D_8014C530[];
-extern u8 D_8014C531[];
-extern s32 D_8014C570[];
+typedef struct {
+    s32 ram[15];
+    s32 status;
+} Pif;
+
+extern Pif D_8014C530;
 extern u8 D_80149CB0;
 
 extern s32 func_800907D0(s32, void *);
@@ -24,20 +27,15 @@ s32 func_800950F4(void *arg0, Out *arg1) {
     s32 status[1];
     s32 result;
     s32 i;
-    s32 *word;
-    s32 n;
     u8 *p;
 
-    word = D_8014C530;
-    do {
-        *word = 0;
-        word++;
-    } while (word < D_8014C570);
-    D_8014C530[15] = 1;
+    for (i = 0; i < 16; i++) {
+        D_8014C530.ram[i] = 0;
+    }
+    D_8014C530.status = 1;
 
-    p = (u8 *)D_8014C530;
-    n = 4;
-    for (i = 0; i < n; i++) {
+    p = (u8 *)D_8014C530.ram;
+    for (i = 0; i < 4; i++) {
         *p++ = 0;
     }
 
@@ -54,18 +52,18 @@ s32 func_800950F4(void *arg0, Out *arg1) {
     p += 8;
     *p = 0xFE;
 
-    func_800907D0(1, D_8014C530);
+    func_800907D0(1, &D_8014C530);
     func_80087E80(arg0, 0, 1);
 
     D_80149CB0 = 0xFE;
-    status[0] = func_800907D0(0, D_8014C530);
+    status[0] = func_800907D0(0, &D_8014C530);
     func_80087E80(arg0, 0, 1);
-    p = D_8014C531;
     if (status[0] != 0) {
         return status[0];
     }
 
-    *(u8 *)D_8014C530 = 0;
+    *(u8 *)&D_8014C530 = 0;
+    p = (u8 *)&D_8014C530 + 1;
     p[2] = 0;
     p[1] = 0;
     p[0] = 0;

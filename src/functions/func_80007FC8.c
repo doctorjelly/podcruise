@@ -31,10 +31,8 @@ s32 func_80007FC8(s32 arg0) {
     if (index >= 0) {
         table = owner->table;
         if (index < table->count) {
-            result = func_800894D0((void *)(unsigned long)(u32)D_8009A2BC,
-                                   (void *)(unsigned long)(u32)table->items[index]);
+            return func_800894D0((void *)(unsigned long)(u32)D_8009A2BC, (void *)(unsigned long)(u32)table->items[index]);
         }
-        return result;
     }
     return result;
 }

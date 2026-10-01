@@ -41,7 +41,7 @@ Entry8002EA28 *func_8002EA28(void) {
         for (i = 0; i < 4; i++) {
             if (D_800D7498[i] != 0) {
                 D_800D74A8 = D_800D74C0[i].unk0;
-                mask = D_800D74C0[i].unk0;
+                mask = D_800D74A8;
                 temp = (f32)D_800D74C0[i].unk2;
                 D_800D74D8[i].unk0 = (s16)(temp >= -100.0f ? (temp <= 100.0f ? temp : 100.0f) : -100.0f);
                 temp = (f32)D_800D74C0[i].unk3;

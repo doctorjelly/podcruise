@@ -31,9 +31,9 @@ u8 mode;
 u8 key;
 {
     s32 result;
-    s32 count;
     s32 index;
     u8 *buffer;
+    s32 count;
     s32 base;
 
     if (mode == 0) {
@@ -50,11 +50,7 @@ u8 key;
         }
     }
 
-    if (key > 0) {
-        count = 1;
-    } else {
-        count = object->unk60;
-    }
+    count = (key > 0) ? 1 : object->unk60;
 
     if (mode == 1) {
         out[1] = func_80090AB0(out + count * 2, -count * 2 + 0x100);

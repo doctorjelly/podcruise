@@ -77,8 +77,8 @@ void func_80008090(void) {
         }
     }
 
-    shadow = D_800D1F38;
     state = D_800D2038;
+    shadow = D_800D1F38;
     floor = D_800A81D0;
     do {
         if (state->unk08 != 0) {

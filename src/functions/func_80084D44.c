@@ -11,7 +11,7 @@ typedef struct {
     /* 0x34 */ u32 unk34;
 } TaskBlock;
 
-extern PcGfx *D_801217B0;
+extern PcGfx * volatile D_801217B0;
 extern PcGfx *D_801217B4;
 extern TaskBlock *D_801488C0;
 extern s32 D_80135030;

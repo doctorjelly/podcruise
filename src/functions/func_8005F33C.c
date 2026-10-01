@@ -42,17 +42,17 @@ void func_8005F33C(u8 *owner, Mover *mover, s32 position) {
     mover->unk_30.z = mover->unk_10.z * -100.0f + mover->unk_30.z;
 
     index = 0;
-    work = position;
     span = bands.width[0];
     total = span - origin;
     if (position >= span) {
         do {
-            work -= span;
+            position -= span;
             index++;
             span = bands.width[index];
             total += span;
-        } while (work >= span);
+        } while (position >= span);
     }
+    work = position;
     if (total > 0) {
         span -= total;
     }

@@ -12,19 +12,11 @@ typedef struct PodRankedNode {
 } PodRankedNode;
 
 void func_8008D22C(PodRankedNode *head, PodRankedNode *entry) {
-    PodRankedNode *previous;
-    PodRankedNode *current;
-    s32 rank;
-    s32 currentRank;
-
-    previous = head;
-    current = head->link;
-    rank = entry->rank;
-    currentRank = current->rank;
-    while (currentRank >= rank) {
+    PodRankedNode *previous = head;
+    PodRankedNode *current = head->link;
+    while (current->rank >= entry->rank) {
         previous = current;
         current = current->link;
-        currentRank = current->rank;
     }
     entry->link = previous->link;
     previous->link = entry;

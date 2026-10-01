@@ -46,18 +46,24 @@ extern s32 func_8003FDCC(s32 tag, Vec70BBC *origin, f32 limit, void *exclude, s3
                          f32 *distances, Vec70BBC *offsets, void **results);
 extern void *func_80080408(Track70BBC *track);
 
-void func_80070BBC(Object70BBC *object, Vec70BBC *frame, s32 flag) {
+void func_80070BBC(Object70BBC *object, f32 *frame, s32 flag) {
+    s32 pad0;
+    s32 pad1;
+    Info70BBC *hit;
+    s32 active;
     Vec70BBC offset;
     f32 distance;
     void *result;
     Probe70BBC probe;
-    Info70BBC *hit;
-    s32 active;
     s32 rewinding;
     s32 done;
     s32 whole;
     f32 scaled;
 
+    pad0 = 0;
+    pad1 = 0; /* reserves frame slots */
+    (void)pad0;
+    (void)pad1;
     active = flag;
     rewinding = flag;
 
@@ -83,9 +89,9 @@ void func_80070BBC(Object70BBC *object, Vec70BBC *frame, s32 flag) {
     do {
         done = 1;
         if (active != 0) {
-            probe.origin[0] = frame[3].x;
-            probe.origin[1] = frame[3].y;
-            probe.origin[2] = frame[3].z;
+            probe.origin[0] = frame[12];
+            probe.origin[1] = frame[13];
+            probe.origin[2] = frame[14];
             hit = func_80005134(object->unk13C, &probe);
         } else {
             hit = func_80080408(&object->track);
@@ -103,7 +109,7 @@ void func_80070BBC(Object70BBC *object, Vec70BBC *frame, s32 flag) {
         }
 
         if (done != 0) {
-            if (func_8003FDCC(0x54657374, &frame[3], 900.0f, object, 1,
+            if (func_8003FDCC(0x54657374, (Vec70BBC *)&frame[12], 900.0f, object, 1,
                               &distance, &offset, &result) > 0) {
                 done = 0;
             }

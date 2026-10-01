@@ -15,11 +15,12 @@ u32 *func_8008DD80(void *arg0, s32 arg1, s32 width, s32 arg3, u32 *output) {
     Context8008DD80 *context;
     u32 *cursor;
     void *entry;
-    Emit8008DD80 emit;
     s32 index;
     u32 doubled;
+    void **list;
 
     context = arg0;
+    list = context->entries;
     doubled = (u32)width * 2;
     output[0] = 0x02000440;
     output[1] = doubled;
@@ -28,15 +29,14 @@ u32 *func_8008DD80(void *arg0, s32 arg1, s32 width, s32 arg3, u32 *output) {
     cursor = output + 4;
 
     for (index = 0; index < context->count; index++) {
-        entry = context->entries[index];
-        emit = *(Emit8008DD80 *)((u8 *)entry + 4);
-        cursor = emit(entry, arg1, width, arg3, cursor);
+        entry = list[index];
+        cursor = (*(Emit8008DD80 *)((u8 *)entry + 4))(entry, arg1, width, arg3, cursor);
         cursor[0] = 0x08000000;
         cursor[1] = doubled & 0xFFFF;
-        cursor[2] = 0x0C007FFF;
         cursor[3] = 0x06C00440;
-        cursor[4] = 0x0C007FFF;
+        cursor[2] = 0x0C007FFF;
         cursor[5] = 0x08000580;
+        cursor[4] = 0x0C007FFF;
         cursor += 6;
     }
     return cursor;

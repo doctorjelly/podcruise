@@ -52,13 +52,15 @@ extern void func_80042BB8(void *);
 
 void func_80043598(void *arg0) {
     Obj80043598 *obj;
-    Linked80043598 *linked;
+    s32 active;
     f32 original[6];
     f32 facing[6];
     f32 matrix[4][4];
-    s32 active;
+    f32 (*mat)[4];
+    Linked80043598 *linked;
 
     obj = arg0;
+    mat = obj->matrix20;
     if (obj->state7C == 0 || obj->player74 < 0) {
         return;
     }
@@ -81,7 +83,7 @@ void func_80043598(void *arg0) {
                 D_800A4AD8 = (f32)((f64)D_800A4AD8 - D_80120BF0);
                 if (D_800A4AD8 <= 0.0f) {
                     D_800A4AD8 = ((f32)func_80082BE0() / 2147483648.0f) * 7.0f + 3.0f;
-                    D_800A4ADC += ((f32)func_80082BE0() / 2147483648.0f) * 7.0f;
+                    D_800A4ADC += 7.0f * ((f32)func_80082BE0() / 2147483648.0f);
                     D_800A4ADC %= 7;
                     obj->state7C = D_800A4AE0[D_800A4ADC];
                     linked->flags60 &= ~0x100000;
@@ -116,9 +118,9 @@ void func_80043598(void *arg0) {
             break;
     }
 
-    func_80016F0C(obj->matrix20, original);
+    func_80016F0C(mat, original);
     func_80082624(original, obj->position138, matrix, facing, original[5]);
-    func_800156DC(obj->matrix20, matrix);
+    func_800156DC(mat, matrix);
 
     if (func_8000BB78(obj->handle78) != 0) {
         if (D_800A5998 != 0) {

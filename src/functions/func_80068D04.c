@@ -54,12 +54,12 @@ void func_80068D04(Body68D04 *body, f32 amount, PcVec3f *direction,
 
     blend = 1.0f - (body->unk6C * body->unk248 * body->unk24C) *
                         (body->unk6C * body->unk248 * body->unk24C);
-    blend = blend * D_800AD528;
+    blend *= D_800AD528;
     if (1.0f < body->unk22C) {
         if (2.0f < body->unk22C) {
             blend = 0.0f;
         } else {
-            blend = blend * (2.0f - body->unk22C);
+            blend *= (2.0f - body->unk22C);
         }
     }
 

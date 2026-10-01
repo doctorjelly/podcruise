@@ -230,8 +230,8 @@ void func_8004EA08(State8004EA08 *state) {
     state->unkC0 = 0;
     state->unkC4 = 0;
     state->unkC8 = 0;
-    for (index = 0; index < 3; index++) {
-        state->unkCC[index] = index;
+    for (count = 0; count < 3; count++) {
+        state->unkCC[count] = count;
     }
     func_80050208(state);
 

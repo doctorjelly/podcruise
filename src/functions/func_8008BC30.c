@@ -50,7 +50,8 @@ void func_8008BC30(Context8008BC30 *arg0) {
     }
     for (;;) {
         func_80087E80(arg0->unkC, &message, 1);
-        if (message->unk0 == 13) {
+        switch (message->unk0) {
+        case 13:
             func_800941E0();
             D_8014B0E0--;
             if (D_8014B0E0 == 0) {
@@ -65,8 +66,10 @@ void func_8008BC30(Context8008BC30 *arg0) {
             now = func_8008C550();
             D_8014C518 = now;
             D_8014C510 += now - previous;
-        } else if (message->unk0 == 14) {
+            break;
+        case 14:
             func_80093E3C();
+            break;
         }
     }
 }

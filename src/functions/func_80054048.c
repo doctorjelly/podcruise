@@ -74,12 +74,12 @@ extern void func_80053C08(Race54048 *race);
 extern s32 func_80080BEC(void *body, f32 *step);
 
 void func_80054048(Race54048 *race) {
-    f32 spare[4];
-    f32 step;
-    s32 running;
-    s32 moved;
-    Racer54048 *racer;
+    f32 spare[2];
     f32 rate;
+    s32 running;
+    f32 step;
+    Racer54048 *racer;
+    s32 moved;
     register f32 cap;
     s32 i;
 
@@ -97,8 +97,9 @@ void func_80054048(Race54048 *race) {
         func_8003B02C(race->pathA, race->matrixA);
         race->flags = (race->flags & ~0xF) | 2;
 
-        for (i = 0; i < race->count; i++) {
-            cap = D_800ACEA8;
+        i = 0;
+        cap = D_800ACEA8;
+        for (; i < race->count; i++) {
             racer = &D_8011B1B8[i];
             if ((racer->flags & 1) && !(racer->flags & 2)) {
                 moved = func_80080BEC(racer->body, &step);

@@ -75,10 +75,10 @@ extern void func_800469B4(Obj *, s32);
 void func_80024954(Obj *obj) {
     char text[272];
     s32 *cursor;
-    s32 value;
     s32 red;
-    s16 idx;
     s32 green;
+    s32 value;
+    s16 idx;
 
     if (D_800A4BBC != 0) {
         D_800A4BBC = 0;
@@ -194,11 +194,10 @@ void func_80024954(Obj *obj) {
             func_800469B4(obj, 9);
             return;
         }
-        if (obj->unk5E == D_800D73E5) {
+        if (D_800D73E5 == obj->unk5E) {
             if ((*cursor & 0x8000) != 0) {
-                value = obj->unk5E;
-                if (value < D_8011A240.unk28) {
-                    obj->unk5E = value + 1;
+                if (obj->unk5E < D_8011A240.unk28) {
+                    obj->unk5E = obj->unk5E + 1;
                     D_8011A240.unk34 = -1;
                     func_8002D4C4(0x57);
                     func_80024704(obj);
@@ -208,7 +207,7 @@ void func_80024954(Obj *obj) {
             }
             if ((*cursor & 0x4000) != 0) {
                 value = obj->unk5E;
-                if (value > 0) {
+                if (obj->unk5E > 0) {
                     obj->unk5E = value - 1;
                     D_8011A240.unk34 = -1;
                     func_8002D4C4(0x57);

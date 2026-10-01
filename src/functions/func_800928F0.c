@@ -20,6 +20,7 @@ s32 func_800928F0(void *arg0, s32 arg1, u16 arg2, u8 *arg3, s32 arg4) {
     s32 retry;
     s32 check;
     s32 index;
+    s32 tmp;
 
     p = D_8014D720;
     retry = 2;
@@ -37,7 +38,7 @@ s32 func_800928F0(void *arg0, s32 arg1, u16 arg2, u8 *arg3, s32 arg4) {
         }
         p[0] = 0xFF;
         p[1] = 0x23;
-        p[2] = *(s32 *)&D_8014D720[0x3C] = 1;
+        p[2] = tmp = *(s32 *)&D_8014D720[0x3C] = 1;
         p[3] = 3;
         p[0x26] = 0xFF;
         p[0x27] = 0xFE;
@@ -55,7 +56,7 @@ s32 func_800928F0(void *arg0, s32 arg1, u16 arg2, u8 *arg3, s32 arg4) {
         func_80087E80(arg0, 0, 1);
         status = (p[2] & 0xC0) >> 4;
         if (status == 0) {
-            if (check != p[0x26]) {
+            if (p[0x26] != check) {
                 status = func_80090880(arg0, arg1);
                 if (status != 0) {
                     break;

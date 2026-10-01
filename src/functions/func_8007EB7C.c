@@ -24,10 +24,6 @@ void func_8007EB7C(s32 arg0, s32 arg1) {
     f32 scale;
     f32 threshold;
     f32 vector[3];
-    f32 x;
-    f32 y;
-    f32 z;
-    Vec3 *slot;
     s32 identifier;
     s32 wasAbove;
     s32 i;
@@ -43,7 +39,7 @@ void func_8007EB7C(s32 arg0, s32 arg1) {
     threshold = 0.8f;
     for (i = 0; i < 8; i++) {
         if (D_800A66E0[i] > 0.0f) {
-            wasAbove = !(D_800A66E0[i] > threshold);
+            wasAbove = D_800A66E0[i] > threshold ? 0 : 1;
             D_800A66E0[i] = (f32)(D_800A66E0[i] - D_80120BF0);
             if (!wasAbove) {
                 if (D_800A66E0[i] <= threshold) {
@@ -58,16 +54,12 @@ void func_8007EB7C(s32 arg0, s32 arg1) {
                 }
             }
             if (D_800A66E0[i] <= 0.0f) {
-                slot = &D_8011DC50[i];
                 level = (f32)func_80082BE0() / 2147483648.0f * 0.080000006f + 0.1f;
                 pitch = (f32)func_80082BE0() / 2147483648.0f * scale + threshold;
-                func_80008BC4(0x43, 6, level, pitch, slot, 0, 0, 1000.0f, 2000.0f);
-                x = slot->unk_00[0];
-                y = slot->unk_00[1];
-                z = slot->unk_00[2];
-                vector[0] = x;
-                vector[1] = y;
-                vector[2] = z;
+                func_80008BC4(0x43, 6, level, pitch, &D_8011DC50[i], 0, 0, 1000.0f, 2000.0f);
+                vector[0] = D_8011DC50[i].unk_00[0];
+                vector[1] = D_8011DC50[i].unk_00[1];
+                vector[2] = D_8011DC50[i].unk_00[2];
                 func_80065810(2, 0, 5.0f, vector, 5.0f);
             }
         }

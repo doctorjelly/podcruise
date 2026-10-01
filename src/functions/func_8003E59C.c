@@ -17,6 +17,7 @@ extern void func_80014568(s16, s16, s32);
 extern void func_80014C98(void);
 
 void func_8003E59C(void) {
+    f64 pad; /* reserves frame slot */
     f32 alpha1;
     f32 alpha2;
     register f32 scale;
@@ -26,8 +27,9 @@ void func_8003E59C(void) {
     volatile f32 *level;
     register u8 *kinds;
     register s32 index;
-    register s32 mode;
+    register u32 mode;
 
+    (void)&pad;
     if (func_8002F054() == 0) {
         scale = (f32)2147483648.0;
         alpha1 = (f32)func_80082BE0() / scale / 2.0f + 0.5f;

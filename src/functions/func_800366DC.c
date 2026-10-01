@@ -87,12 +87,12 @@ void func_800366DC(u8 *light) {
 
     {
         GfxCmd *gfx = D_80112C90++;
-        gfx->w1 = light;
         gfx->w0 = 0xDC08000A;
+        gfx->w1 = light;
     }
     {
         GfxCmd *gfx = D_80112C90++;
-        gfx->w1 = light + 16;
         gfx->w0 = 0xDC08030A;
+        gfx->w1 = light + 16;
     }
 }

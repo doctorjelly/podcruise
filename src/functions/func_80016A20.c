@@ -17,11 +17,11 @@ extern s32 func_80016260(f32 (*matrix)[4], Unk80016A20 *source, Work80016A20 *wo
 extern void func_800167E4(f32 (*matrix)[4], Work80016A20 *work, f32 *vector);
 
 void func_80016A20(f32 (*out)[4], Unk80016A20 *source) {
+    s32 row;
+    s32 column;
     Work80016A20 work;
     f32 vector[3];
     f32 basis[4][4];
-    s32 row;
-    s32 column;
     f32 tx;
     f32 ty;
     f32 tz;

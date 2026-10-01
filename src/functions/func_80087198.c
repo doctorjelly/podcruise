@@ -96,7 +96,7 @@ void func_80087198(void) {
     (void)saved;
     (void)spare;
     func_800390A4();
-    D_800A6974 = D_800A6974 + 1;
+    *(s32 *)0x800A6974 = *(s32 *)0x800A6974 + 1;
 
     D_800A68B0 = D_800A68AC;
     D_800A68AC = D_800D9DB4;
