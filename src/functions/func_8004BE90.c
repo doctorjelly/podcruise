@@ -52,7 +52,6 @@ extern u8 D_800AAE44[];
 extern u8 D_800AAE48[];
 extern PcOptionBlock D_80113680;
 extern PcNameBlock D_80113E60;
-extern u8 D_80113E7C;
 extern s32 D_800D76F0;
 extern s32 *D_8011A508[];
 extern s32 *D_8011A544;
@@ -237,12 +236,8 @@ void func_8004BE90(PcRaceState *state) {
                 record = (PcRacerRecord *)((u8 *)D_800A31E0 + state->entries[index] * stride);
                 func_800517D8(record->unk30, index + 0x1C, 2, record->unk20);
             }
-            index = 0;
-            if (D_80113E7C > 0) {
-                do {
-                    func_800517D8(0x6D, index + 0x34, 1, -1.0f);
-                    index++;
-                } while (index < D_80113E60.unk1C);
+            for (index = 0; index < D_80113E60.unk1C; index++) {
+                func_800517D8(0x6D, index + 0x34, 1, -1.0f);
             }
             func_8002963C(state);
             func_80046670(0x6D, -1, 0x95, 0);

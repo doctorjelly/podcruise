@@ -100,10 +100,10 @@ void func_80041F40(Actor *actor) {
 
     notB = 0;
     lean = 20.0f;
-    pod = actor->unkF4;
-    if (pod == 0) {
+    if (actor->unkF4 == 0) {
         return;
     }
+    pod = actor->unkF4;
     if (!(pod->unk60 & 0x20)) {
         flagA = 1;
     } else {

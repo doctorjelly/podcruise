@@ -26,8 +26,14 @@ void func_8003E59C(void) {
     volatile f32 *level;
     register s32 index;
     register u32 mode;
+    register s32 kind1;
+    register s32 kind2;
+    register u32 other;
 
     (void)&pad;
+    kind1 = 1;
+    kind2 = 2;
+    other = 0x58;
     if (func_8002F054() == 0) {
         scale = (f32)2147483648.0;
         alpha1 = (f32)func_80082BE0() / scale / 2.0f + 0.5f;
@@ -47,12 +53,12 @@ void func_8003E59C(void) {
         for (index = 0, previous = 0; index < D_800A4984; index++) {
             if (previous != D_80118C50[index]) {
                 previous = D_80118C50[index] & 0xFF;
-                if (previous == 1) {
+                if (kind1 == previous) {
                     func_80011F04(0, 255, 255, full * level[0]);
-                } else if (previous == 2) {
+                } else if (kind2 == previous) {
                     func_80011F04(255, 255, 0, full * alpha2 * level[0]);
                 } else if (previous >= 3 || previous < 5) {
-                    if (mode != 0x58) {
+                    if (other != mode) {
                         func_800141EC(0x58);
                         mode = 0x58;
                     }

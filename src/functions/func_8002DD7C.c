@@ -45,7 +45,7 @@ void func_8002DD7C(Obj8002DD7C *arg0) {
 
     while (total < 5) {
         index = (s32)(((f32)func_80082BE0() / (f32)2147483648.0) * 5.0f);
-        bit = (s32)(((f32)func_80082BE0() / (f32)2147483648.0) * (f32)(s32)D_800A21B4[index]);
+        bit = (s32)((f32)(s32)D_800A21B4[index] * ((f32)func_80082BE0() / (f32)2147483648.0));
         mask = D_80113E60[index + 8];
         if (useA != 0) {
             mask = D_80113680[index + 12];

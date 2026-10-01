@@ -85,8 +85,8 @@ f32 func_8006A49C(Racer *racer, Vec3 *point, void *ctx, Vec3 *out, Owner *owner)
     origin.z = point->z;
     if (!(((f32)racer->unk1998 - 400.0f) / 600.0f < 1.0) && (racer->unk60 & 0x20) == 0 &&
             (racer->unk64 & 0x04000000) == 0) {
-        racer->unk64 = racer->unk64 | 0x20000000;
         racer->unk140 = racer->unkEC;
+        racer->unk64 = racer->unk64 | 0x20000000;
         if ((racer->unk60 & 0xF) == 2) {
             func_8003B184(racer->unkAC, scratchB, 0);
             point->z = *(f32 *)&scratchB[0x38];
@@ -104,8 +104,8 @@ f32 func_8006A49C(Racer *racer, Vec3 *point, void *ctx, Vec3 *out, Owner *owner)
             out->x = racer->unk160;
             out->y = racer->unk164;
             out->z = racer->unk168;
-            racer->unk64 |= 0x20000000;
             racer->unk140 = racer->unkEC;
+            racer->unk64 |= 0x20000000;
         } else {
             result = func_800670CC(racer, point, out);
             if (racer->unk64 & 0x800000) {
@@ -125,7 +125,7 @@ f32 func_8006A49C(Racer *racer, Vec3 *point, void *ctx, Vec3 *out, Owner *owner)
         racer->unk164 = out->y;
         racer->unk168 = out->z;
         if ((racer->unk60 & 0x5000) == 0) {
-            if (D_800AD5B0 < racer->unk18C || D_800AD5B0 < -racer->unk18C || (racer->unk60 & 0x2000) == 0) {
+            if (D_800AD5B0 < (level = racer->unk18C) || D_800AD5B0 < -level || (racer->unk60 & 0x2000) == 0) {
                 if (racer->unk64 & 0x400) {
                     func_80069A64(racer, point, ctx, result, out, &spareA, &spareB);
                 } else {

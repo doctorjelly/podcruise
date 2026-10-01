@@ -25,7 +25,6 @@ extern void func_800156DC(f32 [4][4], const f32 [4][4]);
 extern void func_8003B184(void *, void *, f32);
 
 void func_8007E988(Obj8007E988 *obj) {
-    f32 scratch;
     f32 base[4][4];
     f32 target[4][4];
     s32 i;
@@ -34,9 +33,9 @@ void func_8007E988(Obj8007E988 *obj) {
 
     func_80082BE0();
     func_80082BE0();
-    (void)scratch;
     count = 8;
-    for (i = 0; i != count; i++) {
+    i = 0;
+    while (i != count) {
         if (D_800A66E0[i] <= 0.0f) {
             point = &D_8011DC50[i];
             D_800A66E0[i] = (f32)func_80082BE0() / 2147483648.0f * 6.0f + 2.0f;
@@ -49,5 +48,6 @@ void func_8007E988(Obj8007E988 *obj) {
             point->x = (((f32)func_80082BE0() / 2147483648.0f) * 200.0f + -100.0f) + point->x;
             point->y = (((f32)func_80082BE0() / 2147483648.0f) * 200.0f + -100.0f) + point->y;
         }
+        i++;
     }
 }

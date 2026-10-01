@@ -164,21 +164,23 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
     }
 
     func_800156DC((PcVec3fSlot *)base, (PcVec3fSlot *)source);
-    func_80017918(work, scaleX, scaleY, scaleZ, base);
+    func_80017918(base, scaleX, scaleY, scaleZ, base);
 
     node0 = object->primary[0];
     if (node0 != 0) {
         func_80017D48(node0, 0);
-        func_800181BC(node0, 2, 3, 0x10, 2);
+        if (node0 != 0) {
+            func_800181BC(node0, 2, 3, 0x10, 2);
+        }
     }
 
     if ((D_8009B7D8 & 0x80) != 0 && (D_800D76F4 & 0x400) != 0) {
         node0 = object->primary[0];
         if (node0 != 0) {
             func_80017D48(node0, 1);
-        }
-        if (node0 != 0) {
-            func_800181BC(node0, 2, 3, 0x10, 2);
+            if (node0 != 0) {
+                func_800181BC(node0, 2, 3, 0x10, 2);
+            }
         }
 
         node1 = object->primary128;
@@ -190,7 +192,9 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
                               sine[3] * D_800A9AF4, (PcVec3f *)work[2]);
             }
             func_80017BA8(node1, work);
-            func_800181BC(node1, 2, 3, 0x10, 2);
+            if (node1 != 0) {
+                func_800181BC(node1, 2, 3, 0x10, 2);
+            }
         }
     } else {
         node1 = object->primary[1];
@@ -208,9 +212,9 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
                               secondVector.y, secondVector.z, work);
             }
             func_80017BA8(node1, work);
-        }
-        if (node1 != 0) {
-            func_800181BC(node1, 2, 3, 0x10, 2);
+            if (node1 != 0) {
+                func_800181BC(node1, 2, 3, 0x10, 2);
+            }
 
             node1 = object->primary[3];
             if (node1 != 0) {
@@ -227,9 +231,9 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
                                   secondVector.y, secondVector.z, work);
                 }
                 func_80017BA8(node1, work);
-            }
-            if (node1 != 0) {
-                func_800181BC(node1, 2, 3, 0x10, 2);
+                if (node1 != 0) {
+                    func_800181BC(node1, 2, 3, 0x10, 2);
+                }
             }
 
             node1 = object->primaryF8;
@@ -241,9 +245,9 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
                 func_80017918(work, D_800A9B00, D_800A9B00, D_800A9B00,
                               work);
                 func_80017BA8(node1, work);
-            }
-            if (node1 != 0) {
-                func_800181BC(node1, 2, 3, 0x10, 2);
+                if (node1 != 0) {
+                    func_800181BC(node1, 2, 3, 0x10, 2);
+                }
             }
         }
 
@@ -263,9 +267,9 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
                               secondVector.y, secondVector.z, work);
             }
             func_80017BA8(node1, work);
-        }
-        if (node1 != 0) {
-            func_800181BC(node1, 2, 3, 0x10, 2);
+            if (node1 != 0) {
+                func_800181BC(node1, 2, 3, 0x10, 2);
+            }
 
             node1 = object->primary[4];
             if (node1 != 0) {
@@ -283,9 +287,9 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
                                   secondVector.y, secondVector.z, work);
                 }
                 func_80017BA8(node1, work);
-            }
-            if (node1 != 0) {
-                func_800181BC(node1, 2, 3, 0x10, 2);
+                if (node1 != 0) {
+                    func_800181BC(node1, 2, 3, 0x10, 2);
+                }
             }
 
             node1 = object->primaryFC;
@@ -297,9 +301,9 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
                 func_80017918(work, D_800A9B0C, D_800A9B0C, D_800A9B0C,
                               work);
                 func_80017BA8(node1, work);
-            }
-            if (node1 != 0) {
-                func_800181BC(node1, 2, 3, 0x10, 2);
+                if (node1 != 0) {
+                    func_800181BC(node1, 2, 3, 0x10, 2);
+                }
             }
         }
 
@@ -310,8 +314,8 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
             func_80016BF4(&secondVector, &firstVector, work);
             func_80015328((PcVec3f *)work[3], (PcVec3f *)work[3], &secondVector);
             if (animate != 0) {
-                work[3][2] = (f32)(STRIDED_BYTE(D_800A3204, type) * 10) + depth
-                             + 1.5f * scaleZ;
+                work[3][2] = (f32)(STRIDED_BYTE(D_800A3204, type) * 10)
+                             + (depth + 1.5f * scaleZ);
                 func_800155EC((PcVec3f *)work[3], (PcVec3f *)work[3],
                               sine[5] * D_800A9B10, (PcVec3f *)work[2]);
                 func_80015288(&secondVector, (PcVec3f *)work[1]);
@@ -320,16 +324,18 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
                               secondVector.y, secondVector.z, work);
             }
             func_80017BA8(node1, work);
-        }
-        if (node1 != 0) {
-            func_800181BC(node1, 2, 3, 0x10, 2);
+            if (node1 != 0) {
+                func_800181BC(node1, 2, 3, 0x10, 2);
+            }
 
             if (firstVector.y == 0.0f) {
-                if (object->primary[1] != 0) {
-                    func_80017BA8(object->primary[1], work);
+                node1 = object->primary[1];
+                if (node1 != 0) {
+                    func_80017BA8(node1, work);
                 }
-                if (object->primary[2] != 0) {
-                    func_80017BA8(object->primary[2], work);
+                node1 = object->primary[2];
+                if (node1 != 0) {
+                    func_80017BA8(node1, work);
                 }
             }
 
@@ -341,8 +347,6 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
                 work[3][2] = depth;
                 func_80017918(work, 0.004f, 0.004f, 0.004f, work);
                 func_80017BA8(node1, work);
-            }
-            if (node1 != 0) {
                 func_800181BC(node1, 2, 3, 0x10, 2);
             }
         }

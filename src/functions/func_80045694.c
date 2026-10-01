@@ -98,6 +98,7 @@ void func_80045694(PcStage *stage) {
     triple = D_800A4B14;
     quad = D_800A4B20;
     unit = D_800AAD14;
+    level = 250.0f;
 
     for (i = 0; i < 6; i++) {
         kind = stage->unkD4[i];
@@ -148,11 +149,11 @@ void func_80045694(PcStage *stage) {
             func_800833B4(model->unk04, &triple.x);
             func_80045634(stage->unkEC[i]->unk20, stage->unkEC[i]->unk24, model->unk14);
             func_800833B4(model->unk14, &quad.x);
-            func_80017520(matrix, 250.0f, -250.0f, -250.0f);
+            func_80017520(matrix, level, -250.0f, -250.0f);
             func_80017BA8(model->unk04, matrix);
-            func_80017520(matrix, 250.0f, 250.0f, 250.0f);
+            func_80017520(matrix, level, level, level);
             func_80017BA8(model->unk08, matrix);
-            func_80017520(matrix, 250.0f, 250.0f, 250.0f);
+            func_80017520(matrix, level, level, level);
             func_80017BA8(model->unk14, matrix);
             if (model->unkEC != 0) {
                 func_800181BC(model->unkEC, 2, 0xFFFFFFFC, 0x10, 3);

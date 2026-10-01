@@ -68,8 +68,7 @@ s32 func_80004160(PcVec3f *a, f32 b, PcVec3f *c, f32 d, f32 e, PcVec3f *f,
             func_800155EC(&z, &y, e, c);
             func_80015538(&p, &x, &t);
             func_80015538(&q, &z, &t);
-            dot = q.z * p.z + (p.x * q.x + p.y * q.y);
-            if (dot < 0.0f) {
+            if (q.z * p.z + (p.x * q.x + p.y * q.y) < 0.0f) {
                 func_800155C0(&t, b - sqrtf(D_800AE8B0), &t);
                 a->x = a->x + t.x;
                 a->y = a->y + t.y;
@@ -80,12 +79,12 @@ s32 func_80004160(PcVec3f *a, f32 b, PcVec3f *c, f32 d, f32 e, PcVec3f *f,
             } else {
                 dot = f->z * c->z + (c->x * f->x + c->y * f->y);
                 if (0.0f < dot) {
-                    g->x = z.x;
-                    g->y = z.y;
-                    g->z = z.z;
                     r[0] = z.x + a->x;
                     r[1] = z.y + a->y;
                     r[2] = z.z + a->z;
+                    g->x = z.x;
+                    g->y = z.y;
+                    g->z = z.z;
                 } else {
                     r[0] = x.x + a->x;
                     r[1] = x.y + a->y;
@@ -95,11 +94,10 @@ s32 func_80004160(PcVec3f *a, f32 b, PcVec3f *c, f32 d, f32 e, PcVec3f *f,
                     g->z = z.z;
                 }
                 func_800154D0(&g->x);
-                func_800155EC(a, a,
-                              (D_800AE8B8.x * f->x + D_800AE8B8.y * f->y +
-                               D_800AE8B8.z * f->z) -
-                                  (f->z * r[2] + (r[0] * f->x + r[1] * f->y)),
-                              f);
+                dot = (D_800AE8B8.x * f->x + D_800AE8B8.y * f->y +
+                       D_800AE8B8.z * f->z) -
+                      (f->z * r[2] + (r[0] * f->x + r[1] * f->y));
+                func_800155EC(a, a, dot, f);
             }
         }
         h->x = D_800AE8B8.x;

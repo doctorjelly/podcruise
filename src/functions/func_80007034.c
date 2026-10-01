@@ -37,6 +37,7 @@ void func_80007034(PcBootObject *object) {
     s32 *slot;
     f32 span;
     s32 *end_slot;
+    s32 size;
 
     span = ((f32)object->unk18 * 3.0f) / 60.0f;
     D_800AFE90 = (s32)span;
@@ -59,9 +60,11 @@ void func_80007034(PcBootObject *object) {
     slot = &D_800AFA64 - 1;
     end_slot = &D_800AFA6C;
     do {
-        slot[1] = func_80006FE4((s32)(unsigned long)&D_800A818C, object->unk14, 1, 8);
+        s32 item = func_80006FE4((s32)(unsigned long)&D_800A818C, object->unk14, 1, 8);
+        size = D_800AFE94 * 4;
+        slot[1] = item;
         *(s32 *)(unsigned long)slot[1] = func_80006FE4((s32)(unsigned long)&D_800A8198, object->unk14, 1,
-                                        D_800AFE94 * 4);
+                                        size);
         *(s16 *)(unsigned long)(slot[1] + 4) = 0;
         D_8009A2D0[3] = (s32)(unsigned long)&D_800980C0 - (s32)(unsigned long)&func_80097FF0;
         slot++;

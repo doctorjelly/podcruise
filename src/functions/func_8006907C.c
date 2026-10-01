@@ -54,7 +54,7 @@ void func_8006907C(Obj6907C *object, f32 *arg1, f32 *position, f32 *direction) {
     f32 length;
     f32 previous[3];
     f32 scratch[3];
-    f32 pad[6];
+    f32 pad[4];
     f32 planar;
 
     (void)pad;
@@ -65,9 +65,9 @@ void func_8006907C(Obj6907C *object, f32 *arg1, f32 *position, f32 *direction) {
 
     if (!(object->unk064 & 0x400) && !(object->unk060 & 0x2000000)) {
         if (0.0f < velocity[2]) {
-            planar = velocity[0] * velocity[0] + velocity[1] * velocity[1];
-            if (planar * D_800AD534 < velocity[2] * velocity[2]) {
-                velocity[2] = sqrtf(planar) / 5.0f;
+            length = velocity[0] * velocity[0] + velocity[1] * velocity[1];
+            if (length * D_800AD534 < velocity[2] * velocity[2]) {
+                velocity[2] = sqrtf(length) / 5.0f;
             }
         }
     }
@@ -76,12 +76,12 @@ void func_8006907C(Obj6907C *object, f32 *arg1, f32 *position, f32 *direction) {
     velocity[1] = velocity[1] + object->unk1E0;
     velocity[2] = velocity[2] + object->unk1E4;
 
-    object->unk1D0 = func_80081700(4.0f, (f32)D_80120BF0) * object->unk1D0;
-    object->unk1D4 = func_80081700(4.0f, (f32)D_80120BF0) * object->unk1D4;
-    object->unk1D8 = func_80081700(4.0f, (f32)D_80120BF0) * object->unk1D8;
-    object->unk1DC = func_80081700(4.0f, (f32)D_80120BF0) * object->unk1DC;
-    object->unk1E0 = func_80081700(4.0f, (f32)D_80120BF0) * object->unk1E0;
-    object->unk1E4 = func_80081700(4.0f, (f32)D_80120BF0) * object->unk1E4;
+    object->unk1D0 *= func_80081700(4.0f, (f32)D_80120BF0);
+    object->unk1D4 *= func_80081700(4.0f, (f32)D_80120BF0);
+    object->unk1D8 *= func_80081700(4.0f, (f32)D_80120BF0);
+    object->unk1DC *= func_80081700(4.0f, (f32)D_80120BF0);
+    object->unk1E0 *= func_80081700(4.0f, (f32)D_80120BF0);
+    object->unk1E4 *= func_80081700(4.0f, (f32)D_80120BF0);
 
     if (!(object->unk060 & 0x5000)) {
         if (D_800AD538 < object->unk18C || D_800AD538 < -object->unk18C ||
@@ -135,8 +135,7 @@ void func_8006907C(Obj6907C *object, f32 *arg1, f32 *position, f32 *direction) {
             }
             if ((long)direction > 0) {
                 if (object->unk060 & 0x80) {
-                    object->unk1A4 =
-                        object->unk1A4 * func_80081700(5.0f, (f32)D_80120BF0);
+                    object->unk1A4 *= func_80081700(5.0f, (f32)D_80120BF0);
                 }
             }
             previous[0] = position[0] - previous[0];

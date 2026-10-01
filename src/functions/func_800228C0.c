@@ -144,27 +144,29 @@ extern s32 func_8008A6B4(char *buffer, const char *format, ...);
 
 void func_800228C0(PcController800228C0 *owner) {
     PcResult800228C0 *results[12];
-    f32 bestCombined[2];
     char text[0x104];
+    f32 bestCombined[2];
+    f32 alpha;
+    u8 variant;
+    u8 savedGroup;
+    u8 drawAlpha;
     PcResult800228C0 *result;
     PcResult800228C0 *swap;
     PcEntry800228C0 *entry;
     f32 sentinel;
     f32 y;
-    f32 alpha;
     f32 scroll;
     f32 lowerLimit;
     f32 axis;
     f64 highAxis;
-    s32 variant;
     s32 group;
     s32 rank;
     s32 primaryRank;
     s32 secondaryRank;
-    s32 sprite;
+    s16 sprite;
     s32 baseSprite;
     s32 phase;
-    s32 required;
+    s16 required;
     s32 reward;
     s32 rawReward;
     s32 lastIndex;
@@ -172,19 +174,17 @@ void func_800228C0(PcController800228C0 *owner) {
     s32 i;
     s32 j;
     s32 count;
-    u8 savedGroup;
-    u8 drawAlpha;
 
-    sentinel = D_800A9CD8;
+    savedGroup = (u8)owner->group;
     bestCombined[0] = D_800A9CD4;
     bestCombined[1] = D_800A9CD4;
-    savedGroup = (u8)owner->group;
     D_8011A268 = (s32)((f32)owner->resultCount * -30.0f + 150.0f);
     variant = owner->segmentCount;
     if (owner->specialMode != 0) {
         variant = 3;
     }
     func_8003ECB0(0xA0, 0x14, D_800A8EC4);
+    sentinel = D_800A9CD8;
 
     for (i = 0; i < 12; i++) {
         results[i] = 0;
@@ -215,13 +215,13 @@ void func_800228C0(PcController800228C0 *owner) {
                 owner->resultCount = (s8)i;
                 break;
             }
-            if ((result->finalTime > sentinel) || (result->finalTime < 0.0f)) {
-                result->finalTime = sentinel;
+            if ((results[i]->finalTime > sentinel) || (results[i]->finalTime < 0.0f)) {
+                results[i]->finalTime = sentinel;
             }
             for (j = 0; j < variant; j++) {
-                if ((result->segmentTimes[j] > sentinel) ||
-                    (result->segmentTimes[j] < 0.0f)) {
-                    result->segmentTimes[j] = sentinel;
+                if ((results[i]->segmentTimes[j] > sentinel) ||
+                    (results[i]->segmentTimes[j] < 0.0f)) {
+                    results[i]->segmentTimes[j] = sentinel;
                 }
             }
             D_800D73A8[i] = result;
@@ -246,8 +246,10 @@ void func_800228C0(PcController800228C0 *owner) {
         for (i = 0; i < owner->playerCount; i++) {
             bestCombined[i] = results[i]->segmentTimes[0];
             for (j = 1; j < variant; j++) {
-                if ((results[i]->segmentTimes[j] > 0.0f) &&
-                    (results[i]->segmentTimes[j] < bestCombined[i])) {
+                if (results[i]->segmentTimes[j] <= 0.0f) {
+                    break;
+                }
+                if (results[i]->segmentTimes[j] < bestCombined[i]) {
                     bestCombined[i] = results[i]->segmentTimes[j];
                 }
             }
@@ -263,8 +265,8 @@ void func_800228C0(PcController800228C0 *owner) {
                D_80113680.bestCombined[owner->track][owner->profile]) &&
               ((owner->playerCount == 1) ||
                (bestCombined[0] < bestCombined[1]))))) {
-            owner->selectedPlayer = 0;
             D_800A2558 |= 1;
+            owner->selectedPlayer = 0;
             func_800469B4(owner, 2);
             return;
         }
@@ -278,8 +280,8 @@ void func_800228C0(PcController800228C0 *owner) {
              ((bestCombined[1] <
                D_80113680.bestCombined[owner->track][owner->profile]) &&
               (bestCombined[1] < bestCombined[0])))) {
-            owner->selectedPlayer = 1;
             D_800A2558 |= 2;
+            owner->selectedPlayer = 1;
             func_800469B4(owner, 2);
             return;
         }
@@ -326,7 +328,7 @@ void func_800228C0(PcController800228C0 *owner) {
             }
         }
         if (rank >= 4) {
-            scroll = (f32)(rank - 3) * -30.0f;
+            scroll = (f32)((f64)(f32)(rank - 3) * -30.0);
             lowerLimit = (f32)owner->resultCount * -30.0f + 150.0f;
             D_800D73D8 = scroll;
             if (scroll < lowerLimit) {
@@ -337,6 +339,11 @@ void func_800228C0(PcController800228C0 *owner) {
 
         if ((owner->playerCount == 1) && (owner->specialMode != 0) &&
             (owner->resultCount >= 4)) {
+            if (D_800A4BE0 != 0) {
+                for (i = 0; i < owner->resultCount; i++) {
+                }
+            }
+
             for (i = 0; i < owner->resultCount - 1; i++) {
                 if (D_800D73A8[i + 1]->finalTime ==
                     D_800D73A8[i]->finalTime) {
@@ -361,32 +368,31 @@ void func_800228C0(PcController800228C0 *owner) {
                 }
             }
 
-            group = owner->group;
-            if (func_8002D9D0((s8)group, D_800D73DC) >= D_800A255C) {
-                phase = (D_80113E60[0].unk0C[group] >>
+            if (func_8002D9D0(owner->group, D_800D73DC) >= D_800A255C) {
+                phase = (D_80113E60[0].unk0C[owner->group] >>
                          (D_800D73DC * 2)) % 4;
-                if (func_8002DA0C((s8)group, D_800D73DC) != 0) {
+                if (func_8002DA0C(owner->group, D_800D73DC) != 0) {
                     rawReward = *(s16 *)((u8 *)owner + 0x88 +
                                          owner->rewardTableIndex * 8 +
                                          D_800A255C * 2);
                     reward = (s32)((f64)rawReward +
-                                   (f64)rawReward * 0.5 * (f64)group);
+                                   (f64)rawReward * 0.5 * (f64)owner->group);
                     D_80113E60[0].unk18 += reward;
                     D_800A2554 = reward;
-                    if (group < 3) {
-                        lastIndex = D_800A21B4[group] - 1;
+                    if (owner->group < 3) {
+                        lastIndex = D_800A21B4[owner->group] - 1;
                         if ((D_800D73DC == lastIndex) &&
-                            ((D_80113E60[0].unk0B & (1 << group)) == 0)) {
-                            D_80113E60[0].unk0B |= 1 << group;
-                            owner->track = (s8)D_800A233C[group];
+                            ((D_80113E60[0].unk0B & (1 << owner->group)) == 0)) {
+                            D_80113E60[0].unk0B |= 1 << owner->group;
+                            owner->track = (s8)D_800A233C[owner->group];
                             savedGroup = 3;
                         } else if ((D_800D73DC < lastIndex) &&
-                                   ((D_80113E60[0].unk08[group] &
+                                   ((D_80113E60[0].unk08[owner->group] &
                                      (1 << (D_800D73DC + 1))) == 0)) {
                             owner->track =
-                                (s8)D_800A22E8[group][D_800D73DC + 1];
+                                (s8)D_800A22E8[owner->group][D_800D73DC + 1];
                         }
-                        D_80113E60[0].unk08[group] |=
+                        D_80113E60[0].unk08[owner->group] |=
                             1 << (D_800D73DC + 1);
                     }
                     func_80027D24(owner, D_80118F90);
@@ -400,7 +406,9 @@ void func_800228C0(PcController800228C0 *owner) {
                 required = 4 - D_800A255C;
                 if (phase < required) {
                     D_80113E60[0].unk0C[owner->group] &=
-                        ~(3 << (D_800D73DC * 2));
+                        ~(1 << (D_800D73DC * 2));
+                    D_80113E60[0].unk0C[owner->group] &=
+                        ~(1 << (D_800D73DC * 2 + 1));
                     D_80113E60[0].unk0C[owner->group] |=
                         required << (D_800D73DC * 2);
                     if ((D_80113E60[0].unk0C[0] == 0x3FFF) &&
@@ -439,7 +447,6 @@ void func_800228C0(PcController800228C0 *owner) {
     }
 
     for (i = 0; i < owner->resultCount; i++) {
-        result = D_800D73A8[i];
         y = (f32)(0x1E + i * 0x1E) + D_800D73D8 + 15.0f;
         alpha = 255.0f;
         if (y < 45.0f) {
@@ -456,29 +463,30 @@ void func_800228C0(PcController800228C0 *owner) {
         }
         drawAlpha = (u8)(u32)alpha;
 
-        baseSprite = *result->spriteId;
+        baseSprite = *D_800D73A8[i]->spriteId;
         sprite = baseSprite;
         for (j = 0; j < i; j++) {
             if (*D_800D73A8[j]->spriteId == baseSprite) {
                 sprite += 0x17;
             }
         }
-        func_8000A920((s16)sprite, 1);
-        func_8000AA04((s16)sprite, 0x1E, (s16)(s32)y);
-        func_8000AAC0((s16)sprite, 0.5f, 0.5f);
-        func_8000AB24((s16)sprite, 0xFF, 0xFF, 0xFF, drawAlpha);
+        func_8000A920(sprite, 1);
+        func_8000AA04(sprite, 0x1E, (s16)(s32)y);
+        func_8000AAC0(sprite, 0.5f, 0.5f);
+        func_8000AB24(sprite, 0xFF, 0xFF, 0xFF, drawAlpha);
+        y += 10.0f;
 
         rank = i + 1;
         if ((rank == D_800A255C) || (rank == D_800A2560)) {
-            func_8008A6B4(text, D_800A8ED0, result->placement);
-            func_8003EC40(0x58, (s16)(s32)(y + 10.0f), 0xA3, 0xBE,
+            func_8008A6B4(text, D_800A8ED0, D_800D73A8[i]->placement);
+            func_8003EC40(0x58, (s16)(s32)y, 0xA3, 0xBE,
                           0x11, drawAlpha, text);
-            entry = &D_800A31E0[*result->spriteId];
+            entry = &D_800A31E0[*D_800D73A8[i]->spriteId];
             func_8008A6B4(text, D_800A8ED8, entry->labelA,
                           entry->labelB);
-            func_8003EC40(0x5C, (s16)(s32)(y + 11.0f), 0xA3, 0xBE,
+            func_8003EC40(0x5C, (s16)(s32)(y + 1.0f), 0xA3, 0xBE,
                           0x11, drawAlpha, text);
-            func_8003EFDC(0x109, (s16)(s32)(y + 10.0f), result->finalTime,
+            func_8003EFDC(0x109, (s16)(s32)y, D_800D73A8[i]->finalTime,
                           0xA3, 0xBE, 0x11, drawAlpha, 1);
             if (rank == D_800A255C) {
                 func_8008A6B4(text, D_800A8EE4,
@@ -491,18 +499,18 @@ void func_800228C0(PcController800228C0 *owner) {
                               D_80113E60[1].name[1],
                               D_80113E60[1].name[2]);
             }
-            func_8003EC40(0x2E, (s16)(s32)(y + 10.0f), 0xA3, 0xBE,
+            func_8003EC40(0x2E, (s16)(s32)y, 0xA3, 0xBE,
                           0x11, drawAlpha, text);
         } else {
-            func_8008A6B4(text, D_800A8F04, result->placement);
-            func_8003EC40(0x58, (s16)(s32)(y + 10.0f), 0x32, 0xFF,
+            func_8008A6B4(text, D_800A8F04, D_800D73A8[i]->placement);
+            func_8003EC40(0x58, (s16)(s32)y, 0x32, 0xFF,
                           0xFF, drawAlpha, text);
-            entry = &D_800A31E0[*result->spriteId];
+            entry = &D_800A31E0[*D_800D73A8[i]->spriteId];
             func_8008A6B4(text, D_800A8F0C, entry->labelA,
                           entry->labelB);
-            func_8003EC40(0x5C, (s16)(s32)(y + 11.0f), 0x32, 0xFF,
+            func_8003EC40(0x5C, (s16)(s32)(y + 1.0f), 0x32, 0xFF,
                           0xFF, drawAlpha, text);
-            func_8003EFDC(0x109, (s16)(s32)(y + 10.0f), result->finalTime,
+            func_8003EFDC(0x109, (s16)(s32)y, D_800D73A8[i]->finalTime,
                           0x32, 0xFF, 0xFF, drawAlpha, 1);
         }
     }

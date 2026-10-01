@@ -57,7 +57,8 @@ void func_8002BBA4(
     if (activeIndex == labelIndex) {
         func_80014CC0(
             D_800A4B54 * 360.0f, &trigValue, &otherTrigValue);
-        trigValue = (f32)((f64)(trigValue + 1.0f) * 0.5);
+        trigValue = trigValue + 1.0f;
+        trigValue = (f32)((f64)trigValue * 0.5);
         func_80015630(
             &primary, trigValue, &blendStart,
             (f32)(1.0 - (f64)trigValue), &blendEnd);
@@ -94,7 +95,7 @@ void func_8002BBA4(
                 0x7F, COLOR_BYTE(primary.red), COLOR_BYTE(primary.green),
                 COLOR_BYTE(primary.blue), 255);
         }
-        if ((activeIndex == 1) && (labelIndex == 1)) {
+        if ((activeIndex == 1) && (activeIndex == labelIndex)) {
             func_8000AB24(
                 0x80, COLOR_BYTE(primary.red), COLOR_BYTE(primary.green),
                 COLOR_BYTE(primary.blue), 255);

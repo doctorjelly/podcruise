@@ -7,21 +7,20 @@ extern f32 D_800AD984;
 extern void func_80017824(void *dst, f32 angle, f32 x, f32 y, f32 z, void *src);
 
 void func_800745AC(u8 *obj) {
-    f32 target;
+    f32 level;
+    f32 add;
     f32 a;
     f32 b;
-    f32 level;
     u8 *part[1];
 
-    target = 0;
+    level = 0;
     if (*(f32 *)(obj + 0x2FC) < 0.0f) {
-        target = *(f32 *)(obj + 0x2FC) * -15.0f;
+        level = *(f32 *)(obj + 0x2FC) * -15.0f;
     }
     if (*(f32 *)(obj + 0x1A0) < 100.0f) {
-        target = 0.0f;
+        level = 0.0f;
     }
-    level = *(f32 *)(obj + 0x19B8);
-    level = (target - level) * D_800AD97C + level;
+    level = (level - *(f32 *)(obj + 0x19B8)) * D_800AD97C + *(f32 *)(obj + 0x19B8);
     *(f32 *)(obj + 0x19B8) = level;
 
     a = *(f32 *)(obj + 0x204) / 45.0f;
@@ -44,7 +43,8 @@ void func_800745AC(u8 *obj) {
     }
     if (*(s32 *)(*(u8 **)(obj + 0x344) + 0x8) != 0) {
         part[0] = obj + 0x80;
+        add = level * D_800AD984;
         func_80017824(part[0] + 0x350, (b * 0.5f + 1.0f) * level, 1.0f, 0.0f, 0.0f, part[0] + 0x350);
-        *(f32 *)(part[0] + 0x388) = *(f32 *)(part[0] + 0x388) + level * D_800AD984;
+        *(f32 *)(part[0] + 0x388) = *(f32 *)(part[0] + 0x388) + add;
     }
 }

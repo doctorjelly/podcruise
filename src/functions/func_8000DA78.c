@@ -196,9 +196,9 @@ laid_out:
         if (D_8009B800 == 2) {
             x = 0xA0;
             if (D_8009B7D4 > 0) {
-                y = (index * 4 - index) * 4 + 0x42;
+                y = index * 12 + 0x42;
             } else {
-                y = index * 16 + index + 0x42;
+                y = index * 17 + 0x42;
             }
             value = func_8002F060();
             if (0.0f < value) {

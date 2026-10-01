@@ -41,10 +41,10 @@ extern void func_80028D60(void);
 extern s32 func_80082BE0(void);
 
 void func_80050F88(Obj *obj) {
-    f32 cosine;
+    Vec3f scratch;
     f32 sine;
     Vec3f position;
-    Vec3f scratch;
+    f32 cosine;
     f32 angle;
 
     if (D_800A21A4 != 0) {
@@ -74,7 +74,8 @@ void func_80050F88(Obj *obj) {
         D_800A5294 = 5;
         D_800A5278[0] = (f32)(s32)((f32)func_80082BE0() / 2147483648.0f * (f32)2.0) * 180.0f;
     }
-    func_80014CC0(D_800A5278[0], &cosine, &sine);
+    angle = D_800A5278[0];
+    func_80014CC0(angle, &cosine, &sine);
     func_80015288(&position, &D_800A527C);
     func_800155EC(&position, &position, 8.0f * cosine, (const Vec3f *)D_80118DE0);
     func_80015288(&D_80118D90, &position);

@@ -34,7 +34,6 @@ u8 key;
     s32 index;
     u8 *buffer;
     s32 count;
-    s32 base;
 
     if (mode == 0) {
         if (key == D_800A7ED4 && object->unk08 == D_800A7ED0) {
@@ -56,13 +55,12 @@ u8 key;
         out[1] = func_80090AB0(out + count + count, -count * 2 + 0x100);
     }
 
-    base = key * 8;
     for (index = 0, buffer = out; index < 8; index++) {
         if (mode == 1) {
-            func_800928F0(object->unk04, object->unk08, object->unk54 + base + index, buffer, 0);
-            result = func_800928F0(object->unk04, object->unk08, object->unk58 + base + index, buffer, 0);
+            func_800928F0(object->unk04, object->unk08, object->unk54 + key * 8 + index, buffer, 0);
+            result = func_800928F0(object->unk04, object->unk08, object->unk58 + key * 8 + index, buffer, 0);
         } else {
-            result = func_80092050(object->unk04, object->unk08, object->unk54 + base + index, buffer);
+            result = func_80092050(object->unk04, object->unk08, object->unk54 + key * 8 + index, buffer);
         }
         if (result != 0) {
             return result;
@@ -74,14 +72,14 @@ u8 key;
         if ((u8)func_80090AB0(out + count + count, -count * 2 + 0x100) != out[1]) {
             buffer = out;
             for (index = 0; index < 8; index++) {
-                func_80092050(object->unk04, object->unk08, object->unk58 + base + index, buffer);
+                func_80092050(object->unk04, object->unk08, object->unk58 + key * 8 + index, buffer);
                 buffer += 0x20;
             }
             if ((u8)func_80090AB0(out + count + count, -count * 2 + 0x100) != out[1]) {
                 return 3;
             }
             for (index = 0, buffer = out; index != 8; index++) {
-                func_800928F0(object->unk04, object->unk08, object->unk54 + base + index, buffer, 0);
+                func_800928F0(object->unk04, object->unk08, object->unk54 + key * 8 + index, buffer, 0);
                 buffer += 0x20;
             }
         }

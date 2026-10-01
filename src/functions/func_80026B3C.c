@@ -99,7 +99,7 @@ void func_80026B3C(Ctx26B3C *arg0) {
     func_80008B14(0x1B, 7, 0.05f, 0.8f, 1);
 
     if (D_800D70D0 >= 0) {
-        t = D_800D70D0 - D_80120BF8 * 0.5f;
+        t = D_800D70D0 - 0.5f * D_80120BF8;
         D_800D70D0 = t;
         if (t <= 0.0f) {
             D_800A4BDC = -1;

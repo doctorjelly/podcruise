@@ -127,16 +127,16 @@ void func_80076180(Owner *owner, Panel *panel, f32 requestX, f32 requestY) {
             }
         }
         switch (mode) {
+            case 8:
+            case 10:
+                twist = 0.0f;
+                break;
             case 4:
             case 6:
             case 16:
                 twist = 0.0f;
                 scale = 1.0f;
                 brightness = ((f32)func_80082BE0() / 2147483648.0f) * 0.10000002f + 0.9f;
-                break;
-            case 8:
-            case 10:
-                twist = 0.0f;
                 break;
         }
         func_8001745C(&matrix[0][0], 0.0f, 0.0f, twist);
@@ -165,16 +165,16 @@ void func_80076180(Owner *owner, Panel *panel, f32 requestX, f32 requestY) {
             }
         }
         switch (mode) {
+            case 8:
+            case 10:
+                twist = 0.0f;
+                break;
             case 4:
             case 6:
             case 16:
                 twist = 0.0f;
                 scale = 1.0f;
                 brightness = ((f32)func_80082BE0() / 2147483648.0f) * 0.10000002f + 0.9f;
-                break;
-            case 8:
-            case 10:
-                twist = 0.0f;
                 break;
         }
         func_8001745C(&matrix[0][0], 0.0f, 0.0f, twist);

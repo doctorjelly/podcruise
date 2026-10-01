@@ -20,11 +20,12 @@ extern f32 D_800ADC54;
 extern f32 D_800ADC58;
 
 void func_8007F24C(PcTrack8007F24C *track, PcVec3 *vector) {
+    f32 target;
+    f32 reach;
     f32 previous;
-    f32 current;
+    f32 value;
     f32 matrix[16];
     f32 step;
-    f32 target;
     s32 moved;
     s32 settled;
 
@@ -34,13 +35,13 @@ void func_8007F24C(PcTrack8007F24C *track, PcVec3 *vector) {
     do {
         settled = 1;
         target = (vector->x * matrix[4] + vector->y * matrix[5]) + matrix[6] * vector->z;
-        previous = (matrix[12] * matrix[4] + matrix[13] * matrix[5]) + matrix[14] * matrix[6];
-        if (previous < target) {
-            previous = track->unk08;
-            track->unk08 = previous + step;
+        reach = (matrix[12] * matrix[4] + matrix[13] * matrix[5]) + matrix[14] * matrix[6];
+        if (reach < target) {
+            value = track->unk08;
+            track->unk08 = value + step;
             moved = 1;
             func_8003B02C(track, matrix);
-            if (previous != track->unk08) {
+            if (value != track->unk08) {
                 settled = 0;
             }
         }
@@ -50,22 +51,22 @@ void func_8007F24C(PcTrack8007F24C *track, PcVec3 *vector) {
         step = D_800ADC58;
         track->unk08 = track->unk08 - step;
         func_8003B02C(track, matrix);
-        current = track->unk08;
+        value = track->unk08;
         do {
             settled = 1;
             target = (vector->x * matrix[4] + vector->y * matrix[5]) + matrix[6] * vector->z;
-            previous = (matrix[12] * matrix[4] + matrix[13] * matrix[5]) + matrix[14] * matrix[6];
-            if (target < previous) {
-                previous = current;
-                track->unk08 = current - step;
+            reach = (matrix[12] * matrix[4] + matrix[13] * matrix[5]) + matrix[14] * matrix[6];
+            if (target < reach) {
+                previous = value;
+                track->unk08 = value - step;
                 func_8003B02C(track, matrix);
-                current = track->unk08;
-                if (previous != current) {
+                value = track->unk08;
+                if (previous != value) {
                     settled = 0;
                 }
             }
         } while (settled == 0);
-        track->unk08 = current + step;
+        track->unk08 = value + step;
         func_8003B02C(track, matrix);
     }
 }

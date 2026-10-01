@@ -4,6 +4,7 @@
 extern f32 D_80112E60[4][4];
 
 s32 func_80036A1C(f32 *bounds, s32 trackInside) {
+    s32 cmp;
     f32 p0[2][3];
     f32 p1[2][3];
     f32 p2[2][3];
@@ -15,7 +16,6 @@ s32 func_80036A1C(f32 *bounds, s32 trackInside) {
     s16 in1;
     s16 in2;
 
-    s32 cmp;
     s16 sx;
     s16 sy;
     s16 sz;
@@ -52,13 +52,14 @@ s32 func_80036A1C(f32 *bounds, s32 trackInside) {
     p3[0][2] = bounds[2] * D_80112E60[2][3];
     p3[1][2] = bounds[5] * D_80112E60[2][3];
 
-    in0 = 0;
-    in1 = 0;
-    in2 = 0;
     if (trackInside != 0) {
         in0 = -1;
         in1 = -1;
         in2 = -1;
+    } else {
+        in0 = 0;
+        in1 = 0;
+        in2 = 0;
     }
     sx = -2;
     sy = -2;

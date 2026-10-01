@@ -38,8 +38,10 @@ void func_8003B324(Gfx8003B324 **listPointer, s32 left, s32 right, s32 top, s32 
 
     list = *listPointer;
     negCosine = -cosine;
-    centerY = (f32)(bottom + top) * 0.5f;
     centerX = (f32)(right + left) * 0.5f;
+    centerY = (f32)(bottom + top) * 0.5f;
+    dy0 = (f32)top - centerY;
+    dx0 = (f32)left - centerX;
 
     EMIT(list++, 0x01004008, D_800A4920);
     EMIT(list++, 0x021C0000, 0);
@@ -47,8 +49,6 @@ void func_8003B324(Gfx8003B324 **listPointer, s32 left, s32 right, s32 top, s32 
     EMIT(list++, 0x021C0004, 0);
     EMIT(list++, 0x021C0006, 0);
 
-    dx0 = (f32)left - centerX;
-    dy0 = (f32)top - centerY;
     scaleY = (f32)D_80114470[1] / 240.0f;
     scaleX = (f32)D_80114470[0] / 320.0f;
     skew = scaleY / scaleX - 1.0f;

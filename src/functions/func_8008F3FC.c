@@ -244,6 +244,7 @@ Acmd *func_8008F3FC(Obj *obj, s32 arg1, s32 count, s32 time, Acmd *cmd) {
     } bits;
     Event *ev4;
     Event *ev5;
+    void *tbl;
     s32 delta;
 
     (void)arg1;
@@ -254,15 +255,15 @@ Acmd *func_8008F3FC(Obj *obj, s32 arg1, s32 count, s32 time, Acmd *cmd) {
     dmemBase = 0;
 
     while (o->unk3C != 0) {
-        event = o->unk3C;
-        delta = event->time - cur;
+        delta = o->unk3C->time - cur;
+        cur = o->unk3C->time;
         if (count < delta) {
             break;
         }
-        cur = event->time;
 
-        switch (event->type) {
+        switch (o->unk3C->type) {
         case 13:
+            event = o->unk3C;
             note = event;
             if (note->flag != 0) {
                 o->unk08(o, 8, 0);
@@ -295,13 +296,12 @@ Acmd *func_8008F3FC(Obj *obj, s32 arg1, s32 count, s32 time, Acmd *cmd) {
         case 12:
         case 16:
             out = func_8008F0B4(o, &dmemIn, &dmemBase, delta, time, out);
-            ev1 = o->unk3C;
             if (o->unk30 >= o->unk34) {
                 o->unk28 = (s16)((D_800A7D80[o->unk18] * o->unk1A) >> 15);
-                o->unk30 = o->unk34;
-                o->unk1C = o->unk28;
                 o->unk2E =
                     (s16)((D_800A7D80[127 - o->unk18] * o->unk1A) >> 15);
+                o->unk1C = o->unk28;
+                o->unk30 = o->unk34;
                 o->unk1E = o->unk2E;
             } else {
                 o->unk1C = (s16)func_8008F34C((f32)o->unk1C, o->unk30,
@@ -315,8 +315,8 @@ Acmd *func_8008F3FC(Obj *obj, s32 arg1, s32 count, s32 time, Acmd *cmd) {
             if (o->unk1E == 0) {
                 o->unk1E = 1;
             }
-            if ((s16)ev1->type == 12) {
-                o->unk18 = (s16)ev1->arg0C.i;
+            if ((s16)o->unk3C->type == 12) {
+                o->unk18 = (s16)o->unk3C->arg0C.i;
             }
             if ((s16)o->unk3C->type == 11) {
                 o->unk30 = 0;
@@ -332,7 +332,7 @@ Acmd *func_8008F3FC(Obj *obj, s32 arg1, s32 count, s32 time, Acmd *cmd) {
             break;
 
         case 14:
-            note = event;
+            note = o->unk3C;
             if (note->flag != 0) {
                 o->unk08(o, 8, 0);
             }
@@ -348,14 +348,16 @@ Acmd *func_8008F3FC(Obj *obj, s32 arg1, s32 count, s32 time, Acmd *cmd) {
             break;
 
         case 0:
-            ev4 = event;
+            ev4 = o->unk3C;
+            tbl = D_800A6990;
             *(s32 *)(ev4->arg0C.p + 0xD8) = 0;
-            func_80088450(D_800A6990, ev4->arg0C.p);
+            func_80088450(tbl, ev4->arg0C.p);
             break;
 
         default:
             out = func_8008F0B4(o, &dmemIn, &dmemBase, delta, time, out);
-            ev3 = o->unk3C;
+            ev1 = o->unk3C;
+            ev3 = ev1;
             o->unk08(o, (s16)ev3->type, ev3->arg0C.i);
             break;
         }

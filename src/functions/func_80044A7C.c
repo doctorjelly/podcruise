@@ -31,14 +31,16 @@ extern void func_80017BA8(void *destination, void *source);
 
 void func_80044A7C(PcObject *object) {
     f32 head[3];
+    s32 index;
+    f32 length;
     f32 tail[3];
     f32 delta[3];
     f32 side[3];
     f32 frame[4][4];
     f32 work[4][4];
-    s32 index;
-    f32 length;
+    f32 scale;
 
+    scale = D_800AAD08;
     for (index = 0; index != 6; index++) {
         if (object->unk_0EC[index] == 0) {
             continue;
@@ -63,7 +65,7 @@ void func_80044A7C(PcObject *object) {
         length = func_800154D0(delta);
         side[0] = delta[1];
         side[1] = -delta[0];
-        side[2] = 0.0;
+        side[2] = 0.0f;
         func_800154D0(side);
 
         func_80015538(frame[0], delta, side);
@@ -77,7 +79,7 @@ void func_80044A7C(PcObject *object) {
         func_800155EC(frame[3], frame[3], 0.5f, tail);
 
         func_80017BA8(&object->unk_C2C[index], frame);
-        func_80017520(frame[0], D_800AAD08, 1.0f, length / 20.0f);
+        func_80017520(frame[0], scale, 1.0, length / 20.0f);
         func_80017BA8(&object->unk_C2C[index + 6], frame);
     }
 }

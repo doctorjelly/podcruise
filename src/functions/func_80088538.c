@@ -44,6 +44,7 @@ u32 *func_80088538(u32 *commands, s32 *countOut, void *state, s32 samples) {
     s32 chunk;
     s32 now;
     s32 spare[10];
+    s32 inc;
 
     (void)spare;
     mixer = D_800A6990;
@@ -73,7 +74,8 @@ u32 *func_80088538(u32 *commands, s32 *countOut, void *state, s32 samples) {
     if ((position - now) < samples) {
         do {
             mixer->unk1C &= ~0xF;
-            best[0]->unk10 += (s32)(f32)(((f64)((f32)best[0]->step(best[0]) * (f32)mixer->unk44) / 1000000.0) + 0.5);
+            inc = (s32)(f32)(((f64)((f32)best[0]->step(best[0]) * (f32)mixer->unk44) / 1000000.0) + 0.5);
+            best[0]->unk10 += inc;
 
             best[0] = 0;
             node = mixer->head;

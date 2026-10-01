@@ -111,8 +111,8 @@ void func_80024070(Unk80024070 *arg0) {
         D_800A4BC4 = 0;
         func_8004E4F4(arg0);
 
-        entry = D_8011A204[arg0->unk34 * 3];
-        D_8011A240.unk30 = entry;
+        D_8011A240.unk30 = D_8011A204[arg0->unk34 * 3];
+        entry = D_8011A240.unk30;
         style = D_801198A8[entry].unk0;
         func_800519C0(arg0->unk72, D_800A2DE0[style].unk3, D_800A2DE0[style].unk1,
                       D_801198A8[entry].unk1);
@@ -250,9 +250,9 @@ void func_80024070(Unk80024070 *arg0) {
         }
 
         if (restart != 0) {
-            entry = D_8011A204[arg0->unk34 * 3];
+            D_8011A240.unk30 = D_8011A204[arg0->unk34 * 3];
+            entry = D_8011A240.unk30;
             style = D_801198A8[entry].unk0;
-            D_8011A240.unk30 = entry;
             func_800519C0(arg0->unk72, D_800A2DE0[style].unk3, D_800A2DE0[style].unk1,
                           D_801198A8[entry].unk1);
             func_80029C24();

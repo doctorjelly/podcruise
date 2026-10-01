@@ -59,9 +59,13 @@ extern void func_8003B860(
         EMIT_COMMAND(0xF5000000 | IMGFMT | (loadSize),                         \
             TILE_A | 0x07000000 | TILE_B | TILE_C | TILE_D);                   \
         EMIT_COMMAND(0xE6000000, 0);                                           \
-        loadCount = (loadCountExpr) < 0x7FF ? (loadCountExpr) : 0x7FF;         \
-        EMIT_COMMAND(0xF3000000, 0x07000000 | (u32)((dxtExpr) & 0xFFF) |       \
-            ((u32)(loadCount & 0xFFF) << 12));                                 \
+        {                                                                      \
+            Gfx8003BAB0 *command = output++;                                   \
+            command->w0 = 0xF3000000;                                          \
+            loadCount = (loadCountExpr) < 0x7FF ? (loadCountExpr) : 0x7FF;     \
+            command->w1 = 0x07000000 | (u32)((dxtExpr) & 0xFFF) |              \
+                ((u32)(loadCount & 0xFFF) << 12);                              \
+        }                                                                      \
         EMIT_COMMAND(0xE7000000, 0);                                           \
         EMIT_COMMAND(0xF5000000 | IMGFMT | (renderSize) |                      \
             ((u32)((tileLineExpr) & 0x1FF) << 9),                              \

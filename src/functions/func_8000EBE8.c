@@ -38,10 +38,10 @@ void func_8000EBE8(s16 *obj, f32 *pos, f32 *outX, f32 *outY, f32 *outZ, f32 *out
     q[0] = sz[0] * 0.5f;
     c = obj[12];
     e = obj[13];
-    *outX = -1000.0f;
     dA = (f32)(c / 4) - q[1];
-    *outY = -1000.0f;
     dB = (f32)(e / 4) - q[0];
+    *outX = -1000.0f;
+    *outY = -1000.0f;
     if (mode == 0) {
         point[0] = pos[0] - D_800A3FDC[0];
         point[1] = pos[1] - D_800A3FDC[1];

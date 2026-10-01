@@ -24,12 +24,12 @@ extern f32 D_80119878[];
 extern s16 D_80119898[];
 
 void func_80046DC4(s32 *arg0, f32 x, f32 y) {
-    f32 scale;
     f32 level;
     s32 xi;
     s32 xb;
     s16 id;
     s32 sel;
+    f32 scale;
     s32 i;
     u8 alpha;
 

@@ -23,7 +23,6 @@ typedef struct {
     PcJointPair unk_1710[6];
 } PcObject;
 
-extern f32 D_800AAD0C;
 
 extern void func_80083190(PcJointA *source, f32 matrix[4][4]);
 extern void func_8001535C(f32 *output, f32 *left, f32 *right);
@@ -42,10 +41,8 @@ void func_80044CD8(PcObject *object) {
     f32 frame[4][4];
     f32 length;
     f32 work[4][4];
-    f32 scale;
     s32 index;
 
-    scale = D_800AAD0C;
     for (index = 0; index != 6; index++) {
         if (object->unk_0EC[index] == 0) {
             continue;
@@ -66,7 +63,7 @@ void func_80044CD8(PcObject *object) {
             func_80015268(frame[2], 0.0f, 0.0f, 1.0f);
             func_80015538(frame[0], frame[1], frame[2]);
             func_80015538(frame[2], frame[0], frame[1]);
-            func_80017918(frame, scale, length / 100.0f, scale, frame);
+            func_80017918(frame, 0.004f, length / 100.0f, 0.004f, frame);
             func_80017BA8(&object->unk_1710[index].unk_58, frame);
         }
         if (*(s32 *)&object->unk_464[index + 24] != 0 && *(s32 *)&object->unk_464[index + 12] != 0) {
@@ -85,7 +82,7 @@ void func_80044CD8(PcObject *object) {
             func_80015268(frame[2], 0.0f, 0.0f, 1.0f);
             func_80015538(frame[0], frame[1], frame[2]);
             func_80015538(frame[2], frame[0], frame[1]);
-            func_80017918(frame, scale, length / 100.0f, scale, frame);
+            func_80017918(frame, 0.004f, length / 100.0f, 0.004f, frame);
             func_80017BA8(&object->unk_1710[index].unk_00, frame);
         }
     }

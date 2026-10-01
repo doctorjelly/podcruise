@@ -129,25 +129,23 @@ void func_8004CA50(Context8004CA50 *context) {
     f32 farPlane;
     SceneObject8004CA50 *object;
     s32 savedDisplayValue;
-    TrackNode8004CA50 *track;
     PcVec3f ambient;
     PcVec3f diffuse;
-    f32 sine;
     PcVec3f direction;
-    s32 firstChoice;
     Transform8004CA50 transformA;
     Transform8004CA50 transformB;
     s16 i;
     PcVec3f position;
-    f32 targetAngle;
+    s32 objectId;
+    f32 sine;
     f32 cosine;
     f32 angle;
     f32 firstAngle;
-    s32 objectId;
+    s32 firstChoice;
     s32 objectMode;
+    s32 nextChoice;
     s32 firstObject;
     s32 secondObject;
-    s32 nextChoice;
     f32 radius;
 
     farPlane = D_800AB1D0;
@@ -155,10 +153,10 @@ void func_8004CA50(Context8004CA50 *context) {
     func_8000AC90(0x3800);
     D_800A4BC0 = 0;
 
-    D_8011A240.progress = 0.0f;
+    D_8011A240.secondaryProgress = 0;
+    D_8011A240.progress = 0;
     D_8011A240.active = 0;
     D_8011A240.secondaryActive = 0;
-    D_8011A240.secondaryProgress = 0.0f;
     D_8011A240.value10 = 0;
     D_8011A240.value14 = 0;
     D_8011A240.value18 = 0;
@@ -294,14 +292,13 @@ void func_8004CA50(Context8004CA50 *context) {
             func_80015288(&position, &D_800A519C);
             angle = func_80014F54(position.x - D_801195F0.x,
                                   D_801195F0.y - position.y);
-            targetAngle = angle -
-                          90.0f * ((f32)func_80082BE0() / 2147483648.0f);
+            angle = angle -
+                    90.0f * ((f32)func_80082BE0() / 2147483648.0f);
         } else {
             func_80015288(&position, &D_800A51A8);
-            targetAngle = func_80014F54(position.x - D_801195F0.x,
-                                        D_801195F0.y - position.y);
+            angle = func_80014F54(position.x - D_801195F0.x,
+                                  D_801195F0.y - position.y);
         }
-        angle = targetAngle;
         objectId =
             (s32)(((f32)func_80082BE0() / 2147483648.0f) * 5.0f) + 0x17;
         switch (objectId) {
@@ -321,8 +318,7 @@ void func_8004CA50(Context8004CA50 *context) {
             objectMode = 0x41;
             break;
         }
-        func_80063084(objectId, objectMode, &position, &position, targetAngle,
-                      targetAngle);
+        func_80063084(objectId, objectMode, &position, &position, angle, angle);
 
         i = 0;
         while (i < context->riderCount) {
@@ -370,9 +366,10 @@ void func_8004CA50(Context8004CA50 *context) {
                           (f32)((f64)i * 50.0 + D_800AB248), -569.0f,
                           -145.0f);
             func_800513E0(context, i);
-            track = &D_800A4C00[context->trackIndex];
-            angle = func_80014F54(track->heading.x - track->position.x,
-                                  track->position.y - track->heading.y);
+            angle = func_80014F54(D_800A4C00[context->trackIndex].heading.x -
+                                      D_800A4C00[context->trackIndex].position.x,
+                                  D_800A4C00[context->trackIndex].position.y -
+                                      D_800A4C00[context->trackIndex].heading.y);
             func_80063084(i + 0x1C, 0x14, &position, &D_801195F0, angle,
                           angle + 180.0f);
             i++;

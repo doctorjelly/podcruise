@@ -46,11 +46,11 @@ extern s32 func_8003FDCC(s32 tag, Vec70BBC *origin, f32 limit, void *exclude, s3
                          f32 *distances, Vec70BBC *offsets, void **results);
 extern void *func_80080408(Track70BBC *track);
 
-void func_80070BBC(Object70BBC *object, f32 *frame, s32 flag) {
+void func_80070BBC(Object70BBC *object, f32 *frame, s32 active) {
     s32 pad0;
     s32 pad1;
     Info70BBC *hit;
-    s32 active;
+    s32 flag;
     Vec70BBC offset;
     f32 distance;
     void *result;
@@ -64,8 +64,8 @@ void func_80070BBC(Object70BBC *object, f32 *frame, s32 flag) {
     pad1 = 0; /* reserves frame slots */
     (void)pad0;
     (void)pad1;
-    active = flag;
-    rewinding = flag;
+    flag = active;
+    rewinding = active;
 
     if (flag == 0) {
         scaled = object->track.unk08 * -10.0f;

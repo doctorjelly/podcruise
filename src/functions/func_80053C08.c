@@ -43,6 +43,7 @@ void func_80053C08(Owner *owner) {
     s32 cur;
     s32 prev;
     s32 n;
+    s32 *p;
 
     (void)spareA;
     (void)spareB;
@@ -60,7 +61,7 @@ void func_80053C08(Owner *owner) {
                             other = &D_8011B1B8[j];
                             n = other->unk5C;
                             if (n > 0 && rec != other && rec->unk5C == n + 1) {
-                                id = *other->unk18;
+                                p = other->unk18; id = *p;
                                 j = owner->unk1BC;
                             }
                         }
@@ -90,7 +91,7 @@ void func_80053C08(Owner *owner) {
                             other = &D_8011B1B8[j];
                             n = other->unk5C;
                             if (n > 0 && rec != other && rec->unk5C + 1 == n) {
-                                id = *other->unk18;
+                                p = other->unk18; id = *p;
                                 j = owner->unk1BC;
                             }
                         }

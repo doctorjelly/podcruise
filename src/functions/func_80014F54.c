@@ -31,8 +31,8 @@ f32 func_80014F54(f32 x, f32 y) {
         result = 0.0f;
     } else {
         swapped = 0;
-        ax = (x < 0.0f) ? -x : x;
-        ay = (y < 0.0f) ? -y : y;
+        ax = (x < 0) ? -x : x;
+        ay = (y < 0) ? -y : y;
         if (ay < ax) {
             swapped = 1;
             t = ay / ax;

@@ -90,8 +90,8 @@ Command800963CC *func_800963CC(
     out[2].w0 = 0x0C005A82;
     out[2].w1 = 0x080006C0;
 
-    rightOffset = 0x140;
     leftOffset = 0;
+    rightOffset = 0x140;
     out = func_80095C20(
         sequence, sequence->cursor, 0x6C0, sampleCount, out + 3);
     out->w0 = 0x02000800;
@@ -155,8 +155,8 @@ Command800963CC *func_800963CC(
         previousBoundary = sequence->cursor + voice->end;
     }
 
-    newCursor = (s16 *)((u8 *)sequence->cursor + doubledCount);
     ringEnd = sequence->ringBase + sequence->ringLength;
+    newCursor = (s16 *)((u8 *)sequence->cursor + doubledCount);
     sequence->cursor = newCursor;
     if (ringEnd < newCursor) {
         sequence->cursor = newCursor - sequence->ringLength;

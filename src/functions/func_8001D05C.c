@@ -70,13 +70,12 @@ void func_8001D05C(void *arg) {
     s32 selection;
     u32 bits;
     u32 previous;
-    s32 found;
     s32 slot;
     s32 letter;
     s32 column;
     s32 index;
     s32 x;
-    s32 offset;
+    s32 count;
     s32 red;
     s32 green;
     s32 blue;
@@ -163,27 +162,27 @@ void func_8001D05C(void *arg) {
                     D_800A23C4 = 0;
                 }
             } else {
-                found = 0;
+                count = 0;
                 if (0xFF != D_800A23CC[0]) {
                     record = &D_800A23CC[0];
                     letter = record[0];
                     do {
                         if (D_800A23C4 != letter) {
-                            found++;
+                            count++;
                         } else if (key != record[1]) {
-                            found++;
+                            count++;
                         } else {
                             D_800A23C4 = record[2];
-                            found = -1;
+                            count = -1;
                         }
-                        if (found < 0) {
+                        if (count < 0) {
                             break;
                         }
-                        record = &D_800A23CC[found * 3];
+                        record = &D_800A23CC[count * 3];
                         letter = record[0];
                     } while (0xFF != letter);
                 }
-                if (found != -1) {
+                if (count != -1) {
                     D_800A23C4 = 0;
                 }
                 if (D_800A23C8 < 0x1E) {
@@ -226,10 +225,10 @@ void func_8001D05C(void *arg) {
 
     index = 0;
     if (D_8011A240[11] > 0) {
-        offset = 0;
+        count = 0;
         do {
             column = D_8011A270;
-            x = (s16)((0xA0 - (column * 4 + column) * 4) + offset);
+            x = (s16)((0xA0 - (column * 4 + column) * 4) + count);
             if (x < 0xA0) {
                 shade = 255.0f - ((f32)(0xA0 - x) + (f32)(0xA0 - x));
             } else {
@@ -254,7 +253,7 @@ void func_8001D05C(void *arg) {
                               text);
             }
             index++;
-            offset += 0x14;
+            count += 0x14;
         } while (index < D_8011A26C);
     }
 

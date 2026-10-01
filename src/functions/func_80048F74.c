@@ -19,9 +19,9 @@ void func_80048F74(s32 arg0) {
     f32 cosine;
     KeyBlock key;
     s32 first;
+    s32 head;
     s32 last;
     s32 count;
-    s32 head;
     s32 tail;
     s32 index;
     s32 inner;

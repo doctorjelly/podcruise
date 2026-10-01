@@ -43,20 +43,22 @@ extern void func_8003609C(u32, u32 *);
 
 void func_80036314(Sprite *sprite, s16 dx, s16 dy) {
     s32 i;
-    Layer **slot;
     CommandWord *cmd;
     Layer *layer;
     s32 mode;
     s32 lod;
+    Layer **slot;
 
     func_8003609C(sprite->unk00, &D_80112E14);
     cmd = D_80112C90; D_80112C90 = cmd + 1; cmd->hi = (0xD7000000 | ((sprite->unk0F & 7) << 11) | ((sprite->unk0E & 7) << 8)) | 2; cmd->lo = ((u32)sprite->unk14 << 16) | ((u32)sprite->unk16 & 0xFFFF);
-    if ((sprite->unk00 & 0x100) == 0) {
+    if (sprite->unk00 & 0x100) {
+    } else {
+        lod = 0x7FF;
         mode = (sprite->unk0D == 3) ? 3 : 2;
-        lod = (sprite->unk1A < 0x7FF) ? sprite->unk1A : 0x7FF;
         cmd = D_80112C90; D_80112C90 = cmd + 1; cmd->hi = 0xFD000000 | ((sprite->unk0C & 7) << 21) | ((mode & 3) << 19); cmd->lo = sprite->unk38;
         cmd = D_80112C90; D_80112C90 = cmd + 1; cmd->hi = 0xF5000000 | ((sprite->unk0C & 7) << 21) | ((mode & 3) << 19); cmd->lo = 0x07000000;
         cmd = D_80112C90; D_80112C90 = cmd + 1; cmd->hi = 0xE6000000; cmd->lo = 0;
+        if (sprite->unk1A < 0x7FF) { lod = sprite->unk1A; }
         cmd = D_80112C90; D_80112C90 = cmd + 1; cmd->hi = 0xF3000000; cmd->lo = 0x07000000 | ((lod & 0xFFF) << 12) | (sprite->unk18 & 0xFFF);
     }
     if (sprite->unk3C != 0) {

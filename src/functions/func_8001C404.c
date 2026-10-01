@@ -50,7 +50,6 @@ unsigned char selected;
     s16 id;
     s16 state;
     Str16 buffer;
-    s8 slot;
     u8 lane;
     s32 elem;
     f32 alpha;
@@ -62,7 +61,6 @@ unsigned char selected;
         alpha = D_8011A240 * 254.0f;
     }
     for (i = selected; i < selected + 1; i++) {
-        slot = i;
         for (j = 0; j < D_800A21B4[i]; j++) {
             elem = 0x37 + j * 0x23;
             lane = j;
@@ -87,14 +85,14 @@ unsigned char selected;
                 func_8000AB24(id, 0x9D, 0x59, 0x20, (u8)alpha);
                 break;
             }
-            if (func_8002DAD0(object, slot, lane) == 0) {
+            if (func_8002DAD0(object, (s8)i, lane) == 0) {
                 func_8000AB24(id, 0x80, 0x80, 0x80, (u8)alpha);
             } else if (state > 0) {
                 func_8000AB24(id, 0xFF, 0xFF, 0xFF, (u8)alpha);
             }
             func_8008A6B4((char *)&buffer, D_800A8AE0, j + 1);
-            if (object->unk_6C == 0 || func_8002DA0C(slot, lane) != 0) {
-                if (func_8002DAD0(object, slot, lane) == 0) {
+            if (object->unk_6C == 0 || func_8002DA0C((s8)i, lane) != 0) {
+                if (func_8002DAD0(object, (s8)i, lane) == 0) {
                     func_8003EC40(elem + 5, 0x6D, 0x80, 0x80, 0x80, (u8)alpha,
                                   (char *)&buffer);
                     func_8003EC40(elem + 0xC, 0x6F, 0x80, 0x80, 0x80, (u8)alpha,
@@ -129,7 +127,7 @@ unsigned char selected;
                 }
             }
             if (object->unk_6C != 0 && state == 0 &&
-                func_8002DA0C(slot, lane) == 0) {
+                func_8002DA0C((s8)i, lane) == 0) {
                 switch (i) {
                 case 0:
                     func_8003EC40(elem + 3, 0x6F, 0x32, 0xFF, 0xFF, (u8)alpha,
@@ -154,7 +152,7 @@ unsigned char selected;
             func_8000AA04(id, 0x35 + j * 0x23, 0x5C);
             func_8000AAC0(id, 0.6667f, 0.6667f);
             func_8000AB24(id, 0xA3, 0xBE, 0x11, (u8)alpha);
-            if (func_8002DAD0(object, slot, lane) == 0) {
+            if (func_8002DAD0(object, (s8)i, lane) == 0) {
                 func_8000AB24(id, 0x80, 0x80, 0x80, (u8)alpha);
             }
             if (selected == object->unk_5E) {

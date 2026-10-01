@@ -30,27 +30,27 @@ s16 red;
 s16 green;
 s16 blue;
 {
-    f64 scaleX;
-    s16 c[3];
-    s32 size;
-    s32 y0;
     Gfx800857B0 *gfx;
-    s32 xy[2];
-    s32 x0;
-    Gfx800857B0 *image;
     Rect800857B0 *rect;
-    u32 fill;
+    s16 c[3];
+    s32 x0;
+    s32 y0;
+    s32 xy[2];
+    f64 scaleX;
+    s32 size;
+    Gfx800857B0 *image;
     f64 scaleY;
+    u32 fill;
 
     rect = &D_80120DF0[index];
-    xy[0] = rect->unk2C;
     xy[1] = rect->unk28;
+    xy[0] = rect->unk2C;
     scaleX = (f64)D_80114470[0] / 320.0;
     x0 = rect->unk20 * scaleX;
     scaleY = (f64)D_80114470[1] / 240.0;
     y0 = rect->unk24 * scaleY;
-    xy[0] = xy[0] * scaleY;
     xy[1] = xy[1] * scaleX;
+    xy[0] = xy[0] * scaleY;
 
     EMITP(0xE7000000, 0);
     EMITP(0xE3000A01, 0x00300000);

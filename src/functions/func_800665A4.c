@@ -67,6 +67,7 @@ void func_800665A4(PcTrigActor *actor, PcTrigOwner *owner) {
     s16 flags;
     f32 halfLength;
     f32 fraction;
+    f32 t;
     f32 alongAxis;
     f32 alongOwner;
 
@@ -102,8 +103,8 @@ void func_800665A4(PcTrigActor *actor, PcTrigOwner *owner) {
                 base[0] = owner->unk00;
                 base[1] = owner->unk04;
                 base[2] = owner->unk08;
-                halfLength = owner->unk18 * 0.5f;
                 halfHeight = owner->unk1C * 0.5f;
+                halfLength = owner->unk18 * 0.5f;
                 far[0] = base[0] + owner->unk10 * halfLength;
                 far[1] = base[1] - owner->unk0C * halfLength;
                 far[2] = origin[2];
@@ -123,21 +124,22 @@ void func_800665A4(PcTrigActor *actor, PcTrigOwner *owner) {
                     point[1] = far[1];
                     point[2] = far[2];
                 } else {
-                    fraction = ((origin[0] * delta[0] + origin[1] * delta[1] + origin[2] * delta[2]) -
+                    t = ((origin[0] * delta[0] + origin[1] * delta[1] + origin[2] * delta[2]) -
                                 (far[0] * delta[0] + far[1] * delta[1] + far[2] * delta[2])) / lengthSquared;
-                    if (fraction <= 0.0f) {
+                    if (t <= 0.0f) {
                         point[0] = far[0];
                         point[1] = far[1];
                         point[2] = far[2];
-                    } else if (1.0f <= fraction) {
+                    } else if (1.0f <= t) {
                         point[0] = near[0];
                         point[1] = near[1];
                         point[2] = near[2];
                     } else {
-                        point[0] = far[0] + delta[0] * fraction;
-                        point[1] = far[1] + delta[1] * fraction;
-                        point[2] = far[2] + delta[2] * fraction;
+                        point[0] = far[0] + delta[0] * t;
+                        point[1] = far[1] + delta[1] * t;
+                        point[2] = far[2] + delta[2] * t;
                     }
+                    fraction = t;
                 }
                 if (owner->unk24 == 0x66 || owner->unk24 == 0x68) {
                     if (0.0f < fraction && fraction < 1.0f && origin[2] < base[2] + halfHeight &&

@@ -38,9 +38,9 @@ void func_80000B00(Vec3f *point, Vec3f *cornerA, Vec3f *cornerB, Vec3f *cornerC,
     func_80081A2C(point, cornerB, cornerC, &edgeB);
     func_80081A2C(point, cornerC, cornerA, &edgeC);
 
-    dz = probe->z - edgeA.z;
-    dx = probe->x - edgeA.x;
     dy = probe->y - edgeA.y;
+    dx = probe->x - edgeA.x;
+    dz = probe->z - edgeA.z;
     best.x = edgeA.x;
     best.y = edgeA.y;
     best.z = edgeA.z;
@@ -50,19 +50,19 @@ void func_80000B00(Vec3f *point, Vec3f *cornerA, Vec3f *cornerB, Vec3f *cornerC,
     if (distance < bestDistance) {
         best.x = edgeB.x;
         best.y = edgeB.y;
-        best.z = edgeB.z;
         bestDistance = distance;
+        best.z = edgeB.z;
     }
 
-    dz = probe->z - edgeC.z;
     dx = probe->x - edgeC.x;
     dy = probe->y - edgeC.y;
+    dz = probe->z - edgeC.z;
     distance = dz * dz + (dx * dx + dy * dy);
     if (distance < bestDistance) {
         best.x = edgeC.x;
         best.y = edgeC.y;
-        best.z = edgeC.z;
         bestDistance = distance;
+        best.z = edgeC.z;
     }
 
     if (bestDistance <= D_800AE8B0) {

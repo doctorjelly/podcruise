@@ -53,12 +53,12 @@ f32 func_80066144(Obj80066144 *object, PcVec3f *origin, s32 unused, f32 offset, 
     func_80015268(&list[0], 0.0f, 0.0f, 0.0f);
     record = &D_800A5CA0[object->unk1E70->entries[0]];
     count = 1;
-    func_80015288(&list[count++], &record->second);
+    func_80015288(&list[count], &record->second);
+    count++;
     func_80015288(&list[count], &record->second);
     list[count].x = -list[count].x;
-    count++;
-    func_80015288(&list[count], &record->first);
-    count++;
+    func_80015288(&list[count + 1], &record->first);
+    count += 2;
     if (count > 0) {
         for (i = 0; i < count; i++) {
             func_800155C0(&direction, list[i].x, &object->unk020);
