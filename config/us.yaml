@@ -318,7 +318,7 @@ segments:
       - [0x16324, c, functions/func_80015724]
       - [0x16830, c, functions/func_80015C30]
       - [0x16CBC, c, functions/func_800160BC]
-      - [0x16E60, asm, main_16E60]
+      - [0x16E60, c, functions/func_80016260]
       - [0x173E4, c, functions/func_800167E4]
       - [0x17620, c, functions/func_80016A20]
       - [0x177F4, c, functions/func_80016BF4]
