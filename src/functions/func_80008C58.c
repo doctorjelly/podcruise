@@ -66,7 +66,8 @@ void func_80008C58(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 *point, s32 arg5)
         offset[0] = offset[0] - matrix[3][0];
         offset[1] = offset[1] - matrix[3][1];
         offset[2] = offset[2] - matrix[3][2];
-        if (offset[0] < D_800A81F0 && -offset[0] < D_800A81F0 &&
+        side = D_800A81F0;
+        if (offset[0] < side && -offset[0] < side &&
             offset[1] < D_800A81F8 && -offset[1] < D_800A81F8) {
             side = 0;
         } else {

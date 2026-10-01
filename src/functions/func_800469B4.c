@@ -91,6 +91,8 @@ void func_800469B4(Race *race, s32 mode) {
             race->flags |= 4;
         }
     }
+    if (!race) {
+    }
     switch (race->mode) {
     case 0:
         func_8008A6B4(message, D_800AAD20);
