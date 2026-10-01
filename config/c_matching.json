@@ -14307,7 +14307,7 @@
       "flags": [
         "-G",
         "0",
-        "-O2",
+        "-O3",
         "-mips2",
         "-non_shared",
         "-Xcpluscomm",
@@ -15199,7 +15199,7 @@
       "flags": [
         "-G",
         "0",
-        "-O2",
+        "-O3",
         "-mips2",
         "-non_shared",
         "-Xcpluscomm",
@@ -22245,18 +22245,7 @@
       "id": "func_800141EC",
       "source": "src/functions/func_800141EC.c",
       "link_vram": "0x800141EC",
-      "flags": [
-        "-G",
-        "0",
-        "-O2",
-        "-mips2",
-        "-non_shared",
-        "-Xcpluscomm",
-        "-signed",
-        "-Wab,-r4300_mul"
-      ],
       "absolute_symbols": {
-        "D_801217B0": "0x801217B0",
         "D_800A1CCC": "0x800A1CCC",
         "D_800A1D8C": "0x800A1D8C",
         "D_800A1DD0": "0x800A1DD0",
@@ -22268,6 +22257,7 @@
         "D_800D6930": "0x800D6930",
         "D_800D6934": "0x800D6934",
         "D_800D6938": "0x800D6938",
+        "D_801217B0": "0x801217B0",
         "func_800125E4": "0x800125E4"
       },
       "functions": [
@@ -29123,6 +29113,17 @@
           "rom": "0x5D7D8",
           "size": 1332
         }
+      ],
+      "flags": [
+        "-G",
+        "0",
+        "-O2",
+        "-mips2",
+        "-non_shared",
+        "-Xcpluscomm",
+        "-signed",
+        "-Wab,-r4300_mul",
+        "-Wo,-loopunroll,0"
       ]
     },
     {

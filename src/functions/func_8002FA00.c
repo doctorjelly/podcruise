@@ -22,8 +22,8 @@ void func_8002FA00(s32 arg0) {
         }
     }
     D_800A2868 = arg0;
-    D_800D9DD8[arg0] = D_800D9DD8[arg0 - 1];
-    func_80030574(D_800D9DD8[arg0]);
+    D_800D9DD8[D_800A2868] = D_800D9DD8[D_800A2868 - 1];
+    func_80030574(D_800D9DD8[D_800A2868]);
     func_80007E80(1);
     count = D_800A2868;
     if (count < 9) {

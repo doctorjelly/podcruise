@@ -52,6 +52,7 @@ u8 character;
 {
     register PcFont *font;
     PcGlyph *glyph;
+    PcGlyph *glyphs;
     s32 index;
     s32 result;
 
@@ -87,10 +88,10 @@ u8 character;
         character -= 0x20;
     }
 
-    result = (s32)(long)font->unk5C;
-    if ((result != 0) && (character >= font->unk5A) && (font->unk5B >= character)) {
+    glyphs = font->unk5C;
+    if ((glyphs != 0) && (character >= font->unk5A) && (font->unk5B >= character)) {
         index = character - font->unk5A;
-        glyph = &((PcGlyph *)(long)result)[index];
+        glyph = (PcGlyph *)((u8 *)glyphs + index * 16);
         if (glyph->unk08 == -1) {
             result = -2;
         } else {
