@@ -31,12 +31,12 @@ not a substitute for owning it.
 - `splat` configurations for all four unique supplied images, without
   committing extracted code or assets.
 - Byte-identical hybrid rebuilds for all four unique images.
-- 1,348 functions represented by independently written C, covering 616,960
+- 1,348 functions represented by independently written C, covering 616,920
   original instruction bytes. `make manifest` generates that ledger into
   `analysis/source_manifest.json` from the matching configuration and the
   per-version comparison reports, and fails if any unconfigured source lacks
   a recorded reason.
-- Exact IDO 5.3 matches for 1,100 of them (274,096 bytes, 44.10% of main-CPU
+- Exact IDO 5.3 matches for 1,108 of them (279,204 bytes, 44.92% of main-CPU
   text) in the canonical USA image. The USA hybrid rebuild substitutes those
   functions and remains byte-identical to the retail ROM. Regional matches are
   tracked independently; see [`docs/DECOMP_STATUS.md`](docs/DECOMP_STATUS.md)
