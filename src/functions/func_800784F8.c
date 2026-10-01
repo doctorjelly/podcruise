@@ -44,20 +44,11 @@ extern void func_800834F0(void *node, f32 *first, f32 *second, f32 scale,
 #define FIELD(type, base, offset) (*(type *)((u8 *)(base) + (offset)))
 #define POINTER(base, offset) FIELD(void *, base, offset)
 #define MATRIX(base, offset) ((Matrix800784F8 *)((u8 *)(base) + (offset)))
+#define TYPE(c) (**(s32 **)((u8 *)POINTER(c, 0x1E70) + 0x18))
 #define CLAMP(value, low, high) \
     ((value) < (low) ? (low) : ((value) > (high) ? (high) : (value)))
 
 void func_800784F8(void *craft) {
-    void *attached;
-    void *kind;
-    s32 type;
-    s32 special_type;
-    s32 paired_attachment;
-    s32 effect_mode;
-    s32 timer;
-    s32 i;
-    u32 scroll_a;
-    u32 scroll_b;
     f32 heat;
     f32 velocity;
     f32 heat_level;
@@ -81,46 +72,52 @@ void func_800784F8(void *craft) {
     f32 scale;
     f32 response;
     f32 longitudinal_scale;
+    Matrix800784F8 exhaust_matrix;
+    Matrix800784F8 local_matrix;
+    Vector800784F8 zero_a;
+    Vector800784F8 zero_b;
     Vector800784F8 first_point;
     Vector800784F8 second_point;
     Vector800784F8 offset;
-    Vector800784F8 zero_a;
-    Vector800784F8 zero_b;
-    Matrix800784F8 local_matrix;
-    Matrix800784F8 exhaust_matrix;
+    s32 special_type;
+    s32 paired_attachment;
+    s32 effect_mode;
+    s32 timer;
+    s32 i;
+    u32 scroll_a;
+    u32 scroll_b;
     Matrix800784F8 *matrix_a;
     Matrix800784F8 *matrix_b;
     Matrix800784F8 *output;
 
-    attached = POINTER(craft, 0x344);
-    if (attached == 0) {
+    special_type = 0;
+    paired_attachment = 0;
+    if (POINTER(craft, 0x344) == 0) {
         return;
     }
 
-    if (POINTER(attached, 0xEC) != 0) {
-        func_800181BC(POINTER(attached, 0xEC), 2, 3, 0x10, 2);
+    if (POINTER(POINTER(craft, 0x344), 0xEC) != 0) {
+        func_800181BC(POINTER(POINTER(craft, 0x344), 0xEC), 2, 3, 0x10, 2);
     }
     func_800156DC(local_matrix, *MATRIX(craft, 0x20));
 
-    kind = POINTER(craft, 0x1E70);
-    type = **(s32 **)((u8 *)kind + 0x18);
-    special_type = type == 14;
-    paired_attachment =
-        (FIELD(s32, attached, 0x0C) != 0) &&
-        (FIELD(s32, attached, 0x10) != 0);
+    if (TYPE(craft) == 14) {
+        special_type = 1;
+    }
+    if (FIELD(s32, POINTER(craft, 0x344), 0x0C) != 0 && FIELD(s32, POINTER(craft, 0x344), 0x10) != 0) {
+        paired_attachment = 1;
+    }
 
-    matrix_a = MATRIX(craft, 0x390);
-    matrix_b = MATRIX(craft, 0x3D0);
     if (!special_type) {
-        func_80015288(first_point, (*matrix_a)[3]);
-        func_80015288(offset, &D_800A5CA0[type][15]);
+        func_80015288(first_point, (*MATRIX(craft, 0x390))[3]);
+        func_80015288(offset, &D_800A5CA0[TYPE(craft)][15]);
         offset[0] = -offset[0];
-        func_80016BF4(offset, offset, *matrix_a);
+        func_80016BF4(offset, offset, *MATRIX(craft, 0x390));
         func_80015328(first_point, offset, first_point);
 
         if (paired_attachment) {
             func_80015288(second_point, (*MATRIX(craft, 0x450))[3]);
-            func_80015288(offset, &D_800A5CA0[type][15]);
+            func_80015288(offset, &D_800A5CA0[TYPE(craft)][15]);
             func_80016BF4(offset, offset, *MATRIX(craft, 0x450));
             func_80015328(second_point, offset, second_point);
             first_point[2] += FIELD(f32, craft, 0x250);
@@ -128,30 +125,42 @@ void func_800784F8(void *craft) {
             func_800738D4(craft, 2, first_point, second_point);
 
             func_80015288(first_point, (*MATRIX(craft, 0x410))[3]);
-            func_80015288(offset, &D_800A5CA0[type][15]);
+            func_80015288(offset, &D_800A5CA0[TYPE(craft)][15]);
             offset[0] = -offset[0];
             func_80016BF4(offset, offset, *MATRIX(craft, 0x410));
             func_80015328(first_point, offset, first_point);
         }
 
-        func_80015288(second_point, (*matrix_b)[3]);
-        func_80015288(offset, &D_800A5CA0[type][15]);
-        func_80016BF4(offset, offset, *matrix_b);
+        func_80015288(second_point, (*MATRIX(craft, 0x3D0))[3]);
+        func_80015288(offset, &D_800A5CA0[TYPE(craft)][15]);
+        func_80016BF4(offset, offset, *MATRIX(craft, 0x3D0));
         func_80015328(second_point, offset, second_point);
         first_point[2] += FIELD(f32, craft, 0x250);
         second_point[2] += FIELD(f32, craft, 0x250);
         func_800738D4(craft, 1, first_point, second_point);
     }
 
-    heat = CLAMP(FIELD(f32, craft, 0x1A0) * D_800ADAA0, 0.0f, 1.0f);
-    velocity = CLAMP(FIELD(f32, craft, 0x1EC) / 60.0f, -1.0f, 1.0f);
-
-    attached = POINTER(craft, 0x344);
-    scroll_a = func_8000E8C4(POINTER(attached, 0x114));
-    scroll_b = func_8000E8C4(POINTER(attached, 0x118));
+    matrix_a = MATRIX(craft, 0x390);
+    matrix_b = MATRIX(craft, 0x3D0);
+    heat = FIELD(f32, craft, 0x1A0) * D_800ADAA0;
+    if (heat > 1.0f) {
+        heat = 1.0f;
+    }
+    if (heat < 0.0f) {
+        heat = 0.0f;
+    }
+    velocity = FIELD(f32, craft, 0x1EC) / 60.0f;
+    if (velocity > 1.0f) {
+        velocity = 1.0f;
+    }
+    if (velocity < -1.0f) {
+        velocity = -1.0f;
+    }
+    scroll_a = func_8000E8C4(POINTER(POINTER(craft, 0x344), 0x114));
+    scroll_b = func_8000E8C4(POINTER(POINTER(craft, 0x344), 0x118));
 
     func_800156DC(exhaust_matrix, *matrix_a);
-    func_80015288(offset, &D_800A5CA0[type][21]);
+    func_80015288(offset, &D_800A5CA0[TYPE(craft)][21]);
     func_80016BF4(offset, offset, exhaust_matrix);
     exhaust_matrix[3][0] += offset[0];
     exhaust_matrix[3][1] += offset[1];
@@ -164,17 +173,15 @@ void func_800784F8(void *craft) {
     exhaust_matrix[2][2] = (*matrix_a)[1][2];
     output = MATRIX(craft, 0x1410);
     func_800156DC(*output, exhaust_matrix);
-    attached = POINTER(craft, 0x344);
-    if (POINTER(attached, 0x10C) != 0) {
-        func_800181BC(POINTER(attached, 0x10C), 2, 3, 0x10, 2);
+    if (POINTER(POINTER(craft, 0x344), 0x10C) != 0) {
+        func_800181BC(POINTER(POINTER(craft, 0x344), 0x10C), 2, 3, 0x10, 2);
     }
-    attached = POINTER(craft, 0x344);
-    if (POINTER(attached, 0x10C) != 0) {
-        func_80017BA8(POINTER(attached, 0x10C), output);
+    if (POINTER(POINTER(craft, 0x344), 0x10C) != 0) {
+        func_80017BA8(POINTER(POINTER(craft, 0x344), 0x10C), output);
     }
 
     func_800156DC(exhaust_matrix, *matrix_b);
-    func_80015288(offset, &D_800A5CA0[type][21]);
+    func_80015288(offset, &D_800A5CA0[TYPE(craft)][21]);
     offset[0] *= -1.0f;
     func_80016BF4(offset, offset, exhaust_matrix);
     exhaust_matrix[3][0] += offset[0];
@@ -188,45 +195,47 @@ void func_800784F8(void *craft) {
     exhaust_matrix[2][2] = (*matrix_b)[1][2];
     output = MATRIX(craft, 0x1450);
     func_800156DC(*output, exhaust_matrix);
-    attached = POINTER(craft, 0x344);
-    if (POINTER(attached, 0x110) != 0) {
-        func_800181BC(POINTER(attached, 0x110), 2, 3, 0x10, 2);
+    if (POINTER(POINTER(craft, 0x344), 0x110) != 0) {
+        func_800181BC(POINTER(POINTER(craft, 0x344), 0x110), 2, 3, 0x10, 2);
     }
-    attached = POINTER(craft, 0x344);
-    if (POINTER(attached, 0x110) != 0) {
-        func_80017BA8(POINTER(attached, 0x110), output);
+    if (POINTER(POINTER(craft, 0x344), 0x110) != 0) {
+        func_80017BA8(POINTER(POINTER(craft, 0x344), 0x110), output);
     }
 
-    scale = D_800A5D00[type][0] * D_800ADAA4;
+    scale = D_800A5D00[TYPE(craft)][0] * D_800ADAA4;
     longitudinal_scale = -((heat * 3.0f + 9.0f) * D_800ADAA4);
     func_80017520((f32 *)MATRIX(craft, 0x1490), scale, scale,
                   longitudinal_scale);
     func_80017520((f32 *)MATRIX(craft, 0x14D0), scale, scale,
                   longitudinal_scale);
-    attached = POINTER(craft, 0x344);
-    if (POINTER(attached, 0x114) != 0) {
-        func_80017BA8(POINTER(attached, 0x114), MATRIX(craft, 0x1490));
+    if (POINTER(POINTER(craft, 0x344), 0x114) != 0) {
+        func_80017BA8(POINTER(POINTER(craft, 0x344), 0x114), MATRIX(craft, 0x1490));
     }
-    attached = POINTER(craft, 0x344);
-    if (POINTER(attached, 0x118) != 0) {
-        func_80017BA8(POINTER(attached, 0x118), MATRIX(craft, 0x14D0));
+    if (POINTER(POINTER(craft, 0x344), 0x118) != 0) {
+        func_80017BA8(POINTER(POINTER(craft, 0x344), 0x118), MATRIX(craft, 0x14D0));
     }
 
-    heat_level = CLAMP(heat * 255.0f, 1.0f, 50.0f);
+    heat_level = heat * 255.0f;
+    if (heat_level > 50.0f) {
+        heat_level = 50.0f;
+    }
+    if (heat_level < 1.0f) {
+        heat_level = 1.0f;
+    }
     negative_velocity = -velocity;
-    if (negative_velocity < 0.0f) {
+    if (negative_velocity < 0.0) {
         negative_velocity = 0.0f;
     }
     intensity_a = (1.0f - negative_velocity * D_800ADAA8) * heat_level;
-    if (intensity_a < 1.0f) {
+    if (intensity_a < 1.0) {
         intensity_a = 1.0f;
     }
     positive_velocity = velocity;
-    if (positive_velocity < 0.0f) {
+    if (positive_velocity < 0.0) {
         positive_velocity = 0.0f;
     }
     intensity_b = (1.0f - positive_velocity * D_800ADAA8) * heat_level;
-    if (intensity_b < 1.0f) {
+    if (intensity_b < 1.0) {
         intensity_b = 1.0f;
     }
 
@@ -308,45 +317,41 @@ void func_800784F8(void *craft) {
                   D_800ADAB0, 10.0f, effect_mode);
 
     timer = FIELD(s32, craft, 0x1998);
-    attached = POINTER(craft, 0x344);
-    if (special_type || timer >= 76 || attached == 0) {
-        if (POINTER(attached, 0x28) != 0) {
-            func_800181BC(POINTER(attached, 0x28), 2, (u32)-4, 0x10, 3);
+    if (special_type || timer >= 76 || POINTER(craft, 0x344) == 0) {
+        if (POINTER(POINTER(craft, 0x344), 0x28) != 0) {
+            func_800181BC(POINTER(POINTER(craft, 0x344), 0x28), 2, (u32)-4, 0x10, 3);
         }
-        if (POINTER(attached, 0x2C) != 0) {
-            func_800181BC(POINTER(attached, 0x2C), 2, (u32)-4, 0x10, 3);
+        if (POINTER(POINTER(craft, 0x344), 0x2C) != 0) {
+            func_800181BC(POINTER(POINTER(craft, 0x344), 0x2C), 2, (u32)-4, 0x10, 3);
         }
         return;
     }
 
-    if (POINTER(attached, 0x28) != 0) {
+    if (POINTER(POINTER(craft, 0x344), 0x28) != 0) {
         output = MATRIX(craft, 0x5D0);
         func_80075FC4(*MATRIX(craft, 0x490), *matrix_a, 1.0f, 1.0f,
-                      type, *output);
+                      TYPE(craft), *output);
         (*output)[3][2] += FIELD(f32, craft, 0x250);
         func_80017BA8(POINTER(POINTER(craft, 0x344), 0x28), output);
     }
-    attached = POINTER(craft, 0x344);
-    if (POINTER(attached, 0x2C) != 0) {
+    if (POINTER(POINTER(craft, 0x344), 0x2C) != 0) {
         output = MATRIX(craft, 0x610);
         func_80075FC4(*MATRIX(craft, 0x490), *matrix_b, -1.0f, 1.0f,
-                      type, *output);
+                      TYPE(craft), *output);
         (*output)[3][2] += FIELD(f32, craft, 0x250);
         func_80017BA8(POINTER(POINTER(craft, 0x344), 0x2C), output);
     }
-    attached = POINTER(craft, 0x344);
-    if (POINTER(attached, 0x30) != 0) {
+    if (POINTER(POINTER(craft, 0x344), 0x30) != 0) {
         output = MATRIX(craft, 0x650);
         func_80075FC4(*MATRIX(craft, 0x490), *MATRIX(craft, 0x410),
-                      1.0f, -1.0f, type, *output);
+                      1.0f, -1.0f, TYPE(craft), *output);
         (*output)[3][2] += FIELD(f32, craft, 0x250);
         func_80017BA8(POINTER(POINTER(craft, 0x344), 0x30), output);
     }
-    attached = POINTER(craft, 0x344);
-    if (POINTER(attached, 0x34) != 0) {
+    if (POINTER(POINTER(craft, 0x344), 0x34) != 0) {
         output = MATRIX(craft, 0x690);
         func_80075FC4(*MATRIX(craft, 0x490), *MATRIX(craft, 0x450),
-                      -1.0f, -1.0f, type, *output);
+                      -1.0f, -1.0f, TYPE(craft), *output);
         (*output)[3][2] += FIELD(f32, craft, 0x250);
         func_80017BA8(POINTER(POINTER(craft, 0x344), 0x34), output);
     }
@@ -365,8 +370,7 @@ void func_800784F8(void *craft) {
         if ((f64)scale > 1.0) {
             scale = 1.0f;
         }
-        attached = POINTER(craft, 0x344);
-        func_800834F0(POINTER(attached, 0x28), zero_a, zero_b, scale, 1.0f,
+        func_800834F0(POINTER(POINTER(craft, 0x344), 0x28), zero_a, zero_b, scale, 1.0f,
                       (f32)timer, 50.0f, 0);
 
         func_80015268(zero_a, 0.0f, 0.0f, 0.0f);
@@ -379,8 +383,7 @@ void func_800784F8(void *craft) {
         if ((f64)scale > 1.0) {
             scale = 1.0f;
         }
-        attached = POINTER(craft, 0x344);
-        func_800834F0(POINTER(attached, 0x2C), zero_a, zero_b, scale, 1.0f,
+        func_800834F0(POINTER(POINTER(craft, 0x344), 0x2C), zero_a, zero_b, scale, 1.0f,
                       (f32)timer, 50.0f, 0);
     }
 }

@@ -36,6 +36,7 @@ extern s32 D_800B04B0;
 void func_80007034(PcBootObject *object) {
     s32 *slot;
     f32 span;
+    s32 *end_slot;
 
     span = ((f32)object->unk18 * 3.0f) / 60.0f;
     D_800AFE90 = (s32)span;
@@ -56,6 +57,7 @@ void func_80007034(PcBootObject *object) {
     } while (slot < &D_800AFA64);
 
     slot = &D_800AFA64 - 1;
+    end_slot = &D_800AFA6C;
     do {
         slot[1] = func_80006FE4((s32)(unsigned long)&D_800A818C, object->unk14, 1, 8);
         *(s32 *)(unsigned long)slot[1] = func_80006FE4((s32)(unsigned long)&D_800A8198, object->unk14, 1,
@@ -63,7 +65,7 @@ void func_80007034(PcBootObject *object) {
         *(s16 *)(unsigned long)(slot[1] + 4) = 0;
         D_8009A2D0[3] = (s32)(unsigned long)&D_800980C0 - (s32)(unsigned long)&func_80097FF0;
         slot++;
-    } while (slot != &D_800AFA6C);
+    } while (slot != end_slot);
 
     func_800880E0(&D_800B0498, &D_800B04B0, 0x40);
     D_800AFABC = 0;

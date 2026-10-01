@@ -37,7 +37,7 @@ void func_80048F74(s32 arg0) {
 
     first = D_800D6DD8[arg0][0];
     last = D_800D6DD8[arg0][1];
-    count = (last - first) + 1;
+    count = 1 - first + last;
     limit = count + 2;
     tail = count + 1;
     head = 0;

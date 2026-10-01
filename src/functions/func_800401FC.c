@@ -51,7 +51,6 @@ void func_800401FC(Obj800401FC *object, Ctx800401FC *context) {
     f32 quotient;
     f32 blend;
     f32 rest;
-    f32 random;
 
 #if defined(__GNUC__)
     (void)D_800AAC30;
@@ -163,10 +162,10 @@ void func_800401FC(Obj800401FC *object, Ctx800401FC *context) {
     }
 
     if (object->unk2E4 & 0x10) {
-        random = ((f32)func_80082BE0() / (f32)2147483648.0) * 0.5f + 0.5f;
-        color[0] = 200.0f * random;
-        color[1] = 200.0f * random;
-        color[2] = 255.0f * random;
+        blend = ((f32)func_80082BE0() / (f32)2147483648.0) * 0.5f + 0.5f;
+        color[0] = 200.0f * blend;
+        color[1] = 200.0f * blend;
+        color[2] = 255.0f * blend;
         offset[0] = context->unk0050[0] - context->unk13C0[0];
         offset[1] = context->unk0050[1] - context->unk13C0[1];
         offset[2] = context->unk0050[2] - context->unk13C0[2];

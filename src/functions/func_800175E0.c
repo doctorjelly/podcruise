@@ -30,12 +30,12 @@ void func_800175E0(f32 *m, f32 angle, f32 x, f32 y, f32 z) {
         m[0] = cosine;
         m[5] = cosine;
         m[1] = sine;
+        m[4] = -sine;
         m[2] = 0.0f;
         m[6] = 0.0f;
-        m[8] = 0.0f;
-        m[4] = -sine;
-        m[9] = 0.0f;
         m[10] = 1.0f;
+        m[8] = 0.0f;
+        m[9] = 0.0f;
     } else if (z <= D_800A8814) {
         xy = x * y;
         zx = z * x;
@@ -43,12 +43,12 @@ void func_800175E0(f32 *m, f32 angle, f32 x, f32 y, f32 z) {
         m[0] = cosine;
         m[5] = cosine;
         m[1] = -sine;
+        m[4] = sine;
         m[2] = 0.0f;
         m[6] = 0.0f;
         m[8] = 0.0f;
         m[9] = 0.0f;
         m[10] = 1.0f;
-        m[4] = sine;
     } else {
         omc = 1.0f - cosine;
         sx = sine * x;
@@ -70,8 +70,8 @@ void func_800175E0(f32 *m, f32 angle, f32 x, f32 y, f32 z) {
         m[4] = omc * xy - sz;
         m[2] = omc * zx - sy;
         m[6] = omc * zy + sx;
-        m[9] = omc * zy - sx;
         m[8] = omc * zx + sy;
+        m[9] = omc * zy - sx;
     }
     m[12] = 0.0f;
     m[13] = 0.0f;

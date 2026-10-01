@@ -22,7 +22,7 @@ extern f32 D_800AE8DC;
 s32 func_80004160(PcVec3f *a, f32 b, PcVec3f *c, f32 d, f32 e, PcVec3f *f,
                   PcVec3f *g, PcVec3f *h) {
     PcVec3f t;
-    PcVec3f r;
+    f32 r[3];
     PcVec3f pad0;
     PcVec3f v;
     PcVec3f w;
@@ -49,8 +49,7 @@ s32 func_80004160(PcVec3f *a, f32 b, PcVec3f *c, f32 d, f32 e, PcVec3f *f,
         func_80015538(&v, &u, c);
         len = func_800153C0(&v);
         if (len < D_800A813C) {
-            dot = c->z * t.z + (t.x * c->x + t.y * c->y);
-            if (dot < 0.0f) {
+            if (c->z * t.z + (t.x * c->x + t.y * c->y) < 0.0f) {
                 func_800155C0(&t, -(d - sqrtf(D_800AE8B0)), f);
             } else {
                 func_800155C0(&t, -e - sqrtf(D_800AE8B0), f);
@@ -81,16 +80,16 @@ s32 func_80004160(PcVec3f *a, f32 b, PcVec3f *c, f32 d, f32 e, PcVec3f *f,
             } else {
                 dot = f->z * c->z + (c->x * f->x + c->y * f->y);
                 if (0.0f < dot) {
-                    r.x = z.x + a->x;
-                    r.y = z.y + a->y;
-                    r.z = z.z + a->z;
                     g->x = z.x;
                     g->y = z.y;
                     g->z = z.z;
+                    r[0] = z.x + a->x;
+                    r[1] = z.y + a->y;
+                    r[2] = z.z + a->z;
                 } else {
-                    r.x = x.x + a->x;
-                    r.y = x.y + a->y;
-                    r.z = x.z + a->z;
+                    r[0] = x.x + a->x;
+                    r[1] = x.y + a->y;
+                    r[2] = x.z + a->z;
                     g->x = z.x;
                     g->y = z.y;
                     g->z = z.z;
@@ -99,7 +98,7 @@ s32 func_80004160(PcVec3f *a, f32 b, PcVec3f *c, f32 d, f32 e, PcVec3f *f,
                 func_800155EC(a, a,
                               (D_800AE8B8.x * f->x + D_800AE8B8.y * f->y +
                                D_800AE8B8.z * f->z) -
-                                  (f->z * r.z + (r.x * f->x + r.y * f->y)),
+                                  (f->z * r[2] + (r[0] * f->x + r[1] * f->y)),
                               f);
             }
         }

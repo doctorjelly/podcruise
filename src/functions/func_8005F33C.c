@@ -28,6 +28,7 @@ void func_8005F33C(u8 *owner, Mover *mover, s32 position) {
     s32 index;
     s32 work;
     f32 half;
+    f32 k20 = 20.0f;
     s32 span;
     s32 total;
     s32 origin;
@@ -62,7 +63,7 @@ void func_8005F33C(u8 *owner, Mover *mover, s32 position) {
     fremain = (f32)work;
     rotation = findex * -30.0f;
     half = (fspan - 1.0f) * 0.5f;
-    amount = fremain * 20.0f + half * -20.0f;
+    amount = fremain * k20 + half * -k20;
     func_800155EC(&mover->unk_30, &mover->unk_30, rotation, &mover->unk_10);
     func_800155EC(&mover->unk_30, &mover->unk_30, amount, &mover->unk_00);
 }

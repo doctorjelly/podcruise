@@ -45,11 +45,11 @@ s16 blue;
     xy[0] = rect->unk2C;
     xy[1] = rect->unk28;
     scaleX = (f64)D_80114470[0] / 320.0;
-    scaleY = (f64)D_80114470[1] / 240.0;
     x0 = rect->unk20 * scaleX;
+    scaleY = (f64)D_80114470[1] / 240.0;
     y0 = rect->unk24 * scaleY;
-    xy[1] = xy[1] * scaleX;
     xy[0] = xy[0] * scaleY;
+    xy[1] = xy[1] * scaleX;
 
     EMIT(0xE7000000, 0);
     EMIT(0xE3000A01, 0x00300000);

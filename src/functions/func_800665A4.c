@@ -104,6 +104,9 @@ void func_800665A4(PcTrigActor *actor, PcTrigOwner *owner) {
                 base[2] = owner->unk08;
                 halfLength = owner->unk18 * 0.5f;
                 halfHeight = owner->unk1C * 0.5f;
+                spareA[0] = halfLength;
+                spareB[0] = halfHeight;
+                spareC[0] = origin[2];
                 far[0] = base[0] + owner->unk10 * halfLength;
                 far[1] = base[1] - owner->unk0C * halfLength;
                 far[2] = origin[2];

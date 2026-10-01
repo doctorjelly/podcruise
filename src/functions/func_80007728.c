@@ -23,9 +23,15 @@ void func_80007728(s32 count) {
     Node80007728 *node;
     Node80007728 *next;
     Node80007728 *tail;
+    s32 saved_count;
 
-    for (index = 0; index < count; index++) {
+    saved_count = count;
+
+    for (index = 0; index < saved_count; index++) {
         func_80087E80(D_800B0498, &scratch, 0);
+    }
+
+    if (count) {
     }
 
     node = D_800AFAC0[0];

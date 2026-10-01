@@ -124,7 +124,7 @@ void func_80076B34(Obj *arg0) {
     if (b == 0) {
         return;
     }
-    target = b;
+    target = tail->unk314[0];
     if (target->unk60 != 8) {
         return;
     }

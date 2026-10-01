@@ -109,22 +109,22 @@ void func_8004E4F4(Mode *arg0) {
     }
 
     if (arg0->unk38 == 1) {
-        for (i = 0; i < 16; i += 2) {
-            c = D_8011A210[i * 3];
+        for (mid = 0; mid < 16; mid += 2) {
+            c = D_8011A210[mid * 3];
             if (-1 != c) {
                 D_801198A8[c].unkC = -130.0f;
                 D_801198A8[c].unk2C = 0.0f;
                 D_801198A8[c].unk28 = 0.0f;
-                D_801198A8[c].unk4 = D_800A4C00[i + 4].unkC;
-                D_801198A8[c].unk8 = D_800A4C00[i + 4].unk10;
+                D_801198A8[c].unk4 = D_800A4C00[mid + 4].unkC;
+                D_801198A8[c].unk8 = D_800A4C00[mid + 4].unk10;
             }
-            c = D_8011A210[i * 3 + 3];
+            c = D_8011A210[mid * 3 + 3];
             if (-1 != c) {
                 D_801198A8[c].unkC = -130.0f;
                 D_801198A8[c].unk2C = 0.0f;
                 D_801198A8[c].unk28 = 0.0f;
-                D_801198A8[c].unk4 = D_800A4C00[i + 5].unkC;
-                D_801198A8[c].unk8 = D_800A4C00[i + 5].unk10;
+                D_801198A8[c].unk4 = D_800A4C00[mid + 5].unkC;
+                D_801198A8[c].unk8 = D_800A4C00[mid + 5].unk10;
             }
         }
     }

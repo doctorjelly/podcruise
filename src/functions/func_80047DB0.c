@@ -114,7 +114,7 @@ void func_80047DB0(void *object) {
         }
     }
 
-    for (index = 0; index < D_8011A240[11] + 1; index++) {
+    for (index = 0; index <= D_8011A240[11]; index++) {
         entry = D_8011A508[0x8E + index]->unk00;
         if (entry == 0) {
             continue;
@@ -141,11 +141,11 @@ void func_80047DB0(void *object) {
         func_800156DC(second, first);
         if (index == D_800A4BE8) {
             if (index != D_8011A240[11]) {
-                func_800178C4(second, second, D_800A4B50 * 4.0f,
+                func_800178C4(second, second, D_800A4B50 * (f32)(f64)4.0,
                               first[2][0], first[2][1], first[2][2]);
                 func_800178C4(second, second, 45.0f,
                               first[1][0], first[1][1], first[1][2]);
-                func_800178C4(second, second, D_800A4B50 * -1.0f,
+                func_800178C4(second, second, -D_800A4B50,
                               first[2][0], first[2][1], first[2][2]);
             }
         }

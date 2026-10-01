@@ -40,33 +40,39 @@ extern s32 func_8007B34C(f32 *, s32, s32, s32, s32, f32, s32);
 void func_80077C94(Craft80077C94 *craft, f32 source[4][4], f32 scaleX, f32 scaleY,
                    f32 scaleZ, f32 angle, s32 arg6) {
     f32 matrix[4][4];
+    f32 alpha;
     f32 fade;
     f32 red;
     f32 green;
     f32 blue;
     f32 level;
-    f32 alpha;
-    s32 mode;
-    s32 changed;
-    s32 emphasis;
-    s32 dim;
-    s32 wide;
-    s32 tall;
-    s32 warm;
-    s32 cool;
+    f32 prod;
+    f32 snd;
+    f32 pad[5];
     s32 lit;
+    s32 warm;
+    s32 emphasis;
+    s32 cool;
     s32 flags;
     Item80077C94 *item;
+    s32 wide;
+    s32 tall;
+    s32 boost;
+    s32 changed;
+    s32 dim;
     void *node;
+    s32 mode;
 
+    (void)pad; /* reserves the original's unused frame words */
     cool = 0;
-    warm = 0;
     lit = 0;
-    tall = 0;
+    warm = 0;
+    emphasis = 0;
     wide = 0;
+    tall = 0;
+    boost = 0;
     changed = 0;
     dim = 0;
-    emphasis = 0;
 
     /* The original leaves this stack word unwritten when arg6 is zero. */
 
@@ -154,7 +160,7 @@ void func_80077C94(Craft80077C94 *craft, f32 source[4][4], f32 scaleX, f32 scale
     case 0:
         if (changed != 0) {
             blue = 120.0f;
-            red = 200.0f;
+            red = 200.0;
             green = 170.0f;
             level = 255.0f;
         } else if (cool != 0) {
@@ -164,14 +170,14 @@ void func_80077C94(Craft80077C94 *craft, f32 source[4][4], f32 scaleX, f32 scale
             level = 255.0f;
         } else if (wide != 0) {
             blue = 120.0f;
-            red = 200.0f;
+            red = 200.0;
             green = 170.0f;
             level = 255.0f;
         } else {
             red = 182.0f;
             green = 164.0f;
             blue = 136.0f;
-            level = 200.0f;
+            level = 200.0;
         }
         break;
     case 1:
@@ -188,20 +194,17 @@ void func_80077C94(Craft80077C94 *craft, f32 source[4][4], f32 scaleX, f32 scale
         break;
     case 2:
         if (emphasis != 0) {
-            blue = 120.0f;
+            blue = red = 120.0f;
             level = 255.0f;
             green = 100.0f;
-            red = blue;
         } else if (changed != 0) {
             blue = 120.0f;
-            green = 75.0f;
+            green = red = 75.0f;
             level = 64.0f;
-            red = green;
         } else {
-            blue = 120.0f;
+            blue = red = 120.0f;
             green = 100.0f;
             level = 16.0f;
-            red = blue;
         }
         break;
     case 4:
@@ -221,15 +224,13 @@ void func_80077C94(Craft80077C94 *craft, f32 source[4][4], f32 scaleX, f32 scale
             blue = 50.0f;
             level = 255.0f;
         } else if (emphasis != 0) {
-            green = 220.0f;
+            green = red = 220.0f;
             level = 255.0f;
-            blue = 200.0f;
-            red = green;
+            blue = 200.0;
         } else if (lit != 0) {
-            level = 255.0f;
+            level = red = 255.0f;
             green = 100.0f;
             blue = 30.0f;
-            red = level;
         } else {
             red = 110.0f;
             green = 90.0f;
@@ -242,7 +243,7 @@ void func_80077C94(Craft80077C94 *craft, f32 source[4][4], f32 scaleX, f32 scale
             red = 210.0f;
             green = 130.0f;
             blue = 60.0f;
-            level = 200.0f;
+            level = 200.0;
         } else if (cool != 0) {
             red = 210.0f;
             green = 130.0f;
@@ -267,33 +268,30 @@ void func_80077C94(Craft80077C94 *craft, f32 source[4][4], f32 scaleX, f32 scale
             blue = 104.0f;
             level = 255.0f;
         } else {
-            green = 203.0f;
+            green = red = 203.0f;
             level = 75.0f;
             blue = 204.0f;
-            red = green;
         }
         break;
     case 7:
         if (emphasis != 0) {
-            level = 255.0f;
-            green = level;
+            level = green = 255.0f;
         } else if (cool != 0) {
-            green = 150.0f;
+            green = red = 150.0f;
             blue = 230.0f;
             level = 255.0f;
-            red = green;
         } else {
-            green = 150.0f;
+            green = red = 150.0f;
             blue = 230.0f;
             level = 128.0f;
-            red = green;
         }
         break;
     }
 
+    snd = 69.0f;
     if (D_800ADA90 < matrix[1][2]) {
         if (emphasis != 0) {
-            changed = 1;
+            boost = 1;
             angle = 0.0f;
         }
         func_800155EC(matrix[3], matrix[3], -angle, matrix[0]);
@@ -306,21 +304,17 @@ void func_80077C94(Craft80077C94 *craft, f32 source[4][4], f32 scaleX, f32 scale
         matrix[2][0] *= scaleZ;
         matrix[2][1] *= scaleZ;
         matrix[2][2] *= scaleZ;
-        alpha = level * fade;
-        if (alpha < 1.0f) {
-            alpha = 1.0f;
-        } else if (254.0f < alpha) {
-            alpha = 254.0f;
-        }
+        prod = level * fade;
+        alpha = (1.0f <= prod) ? ((prod <= 254.0f) ? prod : 254.0f) : 1.0f;
         if (wide != 0) {
-            changed = 1;
+            boost = 1;
         }
         if (0.0f < alpha) {
             if (func_8007B34C(matrix[0], (s32)red, (s32)green, (s32)blue,
                               (s32)alpha, D_800ADA94, mode) != 0) {
-                if (changed != 0) {
+                if (boost != 0) {
                     if (D_800ADA98 < 1.0f) {
-                        func_80008B14((s32)69.0f, 7,
+                        func_80008B14((s32)snd, 7,
                                       fade * D_800ADA9C * 0.25f, 1.0f, 1);
                     }
                 }
