@@ -71,10 +71,10 @@ void func_80009C0C(s32 arg0, s32 arg1, f32 arg2, s32 arg3) {
         end = entry->unk04;
         phase = arg2;
         if (end < start) {
+            end = end + one;
             if (arg2 < start) {
                 phase = arg2 + one;
             }
-            end = end + one;
         }
         if (start < end) {
             fraction = (phase - start) / (end - start);
