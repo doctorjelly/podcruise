@@ -38,49 +38,42 @@ extern void func_8008D7D0(Channel80096158 *channel);
 s32 func_80096158(Sequence80096158 *sequence, s32 selector, const s32 *input) {
     s32 field;
     s32 value;
-    Voice80096158 *voice;
+    Sequence80096158 *seq;
     Channel80096158 *channel;
 
+    seq = sequence;
     field = selector - 2;
     value = *input;
-    switch (field & 7) {
+    switch (field % 8) {
         case 0:
-            voice = &sequence->voices[field / 8];
-            voice->start = value & ~7;
+            seq->voices[field / 8].start = value & ~7;
             break;
         case 1:
-            voice = &sequence->voices[field / 8];
-            voice->end = value & ~7;
+            seq->voices[field / 8].end = value & ~7;
             break;
         case 2:
-            voice = &sequence->voices[field / 8];
-            voice->second = value;
+            seq->voices[field / 8].first = value;
             break;
         case 3:
-            voice = &sequence->voices[field / 8];
-            voice->first = value;
+            seq->voices[field / 8].second = value;
             break;
         case 4:
-            voice = &sequence->voices[field / 8];
-            voice->third = value;
+            seq->voices[field / 8].third = value;
             break;
         case 5:
-            voice = &sequence->voices[field / 8];
-            voice->rate = ((f32)value / 1000.0f) * 2.0 /
+            seq->voices[field / 8].rate = ((f32)value / 1000.0f) * 2.0 /
                           (f64)D_800A6990->rate;
             break;
         case 6:
-            voice = &sequence->voices[field / 8];
-            voice->position =
+            seq->voices[field / 8].position =
                 ((f64)(f32)value / 173123.40490667601) *
-                (f64)(voice->end - voice->start);
+                (f64)(seq->voices[field / 8].end - seq->voices[field / 8].start);
             break;
         case 7:
-            voice = &sequence->voices[field / 8];
-            channel = voice->channel;
+            channel = seq->voices[field / 8].channel;
             if (channel != 0) {
                 channel->value = value;
-                func_8008D7D0(channel);
+                func_8008D7D0(seq->voices[field / 8].channel);
             }
             break;
     }

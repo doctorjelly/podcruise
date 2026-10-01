@@ -13,16 +13,23 @@ extern u32 D_80000308;
 extern u32 func_80088360(u32 address);
 
 s32 func_800944E0(s32 direction, u32 cartridge_offset, u32 dram_address, u32 size) {
-    while (PI_STATUS_REG & 3) {
+    register u32 stat;
+
+    stat = PI_STATUS_REG;
+    while (stat & 3) {
+        stat = PI_STATUS_REG;
     }
 
     PI_DRAM_ADDR_REG = func_80088360(dram_address);
     PI_CART_ADDR_REG = (D_80000308 | cartridge_offset) & 0x1FFFFFFF;
-    if (direction == 0) {
+    switch (direction) {
+    case 0:
         PI_WR_LEN_REG = size - 1;
-    } else if (direction == 1) {
+        break;
+    case 1:
         PI_RD_LEN_REG = size - 1;
-    } else {
+        break;
+    default:
         return -1;
     }
     return 0;

@@ -38,6 +38,7 @@ typedef struct Owner8004F358 {
 } Owner8004F358;
 
 typedef struct Message8004F358 {
+    u8 pad[4];
     /* 0x00 */ u32 tag;
     /* 0x04 */ s32 unk04;
     /* 0x08 */ s32 unk08;
@@ -53,6 +54,7 @@ typedef struct Message8004F358 {
     /* 0x30 */ s32 unk30;
     /* 0x34 */ s32 unk34;
     /* 0x38 */ s32 unk38;
+    s32 unk3C;
 } Message8004F358;
 
 extern Entry8004F358 D_800A21B8[];
@@ -81,15 +83,18 @@ void func_8004F358(Owner8004F358 *arg0, s32 arg1, s32 arg2) {
     if (arg0->unk64 == 2) {
         arg0->unk70 = 1;
         arg0->unk71 = 3;
-        do {
+        while (1) {
             arg0->unk5D = (s32)(((f32)func_80082BE0() / (f32)2147483648.0) * 25.0f);
-        } while ((arg0->unk5D == 19) || (D_800A21B8[arg0->unk5D].unk00 == -1) ||
-                 (D_800A21B8[arg0->unk5D].unk08 != 0));
+            if (arg0->unk5D == 19) continue;
+            if (D_800A21B8[arg0->unk5D].unk00 == -1) continue;
+            if (D_800A21B8[arg0->unk5D].unk08 != 0) continue;
+            break;
+        }
     }
 
-    if (D_800A5998 != 0) {
-        arg0->unk64 = 1;
+    if (D_800A5998 != 0 && 1) {
         arg0->unk5D = D_80119668[D_800A4BFC];
+        arg0->unk64 = 1;
         D_80113680.unk008 |= 0x40;
     }
 
