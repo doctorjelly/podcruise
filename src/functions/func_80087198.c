@@ -45,6 +45,7 @@ extern s32 D_800A6950;
 extern void *D_800A6964;
 extern Vec87198 D_800A6968;
 extern s32 D_800A6974;
+extern s32 D_800A6970[];
 extern s16 D_800D6980;
 extern u32 D_800D76F0;
 extern u8 D_800D9DB0;
@@ -96,7 +97,7 @@ void func_80087198(void) {
     (void)saved;
     (void)spare;
     func_800390A4();
-    *(s32 *)0x800A6974 = *(s32 *)0x800A6974 + 1;
+    D_800A6974 = D_800A6970[1] + 1;
 
     D_800A68B0 = D_800A68AC;
     D_800A68AC = D_800D9DB4;

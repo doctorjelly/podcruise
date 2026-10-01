@@ -387,3 +387,37 @@ prose:
 - Attribute yield by testing which assigned functions changed state. Counting
   occurrences of "exact" in worker reports is not attribution; a report saying
   a function is *not* exact matches the same search.
+
+## Claude worker tiers, measured
+
+One session (2026-10-01) dispatched single-function Claude workers against the
+USA nonmatching queue and attributed results by re-probing every assigned
+function, not by reading worker prose.
+
+- Sonnet at medium effort: 426 dispatches, 17 exact matches (4.0 percent).
+  The rate fell from about 6 percent in the first four waves to about 1
+  percent once only repeatedly failed functions remained. Across all tiers,
+  133 verified improvements to nonmatching sources were kept (wrong size to
+  correct size, or fewer differing words at the correct size; some functions
+  more than once).
+- Haiku: 128 dispatches, 2 exact matches. It makes three to five times as many
+  probe calls as Sonnet, so its raw token use per worker is similar, but at
+  roughly one third of Sonnet's per-token price.
+- Sonnet at low effort stops after three to seven probes. In a paired test on
+  the same 36 functions it produced 2 verified improvements, against 7 for
+  Sonnet at medium effort and 8 for Haiku, while saving only about 15 percent
+  of Sonnet-medium tokens. Do not use it for this work.
+- In that paired test the three tiers mostly solved different functions, so a
+  second tier on a function the first failed is worth more than a repeat with
+  the same tier.
+- Haiku is more likely to leave artefacts that pass the probe but must be
+  rejected: dead empty loops, flag-only coincidences, uninitialised reads.
+  Screen every non-exact change from it before committing.
+- Mechanical passes produced as many matches per hour as the workers once the
+  queue hardened: a 12-flag-set sweep re-run after source improvements (5
+  matches), literal-pool and jump-table placement with `rodata_vram` and
+  8-byte `rodata_alignment` (2), a missing absolute symbol (1), and
+  decomp-permuter at two threads for 30 minutes per function (4 directly, 2
+  more when its partial outputs were handed to a worker as hints).
+- Re-run the flag sweep after every wave. Two functions became exact at `-O3`
+  only after a worker had fixed their source shape at the default flags.

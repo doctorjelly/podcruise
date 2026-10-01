@@ -12,12 +12,12 @@ extern void func_80083EFC(s16 *pointA, s16 *pointB, s16 *pointC, void *object,
 void func_80084148(DisplayCommand *commands, f32 (*transform)[4], f32 *best, f32 *reference,
                    f32 *outPoint, f32 *extra) {
     s16 *vertices;
-    register s32 index0;
-    register s32 index1;
-    register s32 index2;
-    register u8 *bytes;
-    register f32 *outPointLocal;
-    register f32 *extraLocal;
+    s32 index0;
+    s32 index1;
+    s32 index2;
+    u8 *bytes;
+    f32 *outPointLocal;
+    f32 *extraLocal;
     s32 done;
     u8 pad3[32];
     DisplayCommand command;
@@ -40,9 +40,12 @@ void func_80084148(DisplayCommand *commands, f32 (*transform)[4], f32 *best, f32
             case 0x03000000:
                 break;
             case 0x06000000:
-                index0 = bytes[5] * 4;
-                index1 = bytes[6] * 4;
-                index2 = bytes[7] * 4;
+                index0 = bytes[5];
+                index1 = bytes[6];
+                index2 = bytes[7];
+                index0 *= 4;
+                index1 *= 4;
+                index2 *= 4;
                 func_80083EFC(&vertices[bytes[1] * 4], &vertices[bytes[2] * 4],
                               &vertices[bytes[3] * 4], transform, best,
                               reference, outPointLocal, extraLocal);

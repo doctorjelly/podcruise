@@ -61,7 +61,7 @@ void func_80050F88(Obj *obj) {
        original reserved no separate local for it. The new angle is written
        into the global as part of the same assignment so that the value is
        still held in a register for the wrap test and the wrap store. */
-    cosine = D_800A5278[0] = D_800A5278[0] + 40.0f * D_80120BF8;
+    cosine = D_800A5278[0] = D_800A5278[0] + D_80120BF8 * 40.0f;
     if (cosine > 360.0f) {
         D_800A5278[0] = cosine - 360.0f;
     }

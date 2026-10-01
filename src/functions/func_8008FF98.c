@@ -69,10 +69,10 @@ s32 func_8008FF98(Owner *owner, Link *link, Request *request) {
     link->unk_08 = 0;
     found = func_8008FEB0(owner, &entry, request->unk_00);
     if (entry) {
+        emitter[0] = entry->unk_0C;
         if (found != 0) {
             entry->unk_D8 = 0x200;
             ((Slot *)entry->unk_08)->unk_08 = 0;
-            emitter[0] = entry->unk_0C;
             command = func_80088500();
             command->unk_08 = 0xB;
             command->unk_0C = 0;

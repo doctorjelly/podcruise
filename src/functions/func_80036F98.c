@@ -75,6 +75,7 @@ void func_80036F98(Scene *scene) {
     u32 flags;
     Params params;
     s32 index;
+    s32 n;
     CommandWord *saved;
 
     saved = D_80112C90;
@@ -85,9 +86,9 @@ void func_80036F98(Scene *scene) {
         scene->unk34 = D_800A3D30;
     }
 
-    index = 0;
-    while (index < scene->unk14) {
-        node = scene->unk18[index++];
+    n = scene->unk14;
+    for (index = 0; index < n; index++) {
+        node = scene->unk18[index];
         dl = node->unk30;
         GFX_PIPESYNC(D_80112C90);
         item = node->unk00;

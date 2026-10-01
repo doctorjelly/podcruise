@@ -37,8 +37,9 @@ void func_8003B324(Gfx8003B324 **listPointer, s32 left, s32 right, s32 top, s32 
     s32 y3;
 
     list = *listPointer;
-    centerX = (f32)(right + left) * 0.5f;
+    negCosine = -cosine;
     centerY = (f32)(bottom + top) * 0.5f;
+    centerX = (f32)(right + left) * 0.5f;
 
     EMIT(list++, 0x01004008, D_800A4920);
     EMIT(list++, 0x021C0000, 0);
@@ -59,27 +60,25 @@ void func_8003B324(Gfx8003B324 **listPointer, s32 left, s32 right, s32 top, s32 
         dx1 = ((f32)right - centerX) / scaleX;
         dx0 = dx0 / scaleX;
         dy1 = ((f32)bottom - centerY) / scaleY;
-        negCosine = -cosine;
         x0 = (s32)((dx0 * sine + baseX + dy0 * cosine) * scaleX + 0.5f);
-        y0 = (s32)((dy0 * sine + baseY + dx0 * negCosine) * scaleY + 0.5f);
+        y0 = (s32)((dy0 * sine + baseY + negCosine * dx0) * scaleY + 0.5f);
         x1 = (s32)((dx1 * sine + baseX + dy0 * cosine) * scaleX + 0.5f);
-        y1 = (s32)((dy0 * sine + baseY + dx1 * negCosine) * scaleY + 0.5f);
+        y1 = (s32)((dy0 * sine + baseY + negCosine * dx1) * scaleY + 0.5f);
         x2 = (s32)((dx1 * sine + baseX + dy1 * cosine) * scaleX + 0.5f);
-        y2 = (s32)((dy1 * sine + baseY + dx1 * negCosine) * scaleY + 0.5f);
+        y2 = (s32)((dy1 * sine + baseY + negCosine * dx1) * scaleY + 0.5f);
         x3 = (s32)((dx0 * sine + baseX + dy1 * cosine) * scaleX + 0.5f);
-        y3 = (s32)((dy1 * sine + baseY + dx0 * negCosine) * scaleY + 0.5f);
+        y3 = (s32)((dy1 * sine + baseY + negCosine * dx0) * scaleY + 0.5f);
     } else {
-        negCosine = -cosine;
         x0 = (s32)(dx0 * sine + centerX + dy0 * cosine + 0.5f);
-        y0 = (s32)(dy0 * sine + centerY + dx0 * negCosine + 0.5f);
+        y0 = (s32)(dy0 * sine + centerY + negCosine * dx0 + 0.5f);
         dx1 = (f32)right - centerX;
         x1 = (s32)(dx1 * sine + centerX + dy0 * cosine + 0.5f);
-        y1 = (s32)(dy0 * sine + centerY + dx1 * negCosine + 0.5f);
+        y1 = (s32)(dy0 * sine + centerY + negCosine * dx1 + 0.5f);
         dy1 = (f32)bottom - centerY;
         x2 = (s32)(dx1 * sine + centerX + dy1 * cosine + 0.5f);
-        y2 = (s32)(dy1 * sine + centerY + dx1 * negCosine + 0.5f);
+        y2 = (s32)(dy1 * sine + centerY + negCosine * dx1 + 0.5f);
         x3 = (s32)(dx0 * sine + centerX + dy1 * cosine + 0.5f);
-        y3 = (s32)(dy1 * sine + centerY + dx0 * negCosine + 0.5f);
+        y3 = (s32)(dy1 * sine + centerY + negCosine * dx0 + 0.5f);
     }
 
     EMIT(list++, 0x02180000, (x0 << 16) | (y0 & 0xFFFF));

@@ -27,7 +27,7 @@ extern void *func_80017EDC(void *object);
 
 void func_800049FC(Node800049FC *node, f32 (*arg1)[7], s32 arg2) {
     s32 count;
-    f32 unused[22];
+    f32 unused[23];
     f32 vec[3];
     f32 zero;
     s32 i;

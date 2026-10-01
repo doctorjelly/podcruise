@@ -48,8 +48,8 @@ void func_800105DC(s16 *object) {
     do {
         func_8000A920((s16)*first, 0);
         func_8000A920((s16)*second, 0);
-        second++;
         first++;
+        second++;
     } while (second < &D_800D5FD0);
 
     i = 0;

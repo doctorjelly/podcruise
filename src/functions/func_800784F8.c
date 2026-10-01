@@ -49,6 +49,7 @@ extern void func_800834F0(void *node, f32 *first, f32 *second, f32 scale,
     ((value) < (low) ? (low) : ((value) > (high) ? (high) : (value)))
 
 void func_800784F8(void *craft) {
+    volatile u8 *_pad = 0;
     f32 heat;
     f32 velocity;
     f32 heat_level;
@@ -90,6 +91,7 @@ void func_800784F8(void *craft) {
     Matrix800784F8 *matrix_b;
     Matrix800784F8 *output;
 
+    (void)_pad;
     special_type = 0;
     paired_attachment = 0;
     if (POINTER(craft, 0x344) == 0) {

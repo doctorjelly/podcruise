@@ -19,9 +19,7 @@ extern u64 func_8008AB48(u64, u64);
 extern u64 func_8008AC48(u64, u64);
 
 void func_80081360(void) {
-    f64 now;
-    f64 prev;
-    f64 diff;
+    f64 diff, prev;
     u64 ticks;
 
     if (D_800A6758) {
@@ -30,14 +28,12 @@ void func_80081360(void) {
         D_800A26A0 = ticks;
         D_800A26A8 = ticks;
         D_800A26B0 = ticks;
-        now = func_8008126C();
-        D_80120C20 = now;
-        D_80120C00 = now;
+        D_80120C20 = func_8008126C();
+        D_80120C00 = D_80120C20;
         D_80120BF0 = 0.002;
         D_800A6758 = 0;
     } else if (D_800A6750 <= 0.0) {
-        now = func_8008126C();
-        D_80120C20 = now;
+        D_80120C20 = func_8008126C();
         diff = D_80120C20 - D_80120C00;
         D_80120BF0 = diff;
         D_80120BF8 = (f32)diff;

@@ -66,18 +66,19 @@ extern PcRacer80059E54 *D_8011B1BC;
 
 void func_80059E54(PcSession80059E54 *session, PcRacer80059E54 *racer,
                    void *object) {
-    char text[0x20];
-    const char *label;
-    f32 value;
-    s32 row;
-    s32 rowY;
-    s32 baseY;
-    s32 valueX;
-    s32 iconX;
-    s32 mode;
-    u8 red;
     u8 green;
+    s32 mode;
     u8 blue;
+    s32 colX;
+    s32 valueX;
+    u8 red;
+    s32 row;
+    s32 iconX;
+    s32 baseY;
+    s32 rowY;
+    const char *label;
+    char text[0x20];
+    f32 value;
 
     (void)object;
     mode = func_80051FF4();
@@ -106,15 +107,15 @@ void func_80059E54(PcSession80059E54 *session, PcRacer80059E54 *racer,
     rowY -= session->unk1C8 * 14;
     value = racer->unk74;
     if (value < 60.0f) {
-        valueX = 0x5B;
+        colX = 0x5B;
     } else if (value < 600.0f) {
-        valueX = 0x69;
+        colX = 0x69;
     } else if (value < D_800ACF78) {
-        valueX = 0x73;
+        colX = 0x73;
     } else if (value < D_800ACF7C) {
-        valueX = 0x7D;
+        colX = 0x7D;
     } else {
-        valueX = 0x87;
+        colX = 0x87;
     }
 
     for (row = 0; row < session->unk1C8; row++) {
@@ -124,8 +125,6 @@ void func_80059E54(PcSession80059E54 *session, PcRacer80059E54 *racer,
         func_8008A6B4(text, D_800ACD90, row + 1);
         func_8003EC40(0x2D, (s16)rowY, 0xFF, 0xFF, 0, 0xFF, text);
 
-        red = 0xFF;
-        green = 0x80;
         if (racer->unk60[row] <= session->unk1D0) {
             if (D_800A26F4 == 0) {
                 red = (u8)(u32)((((f32)func_80082BE0() /
@@ -136,15 +135,17 @@ void func_80059E54(PcSession80059E54 *session, PcRacer80059E54 *racer,
                 red = (u8)(u32)D_800ACF80;
             }
             green = (u8)(red - 0x14);
+        } else {
+            red = 0xFF;
+            green = 0x80;
         }
-        func_8003F084((s16)valueX, (s16)(rowY - 3), racer->unk60[row],
+        func_8003F084((s16)colX, (s16)(rowY - 3), racer->unk60[row],
                       red, green, 0, 0xFF, D_800ACD98);
         rowY += 14;
     }
 
     red = 0x32;
     green = 0xFF;
-    blue = 5;
     value = racer->unk74;
     if (value <= session->unk1D4) {
         session->unk1D4 = value;
@@ -154,7 +155,7 @@ void func_80059E54(PcSession80059E54 *session, PcRacer80059E54 *racer,
                              26.0f) +
                             24.0f);
         } else {
-            red = (u8)(u32)43.5f;
+            red = (u8)(u32)(value = 43.5f);
         }
         if (D_800A26F4 == 0) {
             green = (u8)(u32)((((f32)func_80082BE0() /
@@ -165,10 +166,12 @@ void func_80059E54(PcSession80059E54 *session, PcRacer80059E54 *racer,
             green = (u8)(u32)D_800ACF84;
         }
         blue = 0;
+    } else {
+        blue = 5;
     }
     func_8008A6B4(text, D_800ACDA0, D_800ACDA8);
     func_8003EC40(0x19, (s16)(rowY + 1), 0xF0, 0xFF, 0, 0xFF, text);
-    func_8003F084((s16)valueX, (s16)(rowY - 3), racer->unk74, red, green,
+    func_8003F084((s16)colX, (s16)(rowY - 3), racer->unk74, red, green,
                   blue, 0xFF, D_800ACDB4);
 
     if (D_800A52BC >= 2) {
@@ -186,17 +189,23 @@ void func_80059E54(PcSession80059E54 *session, PcRacer80059E54 *racer,
                               (f32)2147483648.0) *
                              127.0f) +
                             128.0f);
-            green = (u8)(u32)((((f32)func_80082BE0() /
-                                (f32)2147483648.0) *
-                               127.0f) +
-                              128.0f);
-            blue = (u8)(u32)((((f32)func_80082BE0() /
-                               (f32)2147483648.0) *
-                              127.0f) +
-                             128.0f);
         } else {
             red = (u8)(u32)D_800ACF88;
+        }
+        if (D_800A26F4 == 0) {
+            green = (u8)(u32)((((f32)func_80082BE0() /
+                              (f32)2147483648.0) *
+                             127.0f) +
+                            128.0f);
+        } else {
             green = (u8)(u32)D_800ACF8C;
+        }
+        if (D_800A26F4 == 0) {
+            blue = (u8)(u32)((((f32)func_80082BE0() /
+                              (f32)2147483648.0) *
+                             127.0f) +
+                            128.0f);
+        } else {
             blue = (u8)(u32)D_800ACF90;
         }
         func_8008A6B4(text, D_800ACDDC, racer->unk5C);
@@ -217,18 +226,18 @@ void func_80059E54(PcSession80059E54 *session, PcRacer80059E54 *racer,
         valueX = 0xA0;
         rowY = baseY;
         if (value < 0.5f) {
-            valueX = (s32)((f32)0xA0 -
-                           (2.0f * (0.5f - value) * 190.0f));
+            valueX = (s32)((f32)valueX -
+                           ((f32)2.0 * (0.5f - value) * 190.0f));
         }
         if (value > 7.5f) {
             valueX = (s32)((f32)valueX +
-                           (2.0f * (value - 7.5f) * 190.0f));
+                           ((f32)2.0 * (value - 7.5f) * 190.0f));
         }
 
         if (D_800A52BC < 2 && racer->unk5C < 4) {
             valueX -= 0x14;
             iconX = 0x140 - valueX;
-            rowY = baseY + 0x14;
+            rowY += 0x14;
             func_80087814((s16)(iconX - 0x11), (s16)(rowY - 0x21),
                           (s16)(iconX + 0x11), (s16)(rowY + 0x21));
             if (racer->unk5C == 1) {
@@ -259,17 +268,23 @@ void func_80059E54(PcSession80059E54 *session, PcRacer80059E54 *racer,
                               (f32)2147483648.0) *
                              127.0f) +
                             128.0f);
-            green = (u8)(u32)((((f32)func_80082BE0() /
-                                (f32)2147483648.0) *
-                               127.0f) +
-                              128.0f);
-            blue = (u8)(u32)((((f32)func_80082BE0() /
-                               (f32)2147483648.0) *
-                              127.0f) +
-                             128.0f);
         } else {
             red = (u8)(u32)D_800ACF94;
+        }
+        if (D_800A26F4 == 0) {
+            green = (u8)(u32)((((f32)func_80082BE0() /
+                              (f32)2147483648.0) *
+                             127.0f) +
+                            128.0f);
+        } else {
             green = (u8)(u32)D_800ACF98;
+        }
+        if (D_800A26F4 == 0) {
+            blue = (u8)(u32)((((f32)func_80082BE0() /
+                              (f32)2147483648.0) *
+                             127.0f) +
+                            128.0f);
+        } else {
             blue = (u8)(u32)D_800ACF9C;
         }
         func_8008A6B4(text, D_800ACE08, racer->unk5C);

@@ -134,8 +134,8 @@ void func_8004CA50(Context8004CA50 *context) {
     PcVec3f direction;
     Transform8004CA50 transformA;
     Transform8004CA50 transformB;
-    PcVec3f position;
     TrackNode8004CA50 *track;
+    PcVec3f position;
     f32 angle;
     f32 targetAngle;
     f32 sine;

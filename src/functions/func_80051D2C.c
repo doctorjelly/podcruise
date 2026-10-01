@@ -37,11 +37,11 @@ extern u8 D_800ACC30[];
 extern f64 D_80120BF0;
 
 void func_80051D2C(void *object, s32 reset) {
-    u8 text[0x114];
     s32 count;
     s32 index;
     s32 row;
     u8 *value;
+    u8 text[0x114];
     u8 *entry;
     u8 shade;
     u8 tint;
@@ -94,13 +94,13 @@ void func_80051D2C(void *object, s32 reset) {
         }
         if (row >= -9 && row < 0xFA) {
             if (entry[0] == 0) {
+                func_8008A6B4(text, D_800ACC24, value);
                 shade = 0xBE;
                 tint = 0xBE;
-                func_8008A6B4(text, D_800ACC24, value);
             } else {
+                func_8008A6B4(text, D_800ACC30, value);
                 shade = 0xFF;
                 tint = 0xFF;
-                func_8008A6B4(text, D_800ACC30, value);
             }
             func_8003EC40(0xA0, (s16)row, tint, shade, 0xFF, 0xFF, text);
         }

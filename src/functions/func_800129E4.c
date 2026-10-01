@@ -22,7 +22,6 @@ extern u8 D_800A1D1C[];
 s32 func_800129E4(u8 *arg0, Font *arg1) {
     u8 *p;
     Glyph *glyph;
-    u8 *base;
     s32 total;
     s32 done;
     s32 ch;
@@ -57,7 +56,6 @@ s32 func_800129E4(u8 *arg0, Font *arg1) {
         }
         if (c != 0 && !done) {
             glyph = 0;
-            base = arg1->unk5C;
             idx = ch;
             if (c >= 0x61 && c < 0x7B && arg1->unk5B < 0x61) {
                 idx = c - 0x20;
@@ -75,8 +73,8 @@ s32 func_800129E4(u8 *arg0, Font *arg1) {
                     }
                 }
             }
-            if (base != 0 && idx >= arg1->unk5A && idx <= arg1->unk5B) {
-                glyph = &((Glyph *)base)[idx - arg1->unk5A];
+            if (arg1->unk5C != 0 && idx >= arg1->unk5A && idx <= arg1->unk5B) {
+                glyph = &((Glyph *)arg1->unk5C)[idx - arg1->unk5A];
             }
             if (glyph != 0) {
                 total += glyph->unk02;

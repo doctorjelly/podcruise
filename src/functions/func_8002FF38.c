@@ -48,7 +48,10 @@ Object8002FF38 *func_8002FF38(s32 index) {
     if (obj->unk_4 != 2 || obj->unk_8 != 0) {
         size = obj->unk_C * 8;
         dest += 0x14;
-        func_80011D60(base + (range[2] + 0x14), dest, size);
+        {
+            s32 offset = range[2] + 0x14;
+            func_80011D60(base + offset, dest, size);
+        }
         obj->unk_10 = (Entry8002FF38 *)dest;
         for (i = 0; i < obj->unk_C; i++) {
         }
