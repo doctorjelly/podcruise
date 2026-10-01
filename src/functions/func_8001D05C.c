@@ -62,7 +62,7 @@ extern s32 func_80082BE0(void);
 extern void func_8008A6B4(char *, const char *, ...);
 
 void func_8001D05C(void *arg) {
-    char text[18] = "";
+    char text[19] = "";
     f32 point[3];
     f32 view[4][4];
     f32 place[4][4];
@@ -82,6 +82,7 @@ void func_8001D05C(void *arg) {
     s32 blue;
     u8 *record;
     f32 shade;
+    f32 angle;
 
     if (D_800D76F0 & 0x100) {
         if (D_800D7700 & 0x40) {
@@ -277,7 +278,8 @@ void func_8001D05C(void *arg) {
         func_800156DC(place, view);
         func_80015268(point, 0.0f, 600.0f, -60.0f);
         func_80016BF4(point, point, view);
-        func_800178C4(place, place, D_800A2518, view[2][0], view[2][1],
+        angle = D_800A2518;
+        func_800178C4(place, place, angle, view[2][0], view[2][1],
                       view[2][2]);
         func_80015328(place[3], place[3], point);
         func_80015288(place[3], point);

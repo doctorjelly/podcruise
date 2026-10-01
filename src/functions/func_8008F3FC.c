@@ -226,20 +226,25 @@ static f32 func_8008F34C(f32 value, s32 exponent, s16 rateHigh, u16 rateLow) {
 }
 
 Acmd *func_8008F3FC(Obj *obj, s32 arg1, s32 count, s32 time, Acmd *cmd) {
+    Acmd *out;
+    Obj *o;
     s16 dmemBase;
-    union {
-        f32 f;
-        s32 i;
-    } bits;
+    Event *ev1;
     s32 cur;
+    Obj *ev2;
+    s16 dmemIn;
     Event *event;
     Event *note;
     Event *done;
     Event *next;
-    s16 dmemIn;
+    Event *ev3;
+    union {
+        f32 f;
+        s32 i;
+    } bits;
+    Event *ev4;
+    Event *ev5;
     s32 delta;
-    Obj *o;
-    Acmd *out;
 
     (void)arg1;
     o = obj;
@@ -257,50 +262,6 @@ Acmd *func_8008F3FC(Obj *obj, s32 arg1, s32 count, s32 time, Acmd *cmd) {
         cur = event->time;
 
         switch (event->type) {
-        case 0:
-            *(s32 *)(event->arg0C.p + 0xD8) = 0;
-            func_80088450(D_800A6990, event->arg0C.p);
-            break;
-
-        case 11:
-        case 12:
-        case 16:
-            out = func_8008F0B4(o, &dmemIn, &dmemBase, delta, time, out);
-            if (o->unk30 >= o->unk34) {
-                o->unk28 = (s16)((D_800A7D80[o->unk18] * o->unk1A) >> 15);
-                o->unk30 = o->unk34;
-                o->unk1C = o->unk28;
-                o->unk2E =
-                    (s16)((D_800A7D80[127 - o->unk18] * o->unk1A) >> 15);
-                o->unk1E = o->unk2E;
-            } else {
-                o->unk1C = (s16)func_8008F34C((f32)o->unk1C, o->unk30,
-                                                o->unk26, (u16)o->unk24);
-                o->unk1E = (s16)func_8008F34C((f32)o->unk1E, o->unk30,
-                                                o->unk2C, (u16)o->unk2A);
-            }
-            if (o->unk1C == 0) {
-                o->unk1C = 1;
-            }
-            if (o->unk1E == 0) {
-                o->unk1E = 1;
-            }
-            if ((s16)o->unk3C->type == 12) {
-                o->unk18 = (s16)o->unk3C->arg0C.i;
-            }
-            if ((s16)o->unk3C->type == 11) {
-                o->unk30 = 0;
-                o->unk1A = (s16)((o->unk3C->arg0C.i * o->unk3C->arg0C.i)
-                                   >> 15);
-                o->unk34 = o->unk3C->arg10.w;
-            }
-            if ((s16)o->unk3C->type == 16) {
-                o->unk20 = D_800A7D80[o->unk3C->arg0C.i];
-                o->unk22 = D_800A7D80[127 - o->unk3C->arg0C.i];
-            }
-            o->unk38 = 1;
-            break;
-
         case 13:
             note = event;
             if (note->flag != 0) {
@@ -330,23 +291,72 @@ Acmd *func_8008F3FC(Obj *obj, s32 arg1, s32 count, s32 time, Acmd *cmd) {
             }
             break;
 
+        case 11:
+        case 12:
+        case 16:
+            out = func_8008F0B4(o, &dmemIn, &dmemBase, delta, time, out);
+            ev1 = o->unk3C;
+            if (o->unk30 >= o->unk34) {
+                o->unk28 = (s16)((D_800A7D80[o->unk18] * o->unk1A) >> 15);
+                o->unk30 = o->unk34;
+                o->unk1C = o->unk28;
+                o->unk2E =
+                    (s16)((D_800A7D80[127 - o->unk18] * o->unk1A) >> 15);
+                o->unk1E = o->unk2E;
+            } else {
+                o->unk1C = (s16)func_8008F34C((f32)o->unk1C, o->unk30,
+                                                o->unk26, (u16)o->unk24);
+                o->unk1E = (s16)func_8008F34C((f32)o->unk1E, o->unk30,
+                                                o->unk2C, (u16)o->unk2A);
+            }
+            if (o->unk1C == 0) {
+                o->unk1C = 1;
+            }
+            if (o->unk1E == 0) {
+                o->unk1E = 1;
+            }
+            if ((s16)ev1->type == 12) {
+                o->unk18 = (s16)ev1->arg0C.i;
+            }
+            if ((s16)o->unk3C->type == 11) {
+                o->unk30 = 0;
+                o->unk1A = (s16)((o->unk3C->arg0C.i * o->unk3C->arg0C.i)
+                                   >> 15);
+                o->unk34 = o->unk3C->arg10.w;
+            }
+            if ((s16)o->unk3C->type == 16) {
+                o->unk20 = D_800A7D80[o->unk3C->arg0C.i];
+                o->unk22 = D_800A7D80[127 - o->unk3C->arg0C.i];
+            }
+            o->unk38 = 1;
+            break;
+
         case 14:
             note = event;
             if (note->flag != 0) {
                 o->unk08(o, 8, 0);
             }
-            o->unk08(o, 5, note->arg0C.i);
+            ev5 = note;
+            o->unk08(o, 5, ev5->arg0C.i);
             o->unk08(o, 9, 0);
             break;
 
         case 15:
             out = func_8008F0B4(o, &dmemIn, &dmemBase, delta, time, out);
-            o->unk08(o, 4, 0);
+            ev2 = o;
+            ev2->unk08(o, 4, 0);
+            break;
+
+        case 0:
+            ev4 = event;
+            *(s32 *)(ev4->arg0C.p + 0xD8) = 0;
+            func_80088450(D_800A6990, ev4->arg0C.p);
             break;
 
         default:
             out = func_8008F0B4(o, &dmemIn, &dmemBase, delta, time, out);
-            o->unk08(o, (s16)o->unk3C->type, o->unk3C->arg0C.i);
+            ev3 = o->unk3C;
+            o->unk08(o, (s16)ev3->type, ev3->arg0C.i);
             break;
         }
 
