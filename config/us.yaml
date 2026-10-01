@@ -752,6 +752,7 @@ segments:
       - [0x4ECA0, c, functions/func_8004E0A0]
       - [0x4F088, c, functions/func_8004E488]
       - [0x4F0F4, asm, main_4F0F4]
+      - [0x4F608, c, functions/func_8004EA08]
       - [0x4FE54, c, functions/func_8004F254]
       - [0x4FF58, c, functions/func_8004F358]
       - [0x502E8, c, functions/func_8004F6E8]
