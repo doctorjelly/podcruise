@@ -27,14 +27,11 @@ void *func_800305E8(s32 index) {
     s32 padA[3];
     s32 header[3];
     s32 i;
-    s32 pad0;
     void *result;
     u8 *data;
     u8 *scratch;
     u32 *cursor;
     u32 word;
-    s32 pad1;
-    s32 pad2;
     u8 *mark;
     s32 started;
     s32 size;
@@ -45,9 +42,6 @@ void *func_800305E8(s32 index) {
     u8 *base[1];
 
     (void)padA;
-    (void)pad0;
-    (void)pad1;
-    (void)pad2;
     (void)pad4;
     D_800A2848 = 1;
     D_800D9DC8 = 0;
@@ -97,10 +91,13 @@ void *func_800305E8(s32 index) {
     result = data;
     cursor = (u32 *)data;
     for (i = 0; i < (size >> 2); i++) {
-        word = bitmap[0][i >> 5] & (1U << (31 - (i & 31)));
+        s32 shift = 31 - (i & 31);
+        word = bitmap[0][i >> 5] & (1U << shift);
         if (word != 0) {
-            if ((*cursor & 0xFF000000) == 0x0A000000) {
-                func_800304AC((s32)(*cursor & 0xFFFFFF), (s32 *)cursor,
+            u32 masked = *cursor & 0xFFFFFF;
+            u32 field = *cursor & 0xFF000000;
+            if (field == 0x0A000000) {
+                func_800304AC((s32)masked, (s32 *)cursor,
                               (s32 *)(cursor + 1));
             } else if (*cursor != 0) {
                 *cursor = *cursor + (u32)(unsigned long)data;

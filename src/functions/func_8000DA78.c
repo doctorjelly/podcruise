@@ -16,7 +16,6 @@ extern const char D_800A8548[];
 extern const char D_800A854C[];
 extern const char D_800A8554[];
 extern const char D_800A855C[];
-extern f64 D_800A8660;
 extern s32 D_800D5710;
 extern s32 D_800D5714;
 extern s32 D_800D7700;
@@ -169,15 +168,15 @@ void func_8000DA78(void) {
             continue;
         }
         base = index * 14;
-        red = 255.0f;
-        blue = 255.0f;
-        if ((f64)sp98 < D_800A8660) {
+        red = 255;
+        blue = 255;
+        if ((f64)sp98 < -9999.99) {
             if (sp94 < -9999) {
                 func_8008A6B4(sp1DC, D_800A8528, sp19C);
                 goto laid_out;
             }
         }
-        if (D_800A8660 < (f64)sp98) {
+        if (-9999.99 < (f64)sp98) {
             func_8008A6B4(sp1DC, D_800A8530, sp19C, (f64)sp98);
         } else {
             func_8008A6B4(sp1DC, D_800A853C, sp19C, sp94);
@@ -214,7 +213,7 @@ laid_out:
                 }
                 func_8008A6B4(sp2DC, D_800A8548, sp1DC);
                 func_8003EDD4(0xA0, (s16)y, (u8)(u32)red, (u8)(u32)green,
-                              (s32)(u32)blue, (s32)(u32)(255.0f * value), sp2DC);
+                              (s32)(u32)blue, (s32)(u32)(f32)(255.0 * value), sp2DC);
             }
         } else {
             green = 255.0f;

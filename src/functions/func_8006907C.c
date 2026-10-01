@@ -55,8 +55,9 @@ void func_8006907C(Obj6907C *object, f32 *arg1, f32 *position, f32 *direction) {
     f32 length;
     f32 previous[3];
     f32 scratch[3];
-    s32 count;
+    f32 pad[6];
 
+    (void)pad;
     amount = func_80068410(object);
     amount = func_800689A0(object) + amount;
     func_80068D04(object, amount, direction, velocity);
@@ -84,14 +85,14 @@ void func_8006907C(Obj6907C *object, f32 *arg1, f32 *position, f32 *direction) {
     if (!(object->unk060 & 0x5000)) {
         if (D_800AD538 < object->unk18C || D_800AD538 < -object->unk18C ||
             !(object->unk060 & 0x2000)) {
-            dot = object->unk1CC * velocity[2] +
-                  (velocity[0] * object->unk1C4 + velocity[1] * object->unk1C8);
+            direction = &object->unk1C4;
+            dot = (velocity[0] * object->unk1C4 + velocity[1] * object->unk1C8) + object->unk1CC * velocity[2];
             if (dot < 0.0f) {
                 velocity[0] = object->unk1C4 + velocity[0];
                 velocity[1] = object->unk1C8 + velocity[1];
                 velocity[2] = object->unk1CC + velocity[2];
             } else {
-                length = func_800153C0(&object->unk1C4);
+                length = func_800153C0(direction);
                 if (1.0f < length) {
                     if (1.0f < amount) {
                         planar = dot / (60.0f * amount);
@@ -104,7 +105,7 @@ void func_8006907C(Obj6907C *object, f32 *arg1, f32 *position, f32 *direction) {
                     if (planar < 1.0f) {
                         planar = 1.0f;
                     }
-                    func_800155EC(velocity, velocity, planar, &object->unk1C4);
+                    func_800155EC(velocity, velocity, planar, direction);
                 } else {
                     velocity[0] = object->unk1C4 + velocity[0];
                     velocity[1] = object->unk1C8 + velocity[1];
@@ -126,14 +127,14 @@ void func_8006907C(Obj6907C *object, f32 *arg1, f32 *position, f32 *direction) {
             previous[0] = position[0];
             previous[1] = position[1];
             previous[2] = position[2];
-            count = 0;
+            direction = (f32 *)0L;
             while (func_80033140(position, arg1, object->unk13C, scratch)) {
-                count++;
-                if (count == 6) {
+                direction = (f32 *)((long)direction + 1);
+                if ((long)direction == 6) {
                     break;
                 }
             }
-            if (count > 0) {
+            if ((long)direction > 0) {
                 if (object->unk060 & 0x80) {
                     object->unk1A4 =
                         object->unk1A4 * func_80081700(5.0f, (f32)D_80120BF0);

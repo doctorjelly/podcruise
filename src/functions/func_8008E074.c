@@ -28,6 +28,8 @@ typedef struct State8008E074 {
 Cmd8008E074 *func_8008E074(State8008E074 *state, s16 *countPtr, s32 count, s32 arg3,
                            Cmd8008E074 *cmd) {
     Cmd8008E074 *p;
+    Cmd8008E074 *a;
+    Cmd8008E074 *c;
     s32 length;
     s32 bytes;
     s32 address;
@@ -85,15 +87,16 @@ Cmd8008E074 *func_8008E074(State8008E074 *state, s16 *countPtr, s32 count, s32 a
                     } else {
                         pad = 0;
                     }
-                    p[0].w1 = (u32)((total - (total & 7)) + 8) & 0xFFFF;
-                    p[0].w0 = ((u32)(dmem + pad) & 0xFFFF) | 0x08000000;
-                    p[1].w0 = 0x04000000;
-                    p[1].w1 = address - misalign;
-                    p += 2;
+                    a = p++;
+                    c = p++;
+                    a->w1 = (u32)((total - (total & 7)) + 8) & 0xFFFF;
+                    a->w0 = ((u32)(dmem + pad) & 0xFFFF) | 0x08000000;
+                    c->w0 = 0x04000000;
+                    c->w1 = address - misalign;
                     if (misalign != 0 || pad != 0) {
-                        p[0].w0 = ((u32)((dmem + misalign) + pad) & 0xFFFFFF) | 0x0A000000;
-                        p[0].w1 = ((u32)dmem << 16) | ((u32)bytes & 0xFFFF);
-                        p += 1;
+                        a = p++;
+                        a->w0 = ((u32)((dmem + misalign) + pad) & 0xFFFFFF) | 0x0A000000;
+                        a->w1 = ((u32)dmem << 16) | ((u32)bytes & 0xFFFF);
                     }
                 }
                 state->unk38 = state->unk38 + count;
@@ -135,9 +138,9 @@ Cmd8008E074 *func_8008E074(State8008E074 *state, s16 *countPtr, s32 count, s32 a
             if (total < 0) {
                 total = 0;
             }
-            p[0].w0 = ((u32)(*countPtr + total) & 0xFFFFFF) | 0x02000000;
-            p[0].w1 = length;
-            p += 1;
+            a = p++;
+            a->w0 = ((u32)(*countPtr + total) & 0xFFFFFF) | 0x02000000;
+            a->w1 = length;
         }
     }
     return p;

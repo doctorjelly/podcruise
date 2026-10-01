@@ -14,84 +14,44 @@ typedef struct {
     f32 f2C;
 } Obj800321F0;
 
-extern f32 D_800AA3C8;
-extern f32 D_800AA3CC;
-extern f32 D_800AA3D0;
-extern f32 D_800AA3D4;
-extern f32 D_800AA3D8;
-extern f32 D_800AA3DC;
-extern f32 D_800AA3E0;
-extern f32 D_800AA3E4;
-extern f32 D_800AA3E8;
-extern f32 D_800AA3EC;
-extern f32 D_800AA3F0;
-extern f32 D_800AA3F4;
-extern f32 D_800AA3F8;
-extern f32 D_800AA3FC;
-extern f32 D_800AA400;
-extern f32 D_800AA404;
-extern f32 D_800AA408;
-extern f32 D_800AA40C;
-extern f32 D_800AA410;
-extern f32 D_800AA414;
-extern f32 D_800AA418;
-extern f32 D_800AA41C;
-extern f32 D_800AA420;
-extern f32 D_800AA424;
-extern f32 D_800AA428;
-extern f32 D_800AA42C;
-extern f32 D_800AA430;
-extern f32 D_800AA434;
-extern f32 D_800AA438;
-extern f32 D_800AA43C;
-extern f32 D_800AA440;
-extern f32 D_800AA444;
-extern f32 D_800AA448;
-extern f32 D_800AA44C;
-extern f32 D_800AA450;
-extern f32 D_800AA454;
-extern f32 D_800AA458;
-extern f32 D_800AA45C;
-extern f32 D_800AA460;
-extern f32 D_800AA464;
 
 void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
     switch (index) {
     case 0:
             if (channel == 1) {
-                object->f00 += D_800AA3C8 * step;
+                object->f00 += 0.05f * step;
                 if (object->f00 > 1.0f) {
                     object->f00 = 1.0f;
                 }
-                if (object->f00 < D_800AA3CC) {
-                    object->f00 = D_800AA3CC;
+                if (object->f00 < 0.01f) {
+                    object->f00 = 0.01f;
                 }
             }
             if (channel == 2) {
-                object->f00 += D_800AA3D4 * step;
+                object->f00 += 0.1f * step;
                 if (object->f00 > 1.0f) {
                     object->f00 = 1.0f;
                 }
-                if (object->f00 < D_800AA3D0) {
-                    object->f00 = D_800AA3D0;
+                if (object->f00 < 0.01f) {
+                    object->f00 = 0.01f;
                 }
             }
             if (channel == 3) {
-                object->f00 += D_800AA3D8 * step;
+                object->f00 += 0.15f * step;
                 if (object->f00 > 1.0f) {
                     object->f00 = 1.0f;
                 }
-                if (object->f00 < D_800AA3D0) {
-                    object->f00 = D_800AA3D0;
+                if (object->f00 < 0.01f) {
+                    object->f00 = 0.01f;
                 }
             }
             if (channel == 4) {
-                object->f00 += D_800AA3DC * step;
+                object->f00 += 0.2f * step;
                 if (object->f00 > 1.0f) {
                     object->f00 = 1.0f;
                 }
-                if (object->f00 < D_800AA3D0) {
-                    object->f00 = D_800AA3D0;
+                if (object->f00 < 0.01f) {
+                    object->f00 = 0.01f;
                 }
             }
             if (channel == 5) {
@@ -99,8 +59,8 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
                 if (object->f00 > 1.0f) {
                     object->f00 = 1.0f;
                 }
-                if (object->f00 < D_800AA3D0) {
-                    object->f00 = D_800AA3D0;
+                if (object->f00 < 0.01f) {
+                    object->f00 = 0.01f;
                 }
             }
         break;
@@ -123,7 +83,7 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
                     object->f04 = 50.0f;
                 }
             }
-            if (channel == 3) {
+            else if (channel == 3) {
                 object->f04 += 348.0f * step;
                 if (object->f04 > 1000.0f) {
                     object->f04 = 1000.0f;
@@ -132,7 +92,7 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
                     object->f04 = 50.0f;
                 }
             }
-            if (channel == 4) {
+            else if (channel == 4) {
                 object->f04 += 464.0f * step;
                 if (object->f04 > 1000.0f) {
                     object->f04 = 1000.0f;
@@ -141,8 +101,8 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
                     object->f04 = 50.0f;
                 }
             }
-            if (channel == 5) {
-                object->f04 += D_800AA3E0 * step;
+            else if (channel == 5) {
+                object->f04 += 578.0f * step;
                 if (object->f04 > 1000.0f) {
                     object->f04 = 1000.0f;
                 }
@@ -153,56 +113,56 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
         break;
     case 2:
             if (channel == 1) {
-                object->f0C = object->f0C * (D_800AA3E8 + D_800AA3E4 * (1.0f - step));
+                object->f0C = object->f0C * (0.86f + 0.13999999f * (1.0f - step));
                 if (object->f0C > 5.0f) {
                     object->f0C = 5.0f;
                 }
-                if (object->f0C < D_800AA3EC) {
-                    object->f0C = D_800AA3EC;
+                if (object->f0C < 0.1f) {
+                    object->f0C = 0.1f;
                 }
             }
             if (channel == 2) {
-                object->f0C = object->f0C * (D_800AA3F8 + D_800AA3F4 * (1.0f - step));
+                object->f0C = object->f0C * (0.72f + 0.27999997f * (1.0f - step));
                 if (object->f0C > 5.0f) {
                     object->f0C = 5.0f;
                 }
-                if (object->f0C < D_800AA3F0) {
-                    object->f0C = D_800AA3F0;
+                if (object->f0C < 0.1f) {
+                    object->f0C = 0.1f;
                 }
             }
             if (channel == 3) {
-                object->f0C = object->f0C * (D_800AA400 + D_800AA3FC * (1.0f - step));
+                object->f0C = object->f0C * (0.58f + 0.42000002f * (1.0f - step));
                 if (object->f0C > 5.0f) {
                     object->f0C = 5.0f;
                 }
-                if (object->f0C < D_800AA3F0) {
-                    object->f0C = D_800AA3F0;
+                if (object->f0C < 0.1f) {
+                    object->f0C = 0.1f;
                 }
             }
             if (channel == 4) {
-                object->f0C = object->f0C * (D_800AA408 + D_800AA404 * (1.0f - step));
+                object->f0C = object->f0C * (0.44f + 0.56f * (1.0f - step));
                 if (object->f0C > 5.0f) {
                     object->f0C = 5.0f;
                 }
-                if (object->f0C < D_800AA3F0) {
-                    object->f0C = D_800AA3F0;
+                if (object->f0C < 0.1f) {
+                    object->f0C = 0.1f;
                 }
             }
             if (channel == 5) {
-                object->f0C = object->f0C * (D_800AA410 + D_800AA40C * (1.0f - step));
+                object->f0C = object->f0C * (0.3f + 0.7f * (1.0f - step));
                 if (object->f0C > 5.0f) {
                     object->f0C = 5.0f;
                 }
-                if (object->f0C < D_800AA3F0) {
-                    object->f0C = D_800AA3F0;
+                if (object->f0C < 0.1f) {
+                    object->f0C = 0.1f;
                 }
             }
         break;
     case 3:
             if (channel == 1) {
                 object->f10 += 40.0f * step;
-                if (object->f10 > D_800AA414) {
-                    object->f10 = D_800AA414;
+                if (object->f10 > 650.0f) {
+                    object->f10 = 650.0f;
                 }
                 if (object->f10 < 450.0f) {
                     object->f10 = 450.0f;
@@ -210,8 +170,8 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
             }
             if (channel == 2) {
                 object->f10 += 80.0f * step;
-                if (object->f10 > D_800AA418) {
-                    object->f10 = D_800AA418;
+                if (object->f10 > 650.0f) {
+                    object->f10 = 650.0f;
                 }
                 if (object->f10 < 450.0f) {
                     object->f10 = 450.0f;
@@ -219,8 +179,8 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
             }
             if (channel == 3) {
                 object->f10 += 120.0f * step;
-                if (object->f10 > D_800AA418) {
-                    object->f10 = D_800AA418;
+                if (object->f10 > 650.0f) {
+                    object->f10 = 650.0f;
                 }
                 if (object->f10 < 450.0f) {
                     object->f10 = 450.0f;
@@ -228,8 +188,8 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
             }
             if (channel == 4) {
                 object->f10 += 160.0f * step;
-                if (object->f10 > D_800AA418) {
-                    object->f10 = D_800AA418;
+                if (object->f10 > 650.0f) {
+                    object->f10 = 650.0f;
                 }
                 if (object->f10 < 450.0f) {
                     object->f10 = 450.0f;
@@ -237,8 +197,8 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
             }
             if (channel == 5) {
                 object->f10 += 200.0f * step;
-                if (object->f10 > D_800AA418) {
-                    object->f10 = D_800AA418;
+                if (object->f10 > 650.0f) {
+                    object->f10 = 650.0f;
                 }
                 if (object->f10 < 450.0f) {
                     object->f10 = 450.0f;
@@ -247,7 +207,7 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
         break;
     case 4:
             if (channel == 1) {
-                object->f14 = object->f14 * (D_800AA420 + D_800AA41C * (1.0f - step));
+                object->f14 = object->f14 * (0.92f + 0.07999998f * (1.0f - step));
                 if (object->f14 > 1000.0f) {
                     object->f14 = 1000.0f;
                 }
@@ -256,7 +216,7 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
                 }
             }
             if (channel == 2) {
-                object->f14 = object->f14 * (D_800AA428 + D_800AA424 * (1.0f - step));
+                object->f14 = object->f14 * (0.83f + 0.17000002f * (1.0f - step));
                 if (object->f14 > 1000.0f) {
                     object->f14 = 1000.0f;
                 }
@@ -265,7 +225,7 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
                 }
             }
             if (channel == 3) {
-                object->f14 = object->f14 * (D_800AA430 + D_800AA42C * (1.0f - step));
+                object->f14 = object->f14 * (0.74f + 0.26f * (1.0f - step));
                 if (object->f14 > 1000.0f) {
                     object->f14 = 1000.0f;
                 }
@@ -274,7 +234,7 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
                 }
             }
             if (channel == 4) {
-                object->f14 = object->f14 * (D_800AA438 + D_800AA434 * (1.0f - step));
+                object->f14 = object->f14 * (0.65f + 0.35000002f * (1.0f - step));
                 if (object->f14 > 1000.0f) {
                     object->f14 = 1000.0f;
                 }
@@ -283,7 +243,7 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
                 }
             }
             if (channel == 5) {
-                object->f14 = object->f14 * (D_800AA440 + D_800AA43C * (1.0f - step));
+                object->f14 = object->f14 * (0.56f + 0.44f * (1.0f - step));
                 if (object->f14 > 1000.0f) {
                     object->f14 = 1000.0f;
                 }
@@ -294,7 +254,7 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
         break;
     case 5:
             if (channel == 1) {
-                object->f24 += D_800AA444 * step;
+                object->f24 += 1.6f * step;
                 if (object->f24 > 20.0f) {
                     object->f24 = 20.0f;
                 }
@@ -303,7 +263,7 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
                 }
             }
             if (channel == 2) {
-                object->f24 += D_800AA448 * step;
+                object->f24 += 3.2f * step;
                 if (object->f24 > 20.0f) {
                     object->f24 = 20.0f;
                 }
@@ -312,7 +272,7 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
                 }
             }
             if (channel == 3) {
-                object->f24 += D_800AA44C * step;
+                object->f24 += 4.8f * step;
                 if (object->f24 > 20.0f) {
                     object->f24 = 20.0f;
                 }
@@ -321,7 +281,7 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
                 }
             }
             if (channel == 4) {
-                object->f24 += D_800AA450 * step;
+                object->f24 += 6.4f * step;
                 if (object->f24 > 20.0f) {
                     object->f24 = 20.0f;
                 }
@@ -341,7 +301,7 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
         break;
     case 6:
             if (channel == 1) {
-                object->f2C += D_800AA454 * step;
+                object->f2C += 0.1f * step;
                 if (object->f2C > 1.0f) {
                     object->f2C = 1.0f;
                 }
@@ -350,7 +310,7 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
                 }
             }
             if (channel == 2) {
-                object->f2C += D_800AA458 * step;
+                object->f2C += 0.2f * step;
                 if (object->f2C > 1.0f) {
                     object->f2C = 1.0f;
                 }
@@ -359,7 +319,7 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
                 }
             }
             if (channel == 3) {
-                object->f2C += D_800AA45C * step;
+                object->f2C += 0.3f * step;
                 if (object->f2C > 1.0f) {
                     object->f2C = 1.0f;
                 }
@@ -368,7 +328,7 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
                 }
             }
             if (channel == 4) {
-                object->f2C += D_800AA460 * step;
+                object->f2C += 0.4f * step;
                 if (object->f2C > 1.0f) {
                     object->f2C = 1.0f;
                 }
@@ -377,7 +337,7 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
                 }
             }
             if (channel == 5) {
-                object->f2C += D_800AA464 * step;
+                object->f2C += 0.45f * step;
                 if (object->f2C > 1.0f) {
                     object->f2C = 1.0f;
                 }

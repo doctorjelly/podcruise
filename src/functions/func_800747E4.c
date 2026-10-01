@@ -26,10 +26,12 @@ void func_800747E4(u8 *obj) {
     } else if (*(u32 *)(obj + 0x64) & 0x10000) {
         dir = 1.0f;
     } else {
+        dir = 0.0f;
+    }
+    if (dir == 0.0f) {
         *(f32 *)(obj + 0x340) = 0.0f;
         *(f32 *)(obj + 0x33C) = 0.0f;
         *(f32 *)(obj + 0x338) = 0.0f;
-        dir = 0.0f;
     }
     if (dir == 0.0f) {
         return;

@@ -49,22 +49,22 @@ extern f32 func_8008035C(void *source);
 extern s32 func_80082BE0(void);
 
 void func_80073CD0(Ctx73CD0 *ctx, f32 pan) {
-    f32 pad[8];
-    f32 scaleA;
-    f32 scaleB;
-    s32 muted;
-    s16 newIndex;
-    s16 prevIndex;
-    Obj73CD0 *owner;
-    s32 mode;
-    s32 index;
-    s32 band;
     f32 ratio;
-    f32 *level;
-    s16 soundId;
+    s32 soundId;
     f32 amount;
-    f32 low;
+    s32 index;
+    f32 pad[7];
+    Obj73CD0 *owner;
     f32 high;
+    f32 scaleB;
+    s32 mode;
+    s32 band;
+    s32 muted;
+    s16 idx[2];
+    f32 scaleA;
+    f32 low;
+    s16 *pi;
+    f32 *level;
 
     (void)pad;
 
@@ -72,7 +72,7 @@ void func_80073CD0(Ctx73CD0 *ctx, f32 pan) {
     low = 50.0f;
     high = 73.0f;
     scaleA = ((1.0f - (D_800A36BC[*ctx->owner->kind][0] - low) / (high - low)) * 0.5f) + 0.75f;
-    scaleB = scaleA;
+    scaleB = ((1.0f - (D_800A36BC[*ctx->owner->kind][0] - low) / (high - low)) * 0.5f) + 0.75f;
     func_80009C0C(D_800A59FC, D_800A5A00, func_8008035C(&ctx->source), ctx->value);
 
     if (ctx->stateA & 0x5800) {
@@ -81,13 +81,13 @@ void func_80073CD0(Ctx73CD0 *ctx, f32 pan) {
 
     owner = ctx->owner;
     mode = func_80051FF4();
-    if (mode != 0) {
+    if (mode == 0) {
+        index = 0;
+    } else {
         index = func_800520C8(owner);
         if (index < 0) {
             return;
         }
-    } else {
-        index = 0;
     }
 
     ratio = ctx->value / owner->span;
@@ -103,12 +103,13 @@ void func_80073CD0(Ctx73CD0 *ctx, f32 pan) {
     if (amount < 0.0f) {
         amount = 0.0f;
     }
-    prevIndex = band;
+    idx[1] = band;
+    high = D_800A6688[band + 1] + D_800AD944;
     if (ratio < amount) {
         band = band - 1;
         D_8011C8A0[index] = band;
     }
-    if ((D_800A6688[prevIndex + 1] + D_800AD944) < ratio) {
+    if (high < ratio) {
         band = band + 1;
         D_8011C8A0[index] = band;
     }
@@ -120,16 +121,17 @@ void func_80073CD0(Ctx73CD0 *ctx, f32 pan) {
         band = 3;
         D_8011C8A0[index] = band;
     }
-    newIndex = band;
+    pi = idx;
+    pi[0] = band;
 
     if (level == D_800A6670) {
-        soundId = band + 0xA2;
+        soundId = (s16)(band + 0xA2);
     } else {
-        soundId = band + 0xA8;
+        soundId = (s16)(band + 0xA8);
     }
 
     if (soundId >= 0) {
-        amount = (D_800A66A0[newIndex][1] + D_800A66A0[newIndex][0]) * 0.5f;
+        amount = (D_800A66A0[pi[0]][1] + D_800A66A0[pi[0]][0]) * 0.5f;
         if (((f32)func_80082BE0() / (f32)2147483648.0) < D_800AD948) {
             func_80082BE0();
         }
@@ -200,10 +202,10 @@ void func_80073CD0(Ctx73CD0 *ctx, f32 pan) {
         }
     }
 
-    if (newIndex < prevIndex) {
+    if (idx[0] < idx[1]) {
         func_80082BE0();
         func_80082BE0();
-    } else if (prevIndex < newIndex) {
+    } else if (idx[1] < idx[0]) {
         amount = (f32)((f64)((f32)func_80082BE0() / (f32)2147483648.0) * D_800AD958 + D_800AD960) * scaleA;
         ratio = (f32)((f64)((f32)func_80082BE0() / (f32)2147483648.0) * D_800AD968 + 0.5) * pan;
         if (muted == 0) {

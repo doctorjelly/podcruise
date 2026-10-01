@@ -83,21 +83,23 @@ void func_80041F40(Actor *actor) {
     f32 mtxA[4][4];
     f32 vecP[3];
     f64 quarter;
+    f32 lean;
     f32 x;
     f32 y;
     f32 w;
     f32 dot;
     f32 vecQ[3];
     f32 vecR[3];
-    f32 lean;
     f32 unit;
     f32 cube;
     f32 euler[6];
     s32 notB;
     f64 absQuarter;
+    f32 absCube;
     f32 delta[3];
 
     notB = 0;
+    lean = 20.0f;
     pod = actor->unkF4;
     if (pod == 0) {
         return;
@@ -110,7 +112,7 @@ void func_80041F40(Actor *actor) {
     if (pod->unk60 & 0x20) {
         if (pod->unk1A0 < 50.0f) {
             func_800155EC(actor->unk224[3], actor->unk224[3],
-                          (f32)(-20.0f * D_80120BF0), pod->unk20[1]);
+                          (f32)(-lean * D_80120BF0), pod->unk20[1]);
         }
     }
     if (pod->unk60 & 0x06000000) {
@@ -235,19 +237,23 @@ void func_80041F40(Actor *actor) {
     }
     func_80016F0C(actor->unkF4->unk20, euler);
     unit = euler[5] / 180.0f;
+    cube = unit * 180.0f;
     if (flagB == 0) {
         cube = unit * unit * unit * 180.0f;
+        if (cube < 0.0f) {
+            absCube = -cube;
+        } else {
+            absCube = cube;
+        }
         quarter = euler[5] * 0.25;
         if (quarter < 0.0) {
             absQuarter = -quarter;
         } else {
             absQuarter = quarter;
         }
-        if ((f64)(cube < 0.0f ? -cube : cube) <= absQuarter) {
+        if ((f64)absCube <= absQuarter) {
             cube = (f32)quarter;
         }
-    } else {
-        cube = unit * 180.0f;
     }
     func_8001745C(mtxB[0], 0.0f, 0.0f, cube);
     func_80015288(mtxB[3], vecQ);

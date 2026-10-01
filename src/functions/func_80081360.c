@@ -3,28 +3,30 @@
 
 extern s32 D_800A6758;
 extern f64 D_800A6750;
-extern volatile long long D_800A26A0;
-extern volatile long long D_800A26A8;
-extern long long D_800A26B0;
+extern u64 D_800A26A0;
+extern u64 D_800A26A8;
+extern u64 D_800A26B0;
 extern volatile f64 D_80120BF0;
 extern volatile f32 D_80120BF8;
 extern volatile f64 D_80120C00;
-extern volatile f64 D_80120C20;
+extern f64 D_80120C20;
 extern volatile s32 D_80120BE8;
 
 extern void func_80081260(void);
-extern long long func_800811DC(void);
+extern u64 func_800811DC(void);
 extern f64 func_8008126C(void);
+extern u64 func_8008AB48(u64, u64);
+extern u64 func_8008AC48(u64, u64);
 
 void func_80081360(void) {
     f64 now;
     f64 prev;
     f64 diff;
-    long long ticks;
+    u64 ticks;
 
     if (D_800A6758) {
         func_80081260();
-        ticks = func_800811DC() * 64 / 3000;
+        ticks = func_8008AB48(func_8008AC48(func_800811DC(), 64), 3000);
         D_800A26A0 = ticks;
         D_800A26A8 = ticks;
         D_800A26B0 = ticks;
@@ -36,7 +38,7 @@ void func_80081360(void) {
     } else if (D_800A6750 <= 0.0) {
         now = func_8008126C();
         D_80120C20 = now;
-        diff = now - D_80120C00;
+        diff = D_80120C20 - D_80120C00;
         D_80120BF0 = diff;
         D_80120BF8 = (f32)diff;
         if (D_80120BF8 < 0.002f) {
@@ -45,7 +47,7 @@ void func_80081360(void) {
         if (0.05f < D_80120BF8) {
             D_80120BF8 = 0.05;
         }
-        D_80120C00 = now;
+        D_80120C00 = D_80120C20;
     } else {
         prev = D_80120C20;
         D_80120BF0 = D_800A6750;

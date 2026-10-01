@@ -95,13 +95,19 @@ extern void func_800834F0(void *node, void *first, void *second, f32 phase,
 void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByType,
                    f32 scaleX, f32 scaleY, f32 scaleZ, f32 depth, s32 animate,
                    f32 requestX, f32 requestY) {
-    Matrix80018480 base;
+    s32 index;
+    s32 type;
     Matrix80018480 work;
-    Matrix80018480 firstMatrix;
-    Matrix80018480 secondMatrix;
-    Matrix80018480 beamMatrix;
+    Matrix80018480 base;
     PcVec3f firstVector;
     PcVec3f secondVector;
+    f32 typeScale;
+    f32 length;
+    f32 phase;
+    f32 beamX;
+    f32 beamZ;
+    f32 sine[8];
+    f32 cosine[8];
     PcVec3f firstPoint;
     PcVec3f secondPoint;
     PcVec3f firstOffset;
@@ -109,22 +115,18 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
     PcVec3f direction;
     PcVec3f firstZero;
     PcVec3f secondZero;
-    f32 sine[8];
-    f32 cosine[8];
-    f32 typeScale;
-    f32 length;
-    f32 phase;
-    TypeGeometry80018480 *geometry;
-    void *node;
-    s32 index;
-    s32 type;
+    Matrix80018480 firstMatrix;
+    Matrix80018480 secondMatrix;
+    Matrix80018480 beamMatrix;
+    void *node1;
+    void *node0;
+    void **slot;
 
     if (object == 0) {
         return;
     }
 
     type = object->type;
-    geometry = &D_800A5CA0[type];
 
     if (animate != 0) {
         for (index = 0; index < 8; index++) {
@@ -164,35 +166,37 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
     func_800156DC((PcVec3fSlot *)base, (PcVec3fSlot *)source);
     func_80017918(work, scaleX, scaleY, scaleZ, base);
 
-    node = object->primary[0];
-    if (node != 0) {
-        func_80017D48(node, 0);
-        func_800181BC(node, 2, 3, 0x10, 2);
+    node0 = object->primary[0];
+    if (node0 != 0) {
+        func_80017D48(node0, 0);
+        func_800181BC(node0, 2, 3, 0x10, 2);
     }
 
     if ((D_8009B7D8 & 0x80) != 0 && (D_800D76F4 & 0x400) != 0) {
-        node = object->primary[0];
-        if (node != 0) {
-            func_80017D48(node, 1);
-            func_800181BC(node, 2, 3, 0x10, 2);
+        node0 = object->primary[0];
+        if (node0 != 0) {
+            func_80017D48(node0, 1);
+        }
+        if (node0 != 0) {
+            func_800181BC(node0, 2, 3, 0x10, 2);
         }
 
-        node = object->primary128;
-        if (node != 0) {
+        node1 = object->primary128;
+        if (node1 != 0) {
             func_800156DC((PcVec3fSlot *)work, (PcVec3fSlot *)base);
             func_80017918(work, D_800A9AF0, D_800A9AF0, D_800A9AF0, work);
             if (animate != 0) {
                 func_800155EC((PcVec3f *)work[3], (PcVec3f *)work[3],
                               sine[3] * D_800A9AF4, (PcVec3f *)work[2]);
             }
-            func_80017BA8(node, work);
-            func_800181BC(node, 2, 3, 0x10, 2);
+            func_80017BA8(node1, work);
+            func_800181BC(node1, 2, 3, 0x10, 2);
         }
     } else {
-        node = object->primary[1];
-        if (node != 0) {
+        node1 = object->primary[1];
+        if (node1 != 0) {
             func_800156DC((PcVec3fSlot *)work, (PcVec3fSlot *)base);
-            func_80015288(&firstVector, &geometry->attachment);
+            func_80015288(&firstVector, &D_800A5CA0[type].attachment);
             func_80016BF4(&secondVector, &firstVector, work);
             func_80015328((PcVec3f *)work[3], (PcVec3f *)work[3], &secondVector);
             if (animate != 0) {
@@ -203,11 +207,13 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
                 func_80017824(work, sine[1] * 5.0f, secondVector.x,
                               secondVector.y, secondVector.z, 0);
             }
-            func_80017BA8(node, work);
-            func_800181BC(node, 2, 3, 0x10, 2);
+            func_80017BA8(node1, work);
+        }
+        if (node1 != 0) {
+            func_800181BC(node1, 2, 3, 0x10, 2);
 
-            node = object->primary[3];
-            if (node != 0) {
+            node1 = object->primary[3];
+            if (node1 != 0) {
                 func_80015288(&firstVector, &D_800A6654);
                 func_80016BF4(&secondVector, &firstVector, base);
                 func_80015328((PcVec3f *)work[3], (PcVec3f *)work[3],
@@ -220,27 +226,31 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
                     func_80017824(work, sine[1] * 5.0f, secondVector.x,
                                   secondVector.y, secondVector.z, 0);
                 }
-                func_80017BA8(node, work);
-                func_800181BC(node, 2, 3, 0x10, 2);
+                func_80017BA8(node1, work);
+            }
+            if (node1 != 0) {
+                func_800181BC(node1, 2, 3, 0x10, 2);
             }
 
-            node = object->primaryF8;
-            if (node != 0) {
+            node1 = object->primaryF8;
+            if (node1 != 0) {
                 func_80015288(&secondVector, (PcVec3f *)work[3]);
                 func_80017520(work, scaleX, scaleY, scaleZ);
                 func_80015288((PcVec3f *)work[3], &secondVector);
                 work[3][2] = depth;
                 func_80017918(work, D_800A9B00, D_800A9B00, D_800A9B00,
                               work);
-                func_80017BA8(node, work);
-                func_800181BC(node, 2, 3, 0x10, 2);
+                func_80017BA8(node1, work);
+            }
+            if (node1 != 0) {
+                func_800181BC(node1, 2, 3, 0x10, 2);
             }
         }
 
-        node = object->primary[2];
-        if (node != 0) {
+        node1 = object->primary[2];
+        if (node1 != 0) {
             func_800156DC((PcVec3fSlot *)work, (PcVec3fSlot *)base);
-            func_80015288(&firstVector, &geometry->attachment);
+            func_80015288(&firstVector, &D_800A5CA0[type].attachment);
             firstVector.x = -firstVector.x;
             func_80016BF4(&secondVector, &firstVector, work);
             func_80015328((PcVec3f *)work[3], (PcVec3f *)work[3], &secondVector);
@@ -252,11 +262,13 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
                 func_80017824(work, sine[2] * 5.0f, secondVector.x,
                               secondVector.y, secondVector.z, 0);
             }
-            func_80017BA8(node, work);
-            func_800181BC(node, 2, 3, 0x10, 2);
+            func_80017BA8(node1, work);
+        }
+        if (node1 != 0) {
+            func_800181BC(node1, 2, 3, 0x10, 2);
 
-            node = object->primary[4];
-            if (node != 0) {
+            node1 = object->primary[4];
+            if (node1 != 0) {
                 func_80015288(&firstVector, &D_800A6654);
                 firstVector.x = -firstVector.x;
                 func_80016BF4(&secondVector, &firstVector, base);
@@ -270,32 +282,36 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
                     func_80017824(work, sine[0] * 5.0f, secondVector.x,
                                   secondVector.y, secondVector.z, 0);
                 }
-                func_80017BA8(node, work);
-                func_800181BC(node, 2, 3, 0x10, 2);
+                func_80017BA8(node1, work);
+            }
+            if (node1 != 0) {
+                func_800181BC(node1, 2, 3, 0x10, 2);
             }
 
-            node = object->primaryFC;
-            if (node != 0) {
+            node1 = object->primaryFC;
+            if (node1 != 0) {
                 func_80015288(&secondVector, (PcVec3f *)work[3]);
                 func_80017520(work, scaleX, scaleY, scaleZ);
                 func_80015288((PcVec3f *)work[3], &secondVector);
                 work[3][2] = depth;
                 func_80017918(work, D_800A9B0C, D_800A9B0C, D_800A9B0C,
                               work);
-                func_80017BA8(node, work);
-                func_800181BC(node, 2, 3, 0x10, 2);
+                func_80017BA8(node1, work);
+            }
+            if (node1 != 0) {
+                func_800181BC(node1, 2, 3, 0x10, 2);
             }
         }
 
-        node = object->primary[5];
-        if (node != 0) {
+        node1 = object->primary[5];
+        if (node1 != 0) {
             func_800156DC((PcVec3fSlot *)work, (PcVec3fSlot *)base);
-            func_80015288(&firstVector, &geometry->center);
+            func_80015288(&firstVector, &D_800A5CA0[type].center);
             func_80016BF4(&secondVector, &firstVector, work);
             func_80015328((PcVec3f *)work[3], (PcVec3f *)work[3], &secondVector);
             if (animate != 0) {
-                work[3][2] = (f32)STRIDED_BYTE(D_800A3204, type) * 10.0f
-                             + depth + 1.5f * scaleZ;
+                work[3][2] = (f32)(STRIDED_BYTE(D_800A3204, type) * 10) + depth
+                             + 1.5f * scaleZ;
                 func_800155EC((PcVec3f *)work[3], (PcVec3f *)work[3],
                               sine[5] * D_800A9B10, (PcVec3f *)work[2]);
                 func_80015288(&secondVector, (PcVec3f *)work[1]);
@@ -303,8 +319,10 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
                 func_80017824(work, sine[1] * 10.0f, secondVector.x,
                               secondVector.y, secondVector.z, 0);
             }
-            func_80017BA8(node, work);
-            func_800181BC(node, 2, 3, 0x10, 2);
+            func_80017BA8(node1, work);
+        }
+        if (node1 != 0) {
+            func_800181BC(node1, 2, 3, 0x10, 2);
 
             if (firstVector.y == 0.0f) {
                 if (object->primary[1] != 0) {
@@ -315,15 +333,17 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
                 }
             }
 
-            node = object->primary100;
-            if (node != 0) {
+            node1 = object->primary100;
+            if (node1 != 0) {
                 func_80015288(&secondVector, (PcVec3f *)work[3]);
                 func_80017520(work, scaleX, scaleY, scaleZ);
                 func_80015288((PcVec3f *)work[3], &secondVector);
                 work[3][2] = depth;
                 func_80017918(work, 0.004f, 0.004f, 0.004f, work);
-                func_80017BA8(node, work);
-                func_800181BC(node, 2, 3, 0x10, 2);
+                func_80017BA8(node1, work);
+            }
+            if (node1 != 0) {
+                func_800181BC(node1, 2, 3, 0x10, 2);
             }
         }
 
@@ -358,16 +378,16 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
             D_800A21AC--;
         }
 
-        node = object->beam[4];
-        if (node != 0) {
+        slot = &object->beam[4];
+        if (*slot != 0) {
             func_80017C18(object->primary[5], secondMatrix);
             func_80015288(&firstPoint, (PcVec3f *)secondMatrix[3]);
             func_80017C18(object->primary[1], firstMatrix);
             func_80015288(&secondPoint, (PcVec3f *)firstMatrix[3]);
-            func_80015288(&firstOffset, &geometry->firstEndpoint);
+            func_80015288(&firstOffset, &D_800A5CA0[type].firstEndpoint);
             func_80016BF4(&firstOffset, &firstOffset, secondMatrix);
             func_80015328(&firstPoint, &firstOffset, &firstPoint);
-            func_80015288(&secondOffset, &geometry->secondEndpoint);
+            func_80015288(&secondOffset, &D_800A5CA0[type].secondEndpoint);
             func_80016BF4(&secondOffset, &secondOffset, firstMatrix);
             func_80015328(&secondPoint, &secondOffset, &secondPoint);
             func_8001535C(&direction, &firstPoint, &secondPoint);
@@ -384,28 +404,32 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
                           (PcVec3f *)beamMatrix[1]);
             func_80017918(beamMatrix, D_800A9B14 * scaleX, length / 100.0f,
                           D_800A9B14 * scaleZ, beamMatrix);
-            func_80017BA8(node, beamMatrix);
+            func_80017BA8(*slot, beamMatrix);
             if (D_800A21AC > 0) {
                 func_80015268(&secondZero, 0.0f, 0.0f, 0.0f);
                 func_80015268(&firstZero, 0.0f, 0.0f, 0.0f);
                 phase = animate != 0 ? D_800A9B18 : 0.5f;
-                func_800834F0(node, &secondZero, &firstZero, phase, 1.0f,
+                func_800834F0(*slot, &secondZero, &firstZero, phase, 1.0f,
                               0.0f, 50.0f, 0);
             }
-            func_800181BC(node, 2, 3, 0x10, 2);
+        }
+        if (*slot != 0) {
+            func_800181BC(*slot, 2, 3, 0x10, 2);
         }
 
-        node = object->beam[5];
-        if (node != 0) {
+        slot = &object->beam[5];
+        if (*slot != 0) {
+            beamX = D_800A9B1C * scaleX;
+            beamZ = D_800A9B20 * scaleZ;
             func_80017C18(object->primary[5], secondMatrix);
             func_80015288(&firstPoint, (PcVec3f *)secondMatrix[3]);
             func_80017C18(object->primary[2], firstMatrix);
             func_80015288(&secondPoint, (PcVec3f *)firstMatrix[3]);
-            func_80015288(&firstOffset, &geometry->firstEndpoint);
+            func_80015288(&firstOffset, &D_800A5CA0[type].firstEndpoint);
             firstOffset.x = -firstOffset.x;
             func_80016BF4(&firstOffset, &firstOffset, secondMatrix);
             func_80015328(&firstPoint, &firstOffset, &firstPoint);
-            func_80015288(&secondOffset, &geometry->secondEndpoint);
+            func_80015288(&secondOffset, &D_800A5CA0[type].secondEndpoint);
             secondOffset.x = -secondOffset.x;
             func_80016BF4(&secondOffset, &secondOffset, firstMatrix);
             func_80015328(&secondPoint, &secondOffset, &secondPoint);
@@ -421,29 +445,33 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
             func_80015538((PcVec3f *)beamMatrix[2],
                           (PcVec3f *)beamMatrix[0],
                           (PcVec3f *)beamMatrix[1]);
-            func_80017918(beamMatrix, D_800A9B1C * scaleX, length / 100.0f,
-                          D_800A9B20 * scaleZ, beamMatrix);
-            func_80017BA8(node, beamMatrix);
+            func_80017918(beamMatrix, beamX, length / 100.0f, beamZ,
+                          beamMatrix);
+            func_80017BA8(*slot, beamMatrix);
             if (D_800A21AC > 0) {
                 func_80015268(&secondZero, 0.0f, 0.0f, 0.0f);
                 func_80015268(&firstZero, 0.0f, 0.0f, 0.0f);
                 phase = animate != 0 ? D_800A9B24 : 0.5f;
-                func_800834F0(node, &secondZero, &firstZero, phase, 1.0f,
+                func_800834F0(*slot, &secondZero, &firstZero, phase, 1.0f,
                               0.0f, 50.0f, 0);
             }
-            func_800181BC(node, 2, 3, 0x10, 2);
+        }
+        if (*slot != 0) {
+            func_800181BC(*slot, 2, 3, 0x10, 2);
         }
 
-        node = object->beam[6];
-        if (node != 0) {
+        slot = &object->beam[6];
+        if (*slot != 0) {
+            beamX = D_800A9B28 * scaleX;
+            beamZ = D_800A9B2C * scaleZ;
             func_80017C18(object->primary[5], secondMatrix);
             func_80015288(&firstPoint, (PcVec3f *)secondMatrix[3]);
             func_80017C18(object->primary[3], firstMatrix);
             func_80015288(&secondPoint, (PcVec3f *)firstMatrix[3]);
-            func_80015288(&firstOffset, &geometry->firstEndpoint);
+            func_80015288(&firstOffset, &D_800A5CA0[type].firstEndpoint);
             func_80016BF4(&firstOffset, &firstOffset, secondMatrix);
             func_80015328(&firstPoint, &firstOffset, &firstPoint);
-            func_80015288(&secondOffset, &geometry->secondEndpoint);
+            func_80015288(&secondOffset, &D_800A5CA0[type].secondEndpoint);
             func_80016BF4(&secondOffset, &secondOffset, firstMatrix);
             func_80015328(&secondPoint, &secondOffset, &secondPoint);
             func_8001535C(&direction, &firstPoint, &secondPoint);
@@ -458,30 +486,34 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
             func_80015538((PcVec3f *)beamMatrix[2],
                           (PcVec3f *)beamMatrix[0],
                           (PcVec3f *)beamMatrix[1]);
-            func_80017918(beamMatrix, D_800A9B28 * scaleX, length / 100.0f,
-                          D_800A9B2C * scaleZ, beamMatrix);
-            func_80017BA8(node, beamMatrix);
+            func_80017918(beamMatrix, beamX, length / 100.0f, beamZ,
+                          beamMatrix);
+            func_80017BA8(*slot, beamMatrix);
             if (D_800A21AC > 0) {
                 func_80015268(&secondZero, 0.0f, 0.0f, 0.0f);
                 func_80015268(&firstZero, 0.0f, 0.0f, 0.0f);
                 phase = animate != 0 ? D_800A9B30 : 0.5f;
-                func_800834F0(node, &secondZero, &firstZero, phase, 1.0f,
+                func_800834F0(*slot, &secondZero, &firstZero, phase, 1.0f,
                               0.0f, 50.0f, 0);
             }
-            func_800181BC(node, 2, 3, 0x10, 2);
+        }
+        if (*slot != 0) {
+            func_800181BC(*slot, 2, 3, 0x10, 2);
         }
 
-        node = object->beam[7];
-        if (node != 0) {
+        slot = &object->beam[7];
+        if (*slot != 0) {
+            beamX = D_800A9B34 * scaleX;
+            beamZ = D_800A9B38 * scaleZ;
             func_80017C18(object->primary[5], secondMatrix);
             func_80015288(&firstPoint, (PcVec3f *)secondMatrix[3]);
             func_80017C18(object->primary[4], firstMatrix);
             func_80015288(&secondPoint, (PcVec3f *)firstMatrix[3]);
-            func_80015288(&firstOffset, &geometry->firstEndpoint);
+            func_80015288(&firstOffset, &D_800A5CA0[type].firstEndpoint);
             firstOffset.x = -firstOffset.x;
             func_80016BF4(&firstOffset, &firstOffset, secondMatrix);
             func_80015328(&firstPoint, &firstOffset, &firstPoint);
-            func_80015288(&secondOffset, &geometry->secondEndpoint);
+            func_80015288(&secondOffset, &D_800A5CA0[type].secondEndpoint);
             secondOffset.x = -secondOffset.x;
             func_80016BF4(&secondOffset, &secondOffset, firstMatrix);
             func_80015328(&secondPoint, &secondOffset, &secondPoint);
@@ -497,17 +529,19 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
             func_80015538((PcVec3f *)beamMatrix[2],
                           (PcVec3f *)beamMatrix[0],
                           (PcVec3f *)beamMatrix[1]);
-            func_80017918(beamMatrix, D_800A9B34 * scaleX, length / 100.0f,
-                          D_800A9B38 * scaleZ, beamMatrix);
-            func_80017BA8(node, beamMatrix);
+            func_80017918(beamMatrix, beamX, length / 100.0f, beamZ,
+                          beamMatrix);
+            func_80017BA8(*slot, beamMatrix);
             if (D_800A21AC > 0) {
                 func_80015268(&secondZero, 0.0f, 0.0f, 0.0f);
                 func_80015268(&firstZero, 0.0f, 0.0f, 0.0f);
                 phase = animate != 0 ? D_800A9B3C : 0.5f;
-                func_800834F0(node, &secondZero, &firstZero, phase, 1.0f,
+                func_800834F0(*slot, &secondZero, &firstZero, phase, 1.0f,
                               0.0f, 50.0f, 0);
             }
-            func_800181BC(node, 2, 3, 0x10, 2);
+        }
+        if (*slot != 0) {
+            func_800181BC(*slot, 2, 3, 0x10, 2);
         }
 
         if (D_800A21AC == 4) {

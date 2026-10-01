@@ -73,8 +73,10 @@ extern s32 func_80082BE0(void);
 extern void func_80086730(s32, f32, f32, f32, f32, f32);
 
 void func_8005337C(Owner8005337C *owner) {
-    u32 message[14];
+    u32 message[12];
     s32 index;
+    f32 lo;
+    f32 hi;
 
     if (D_800A5998 == 0) {
         func_80053300(owner);
@@ -177,14 +179,16 @@ void func_8005337C(Owner8005337C *owner) {
         case 0:
             func_8007EB7C(owner->effect1AC, 1);
             owner->timer0C = (f32)((f64)owner->timer0C - D_80120BF0);
+            lo = D_800ACE90;
+            hi = D_800ACE8C;
             for (index = 0; index < owner->count1BC; index++) {
                 Record8005337C *record =
                     (Record8005337C *)((u8 *)D_8011B1B8 + index * 0x88);
                 Subject8005337C *subject = record->subject84;
 
                 if (subject != 0) {
-                    if (owner->timer0C > D_800ACE90 &&
-                        owner->timer0C < D_800ACE8C) {
+                    if (owner->timer0C > lo &&
+                        owner->timer0C < hi) {
                         subject->flags64 |= 0x800;
                     } else {
                         subject->flags64 &= ~0x800;

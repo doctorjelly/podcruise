@@ -52,7 +52,7 @@ void func_80042BB8(Actor80042BB8 *actor) {
     (void)spare;
     if (func_80051FF4() == 1) {
         spread = 2.0f;
-        fade = D_800A4AF0 + D_80120BF0 * 3.0;
+        fade = D_800A4AF0 + 3.0 * D_80120BF0;
     } else {
         spread = 1.5f;
         fade = D_800A4AF0 + D_80120BF0 * (3.0f / (f32)func_80051FF4());

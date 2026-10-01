@@ -68,10 +68,11 @@ void func_80069EC0(Body *body, Vec3 *vel, Vec3 *normal) {
     s32 pad1;
     s32 pad2;
     f32 impact;
-    s32 pad3;
+    f32 nx;
+    f32 nz;
 
-    pad0 = 0; pad1 = 0; pad2 = 0; pad3 = 0;
-    (void)pad0; (void)pad1; (void)pad2; (void)pad3;
+    pad0 = 0; pad1 = 0; pad2 = 0;
+    (void)pad0; (void)pad1; (void)pad2;
     hit = 0;
     vecs[2].x = normal->x;
     vecs[2].y = normal->y;
@@ -98,10 +99,12 @@ void func_80069EC0(Body *body, Vec3 *vel, Vec3 *normal) {
     speed = func_800153C0(&vecs[1]);
     if (D_800AD594 <= speed) {
         scale = 1.0f / speed;
-        vecs[1].x = vecs[1].x * scale;
+        nx = vecs[1].x * scale;
         vecs[1].y = vecs[1].y * scale;
-        vecs[1].z = vecs[1].z * scale;
-        forward = vecs[1].x * body->unk30.x + vecs[1].y * body->unk30.y + body->unk30.z * vecs[1].z;
+        nz = vecs[1].z * scale;
+        vecs[1].x = nx;
+        vecs[1].z = nz;
+        forward = nx * body->unk30.x + vecs[1].y * body->unk30.y + body->unk30.z * nz;
         func_80015538(&vecs[0], &body->unk194, &body->unk30);
         func_800154D0(&vecs[0]);
         side = vecs[1].x * vecs[0].x + vecs[1].y * vecs[0].y + vecs[0].z * vecs[1].z;

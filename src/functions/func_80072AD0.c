@@ -60,10 +60,10 @@ void func_80072AD0(void *object, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     if (arg1 != 0) {
         func_8003B250((u8 *)object + 0xAC, 0);
     }
+    node = POINTER_AT(object, 0x1E70);
+    FLOAT_AT(object, 0xB4) = D_800AD918;
     WORD_AT(object, 0x64) = 0;
     WORD_AT(object, 0x60) = 0;
-    FLOAT_AT(object, 0xB4) = D_800AD918;
-    node = POINTER_AT(object, 0x1E70);
     value = WORD_AT(node, 0x4);
     if (value == 0x4C6F636C) {
         WORD_AT(object, 0x60) = 0x20;

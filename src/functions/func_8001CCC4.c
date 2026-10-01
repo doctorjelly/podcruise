@@ -66,12 +66,12 @@ s32 func_8001CCC4(ObjB05 *arg0, s32 arg1) {
     if (flags & 1) {
         func_8002D4C4(0x55);
         if (D_800A23C0 == 0) {
-            if (D_800A23BC != 0) {
-                D_800A23BC = 0;
-                D_800A23C0 = 1;
+            if (D_800A23BC == 0) {
+                arg0->unk10 = 0;
                 return 0;
             }
-            arg0->unk10 = 0;
+            D_800A23BC = 0;
+            D_800A23C0 = 1;
             return 0;
         }
         D_800A23C0 = 0;
