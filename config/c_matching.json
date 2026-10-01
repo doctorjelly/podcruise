@@ -29926,6 +29926,7 @@
       "id": "func_80077C94",
       "source": "src/functions/func_80077C94.c",
       "link_vram": "0x80077C94",
+      "rodata_vram": "0x800ADA70",
       "absolute_symbols": {
         "D_800A59FC": "0x800A59FC",
         "D_800ADA90": "0x800ADA90",

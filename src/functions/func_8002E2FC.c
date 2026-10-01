@@ -19,12 +19,12 @@ extern s32 func_8008ADB0(void *);
 
 void func_8002E2FC(void) {
     s32 message;
-    register u8 *object;
-    register s32 *messagePointer;
-
+    u8 *object;
+    s32 *messagePointer;
     object = D_800D7420;
     messagePointer = &message;
-    while (func_80087E80(object, messagePointer, 0) != -1) {
+    if (func_80087E80(object, messagePointer, 0) != -1) {
+    while (1) {
         switch (message) {
         case 1:
         case 4:
@@ -56,5 +56,9 @@ void func_8002E2FC(void) {
             func_8002DFB0(2000, 0);
             break;
         }
+        if (func_80087E80(object, messagePointer, 0) == -1) {
+            break;
+        }
+    }
     }
 }
