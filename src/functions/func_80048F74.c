@@ -42,18 +42,16 @@ void func_80048F74(s32 arg0) {
     tail = count + 1;
     head = 0;
 
-    if (first <= last) {
-        for (index = first; index <= D_800D6DD8[arg0][1]; index++) {
-            func_80014CC0(D_80119670[index][3], &sine, &cosine);
-            if ((D_80119670[index][1] * cosine) > 0.0f) {
-                key.value[head] = D_80119670[index][5];
-                order[head] = (index - D_800D6DD8[arg0][0]) + 0x46;
-                head++;
-            } else {
-                key.value[tail] = D_80119670[index][5];
-                order[tail] = (index - D_800D6DD8[arg0][0]) + 0x46;
-                tail--;
-            }
+    for (index = first; index <= D_800D6DD8[arg0][1]; index++) {
+        func_80014CC0(D_80119670[index][3], &sine, &cosine);
+        if ((D_80119670[index][1] * cosine) > 0.0f) {
+            key.value[head] = D_80119670[index][5];
+            order[head] = (index - D_800D6DD8[arg0][0]) + 0x46;
+            head++;
+        } else {
+            key.value[tail] = D_80119670[index][5];
+            order[tail] = (index - D_800D6DD8[arg0][0]) + 0x46;
+            tail--;
         }
     }
 
@@ -84,7 +82,7 @@ void func_80048F74(s32 arg0) {
 
     taken = 0;
     for (outer = 0; outer < 151; outer++) {
-        for (inner = 0; inner < limit; inner++) {
+        for (inner = 0; inner < count + 2; inner++) {
             if (*D_8011A508[order[inner]] == D_8011A2A8[outer]) {
                 D_8011A2A8[outer] = *D_8011A508[order[taken]];
                 taken++;

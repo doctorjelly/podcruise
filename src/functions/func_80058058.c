@@ -72,11 +72,6 @@ extern s32 func_80082BE0(void);
 
 void func_80058058(Actor80058058 *actor, s32 mode) {
     Obj80058058 *obj;
-    f32 *phase;
-    f32 *visibility;
-    f32 *holdTimer;
-    f32 *velocity;
-    f32 *messageTimer;
     f32 baseY;
     f32 originalY;
     f32 level;
@@ -124,21 +119,18 @@ void func_80058058(Actor80058058 *actor, s32 mode) {
     specialCritical = 0;
     fullComponent = 0;
     markedComponent = 0;
+    soundVolume = 0.0f;
+    soundParam = 0.25f;
     obj = actor->unk84;
     baseY = mode == 0 ? 175.0f : 65.0f;
     originalY = baseY;
 
-    phase = &D_800A59B8[mode];
-    visibility = &D_800A59C0[mode];
-    holdTimer = &D_800A59C8[mode];
-    velocity = &D_800A59D0[mode];
-    messageTimer = &D_800A59D8[mode];
 
     if ((obj->unk060 & 0x1000) != 0) {
-        *visibility = 1.0f;
-        *velocity = 0.0f;
+        D_800A59C0[mode] = 1.0f;
+        D_800A59D0[mode] = 0.0f;
     } else if ((obj->unk060 & 0x4000) != 0) {
-        *velocity = -1.0f;
+        D_800A59D0[mode] = -1.0f;
     } else {
         active = 0;
         if ((obj->unk060 & 0x2000) != 0) {
@@ -154,7 +146,8 @@ void func_80058058(Actor80058058 *actor, s32 mode) {
             active = 1;
         }
         for (index = 0; index < 6; index++) {
-            if (D_800ACEF8 < (f64)obj->unk288[index]) {
+            level = obj->unk288[index];
+            if (D_800ACEF8 < (f64)level) {
                 active = 1;
             }
             if ((obj->unk2A0[index] & 0x1C) != 0) {
@@ -165,37 +158,37 @@ void func_80058058(Actor80058058 *actor, s32 mode) {
             active = 1;
         }
         if (active != 0) {
-            *velocity = 4.0f;
-            *holdTimer = 5.0f;
+            D_800A59D0[mode] = 4.0f;
+            D_800A59C8[mode] = 5.0f;
         }
     }
 
     if (func_8002F054() == 0) {
-        *phase = (f32)((f64)*phase - (D_80120BF0 * 1.5));
-        if (*phase <= 0.0f) {
-            *phase += 1.0f;
+        D_800A59B8[mode] = (f32)((f64)D_800A59B8[mode] - (D_80120BF0 * 1.5));
+        if (D_800A59B8[mode] <= 0) {
+            D_800A59B8[mode] += 1.0f;
         }
         obj->unk2B8 = (f32)((f64)obj->unk2B8 - D_80120BF0);
-        if (obj->unk2B8 < 0.0f) {
+        if (obj->unk2B8 < 0) {
             obj->unk2B8 = 0.0f;
         }
-        *visibility =
-            (f32)((f64)*visibility + ((f64)*velocity * D_80120BF0));
-        if (*visibility > 1.0f) {
-            *visibility = 1.0f;
-            *velocity = 0.0f;
+        D_800A59C0[mode] =
+            (f32)((f64)D_800A59C0[mode] + ((f64)D_800A59D0[mode] * D_80120BF0));
+        if (D_800A59C0[mode] > 1.0f) {
+            D_800A59C0[mode] = 1.0f;
+            D_800A59D0[mode] = 0.0f;
         }
-        if (*visibility > 0.0f) {
-            *holdTimer = (f32)((f64)*holdTimer - D_80120BF0);
-            if (*holdTimer <= 0.0f) {
-                *velocity = -4.0f;
+        if (D_800A59C0[mode] > 0) {
+            D_800A59C8[mode] = (f32)((f64)D_800A59C8[mode] - D_80120BF0);
+            if (D_800A59C8[mode] <= 0) {
+                D_800A59D0[mode] = -4.0f;
             }
         }
     }
 
-    if (*visibility <= 0.0f) {
-        *visibility = 0.0f;
-        *velocity = 0.0f;
+    if (D_800A59C0[mode] <= 0) {
+        D_800A59C0[mode] = 0.0f;
+        D_800A59D0[mode] = 0.0f;
         if (mode == 0) {
             for (index = 0; index < 6; index++) {
                 func_8000A920((s16)(index + 0x1B), 0);
@@ -339,7 +332,7 @@ void func_80058058(Actor80058058 *actor, s32 mode) {
                 }
             }
             if (level >= 1.0f) {
-                color = (s32)(*phase * 127.0f);
+                color = (s32)(D_800A59B8[mode] * 127.0f);
                 cr = color + 128;
                 cg = color;
                 cb = color;
@@ -374,7 +367,7 @@ void func_80058058(Actor80058058 *actor, s32 mode) {
                     cb = 0xFF;
                     ca = 200;
                 } else {
-                    pulse = *phase;
+                    pulse = D_800A59B8[mode];
                     cr =
                         (s32)((pulse * (f32)(0xFF - cr)) +
                               (f32)cr);
@@ -405,16 +398,14 @@ void func_80058058(Actor80058058 *actor, s32 mode) {
         }
         }
 
-        soundVolume = 0.0f;
-        soundParam = 0.25f;
         baseY -= 45.0f;
         if (markedComponent != 0) {
             func_8003EC40(54, (s16)(baseY + 63.0f), 0xFF, 0x80, 0,
-                          (u8)(u32)(*phase * 255.0f), D_800ACD24);
+                          (u8)(u32)(D_800A59B8[mode] * 255.0f), D_800ACD24);
         }
 
         if (obj->unk218 < 20.0f) {
-            color = (s32)(*phase * 255.0f);
+            color = (s32)(D_800A59B8[mode] * 255.0f);
             if (markedComponent == 0 && (obj->unk060 & 0x800000) != 0) {
                 func_8003EC40(54, (s16)(baseY + 63.0f), 0xFF, 0x80, 0,
                               (u8)color, D_800ACD38);
@@ -445,7 +436,7 @@ void func_80058058(Actor80058058 *actor, s32 mode) {
                     (u8)(u32)(255.0f * ratio),
                     (u8)(u32)(((1.0 - (f64)ratio) * D_800ACF38) + 128.0),
                     (u8)(u32)((1.0 - (f64)ratio) * D_800ACF10),
-                    (u8)(u32)(*phase * 255.0f), D_800ACD48);
+                    (u8)(u32)(D_800A59B8[mode] * 255.0f), D_800ACD48);
             }
             frontArrowRed = (s32)(255.0f * ratio);
             frontArrowGreen =
@@ -469,7 +460,7 @@ void func_80058058(Actor80058058 *actor, s32 mode) {
         }
 
         if (fullComponent != 0) {
-            color = (s32)(*phase * 127.0f);
+            color = (s32)(D_800A59B8[mode] * 127.0f);
             func_8003EC40(54, (s16)(baseY + 48.0f), (u8)(color + 128),
                           (u8)color, (u8)color, (u8)(color + 128),
                           D_800ACD5C);
@@ -479,7 +470,7 @@ void func_80058058(Actor80058058 *actor, s32 mode) {
         if ((obj->unk060 & 0x400) != 0) {
             if (frontCritical != 0 || rearCritical != 0 ||
                 specialCritical != 0) {
-                *messageTimer = 0.0f;
+                D_800A59D8[mode] = 0.0f;
                 if (D_800A26F4 == 0) {
                     color = (s32)((RANDOM_UNIT() * 127.0f) + 128.0f);
                 } else {
@@ -488,12 +479,12 @@ void func_80058058(Actor80058058 *actor, s32 mode) {
                 func_8003EC40(54, (s16)(baseY + 48.0f), 0x80, 0x80,
                               0xFF, (u8)color, D_800ACD68);
             } else {
-                if (*messageTimer <= 0.0f) {
+                if (D_800A59D8[mode] <= 0) {
                     func_80008B14(0x46, 7, 0.25f, 1.0f, 0);
                 }
-                *messageTimer =
-                    (f32)((f64)*messageTimer + D_80120BF0);
-                if (*messageTimer < D_800ACF5C) {
+                D_800A59D8[mode] =
+                    (f32)((f64)D_800A59D8[mode] + D_80120BF0);
+                if (D_800A59D8[mode] < D_800ACF5C) {
                     if (D_800A26F4 == 0) {
                         color =
                             (s32)((RANDOM_UNIT() * 127.0f) + 128.0f);
@@ -505,7 +496,7 @@ void func_80058058(Actor80058058 *actor, s32 mode) {
                 }
             }
         } else {
-            *messageTimer = 0.0f;
+            D_800A59D8[mode] = 0.0f;
         }
 
         if (func_8002F054() == 0) {
@@ -520,7 +511,7 @@ void func_80058058(Actor80058058 *actor, s32 mode) {
                 }
                 D_800A59E0 = (f32)now;
             }
-            if (soundVolume > 0.0f) {
+            if (soundVolume > 0) {
                 func_80008B14(0x83, 7, soundParam, soundVolume, 1);
             }
             if ((obj->unk060 & 0x400) != 0 &&
@@ -543,7 +534,7 @@ void func_80058058(Actor80058058 *actor, s32 mode) {
         for (row = 0; row < 3; row++) {
             index = group * 3 + row;
             sprite = (s16)((mode == 0 ? 0x1B : 0x23) + index);
-            wobble = (1.0f - *visibility) * 15.0f;
+            wobble = (1.0f - D_800A59C0[mode]) * 15.0f;
             x = 34.0f + (f32)(group * 24);
             y = originalY + 2.0f + (f32)(row * 14);
             if (row == 1) {
@@ -565,7 +556,7 @@ void func_80058058(Actor80058058 *actor, s32 mode) {
             func_8000AAC0(sprite, 0.75f, 0.75f);
             func_8000AB24(sprite, (u8)red[index], (u8)green[index],
                           (u8)blue[index],
-                          (u8)(u32)(*visibility * (f32)alpha[index]));
+                          (u8)(u32)(D_800A59C0[mode] * (f32)alpha[index]));
         }
     }
 
@@ -577,7 +568,7 @@ void func_80058058(Actor80058058 *actor, s32 mode) {
     func_8000AB24(
         sprite, (u8)frontArrowRed, (u8)frontArrowGreen,
         (u8)frontArrowBlue,
-        (u8)(u32)((f32)frontArrowAlpha * (*visibility * *visibility)));
+        (u8)(u32)((f32)frontArrowAlpha * (D_800A59C0[mode] * D_800A59C0[mode])));
 
     sprite = mode == 0 ? 0x22 : 0x2A;
     func_8000A920(sprite, 1);
@@ -585,7 +576,7 @@ void func_80058058(Actor80058058 *actor, s32 mode) {
     func_8000AAC0(sprite, 0.75f, 0.75f);
     func_8000AB24(
         sprite, (u8)rearArrowRed, (u8)rearArrowGreen, (u8)rearArrowBlue,
-        (u8)(u32)((f32)rearArrowAlpha * (*visibility * *visibility)));
+        (u8)(u32)((f32)rearArrowAlpha * (D_800A59C0[mode] * D_800A59C0[mode])));
 }
 
 #undef RANDOM_UNIT

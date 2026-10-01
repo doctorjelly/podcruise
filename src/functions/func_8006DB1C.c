@@ -67,12 +67,12 @@ void func_8006DB1C(Pod *pod) {
     (void)spare;
     pod->unk230 = D_800A5B64;
     if (pod->unk64 & 0x2000000) {
-        pod->unk230 = D_800AD6BC;
         if (pod->unk108 > D_800AD6B8) {
             pod->unk108 = pod->unk108 - 100.0 * D_80120BF0;
         } else {
             pod->unk108 = D_800AD6B8;
         }
+        pod->unk230 = D_800AD6BC;
         pod->unk70 = D_800AD6C0;
         pod->unk74 = 400.0f;
     } else {

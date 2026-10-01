@@ -73,10 +73,11 @@ extern s32 func_80082BE0(void);
 extern void func_80086730(s32, f32, f32, f32, f32, f32);
 
 void func_8005337C(Owner8005337C *owner) {
-    u32 message[12];
+    s32 found;
     s32 index;
     f32 lo;
     f32 hi;
+    u32 message[12];
 
     if (D_800A5998 == 0) {
         func_80053300(owner);
@@ -107,22 +108,21 @@ void func_8005337C(Owner8005337C *owner) {
             if (owner->handle130 == 0 ||
                 (owner->active154 != 0 && owner->timer0C > 0.5f)) {
                 func_8000AB24(-0x67, 0, 0, 0, 0xFF);
-                owner->flags08 = (owner->flags08 & ~0xF) | 5;
                 owner->timer0C = D_800ACE88;
+                owner->flags08 = (owner->flags08 & ~0xF) | 5;
                 func_80052A08(owner, 3);
                 func_80086730(1, 100.0f, -1.0f, -1.0f, -1.0f, -1.0f);
                 message[0] = 0x53776565;
                 message[1] = 1;
                 func_8003FA24(0x634D616E, message);
                 func_80007A44();
-                *(f32 *)0x800A59AC = 2.0f;
+                D_800A59AC = 2.0f;
             }
             break;
 
         case 5: {
             Hang8005337C *hang;
             s32 choice;
-            s32 found;
             f32 cooldown;
 
             if (func_80053220(0x201) != 0) {

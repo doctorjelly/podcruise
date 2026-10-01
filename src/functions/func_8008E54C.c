@@ -93,6 +93,8 @@ Cmd *func_8008E54C(Obj *a, s16 *b, s32 n, s32 unused, Cmd *out) {
     s32 delta;
     s32 flag;
     s32 cond;
+    Buf *buf;
+    s32 used;
 
     (void)unused;
     flag = 0;
@@ -104,8 +106,9 @@ Cmd *func_8008E54C(Obj *a, s16 *b, s32 n, s32 unused, Cmd *out) {
     out->w1 = (u32)(a->unk28->w10 + 8) & 0x1FFFFFFF;
     cursor = out + 1;
 
-    cond = ((u32)a->unk20 < (u32)(a->unk38 + n)) && (a->unk24 != 0);
-    len = cond ? (a->unk20 - a->unk38) : n;
+    used = a->unk38;
+    cond = ((u32)a->unk20 < (u32)(used + n)) && (a->unk24 != 0);
+    len = cond ? (a->unk20 - used) : n;
     pad = (a->unk3C != 0) ? (16 - a->unk3C) : 0;
     avail = len - pad;
     if (avail < 0) {
@@ -129,7 +132,7 @@ Cmd *func_8008E54C(Obj *a, s16 *b, s32 n, s32 unused, Cmd *out) {
         sample = *b;
         delta = len * 2;
         while (len < n) {
-            aligned = (((blocks + 1) << 5) + sample) & -32;
+            aligned = (((blocks + 1) * 32) + sample) & ~31;
             n -= len;
             if (a->unk24 != -1 && a->unk24 != 0) {
                 a->unk24 = a->unk24 - 1;
@@ -156,8 +159,9 @@ Cmd *func_8008E54C(Obj *a, s16 *b, s32 n, s32 unused, Cmd *out) {
         return cursor;
     }
 
+    buf = a->unk28;
     total = a->unk44 + blocks9;
-    excess = (total - (s32)a->unk28->w0) - (s32)a->unk28->w4;
+    excess = (total - (s32)buf->w0) - (s32)buf->w4;
     if (excess < 0) {
         excess = 0;
     }
@@ -191,8 +195,8 @@ Cmd *func_8008E54C(Obj *a, s16 *b, s32 n, s32 unused, Cmd *out) {
         } else {
             delta = 0;
         }
-        cursor->w1 = (u32)(limit * 2);
         cursor->w0 = FIELD(2, 24, 8) | FIELD(*b + delta, 0, 24);
+        cursor->w1 = (u32)(limit * 2);
         cursor++;
         return cursor;
     }

@@ -85,13 +85,13 @@ extern void func_800519C0(s32, s32, s32, s32);
 extern s32 func_8008A6B4(u8 *, u8 *, u8 *);
 
 void func_80024070(Unk80024070 *arg0) {
+    s32 entry;
+    s32 flags;
     u8 text[0x100];
     s32 restart;
     s8 request;
     s32 i;
-    s32 flags;
     s32 style;
-    s32 entry;
     s32 width;
 
     restart = 0;

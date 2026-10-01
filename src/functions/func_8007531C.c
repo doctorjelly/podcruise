@@ -43,10 +43,10 @@ void func_8007531C(Node *node) {
                     child = node->children[i];
                     entry = child->unk0;
                     if (entry != 0) {
+                        j = 0;
                         value = entry->unk8;
                         if (value != 0) {
                             found = 0;
-                            j = 0;
                             if (j < D_8011C8D8) {
                                 do {
                                     if (value == D_8011C8B0[j]->unk8) {

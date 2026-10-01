@@ -151,6 +151,7 @@ void func_8004EA08(State8004EA08 *state) {
     Item8004EA08 *item;
     s32 groupIndex;
     s32 index;
+    u32 uindex;
     s32 total;
     s32 count;
     s32 random;
@@ -175,11 +176,11 @@ void func_8004EA08(State8004EA08 *state) {
     D_8011A240.unk24 = 0;
     D_8011A240.unk28 = 0;
 
-    for (index = 0; index < 151; index++) {
-        D_8011A2A8[index] = 0;
-        D_8011A508[index] = 0;
-        D_8011A768[index] = 0;
-        D_8011A9C8[index] = 0;
+    for (uindex = 0; uindex < 151; uindex++) {
+        D_8011A2A8[uindex] = 0;
+        D_8011A508[uindex] = 0;
+        D_8011A768[uindex] = 0;
+        D_8011A9C8[uindex] = 0;
     }
 
     func_80028070(state);
@@ -265,8 +266,8 @@ void func_8004EA08(State8004EA08 *state) {
         record->unk74 = 0.0f;
         record->unk78 = 0;
         record->unk7C = 0;
-        for (index = 0; index < 5; index++) {
-            record->unk60[index] = 0.0f;
+        for (uindex = 0; uindex < 5; uindex++) {
+            record->unk60[uindex] = 0.0f;
         }
     }
 

@@ -53,12 +53,17 @@ s16 blue1;
     s32 y1;
     s32 depth;
     u32 fill;
+    Cmd8008528C *cmd;
 
     scale = (f64)D_80114470.unk00 / 320.0;
-    x0 = (s32)(D_80120DF0.unk20 * scale);
-    y0 = (s32)(D_80120DF0.unk24 * ((f64)D_80114470.unk02 / 240.0));
-    x1 = (s32)(D_80120DF0.unk28 * scale);
-    y1 = (s32)(D_80120DF0.unk2C * ((f64)D_80114470.unk02 / 240.0));
+    x0 = D_80120DF0.unk20;
+    y0 = D_80120DF0.unk24;
+    x1 = D_80120DF0.unk28;
+    y1 = D_80120DF0.unk2C;
+    x0 = (s32)(x0 * scale);
+    y0 = (s32)(y0 * ((f64)D_80114470.unk02 / 240.0));
+    x1 = (s32)(x1 * scale);
+    y1 = (s32)(y1 * ((f64)D_80114470.unk02 / 240.0));
 
     if (D_800A4740 != 0) {
         CMD(0xE7000000, 0)
@@ -70,20 +75,23 @@ s16 blue1;
     }
 
     CMD(0xE7000000, 0)
+    cmd = D_801217B0++;
     if (D_80114470.unk04 == 0x20) {
         depth = 3;
     } else {
         depth = 2;
     }
-    CMD(0xFF000000 | ((depth & 3) << 19) | ((D_80114470.unk00 - 1) & 0xFFF), func_80088360(D_800D9DB4))
+    cmd->w0 = (u32)(0xFF000000 | ((depth & 3) << 19) | ((D_80114470.unk00 - 1) & 0xFFF));
+    cmd->w1 = (u32)(func_80088360(D_800D9DB4));
 
     if (flag0 == 0) {
         if (flag1 == 0) {
             if (D_80114470.unk04 == 0x10) {
                 r = red0; g = green0; b = blue0;
-                r += 4; if (r >= 0x100) { r = 0xFF; }
-                g += 4; if (g >= 0x100) { g = 0xFF; }
-                b += 4; if (b >= 0x100) { b = 0xFF; }
+                r += 4; g += 4; b += 4;
+                if (r >= 0x100) { r = 0xFF; }
+                if (g >= 0x100) { g = 0xFF; }
+                if (b >= 0x100) { b = 0xFF; }
                 fill = (((r << 8) & 0xF800) | ((g << 3) & 0x7C0) | ((b >> 2) & 0x3E)) | 1;
                 fill = fill | (fill << 16);
             } else {
@@ -96,9 +104,10 @@ s16 blue1;
         if (flag2 == 0) {
             if (D_80114470.unk04 == 0x10) {
                 r = red1; g = green1; b = blue1;
-                r += 4; if (r >= 0x100) { r = 0xFF; }
-                g += 4; if (g >= 0x100) { g = 0xFF; }
-                b += 4; if (b >= 0x100) { b = 0xFF; }
+                r += 4; g += 4; b += 4;
+                if (r >= 0x100) { r = 0xFF; }
+                if (g >= 0x100) { g = 0xFF; }
+                if (b >= 0x100) { b = 0xFF; }
                 fill = (((r << 8) & 0xF800) | ((g << 3) & 0x7C0) | ((b >> 2) & 0x3E)) | 1;
                 fill = fill | (fill << 16);
             } else {

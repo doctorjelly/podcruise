@@ -11,36 +11,18 @@ s32 func_80036A1C(f32 *bounds, s32 trackInside) {
     f32 w;
     f32 v;
     s32 i;
-    s32 cmp;
-    s32 in0;
-    s32 in1;
-    s32 in2;
-        s16 unset;
+    s16 in0;
+    s16 in1;
+    s16 in2;
 
+    s32 cmp;
     s16 sx;
     s16 sy;
     s16 sz;
-    s32 ia;
-    s32 ib;
-    s32 ic;
 
     if (bounds[3] < bounds[0] || bounds[4] < bounds[1] || bounds[5] < bounds[2]) {
         return 0;
     }
-
-    in0 = 0;
-    in1 = 0;
-    in2 = 0;
-    if (trackInside != 0) {
-        in0 = -1;
-        in1 = -1;
-        in2 = -1;
-    }
-    unset = -2;
-    sx = unset;
-    sy = unset;
-    sz = unset;
-
 
     p0[0][0] = bounds[0] * D_80112E60[0][0];
     p0[1][0] = bounds[3] * D_80112E60[0][0];
@@ -70,17 +52,25 @@ s32 func_80036A1C(f32 *bounds, s32 trackInside) {
     p3[0][2] = bounds[2] * D_80112E60[2][3];
     p3[1][2] = bounds[5] * D_80112E60[2][3];
 
+    in0 = 0;
+    in1 = 0;
+    in2 = 0;
+    if (trackInside != 0) {
+        in0 = -1;
+        in1 = -1;
+        in2 = -1;
+    }
+    sx = -2;
+    sy = -2;
+    sz = -2;
 
 
     for (i = 0; i < 8; i++) {
-        ia = (i & 4) >> 2;
-        ib = (i & 2) >> 1;
-        ic = i & 1;
 
-        w = D_80112E60[3][3] + (p3[ia][0] + p3[ib][1] + p3[ic][2]);
+        w = (p3[(i & 4) >> 2][0] + p3[(i & 2) >> 1][1] + p3[i & 1][2]) + D_80112E60[3][3];
 
         if (in0 != 0 || sx != 0) {
-            v = D_80112E60[3][0] + (p0[ia][0] + p0[ib][1] + p0[ic][2]);
+            v = (p0[(i & 4) >> 2][0] + p0[(i & 2) >> 1][1] + p0[i & 1][2]) + D_80112E60[3][0];
             if (0.0f < w) {
                 if (w < v) {
                     cmp = 1;
@@ -107,14 +97,14 @@ s32 func_80036A1C(f32 *bounds, s32 trackInside) {
                 in0 = 0;
                 if (sx == -cmp) {
                     sx = 0;
-                } else if (sx == unset) {
+                } else if (sx == -2) {
                     sx = cmp;
                 }
             }
         }
 
         if (in1 != 0 || sy != 0) {
-            v = D_80112E60[3][1] + (p1[ia][0] + p1[ib][1] + p1[ic][2]);
+            v = (p1[(i & 4) >> 2][0] + p1[(i & 2) >> 1][1] + p1[i & 1][2]) + D_80112E60[3][1];
             if (0.0f < w) {
                 if (w < v) {
                     cmp = 1;
@@ -141,21 +131,22 @@ s32 func_80036A1C(f32 *bounds, s32 trackInside) {
                 in1 = 0;
                 if (sy == -cmp) {
                     sy = 0;
-                } else if (sy == unset) {
+                } else if (sy == -2) {
                     sy = cmp;
                 }
             }
         }
 
         if (in2 != 0 || sz != 0) {
-            cmp = -1;
             if (0.0f < w) {
-                v = D_80112E60[3][2] + (p2[ia][0] + p2[ib][1] + p2[ic][2]);
+                v = (p2[(i & 4) >> 2][0] + p2[(i & 2) >> 1][1] + p2[i & 1][2]) + D_80112E60[3][2];
                 if (w < v) {
                     cmp = 1;
                 } else {
                     cmp = 0;
                 }
+            } else {
+                cmp = -1;
             }
             if (cmp == 0) {
                 sz = 0;
@@ -166,7 +157,7 @@ s32 func_80036A1C(f32 *bounds, s32 trackInside) {
                 in2 = 0;
                 if (sz == -cmp) {
                     sz = 0;
-                } else if (sz == unset) {
+                } else if (sz == -2) {
                     sz = cmp;
                 }
             }
@@ -176,8 +167,8 @@ s32 func_80036A1C(f32 *bounds, s32 trackInside) {
     if (in0 != 0 && in1 != 0 && in2 != 0) {
         return 2;
     }
-    if (sx == 0 && sy == 0 && sz == 0) {
-        return 1;
+    if (sx != 0 || sy != 0 || sz != 0) {
+        return 0;
     }
-    return 0;
+    return 1;
 }

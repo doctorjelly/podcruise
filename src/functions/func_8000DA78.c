@@ -27,28 +27,28 @@ extern void func_8000D90C(s32, f32);
 extern void func_8000D960(s32);
 extern f32 func_8002F060(void);
 extern void func_8002F144(void);
-extern void func_8003EC40(s32, s32, s32, s32, s32, s32, char *);
-extern void func_8003EDD4(s32, s32, s32, s32, s32, s32, char *);
+extern void func_8003EC40(s16, s16, s32, s32, s32, s32, char *);
+extern void func_8003EDD4(s16, s16, s32, s32, s32, s32, char *);
 extern s32 func_80053220(s32);
 extern s32 func_80082BE0(void);
 extern void func_8008A6B4(char *, const char *, ...);
 
 void func_8000DA78(void) {
+    f32 red;
     char sp2DC[256];
     char sp1DC[256];
     char sp19C[64];
     u8 sp9C[256];
     f32 sp98;
     s32 sp94;
-    f32 value;
-    f32 pulse;
-    f32 red;
     f32 blue;
-    f32 green;
     s32 index;
+    f32 value;
     s32 base;
+    f32 green;
     s32 x;
     s32 y;
+    f32 pulse;
 
     if (D_8009B7E8 != 0) {
         D_800D5714 = D_800D5714 - 1;
@@ -169,7 +169,7 @@ void func_8000DA78(void) {
         }
         base = index * 14;
         red = 255;
-        blue = 255;
+        blue = 255.0f;
         if ((f64)sp98 < -9999.99) {
             if (sp94 < -9999) {
                 func_8008A6B4(sp1DC, D_800A8528, sp19C);

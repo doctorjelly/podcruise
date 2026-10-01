@@ -89,11 +89,11 @@ extern s32 func_80036A1C(f32 *, s32);
 extern void func_80036F98(Ctx800374C4 *);
 
 void func_800374C4(Ctx800374C4 *context) {
-    s16 count;
     Item800374C4 *item;
     s32 index;
     u32 mode;
     u32 flags;
+    s16 count;
     u32 chunk;
     Mat800374C4 material;
 
@@ -164,32 +164,32 @@ void func_800374C4(Ctx800374C4 *context) {
                 continue;
             }
         }
+        chunk = item->unk30;
         {
             Gfx800374C4 *g;
             g = D_80112C90++;
             g->w1 = 0;
             g->w0 = 0xE7000000;
         }
-        chunk = item->unk30;
         mode = D_80112DD8;
         if (item->unk00 != 0) {
             flags = item->unk00->unk00;
-            if (flags & 2) {
+            if (flags & 0x2) {
                 mode = mode | 0x10000;
             } else {
                 mode = mode & ~0x10000;
             }
-            if (flags & 1) {
+            if (flags & 0x1) {
                 mode = mode | 0x20000;
             } else {
                 mode = mode & ~0x20000;
             }
-            if (flags & 4) {
+            if (flags & 0x4) {
                 mode = mode | 0x200000;
             } else {
                 mode = mode & ~0x200000;
             }
-            if (flags & 8) {
+            if (flags & 0x8) {
                 mode = mode | 0x400;
             } else {
                 mode = mode & ~0x400;
@@ -214,14 +214,15 @@ void func_800374C4(Ctx800374C4 *context) {
         if (mode != D_80112DD8) {
             {
                 Gfx800374C4 *g;
+                u32 setBits = mode & 0x2F0605;
                 g = D_80112C90++;
-                g->w1 = mode & 0x2F0605;
-                g->w0 = 0xD9FFFFFF;
+                g->w0 = 0xD9FFFFFF; g->w1 = setBits;
             }
             {
                 Gfx800374C4 *g;
+                u32 clearBits = ~mode & 0x2F0605;
                 g = D_80112C90++;
-                g->w0 = (~(~mode & 0x2F0605) & 0xFFFFFF) | 0xD9000000;
+                g->w0 = (~clearBits & 0xFFFFFF) | 0xD9000000;
                 g->w1 = 0;
             }
         }
@@ -230,15 +231,37 @@ void func_800374C4(Ctx800374C4 *context) {
             func_800366DC(func_80033DD0());
         }
         D_80112DD8 = mode;
-        if (item->unk00 != 0 && item->unk00->unk0C != 0) {
-            material = *item->unk00->unk0C;
-        } else {
+        if (item->unk00 == 0 || item->unk00->unk0C == 0) {
             material = D_800A3D68;
+        } else {
+            material = *item->unk00->unk0C;
         }
         func_8003594C(&material, item->unk00);
         func_80035BF0(&material, 0);
         D_80112DE0 = material;
-        if ((D_800D697C & 0x10) || item->unk00 == 0 || item->unk00->unk08 == 0) {
+        if (!(D_800D697C & 0x10) && item->unk00 != 0 && item->unk00->unk08 != 0) {
+            if (D_80112E18 != item->unk00->unk08 || (item->unk00->unk00 & 0x4000) != 0 ||
+            D_80112E1C != item->unk00->unk04 ||
+            ((D_80112E1E = item->unk00->unk06), D_80112E1E) != 0) {
+                D_80112E18 = item->unk00->unk08;
+                D_80112E1C = item->unk00->unk04;
+                D_80112E1E = item->unk00->unk06;
+                {
+                    Gfx800374C4 *g;
+                    g = D_80112C90++;
+                    g->w1 = 0;
+                    g->w0 = 0xE7000000;
+                }
+                func_80036314(D_80112E18, item->unk00->unk04, item->unk00->unk06);
+            } else {
+                {
+                    Gfx800374C4 *g;
+                    g = D_80112C90++;
+                    g->w1 = 0;
+                    g->w0 = 0xE7000000;
+                }
+            }
+        } else {
             D_80112E18 = -1;
             D_80112E1C = 0;
             D_80112E1E = 0;
@@ -248,24 +271,6 @@ void func_800374C4(Ctx800374C4 *context) {
                 g->w1 = 0;
                 g->w0 = 0xD7000000;
             }
-        } else if (D_80112E18 == item->unk00->unk08 && (item->unk00->unk00 & 0x4000) == 0 &&
-                   item->unk00->unk04 == D_80112E1C &&
-                   ((D_80112E1E = item->unk00->unk06), D_80112E1E) == 0) {
-            Gfx800374C4 *g;
-            g = D_80112C90++;
-            g->w1 = 0;
-            g->w0 = 0xE7000000;
-        } else {
-            D_80112E18 = item->unk00->unk08;
-            D_80112E1C = item->unk00->unk04;
-            D_80112E1E = item->unk00->unk06;
-            {
-                Gfx800374C4 *g;
-                g = D_80112C90++;
-                g->w1 = 0;
-                g->w0 = 0xE7000000;
-            }
-            func_80036314(D_80112E18, item->unk00->unk04, item->unk00->unk06);
         }
         if (chunk != 0) {
             if (item->unk3E != 0) {

@@ -6,7 +6,7 @@ extern void func_8000A920(s16, s32);
 extern void func_8000AA04(s16, s16, s16);
 extern void func_8000AAC0(s16, f32, f32);
 extern void func_8000AB24(s16, s32, s32, s32, s32);
-extern void func_8003EC40(s16, s16, u8, u8, u8, u8, u8 *);
+extern void func_8003EC40(s16, s16, u8, u8, u8, s32, u8 *);
 extern s32 func_80082BE0(void);
 
 extern s32 D_800A4BB4;
@@ -36,7 +36,8 @@ void func_80046DC4(s32 *arg0, f32 x, f32 y) {
     sel = -1;
     level = 255.0f;
     scale = 1.0f;
-    if (arg0[2] == 8) {
+    xb = arg0[2];
+    if (xb == 8) {
         scale = D_800A4BF0 * 2.5f;
     }
     level = level * scale;

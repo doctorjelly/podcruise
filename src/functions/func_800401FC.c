@@ -41,6 +41,8 @@ static const f32 D_800AAC30[2] = {0.0f, 0.0f};
 #define TRUNCF(x) ((x) < 0.0f ? (s32)((x) - 0.999999f) : (s32)(x))
 
 void func_800401FC(Obj800401FC *object, Ctx800401FC *context) {
+    u32 flags;
+    u32 flags2;
     s32 changed;
     f32 sp78[3];
     f32 color[3];
@@ -65,13 +67,15 @@ void func_800401FC(Obj800401FC *object, Ctx800401FC *context) {
     sp78[1] = object->unk2F4[1];
     sp78[2] = object->unk2F4[2];
 
-    if (object->unk2E4 & 0x40) {
+    flags2 = object->unk2E4;
+    if (flags2 & 0x40) {
         object->unk2E4 &= ~0x40;
         changed = 1;
     }
 
     if (object->unk2E4 & 1) {
-        if ((s32)object->unk2E4 < 0) {
+        flags = object->unk2E4;
+        if (flags & 0x80000000) {
             object->unk2E8[0] = object->unk334[0];
             object->unk2E8[1] = object->unk334[1];
             object->unk2E8[2] = object->unk334[2];

@@ -129,25 +129,26 @@ void func_8004CA50(Context8004CA50 *context) {
     f32 farPlane;
     SceneObject8004CA50 *object;
     s32 savedDisplayValue;
+    TrackNode8004CA50 *track;
     PcVec3f ambient;
     PcVec3f diffuse;
+    f32 sine;
     PcVec3f direction;
+    s32 firstChoice;
     Transform8004CA50 transformA;
     Transform8004CA50 transformB;
-    TrackNode8004CA50 *track;
+    s16 i;
     PcVec3f position;
-    f32 angle;
     f32 targetAngle;
-    f32 sine;
     f32 cosine;
+    f32 angle;
     f32 firstAngle;
-    s32 firstChoice;
-    s32 nextChoice;
     s32 objectId;
     s32 objectMode;
     s32 firstObject;
     s32 secondObject;
-    s16 i;
+    s32 nextChoice;
+    f32 radius;
 
     farPlane = D_800AB1D0;
     savedDisplayValue = D_800A4B38;
@@ -201,8 +202,8 @@ void func_8004CA50(Context8004CA50 *context) {
         func_80063084(0x38, 0x11, &position, &position, angle, angle);
 
         firstChoice =
-            (s32)(((f32)func_80082BE0() / 2147483648.0f) * 3.0f);
-        func_80015288(&position, &D_800A5100[firstChoice + 10]);
+            (s32)(((f32)func_80082BE0() / 2147483648.0f) * 3.0f) + 10;
+        func_80015288(&position, &D_800A5100[firstChoice]);
         object = func_8003F800(0x456C6D6F, 0x39);
         if (object->state == 1) {
             func_80063084(0x39, 0, &position, &position, angle, angle);
@@ -213,7 +214,7 @@ void func_8004CA50(Context8004CA50 *context) {
         do {
             nextChoice =
                 (s32)(((f32)func_80082BE0() / 2147483648.0f) * 3.0f) + 10;
-        } while (nextChoice == firstChoice + 10);
+        } while (nextChoice == firstChoice);
         context->randomChoice = (s8)(nextChoice - 9);
         func_80015288(&position, &D_800A5100[nextChoice]);
         angle = ((f32)func_80082BE0() / 2147483648.0f) * 360.0f;
@@ -266,7 +267,10 @@ void func_8004CA50(Context8004CA50 *context) {
         } else if (D_800A21B0 == 1) {
             context->option10 = 0;
         }
-        context->trackIndex = context->option10 == 1 ? 2 : 1;
+        context->trackIndex = 1;
+        if (context->option10 == 1) {
+            context->trackIndex = 2;
+        }
 
         func_80015288(&position, &D_800A5130);
         func_80015288(&D_801195F0, &position);
@@ -339,10 +343,10 @@ void func_8004CA50(Context8004CA50 *context) {
         }
 
         for (i = 0; i < 4 - D_80113E60[0x1C]; i++) {
-            firstAngle = 256.0f * D_800AB240;
+            radius = 256.0f * D_800AB240;
             func_80014CC0((f32)(0x122 - i * 10), &sine, &cosine);
-            func_80015268(&position, firstAngle * cosine + 12.0f,
-                          firstAngle * sine - 116.0f, -60.0f);
+            func_80015268(&position, radius * cosine + 12.0f,
+                          radius * sine - 116.0f, -60.0f);
             angle = func_80014F54(position.x - 12.0f, -116.0f - position.y);
             func_80063084(i + 0x34, 5, &position, &position, angle, angle);
         }

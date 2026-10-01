@@ -30,13 +30,11 @@ extern s32 func_800928F0(void *arg0, s32 arg1, u16 arg2, u8 *arg3, s32 arg4);
 
 s32 func_80090C20(Context *context, Packet *source, Packet *destination) {
     s32 result;
-    u8 *walk;
-    u8 *code;
     u8 high[32];
     u8 low[32];
-    u8 *invert;
     u16 codes[4];
     s32 attempt;
+    s32 i;
 
     attempt = 0;
     destination->unk00 = -1;
@@ -60,9 +58,9 @@ s32 func_80090C20(Context *context, Packet *source, Packet *destination) {
         if (result != 0) {
             return result;
         }
-        high[0] = (attempt & 0xFF) | 0x80;
-        for (invert = &high[1]; invert < &high[32]; invert++) {
-            *invert = ~*invert;
+        high[0] = attempt | 0x80;
+        for (i = 1; i < 32; i++) {
+            high[i] = ~high[i];
         }
         result = func_800928F0(context->unk04, context->unk08, 0, high, 0);
         if (result != 0) {
@@ -72,19 +70,12 @@ s32 func_80090C20(Context *context, Packet *source, Packet *destination) {
         if (result != 0) {
             return result;
         }
-        walk = low;
-        invert = high;
-        for (;;) {
-            if (*walk != *invert) {
-                break;
-            }
-            walk++;
-            invert++;
-            if (walk >= high) {
+        for (i = 0; i < 32; i++) {
+            if (low[i] != high[i]) {
                 break;
             }
         }
-        if (walk != &low[32]) {
+        if (i != 32) {
             break;
         }
         if (attempt > 0) {
@@ -119,9 +110,9 @@ s32 func_80090C20(Context *context, Packet *source, Packet *destination) {
     codes[1] = 3;
     codes[2] = 4;
     codes[3] = 6;
-    for (code = (u8 *)codes; code < (u8 *)&codes[4]; code += 2) {
-        result = func_800928F0(context->unk04, context->unk08,
-                               *(u16 *)code, (u8 *)destination, 1);
+    for (i = 0; i < 4; i++) {
+        result = func_800928F0(context->unk04, context->unk08, codes[i],
+                               (u8 *)destination, 1);
         if (result != 0) {
             return result;
         }
@@ -132,8 +123,8 @@ s32 func_80090C20(Context *context, Packet *source, Packet *destination) {
         return result;
     }
 
-    for (attempt = 0; attempt < 32; attempt++) {
-        if (high[attempt] != ((u8 *)destination)[attempt]) {
+    for (i = 0; i < 32; i++) {
+        if (high[i] != ((u8 *)destination)[i]) {
             return 0xA;
         }
     }

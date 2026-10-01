@@ -72,8 +72,8 @@ extern void func_80016BF4(PcVec3f *output, const PcVec3f *vector,
                           Matrix80018480 transform);
 extern void func_80017520(Matrix80018480 matrix, f32 x, f32 y, f32 z);
 extern void func_80017580(Matrix80018480 matrix, f32 x, f32 y, f32 z);
-extern void func_80017824(Matrix80018480 matrix, f32 amount, f32 x, f32 y,
-                          f32 z, s32 mode);
+extern void func_80017824(Matrix80018480 destination, f32 amount, f32 x,
+                          f32 y, f32 z, Matrix80018480 source);
 extern void func_80017918(Matrix80018480 destination, f32 x, f32 y, f32 z,
                           Matrix80018480 source);
 extern void func_80017BA8(void *destination, const void *source);
@@ -99,13 +99,10 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
     s32 type;
     Matrix80018480 work;
     Matrix80018480 base;
-    PcVec3f firstVector;
     PcVec3f secondVector;
-    f32 typeScale;
-    f32 length;
-    f32 phase;
-    f32 beamX;
-    f32 beamZ;
+    PcVec3f firstVector;
+    void *node1;
+    void *node0;
     f32 sine[8];
     f32 cosine[8];
     PcVec3f firstPoint;
@@ -118,9 +115,12 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
     Matrix80018480 firstMatrix;
     Matrix80018480 secondMatrix;
     Matrix80018480 beamMatrix;
-    void *node1;
-    void *node0;
     void **slot;
+    f32 typeScale;
+    f32 length;
+    f32 phase;
+    f32 beamX;
+    f32 beamZ;
 
     if (object == 0) {
         return;
@@ -205,7 +205,7 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
                 func_80015288(&secondVector, (PcVec3f *)work[1]);
                 func_800154D0(&secondVector);
                 func_80017824(work, sine[1] * 5.0f, secondVector.x,
-                              secondVector.y, secondVector.z, 0);
+                              secondVector.y, secondVector.z, work);
             }
             func_80017BA8(node1, work);
         }
@@ -224,7 +224,7 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
                     func_80015288(&secondVector, (PcVec3f *)work[1]);
                     func_800154D0(&secondVector);
                     func_80017824(work, sine[1] * 5.0f, secondVector.x,
-                                  secondVector.y, secondVector.z, 0);
+                                  secondVector.y, secondVector.z, work);
                 }
                 func_80017BA8(node1, work);
             }
@@ -260,7 +260,7 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
                 func_80015288(&secondVector, (PcVec3f *)work[1]);
                 func_800154D0(&secondVector);
                 func_80017824(work, sine[2] * 5.0f, secondVector.x,
-                              secondVector.y, secondVector.z, 0);
+                              secondVector.y, secondVector.z, work);
             }
             func_80017BA8(node1, work);
         }
@@ -280,7 +280,7 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
                     func_80015288(&secondVector, (PcVec3f *)work[1]);
                     func_800154D0(&secondVector);
                     func_80017824(work, sine[0] * 5.0f, secondVector.x,
-                                  secondVector.y, secondVector.z, 0);
+                                  secondVector.y, secondVector.z, work);
                 }
                 func_80017BA8(node1, work);
             }
@@ -317,7 +317,7 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
                 func_80015288(&secondVector, (PcVec3f *)work[1]);
                 func_800154D0(&secondVector);
                 func_80017824(work, sine[1] * 10.0f, secondVector.x,
-                              secondVector.y, secondVector.z, 0);
+                              secondVector.y, secondVector.z, work);
             }
             func_80017BA8(node1, work);
         }

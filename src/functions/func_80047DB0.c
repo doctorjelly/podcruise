@@ -25,8 +25,6 @@ extern Triple D_800A51C4;
 extern f32 D_800A4BF0;
 extern s32 D_800A4BE8;
 extern f32 D_800A4B50;
-extern f32 D_800AAF9C;
-extern f64 D_800AAFA0;
 extern u8 D_80113E60[];
 extern Record D_8011A050[];
 extern s32 D_8011A240[];
@@ -64,7 +62,6 @@ void func_80047DB0(void *object) {
     void *other;
     Record *record;
     s16 identifier;
-    s16 column;
     u8 alpha;
     s32 index;
 
@@ -82,10 +79,9 @@ void func_80047DB0(void *object) {
         func_8000A920(identifier, 1);
         columnBase = (f32)((index % 2) * 40 + 210);
         rowBase = (f32)((index / 2) * 35 + 20);
-        column = (s16)(s32)(columnBase + 2.0f);
-        func_8000AA04(identifier, column, (s16)(s32)(rowBase + 1.0f));
+        func_8000AA04(identifier, (s16)(s32)(columnBase + 2.0f), (s16)(s32)(rowBase + 1.0f));
         if (index == D_8011A240[11]) {
-            func_8000AA04(identifier, column, (s16)(s32)(rowBase + 2.0f));
+            func_8000AA04(identifier, (s16)(s32)(columnBase + 2.0f), (s16)(s32)(rowBase + 2.0f));
         }
         func_8000AB24(identifier, 0x32, 0xFF, 0xFF, alpha);
 
@@ -100,21 +96,20 @@ void func_80047DB0(void *object) {
                 identifier = 0x6F;
             }
             func_8000A920(identifier, 1);
-            column = (s16)(s32)(columnBase - 5.0f);
-            func_8000AA04(identifier, column, (s16)(s32)(rowBase - 7.0f));
+            func_8000AA04(identifier, (s16)(s32)(columnBase - 5.0f), (s16)(s32)(rowBase - 7.0f));
             if (index == D_8011A240[11]) {
-                func_8000AA04(identifier, column, (s16)(s32)(rowBase - 4.0f));
+                func_8000AA04(identifier, (s16)(s32)(columnBase - 5.0f), (s16)(s32)(rowBase - 4.0f));
             }
             func_8000AB24(identifier, 0x32, 0xFF, 0xFF, alpha);
         }
         if (index < D_8011A240[11]) {
             func_80047A78(object, (s32)(columnBase + 36.0f), (s32)(rowBase + 2.0f),
-                          (f32)(u32)D_80113E60[index + 0x24] * D_800AAF9C,
+                          (f32)(u32)D_80113E60[index + 0x24] * 0.003921568f,
                           level, 3.0f, 30.0f);
         }
     }
 
-    for (index = 0; index <= D_8011A240[11]; index++) {
+    for (index = 0; index < D_8011A240[11] + 1; index++) {
         entry = D_8011A508[0x8E + index]->unk00;
         if (entry == 0) {
             continue;
@@ -149,7 +144,7 @@ void func_80047DB0(void *object) {
                               first[2][0], first[2][1], first[2][2]);
             }
         }
-        scale = (f32)((f64)(D_800A4BF0 * 2.5f) * D_800AAFA0);
+        scale = (f32)((f64)(D_800A4BF0 * 2.5f) * 0.003);
         if (index == D_8011A240[11]) {
             scale = (f32)((f64)scale * 5.5);
         }

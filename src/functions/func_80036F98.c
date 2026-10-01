@@ -149,6 +149,7 @@ void func_80036F98(Scene *scene) {
         if (dl != 0) {
             GFX_CALLDL(D_80112C90, dl);
         }
+        n = scene->unk14;
     }
 
     D_800A3D30 = D_80112C90;

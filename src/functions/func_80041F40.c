@@ -81,22 +81,22 @@ void func_80041F40(Actor *actor) {
     s32 flagA;
     f32 mtxB[4][4];
     f32 mtxA[4][4];
-    f32 vecP[3];
-    f64 quarter;
     f32 lean;
     f32 x;
     f32 y;
+    f32 cube;
+    f32 vecP[3];
     f32 w;
     f32 dot;
     f32 vecQ[3];
     f32 vecR[3];
-    f32 unit;
-    f32 cube;
+    f64 quarter;
     f32 euler[6];
     s32 notB;
-    f64 absQuarter;
-    f32 absCube;
     f32 delta[3];
+    f32 absCube;
+    f64 absQuarter;
+    f32 unit;
 
     notB = 0;
     lean = 20.0f;
@@ -125,9 +125,9 @@ void func_80041F40(Actor *actor) {
     }
     actor->unk2B0 = 100.0f;
     if (notB != 0) {
+        quarter = pod->unk19B4 * 0.75;
         x = D_800A5CA0[*pod->unk1E70->unk18].unk4C;
-        y = (f32)(D_800A5CA0[*pod->unk1E70->unk18].unk50 +
-                  pod->unk19B4 * 0.75);
+        y = (f32)(D_800A5CA0[*pod->unk1E70->unk18].unk50 + quarter);
     } else {
         actor->unk148 = D_800A5CA0[*pod->unk1E70->unk18].unk4C;
         x = actor->unk148;
@@ -262,38 +262,22 @@ void func_80041F40(Actor *actor) {
     func_80015288(mtxB[3], vecR);
     func_800156DC(actor->unk264, mtxB);
 
-    actor->unk20[0][0] = actor->unk224[0][0];
-    actor->unk20[0][1] = actor->unk224[0][1];
-    actor->unk20[0][2] = actor->unk224[0][2];
-    actor->unk20[0][3] = actor->unk224[0][3];
-    actor->unk20[1][0] = actor->unk224[1][0];
-    actor->unk20[1][1] = actor->unk224[1][1];
-    actor->unk20[1][2] = actor->unk224[1][2];
-    actor->unk20[1][3] = actor->unk224[1][3];
-    actor->unk20[2][0] = actor->unk224[2][0];
-    actor->unk20[2][1] = actor->unk224[2][1];
-    actor->unk20[2][2] = actor->unk224[2][2];
-    actor->unk20[2][3] = actor->unk224[2][3];
-    actor->unk20[3][0] = actor->unk224[3][0];
-    actor->unk20[3][1] = actor->unk224[3][1];
-    actor->unk20[3][2] = actor->unk224[3][2];
-    actor->unk20[3][3] = actor->unk224[3][3];
-    actor->unk108[0][0] = actor->unk264[0][0];
-    actor->unk108[0][1] = actor->unk264[0][1];
-    actor->unk108[0][2] = actor->unk264[0][2];
-    actor->unk108[0][3] = actor->unk264[0][3];
-    actor->unk108[1][0] = actor->unk264[1][0];
-    actor->unk108[1][1] = actor->unk264[1][1];
-    actor->unk108[1][2] = actor->unk264[1][2];
-    actor->unk108[1][3] = actor->unk264[1][3];
-    actor->unk108[2][0] = actor->unk264[2][0];
-    actor->unk108[2][1] = actor->unk264[2][1];
-    actor->unk108[2][2] = actor->unk264[2][2];
-    actor->unk108[2][3] = actor->unk264[2][3];
-    actor->unk108[3][0] = actor->unk264[3][0];
-    actor->unk108[3][1] = actor->unk264[3][1];
-    actor->unk108[3][2] = actor->unk264[3][2];
-    actor->unk108[3][3] = actor->unk264[3][3];
+    actor->unk20[0][0] = actor->unk224[0][0]; actor->unk20[0][1] = actor->unk224[0][1];
+    actor->unk20[0][2] = actor->unk224[0][2]; actor->unk20[0][3] = actor->unk224[0][3];
+    actor->unk20[1][0] = actor->unk224[1][0]; actor->unk20[1][1] = actor->unk224[1][1];
+    actor->unk20[1][2] = actor->unk224[1][2]; actor->unk20[1][3] = actor->unk224[1][3];
+    actor->unk20[2][0] = actor->unk224[2][0]; actor->unk20[2][1] = actor->unk224[2][1];
+    actor->unk20[2][2] = actor->unk224[2][2]; actor->unk20[2][3] = actor->unk224[2][3];
+    actor->unk20[3][0] = actor->unk224[3][0]; actor->unk20[3][1] = actor->unk224[3][1];
+    actor->unk20[3][2] = actor->unk224[3][2]; actor->unk20[3][3] = actor->unk224[3][3];
+    actor->unk108[0][0] = actor->unk264[0][0]; actor->unk108[0][1] = actor->unk264[0][1];
+    actor->unk108[0][2] = actor->unk264[0][2]; actor->unk108[0][3] = actor->unk264[0][3];
+    actor->unk108[1][0] = actor->unk264[1][0]; actor->unk108[1][1] = actor->unk264[1][1];
+    actor->unk108[1][2] = actor->unk264[1][2]; actor->unk108[1][3] = actor->unk264[1][3];
+    actor->unk108[2][0] = actor->unk264[2][0]; actor->unk108[2][1] = actor->unk264[2][1];
+    actor->unk108[2][2] = actor->unk264[2][2]; actor->unk108[2][3] = actor->unk264[2][3];
+    actor->unk108[3][0] = actor->unk264[3][0]; actor->unk108[3][1] = actor->unk264[3][1];
+    actor->unk108[3][2] = actor->unk264[3][2]; actor->unk108[3][3] = actor->unk264[3][3];
 
     if (pod->unk60 & 0x00100000) {
         func_800156DC(mtxA, pod->unk20);

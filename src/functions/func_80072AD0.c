@@ -37,15 +37,15 @@ extern s32 func_80083D80(void *node, f32 *bounds, s32 flags);
 
 void func_80072AD0(void *object, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                    f32 *arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9) {
+    u32 index;
     void *target;
     void *node;
-    u32 index;
     f32 rate;
     s32 flags;
     s32 masked;
     s32 value;
-    s32 spare;
     Request80072AD0 request;
+    s32 spare;
     f32 probe[14];
     f32 bounds[6];
 
@@ -60,11 +60,10 @@ void func_80072AD0(void *object, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     if (arg1 != 0) {
         func_8003B250((u8 *)object + 0xAC, 0);
     }
-    node = POINTER_AT(object, 0x1E70);
     FLOAT_AT(object, 0xB4) = D_800AD918;
     WORD_AT(object, 0x64) = 0;
     WORD_AT(object, 0x60) = 0;
-    value = WORD_AT(node, 0x4);
+    value = WORD_AT(POINTER_AT(object, 0x1E70), 0x4);
     if (value == 0x4C6F636C) {
         WORD_AT(object, 0x60) = 0x20;
     } else if (value == 0x52656D6F) {
@@ -79,24 +78,24 @@ void func_80072AD0(void *object, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     } else {
         WORD_AT(object, 0x60) &= ~0x100;
     }
-    node = POINTER_AT(object, 0x1E70);
-    FLOAT_AT(object, 0x6C) = FLOAT_AT(node, 0x1C);
-    FLOAT_AT(object, 0x70) = FLOAT_AT(node, 0x20);
-    FLOAT_AT(object, 0x74) = FLOAT_AT(node, 0x24);
-    FLOAT_AT(object, 0x78) = FLOAT_AT(node, 0x28);
-    FLOAT_AT(object, 0x7C) = FLOAT_AT(node, 0x2C);
-    FLOAT_AT(object, 0x80) = FLOAT_AT(node, 0x30);
-    FLOAT_AT(object, 0x84) = FLOAT_AT(node, 0x34);
-    FLOAT_AT(object, 0x88) = FLOAT_AT(node, 0x38);
-    FLOAT_AT(object, 0x8C) = FLOAT_AT(node, 0x3C);
-    FLOAT_AT(object, 0x90) = FLOAT_AT(node, 0x40);
-    FLOAT_AT(object, 0x94) = FLOAT_AT(node, 0x44);
-    FLOAT_AT(object, 0x98) = FLOAT_AT(node, 0x48);
-    FLOAT_AT(object, 0x9C) = FLOAT_AT(node, 0x4C);
-    FLOAT_AT(object, 0xA0) = FLOAT_AT(node, 0x50);
-    FLOAT_AT(object, 0xA4) = FLOAT_AT(node, 0x54);
+    target = POINTER_AT(object, 0x1E70);
+    FLOAT_AT(object, 0x6C) = FLOAT_AT(target, 0x1C);
+    FLOAT_AT(object, 0x70) = FLOAT_AT(target, 0x20);
+    FLOAT_AT(object, 0x74) = FLOAT_AT(target, 0x24);
+    FLOAT_AT(object, 0x78) = FLOAT_AT(target, 0x28);
+    FLOAT_AT(object, 0x7C) = FLOAT_AT(target, 0x2C);
+    FLOAT_AT(object, 0x80) = FLOAT_AT(target, 0x30);
+    FLOAT_AT(object, 0x84) = FLOAT_AT(target, 0x34);
+    FLOAT_AT(object, 0x88) = FLOAT_AT(target, 0x38);
+    FLOAT_AT(object, 0x8C) = FLOAT_AT(target, 0x3C);
+    FLOAT_AT(object, 0x90) = FLOAT_AT(target, 0x40);
+    FLOAT_AT(object, 0x98) = FLOAT_AT(target, 0x48);
+    FLOAT_AT(object, 0x94) = FLOAT_AT(target, 0x44);
+    FLOAT_AT(object, 0x9C) = FLOAT_AT(target, 0x4C);
+    FLOAT_AT(object, 0xA0) = FLOAT_AT(target, 0x50);
+    FLOAT_AT(object, 0xA4) = FLOAT_AT(target, 0x54);
     FLOAT_AT(object, 0xA4) = 2.0f;
-    FLOAT_AT(object, 0xA8) = FLOAT_AT(node, 0x54);
+    FLOAT_AT(object, 0xA8) = FLOAT_AT(target, 0x54);
     node = (void *)arg5;
     FLOAT_AT(object, 0x20) = FLOAT_AT(node, 0x0);
     FLOAT_AT(object, 0x24) = FLOAT_AT(node, 0x4);
@@ -124,13 +123,13 @@ void func_80072AD0(void *object, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     FLOAT_AT(object, 0x58) = FLOAT_AT(object, 0x58)
         - (func_80004FB0(arg3, &probe[7], &probe[3], &probe[0]) - FLOAT_AT(object, 0x94));
     func_80016F0C((f32 *)((u8 *)object + 0x20), (f32 *)((u8 *)object + 0x8));
+    rate = D_800AD91C;
     WORD_AT(object, 0xEC) = 0;
     WORD_AT(object, 0xF8) = 0;
     WORD_AT(object, 0x100) = 0;
     WORD_AT(object, 0xF0) = 0;
     FLOAT_AT(object, 0x124) = 1.0f;
     FLOAT_AT(object, 0x120) = 1.0f;
-    rate = D_800AD91C;
     FLOAT_AT(object, 0xE0) = rate;
     FLOAT_AT(object, 0xE4) = rate;
     FLOAT_AT(object, 0x2BC) = 0.0f;

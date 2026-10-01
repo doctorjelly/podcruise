@@ -68,7 +68,6 @@ void func_80021F84(Struct80021F84 *arg0) {
     char buffer[52];
     s32 value;
     s32 kind;
-    s32 index;
 
     if (D_800A2550 != 0 || D_800A4BBC != 0) {
         D_800A254C = 0;
@@ -179,15 +178,14 @@ void func_80021F84(Struct80021F84 *arg0) {
     if (D_800A2180 != 0 && D_800A4BE8 != -1) {
         D_800A2180 = 0;
         func_80047920();
-        index = D_800A4BE8;
-        if (index < 7) {
-            func_800519C0(arg0->unk_72, D_800A2DE3[D_8011A050[index * 56] * 16], 0, 255);
+        if (D_800A4BE8 < 7) {
+            func_800519C0(arg0->unk_72, D_800A2DE3[D_8011A050[D_800A4BE8 * 56] * 16], 0, 255);
             value = D_800A4BE8 % 4 + 31;
             if (value != arg0->unk_34) {
                 func_800503E8(arg0, value, -1, 0);
             }
         } else {
-            func_800519C0(arg0->unk_72, index, 0, 255);
+            func_800519C0(arg0->unk_72, D_800A4BE8, 0, 255);
             D_800A4BC0 = 1;
             arg0->unk_34 = 0x1A;
             func_8002AFFC(arg0, 0x1A, 0);

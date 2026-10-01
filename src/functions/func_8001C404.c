@@ -46,19 +46,19 @@ Racer *object;
 unsigned char selected;
 {
     s32 i;
-    s32 elem;
     s32 j;
-    Str16 buffer;
     s16 id;
-    u8 lane;
-    s8 slot;
     s16 state;
+    Str16 buffer;
+    s8 slot;
+    u8 lane;
+    s32 elem;
     f32 alpha;
 
     state = 0;
     buffer = D_800A8AD0;
     alpha = 254.0f;
-    if (object->unk_5E != selected) {
+    if (selected != object->unk_5E) {
         alpha = D_8011A240 * 254.0f;
     }
     for (i = selected; i < selected + 1; i++) {
@@ -157,7 +157,7 @@ unsigned char selected;
             if (func_8002DAD0(object, slot, lane) == 0) {
                 func_8000AB24(id, 0x80, 0x80, 0x80, (u8)alpha);
             }
-            if (object->unk_5E == selected) {
+            if (selected == object->unk_5E) {
                 if (func_8002DB20(object, D_8011A270) == j) {
                     func_8000A920(id, 0);
                     func_8000A920(0x5F, 1);

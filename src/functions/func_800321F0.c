@@ -113,7 +113,7 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
         break;
     case 2:
             if (channel == 1) {
-                object->f0C = object->f0C * (0.86f + 0.13999999f * (1.0f - step));
+                object->f0C = object->f0C * (0.13999999f * (1.0f - step) + 0.86f);
                 if (object->f0C > 5.0f) {
                     object->f0C = 5.0f;
                 }
@@ -122,7 +122,7 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
                 }
             }
             if (channel == 2) {
-                object->f0C = object->f0C * (0.72f + 0.27999997f * (1.0f - step));
+                object->f0C = object->f0C * (0.27999997f * (1.0f - step) + 0.72f);
                 if (object->f0C > 5.0f) {
                     object->f0C = 5.0f;
                 }
@@ -131,7 +131,7 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
                 }
             }
             if (channel == 3) {
-                object->f0C = object->f0C * (0.58f + 0.42000002f * (1.0f - step));
+                object->f0C = object->f0C * (0.42000002f * (1.0f - step) + 0.58f);
                 if (object->f0C > 5.0f) {
                     object->f0C = 5.0f;
                 }
@@ -140,7 +140,7 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
                 }
             }
             if (channel == 4) {
-                object->f0C = object->f0C * (0.44f + 0.56f * (1.0f - step));
+                object->f0C = object->f0C * (0.56f * (1.0f - step) + 0.44f);
                 if (object->f0C > 5.0f) {
                     object->f0C = 5.0f;
                 }
@@ -149,7 +149,7 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
                 }
             }
             if (channel == 5) {
-                object->f0C = object->f0C * (0.3f + 0.7f * (1.0f - step));
+                object->f0C = object->f0C * (0.7f * (1.0f - step) + 0.3f);
                 if (object->f0C > 5.0f) {
                     object->f0C = 5.0f;
                 }
@@ -207,7 +207,7 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
         break;
     case 4:
             if (channel == 1) {
-                object->f14 = object->f14 * (0.92f + 0.07999998f * (1.0f - step));
+                object->f14 = object->f14 * (0.07999998f * (1.0f - step) + 0.92f);
                 if (object->f14 > 1000.0f) {
                     object->f14 = 1000.0f;
                 }
@@ -216,7 +216,7 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
                 }
             }
             if (channel == 2) {
-                object->f14 = object->f14 * (0.83f + 0.17000002f * (1.0f - step));
+                object->f14 = object->f14 * (0.17000002f * (1.0f - step) + 0.83f);
                 if (object->f14 > 1000.0f) {
                     object->f14 = 1000.0f;
                 }
@@ -225,7 +225,7 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
                 }
             }
             if (channel == 3) {
-                object->f14 = object->f14 * (0.74f + 0.26f * (1.0f - step));
+                object->f14 = object->f14 * (0.26f * (1.0f - step) + 0.74f);
                 if (object->f14 > 1000.0f) {
                     object->f14 = 1000.0f;
                 }
@@ -234,7 +234,7 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
                 }
             }
             if (channel == 4) {
-                object->f14 = object->f14 * (0.65f + 0.35000002f * (1.0f - step));
+                object->f14 = object->f14 * (0.35000002f * (1.0f - step) + 0.65f);
                 if (object->f14 > 1000.0f) {
                     object->f14 = 1000.0f;
                 }
@@ -243,7 +243,7 @@ void func_800321F0(Obj800321F0 *object, s32 index, s32 channel, f32 step) {
                 }
             }
             if (channel == 5) {
-                object->f14 = object->f14 * (0.56f + 0.44f * (1.0f - step));
+                object->f14 = object->f14 * (0.44f * (1.0f - step) + 0.56f);
                 if (object->f14 > 1000.0f) {
                     object->f14 = 1000.0f;
                 }

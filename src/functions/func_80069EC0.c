@@ -104,7 +104,7 @@ void func_80069EC0(Body *body, Vec3 *vel, Vec3 *normal) {
         nz = vecs[1].z * scale;
         vecs[1].x = nx;
         vecs[1].z = nz;
-        forward = nx * body->unk30.x + vecs[1].y * body->unk30.y + body->unk30.z * nz;
+        forward = vecs[1].x * body->unk30.x + vecs[1].y * body->unk30.y + body->unk30.z * nz;
         func_80015538(&vecs[0], &body->unk194, &body->unk30);
         func_800154D0(&vecs[0]);
         side = vecs[1].x * vecs[0].x + vecs[1].y * vecs[0].y + vecs[0].z * vecs[1].z;
