@@ -356,7 +356,7 @@
           "name": "func_8008BC30",
           "vram": "0x8008BC30",
           "rom": "0x8C830",
-          "size": 400
+          "size": 396
         }
       ]
     },
@@ -390,7 +390,7 @@
           "name": "func_8008EADC",
           "vram": "0x8008EADC",
           "rom": "0x8F6DC",
-          "size": 532
+          "size": 520
         }
       ]
     },
@@ -24974,7 +24974,7 @@
           "name": "func_8002DD7C",
           "vram": "0x8002DD7C",
           "rom": "0x2E97C",
-          "size": 564
+          "size": 556
         }
       ]
     },
