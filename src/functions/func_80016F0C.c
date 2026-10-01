@@ -50,7 +50,8 @@ void func_80016F0C(f32 matrix[4][4], f32 *output) {
         output[5] = value;
         output[3] = 0.0f;
     } else {
-        if (1.0f < planar[1] / length) {
+        span = planar[1] / length;
+        if (1.0f < span) {
             value = 0.0f;
         } else {
             value = func_80014F2C(planar[1] / length);

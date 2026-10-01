@@ -324,7 +324,7 @@ segments:
       - [0x17978, c, functions/func_80016D78]
       - [0x179A0, c, functions/func_80016DA0]
       - [0x179D8, c, functions/func_80016DD8]
-      - [0x17B0C, asm, main_17B0C]
+      - [0x17B0C, c, functions/func_80016F0C]
       - [0x17E3C, c, functions/func_8001723C]
       - [0x17F4C, c, functions/func_8001734C]
       - [0x1805C, c, functions/func_8001745C]

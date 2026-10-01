@@ -25243,11 +25243,11 @@
       "source": "src/functions/func_80016F0C.c",
       "link_vram": "0x80016F0C",
       "absolute_symbols": {
-        "func_800153C0": "0x800153C0",
-        "func_80014F2C": "0x80014F2C",
         "D_800A87F8": "0x800A87F8",
         "D_800A8800": "0x800A8800",
-        "D_800A8808": "0x800A8808"
+        "D_800A8808": "0x800A8808",
+        "func_80014F2C": "0x80014F2C",
+        "func_800153C0": "0x800153C0"
       },
       "functions": [
         {
