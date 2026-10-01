@@ -702,6 +702,7 @@ segments:
       - [0x450B0, c, functions/func_800444B0]
       - [0x45268, c, functions/func_80044668]
       - [0x4567C, asm, main_4567C]
+      - [0x45C04, c, functions/func_80045004]
       - [0x45D44, c, functions/func_80045144]
       - [0x45F14, c, functions/func_80045314]
       - [0x460A8, c, functions/func_800454A8]
