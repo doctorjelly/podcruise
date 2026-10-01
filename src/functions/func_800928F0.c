@@ -36,9 +36,10 @@ s32 func_800928F0(void *arg0, s32 arg1, u16 arg2, u8 *arg3, s32 arg4) {
             index++;
             *p++ = 0;
         }
+        index = tmp = *(s32 *)&D_8014D720[0x3C] = 1;
         p[0] = 0xFF;
         p[1] = 0x23;
-        p[2] = tmp = *(s32 *)&D_8014D720[0x3C] = 1;
+        p[2] = index;
         p[3] = 3;
         p[0x26] = 0xFF;
         p[0x27] = 0xFE;

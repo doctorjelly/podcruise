@@ -20,6 +20,7 @@ void func_80039B70(void) {
     u32 pb;
     u32 w;
     u32 g2;
+    u32 off;
 
     func_80039A30();
     func_80007A44();
@@ -32,6 +33,7 @@ void func_80039B70(void) {
         } else {
             g2 = 0;
         }
-        func_8003140C(D_80114530[index] - 2U * g1, 0, 2U * g2 + w * 240U * pb);
+        off = g1 + g1;
+        func_8003140C(D_80114530[index] - off, 0, 2U * g2 + w * 240U * pb);
     }
 }

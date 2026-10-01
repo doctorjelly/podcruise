@@ -136,8 +136,8 @@ void func_80070BBC(Object70BBC *object, f32 *frame, s32 flag) {
             if (flag != 0) {
                 object->track.unk08 = object->track.unk08 - D_800AD84C;
                 active = 1;
-                done = 0;
                 func_8003B02C(&object->track, frame);
+                done = 0;
             }
         }
     } while (done == 0);
