@@ -18,9 +18,9 @@ void func_800175E0(f32 *m, f32 angle, f32 x, f32 y, f32 z) {
     f32 xx;
     f32 yy;
     f32 zz;
-    f32 cxx;
-    f32 cyy;
     f32 d;
+    f32 cyy;
+    f32 cxx;
 
     func_80014CC0(angle, &sine, &cosine);
     if (z >= D_800A8810) {

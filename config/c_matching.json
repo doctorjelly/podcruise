@@ -14787,20 +14787,10 @@
       "id": "func_800175E0",
       "source": "src/functions/func_800175E0.c",
       "link_vram": "0x800175E0",
-      "flags": [
-        "-G",
-        "0",
-        "-O2",
-        "-mips2",
-        "-non_shared",
-        "-Xcpluscomm",
-        "-signed",
-        "-Wab,-r4300_mul"
-      ],
       "absolute_symbols": {
-        "func_80014CC0": "0x80014CC0",
         "D_800A8810": "0x800A8810",
-        "D_800A8814": "0x800A8814"
+        "D_800A8814": "0x800A8814",
+        "func_80014CC0": "0x80014CC0"
       },
       "functions": [
         {

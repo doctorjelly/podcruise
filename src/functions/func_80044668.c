@@ -55,6 +55,8 @@ void func_80044668(Ctx44668 *ctx) {
             distance = func_80004FB0(handle, ray, hit, normal);
             func_80000520(0);
             if (0.0f < distance) {
+                do {
+                } while (0);
                 matrix[2][0] = normal[0];
                 matrix[2][1] = normal[1];
                 matrix[2][2] = normal[2];

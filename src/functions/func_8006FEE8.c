@@ -109,7 +109,7 @@ void func_8006FEE8(Obj8006FEE8 *arg0) {
                 for (index = 0; index < count; index++) {
                     if (results[index] != arg0) {
                         func_8001535C(origin, &results[index]->unk50, &arg0->unk50);
-                        value = origin[0] * arg0->unk20 + origin[1] * arg0->unk24 + origin[2] * arg0->unk28;
+                        value = origin[0] * arg0->unk20 + origin[1] * arg0->unk24 + origin[2] * (*arg0).unk28;
                         if (0.0f < value) {
                             func_8006E034(arg0);
                         }

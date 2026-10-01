@@ -53,6 +53,7 @@ void func_8007F098(Track8007F098 *track, f32 scale, void *space, s16 *samples) {
     s16 previousIndex;
     s16 currentSample;
     s32 conflict;
+    s16 newSample;
 
     locals.probe.heading[0] = 0.0f;
     locals.probe.heading[1] = 0.0f;
@@ -72,16 +73,19 @@ void func_8007F098(Track8007F098 *track, f32 scale, void *space, s16 *samples) {
     func_80000520(0);
 
     lane = func_8003A568(track, 0);
-    conflict = 0;
     tableIndex = (s32)(((f32)lane + track->position) * scale);
     currentSample = samples[lane];
+    conflict = 0;
     D_8011DCF8[tableIndex] = object;
     if (object != 0) {
         previousIndex = object->tableIndex;
         if (previousIndex == 0) {
             object->tableIndex = tableIndex;
-        } else if (currentSample != samples[(s32)((f32)previousIndex / scale)]) {
-            conflict = 1;
+        } else {
+            newSample = samples[(s32)((f32)previousIndex / scale)];
+            if (currentSample != newSample) {
+                conflict = 1;
+            }
         }
     }
 
