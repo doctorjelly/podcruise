@@ -57,8 +57,8 @@ void func_80007218(void) {
     PcBoot80007218 boot;
     u32 n;
 
-    n = 0x21768;
-    for (i = 0; i < n; ) {
+    n = 0x21728;
+    for (i = 0; i < n + 0x40; ) {
         D_800B05B8[i] = 0;
         i++;
     }

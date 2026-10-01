@@ -4,9 +4,7 @@
 
 typedef struct PcCraft {
     u8 unk000[0x30];
-    f32 unk030;
-    f32 unk034;
-    f32 unk038;
+    f32 unk030[3];
     u8 unk03C[0x4];
     f32 unk040[3];
     u8 unk04C[0x14];
@@ -111,7 +109,7 @@ void func_8006C0D4(PcCraft *craft) {
         } else {
             craft->unk1A0 = func_800151C0(delta) / (f32)D_80120BF0;
         }
-        if ((delta[0] * craft->unk030 + delta[1] * craft->unk034) + delta[2] * craft->unk038 < 0.0f) {
+        if ((delta[0] * craft->unk030[0] + delta[1] * craft->unk030[1]) + delta[2] * craft->unk030[2] < 0.0f) {
             craft->unk1A0 = -craft->unk1A0;
         }
     }

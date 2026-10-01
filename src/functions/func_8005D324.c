@@ -166,9 +166,7 @@ void func_8005D324(s32 arg0, s32 arg1) {
             green = 0xF0;
             blue = 0xFF;
         } else {
-            position[0] = 0.0f;
-            position[1] = 512.0f;
-            position[2] = 230.0f;
+            position[0] = 0.0f; position[1] = 512.0f; position[2] = 230.0f;
             scale = D_800AD054;
             red = 0xFF;
             green = 0xFF;

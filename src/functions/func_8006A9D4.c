@@ -27,7 +27,7 @@ f32 func_8006A9D4(register Obj8006A9D4 *obj, register f32 *p, s32 arg2, f32 *out
 f32 func_8006A9D4(register Obj8006A9D4 *obj, register f32 *p, s32 arg2, f32 *out) {
     f32 work[16];
     f32 result;
-    f32 delta[3];
+    struct { f32 x, y, z; } delta;
     f32 saved[3];
     f32 spare[3];
 
@@ -53,17 +53,17 @@ f32 func_8006A9D4(register Obj8006A9D4 *obj, register f32 *p, s32 arg2, f32 *out
             obj->unk64 |= 2;
         }
     } else if (obj->unk60 & 0x20) {
-        delta[0] = p[0];
-        delta[1] = p[1];
-        delta[2] = p[2];
+        delta.x = p[0];
+        delta.y = p[1];
+        delta.z = p[2];
         func_800678A8(obj, p);
-        delta[0] = p[0] - delta[0];
-        delta[1] = p[1] - delta[1];
-        delta[2] = p[2] - delta[2];
-        delta[0] = obj->unk154 + delta[0];
-        delta[1] = obj->unk158 + delta[1];
-        delta[2] = obj->unk15C + delta[2];
-        func_80069EC0(obj, delta, out);
+        delta.x = p[0] - delta.x;
+        delta.y = p[1] - delta.y;
+        delta.z = p[2] - delta.z;
+        delta.x = obj->unk154 + delta.x;
+        delta.y = obj->unk158 + delta.y;
+        delta.z = obj->unk15C + delta.z;
+        func_80069EC0(obj, &delta.x, out);
     } else {
         func_80033010(p, saved, obj->unk13C, spare);
     }

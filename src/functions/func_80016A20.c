@@ -10,18 +10,18 @@ typedef struct Unk80016A20 {
 } Unk80016A20;
 
 typedef struct Work80016A20 {
-    char unk_00[0x14];
+    char unk_00[0x10];
 } Work80016A20;
 
 extern s32 func_80016260(f32 (*matrix)[4], Unk80016A20 *source, Work80016A20 *work);
 extern void func_800167E4(f32 (*matrix)[4], Work80016A20 *work, f32 *vector);
 
 void func_80016A20(f32 (*out)[4], Unk80016A20 *source) {
-    s32 row;
     s32 column;
     Work80016A20 work;
     f32 vector[3];
     f32 basis[4][4];
+    s32 row;
     f32 tx;
     f32 ty;
     f32 tz;

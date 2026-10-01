@@ -35,7 +35,6 @@ void func_80065E54(Actor *actor, Vec3f *arg1, Vec3f *arg2, Vec3f *arg3, f32 *arg
     f32 angles[3];
     f32 spare0;
     f32 spare1;
-    f32 saved;
 
     (void)spare0;
     (void)spare1;
@@ -70,9 +69,8 @@ void func_80065E54(Actor *actor, Vec3f *arg1, Vec3f *arg2, Vec3f *arg3, f32 *arg
         }
     }
 
-    saved = arg8[2];
     dy = angles[1] - arg8[1];
-    dz = angles[2] - saved;
+    dz = angles[2] - arg8[2];
     if (angles[1] < arg8[1]) {
         dy = dy / 3.0f;
     } else if (arg8[1] < angles[1]) {
@@ -88,7 +86,7 @@ void func_80065E54(Actor *actor, Vec3f *arg1, Vec3f *arg2, Vec3f *arg3, f32 *arg
                 dz = dz * ratio;
             }
         } else {
-            dz = (-saved) / 8.0f;
+            dz = (-arg8[2]) / 8.0f;
             dy = 0.0f;
             if (arg8[1] > -37.0f) {
                 dy = (f32)D_80120BF0 * -22.0f;
@@ -102,5 +100,5 @@ void func_80065E54(Actor *actor, Vec3f *arg1, Vec3f *arg2, Vec3f *arg3, f32 *arg
     }
 
     arg8[1] = arg8[1] + dy;
-    arg8[2] = saved + dz;
+    arg8[2] = arg8[2] + dz;
 }

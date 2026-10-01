@@ -29,12 +29,13 @@ extern s32 func_80092050(void *arg0, s32 arg1, u16 arg2, void *arg3);
 extern s32 func_800928F0(void *arg0, s32 arg1, u16 arg2, u8 *arg3, s32 arg4);
 
 s32 func_80090C20(Context *context, Packet *source, Packet *destination) {
-    s32 result;
+    s32 attempt;
     u8 high[32];
     u8 low[32];
-    u16 codes[4];
-    s32 attempt;
+    s32 flag;
     s32 i;
+    s32 result;
+    u16 codes[4];
 
     attempt = 0;
     destination->unk00 = -1;
@@ -101,7 +102,8 @@ s32 func_80090C20(Context *context, Packet *source, Packet *destination) {
         }
     }
 
-    destination->unk18 = (source->unk18 & 0xFFFE) | (attempt > 0 ? 1 : 0);
+    flag = attempt > 0 ? 1 : 0;
+    destination->unk18 = (source->unk18 & 0xFFFE) | flag;
     destination->unk1A = attempt;
     destination->unk1B = source->unk1B;
     func_80090B24((u16 *)destination, &destination->unk1C, &destination->unk1E);

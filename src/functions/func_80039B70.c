@@ -33,7 +33,7 @@ void func_80039B70(void) {
         } else {
             g2 = 0;
         }
-        off = g1 + g1;
+        off = g1 << 1; off += g1 * 0;
         func_8003140C(D_80114530[index] - off, 0, 2U * g2 + w * 240U * pb);
     }
 }
