@@ -5048,17 +5048,17 @@
       "link_vram": "0x80063084",
       "rodata_vram": "0x800AD350",
       "absolute_symbols": {
-        "func_8003F800": "0x8003F800",
         "func_80015268": "0x80015268",
         "func_80015288": "0x80015288",
         "func_800174B8": "0x800174B8",
         "func_80017BA8": "0x80017BA8",
         "func_800181BC": "0x800181BC",
-        "func_80082BE0": "0x80082BE0",
         "func_80033780": "0x80033780",
         "func_80033878": "0x80033878",
         "func_80033928": "0x80033928",
-        "func_80060DE4": "0x80060DE4"
+        "func_8003F800": "0x8003F800",
+        "func_80060DE4": "0x80060DE4",
+        "func_80082BE0": "0x80082BE0"
       },
       "functions": [
         {
@@ -15473,27 +15473,27 @@
       "link_vram": "0x80043598",
       "rodata_vram": "0x800AACD0",
       "absolute_symbols": {
-        "D_800A5998": "0x800A5998",
         "D_800A4AD8": "0x800A4AD8",
         "D_800A4ADC": "0x800A4ADC",
         "D_800A4AE0": "0x800A4AE0",
+        "D_800A5998": "0x800A5998",
         "D_80120BF0": "0x80120BF0",
-        "func_80082BE0": "0x80082BE0",
+        "func_8000BB78": "0x8000BB78",
+        "func_800117F0": "0x800117F0",
+        "func_80011814": "0x80011814",
+        "func_800156DC": "0x800156DC",
+        "func_80016F0C": "0x80016F0C",
+        "func_80017F28": "0x80017F28",
+        "func_8001811C": "0x8001811C",
+        "func_80041258": "0x80041258",
+        "func_800419EC": "0x800419EC",
         "func_80041D14": "0x80041D14",
         "func_80041F40": "0x80041F40",
         "func_80042970": "0x80042970",
-        "func_80041258": "0x80041258",
-        "func_800419EC": "0x800419EC",
-        "func_80016F0C": "0x80016F0C",
-        "func_80082624": "0x80082624",
-        "func_800156DC": "0x800156DC",
-        "func_8000BB78": "0x8000BB78",
-        "func_80017F28": "0x80017F28",
-        "func_8001811C": "0x8001811C",
+        "func_80042BB8": "0x80042BB8",
         "func_80042EEC": "0x80042EEC",
-        "func_800117F0": "0x800117F0",
-        "func_80011814": "0x80011814",
-        "func_80042BB8": "0x80042BB8"
+        "func_80082624": "0x80082624",
+        "func_80082BE0": "0x80082BE0"
       },
       "functions": [
         {
@@ -26757,16 +26757,8 @@
       "id": "func_80054048",
       "source": "src/functions/func_80054048.c",
       "link_vram": "0x80054048",
-      "flags": [
-        "-G",
-        "0",
-        "-O2",
-        "-mips2",
-        "-non_shared",
-        "-Xcpluscomm",
-        "-signed",
-        "-Wab,-r4300_mul"
-      ],
+      "rodata_vram": "0x800ACEA8",
+      "rodata_alignment": 8,
       "absolute_symbols": {
         "D_800A52D0": "0x800A52D0",
         "D_800ACEA8": "0x800ACEA8",

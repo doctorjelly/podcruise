@@ -50,17 +50,13 @@ extern void func_800117F0(void);
 extern void func_80011814(void);
 extern void func_80042BB8(void *);
 
-void func_80043598(void *arg0) {
-    Obj80043598 *obj;
-    s32 active;
+void func_80043598(Obj80043598 *obj) {
     f32 original[6];
     f32 facing[6];
     f32 matrix[4][4];
-    f32 (*mat)[4];
+    s32 active;
     Linked80043598 *linked;
 
-    obj = arg0;
-    mat = obj->matrix20;
     if (obj->state7C == 0 || obj->player74 < 0) {
         return;
     }
@@ -118,9 +114,9 @@ void func_80043598(void *arg0) {
             break;
     }
 
-    func_80016F0C(mat, original);
+    func_80016F0C(obj->matrix20, original);
     func_80082624(original, obj->position138, matrix, facing, original[5]);
-    func_800156DC(mat, matrix);
+    func_800156DC(obj->matrix20, matrix);
 
     if (func_8000BB78(obj->handle78) != 0) {
         if (D_800A5998 != 0) {

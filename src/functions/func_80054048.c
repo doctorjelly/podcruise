@@ -52,7 +52,6 @@ extern Racer54048 *D_8011B1C0;
 extern Racer54048 *D_8011B1C4;
 extern Racer54048 *D_8011B1C8;
 extern s32 D_800A52D0;
-extern f32 D_800ACEA8;
 extern f64 D_80120BF0;
 
 extern void func_800092EC(s32 owner, s32 handle, s32 detail);
@@ -80,8 +79,8 @@ void func_80054048(Race54048 *race) {
     f32 step;
     Racer54048 *racer;
     s32 moved;
-    register f32 cap;
     s32 i;
+    s32 one = 1;
 
     (void)spare;
 
@@ -93,13 +92,11 @@ void func_80054048(Race54048 *race) {
         }
     }
 
-    if (running == 1) {
+    if (one == running) {
         func_8003B02C(race->pathA, race->matrixA);
         race->flags = (race->flags & ~0xF) | 2;
 
-        i = 0;
-        cap = D_800ACEA8;
-        for (; i < race->count; i++) {
+        for (i = 0; i < race->count; i++) {
             racer = &D_8011B1B8[i];
             if ((racer->flags & 1) && !(racer->flags & 2)) {
                 moved = func_80080BEC(racer->body, &step);
@@ -188,13 +185,13 @@ void func_80054048(Race54048 *race) {
 
                 if (!(racer->flags & 2)) {
                     racer->total = (f32)((f64)racer->total + (D_80120BF0 - (f64)step));
-                    if (cap < racer->total) {
-                        racer->total = cap;
+                    if (3000.0f < racer->total) {
+                        racer->total = 3000.0f;
                     }
                     racer->lap[racer->lapIndex] =
                         (f32)((f64)racer->lap[racer->lapIndex] + (D_80120BF0 - (f64)step));
-                    if (cap < racer->lap[racer->lapIndex]) {
-                        racer->lap[racer->lapIndex] = cap;
+                    if (3000.0f < racer->lap[racer->lapIndex]) {
+                        racer->lap[racer->lapIndex] = 3000.0f;
                     }
                     if (D_8011B1BC == 0 || racer == D_8011B1BC ||
                         racer == D_8011B1C0 || racer == D_8011B1C4 ||

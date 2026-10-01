@@ -2,7 +2,7 @@
 
 #include "podcruise/types.h"
 typedef struct { f32 x, y, z; } PcVec3f;
-extern void func_80015268(PcVec3f *, f32, s32, s32);
+extern void func_80015268(PcVec3f *, f32, f32, f32);
 extern void func_80015288(PcVec3f *, const PcVec3f *);
 
 typedef struct {
@@ -67,7 +67,7 @@ void func_80063084(s32 arg0, s32 arg1, PcVec3f *arg2, PcVec3f *arg3, f32 arg4,
             func_800181BC(handle, 2, -4, 0x10, 3);
         }
         func_80015288(&transform.position, &object->unk44);
-        func_80015268(&transform.rotation, object->unk68, 0, 0);
+        func_80015268(&transform.rotation, object->unk68, 0, 0.0f);
         func_800174B8(matrix, (f32 *)&transform);
         func_80017BA8(handle, matrix);
     }
