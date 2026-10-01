@@ -23,11 +23,10 @@ extern s32 func_800907D0(s32, void *);
 extern s32 func_80087E80(void *, s32, s32);
 
 s32 func_800950F4(void *arg0, Out *arg1) {
-    Blk8 blk;
     s32 status[1];
-    s32 result;
     s32 i;
     u8 *p;
+    Blk8 blk;
 
     for (i = 0; i < 16; i++) {
         D_8014C530.ram[i] = 0;
@@ -62,19 +61,17 @@ s32 func_800950F4(void *arg0, Out *arg1) {
         return status[0];
     }
 
-    *(u8 *)&D_8014C530 = 0;
-    p = (u8 *)&D_8014C530 + 1;
-    p[2] = 0;
-    p[1] = 0;
-    p[0] = 0;
-    blk = *(Blk8 *)(p + 3);
+    p = (u8 *)D_8014C530.ram;
+    for (i = 0; i < 4; i++) {
+        *p++ = 0;
+    }
+    blk = *(Blk8 *)p;
 
     arg1->unk3 = (blk.b[2] & 0xC0) >> 4;
-    result = arg1->unk3;
-    arg1->unk0 = (blk.b[5] << 8) | blk.b[4];
+    arg1->unk0 = blk.b[4] | (blk.b[5] << 8);
     arg1->unk2 = blk.b[6];
-    if (result != 0) {
-        return result;
+    if (arg1->unk3 != 0) {
+        return arg1->unk3;
     }
     return 0;
 }

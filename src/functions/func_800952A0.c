@@ -1,6 +1,5 @@
 /* Independently written from specs/func_800952A0.md (worker batch_03).
- * Behavior-level recovery: exact length (1408 bytes, 352 instructions) and matching
- * structure; not byte-exact — see the spec for the residual register-class note. */
+ * Byte-exact against the USA ROM (1408 bytes, 352 instructions). */
 
 #include "podcruise/types.h"
 
@@ -32,7 +31,7 @@ extern void func_800958D4(void);
 extern DdControl *D_8014D7D4;
 extern u32 D_800A7B50;
 
-#define PI_STATUS (*(volatile u32 *)0xA4600010)
+#define PI_STATUS (*(volatile s32 *)0xA4600010)
 #define DD_STATUS (*(volatile u32 *)0xA5000508)
 #define DD_ASIC (*(u32 *)0xA5000510)
 
@@ -44,7 +43,10 @@ s32 func_800952A0(void) {
     DdRecord *record;
     s32 state;
     s32 count;
+    s32 two;
+    u32 n;
 
+    two = 2;
     control = &D_8014D7D4->sub;
     record = &control->records[control->slot];
 
@@ -73,7 +75,7 @@ s32 func_800952A0(void) {
     }
 
     state = control->state;
-    if (2 == state) {
+    if (two == state) {
         return 1;
     }
 
@@ -92,7 +94,7 @@ s32 func_800952A0(void) {
 
     if (1 == state) {
         if (!(status & 0x40000000)) {
-            if (control->command * 85 != control->counter + 1) {
+            if (control->counter + 1 != control->command * 85) {
                 record->words[0] = 0x18;
                 func_80095820();
                 return 1;
@@ -129,7 +131,8 @@ s32 func_800952A0(void) {
 
     if (((DD_ASIC & 0x00200000) && (DD_ASIC & 0x00400000)) ||
         (DD_ASIC & 0x02000000)) {
-        if (record->words[4] >= 4) {
+        n = record->words[4];
+        if (n >= 4) {
             if (control->command != 3 || control->counter >= 0x53) {
                 record->words[0] = 0x17;
                 func_80095820();
@@ -141,13 +144,14 @@ s32 func_800952A0(void) {
         record->words[4] = record->words[4] + 1;
     }
 
+    count = control->counter;
     if (status & 0x10000000) {
-    if (control->counter != 0x57) {
+    if (count != 0x57) {
         record->words[0] = 0x18;
         func_80095820();
     }
 
-    if (control->command == 2 && control->slot == 0) {
+    if ((u32)control->command == 2 && (u32)control->slot == 0) {
         control->slot = 1;
         control->counter = -1;
         control->records[1].words[1] =
@@ -182,10 +186,11 @@ s32 func_800952A0(void) {
         }
         control->counter = count + 1;
 
-        if (!(status & 0x40000000)) {
+        if (status & 0x40000000) {
             if (control->counter >= 0x55) {
                 record->words[0] = 0x18;
                 func_80095820();
+                return 1;
             } else {
                 func_800945C0(D_8014D7D4, 0, 0x05000400, record->words[1],
                               record->words[3]);

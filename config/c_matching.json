@@ -13617,26 +13617,16 @@
       "source": "src/functions/func_80094ED0.c",
       "link_vram": "0x80094ED0",
       "absolute_symbols": {
-        "func_800905F0": "0x800905F0",
-        "func_80090634": "0x80090634",
-        "func_800950F4": "0x800950F4",
-        "func_80095048": "0x80095048",
-        "func_800907D0": "0x800907D0",
-        "func_80087E80": "0x80087E80",
+        "D_80149CB0": "0x80149CB0",
         "D_8014C530": "0x8014C530",
         "D_8014C534": "0x8014C534",
-        "D_80149CB0": "0x80149CB0"
+        "func_80087E80": "0x80087E80",
+        "func_800905F0": "0x800905F0",
+        "func_80090634": "0x80090634",
+        "func_800907D0": "0x800907D0",
+        "func_80095048": "0x80095048",
+        "func_800950F4": "0x800950F4"
       },
-      "flags": [
-        "-G",
-        "0",
-        "-O2",
-        "-mips2",
-        "-non_shared",
-        "-Xcpluscomm",
-        "-signed",
-        "-Wab,-r4300_mul"
-      ],
       "functions": [
         {
           "name": "func_80094ED0",
@@ -23274,22 +23264,12 @@
       "id": "func_800952A0",
       "source": "src/functions/func_800952A0.c",
       "link_vram": "0x800952A0",
-      "flags": [
-        "-G",
-        "0",
-        "-O2",
-        "-mips2",
-        "-non_shared",
-        "-Xcpluscomm",
-        "-signed",
-        "-Wab,-r4300_mul"
-      ],
       "absolute_symbols": {
+        "D_800A7B50": "0x800A7B50",
+        "D_8014D7D4": "0x8014D7D4",
         "func_800945C0": "0x800945C0",
         "func_80095820": "0x80095820",
-        "func_800958D4": "0x800958D4",
-        "D_8014D7D4": "0x8014D7D4",
-        "D_800A7B50": "0x800A7B50"
+        "func_800958D4": "0x800958D4"
       },
       "functions": [
         {
@@ -25634,13 +25614,6 @@
       "source": "src/functions/func_800049FC.c",
       "link_vram": "0x800049FC",
       "absolute_symbols": {
-        "func_800035BC": "0x800035BC",
-        "func_80003B44": "0x80003B44",
-        "func_80004704": "0x80004704",
-        "func_800155EC": "0x800155EC",
-        "func_80017E54": "0x80017E54",
-        "func_80017E88": "0x80017E88",
-        "func_80017EDC": "0x80017EDC",
         "D_8009A270": "0x8009A270",
         "D_8009A274": "0x8009A274",
         "D_8009A278": "0x8009A278",
@@ -25649,7 +25622,14 @@
         "D_800AE918": "0x800AE918",
         "D_800AE928": "0x800AE928",
         "D_800AEC78": "0x800AEC78",
-        "D_800AEC7C": "0x800AEC7C"
+        "D_800AEC7C": "0x800AEC7C",
+        "func_800035BC": "0x800035BC",
+        "func_80003B44": "0x80003B44",
+        "func_80004704": "0x80004704",
+        "func_800155EC": "0x800155EC",
+        "func_80017E54": "0x80017E54",
+        "func_80017E88": "0x80017E88",
+        "func_80017EDC": "0x80017EDC"
       },
       "functions": [
         {

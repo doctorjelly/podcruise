@@ -93,6 +93,8 @@ void func_800049FC(Node800049FC *node, f32 (*arg1)[7], s32 arg2) {
         }
     }
 
+    if (D_800AE918[0] == zero) {
+    }
     count = func_80017E54(node);
     for (i = 0; i < count; i++) {
         child = node->unk18[i];

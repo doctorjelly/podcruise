@@ -36,7 +36,7 @@ u8 address;
 u8 *buffer;
 {
     s32 ret;
-    int x;
+    u16 type;
     u8 *ptr = (u8 *)&D_8014C530;
     EepFormat eepromformat;
     ContStatus sdata;
@@ -45,7 +45,8 @@ u8 *buffer;
     ret = func_800950F4(mq, &sdata);
 
     if (ret == 0) {
-        switch (sdata.type & 0xC000) {
+        type = sdata.type & 0xC000;
+        switch (type) {
             case 0x8000:
                 if (address >= 0x40) {
                     ret = -1;
@@ -77,6 +78,5 @@ u8 *buffer;
     eepromformat = *(EepFormat *)ptr;
     ret = (eepromformat.rxsize & 0xC0) >> 4;
     func_80090634();
-    (void)x;
     return ret;
 }
