@@ -93,6 +93,8 @@ void func_80014568(s32 arg0, s32 arg1, u8 arg2) {
             u32 *gfx;
 
             gfx = D_801217B0;
+            if (D_801217B0) {
+            }
             D_801217B0 = gfx + 2;
             gfx[0] = 0xFA000000;
             gfx[1] = PACK(D_800A1CCC[0], D_800A1CCC[1], D_800A1CCC[2], D_800A1CCC[3]);

@@ -23323,18 +23323,7 @@
       "id": "func_80014568",
       "source": "src/functions/func_80014568.c",
       "link_vram": "0x80014568",
-      "flags": [
-        "-G",
-        "0",
-        "-O2",
-        "-mips2",
-        "-non_shared",
-        "-Xcpluscomm",
-        "-signed",
-        "-Wab,-r4300_mul"
-      ],
       "absolute_symbols": {
-        "func_80011F38": "0x80011F38",
         "D_800A1CCC": "0x800A1CCC",
         "D_800D691C": "0x800D691C",
         "D_800D6920": "0x800D6920",
@@ -23344,7 +23333,8 @@
         "D_800D6930": "0x800D6930",
         "D_800D6934": "0x800D6934",
         "D_800D6938": "0x800D6938",
-        "D_801217B0": "0x801217B0"
+        "D_801217B0": "0x801217B0",
+        "func_80011F38": "0x80011F38"
       },
       "functions": [
         {
@@ -26146,7 +26136,7 @@
           "name": "func_80082BE0",
           "vram": "0x80082BE0",
           "rom": "0x837E0",
-          "size": 160
+          "size": 152
         }
       ]
     },
@@ -28178,6 +28168,16 @@
           "rom": "0x90580",
           "size": 216
         }
+      ],
+      "flags": [
+        "-G",
+        "0",
+        "-O3",
+        "-mips2",
+        "-non_shared",
+        "-Xcpluscomm",
+        "-signed",
+        "-Wab,-r4300_mul"
       ]
     },
     {
@@ -30260,6 +30260,16 @@
           "rom": "0x8E980",
           "size": 288
         }
+      ],
+      "flags": [
+        "-G",
+        "0",
+        "-O3",
+        "-mips2",
+        "-non_shared",
+        "-Xcpluscomm",
+        "-signed",
+        "-Wab,-r4300_mul"
       ]
     },
     {
