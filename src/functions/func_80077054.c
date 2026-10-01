@@ -2,6 +2,10 @@
 #include "podcruise/types.h"
 
 typedef f32 Matrix[4][4];
+typedef struct {
+    u8 pad[0x19BC];
+    Matrix ring[18];
+} PodRing;
 
 #define AT(p, off) ((void *)((u8 *)(p) + (off)))
 #define FF(p, off) (*(f32 *)((u8 *)(p) + (off)))
@@ -9,7 +13,7 @@ typedef f32 Matrix[4][4];
 #define FU(p, off) (*(u32 *)((u8 *)(p) + (off)))
 #define FP(p, off) (*(void **)((u8 *)(p) + (off)))
 #define FM(p, off) ((f32 (*)[4])((u8 *)(p) + (off)))
-#define RING(p, i) ((f32 (*)[4])((u8 *)(p) + (i) * 64 + 0x19BC))
+#define RING(p, i) (((PodRing *)(p))->ring[i])
 
 extern s32 D_8009B7D0;
 extern s32 D_8009B7D8;
@@ -46,26 +50,27 @@ extern void func_80074CDC(void *);
 extern f32 func_80081700(f32, f32);
 
 void func_80077054(void *arg) {
+    f32 turn;
     Matrix work;
     Matrix base;
     Matrix trailB;
     Matrix trailA;
-    f32 offset[3];
+    f32 lean;
     s32 isReplay;
     s32 hasWing;
+    s32 step;
+    f32 fade;
+    s32 mask;
+    s32 index;
+    s32 dbg;
+    f32 drop;
+    f32 len;
+    f32 offset[3];
     f32 pivot[3];
     f32 swing[3];
     f32 blend[3];
-    s32 index;
-    s32 mask;
-    s32 step;
     void *entry;
     void *anchor;
-    void *link;
-    f32 fade;
-    f32 lean;
-    f32 drop;
-    f32 turn;
 
     isReplay = 0;
     hasWing = 0;
@@ -91,22 +96,29 @@ void func_80077054(void *arg) {
         }
     }
 
-    link = FP(arg, 0x344);
-    if (link == 0) {
+    if (FP(arg, 0x344) == 0) {
         func_80017918(AT(arg, 0x15D0), D_800ADA68, D_800ADA68, D_800ADA68, base);
         if ((mask != 0) && (FS(arg, 0x60) & 0x5800)) {
             if (FP(arg, 0x348) != 0) {
-                func_800181BC(FP(arg, 0x348), 2, -4, 0x10, 3);
+                if (FP(arg, 0x348) != 0) {
+                    func_800181BC(FP(arg, 0x348), 2, -4, 0x10, 3);
+                }
             }
             if (FP(arg, 0x34C) != 0) {
-                func_800181BC(FP(arg, 0x34C), 2, -4, 0x10, 3);
+                if (FP(arg, 0x34C) != 0) {
+                    func_800181BC(FP(arg, 0x34C), 2, -4, 0x10, 3);
+                }
             }
         } else {
             if (FP(arg, 0x348) != 0) {
-                func_800181BC(FP(arg, 0x348), 2, 3, 0x10, 2);
+                if (FP(arg, 0x348) != 0) {
+                    func_800181BC(FP(arg, 0x348), 2, 3, 0x10, 2);
+                }
             }
             if (FP(arg, 0x34C) != 0) {
-                func_800181BC(FP(arg, 0x34C), 2, 3, 0x10, 2);
+                if (FP(arg, 0x34C) != 0) {
+                    func_800181BC(FP(arg, 0x34C), 2, 3, 0x10, 2);
+                }
             }
         }
         if (D_800A6950 != 0) {
@@ -124,15 +136,17 @@ void func_80077054(void *arg) {
     }
 
     if (mask != 0) {
-        if (FP(link, 0) != 0) {
-            func_800181BC(FP(link, 0), 2, -4, 0x10, 3);
+        if (FP(FP(arg, 0x344), 0) != 0) {
+            func_800181BC(FP(FP(arg, 0x344), 0), 2, -4, 0x10, 3);
         }
+        dbg = D_800A6950;
     } else {
-        if (FP(link, 0) != 0) {
-            func_800181BC(FP(link, 0), 2, 3, 0x10, 2);
+        if (FP(FP(arg, 0x344), 0) != 0) {
+            func_800181BC(FP(FP(arg, 0x344), 0), 2, 3, 0x10, 2);
         }
+        dbg = D_800A6950;
     }
-    if (D_800A6950 != 0) {
+    if (dbg != 0) {
         if ((FS(arg, 0x60) & 0x84000) == 0x80000) {
             D_800A6954[index] = FP(FP(arg, 0x344), 0);
         } else {
@@ -155,23 +169,20 @@ void func_80077054(void *arg) {
     if (FP(FP(arg, 0x344), 0xEC) != 0) {
         func_800181BC(FP(FP(arg, 0x344), 0xEC), 2, 3, 0x10, 2);
     }
-    link = FP(arg, 0x344);
     if (FS(FP(FP(arg, 0x1E70), 0x18), 0) == 0xE) {
         isReplay = 1;
     }
-    if (FS(link, 0xC) != 0) {
-        if (FS(link, 0x10) != 0) {
-            hasWing = 1;
-        }
+    if (FS(FP(arg, 0x344), 0xC) != 0 && FS(FP(arg, 0x344), 0x10) != 0) {
+        hasWing = 1;
     }
-    if (FP(link, 0) != 0) {
-        func_80017D48(FP(link, 0), 0);
+    if (FP(FP(arg, 0x344), 0) != 0) {
+        func_80017D48(FP(FP(arg, 0x344), 0), 0);
     }
 
-    FU(arg, 0x1E3C) = FU(arg, 0x1E3C) + 1;
-    FU(arg, 0x1E3C) = FU(arg, 0x1E3C) % 18;
     FS(arg, 0x1E40) = 0x10;
     FS(arg, 0x1E44) = 0xA;
+    FU(arg, 0x1E3C) = FU(arg, 0x1E3C) + 1;
+    FU(arg, 0x1E3C) = FU(arg, 0x1E3C) % 18;
     func_800156DC(RING(arg, FU(arg, 0x1E3C)), base);
 
     if ((FS(arg, 0x1998) >= 0x4C) || (FP(arg, 0x344) == 0) || (isReplay != 0)) {
@@ -238,17 +249,16 @@ void func_80077054(void *arg) {
     func_800155EC(work[3], work[3], offset[1], base[1]);
     func_800155EC(work[3], work[3], offset[2], base[2]);
 
-    lean = base[1][0] * FF(arg, 0x194) + base[1][1] * FF(arg, 0x198);
-    lean = FF(arg, 0x19C) * base[1][2] + lean;
+    lean = base[1][0] * FF(arg, 0x194) + base[1][1] * FF(arg, 0x198) + FF(arg, 0x19C) * base[1][2];
     func_800155EC(work[3], work[3], (lean - FF(arg, 0x1E60)) * 50.0f, base[2]);
     FF(arg, 0x1E60) = lean;
 
     func_8001535C(pivot, work[3], base[3]);
     anchor = AT(arg, 0x1E48);
     func_8001535C(swing, pivot, anchor);
-    drop = func_800153C0(swing);
+    len = func_800153C0(swing);
     func_800154D0(swing);
-    func_800155EC(AT(arg, 0x1E54), AT(arg, 0x1E54), drop * 20.0f * (f32)D_80120BF0,
+    func_800155EC(AT(arg, 0x1E54), AT(arg, 0x1E54), len * 20.0f * (f32)D_80120BF0,
                   swing);
     func_800155C0(AT(arg, 0x1E54), func_80081700(10.0f, (f32)D_80120BF0),
                   AT(arg, 0x1E54));
@@ -261,15 +271,14 @@ void func_80077054(void *arg) {
     func_80015328(work[3], work[3], blend);
     func_80015288(AT(arg, 0x1E48), blend);
 
-    turn = FF(arg, 0x1E54) * FF(arg, 0x194) + FF(arg, 0x1E58) * FF(arg, 0x198);
-    turn = (FF(arg, 0x19C) * FF(arg, 0x1E5C) + turn) * -2.0f;
+    turn = (FF(arg, 0x1E54) * FF(arg, 0x194) + FF(arg, 0x1E58) * FF(arg, 0x198) + FF(arg, 0x19C) * FF(arg, 0x1E5C)) * -2.0f;
     if (50.0 < (f64)turn) {
         turn = 50.0f;
     }
     if ((f64)turn < -50.0) {
         turn = -50.0f;
     }
-    func_80017824(work, turn, 1.0f, 0.0f, 0.0f, work);
+    func_80017824(work, turn, 1.0, 0.0, 0.0, work);
 
     if (isReplay != 0) {
         FF(arg, 0x19B4) = 0.0f;
@@ -293,7 +302,7 @@ void func_80077054(void *arg) {
     func_80015328(offset, offset, AT(arg, 0x161C));
     turn = -FF(arg, 0x204) / (f32)2.0;
     func_800156DC(work, base);
-    func_80017824(work, turn, 0.0f, 1.0f, 0.0f, work);
+    func_80017824(work, turn, 0.0, 1.0, 0.0, work);
     func_800155EC(work[3], work[3], offset[0], base[0]);
     func_800155EC(work[3], work[3], offset[1], base[1]);
     func_800155EC(work[3], work[3], offset[2], base[2]);
@@ -310,7 +319,7 @@ void func_80077054(void *arg) {
     func_80015328(offset, offset, AT(arg, 0x1628));
     turn = -FF(arg, 0x204) / (f32)2.0;
     func_800156DC(work, base);
-    func_80017824(work, turn, 0.0f, 1.0f, 0.0f, work);
+    func_80017824(work, turn, 0.0, 1.0, 0.0, work);
     func_800155EC(work[3], work[3], offset[0], base[0]);
     func_800155EC(work[3], work[3], offset[1], base[1]);
     func_800155EC(work[3], work[3], offset[2], base[2]);

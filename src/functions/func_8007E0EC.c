@@ -1,12 +1,6 @@
 /* Independently written from specs/functions/recovered/func_8007E0EC.md. */
 #include "podcruise/types.h"
 
-typedef struct MatrixWork {
-    f32 m[4][4];
-    s32 unk40;
-    s32 unk44;
-} MatrixWork;
-
 typedef struct Resource {
     void *unk00;
 } Resource;
@@ -30,7 +24,6 @@ extern s32 D_800A5B5C;
 extern s32 D_800A66D0;
 extern s32 D_800A66D4;
 extern s32 D_800A66D8;
-extern f32 D_800ADC30;
 extern void *D_8011C8F0;
 extern void *D_8011C8F4;
 extern void *D_8011C8F8;
@@ -51,26 +44,18 @@ extern void *D_8011C938;
 extern void *D_8011C93C;
 extern void *D_8011C940;
 extern Queue D_8011C950;
-extern s32 D_8011C964;
 extern void *D_8011C970[1];
-extern s32 D_8011CA58;
-extern s32 D_8011CA5C;
-extern s32 D_8011CA60[48];
+s32 D_8011CA58[50];
 
 s32 func_8007E0EC(s32 arg0, s32 arg1, s32 arg2) {
-    MatrixWork work;
-    s32 result;
     Resource *resource;
-    void *node;
     s32 i;
+    f32 work[4][4];
+    s32 result;
 
     (void)arg1;
     result = 0;
-    D_8011CA58 = 0;
-    D_8011CA5C = 0;
-    for (i = 0; i < 48; i++) {
-        D_8011CA60[i] = 0;
-    }
+    for (i = 0; i < 50; i++) { D_8011CA58[i] = 0; }
     D_800A66D8 = arg0;
     D_800A66D4 = 0;
     D_800A66D0 = 0;
@@ -83,10 +68,9 @@ s32 func_8007E0EC(s32 arg0, s32 arg1, s32 arg2) {
         resource = func_800305E8(0xF9);
         D_8011C8F0 = func_80030964(resource);
         func_8007B744(0);
-        node = resource->unk00;
-        D_8011C910.unk00 = node;
-        if (node != 0) {
-            func_800181BC(node, 2, -4, 0x10, 3);
+        D_8011C910.unk00 = resource->unk00;
+        if (D_8011C910.unk00 != 0) {
+            func_800181BC(D_8011C910.unk00, 2, -4, 0x10, 3);
         }
         D_8011C970[D_8011C950.count] = resource->unk00;
         D_8011C950.count++;
@@ -94,10 +78,9 @@ s32 func_8007E0EC(s32 arg0, s32 arg1, s32 arg2) {
         resource = func_800305E8(0xF6);
         D_8011C8F4 = func_80030964(resource);
         func_8007B744(1);
-        node = resource->unk00;
-        D_8011C910.unk04 = node;
-        if (node != 0) {
-            func_800181BC(node, 2, -4, 0x10, 3);
+        D_8011C910.unk04 = resource->unk00;
+        if (D_8011C910.unk04 != 0) {
+            func_800181BC(D_8011C910.unk04, 2, -4, 0x10, 3);
         }
         D_8011C970[D_8011C950.count] = resource->unk00;
         D_8011C950.count++;
@@ -105,10 +88,9 @@ s32 func_8007E0EC(s32 arg0, s32 arg1, s32 arg2) {
         resource = func_800305E8(0xBF);
         D_8011C8F8 = func_80030964(resource);
         func_8007B744(2);
-        node = resource->unk00;
-        D_8011C910.unk08 = node;
-        if (node != 0) {
-            func_800181BC(node, 2, -4, 0x10, 3);
+        D_8011C910.unk08 = resource->unk00;
+        if (D_8011C910.unk08 != 0) {
+            func_800181BC(D_8011C910.unk08, 2, -4, 0x10, 3);
         }
         D_8011C970[D_8011C950.count] = resource->unk00;
         D_8011C950.count++;
@@ -129,18 +111,17 @@ s32 func_8007E0EC(s32 arg0, s32 arg1, s32 arg2) {
         resource = func_800305E8(0x97);
         D_8011C8F0 = func_80030964(resource);
         D_8011C910.unk00 = resource->unk00;
-        D_8011C930 = resource->unk00;
+        D_8011C930 = D_8011C910.unk00;
 
         resource = func_800305E8(0x122);
         D_8011C8F4 = func_80030964(resource);
         func_8007B744(1);
-        node = resource->unk00;
-        D_8011C910.unk04 = node;
-        if (node != 0) {
-            func_800181BC(node, 2, -4, 0x10, 3);
+        D_8011C910.unk04 = resource->unk00;
+        if (D_8011C910.unk04 != 0) {
+            func_800181BC(D_8011C910.unk04, 2, -4, 0x10, 3);
         }
-        D_8011C970[D_8011C964] = resource->unk00;
-        D_8011C964++;
+        D_8011C970[D_8011C950.count] = resource->unk00;
+        D_8011C950.count++;
         if (arg2 != 0) {
             func_8007DED8(arg2);
         }
@@ -158,10 +139,9 @@ s32 func_8007E0EC(s32 arg0, s32 arg1, s32 arg2) {
         resource = func_800305E8(0x118);
         D_8011C8F0 = func_80030964(resource);
         func_8007B744(0);
-        node = resource->unk00;
-        D_8011C910.unk00 = node;
-        if (node != 0) {
-            func_800181BC(node, 2, -4, 0x10, 3);
+        D_8011C910.unk00 = resource->unk00;
+        if (D_8011C910.unk00 != 0) {
+            func_800181BC(D_8011C910.unk00, 2, -4, 0x10, 3);
         }
         D_8011C970[D_8011C950.count] = resource->unk00;
         D_8011C950.count++;
@@ -169,10 +149,9 @@ s32 func_8007E0EC(s32 arg0, s32 arg1, s32 arg2) {
         resource = func_800305E8(0x117);
         D_8011C8F4 = func_80030964(resource);
         func_8007B744(1);
-        node = resource->unk00;
-        D_8011C910.unk04 = node;
-        if (node != 0) {
-            func_800181BC(node, 2, -4, 0x10, 3);
+        D_8011C910.unk04 = resource->unk00;
+        if (D_8011C910.unk04 != 0) {
+            func_800181BC(D_8011C910.unk04, 2, -4, 0x10, 3);
         }
         D_8011C970[D_8011C950.count] = resource->unk00;
         D_8011C950.count++;
@@ -180,29 +159,27 @@ s32 func_8007E0EC(s32 arg0, s32 arg1, s32 arg2) {
         resource = func_800305E8(0x122);
         D_8011C8FC = func_80030964(resource);
         func_8007B744(3);
-        node = resource->unk00;
-        D_8011C910.unk0C = node;
-        if (node != 0) {
-            func_800181BC(node, 2, -4, 0x10, 3);
+        D_8011C910.unk0C = resource->unk00;
+        if (D_8011C910.unk0C != 0) {
+            func_800181BC(D_8011C910.unk0C, 2, -4, 0x10, 3);
         }
-        D_8011C970[D_8011C964] = resource->unk00;
-        D_8011C964++;
+        D_8011C970[D_8011C950.count] = resource->unk00;
+        D_8011C950.count++;
 
         resource = func_800305E8(0x12D);
         D_8011C8F8 = func_80030964(resource);
         D_8011C910.unk08 = resource->unk00;
-        D_8011C938 = resource->unk00;
+        D_8011C938 = D_8011C910.unk08;
 
         resource = func_800305E8(0x127);
         D_8011C904 = func_80030964(resource);
         func_8007B744(5);
-        node = resource->unk00;
-        D_8011C910.unk14 = node;
-        if (node != 0) {
-            func_800181BC(node, 2, -4, 0x10, 3);
+        D_8011C910.unk14 = resource->unk00;
+        if (D_8011C910.unk14 != 0) {
+            func_800181BC(D_8011C910.unk14, 2, -4, 0x10, 3);
         }
-        D_8011C970[D_8011C964] = resource->unk00;
-        D_8011C964++;
+        D_8011C970[D_8011C950.count] = resource->unk00;
+        D_8011C950.count++;
         if (arg2 != 0) {
             func_8007DED8(arg2);
         }
@@ -213,14 +190,14 @@ s32 func_8007E0EC(s32 arg0, s32 arg1, s32 arg2) {
         resource = func_800305E8(0x128);
         D_8011C8F0 = func_80030964(resource);
         D_8011C910.unk00 = resource->unk00;
-        D_8011C930 = resource->unk00;
+        D_8011C930 = D_8011C910.unk00;
 
         resource = func_800305E8(0x12D);
         D_8011C8F8 = func_80030964(resource);
         D_8011C910.unk08 = resource->unk00;
-        D_8011C938 = resource->unk00;
-        func_80017520(work.m, D_800ADC30, D_800ADC30, D_800ADC30);
-        func_80017BA8(D_8011C910.unk08, work.m);
+        D_8011C938 = D_8011C910.unk08;
+        func_80017520(work, 2.4f, 2.4f, 2.4f);
+        func_80017BA8(D_8011C910.unk08, work);
         if (arg2 != 0) {
             func_8007DED8(arg2);
         }
@@ -231,13 +208,12 @@ s32 func_8007E0EC(s32 arg0, s32 arg1, s32 arg2) {
         resource = func_800305E8(0x123);
         D_8011C8F0 = func_80030964(resource);
         func_8007B744(0);
-        node = resource->unk00;
-        D_8011C910.unk00 = node;
-        if (node != 0) {
-            func_800181BC(node, 2, -4, 0x10, 3);
+        D_8011C910.unk00 = resource->unk00;
+        if (D_8011C910.unk00 != 0) {
+            func_800181BC(D_8011C910.unk00, 2, -4, 0x10, 3);
         }
-        D_8011C970[D_8011C964] = resource->unk00;
-        D_8011C964++;
+        D_8011C970[D_8011C950.count] = resource->unk00;
+        D_8011C950.count++;
         if (arg2 != 0) {
             func_8007DED8(arg2);
         }
@@ -248,13 +224,12 @@ s32 func_8007E0EC(s32 arg0, s32 arg1, s32 arg2) {
         resource = func_800305E8(0x125);
         D_8011C8F0 = func_80030964(resource);
         func_8007B744(0);
-        node = resource->unk00;
-        D_8011C910.unk00 = node;
-        if (node != 0) {
-            func_800181BC(node, 2, -4, 0x10, 3);
+        D_8011C910.unk00 = resource->unk00;
+        if (D_8011C910.unk00 != 0) {
+            func_800181BC(D_8011C910.unk00, 2, -4, 0x10, 3);
         }
-        D_8011C970[D_8011C964] = resource->unk00;
-        D_8011C964++;
+        D_8011C970[D_8011C950.count] = resource->unk00;
+        D_8011C950.count++;
         if (arg2 != 0) {
             func_8007DED8(arg2);
         }
@@ -265,29 +240,27 @@ s32 func_8007E0EC(s32 arg0, s32 arg1, s32 arg2) {
         resource = func_800305E8(0xF7);
         D_8011C8F0 = func_80030964(resource);
         func_8007B744(0);
-        node = resource->unk00;
-        D_8011C910.unk00 = node;
-        if (node != 0) {
-            func_800181BC(node, 2, -4, 0x10, 3);
+        D_8011C910.unk00 = resource->unk00;
+        if (D_8011C910.unk00 != 0) {
+            func_800181BC(D_8011C910.unk00, 2, -4, 0x10, 3);
         }
-        D_8011C970[D_8011C964] = resource->unk00;
-        D_8011C964++;
+        D_8011C970[D_8011C950.count] = resource->unk00;
+        D_8011C950.count++;
 
         resource = func_800305E8(0xF6);
         D_8011C8F4 = func_80030964(resource);
         func_8007B744(1);
-        node = resource->unk00;
-        D_8011C910.unk04 = node;
-        if (node != 0) {
-            func_800181BC(node, 2, -4, 0x10, 3);
+        D_8011C910.unk04 = resource->unk00;
+        if (D_8011C910.unk04 != 0) {
+            func_800181BC(D_8011C910.unk04, 2, -4, 0x10, 3);
         }
-        D_8011C970[D_8011C964] = resource->unk00;
-        D_8011C964++;
+        D_8011C970[D_8011C950.count] = resource->unk00;
+        D_8011C950.count++;
 
         resource = func_800305E8(0x124);
         D_8011C8F8 = func_80030964(resource);
         D_8011C910.unk08 = resource->unk00;
-        D_8011C938 = resource->unk00;
+        D_8011C938 = D_8011C910.unk08;
         if (arg2 != 0) {
             func_8007DED8(arg2);
         }

@@ -102,11 +102,11 @@ void func_8006907C(Obj6907C *object, f32 *arg1, f32 *position, f32 *direction) {
                                 ((f32)D_80120BF0 + (f32)D_80120BF0) * planar;
                         }
                     }
-                    planar = (dot / length) / 100.0f;
-                    if (planar < 1.0f) {
-                        planar = 1.0f;
+                    dot = (dot / length) / 100.0f;
+                    if (dot < 1.0f) {
+                        dot = 1.0f;
                     }
-                    func_800155EC(velocity, velocity, planar, direction);
+                    func_800155EC(velocity, velocity, dot, direction);
                 } else {
                     velocity[0] = object->unk1C4 + velocity[0];
                     velocity[1] = object->unk1C8 + velocity[1];

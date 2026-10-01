@@ -145,17 +145,12 @@ extern f32 func_80051934(void);
 extern s32 func_8008A6B4(char *, const char *, ...);
 
 void func_8004EA08(State8004EA08 *state) {
-    Counts8004EA08 counts;
     Group8004EA08 *group;
-    Record8004EA08 *record;
-    Item8004EA08 *item;
     s32 groupIndex;
+    Counts8004EA08 counts;
     s32 index;
-    u32 uindex;
     s32 total;
     s32 count;
-    s32 random;
-    f32 unit;
     f32 sign;
 
     counts = D_800A5228;
@@ -176,11 +171,11 @@ void func_8004EA08(State8004EA08 *state) {
     D_8011A240.unk24 = 0;
     D_8011A240.unk28 = 0;
 
-    for (uindex = 0; uindex < 151; uindex++) {
-        D_8011A2A8[uindex] = 0;
-        D_8011A508[uindex] = 0;
-        D_8011A768[uindex] = 0;
-        D_8011A9C8[uindex] = 0;
+    for (groupIndex = 0; &D_8011A9C8[groupIndex] < &D_8011A9C8[151]; groupIndex++) {
+        D_8011A2A8[groupIndex] = 0;
+        D_8011A508[groupIndex] = 0;
+        D_8011A768[groupIndex] = 0;
+        D_8011A9C8[groupIndex] = 0;
     }
 
     func_80028070(state);
@@ -231,127 +226,113 @@ void func_8004EA08(State8004EA08 *state) {
     state->unkC0 = 0;
     state->unkC4 = 0;
     state->unkC8 = 0;
-    for (count = 0; count < 3; count++) {
-        state->unkCC[count] = count;
+    for (groupIndex = 0; groupIndex < 3; groupIndex++) {
+        state->unkCC[groupIndex] = groupIndex;
     }
     func_80050208(state);
 
-    for (record = D_80118F90; record < &D_80118F90[12]; record++) {
-        record->unk00 = -1;
-        record->unk04 = -1;
-        record->unk08 = -1;
-        record->unk0C = 0;
-        record->unk10 = 0xFF;
-        record->unk11 = 0xFF;
-        record->unk14 = -1;
-        record->unk18 = 0;
-        record->unk84 = 0;
-        record->unk1C[0] = 0.0f;
-        record->unk1C[1] = 0.0f;
-        record->unk1C[2] = 0.0f;
-        record->unk1C[3] = 0.0f;
-        record->unk1C[4] = 0.0f;
-        record->unk1C[5] = 0.0f;
-        record->unk1C[6] = 0.0f;
-        record->unk1C[7] = 0.0f;
-        record->unk1C[8] = 0.0f;
-        record->unk1C[9] = 0.0f;
-        record->unk1C[10] = 0.0f;
-        record->unk1C[11] = 0.0f;
-        record->unk1C[12] = 0.0f;
-        record->unk1C[13] = 0.0f;
-        record->unk1C[14] = 0.0f;
-        record->unk58 = 0;
-        record->unk5C = 0;
-        record->unk74 = 0.0f;
-        record->unk78 = 0;
-        record->unk7C = 0;
-        for (uindex = 0; uindex < 5; uindex++) {
-            record->unk60[uindex] = 0.0f;
+    for (groupIndex = 0; groupIndex < 12; groupIndex++) {
+        D_80118F90[groupIndex].unk00 = -1;
+        D_80118F90[groupIndex].unk04 = -1;
+        D_80118F90[groupIndex].unk08 = -1;
+        D_80118F90[groupIndex].unk0C = 0;
+        D_80118F90[groupIndex].unk10 = 0xFF;
+        D_80118F90[groupIndex].unk11 = 0xFF;
+        D_80118F90[groupIndex].unk14 = -1;
+        D_80118F90[groupIndex].unk18 = 0;
+        D_80118F90[groupIndex].unk84 = 0;
+        D_80118F90[groupIndex].unk1C[0] = 0.0;
+        D_80118F90[groupIndex].unk1C[1] = 0.0;
+        D_80118F90[groupIndex].unk1C[2] = 0.0;
+        D_80118F90[groupIndex].unk1C[3] = 0.0;
+        D_80118F90[groupIndex].unk1C[4] = 0.0;
+        D_80118F90[groupIndex].unk1C[5] = 0.0;
+        D_80118F90[groupIndex].unk1C[6] = 0.0;
+        D_80118F90[groupIndex].unk1C[7] = 0.0;
+        D_80118F90[groupIndex].unk1C[8] = 0.0;
+        D_80118F90[groupIndex].unk1C[9] = 0.0;
+        D_80118F90[groupIndex].unk1C[10] = 0.0;
+        D_80118F90[groupIndex].unk1C[11] = 0.0;
+        D_80118F90[groupIndex].unk1C[12] = 0.0;
+        D_80118F90[groupIndex].unk1C[13] = 0.0;
+        D_80118F90[groupIndex].unk1C[14] = 0.0;
+        D_80118F90[groupIndex].unk58 = 0;
+        D_80118F90[groupIndex].unk5C = 0;
+        D_80118F90[groupIndex].unk74 = 0.0;
+        D_80118F90[groupIndex].unk78 = 0;
+        D_80118F90[groupIndex].unk7C = 0;
+        for (index = 0; index < 5; index++) {
+            D_80118F90[groupIndex].unk60[index] = 0.0;
         }
     }
 
     total = 0;
     for (groupIndex = 0; groupIndex < 8; groupIndex++) {
-        group = &D_800D6DD8[groupIndex];
-        count = counts.values[groupIndex];
+        group = D_800D6DD8 + groupIndex;
         group->first = total;
-        total += count;
-        group->last = total - 1;
-        if (count == 0) {
+        group->last = total + counts.values[groupIndex] - 1;
+        total += counts.values[groupIndex];
+        if (counts.values[groupIndex] == 0) {
             group->first = -1;
             group->last = -2;
         }
     }
 
     for (groupIndex = 0; groupIndex < 8; groupIndex++) {
-        group = &D_800D6DD8[groupIndex];
-
-        unit = (f32)func_80082BE0() / 2147483648.0f;
-        group->unk08 = (f32)((f64)unit * 360.0);
+        (D_800D6DD8 + groupIndex)->unk08 = (f32)((f64)((f32)func_80082BE0() / 2147483648.0f) * 360);
         if (groupIndex != 6 &&
-            ((group->unk08 > 45.0 && group->unk08 < 135.0f) ||
-             (group->unk08 > 225.0 && group->unk08 < 315.0f))) {
-            group->unk08 += 90.0f;
+            (((D_800D6DD8 + groupIndex)->unk08 > 45.0 && (D_800D6DD8 + groupIndex)->unk08 < 135.0f) ||
+             ((D_800D6DD8 + groupIndex)->unk08 > 225.0 && (D_800D6DD8 + groupIndex)->unk08 < 315.0f))) {
+            (D_800D6DD8 + groupIndex)->unk08 += 90.0f;
         }
 
-        unit = (f32)func_80082BE0() / 2147483648.0f;
-        group->unk0C = (f32)((f64)unit * 360.0);
-        unit = (f32)func_80082BE0() / 2147483648.0f;
-        group->unk14 = (f32)((f64)unit * 360.0);
+        (D_800D6DD8 + groupIndex)->unk0C = (f32)((f64)((f32)func_80082BE0() / 2147483648.0f) * 360);
+        (D_800D6DD8 + groupIndex)->unk14 = (f32)((f64)((f32)func_80082BE0() / 2147483648.0f) * 360);
 
-        random = func_80082BE0();
+        count = func_80082BE0();
         sign = func_80051934();
-        unit = (f32)random / 2147483648.0f;
-        group->unk10 = (f32)((f64)sign *
-                             (5.0 + 10.0 * (f64)unit));
+        (D_800D6DD8 + groupIndex)->unk10 = (f32)((f64)sign *
+                             (5.0 + 10.0 * (f64)((f32)count / 2147483648.0f)));
         if (groupIndex == 6) {
-            group->unk10 *= 5.0f;
+            (D_800D6DD8 + groupIndex)->unk10 *= 5.0f;
         }
 
-        random = func_80082BE0();
+        count = func_80082BE0();
         sign = func_80051934();
-        unit = (f32)random / 2147483648.0f;
-        group->unk18 = (f32)((f64)sign *
-                             (10.0 + 5.0 * (f64)unit) +
-                             (f64)group->unk10);
+        (D_800D6DD8 + groupIndex)->unk18 = (f32)((f64)sign * (10 + 5.0 * (f64)((f32)count / 2147483648.0f)) +
+                             (f64)(D_800D6DD8 + groupIndex)->unk10);
 
-        for (index = group->first; index <= group->last; index++) {
-            item = &D_80119670[index];
+        for (index = (D_800D6DD8 + groupIndex)->first; index <= (D_800D6DD8 + groupIndex)->last; index++) {
+            count = (D_800D6DD8 + groupIndex)->last - (D_800D6DD8 + groupIndex)->first + 1;
+            total = index - (D_800D6DD8 + groupIndex)->first;
 
-            unit = (f32)func_80082BE0() / 2147483648.0f;
-            item->values[3] = (f32)(
-                (f64)unit * (360.0 / (f64)(group->last - group->first + 1)) +
-                (f64)(index - group->first) * 360.0 / (f64)(group->last - group->first + 1));
+            D_80119670[index].values[3] = (f32)(
+                (f64)((f32)func_80082BE0() / 2147483648.0f) * (360.0 / (f64)count) +
+                (f64)total * 360.0 / (f64)count);
 
-            random = func_80082BE0();
+            count = func_80082BE0();
             sign = func_80051934();
-            unit = (f32)random / 2147483648.0f;
-            item->values[4] = (f32)((f64)sign *
-                (45.0 + 15.0 * (f64)unit - 20.0 * (f64)(index - group->first)));
+            D_80119670[index].values[4] = (f32)((f64)sign *
+                (45.0 + 15.0 * (f64)((f32)count / 2147483648.0f) - 20.0 * (f64)total));
 
-            random = func_80082BE0();
+            count = func_80082BE0();
             sign = func_80051934();
-            unit = (f32)random / 2147483648.0f;
-            item->values[0] = (f32)((f64)sign *
-                (65.0 + 10.0 * (f64)unit + 40.0 * (f64)(index - group->first)));
+            D_80119670[index].values[0] = (f32)((f64)sign *
+                (65.0 + 10.0 * (f64)((f32)count / 2147483648.0f) + 40.0 * (f64)total));
 
-            random = func_80082BE0();
+            count = func_80082BE0();
             sign = func_80051934();
-            unit = (f32)random / 2147483648.0f;
-            item->values[1] = (f32)((f64)sign *
-                (65.0 + 10.0 * (f64)unit + 40.0 * (f64)(index - group->first)));
+            D_80119670[index].values[1] = (f32)((f64)sign *
+                (65.0 + 10.0 * (f64)((f32)count / 2147483648.0f) + 40.0 * (f64)total));
 
-            random = func_80082BE0();
+            count = func_80082BE0();
             sign = func_80051934();
-            unit = (f32)random / 2147483648.0f;
-            item->values[2] = (f32)((f64)sign *
-                (5.0 + 40.0 * (f64)unit));
+            D_80119670[index].values[2] = (f32)((f64)sign *
+                (5.0 + 40.0 * (f64)((f32)count / 2147483648.0f)));
 
-            unit = (f32)func_80082BE0() / 2147483648.0f;
-            item->values[5] = (f32)(
-                (f32)((f64)unit * 0.01 + 0.005 +
-                      0.01 * (f64)(index - group->first)) * 15.0f);
+            D_80119670[index].values[5] = (f32)(
+                (f32)((f64)((f32)func_80082BE0() / 2147483648.0f) * 0.009999999999999998 + 0.005 +
+                      0.01 * (f64)total) * 15.0f);
         }
     }
 

@@ -105,57 +105,65 @@ extern s32 func_80080DB4(void *graph, Vec800547EC *origin, f32 range, s32 limit,
 extern s32 func_8008A6B4(char *buffer, const char *format, ...);
 
 void func_800547EC(Session800547EC *session) {
-    Pair800547EC points[170];
-    char text[60];
+    s32 i;
+    s32 j;
+    s32 kind;
+    s32 icon;
+    f32 progress;
+    f32 referenceProgress;
+    f32 scale;
+    Pair800547EC points[191];
     Vec800547EC origin;
     f32 direction[3];
-    f32 perpendicularX;
-    f32 perpendicularY;
+    f32 perpendicular[2];
     f32 horizontalRange;
     f32 range;
     f32 step;
-    f32 referenceProgress;
-    f32 scale;
-    f32 progress;
     f32 difference;
     f32 screenX;
     f32 screenY;
-    f32 relativeX;
-    f32 relativeY;
+    f32 relative[2];
     f32 scaledX;
     f32 scaledY;
     f32 markerOffset;
     Racer800547EC *racer;
-    s32 mode;
-    s32 icon;
+    Track800547EC *track;
+    Progress800547EC *prog;
     s32 pointCount;
-    s32 i;
+    s32 place;
     s32 mapVisible;
+    s32 hh = 238;
+    s32 hlo = 164;
+    s32 hhi = 74;
+    s32 dv = 90;
+    f32 baseX = 276.0f;
+    f64 fade = 2.0;
+    char text[16];
 
     mapVisible = 0;
     if (D_800A52BC == 0) {
         return;
     }
 
-    mode = session->displayMode;
     if (D_800A52BC >= 2) {
-        if (mode < 4) {
-            mode = 5;
+        if (session->displayMode < 4) {
             session->displayMode = 5;
         }
-    } else if (mode >= 5) {
-        mode = 2;
-        session->displayMode = 2;
+    } else {
+        if (session->displayMode >= 5) {
+            session->displayMode = 2;
+        }
     }
 
-    if (mode == 0) {
+    if (session->displayMode == 0) {
         referenceProgress = 0.0f;
         if (session->racerCount >= 2) {
             for (i = 0; i < session->racerCount; i++) {
                 racer = &D_8011B1B8[i];
                 if ((racer->flags & 1) && !(racer->flags & 2) &&
                     racer->tag == 0x4C6F636C) {
-                    referenceProgress = func_8008035C(&racer->track->progress);
+                    track = racer->track;
+                    referenceProgress = func_8008035C(&track->progress);
                 }
             }
 
@@ -163,33 +171,35 @@ void func_800547EC(Session800547EC *session) {
             if (scale > 0.0f) {
                 for (i = 0; i < session->racerCount; i++) {
                     racer = &D_8011B1B8[i];
-                    if ((racer->flags & 1) && !(racer->flags & 2)) {
+                    if ((f64)scale > 0.0 && (racer->flags & 1) &&
+                        !(racer->flags & 2)) {
+                        track = racer->track;
                         difference = referenceProgress -
-                                     func_8008035C(&racer->track->progress);
+                                     func_8008035C(&track->progress);
                         if (difference > 0.5f) {
-                            difference -= 1.0f;
+                            difference -= 1;
                         }
                         if (difference < -0.5f) {
-                            difference += 1.0f;
+                            difference += 1;
                         }
 
-                        icon = *racer->kind;
-                        screenY = 238.0f * 0.5f +
-                                  difference * scale / (90.0f * 0.5f);
-                        if (icon != -1 && screenY <= 164.0f &&
-                            screenY >= 74.0f) {
+                        kind = *racer->kind;
+                        screenY = (f32)hh * 0.5f +
+                                  difference * scale / ((f32)dv * 0.5f);
+                        if (kind != -1 && screenY <= (f32)hlo &&
+                            screenY >= (f32)hhi) {
                             if (racer == D_8011B1BC) {
                                 func_8000A920(0x42, 1);
-                                func_8000AA04(0x42, (s16)(276.0f - 2.0f),
+                                func_8000AA04(0x42, (s16)(baseX - 2.0f),
                                               (s16)(screenY - 1.0f));
                                 func_8000AAC0(0x42, 0.75f, 0.75f);
                                 func_8000AB24(0x42, 0xFF, 0xFF, 0xFF, 0xDC);
                             } else {
-                                icon += 0x2B;
+                                icon = kind + 0x2B;
                                 func_8000A920((s16)icon, 1);
-                                func_8000AA04((s16)icon, (s16)276,
+                                func_8000AA04((s16)icon, (s16)baseX,
                                               (s16)screenY);
-                                func_8000AAC0((s16)icon, 0.5f, 0.5f);
+                                func_8000AAC0((s16)icon, 0.5, 0.5);
                                 func_8000AB24((s16)icon, 0xFF, 0xFF, 0xFF,
                                               0x80);
                             }
@@ -198,12 +208,12 @@ void func_800547EC(Session800547EC *session) {
                                 if (racer == D_8011B1BC) {
                                     func_8008A6B4(text, D_800ACC38,
                                                   racer->place);
-                                    func_8003EC40(284, (s16)screenY, 0xFF,
+                                    func_8003EC40((s16)(baseX + 8.0f), (s16)screenY, 0xFF,
                                                   0xFF, 0, 0xFF, text);
                                 } else {
                                     func_8008A6B4(text, D_800ACC40,
                                                   racer->place);
-                                    func_8003EC40(284, (s16)screenY, 0xFF,
+                                    func_8003EC40((s16)(baseX + 8.0f), (s16)screenY, 0xFF,
                                                   0xFF, 0xFF, 0xFF, text);
                                 }
                             }
@@ -212,12 +222,13 @@ void func_800547EC(Session800547EC *session) {
                 }
             }
         }
-    } else if (mode == 1) {
+    } else if (session->displayMode == 1) {
         for (i = 0; i < session->racerCount; i++) {
             racer = &D_8011B1B8[i];
             if ((racer->flags & 1) && !(racer->flags & 2)) {
-                progress = func_8008035C(&racer->track->progress) * 920.0f;
-                icon = *racer->kind;
+                track = racer->track;
+                progress = func_8008035C(&track->progress) * 920.0f;
+                kind = *racer->kind;
 
                 if (progress >= 0.0f && progress <= 260.0f) {
                     screenX = progress + 20.0f;
@@ -237,8 +248,8 @@ void func_800547EC(Session800547EC *session) {
                     }
                 }
 
-                if (icon != -1) {
-                    icon += 0x2B;
+                if (kind != -1) {
+                    icon = kind + 0x2B;
                     if (racer == D_8011B1BC) {
                         icon = 0x42;
                     }
@@ -266,7 +277,7 @@ void func_800547EC(Session800547EC *session) {
                 }
             }
         }
-    } else if (mode == 2 || mode == 3) {
+    } else if (session->displayMode == 2 || session->displayMode == 3) {
         origin.x = D_80120DF0.originX;
         origin.y = D_80120DF0.originY;
         origin.z = D_80120DF0.originZ;
@@ -274,11 +285,11 @@ void func_800547EC(Session800547EC *session) {
         direction[1] = D_80120DF0.directionY;
         direction[2] = 0.0f;
         func_800154D0(direction);
-        perpendicularX = direction[1];
-        perpendicularY = -direction[0];
+        perpendicular[0] = direction[1];
+        perpendicular[1] = -direction[0];
         mapVisible = 1;
 
-        if (mode == 2) {
+        if (session->displayMode == 2) {
             range = D_800ACEC8;
             if (session->unk1AC == 1 && session->unk1C0 == 3) {
                 step = 3.0f;
@@ -297,26 +308,28 @@ void func_800547EC(Session800547EC *session) {
             if (pointCount > 170) {
                 pointCount = 170;
             }
-            for (i = 0; i < pointCount; i++) {
-                scaledX = points[i].x * 25.0f / horizontalRange;
-                scaledY = points[i].y * 25.0f / range;
-                screenX = perpendicularY * scaledY +
-                          scaledX * perpendicularX;
+            for (j = 0; j < pointCount; j++) {
+                scaledX = points[j].x * 25.0f / horizontalRange;
+                scaledY = points[j].y * 25.0f / range;
+                screenX = perpendicular[1] * scaledY +
+                          scaledX * perpendicular[0];
                 screenY = direction[1] * scaledY + scaledX * direction[0];
                 func_8003E54C(0, (s32)(screenX + 264.0f),
                               (s32)(82.0f - screenY));
             }
         }
 
-        for (i = 0; i < 4; i++) {
-            markerOffset = ((f32)i - 1.5f) * range / 20.0f;
-            relativeX = session->craftAxisX * markerOffset +
-                        session->craftX - origin.x;
-            relativeY = session->craftAxisY * markerOffset +
-                        session->craftY - origin.y;
-            scaledX = relativeX * 25.0f / horizontalRange;
-            scaledY = relativeY * 25.0f / range;
-            screenX = perpendicularY * scaledY + scaledX * perpendicularX;
+        for (j = 0; j < 4; j++) {
+            markerOffset = ((f32)j - 1.5f) * range / 20.0f;
+            relative[0] = session->craftAxisX * markerOffset +
+                        session->craftX;
+            relative[1] = session->craftAxisY * markerOffset +
+                        session->craftY;
+            relative[0] = relative[0] - origin.x;
+            relative[1] = relative[1] - origin.y;
+            scaledX = relative[0] * 25.0f / horizontalRange;
+            scaledY = relative[1] * 25.0f / range;
+            screenX = perpendicular[1] * scaledY + scaledX * perpendicular[0];
             screenY = direction[1] * scaledY + scaledX * direction[0];
             if (screenX < 25.0f && -screenX < 25.0f &&
                 screenY < 25.0f && -screenY < 25.0f) {
@@ -329,16 +342,16 @@ void func_800547EC(Session800547EC *session) {
             racer = &D_8011B1B8[i];
             if (racer != D_8011B1BC && (racer->flags & 1) &&
                 !(racer->flags & 2)) {
-                relativeX = racer->track->x - origin.x;
-                relativeY = racer->track->y - origin.y;
-                scaledX = relativeX * 25.0f / horizontalRange;
-                scaledY = relativeY * 25.0f / range;
-                screenX = perpendicularY * scaledY +
-                          scaledX * perpendicularX;
+                relative[0] = racer->track->x - origin.x;
+                relative[1] = racer->track->y - origin.y;
+                scaledX = relative[0] * 25.0f / horizontalRange;
+                scaledY = relative[1] * 25.0f / range;
+                screenX = perpendicular[1] * scaledY +
+                          scaledX * perpendicular[0];
                 screenY = direction[1] * scaledY + scaledX * direction[0];
                 if (screenX < 25.0f && -screenX < 25.0f &&
                     screenY < 25.0f && -screenY < 25.0f) {
-                    if (mode == 2) {
+                    if (session->displayMode == 2) {
                         func_8003E54C(2, (s32)(screenX + 264.0f),
                                       (s32)(82.0f - screenY));
                     } else {
@@ -351,11 +364,11 @@ void func_800547EC(Session800547EC *session) {
 
         racer = D_8011B1BC;
         if (racer != 0 && (racer->flags & 1)) {
-            relativeX = racer->track->x - origin.x;
-            relativeY = racer->track->y - origin.y;
-            scaledX = relativeX * 25.0f / horizontalRange;
-            scaledY = relativeY * 25.0f / range;
-            screenX = perpendicularY * scaledY + scaledX * perpendicularX;
+            relative[0] = racer->track->x - origin.x;
+            relative[1] = racer->track->y - origin.y;
+            scaledX = relative[0] * 25.0f / horizontalRange;
+            scaledY = relative[1] * 25.0f / range;
+            screenX = perpendicular[1] * scaledY + scaledX * perpendicular[0];
             screenY = direction[1] * scaledY + scaledX * direction[0];
             if (screenX < 25.0f && -screenX < 25.0f &&
                 screenY < 25.0f && -screenY < 25.0f) {
@@ -363,16 +376,19 @@ void func_800547EC(Session800547EC *session) {
                               (s32)(82.0f - screenY));
             }
         }
-    } else if (mode != 4 && mode != 6 && (mode == 5 || mode == 7)) {
+    } else if (session->displayMode != 4 && session->displayMode != 6 && (session->displayMode == 5 || session->displayMode == 7)) {
         for (i = 0; i < session->racerCount; i++) {
             racer = &D_8011B1B8[i];
             if ((racer->flags & 1) && !(racer->flags & 2)) {
+                prog = &racer->track->progress;
                 if (func_80052134(racer) > 0.0f) {
-                    progress = func_8008035C(&racer->track->progress) * 900.0f;
+                    progress = func_8008035C(prog) * 900.0f;
                 } else {
                     progress = 0.0f;
                 }
 
+                place = racer->place;
+                kind = *racer->kind;
                 if (racer == D_8011B1C0) {
                     screenY = 120.0f;
                 } else if (racer == D_8011B1BC) {
@@ -381,8 +397,7 @@ void func_800547EC(Session800547EC *session) {
                     screenY = 114.0f;
                 }
 
-                icon = *racer->kind;
-                if (icon != -1) {
+                if (kind != -1) {
                     if (racer == D_8011B1BC) {
                         icon = 0x42;
                     } else if (racer == D_8011B1C0) {
@@ -391,7 +406,7 @@ void func_800547EC(Session800547EC *session) {
                             func_8000AB24(0x43, 0xFF, 0x80, 0x80, 0xFF);
                         }
                     } else {
-                        icon += 0x2B;
+                        icon = kind + 0x2B;
                     }
                     func_8000A920((s16)icon, 1);
                     func_8000AA04((s16)icon,
@@ -400,20 +415,20 @@ void func_800547EC(Session800547EC *session) {
                     func_8000AAC0((s16)icon, 1.0f, 1.0f);
                 }
 
-                if (racer->place > 0) {
+                if (place > 0) {
                     screenX = progress / D_800ACED0 + 20.0f;
                     if (racer == D_8011B1BC) {
-                        func_8008A6B4(text, D_800ACC58, racer->place);
+                        func_8008A6B4(text, D_800ACC58, place);
                         func_8003EC40((s16)(screenX - 1.0f),
                                       (s16)(screenY - 2.0f), 0xFF, 0xFF, 0,
                                       0xFF, text);
                     } else if (racer == D_8011B1C0) {
-                        func_8008A6B4(text, D_800ACC60, racer->place);
+                        func_8008A6B4(text, D_800ACC60, place);
                         func_8003EC40((s16)(screenX - 1.0f),
                                       (s16)(screenY - 2.0f), 0, 0xFF, 0xFF,
                                       0xFF, text);
                     } else {
-                        func_8008A6B4(text, D_800ACC68, racer->place);
+                        func_8008A6B4(text, D_800ACC68, place);
                         func_8003EC40((s16)screenX, (s16)(screenY - 1.0f),
                                       0xBE, 0xBE, 0xBE, 0xFF, text);
                     }
@@ -423,14 +438,14 @@ void func_800547EC(Session800547EC *session) {
     }
 
     if (mapVisible != 0) {
-        D_800A59B0 = (f32)((f64)D_800A59B0 + D_80120BF0 * 2.0);
-        if (D_800A59B0 > 1.0f) {
-            D_800A59B0 = 1.0f;
+        D_800A59B0 = (f32)((f64)D_800A59B0 + D_80120BF0 * fade);
+        if (D_800A59B0 > 1) {
+            D_800A59B0 = 1;
         }
     } else {
-        D_800A59B0 = (f32)((f64)D_800A59B0 - D_80120BF0 * 2.0);
-        if (D_800A59B0 < 0.0f) {
-            D_800A59B0 = 0.0f;
+        D_800A59B0 = (f32)((f64)D_800A59B0 - D_80120BF0 * fade);
+        if (D_800A59B0 < 0) {
+            D_800A59B0 = 0;
         }
     }
 }

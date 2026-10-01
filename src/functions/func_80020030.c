@@ -12,27 +12,19 @@ typedef struct {
 extern s32 D_800A2190;
 extern s32 D_800A2194;
 extern s32 D_800A21B0;
-extern s32 D_800A2530;
-extern s32 D_800A2534;
-extern s32 D_800A2538;
-extern f32 D_800A253C;
+typedef struct {
+    s32 a;
+    s32 b;
+    s32 c;
+    f32 d;
+} Blk80020030;
+extern Blk80020030 D_800A2530;
 extern u8 D_800A31E0[];
 extern s32 D_800A4BBC;
 extern f32 D_800A4BF0;
 extern u8 D_800A4C00[];
 extern f32 D_800A4FC0[3];
 extern f32 D_800A4FCC[3];
-extern f32 D_800A9C40;
-extern f32 D_800A9C44;
-extern f64 D_800A9C48;
-extern f64 D_800A9C50;
-extern f64 D_800A9C58;
-extern f64 D_800A9C60;
-extern f32 D_800A9C68;
-extern f32 D_800A9C6C;
-extern f32 D_800A9C70;
-extern f32 D_800A9C74;
-extern f32 D_800A9C78;
 extern u8 D_800D6C20[];
 extern f32 D_800D6D90[];
 extern f32 D_800D6DB4;
@@ -80,22 +72,23 @@ extern void func_80084BDC(f32 *first, f32 *second, void *record,
 #define POINTER_VALUE(pointer) ((s32)(unsigned long)(pointer))
 
 void func_80020030(void *state) {
-    Matrix80020030 placement_matrix;
-    Matrix80020030 resource_matrix;
-    Vector80020030 position;
-    Vector80020030 projected;
-    Vector80020030 auxiliary;
-    TransformInput80020030 node_transform;
-    f32 scale_a;
-    f32 scale_b;
     f32 first_angle;
     f32 second_angle;
     f32 vertical;
-    f64 bound_vertical;
+    Matrix80020030 resource_matrix;
+    Matrix80020030 placement_matrix;
     f32 random_value;
+    TransformInput80020030 node_transform;
+    Vector80020030 position;
     f32 sign;
     f32 generated_x;
     f32 generated_y;
+    Vector80020030 projected;
+    Vector80020030 auxiliary;
+    f32 scale_ab[2];
+    s32 left_resource;
+    s32 right_resource;
+    f64 bound_vertical;
     f32 *placement;
     f32 *target;
     void **resources;
@@ -105,17 +98,14 @@ void func_80020030(void *state) {
     f32 *first_data;
     f32 *second_data;
     s32 selected_resource;
-    s32 left_resource;
-    s32 right_resource;
     s32 random_word;
     s32 mode;
     s32 attempt;
     s32 i;
     s32 j;
-    s16 candidate;
 
-    scale_a = D_800A9C40;
-    scale_b = D_800A9C44;
+    scale_ab[1] = 0.1f;
+    scale_ab[0] = 0.1f;
 
     if (FIELD(u8, state, 0x60) == 0) {
         FIELD(u8, state, 0x60) = 1;
@@ -128,71 +118,76 @@ void func_80020030(void *state) {
     }
 
     if (D_800A4BBC != 0) {
-        D_800A2538 = -1;
+        D_800A2530.c = -1;
     }
 
     for (i = 0; i < FIELD(s8, state, 0x70); i++) {
         if (D_8011A508[i + 15] != 0) {
             placement = (f32 *)(D_800D6C20 + i * 0x28);
-            placement[1] = (f32)(0.0 - (f64)(f32)i * D_800A9C48);
+            placement[2] = 50.0f;
+            placement[1] = (f32)(0.0 - (f64)(f32)i * 2500.0);
             placement[2] =
-                50.0f + (f32)(D_800A31E0[
-                                   FIELD(s8, state, 0x72 + i) * 0x34 + 0x24] *
-                               10);
+                50.0f + (f32)(D_800A31E0[FIELD(s8, state, 0x72 + i) * 0x34 +
+                                         0x24] *
+                              10);
 
             func_8001745C((f32 *)placement_matrix, 0.0f, 0.0f, 0.0f);
             func_80015268(placement_matrix[3], placement[0], placement[1],
                           placement[2]);
 
-            if (D_800A2538 != -1) {
-                item = func_8003F800(0x456C6D6F, D_800A2538);
+            if (D_800A2530.c != -1) {
+                item = func_8003F800(0x456C6D6F, D_800A2530.c);
                 mode = FIELD(s32, item, 0x14);
                 if ((mode == 13) || (mode == 15)) {
-                    D_800A253C =
-                        (f32)((f64)D_800A253C - (f64)D_80120BF8);
+                    D_800A2530.d =
+                        (f32)((f64)D_800A2530.d - (f64)D_80120BF8);
                 } else if (mode == 14) {
-                    D_800A253C = (f32)((f64)D_800A253C +
-                                      D_800A9C58 +
-                                      D_800A9C50 *
+                    D_800A2530.d = (f32)((f64)D_800A2530.d +
+                                      (-0.2) +
+                                      0.4 *
                                           (f64)((f32)func_80082BE0() /
                                                 2147483648.0f));
                 }
 
-                if ((f64)D_800A253C < D_800A9C60) {
-                    D_800A253C = D_800A9C68;
+                if ((f64)D_800A2530.d < 0.1) {
+                    D_800A2530.d = 0.1f;
                 }
-                if ((f64)D_800A253C > 1.5) {
-                    D_800A253C = 1.5f;
+                if ((f64)D_800A2530.d > 1.5) {
+                    D_800A2530.d = 1.5f;
                 }
-                if (D_800A2534 == 2) {
-                    scale_a = D_800A253C;
+                if (D_800A2530.b == 2) {
+                    scale_ab[1] = D_800A2530.d;
                 } else {
-                    scale_b = D_800A253C;
+                    scale_ab[0] = D_800A2530.d;
                 }
             }
 
             func_80018480(D_8011A508[i + 15], placement_matrix, 0, 70.0f,
-                          70.0f, 70.0f, -157.0f, 1, scale_a, scale_b);
+                          70.0f, 70.0f, -157.0f, 1, scale_ab[1], scale_ab[0]);
         }
     }
 
     for (i = 0; i < 4; i++) {
         node = D_8011A508[i + 85][0];
         if (node != 0) {
-            func_800181BC(node, 2, (u32)-4, 0x10, 3);
-            func_80015268(node_transform.position, D_800A9C70,
+            if (node != 0) {
+                func_800181BC(node, 2, (u32)-4, 0x10, 3);
+            }
+            func_80015268(node_transform.position, 781.0f,
                           (f32)(i * 100 - 522), -157.0f);
             func_80015268(node_transform.rotation, 0.0f, 0.0f, 0.0f);
             if (i == 3) {
-                func_80015268(node_transform.position, D_800A9C70,
-                              D_800A9C6C, -103.0f);
+                func_80015268(node_transform.position, 781.0f,
+                              (-389.0f), -103.0f);
                 func_80015268(node_transform.rotation, 0.0f, 45.0f, 0.0f);
             }
             func_800174B8((f32 *)resource_matrix, node_transform.position);
             func_80017918(resource_matrix, 0.5f, 0.5f, 0.5f,
                           resource_matrix);
             func_80017BA8(node, resource_matrix);
-            func_800181BC(node, 2, 3, 0x10, 2);
+            if (node != 0) {
+                func_800181BC(node, 2, 3, 0x10, 2);
+            }
         }
     }
 
@@ -216,16 +211,15 @@ void func_80020030(void *state) {
             (s16)(s32)(((f32)func_80082BE0() / 2147483648.0f) * 4.0f);
         for (i = 1; i < 4; i++) {
             do {
-                candidate = (s16)(s32)(((f32)func_80082BE0() /
-                                        2147483648.0f) *
-                                       4.0f);
+                D_800D7170[i] = (s16)(s32)(((f32)func_80082BE0() /
+                                            2147483648.0f) *
+                                           4.0f);
                 for (j = 0; j < i; j++) {
-                    if (candidate == D_800D7170[j]) {
-                        candidate = -1;
+                    if (D_800D7170[i] == D_800D7170[j]) {
+                        D_800D7170[i] = -1;
                     }
                 }
-            } while (candidate == -1);
-            D_800D7170[i] = candidate;
+            } while (D_800D7170[i] == -1);
         }
 
         resources = D_8011A544;
@@ -244,8 +238,8 @@ void func_80020030(void *state) {
 
         for (i = 0; i < (s32)D_80113E7C; i++) {
             record = D_800D7178 + i * 0x28;
-            first_data = D_800D7218 + i * 3;
-            second_data = D_800D7248 + i * 3;
+            first_data = (f32 *)((u8 *)D_800D7218 + i * 12);
+            second_data = (f32 *)((u8 *)D_800D7248 + i * 12);
             mode = D_800D7170[i];
 
             switch (mode) {
@@ -271,13 +265,13 @@ void func_80020030(void *state) {
                                   -157.0f);
 
                     if (position[0] < 0.0f) {
-                        D_800A2534 = D_800A2194;
+                        D_800A2530.b = D_800A2194;
                         selected_resource = left_resource;
                     } else {
-                        D_800A2534 = D_800A2190;
+                        D_800A2530.b = D_800A2190;
                         selected_resource = right_resource;
                     }
-                    D_800A2530 = selected_resource;
+                    D_800A2530.a = selected_resource;
                     func_80084A3C(POINTER_VALUE(resources[0]),
                                   POINTER_VALUE(resources[selected_resource]),
                                   position, 10, POINTER_VALUE(record),
@@ -291,14 +285,14 @@ void func_80020030(void *state) {
                     }
                 } while (attempt < 20);
 
-                func_80017C18(resources[D_800A2534], resource_matrix);
+                func_80017C18(resources[D_800A2530.b], resource_matrix);
                 func_80015288(position, projected);
                 first_angle =
                     func_80014F54(position[0] - resource_matrix[3][0],
                                   resource_matrix[3][1] - position[1]);
                 func_80063084(i + 52, 14, position, position, first_angle,
                               first_angle);
-                D_800A2538 = i + 52;
+                D_800A2530.c = i + 52;
                 break;
 
             case 1:
@@ -391,7 +385,7 @@ void func_80020030(void *state) {
             (f32)random_word / 2147483648.0f * 2000.0f - 1000.0f;
         vertical = D_800D6DC0[4] + 500.0f;
         generated_y =
-            random_value * (D_800D6DC0[4] + D_800A9C74 - vertical) +
+            random_value * (D_800D6DC0[4] + 1500.0f - vertical) +
             vertical;
         func_80015268(position, generated_x, generated_y, -157.0f);
         first_angle =
@@ -417,8 +411,8 @@ void func_80020030(void *state) {
     for (i = 0; i < (s32)D_80113E7C; i++) {
         item = func_8003F800(0x456C6D6F, i + 52);
         record = D_800D7178 + i * 0x28;
-        first_data = D_800D7218 + i * 3;
-        second_data = D_800D7248 + i * 3;
+        first_data = (f32 *)((u8 *)D_800D7218 + i * 12);
+        second_data = (f32 *)((u8 *)D_800D7248 + i * 12);
         func_80084BDC(projected, auxiliary, record, first_data, second_data);
         func_80015288((f32 *)((u8 *)item + 0x44), projected);
 
@@ -463,8 +457,8 @@ void func_80020030(void *state) {
         }
     } else {
         D_800A4BF0 += D_80120BF8;
-        if (D_800A4BF0 > D_800A9C78) {
-            D_800A4BF0 = D_800A9C78;
+        if (D_800A4BF0 > 0.4f) {
+            D_800A4BF0 = 0.4f;
         }
         if (FIELD(s32, state, 0x08) == 8) {
             func_80021F84(state);

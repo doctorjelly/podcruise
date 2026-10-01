@@ -82,10 +82,6 @@ typedef struct Query80088BFC {
     /* 0x10 */ s32 unk10;
 } Query80088BFC;
 
-typedef struct Scratch80088BFC {
-    /* 0x00 */ s32 unk00[17];
-} Scratch80088BFC;
-
 typedef struct Player80088BFC {
     /* 0x00 */ u8 unk00[0x14];
     /* 0x14 */ Pool80088BFC unk14;
@@ -116,22 +112,27 @@ extern void func_80090450(void *, Voice80088BFC *);
 static void func_80088B70(Pool80088BFC *, void *);
 
 void func_80088BFC(Player80088BFC *player) {
-    Query80088BFC post5;
-    Note80088BFC note;
+    Voice80088BFC *voice;
+    Program80088BFC *program;
+    s32 total0;
     f64 value;
     u8 amount;
     f32 rate;
     Post80088BFC post;
-    s32 total0;
-    volatile s16 scaled;
-    Scratch80088BFC scratch;
-    s16 sum;
     s32 total;
-    u8 level;
+    s16 scaled;
+    s32 num;
+    Query80088BFC post5;
+    s32 sc3v;
+    f32 den1;
+    s16 sum;
+    s32 num6;
     Event80088BFC *event;
-    Voice80088BFC *voice;
-    Program80088BFC *program;
-    Sample80088BFC *sample;
+    f32 den;
+    f32 den4;
+    s32 total6;
+    s32 sc6v;
+    Note80088BFC note;
 
     event = &player->unk28;
     for (;;) {
@@ -151,8 +152,7 @@ void func_80088BFC(Player80088BFC *player) {
                     note.unk00 = voice->unk20;
                     note.unk04 = 0;
                     func_8008FF98(player->unk38, voice, &note);
-                    sample = program->unk00;
-                    scaled = sample->unk0C * voice->unk2C / 0x7F;
+                    scaled = program->unk00->unk0C * voice->unk2C / 0x7F;
                     sum = voice->unk2E + program->unk0C - 0x40;
                     if (sum <= 0) {
                         sum = 0;
@@ -163,7 +163,7 @@ void func_80088BFC(Player80088BFC *player) {
                         amount = 0x7F;
                     }
                     rate = voice->unk24;
-                    total = sample->unk00;
+                    total = program->unk00->unk00;
                     func_800900E0(player->unk38, voice, program->unk08);
                     voice->unk28 = 1;
                     func_80090170(player->unk38, voice, amount);
@@ -172,12 +172,10 @@ void func_80088BFC(Player80088BFC *player) {
                     func_80090330(player->unk38, voice, voice->unk2F);
                     post.unk00 = 6;
                     post.unk04 = voice;
-                    value = (f32)program->unk00->unk00 / voice->unk24;
-                    if (2147483647.0 < value) {
-                        total0 = 0x7FFFFFFF;
-                    } else {
-                        total0 = (s32)value;
-                    }
+                    num = program->unk00->unk00;
+                    den = voice->unk24;
+                    value = (f32)num / den;
+                    total0 = 2147483647.0 < value ? 0x7FFFFFFF : (s32)value;
                     func_8008FC3C(&player->unk14, &post, total0);
                 }
                 break;
@@ -186,7 +184,9 @@ void func_80088BFC(Player80088BFC *player) {
                     if (program == 0) {
                         break;
                     }
-                    value = (f32)program->unk00->unk08 / voice->unk24;
+                    num = program->unk00->unk08;
+                    den1 = voice->unk24;
+                    value = (f32)num / den1;
                     if (2147483647.0 < value) {
                         total = 0x7FFFFFFF;
                     } else {
@@ -218,16 +218,17 @@ void func_80088BFC(Player80088BFC *player) {
                         sum = 0;
                     }
                     if (sum < 0x7F) {
-                        level = sum;
+                        amount = sum;
                     } else {
-                        level = 0x7F;
+                        amount = 0x7F;
                     }
-                    func_80090170(player->unk38, voice, level);
+                    func_80090170(player->unk38, voice, amount);
                 }
                 break;
             case 4:
-                voice->unk24 = *(f32 *)&event->unk08;
-                if (voice->unk24 < 0.0001) {
+                den4 = *(f32 *)&event->unk08;
+                voice->unk24 = den4;
+                if (den4 < 0.0001) {
                     voice->unk24 = 0.0001;
                 }
                 if (voice->unk28 == 1) {
@@ -244,20 +245,19 @@ void func_80088BFC(Player80088BFC *player) {
                 voice->unk2C = *(s16 *)&event->unk08;
                 if (voice->unk28 == 1) {
                     if (program != 0) {
-                        func_80090200(player->unk38, voice, program->unk00->unk0D * voice->unk2C / 0x7F, 1000);
+                        sc3v = program->unk00->unk0D * voice->unk2C / 0x7F;
+                        func_80090200(player->unk38, voice, sc3v, 1000);
                     }
                 }
                 break;
             case 6:
                 if (program->unk00->unk04 != -1) {
-                    value = (f32)program->unk00->unk04 / voice->unk24;
-                    if (2147483647.0 < value) {
-                        total0 = 0x7FFFFFFF;
-                    } else {
-                        total0 = (s32)value;
-                    }
-                    total = total0;
-                    func_80090200(player->unk38, voice, program->unk00->unk0D * voice->unk2C / 0x7F, total);
+                    num6 = program->unk00->unk04;
+                    den = voice->unk24;
+                    value = (f32)num6 / den;
+                    sc6v = program->unk00->unk0D * voice->unk2C / 0x7F;
+                    func_80090200(player->unk38, voice, sc6v, total6 = 2147483647.0 < value ? 0x7FFFFFFF : (s32)value);
+                    total = total6;
                     post.unk00 = 1;
                     post.unk04 = voice;
                     func_8008FC3C(&player->unk14, &post, total);
@@ -276,7 +276,6 @@ void func_80088BFC(Player80088BFC *player) {
             break;
         }
     }
-    (void)scratch;
     player->unk50 += player->unk4C;
 }
 
