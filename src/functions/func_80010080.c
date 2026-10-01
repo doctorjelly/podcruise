@@ -27,17 +27,17 @@ extern void func_8000E7F0(s32 x, s32 y, s32 red, s32 green, s32 blue,
                           s32 alpha, u8 *text);
 
 void func_80010080(s16 *arg0, s32 arg1) {
+    s32 maximum;
+    f32 distance;
+    f32 scale;
+    f32 alpha;
+    f32 depth;
+    s32 index;
     f32 screenX;
     f32 screenY;
-    u8 text[16];
-    f32 scale;
-    f32 depth;
-    f32 alpha;
-    f32 fade;
-    f32 distance;
-    s32 index;
     s32 limit;
-    s32 maximum;
+    f32 fade;
+    u8 text[16];
 
     fade = D_800A86A0;
     for (index = 0; index < 20; index++) {

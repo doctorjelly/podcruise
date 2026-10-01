@@ -19,19 +19,17 @@ extern s32 func_800894D0(void *, void *);
 
 s32 func_80007FC8(s32 arg0) {
     Owner80007FC8 *owner;
-    s32 index;
-    Table80007FC8 *table;
     s32 result = -1;
 
     owner = func_80007CE4(arg0);
-    if (owner == 0) {
-        return -1;
-    }
-    index = arg0 & 0x7FFF;
-    if (index >= 0) {
-        table = owner->table;
-        if (index < table->count) {
-            return func_800894D0((void *)(unsigned long)(u32)D_8009A2BC, (void *)(unsigned long)(u32)table->items[index]);
+    if (owner != 0) {
+        s32 index = arg0 & 0x7FFF;
+        if (index >= 0) {
+            Table80007FC8 *table = owner->table;
+            if (index < table->count) {
+                s32 item = table->items[index];
+                result = func_800894D0((void *)(unsigned long)(u32)D_8009A2BC, (void *)(unsigned long)(u32)item);
+            }
         }
     }
     return result;

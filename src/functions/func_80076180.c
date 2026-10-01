@@ -43,106 +43,75 @@ extern u32 func_8000E8C4(void *);
 extern void func_8003E0A0(void *, f32, f32);
 
 void func_80076180(Owner *owner, Panel *panel, f32 requestX, f32 requestY) {
-    f32 matrix[3][4];
+    s32 i;
+    s32 mode;
+    f32 scale;
+    f32 brightness;
+    f32 twist;
+    f32 amount[2];
     void *node;
     u32 scroll;
-    f32 amountX;
-    f32 amountY;
-    f32 twist;
-    f32 brightness;
-    f32 scale;
-    s32 mode;
+    f32 matrix[4][4];
     s32 boosted;
     s32 scaleX;
     s32 scaleY;
-    s32 offset;
-    f32 requested;
 
     scaleY = 0;
     scaleX = 0;
     boosted = 0;
-    if (owner == 0) {
-        mode = panel->unkF0;
-    } else {
+    if (owner != 0) {
         if (owner->unk344 == 0) {
             return;
         }
         panel = owner->unk344;
-        mode = **(s32 **)((u8 *)owner + 0x1E70 + 0x18);
-        if (owner->unk060 & 0x800000) {
-            boosted = 1;
-        } else if (owner->unk064 & 0x2000) {
+        mode = **(s32 **)(*(u8 **)((u8 *)owner + 0x1E70) + 0x18);
+        if ((owner->unk060 & 0x800000) || (owner->unk064 & 0x2000)) {
             boosted = 1;
         }
-        offset = 2 * 4;
-        if (owner->unk2A0[0] & 4) {
-            scaleX = 1;
-        }
-        if (owner->unk2A0[1] & 4) {
-            scaleX = 1;
-        }
-        if (owner->unk2A0[2] & 4) {
-            if (offset < 12) {
-                scaleX = 1;
-            } else {
-                scaleY = 1;
+        for (i = 0; i < 6; i++) {
+            if (owner->unk2A0[i] & 4) {
+                if (i < 3) {
+                    scaleX = 1;
+                } else {
+                    scaleY = 1;
+                }
             }
         }
-        if (owner->unk2A0[3] & 4) {
-            if (offset < 8) {
-                scaleX = 1;
-            } else {
-                scaleY = 1;
-            }
-        }
-        if (owner->unk2A0[4] & 4) {
-            if (offset < 4) {
-                scaleX = 1;
-            } else {
-                scaleY = 1;
-            }
-        }
-        if (owner->unk2A0[5] & 4) {
-            if (offset >= 0) {
-                scaleY = 1;
-            } else {
-                scaleX = 1;
-            }
-        }
+        } else {
+        mode = panel->unkF0;
     }
 
-    amountX = 0.0f;
-    amountY = 0.0f;
+    amount[0] = 0.0f;
+    amount[1] = 0.0f;
     if (0.0f <= requestX) {
-        amountX = requestX;
+        amount[0] = requestX;
     }
     if (0.0f <= requestY) {
-        amountY = requestY;
+        amount[1] = requestY;
     }
     if ((D_8009B7D8 & 0x100) && D_8009B7D0 != 0 && (D_800D76F4 & 0x1000)) {
-        amountX = 1.0f;
-        amountY = 1.0f;
+        amount[0] = 1.0f;
+        amount[1] = 1.0f;
         boosted = 0;
     }
 
     if (owner != 0) {
-        requested = *(f32 *)((u8 *)owner + 0x18C);
-        amountX = requested;
-        amountY = requested;
+        amount[0] = *(f32 *)((u8 *)owner + 0x18C);
+        amount[1] = *(f32 *)((u8 *)owner + 0x18C);
         if (owner->unk064 & 8) {
-            amountX = requested * 0.5f;
-            amountY = requested * 0.5f;
+            amount[0] = amount[0] * 0.5f;
+            amount[1] = amount[1] * 0.5f;
         }
         if (scaleX) {
-            amountX = amountX * 0.2f;
+            amount[0] = amount[0] * 0.2f;
         }
         if (scaleY) {
-            amountY = amountY * 0.2f;
+            amount[1] = amount[1] * 0.2f;
         }
-        amountX = (owner->unk330 + amountX) * 0.5f;
-        amountY = (owner->unk334 + amountY) * 0.5f;
-        owner->unk330 = amountX;
-        owner->unk334 = amountY;
+        amount[0] = (owner->unk330 + amount[0]) * 0.5f;
+        amount[1] = (owner->unk334 + amount[1]) * 0.5f;
+        owner->unk330 = amount[0];
+        owner->unk334 = amount[1];
     }
 
     node = panel->unk70;
@@ -150,13 +119,13 @@ void func_80076180(Owner *owner, Panel *panel, f32 requestX, f32 requestY) {
         scale = ((f32)func_80082BE0() / 2147483648.0f) * 0.20000004f + 1.0f;
         func_80082BE0();
         brightness = 1.0f;
-        if (amountX < 0.25f) {
-            scale = scale * amountX;
+        twist = (f32)D_80120C00 * 30.0f;
+        if (amount[0] < 0.25f) {
+            scale = scale * amount[0];
             if (owner == 0) {
-                brightness = 1.0f * amountX;
+                brightness = (f32)(s32)1 * amount[0];
             }
         }
-        twist = 0.0f;
         switch (mode) {
             case 4:
             case 6:
@@ -168,9 +137,6 @@ void func_80076180(Owner *owner, Panel *panel, f32 requestX, f32 requestY) {
             case 8:
             case 10:
                 twist = 0.0f;
-                break;
-            default:
-                twist = (f32)D_80120C00 * 30.0f;
                 break;
         }
         func_8001745C(&matrix[0][0], 0.0f, 0.0f, twist);
@@ -191,13 +157,13 @@ void func_80076180(Owner *owner, Panel *panel, f32 requestX, f32 requestY) {
         scale = ((f32)func_80082BE0() / 2147483648.0f) * 0.20000004f + 1.0f;
         func_80082BE0();
         brightness = 1.0f;
-        if ((f64)amountY < 0.25) {
-            scale = scale * amountY;
+        twist = (f32)D_80120C00 * 30.0f;
+        if ((f64)amount[1] < 0.25) {
+            scale = scale * amount[1];
             if (owner == 0) {
-                brightness = 1.0f * amountY;
+                brightness = (f32)(s32)1 * amount[1];
             }
         }
-        twist = 0.0f;
         switch (mode) {
             case 4:
             case 6:
@@ -209,9 +175,6 @@ void func_80076180(Owner *owner, Panel *panel, f32 requestX, f32 requestY) {
             case 8:
             case 10:
                 twist = 0.0f;
-                break;
-            default:
-                twist = (f32)D_80120C00 * 30.0f;
                 break;
         }
         func_8001745C(&matrix[0][0], 0.0f, 0.0f, twist);
@@ -233,11 +196,11 @@ void func_80076180(Owner *owner, Panel *panel, f32 requestX, f32 requestY) {
         func_80082BE0();
         scale = ((f32)func_80082BE0() / 2147483648.0f) * 0.25f + 1.0f;
         func_80082BE0();
-        scale = scale * amountX;
+        scale = scale * amount[0];
         if (boosted) {
             scale = ((f32)func_80082BE0() / 2147483648.0f) * 0.6999998f + 3.5f;
         }
-        func_8001745C(&matrix[0][0], 0.0f, 0.0f, ((f32)func_80082BE0() / 2147483648.0f) * 360.0f * 0.0f);
+        func_8001745C(&matrix[0][0], (f32)(s32)0, (f32)(s32)0, ((f32)func_80082BE0() / 2147483648.0f) * 360.0f * (f32)(s32)0);
         func_800155C0((PcVec3f *)matrix[1], scale, (PcVec3f *)matrix[1]);
         if (owner != 0) {
             func_800156DC((PcVec3fSlot *)((u8 *)owner + 0xA90), (PcVec3fSlot *)matrix);
@@ -258,11 +221,11 @@ void func_80076180(Owner *owner, Panel *panel, f32 requestX, f32 requestY) {
         func_80082BE0();
         scale = ((f32)func_80082BE0() / 2147483648.0f) * 0.25f + 1.0f;
         func_80082BE0();
-        scale = scale * amountY;
+        scale = scale * amount[1];
         if (boosted) {
             scale = ((f32)func_80082BE0() / 2147483648.0f) * 0.6999998f + 3.5f;
         }
-        func_8001745C(&matrix[0][0], 0.0f, 0.0f, ((f32)func_80082BE0() / 2147483648.0f) * 360.0f * 0.0f);
+        func_8001745C(&matrix[0][0], 0.0f, 0.0f, ((f32)func_80082BE0() / 2147483648.0f) * 360.0f * (f32)(s32)0);
         func_800155C0((PcVec3f *)matrix[1], scale, (PcVec3f *)matrix[1]);
         if (owner != 0) {
             func_800156DC((PcVec3fSlot *)((u8 *)owner + 0xE10), (PcVec3fSlot *)matrix);

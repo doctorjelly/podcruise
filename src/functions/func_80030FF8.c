@@ -37,8 +37,8 @@ void func_80030FF8(s32 arg0, s32 arg1) {
     }
     D_800A2844 = 1;
     func_80088AD0();
-    D_800D9DDC = 0;
     D_800D9DD8 = D_800D9DB8;
+    D_800D9DDC = 0;
     for (i = 0; i < 8; i++) { D_800D9DE4[i] = 0; }
     D_800D9DE0 = 0;
     func_80030EA0();

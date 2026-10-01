@@ -30,8 +30,8 @@ extern void (*D_800AE93C)(void);
 extern void (*D_800AE940)(void);
 
 f32 func_80005240(void *object, View80005240 *view, f32 *out0, f32 *out1) {
-    f32 mixed[3];
     s32 state;
+    f32 mixed[3];
 
     if (object == 0) {
         D_800AE8B0 = -1.0f;

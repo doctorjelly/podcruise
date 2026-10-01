@@ -15,8 +15,8 @@ extern u8 func_80093B60(u8 *data);
 extern s32 func_80087E80(void *queue, void **out, s32 blocking);
 
 s32 func_800928F0(void *arg0, s32 arg1, u16 arg2, u8 *arg3, s32 arg4) {
-    u8 *p;
     s32 status;
+    u8 *p;
     s32 retry;
     s32 check;
     s32 index;

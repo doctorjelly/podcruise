@@ -70,11 +70,11 @@ void func_80076B34(Obj *arg0) {
     Obj *sp110[10];
     u8 spF0[0x20];
     u8 sp88[0x68];
+    Obj *target;
+    Obj *b;
     Vec3 sp74;
     f32 rad;
     s32 index;
-    Obj *target;
-    Obj *b;
     Obj *tail;
 
     tail = (Obj *)((u8 *)arg0 + 8);

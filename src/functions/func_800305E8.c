@@ -23,22 +23,22 @@ extern void func_800304AC(s32 index, s32 *first, s32 *second);
 extern void func_800827C0(u32 argument);
 
 void *func_800305E8(s32 index) {
-    s32 count;
     s32 padA[3];
-    s32 header[3];
-    s32 i;
-    void *result;
-    u8 *data;
-    u8 *scratch;
     u32 *cursor;
-    u32 word;
-    u8 *mark;
-    s32 started;
-    s32 size;
-    s32 packed;
-    s32 offset;
+    s32 count;
+    s32 i;
     s32 pad4;
     u32 *bitmap[1];
+    s32 offset;
+    s32 header[3];
+    s32 packed;
+    u8 *data;
+    u8 *scratch;
+    s32 started;
+    u8 *mark;
+    void *result;
+    s32 size;
+    u32 word;
     u8 *base[1];
 
     (void)padA;

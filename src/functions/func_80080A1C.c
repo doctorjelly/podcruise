@@ -59,10 +59,15 @@ s32 func_80080A1C(Unk80080A1C *object, s32 force) {
                 }
                 object->unk_E8 = object->unk_E0;
             } else if (previous < object->unk_E0 && object->unk_E4 - D_800ADC7C <= previous) {
-                hit = previous < 0.0f;
-                result |= hit != 0;
-                object->unk_110 = (f32)0;
+                hit = 0;
+                if (previous < 0.0f) {
+                    hit = 1;
+                }
                 object->unk_E8 = object->unk_E0;
+                object->unk_110 = (f32)0;
+                if (hit) {
+                    result = 1;
+                }
             }
         }
     }

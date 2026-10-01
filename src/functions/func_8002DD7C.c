@@ -37,7 +37,7 @@ void func_8002DD7C(Obj8002DD7C *arg0) {
 
     if (func_8002D968(D_80113E60, D_800A9ACC) != 0) {
         if ((D_800A4B94 & 4) != 0) {
-            D_80119668[0] = arg0->unk5D;
+            *(s8 *)0x80119668 = arg0->unk5D;
             total = 1;
             useA = 1;
         }
@@ -51,15 +51,15 @@ void func_8002DD7C(Obj8002DD7C *arg0) {
             mask = D_80113680[index + 12];
         }
         if ((mask & (1 << bit)) != 0) {
-            i = 0;
             found = 0;
+            i = 0;
             if (total > 0) {
                 do {
-                    i++;
-                    if (D_800A22E8[index][bit] == D_80119668[i - 1]) {
+                    if (D_800A22E8[index][bit] == D_80119668[i]) {
                         found = 1;
                         break;
                     }
+                    i++;
                 } while (i != total);
             }
             if (found == 0) {

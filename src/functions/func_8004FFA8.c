@@ -62,8 +62,8 @@ void func_8004FFA8(PcScene *scene, f32 scale) {
 
     func_80046670(0x53, -1, 2, 0);
     if (D_8011A508[2] != 0) {
-        object = D_8011A508[2][0];
-        scene->unk20 = object;
+        scene->unk20 = D_8011A508[2][0];
+        object = scene->unk20;
         if (object != 0) {
             func_80017BA8(object, matrix);
         }

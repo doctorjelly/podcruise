@@ -41,10 +41,10 @@ extern void func_80028D60(void);
 extern s32 func_80082BE0(void);
 
 void func_80050F88(Obj *obj) {
-    f32 cosine;
+    Vec3f scratch;
     f32 sine;
     Vec3f position;
-    Vec3f scratch;
+    f32 cosine;
 
     if (D_800A21A4 != 0) {
         D_800A4BC0 = 0;
