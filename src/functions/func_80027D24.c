@@ -61,7 +61,7 @@ void func_80027D24(s32 arg0, s32 arg1) {
 
     for (i = 0; i < 7; i++) {
         if (D_80113E60[i + 0x1D] == 0) {
-            D_80113E60[index + 0x24] = 255;
+            D_80113E60[i + 0x24] = 255;
         }
     }
     total = 0;

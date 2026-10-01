@@ -52,18 +52,18 @@ extern void func_80047A78(void *object, s32 arg1, s32 arg2, f32 arg3, f32 arg4,
 void func_80047DB0(void *object) {
     f32 point[3];
     f32 second[4][4];
-    f32 first[4][4];
     Triple vector;
-    f32 level;
     f32 columnBase;
     f32 rowBase;
     f32 scale;
+    f32 first[4][4];
     void *entry;
     void *other;
     Record *record;
     s16 identifier;
     u8 alpha;
     s32 index;
+    f32 level;
 
     vector = D_800A51C4;
 
@@ -104,7 +104,7 @@ void func_80047DB0(void *object) {
         }
         if (index < D_8011A240[11]) {
             func_80047A78(object, (s32)(columnBase + 36.0f), (s32)(rowBase + 2.0f),
-                          (f32)(u32)D_80113E60[index + 0x24] * 0.003921568f,
+                          (f32)(u32)D_80113E60[index + 0x24] * 0.0039215684f,
                           level, 3.0f, 30.0f);
         }
     }
