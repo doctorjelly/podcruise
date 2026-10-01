@@ -19,11 +19,11 @@ extern u32 func_80088360(u32);
 #define CMD_LOAD(pkt, addr) { Cmd80095DA8 *_c = (Cmd80095DA8 *)(pkt); _c->w0 = 0x04000000; _c->w1 = func_80088360(addr); }
 
 Cmd80095DA8 *func_80095DA8(Obj80095DA8 *obj, u32 pos, u32 arg2, u32 count, Cmd80095DA8 *cmd) {
-    u32 end;
     u32 span;
     u32 limit;
     u32 n;
     Cmd80095DA8 *p;
+    u32 end;
 
     p = cmd;
     end = obj->unk14 + obj->unk1C * 2;
@@ -36,7 +36,7 @@ Cmd80095DA8 *func_80095DA8(Obj80095DA8 *obj, u32 pos, u32 arg2, u32 count, Cmd80
         n = ((s32)(end - pos) >> 1) * 2;
         CMD_SPAN(p++, arg2, n);
         CMD_LOAD(p++, pos);
-        CMD_SPAN(p++, arg2 + n, ((s32)(limit - end) >> 1) * 2);
+        CMD_SPAN(p++, n + arg2, ((s32)(limit - end) >> 1) * 2);
         CMD_LOAD(p++, obj->unk14);
     } else {
         CMD_SPAN(p++, arg2, span);

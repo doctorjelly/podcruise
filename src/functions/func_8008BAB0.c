@@ -63,11 +63,12 @@ void func_8008BAB0(s32 arg0) {
         handle = func_8008CA80();
         D_800A7B60.unk0 = 1;
         D_800A7B60.unk4 = D_80149ED0;
-        D_800A7B60.unkC = D_800A7B60.unk8 = &D_8014B080[0];
+        D_800A7B60.unk8 = D_8014B080;
+        D_800A7B60.unkC = D_8014B080;
         D_800A7B60.unk10 = 0;
         D_800A7B60.unk14 = 0;
         D_800A7B60.unk18 = 0;
-        func_8008B810(D_80149ED0, 0, func_8008BC30, &D_800A7B60, D_8014B080, arg0);
+        func_8008B810(D_80149ED0, 0, func_8008BC30, &D_800A7B60, D_8014B098 - 0x18, arg0);
         func_80092560();
         func_8008B960(D_80149ED0);
         func_8008CAA0(handle);
