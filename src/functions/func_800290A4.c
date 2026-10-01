@@ -4,6 +4,8 @@
 extern s32 func_8000AB24(s32, s32, s32, s32, s32);
 extern s32 func_8000A920(s32, s32);
 
+extern f32 D_800A2604;
+extern s16 D_800A2608;
 extern s32 D_800A260C;
 extern s32 D_800A4BD8;
 extern s32 D_800A4BDC;
@@ -17,20 +19,21 @@ s32 func_800290A4(void) {
     s16 timer;
 
     done = 0;
-    level = (*(f32 *)0x800A2604);
+    level = D_800A2604;
 
-    if (level == 255.0f || D_800A260C > 0) {
+    if (255.0f == level || (count = D_800A260C) > 0) {
         func_8000AB24(-0x67, 0, 0, 0, 0xFF);
-        count = D_800A260C - 1;
+        count = (*(s32 *)0x800A260C) - 1;
         D_800A260C = count;
         if (count > 0) {
             return done;
         }
     }
 
+    level = (*(f32 *)0x800A2604);
     if (level <= 0.0f) {
         timer = (s16)((*(s16 *)0x800A2608) - 1);
-        (*(s16 *)0x800A2608) = timer;
+        D_800A2608 = timer;
         if (timer <= 0) {
             done = 1;
         }
@@ -44,7 +47,7 @@ s32 func_800290A4(void) {
         (*(s16 *)0x800A2608) = 3;
     }
 
-    (*(f32 *)0x800A2604) = level;
+    D_800A2604 = level;
     func_8000AB24(-0x67, 0, 0, 0, (s32)(u32)level);
 
     if (done == 0) {
@@ -54,6 +57,6 @@ s32 func_800290A4(void) {
     D_800A4BD8 = 1;
     D_800A4BDC = 0;
     D_800A260C = 3;
-    (*(f32 *)0x800A2604) = 255.0f;
+    D_800A2604 = 255.0f;
     return 1;
 }

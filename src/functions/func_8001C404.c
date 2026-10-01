@@ -49,25 +49,19 @@ unsigned char selected;
     s32 elem;
     s32 j;
     Str16 buffer;
-    s32 first;
     s16 id;
     u8 lane;
     s8 slot;
-    f32 alpha;
     s16 state;
-    s32 last;
+    f32 alpha;
 
     state = 0;
     buffer = D_800A8AD0;
     alpha = 254.0f;
-    first = selected;
-    if (object->unk_5E != first) {
+    if (object->unk_5E != selected) {
         alpha = D_8011A240 * 254.0f;
     }
-    last = first + 1;
-    if (first < last) {
-        i = first;
-        do {
+    for (i = selected; i < selected + 1; i++) {
         slot = i;
         for (j = 0; j < D_800A21B4[i]; j++) {
             elem = 0x37 + j * 0x23;
@@ -163,7 +157,7 @@ unsigned char selected;
             if (func_8002DAD0(object, slot, lane) == 0) {
                 func_8000AB24(id, 0x80, 0x80, 0x80, (u8)alpha);
             }
-            if (object->unk_5E == first) {
+            if (object->unk_5E == selected) {
                 if (func_8002DB20(object, D_8011A270) == j) {
                     func_8000A920(id, 0);
                     func_8000A920(0x5F, 1);
@@ -173,6 +167,5 @@ unsigned char selected;
                 }
             }
         }
-        } while (++i != last);
     }
 }

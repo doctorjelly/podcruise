@@ -7,8 +7,8 @@ extern u8 D_800A6770;
 extern s32 D_80120C30;
 
 s32 func_80082BE0(void) {
-    s32 x;
     s32 seed;
+    s32 x;
 
     if (!D_800A6770) {
         seed = (s32)func_800811DC();
@@ -16,7 +16,8 @@ s32 func_80082BE0(void) {
         D_80120C30 = seed;
     }
     seed = D_80120C30;
-    x = seed * 0x41C64E6D + 0x3039;
+    seed = seed * 0x41C64E6D + 0x3039;
+    x = seed;
     if (x == (s32)0x80000000) {
         D_80120C30 = x;
         return 0;

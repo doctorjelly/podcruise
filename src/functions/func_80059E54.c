@@ -81,9 +81,9 @@ void func_80059E54(PcSession80059E54 *session, PcRacer80059E54 *racer,
     (void)object;
     row = func_80051FF4();
     if (row == 2) {
-        rowY = 0xD7;
+        red = 0xD7;
         if (racer == D_8011B1BC) {
-            rowY = 0x69;
+            red = 0x69;
             baseY = 0x1E;
             for (row = 0xF; row != 0x13; row++) {
                 func_8000A920((s16)row, 0);
@@ -98,11 +98,11 @@ void func_80059E54(PcSession80059E54 *session, PcRacer80059E54 *racer,
         for (row = 0; row != 0x13; row++) {
             func_8000A920((s16)row, 0);
         }
-        rowY = 0xD7;
+        red = 0xD7;
         baseY = 0x37;
     }
 
-    rowY -= session->unk1C8 * 14;
+    rowY = red - session->unk1C8 * 14;
     value = racer->unk74;
     if (value < 60.0f) {
         colX = 0x5B;
@@ -213,8 +213,7 @@ void func_80059E54(PcSession80059E54 *session, PcRacer80059E54 *racer,
     }
 
     if (session->unk1BC >= 2) {
-        value = session->unk00C;
-        if (value > 8.0f) {
+        value = session->unk00C; if (value > 8.0f) {
             func_8000A920(0xA9, 0);
             func_8000A920(0xAA, 0);
             func_8000A920(0xAB, 0);

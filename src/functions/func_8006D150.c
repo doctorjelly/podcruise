@@ -181,9 +181,10 @@ void func_8006D150(Racer *racer) {
     delta[0].x = racer->unk0050.x - motion.unk30.x;
     delta[0].y = racer->unk0050.y - motion.unk30.y;
     delta[0].z = racer->unk0050.z - motion.unk30.z;
+    dot = delta[0].x * racer->unk0194.x + delta[0].y * racer->unk0194.y +
+          racer->unk0194.z * delta[0].z;
     func_800155EC(&previous, &point,
-                  racer->unk0194.z * delta[0].z +
-                      (delta[0].x * racer->unk0194.x + delta[0].y * racer->unk0194.y),
+                  dot,
                   &racer->unk0194);
 
     offset.x = previous.x - racer->unk0050.x;
@@ -191,10 +192,9 @@ void func_8006D150(Racer *racer) {
     offset.z = previous.z - racer->unk0050.z;
     length = func_800153C0(&offset);
     if (D_800AD688 < length) {
-        length = 1.0f / length;
-        offset.x = offset.x * length;
-        offset.y = offset.y * length;
-        offset.z = offset.z * length;
+        offset.x *= 1.0f / length;
+        offset.y *= 1.0f / length;
+        offset.z *= 1.0f / length;
         func_80015538(&axis, &racer->unk0030, &offset);
 
         dot = racer->unk0194.z * axis.z +

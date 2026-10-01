@@ -39,13 +39,13 @@ u8 *arg2;
     status = func_800950F4(arg0, info);
     if (status == 0) {
         switch (info->unk0 & 0xC000) {
-        case 0x8000:
-            if (arg1 >= 0x40) {
+        case 0xC000:
+            if ((arg1 + 0) >= 0x100) {
                 status = -1;
             }
             break;
-        case 0xC000:
-            if ((arg1 + 0) >= 0x100) {
+        case 0x8000:
+            if (arg1 >= 0x40) {
                 status = -1;
             }
             break;

@@ -73,12 +73,12 @@ void func_80026644(Obj *obj) {
     base = ent->unkBC * D_800A9D7C;
     if (D_800D6CD0 >= 2) {
         func_80064A88(D_800A9D80);
-    }
-    if (D_800D6CD0 == 3) {
-        if (0.0f < D_800A2584) {
-            obj->unk44[2] = -60.0f + base;
-            func_80015288(D_80118E50, obj->unk44);
-            D_800A2584 = D_800A2584 - D_80120BF8;
+        if (D_800D6CD0 == 3) {
+            if (0.0f < D_800A2584) {
+                obj->unk44[2] = -60.0f + base;
+                func_80015288(D_80118E50, obj->unk44);
+                D_800A2584 = D_800A2584 - D_80120BF8;
+            }
         }
     }
 

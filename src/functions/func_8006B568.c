@@ -79,6 +79,7 @@ void func_8006B568(Obj8006B568 *obj) {
     f32 result[3];
     s32 detached;
     s32 handleA;
+    f32 half;
 
     handleA = func_80005B44(5);
     if (obj->unk1A0 > 150.0f) {
@@ -137,7 +138,8 @@ void func_8006B568(Obj8006B568 *obj) {
     }
     v = obj->unk1F4 * func_80081700(1.5f, (f32)D_80120BF0);
     obj->unk1F4 = v;
-    if ((v < 0.5f) && (-v < 0.5f)) {
+    half = 0.5f;
+    if ((v < half) && (-v < half)) {
         obj->unk1F4 = 0.0f;
     }
     if (detached != 0) {

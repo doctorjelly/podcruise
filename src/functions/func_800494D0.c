@@ -46,19 +46,19 @@ void func_800494D0(void *arg0, s32 arg1, f32 arg2) {
     f32 sine;
     f32 cosine;
     register s32 which;
-    s32 index;
     s32 slot;
     f32 amount;
+    f32 scale;
 
     which = arg1;
-    for (index = 0; index < 8; index++) {
-        D_800D6DD8[index].unk0C += D_80120BF8 * D_800D6DD8[index].unk10;
-        if (D_800D6DD8[index].unk0C > 360.0f) { D_800D6DD8[index].unk0C -= 360.0f; }
-        if (D_800D6DD8[index].unk0C < 0.0f) { D_800D6DD8[index].unk0C += 360.0f; }
-        D_800D6DD8[index].unk14 += D_80120BF8 * D_800D6DD8[index].unk18;
-        if (D_800D6DD8[index].unk14 > 360.0f) { D_800D6DD8[index].unk14 -= 360.0f; }
-        if (D_800D6DD8[index].unk14 < 0.0f) { D_800D6DD8[index].unk14 += 360.0f; }
-        entry = D_8011A508[index + 61];
+    for (slot = 0; slot < 8; slot++) {
+        D_800D6DD8[slot].unk0C += D_80120BF8 * D_800D6DD8[slot].unk10;
+        if (D_800D6DD8[slot].unk0C > 360.0f) { D_800D6DD8[slot].unk0C -= 360.0f; }
+        if (D_800D6DD8[slot].unk0C < 0.0f) { D_800D6DD8[slot].unk0C += 360.0f; }
+        D_800D6DD8[slot].unk14 += D_80120BF8 * D_800D6DD8[slot].unk18;
+        if (D_800D6DD8[slot].unk14 > 360.0f) { D_800D6DD8[slot].unk14 -= 360.0f; }
+        if (D_800D6DD8[slot].unk14 < 0.0f) { D_800D6DD8[slot].unk14 += 360.0f; }
+        entry = D_8011A508[slot + 61];
         if (entry != 0) {
             object = *entry;
             if (object != 0) {
@@ -67,13 +67,13 @@ void func_800494D0(void *arg0, s32 arg1, f32 arg2) {
         }
     }
 
-    for (index = 0; D_80119670[index] < D_80119670[19]; index++) {
-        D_80119670[index][3] += D_80120BF8 * D_80119670[index][4];
-        if (D_80119670[index][3] > 360.0f) { D_80119670[index][3] -= 360.0f; }
-        if (D_80119670[index][3] < 0.0f) { D_80119670[index][3] += 360.0f; }
-        D_80119670[index][3] += D_80120BF8 * D_80119670[index][4];
-        if (D_80119670[index][3] > 360.0f) { D_80119670[index][3] -= 360.0f; }
-        if (D_80119670[index][3] < 0.0f) { D_80119670[index][3] += 360.0f; }
+    for (slot = 0; D_80119670[slot] < D_80119670[19]; slot++) {
+        D_80119670[slot][3] += D_80120BF8 * D_80119670[slot][4];
+        if (D_80119670[slot][3] > 360.0f) { D_80119670[slot][3] -= 360.0f; }
+        if (D_80119670[slot][3] < 0.0f) { D_80119670[slot][3] += 360.0f; }
+        D_80119670[slot][3] += D_80120BF8 * D_80119670[slot][4];
+        if (D_80119670[slot][3] > 360.0f) { D_80119670[slot][3] -= 360.0f; }
+        if (D_80119670[slot][3] < 0.0f) { D_80119670[slot][3] += 360.0f; }
     }
 
     func_80048F74(which);
@@ -99,13 +99,13 @@ void func_800494D0(void *arg0, s32 arg1, f32 arg2) {
 
     object = *D_8011A508[69];
     if (object != 0) {
+        scale = D_800AAFD0 * arg2;
         SHOW(object);
-        amount = D_800AAFD0 * arg2;
         func_800156DC(matrix, D_80118E20);
         func_80015288(vector, D_800A508C);
         func_800178C4(matrix, matrix, D_800D6DD8[which].unk14, D_80118D60[2][0], D_80118D60[2][1], D_80118D60[2][2]);
         func_800178C4(matrix, matrix, D_800D6DD8[which].unk08, D_80118D60[1][0], D_80118D60[1][1], D_80118D60[1][2]);
-        func_80017918(matrix, amount, amount, amount, matrix);
+        func_80017918(matrix, scale, scale, scale, matrix);
         func_80015288(matrix[3], vector);
         func_80017BA8(object, matrix);
         HIDE(object);

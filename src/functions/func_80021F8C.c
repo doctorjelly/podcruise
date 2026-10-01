@@ -63,11 +63,12 @@ extern s8 D_8011A050[];
 extern void **D_8011A544;
 
 void func_80021F84(Struct80021F84 *arg0) {
-    s32 index;
+    s32 flags;
     f32 matrix[16];
     char buffer[52];
     s32 value;
-    s32 flags;
+    s32 kind;
+    s32 index;
 
     if (D_800A2550 != 0 || D_800A4BBC != 0) {
         D_800A254C = 0;
@@ -119,7 +120,8 @@ void func_80021F84(Struct80021F84 *arg0) {
         }
     }
 
-    func_8008A6B4(buffer, D_800A8E80, D_800A2DEC[D_8011A050[D_800A4BE8 * 56] * 4]);
+    kind = D_8011A050[D_800A4BE8 * 56];
+    func_8008A6B4(buffer, D_800A8E80, D_800A2DEC[kind * 4]);
     if (D_800A4BE8 == 7) {
         if (D_80113E7C < 4) {
             func_8008A6B4(buffer, D_800A8E88);
@@ -207,7 +209,9 @@ void func_80021F84(Struct80021F84 *arg0) {
         }
     }
 
-    if (D_800A254C < 2) {
-        D_800A254C = D_800A254C + 1;
+    flags = D_800A254C;
+    if (flags < 2) {
+        flags = flags + 1;
+        D_800A254C = flags;
     }
 }

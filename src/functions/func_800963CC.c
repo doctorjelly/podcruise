@@ -95,7 +95,7 @@ Command800963CC *func_800963CC(
     out = func_80095C20(
         sequence, sequence->cursor, 0x6C0, sampleCount, out + 3);
     out->w0 = 0x02000800;
-    out->w1 = doubledCount;
+    out->w1 = sampleCount * 2;
     out++;
 
     for (index = 0; index < sequence->voiceCount; index++) {
@@ -162,7 +162,9 @@ Command800963CC *func_800963CC(
         sequence->cursor = newCursor - sequence->ringLength;
     }
 
-    out->w0 = 0x0A000800;
-    out->w1 = 0x06C00000 | shortDoubledCount;
-    return out + 1;
+    cmd = out;
+    out++;
+    cmd->w0 = 0x0A000800;
+    cmd->w1 = 0x06C00000 | shortDoubledCount;
+    return out;
 }

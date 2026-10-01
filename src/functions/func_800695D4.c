@@ -130,7 +130,9 @@ void func_800695D4(Obj *obj, f32 arg1, f32 arg2, f32 arg3, Vec3 *arg4, Vec3 *arg
             f = 0.0f;
         } else {
             v = v / D_800AD560;
-            f = (v * v) * (f * 600.0f);
+            g = v * v;
+            f = f * g;
+            f = f * 600.0f;
         }
         obj->unk1F8 = f;
     }

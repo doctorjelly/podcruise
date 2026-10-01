@@ -48,7 +48,8 @@ void func_80053C08(Owner *owner) {
     (void)spareB;
     for (i = 0; i < owner->unk1BC; i++) {
         rec = &D_8011B1B8[i];
-        if ((rec->unk84->unk60 & 0x20) != 0) {
+        big = rec->unk84;
+        if ((big->unk60 & 0x20) != 0) {
             cur = rec->unk5C;
             if (cur > 0) {
                 prev = D_8011C7E8[i];

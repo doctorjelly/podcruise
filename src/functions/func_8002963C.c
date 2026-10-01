@@ -11,7 +11,7 @@ typedef struct Rec8002963C {
 } Rec8002963C;
 
 typedef struct Slot8002963C {
-    u8 unk0;
+    s8 unk0;
     u8 unk1;
     u8 pad2[0x36];
 } Slot8002963C;

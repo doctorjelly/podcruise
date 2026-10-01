@@ -67,17 +67,14 @@ extern void func_80069EC0(Racer *, Vec3 *, Vec3 *);
 
 f32 func_8006A49C(Racer *racer, Vec3 *point, void *ctx, Vec3 *out, Owner *owner) {
     f32 level;
-    Vec3 delta;
-    f32 ratio;
     u8 scratchB[0x40];
     f32 result;
-    Vec3 spareC;
-    Vec3 spareB;
-    u32 state;
-    Vec3 origin;
-    u8 scratchA[0x40];
-    u32 flags;
     Vec3 spareA;
+    Vec3 spareB;
+    Vec3 delta;
+    Vec3 origin;
+    Vec3 spareC;
+    u8 scratchA[0x40];
     Part *part;
 
     (void)spareA; (void)spareB; (void)spareC;
@@ -88,12 +85,10 @@ f32 func_8006A49C(Racer *racer, Vec3 *point, void *ctx, Vec3 *out, Owner *owner)
     origin.z = point->z;
     if (!(((f32)racer->unk1998 - 400.0f) / 600.0f < 1.0) && (racer->unk60 & 0x20) == 0 &&
             (racer->unk64 & 0x04000000) == 0) {
-        flags = racer->unk60;
-        state = racer->unk64;
-        racer->unk64 = state | 0x20000000;
+        racer->unk64 = racer->unk64 | 0x20000000;
         racer->unk140 = racer->unkEC;
-        if ((flags & 0xF) == 2) {
-            func_8003B184(racer->unkAC, scratchB, 0.0f);
+        if ((racer->unk60 & 0xF) == 2) {
+            func_8003B184(racer->unkAC, scratchB, 0);
             point->z = *(f32 *)&scratchB[0x38];
         }
         result = 2.0f;
@@ -104,8 +99,7 @@ f32 func_8006A49C(Racer *racer, Vec3 *point, void *ctx, Vec3 *out, Owner *owner)
             racer->unk64 |= 2;
         }
     } else {
-        state = racer->unk64;
-        if ((state & 0x400000) != 0 && (state & 0x800000) != 0) {
+        if ((racer->unk64 & 0x400000) != 0 && (racer->unk64 & 0x800000) != 0) {
             result = point->z - racer->unk188;
             out->x = racer->unk160;
             out->y = racer->unk164;
@@ -114,11 +108,10 @@ f32 func_8006A49C(Racer *racer, Vec3 *point, void *ctx, Vec3 *out, Owner *owner)
             racer->unk140 = racer->unkEC;
         } else {
             result = func_800670CC(racer, point, out);
-            state = racer->unk64;
-            if (state & 0x800000) {
-                racer->unk64 = state | 0x400000;
+            if (racer->unk64 & 0x800000) {
+                racer->unk64 = racer->unk64 | 0x400000;
             } else {
-                racer->unk64 = state & ~0x400000;
+                racer->unk64 = racer->unk64 & ~0x400000;
             }
         }
 
@@ -131,34 +124,29 @@ f32 func_8006A49C(Racer *racer, Vec3 *point, void *ctx, Vec3 *out, Owner *owner)
         racer->unk160 = out->x;
         racer->unk164 = out->y;
         racer->unk168 = out->z;
-        flags = racer->unk60;
-        if ((flags & 0x5000) == 0) {
-            if (D_800AD5B0 < racer->unk18C || D_800AD5B0 < -racer->unk18C || (flags & 0x2000) == 0) {
+        if ((racer->unk60 & 0x5000) == 0) {
+            if (D_800AD5B0 < racer->unk18C || D_800AD5B0 < -racer->unk18C || (racer->unk60 & 0x2000) == 0) {
                 if (racer->unk64 & 0x400) {
                     func_80069A64(racer, point, ctx, result, out, &spareA, &spareB);
                 } else {
                     func_800695D4(racer, point, ctx, result, out, &spareA, &spareB);
                 }
-                flags = racer->unk60;
             }
         }
-        if ((flags & 0x04000000) == 0) {
+        if ((racer->unk60 & 0x04000000) == 0) {
             func_800672D4(racer, point, result);
-            flags = racer->unk60;
         }
         if (result < 0.0f) {
             result = 2.0f;
         }
-        if ((flags & 0xF) == 2 && (flags & 0x20) == 0) {
-            ratio = ((f32)racer->unk1998 - 400.0f) / 600.0f;
-            if (0.0 <= ratio && ratio <= 1.0) {
-                func_8003B184(racer->unkAC, scratchA, 0.0f);
+        if ((racer->unk60 & 0xF) == 2 && (racer->unk60 & 0x20) == 0) {
+            if (0.0 <= ((f32)racer->unk1998 - 400.0f) / 600.0f && ((f32)racer->unk1998 - 400.0f) / 600.0f <= 1.0) {
+                func_8003B184(racer->unkAC, scratchA, 0);
                 point->z = point->z + (*(f32 *)&scratchA[0x38] - point->z) *
                            (((f32)racer->unk1998 - 400.0f) / 600.0f);
             }
         }
-        state = racer->unk64;
-        if ((state & 0x800000) == 0) {
+        if ((racer->unk64 & 0x800000) == 0) {
             if (racer->unk60 & 0x20) {
                 delta.x = point->x;
                 delta.y = point->y;

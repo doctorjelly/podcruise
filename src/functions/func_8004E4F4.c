@@ -65,6 +65,7 @@ void func_8004E4F4(Mode *arg0) {
     s32 mid;
     f32 sp80;
     f32 sp7C;
+    f32 back;
 
     for (i = 0; i < 35; i++) {
         func_80015268(&D_801198A8[i].unk4, 0.0f, 0.0f, 0.0f);
@@ -132,6 +133,7 @@ void func_8004E4F4(Mode *arg0) {
     if (arg0->unk38 == 2) {
         mid = D_8011A240.unk2C + 1;
         for (i = 0; i < mid; i++) {
+            back = D_800AB2DC;
             D_8011A050[i].unk4 = (f32)(i % 2) * D_800AB2E8 + D_800AB2E4;
             D_8011A050[i].unk8 = 40.0f;
             D_8011A050[i].unk2C = 0.0f;
@@ -139,7 +141,7 @@ void func_8004E4F4(Mode *arg0) {
             D_8011A050[i].unkC = (f32)(i / 2) * D_800AB2E0 + 9.0f;
             if (i == D_8011A240.unk2C) {
                 D_8011A050[i].unk28 = 90.0f;
-                D_8011A050[i].unkC -= D_800AB2DC;
+                D_8011A050[i].unkC -= back;
             }
         }
     }

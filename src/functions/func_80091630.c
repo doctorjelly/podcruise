@@ -103,9 +103,9 @@ s32 func_80091630(Dev80091630 *device) {
                     do {
                         iteration = entry.b.hi;
                         if (curKey != entry.b.hi) {
-                            curKey = entry.b.hi;
+                            curKey = iteration;
                             if (lastLoaded != entry.b.hi) {
-                                status = func_80091354(device, table2, 0, curKey);
+                                status = func_80091354(device, table2, 0, iteration);
                                 lastLoaded = iteration;
                             }
                             if (status != 0 && status != 3) {

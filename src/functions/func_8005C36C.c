@@ -125,8 +125,9 @@ void func_8005C36C(PcSession8005C36C *session) {
         }
     } else if ((session->unk008 & 0xF) == 5) {
         if (D_800ACFF4 < session->unk00C) {
+            f32 span = D_800ACFF8;
             func_8000AB24(-0x67, 0, 0, 0,
-                          (u32)((1.0f - ((D_800ACFFC - session->unk00C) / D_800ACFF8)) * 255.0f));
+                          (u32)((1.0f - ((D_800ACFFC - session->unk00C) / span)) * 255.0f));
         } else {
             func_8000AB24(-0x67, 0, 0, 0, 0);
         }

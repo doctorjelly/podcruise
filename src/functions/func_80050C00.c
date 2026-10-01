@@ -36,6 +36,7 @@ s32 func_80050C00(Actor80050C00 *actor, f32 *value, f32 *pointA, f32 *pointB,
     f32 scaleB;
     f32 spanAB[3];
     f32 pushed[3];
+    s32 flag;
     f32 spanAC[3];
     f32 spanCB[3];
     f32 half;
@@ -43,22 +44,17 @@ s32 func_80050C00(Actor80050C00 *actor, f32 *value, f32 *pointA, f32 *pointB,
     f32 span;
     f32 current;
     f32 start[3];
-    s32 kind;
-    s32 flag;
 
-    current = *value;
     scaleB = D_800AB354 * D_80120BF8;
+    current = *value;
     scaleA = 1600.0f;
-    kind = actor->unk08;
-    if (kind == 0x11 || kind == 0x12 || (kind == 8 && 5.0f <= D_800A4BF4)) {
+    if (actor->unk08 == 0x11 || actor->unk08 == 0x12 || (actor->unk08 == 8 && 5.0f <= D_800A4BF4)) {
         scaleA = 1600.0f * D_800AB358;
         scaleB = scaleB * D_800AB358;
-    } else if (kind == 3) {
-        if (D_800A4BDC == 0) {
-            scaleA = 1600.0f * D_800AB35C;
-            scaleB = scaleB * D_800AB35C;
-        }
-    } else if (kind == 0x10) {
+    } else if (actor->unk08 == 3 && D_800A4BDC == 0) {
+        scaleA = 1600.0f * D_800AB35C;
+        scaleB = scaleB * D_800AB35C;
+    } else if (actor->unk08 == 0x10) {
         scaleA = 1600.0f * D_800AB360;
         scaleB = scaleB * D_800AB360;
     }
@@ -74,13 +70,13 @@ s32 func_80050C00(Actor80050C00 *actor, f32 *value, f32 *pointA, f32 *pointB,
     func_8001535C(spanAB, pointA, pointB);
     span = func_800153C0(spanAB);
 
-    flag = D_800A5274;
+    flag = *(s32 *)0x800A5274;
     limit = scaleB * 6.0f;
     if (half < limit) {
         limit = half;
     }
     if (limit <= span && current < scaleB) {
-        current = current + 2000.0f * D_80120BF8 * step;
+        current += 2000.0f * D_80120BF8 * step;
         if (scaleB < current) {
             current = scaleB;
         }
@@ -109,10 +105,11 @@ s32 func_80050C00(Actor80050C00 *actor, f32 *value, f32 *pointA, f32 *pointB,
             *value = 0.0f;
             return 1;
         }
-        *value = current;
-        return 0;
+    } else {
+        func_80015288(pointB, pointA);
+        *value = 0.0f;
+        return 1;
     }
-    func_80015288(pointB, pointA);
-    *value = 0.0f;
-    return 1;
+    *value = current;
+    return 0;
 }

@@ -10,7 +10,7 @@ extern s32 D_801489C8[];
 f32 func_80085AB4(void) {
     u16 *samples;
     s32 index;
-    s32 value;
+    u16 value;
     f32 total;
 
     samples = D_800A68B0;

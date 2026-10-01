@@ -46,13 +46,17 @@ void func_8007531C(Node *node) {
                         value = entry->unk8;
                         if (value != 0) {
                             found = 0;
-                            for (j = 0; j < D_8011C8D8; j++) {
-                                if (value == D_8011C8B0[j]->unk8) {
-                                    found = 1;
-                                }
-                                if (found) {
-                                    break;
-                                }
+                            j = 0;
+                            if (j < D_8011C8D8) {
+                                do {
+                                    if (value == D_8011C8B0[j]->unk8) {
+                                        found = 1;
+                                    }
+                                    j++;
+                                    if (found) {
+                                        break;
+                                    }
+                                } while (j < D_8011C8D8);
                             }
                             if (!found) {
                                 D_8011C8B0[D_8011C8D8] = entry;

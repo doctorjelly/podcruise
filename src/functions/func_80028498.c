@@ -56,12 +56,11 @@ extern f32 D_80120BF8;
 
 void func_80028498(Ctx80028498 *arg0) {
     s32 slot;
-    f32 work[3];
+    s32 i;
     f32 outB;
     f32 outA;
     f32 span;
-    f32 blend;
-    s32 i;
+    f32 work[3];
 
     span = 0.2f;
     if (D_800A4BCC < 0.0f) {
@@ -182,13 +181,12 @@ void func_80028498(Ctx80028498 *arg0) {
         }
         for (i = 0; i < D_8011A240.unk_2C; i++) {
             if (arg0->unk_38 != 1 || i == D_8011A240.unk_30) {
-                blend = D_800A25F8 / span;
                 D_801198A8[i].unk_04[0] =
-                    (D_801198A8[i].unk_1C[0] - D_801198A8[i].unk_10[0]) * blend + D_801198A8[i].unk_10[0];
+                    (D_801198A8[i].unk_1C[0] - D_801198A8[i].unk_10[0]) * (D_800A25F8 / span) + D_801198A8[i].unk_10[0];
                 D_801198A8[i].unk_04[1] =
-                    (D_801198A8[i].unk_1C[1] - D_801198A8[i].unk_10[1]) * blend + D_801198A8[i].unk_10[1];
+                    (D_801198A8[i].unk_1C[1] - D_801198A8[i].unk_10[1]) * (D_800A25F8 / span) + D_801198A8[i].unk_10[1];
                 D_801198A8[i].unk_04[2] =
-                    (D_801198A8[i].unk_1C[2] - D_801198A8[i].unk_10[2]) * blend + D_801198A8[i].unk_10[2];
+                    (D_801198A8[i].unk_1C[2] - D_801198A8[i].unk_10[2]) * (D_800A25F8 / span) + D_801198A8[i].unk_10[2];
             }
         }
         if (D_800A21A0 == 0 && D_800A4BEC != 0) {

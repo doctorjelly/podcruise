@@ -54,11 +54,13 @@ Cmd8008E074 *func_8008E074(State8008E074 *state, s16 *countPtr, s32 count, s32 a
                     address = state->unk30(state->unk44, bytes, state->unk34);
                     misalign = address & 7;
                     total = bytes + misalign;
-                    cmd[0].w1 = (u32)((total - (total & 7)) + 8) & 0xFFFF;
-                    cmd[0].w0 = ((u32)*countPtr & 0xFFFF) | 0x08000000;
-                    cmd[1].w1 = address - misalign;
-                    cmd[1].w0 = 0x04000000;
-                    p = cmd + 2;
+                    a = p;
+                    c = ++p;
+                    a->w1 = (u32)((total - (total & 7)) + 8) & 0xFFFF;
+                    a->w0 = ((u32)*countPtr & 0xFFFF) | 0x08000000;
+                    c->w1 = address - misalign;
+                    c->w0 = 0x04000000;
+                    p++;
                 } else {
                     misalign = 0;
                 }

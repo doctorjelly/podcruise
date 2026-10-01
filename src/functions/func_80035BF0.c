@@ -46,8 +46,7 @@ void func_80035BF0(Obj80035BF0 *obj, s32 force) {
             {
                 Gfx80035BF0 *g;
                 g = D_80112C90++;
-                g->w0 = 0xE3000A01;
-                g->w1 = 0x00100000;
+                g->w0 = 0xE3000A01; g->w1 = 0x00100000;
             }
         }
     }

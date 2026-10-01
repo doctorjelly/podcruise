@@ -50,14 +50,15 @@ void func_800941E0(void) {
     u32 origin;
     ViContext *next;
     u32 hStart;
-    ViFieldRegs *fld;
     u32 vStart;
+    ViFieldRegs *fld;
     u32 field;
     u32 physical;
+    u32 raw;
 
     next = D_800A7F54;
-    field = *(u32 *)0xA4400010 & 1;
     mode = next->modep;
+    field = *(u32 *)0xA4400010 & 1;
     physical = func_80088360(next->framep);
     fld = &mode->fldRegs[field];
     origin = fld->origin + physical;
@@ -69,7 +70,8 @@ void func_800941E0(void) {
     }
 
     if (next->state & 4) {
-        next->yScale = (u32)(next->yScaleFactor * (f32)(mode->fldRegs[field].yScale & 0xFFF));
+        raw = mode->fldRegs[field].yScale;
+        next->yScale = (u32)(next->yScaleFactor * (f32)(raw & 0xFFF));
         next->yScale |= mode->fldRegs[field].yScale & ~0xFFF;
     } else {
         next->yScale = mode->fldRegs[field].yScale;

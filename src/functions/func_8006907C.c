@@ -59,7 +59,8 @@ void func_8006907C(Obj6907C *object, f32 *arg1, f32 *position, f32 *direction) {
 
     (void)pad;
     amount = func_80068410(object);
-    amount = func_800689A0(object) + amount;
+    dot = func_800689A0(object);
+    amount = amount + dot;
     func_80068D04(object, amount, direction, velocity);
 
     if (!(object->unk064 & 0x400) && !(object->unk060 & 0x2000000)) {
@@ -128,11 +129,9 @@ void func_8006907C(Obj6907C *object, f32 *arg1, f32 *position, f32 *direction) {
             previous[1] = position[1];
             previous[2] = position[2];
             direction = (f32 *)0L;
-            while (func_80033140(position, arg1, object->unk13C, scratch)) {
+            while (func_80033140(position, arg1, object->unk13C, scratch) &&
+                   (long)direction != 6) {
                 direction = (f32 *)((long)direction + 1);
-                if ((long)direction == 6) {
-                    break;
-                }
             }
             if ((long)direction > 0) {
                 if (object->unk060 & 0x80) {

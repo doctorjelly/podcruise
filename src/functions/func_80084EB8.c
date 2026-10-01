@@ -1,7 +1,8 @@
 /* Recovered per specification specs/func_80084EB8.md (framebuffer image setup and screen clear). */
 #include "podcruise/types.h"
 
-extern u32 *D_801217B0;
+typedef struct { u32 a; u32 b; } Gfx;
+extern Gfx *D_801217B0;
 extern s16 D_80114470[];
 extern s32 D_80114528;
 extern s32 D_800D9DB4;
@@ -12,19 +13,19 @@ extern s16 D_801488B8[];
 extern s32 func_80088360(s32);
 extern void func_800390AC(void);
 
-#define GFX(w0, w1) { u32 *g = D_801217B0; D_801217B0 = g + 2; g[0] = (u32)(w0); g[1] = (u32)(w1); }
+#define GFX(w0, w1) { Gfx *g = D_801217B0++; g->a = (u32)(w0); g->b = (u32)(w1); }
 
 void func_80084EB8(s32 arg0) {
-    s32 siz;
-    s32 color;
-    s32 y1;
+    s16 rgb[4];
     s32 x0;
-    s16 rgb[8];
-    f64 sy;
     s32 y0;
     s32 x1;
-    s32 i;
+    s32 y1;
     f64 sx;
+    f64 sy;
+    s32 siz;
+    s32 color;
+    s32 i;
 
     sx = (f64)D_80114470[0] / 320.0;
     x0 = D_80120DF0[8] * sx;

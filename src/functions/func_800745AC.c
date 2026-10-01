@@ -8,12 +8,12 @@ extern void func_80017824(void *dst, f32 angle, f32 x, f32 y, f32 z, void *src);
 
 void func_800745AC(u8 *obj) {
     f32 target;
-    f32 level;
     f32 a;
     f32 b;
+    f32 level;
     u8 *part[1];
 
-    target = 0.0f;
+    target = 0;
     if (*(f32 *)(obj + 0x2FC) < 0.0f) {
         target = *(f32 *)(obj + 0x2FC) * -15.0f;
     }
