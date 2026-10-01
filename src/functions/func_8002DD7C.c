@@ -26,7 +26,7 @@ void func_8002DD7C(Obj8002DD7C *arg0) {
     s32 index;
     s32 bit;
     s32 i;
-    s32 mask;
+    u8 mask;
     s32 found;
 
     D_800A5998 = 1;
@@ -37,7 +37,7 @@ void func_8002DD7C(Obj8002DD7C *arg0) {
 
     if (func_8002D968(D_80113E60, D_800A9ACC) != 0) {
         if ((D_800A4B94 & 4) != 0) {
-            *(s8 *)0x80119668 = arg0->unk5D;
+            D_80119668[total] = arg0->unk5D;
             total = 1;
             useA = 1;
         }

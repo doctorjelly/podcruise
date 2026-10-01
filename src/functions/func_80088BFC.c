@@ -112,17 +112,21 @@ extern void func_80090450(void *, Voice80088BFC *);
 static void func_80088B70(Pool80088BFC *, void *);
 
 void func_80088BFC(Player80088BFC *player) {
-    Voice80088BFC *voice;
-    Program80088BFC *program;
-    s32 total0;
+    Query80088BFC post5;
+    Note80088BFC note;
     f64 value;
     u8 amount;
     f32 rate;
     Post80088BFC post;
-    s32 total;
+    s32 num1;
     s16 scaled;
+    f64 value6;
+    f64 value1;
+    Voice80088BFC *voice;
+    Program80088BFC *program;
+    s32 total0;
+    s32 total;
     s32 num;
-    Query80088BFC post5;
     s32 sc3v;
     f32 den1;
     s16 sum;
@@ -132,7 +136,7 @@ void func_80088BFC(Player80088BFC *player) {
     f32 den4;
     s32 total6;
     s32 sc6v;
-    Note80088BFC note;
+    f32 den6;
 
     event = &player->unk28;
     for (;;) {
@@ -184,13 +188,13 @@ void func_80088BFC(Player80088BFC *player) {
                     if (program == 0) {
                         break;
                     }
-                    num = program->unk00->unk08;
+                    num1 = program->unk00->unk08;
                     den1 = voice->unk24;
-                    value = (f32)num / den1;
-                    if (2147483647.0 < value) {
+                    value1 = (f32)num1 / den1;
+                    if (2147483647.0 < value1) {
                         total = 0x7FFFFFFF;
                     } else {
-                        total = (s32)value;
+                        total = (s32)value1;
                     }
                     func_80090200(player->unk38, voice, 0, total);
                     if (total != 0) {
@@ -253,10 +257,10 @@ void func_80088BFC(Player80088BFC *player) {
             case 6:
                 if (program->unk00->unk04 != -1) {
                     num6 = program->unk00->unk04;
-                    den = voice->unk24;
-                    value = (f32)num6 / den;
+                    den6 = voice->unk24;
+                    value6 = (f32)num6 / den6;
                     sc6v = program->unk00->unk0D * voice->unk2C / 0x7F;
-                    func_80090200(player->unk38, voice, sc6v, total6 = 2147483647.0 < value ? 0x7FFFFFFF : (s32)value);
+                    func_80090200(player->unk38, voice, sc6v, total6 = 2147483647.0 < value6 ? 0x7FFFFFFF : (s32)value6);
                     total = total6;
                     post.unk00 = 1;
                     post.unk04 = voice;

@@ -170,7 +170,7 @@ void func_80058058(Actor80058058 *actor, s32 mode) {
         }
         obj->unk2B8 = (f32)((f64)obj->unk2B8 - D_80120BF0);
         if (obj->unk2B8 < 0) {
-            obj->unk2B8 = 0.0f;
+            obj->unk2B8 = 0;
         }
         D_800A59C0[mode] =
             (f32)((f64)D_800A59C0[mode] + ((f64)D_800A59D0[mode] * D_80120BF0));

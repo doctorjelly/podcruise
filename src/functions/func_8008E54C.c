@@ -79,7 +79,6 @@ Cmd *func_8008E54C(Obj *a, s16 *b, s32 n, s32 unused, Cmd *out);
 
 Cmd *func_8008E54C(Obj *a, s16 *b, s32 n, s32 unused, Cmd *out) {
     Cmd *cursor;
-    s32 len;
     s32 sample;
     s32 avail;
     s32 blocks;
@@ -87,13 +86,14 @@ Cmd *func_8008E54C(Obj *a, s16 *b, s32 n, s32 unused, Cmd *out) {
     s32 used;
     s32 aligned;
     s32 total;
+    s32 len;
     s32 limit;
-    s32 room;
     s32 bytes;
     s32 delta;
     s32 flag;
     s32 cond;
     Buf *buf;
+    s32 room;
 
     (void)unused;
     cursor = out;

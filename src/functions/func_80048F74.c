@@ -18,21 +18,19 @@ void func_80048F74(s32 arg0) {
     f32 sine;
     f32 cosine;
     KeyBlock key;
+    s32 outer;
     s32 first;
     s32 head;
     s32 last;
     s32 count;
     s32 tail;
-    s32 index;
     s32 inner;
-    s32 outer;
-    s32 slot;
     s32 taken;
     s32 limit;
 
     key = D_800A51DC;
-    for (index = 0; index < 5; index++) {
-        order[index] = -1;
+    for (outer = 0; outer < 5; outer++) {
+        order[outer] = -1;
     }
 
     first = D_800D6DD8[arg0][0];
@@ -42,15 +40,15 @@ void func_80048F74(s32 arg0) {
     tail = count + 1;
     head = 0;
 
-    for (index = first; index <= D_800D6DD8[arg0][1]; index++) {
-        func_80014CC0(D_80119670[index][3], &sine, &cosine);
-        if ((D_80119670[index][1] * cosine) > 0.0f) {
-            key.value[head] = D_80119670[index][5];
-            order[head] = (index - D_800D6DD8[arg0][0]) + 0x46;
+    for (outer = first; outer <= D_800D6DD8[arg0][1]; outer++) {
+        func_80014CC0(D_80119670[outer][3], &sine, &cosine);
+        if ((D_80119670[outer][1] * cosine) > 0.0f) {
+            key.value[head] = D_80119670[outer][5];
+            order[head] = (outer - D_800D6DD8[arg0][0]) + 0x46;
             head++;
         } else {
-            key.value[tail] = D_80119670[index][5];
-            order[tail] = (index - D_800D6DD8[arg0][0]) + 0x46;
+            key.value[tail] = D_80119670[outer][5];
+            order[tail] = (outer - D_800D6DD8[arg0][0]) + 0x46;
             tail--;
         }
     }
@@ -63,9 +61,9 @@ void func_80048F74(s32 arg0) {
     for (outer = 0; outer < head - 3; outer++) {
         for (inner = outer + 1; inner < head - 2; inner++) {
             if (key.value[outer] < key.value[inner]) {
-                slot = order[outer];
+                taken = order[outer];
                 order[outer] = order[inner];
-                order[inner] = slot;
+                order[inner] = taken;
             }
         }
     }
@@ -73,9 +71,9 @@ void func_80048F74(s32 arg0) {
     for (outer = tail; outer < count + 1; outer++) {
         for (inner = outer + 1; inner < limit; inner++) {
             if (key.value[inner] < key.value[outer]) {
-                slot = order[outer];
+                taken = order[outer];
                 order[outer] = order[inner];
-                order[inner] = slot;
+                order[inner] = taken;
             }
         }
     }

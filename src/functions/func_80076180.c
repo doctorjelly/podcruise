@@ -55,6 +55,7 @@ void func_80076180(Owner *owner, Panel *panel, f32 requestX, f32 requestY) {
     s32 boosted;
     s32 scaleX;
     s32 scaleY;
+    f32 zero;
 
     scaleY = 0;
     scaleX = 0;
@@ -123,23 +124,26 @@ void func_80076180(Owner *owner, Panel *panel, f32 requestX, f32 requestY) {
         if (amount[0] < 0.25f) {
             scale = scale * amount[0];
             if (owner == 0) {
-                brightness = (f32)(s32)1 * amount[0];
+                brightness *= amount[0];
             }
         }
         switch (mode) {
             case 8:
             case 10:
-                twist = 0.0f;
+                twist = zero = 0.0f;
                 break;
             case 4:
             case 6:
             case 16:
-                twist = 0.0f;
+                twist = zero = 0.0f;
                 scale = 1.0f;
                 brightness = ((f32)func_80082BE0() / 2147483648.0f) * 0.10000002f + 0.9f;
                 break;
+            default:
+                zero = 0.0f;
+                break;
         }
-        func_8001745C(&matrix[0][0], 0.0f, 0.0f, twist);
+        func_8001745C(&matrix[0][0], zero, zero, twist);
         func_800155C0((PcVec3f *)matrix[0], scale, (PcVec3f *)matrix[0]);
         func_800155C0((PcVec3f *)matrix[2], scale, (PcVec3f *)matrix[2]);
         if (owner != 0) {
@@ -161,23 +165,26 @@ void func_80076180(Owner *owner, Panel *panel, f32 requestX, f32 requestY) {
         if ((f64)amount[1] < 0.25) {
             scale = scale * amount[1];
             if (owner == 0) {
-                brightness = (f32)(s32)1 * amount[1];
+                brightness *= amount[1];
             }
         }
         switch (mode) {
             case 8:
             case 10:
-                twist = 0.0f;
+                twist = zero = 0.0f;
                 break;
             case 4:
             case 6:
             case 16:
-                twist = 0.0f;
+                twist = zero = 0.0f;
                 scale = 1.0f;
                 brightness = ((f32)func_80082BE0() / 2147483648.0f) * 0.10000002f + 0.9f;
                 break;
+            default:
+                zero = 0.0f;
+                break;
         }
-        func_8001745C(&matrix[0][0], 0.0f, 0.0f, twist);
+        func_8001745C(&matrix[0][0], zero, zero, twist);
         func_800155C0((PcVec3f *)matrix[0], scale, (PcVec3f *)matrix[0]);
         func_800155C0((PcVec3f *)matrix[2], scale, (PcVec3f *)matrix[2]);
         if (owner != 0) {

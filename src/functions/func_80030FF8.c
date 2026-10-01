@@ -9,10 +9,7 @@ extern u8 *D_800D9DBC;
 extern s16 D_800A2844;
 extern s16 D_800D6996;
 extern u8 *D_800D9DB4;
-extern u8 *D_800D9DD8;
-extern s32 D_800D9DDC;
-extern s32 D_800D9DE0;
-extern s32 D_800D9DE4[8];
+extern u8 *D_800D9DD8[];
 
 extern void func_8008A360(u8 *);
 extern void func_80088AD0(void);
@@ -37,10 +34,10 @@ void func_80030FF8(s32 arg0, s32 arg1) {
     }
     D_800A2844 = 1;
     func_80088AD0();
-    D_800D9DD8 = D_800D9DB8;
-    D_800D9DDC = 0;
-    for (i = 0; i < 8; i++) { D_800D9DE4[i] = 0; }
-    D_800D9DE0 = 0;
+    D_800D9DD8[0] = D_800D9DB8;
+    D_800D9DD8[1] = 0;
+    D_800D9DD8[2] = 0;
+    for (i = 3; i < 11; i++) { D_800D9DD8[i] = 0; }
     func_80030EA0();
     func_80030FA0();
     func_8002FB90();

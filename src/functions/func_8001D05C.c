@@ -68,7 +68,6 @@ void func_8001D05C(void *arg) {
     f32 place[4][4];
     s32 key;
     s32 selection;
-    u32 bits;
     u32 previous;
     s32 slot;
     s32 letter;
@@ -93,69 +92,53 @@ void func_8001D05C(void *arg) {
             }
             if (key == -1) {
                 selection = D_800A23C4;
-                bits = D_8009B7D8;
-                previous = bits;
+                previous = D_8009B7D8;
                 if ((selection == 0xC) || (selection == 0x50)) {
-                    bits = bits | 3;
-                    D_8009B7D8 = bits;
+                    D_8009B7D8 = D_8009B7D8 | 3;
                 }
                 if ((selection == 0x11) || (selection == 0x50)) {
-                    bits = bits | 1;
-                    D_8009B7D8 = bits;
+                    D_8009B7D8 = D_8009B7D8 | 1;
                 }
                 if ((selection == 0x15) || (selection == 0x50)) {
-                    bits = bits | 5;
-                    D_8009B7D8 = bits;
+                    D_8009B7D8 = D_8009B7D8 | 5;
                 }
                 if ((selection == 0x1E) || (selection == 0x50)) {
-                    bits = bits | 9;
-                    D_8009B7D8 = bits;
+                    D_8009B7D8 = D_8009B7D8 | 9;
                 }
                 if ((selection == 0x26) || (selection == 0x50)) {
-                    bits = bits | 0x11;
-                    D_8009B7D8 = bits;
+                    D_8009B7D8 = D_8009B7D8 | 0x11;
                 }
                 if ((selection == 0x2E) || (selection == 0x50)) {
-                    bits = bits | 0x21;
-                    D_8009B7D8 = bits;
+                    D_8009B7D8 = D_8009B7D8 | 0x21;
                 }
                 if ((selection == 0x34) || (selection == 0x50)) {
-                    bits = bits | 0x40;
-                    D_8009B7D8 = bits;
+                    D_8009B7D8 = D_8009B7D8 | 0x40;
                 }
                 if ((selection == 0x3B) || (selection == 0x50)) {
-                    bits = bits | 0x80;
-                    D_8009B7D8 = bits;
+                    D_8009B7D8 = D_8009B7D8 | 0x80;
                 }
                 if ((selection == 0x40) || (selection == 0x50)) {
-                    bits = bits | 0x101;
-                    D_8009B7D8 = bits;
+                    D_8009B7D8 = D_8009B7D8 | 0x101;
                 }
                 if ((selection == 0x44) || (selection == 0x50)) {
-                    bits = bits | 0x201;
-                    D_8009B7D8 = bits;
+                    D_8009B7D8 = D_8009B7D8 | 0x201;
                 }
                 if ((selection == 0x55) || (selection == 0x50)) {
-                    bits = bits | 0x800;
-                    D_8009B7D8 = bits;
+                    D_8009B7D8 = D_8009B7D8 | 0x800;
                 }
                 if ((selection == 0x5A) || (selection == 0x50)) {
-                    bits = bits | 0x1000;
-                    D_8009B7D8 = bits;
+                    D_8009B7D8 = D_8009B7D8 | 0x1000;
                 }
                 if ((selection == 0x5F) || (selection == 0x50)) {
-                    bits = bits | 0x2000;
-                    D_8009B7D8 = bits;
+                    D_8009B7D8 = D_8009B7D8 | 0x2000;
                 }
                 if ((selection == 0x65) || (selection == 0x50)) {
-                    bits = bits | 0x4000;
-                    D_8009B7D8 = bits;
+                    D_8009B7D8 = D_8009B7D8 | 0x4000;
                 }
                 if (selection == 0x68) {
-                    bits = bits | 0x2000000;
-                    D_8009B7D8 = bits;
+                    D_8009B7D8 = D_8009B7D8 | 0x2000000;
                 }
-                if (previous != bits) {
+                if (previous != D_8009B7D8) {
                     func_8002D4C4(0x4B);
                     func_8003E1EC(D_800A8C08, 2.0f);
                     D_800A23C8 = 0;
@@ -209,18 +192,15 @@ void func_8001D05C(void *arg) {
         func_8008A6B4(text, D_800A8C0C, BS(arg, 0x6F) + 1);
         func_8003ECB0(0xA0, 0x37, text);
     }
-    slot = D_8011A240[12];
-    if (slot < 0xD) {
-        slot += 0x1B;
-        D_8011A240[12] = slot;
+    if (D_8011A240[12] < 0xD) {
+        D_8011A240[12] = D_8011A240[12] + 0x1B;
     }
-    if (slot >= 0x29) {
-        slot -= 0x1B;
-        D_8011A240[12] = slot;
+    if (D_8011A240[12] >= 0x29) {
+        D_8011A240[12] = D_8011A240[12] - 0x1B;
     }
-    letter = slot;
-    if (slot >= 0x1B) {
-        letter = slot - 0x1B;
+    letter = D_8011A240[12];
+    if (letter >= 0x1B) {
+        letter = letter - 0x1B;
     }
 
     index = 0;

@@ -14,7 +14,7 @@ s32 func_80033140(f32 *arg0, f32 *arg1, s32 arg2, f32 *arg3) {
     s32 result;
     f32 moved[3];
     f32 push;
-    f32 spare2;
+    f32 planeDot;
     f32 hitPlane[4];
 
     result = 0;
@@ -33,10 +33,9 @@ s32 func_80033140(f32 *arg0, f32 *arg1, s32 arg2, f32 *arg3) {
         if (0.0f <= func_80004FB0(arg2, ray, hitNormal, hitPlane)) {
             hitPlane[3] = hitPlane[2] * hitNormal[2] +
                           (hitNormal[1] * hitPlane[1] + hitPlane[0] * hitNormal[0]);
-            push = hitPlane[3] -
-                    (hitPlane[2] * arg0[2] +
-                     (arg0[1] * hitPlane[1] + arg0[0] * hitPlane[0]));
-            push = push + 2.0f;
+            planeDot = hitPlane[2] * arg0[2] +
+                     (arg0[1] * hitPlane[1] + arg0[0] * hitPlane[0]);
+            push = hitPlane[3] - planeDot + 2.0f;
             moved[0] = hitPlane[0] * push;
             moved[1] = hitPlane[1] * push;
             moved[2] = hitPlane[2] * push;
@@ -52,6 +51,6 @@ s32 func_80033140(f32 *arg0, f32 *arg1, s32 arg2, f32 *arg3) {
             result = 1;
         }
     }
-    (void)spare1; (void)spare2;
+    (void)spare1;
     return result;
 }

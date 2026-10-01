@@ -103,22 +103,22 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
     PcVec3f firstVector;
     void *node1;
     void *node0;
-    f32 sine[8];
+    f32 sine[9];
     f32 cosine[8];
+    f32 phase;
     PcVec3f firstPoint;
     PcVec3f secondPoint;
+    PcVec3f direction;
+    PcVec3f secondZero;
+    PcVec3f firstZero;
     PcVec3f firstOffset;
     PcVec3f secondOffset;
-    PcVec3f direction;
-    PcVec3f firstZero;
-    PcVec3f secondZero;
-    Matrix80018480 firstMatrix;
-    Matrix80018480 secondMatrix;
     Matrix80018480 beamMatrix;
+    Matrix80018480 secondMatrix;
+    Matrix80018480 firstMatrix;
     void **slot;
     f32 typeScale;
     f32 length;
-    f32 phase;
     f32 beamX;
     f32 beamZ;
 
@@ -345,9 +345,11 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
                 func_80017520(work, scaleX, scaleY, scaleZ);
                 func_80015288((PcVec3f *)work[3], &secondVector);
                 work[3][2] = depth;
-                func_80017918(work, 0.004f, 0.004f, 0.004f, work);
+                func_80017918(work, 0.004f, 4e-3f, 0.0040f, work);
                 func_80017BA8(node1, work);
-                func_800181BC(node1, 2, 3, 0x10, 2);
+                if (node1 != 0) {
+                    func_800181BC(node1, 2, 3, 0x10, 2);
+                }
             }
         }
 

@@ -72,7 +72,10 @@ Command800963CC *func_800963CC(
     s32 leftOffset;
     s32 swap;
     s16 *newCursor;
-    Command800963CC *cmd;
+    Command800963CC *firstCmd;
+    Command800963CC *secondCmd;
+    Command800963CC *finalCmd;
+    Command800963CC *endCmd;
     Voice800963CC *voice;
     s16 index;
     s32 doubledCount;
@@ -116,10 +119,10 @@ Command800963CC *func_800963CC(
             sequence, voice, rightOffset, sampleCount, out);
 
         if (voice->firstCommand != 0) {
-            cmd = out;
+            firstCmd = out;
             out++;
-            cmd->w0 = 0x0C000000 | (u16)voice->firstCommand;
-            cmd->w1 = ((u16)leftOffset << 16) | (u16)rightOffset;
+            firstCmd->w0 = 0x0C000000 | (u16)voice->firstCommand;
+            firstCmd->w1 = ((u16)leftOffset << 16) | (u16)rightOffset;
             if ((voice->envelope == 0) && (voice->channel == 0)) {
                 out = func_80095C20(
                     sequence, mirrorEnd, rightOffset, sampleCount, out);
@@ -127,10 +130,10 @@ Command800963CC *func_800963CC(
         }
 
         if (voice->secondCommand != 0) {
-            cmd = out;
+            secondCmd = out;
             out++;
-            cmd->w0 = 0x0C000000 | (u16)voice->secondCommand;
-            cmd->w1 = ((u16)rightOffset << 16) | (u16)leftOffset;
+            secondCmd->w0 = 0x0C000000 | (u16)voice->secondCommand;
+            secondCmd->w1 = ((u16)rightOffset << 16) | (u16)leftOffset;
             out = func_80095C20(
                 sequence, start, leftOffset, sampleCount, out);
         }
@@ -146,10 +149,10 @@ Command800963CC *func_800963CC(
         }
 
         if (voice->finalCommand != 0) {
-            cmd = out;
+            finalCmd = out;
             out++;
-            cmd->w0 = 0x0C000000 | (u16)voice->finalCommand;
-            cmd->w1 = ((u16)rightOffset << 16) | 0x0800;
+            finalCmd->w0 = 0x0C000000 | (u16)voice->finalCommand;
+            finalCmd->w1 = ((u16)rightOffset << 16) | 0x0800;
         }
 
         previousBoundary = sequence->cursor + voice->end;
@@ -162,9 +165,9 @@ Command800963CC *func_800963CC(
         sequence->cursor = newCursor - sequence->ringLength;
     }
 
-    cmd = out;
+    endCmd = out;
     out++;
-    cmd->w0 = 0x0A000800;
-    cmd->w1 = 0x06C00000 | shortDoubledCount;
+    endCmd->w0 = 0x0A000800;
+    endCmd->w1 = 0x06C00000 | shortDoubledCount;
     return out;
 }

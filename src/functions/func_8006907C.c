@@ -63,6 +63,7 @@ void func_8006907C(Obj6907C *object, f32 *arg1, f32 *position, f32 *direction) {
     f32 speed;
     f32 dot;
     f32 pad[3];
+    f32 side;
 
     (void)pad;
     amount = func_80068410(object);
@@ -91,7 +92,8 @@ void func_8006907C(Obj6907C *object, f32 *arg1, f32 *position, f32 *direction) {
     object->unk1E4 *= func_80081700(4.0f, (f32)D_80120BF0);
 
     if (!(object->unk060 & 0x5000)) {
-        if (D_800AD538 < object->unk18C || D_800AD538 < -object->unk18C ||
+        side = object->unk18C;
+        if (D_800AD538 < side || D_800AD538 < -side ||
             !(object->unk060 & 0x2000)) {
             direction = &object->unk1C4;
             dot = object->unk1CC * velocity.z + (velocity.x * object->unk1C4 + velocity.y * object->unk1C8);

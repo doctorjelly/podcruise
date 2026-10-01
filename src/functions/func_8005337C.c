@@ -78,12 +78,14 @@ void func_8005337C(Owner8005337C *owner) {
     f32 lo;
     f32 hi;
     u32 message[12];
+    u32 mode;
 
     if (D_800A5998 == 0) {
         func_80053300(owner);
     }
 
-    switch (owner->flags08 & 0xF) {
+    mode = owner->flags08 & 0xF;
+    switch (mode) {
         case 4:
             if (func_80053220(0x201) != 0 || (owner->flags08 & 0x60) != 0) {
                 func_800530CC(owner);
@@ -130,7 +132,7 @@ void func_8005337C(Owner8005337C *owner) {
                 func_80009F6C();
             } else {
                 owner->timer0C = (f32)((f64)owner->timer0C - D_80120BF0);
-                if (owner->timer0C < 0.0f) {
+                if (owner->timer0C < 0) {
                     func_800530CC(owner);
                 }
             }
@@ -138,8 +140,8 @@ void func_8005337C(Owner8005337C *owner) {
             cooldown = D_800A59AC;
             if (cooldown > 0.0f) {
                 cooldown = (f32)((f64)cooldown - D_80120BF0);
-                *(f32 *)0x800A59AC = cooldown;
             }
+            *(f32 *)0x800A59AC = cooldown;
             if (cooldown <= 0.0f && func_80051FF4() < 2 &&
                 owner->count1BC >= 2 && func_80009524(0, 0x200000) == 0) {
                 found = 0;
@@ -182,9 +184,9 @@ void func_8005337C(Owner8005337C *owner) {
             lo = D_800ACE90;
             hi = D_800ACE8C;
             for (index = 0; index < owner->count1BC; index++) {
-                Record8005337C *record =
-                    (Record8005337C *)((u8 *)D_8011B1B8 + index * 0x88);
-                Subject8005337C *subject = record->subject84;
+                Subject8005337C *subject =
+                    ((Record8005337C *)((u8 *)D_8011B1B8 + index * 0x88))
+                        ->subject84;
 
                 if (subject != 0) {
                     if (owner->timer0C > lo &&
@@ -205,7 +207,10 @@ void func_8005337C(Owner8005337C *owner) {
 
                     if (record->subject84 != 0) {
                         record->flags08 |= 1;
-                        func_8003F99C(record->subject84, message);
+                        func_8003F99C(((Record8005337C *)((u8 *)D_8011B1B8 +
+                                                          index * 0x88))
+                                         ->subject84,
+                                     message);
                     }
                 }
             }

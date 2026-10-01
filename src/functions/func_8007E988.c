@@ -42,9 +42,9 @@ void func_8007E988(Obj8007E988 *obj) {
             func_800156DC(base, obj->unk20);
             func_8003B184(obj->unkAC, target,
                           D_800A66E0[i] / 3.5f * D_800ADC34 * (obj->unk1A0 / 300.0f));
+            point->z = target[3][2] - 8.0f;
             point->x = target[3][0];
             point->y = target[3][1];
-            point->z = target[3][2] - 8.0f;
             point->x = (((f32)func_80082BE0() / 2147483648.0f) * 200.0f + -100.0f) + point->x;
             point->y = (((f32)func_80082BE0() / 2147483648.0f) * 200.0f + -100.0f) + point->y;
         }

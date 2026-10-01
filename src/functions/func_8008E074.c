@@ -28,16 +28,16 @@ typedef struct State8008E074 {
 Cmd8008E074 *func_8008E074(State8008E074 *state, s16 *countPtr, s32 count, s32 arg3,
                            Cmd8008E074 *cmd) {
     s32 total;
-    s32 length;
-    s32 address;
-    s32 bytes;
-    Cmd8008E074 *a;
     s32 pad;
-    Cmd8008E074 *p;
     s32 misalign;
     s32 dmem;
+    Cmd8008E074 *p;
     Cmd8008E074 *c;
+    Cmd8008E074 *a;
+    s32 length;
     s32 limit;
+    s32 address;
+    s32 bytes;
 
     (void)arg3;
     p = cmd;

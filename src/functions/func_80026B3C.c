@@ -98,10 +98,10 @@ void func_80026B3C(Ctx26B3C *arg0) {
 
     func_80008B14(0x1B, 7, 0.05f, 0.8f, 1);
 
-    if (D_800D70D0 >= 0) {
-        t = D_800D70D0 - 0.5f * D_80120BF8;
+    if (D_800D70D0 >= 0.0f) {
+        t = D_800D70D0 - D_80120BF8 * 0.5f;
         D_800D70D0 = t;
-        if (t <= 0.0f) {
+        if (t <= 0) {
             D_800A4BDC = -1;
         }
     }
@@ -109,7 +109,7 @@ void func_80026B3C(Ctx26B3C *arg0) {
     for (i = 0; i != 2; i++) {
         if (D_8011A508[15 + i] != 0) {
             entry = &D_800D6C20[i];
-            entry->unk00 = 0;
+            entry->unk00 = 0.0f;
             entry->unk04 = (f32)(0.0 - (f64)((f32)i * 2500.0));
             entry->unk08 = 50.0f;
             if (arg0->unk72 == 7) {
@@ -118,14 +118,14 @@ void func_80026B3C(Ctx26B3C *arg0) {
             if (arg0->unk72 == 0x11) {
                 D_800D6C20[0].unk04 = 400.0f;
             }
-            func_8001745C(matrix, 0.0f, 0.0f, 0.0f);
+            func_8001745C(matrix, 0, 0, 0);
             func_80015268(&matrix[12], entry->unk00, entry->unk04, entry->unk08);
             func_80018480(D_8011A508[15 + i], matrix, 0, 70.0f, 70.0f, 70.0f, -157.0f, 1, 1.0f, (f32)1.0);
         }
     }
 
     if ((D_800A4BA4 & 1) || (D_800A4BA4 & 2)) {
-        D_800D70D0 = 0;
+        D_800D70D0 = 0.0f;
         D_800A4BDC = -1;
     }
 

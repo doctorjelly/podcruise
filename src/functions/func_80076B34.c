@@ -156,7 +156,8 @@ void func_80076B34(Obj *arg0) {
             do {
                 if (arg0 != sp110[i] && !(sp110[i]->unk60 & 0x7800) && !(sp110[i]->unk64 & 0x2000000)) {
                     index = (s32)((f32)func_80082BE0() / 2147483648.0f * 3.0f);
-                    if (arg0->unk30.x * sp110[i]->unk30.x + arg0->unk30.y * sp110[i]->unk30.y + sp110[i]->unk30.z * arg0->unk30.z < 0.0f) {
+                    rad = arg0->unk30.x * sp110[i]->unk30.x + arg0->unk30.y * sp110[i]->unk30.y + sp110[i]->unk30.z * arg0->unk30.z;
+                    if (rad < 0.0f) {
                         index = index + 3;
                     }
                     sp110[i]->unk2A0[index] |= 8;

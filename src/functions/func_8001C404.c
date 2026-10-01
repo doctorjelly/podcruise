@@ -53,6 +53,7 @@ unsigned char selected;
     u8 lane;
     s32 elem;
     f32 alpha;
+    s32 number;
 
     state = 0;
     buffer = D_800A8AD0;
@@ -90,7 +91,8 @@ unsigned char selected;
             } else if (state > 0) {
                 func_8000AB24(id, 0xFF, 0xFF, 0xFF, (u8)alpha);
             }
-            func_8008A6B4((char *)&buffer, D_800A8AE0, j + 1);
+            number = j + 1;
+            func_8008A6B4((char *)&buffer, D_800A8AE0, number);
             if (object->unk_6C == 0 || func_8002DA0C((s8)i, lane) != 0) {
                 if (func_8002DAD0(object, (s8)i, lane) == 0) {
                     func_8003EC40(elem + 5, 0x6D, 0x80, 0x80, 0x80, (u8)alpha,

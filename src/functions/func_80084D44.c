@@ -14,8 +14,8 @@ typedef struct {
 extern PcGfx * volatile D_801217B0;
 extern PcGfx * volatile D_801217B4;
 extern TaskBlock *D_801488C0;
-extern s32 D_80135030[2];
-extern s32 D_801488B0[2];
+extern volatile s32 D_80135030[2];
+extern volatile s32 D_801488B0[2];
 extern s32 D_800A268C;
 extern s32 D_800A2690;
 

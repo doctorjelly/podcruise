@@ -114,7 +114,7 @@ static s32 func_8008EEE4_stand_in(f64 c, f64 b, s32 a, s16 *d) {
     n = (s32)((1.0 / (f64)a) * (f64)0x40000000);
     func_8008ED18(b / c, &z);
     i = (s32)(z * 16.0);
-    x = tab[i] + z + b;
+    x = tab[i] + b;
     y = 1.0;
     while (n != 0) {
         if (n & 1) {
@@ -228,11 +228,11 @@ static f32 func_8008F34C(f32 value, s32 exponent, s16 rateHigh, u16 rateLow) {
 Acmd *func_8008F3FC(Obj *obj, s32 arg1, s32 count, s32 time, Acmd *cmd) {
     Acmd *out;
     Obj *o;
-    s16 dmemBase;
+    s16 dmemIn;
     Event *ev1;
     s32 cur;
     Obj *ev2;
-    s16 dmemIn;
+    s16 dmemBase;
     Event *event;
     Event *note;
     Event *done;
@@ -251,8 +251,8 @@ Acmd *func_8008F3FC(Obj *obj, s32 arg1, s32 count, s32 time, Acmd *cmd) {
     o = obj;
     out = cmd;
     cur = time;
-    dmemIn = 0;
     dmemBase = 0;
+    dmemIn = 0;
 
     while (o->unk3C != 0) {
         delta = o->unk3C->time - cur;
@@ -332,7 +332,8 @@ Acmd *func_8008F3FC(Obj *obj, s32 arg1, s32 count, s32 time, Acmd *cmd) {
             break;
 
         case 14:
-            note = o->unk3C;
+            ev1 = o->unk3C;
+            note = ev1;
             if (note->flag != 0) {
                 o->unk08(o, 8, 0);
             }
@@ -348,7 +349,8 @@ Acmd *func_8008F3FC(Obj *obj, s32 arg1, s32 count, s32 time, Acmd *cmd) {
             break;
 
         case 0:
-            ev4 = o->unk3C;
+            ev3 = o->unk3C;
+            ev4 = ev3;
             tbl = D_800A6990;
             *(s32 *)(ev4->arg0C.p + 0xD8) = 0;
             func_80088450(tbl, ev4->arg0C.p);
@@ -356,13 +358,11 @@ Acmd *func_8008F3FC(Obj *obj, s32 arg1, s32 count, s32 time, Acmd *cmd) {
 
         default:
             out = func_8008F0B4(o, &dmemIn, &dmemBase, delta, time, out);
-            ev1 = o->unk3C;
-            ev3 = ev1;
-            o->unk08(o, (s16)ev3->type, ev3->arg0C.i);
+            o->unk08(o, (s16)o->unk3C->type, o->unk3C->arg0C.i);
             break;
         }
 
-        dmemIn += delta * 2;
+        dmemBase += delta * 2;
         count -= delta;
         done = o->unk3C;
         next = done->next;

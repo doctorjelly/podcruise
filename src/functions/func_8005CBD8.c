@@ -159,7 +159,7 @@ s32 func_8005CBD8(PcWord5C *self, Msg5CBD8 *message, f32 *arg2) {
                     index = count;
                 }
             }
-            return 1;
+            break;
 
         case 0x50617773:
             if (message->unk04 < 0) {
@@ -194,7 +194,7 @@ s32 func_8005CBD8(PcWord5C *self, Msg5CBD8 *message, f32 *arg2) {
             }
             self[0x8 / 4].s &= ~0x80;
             D_800A533C = message->unk38;
-            if (0.0f < self[0x1CC / 4].f) {
+            if (0 < self[0x1CC / 4].f) {
                 self[0x8 / 4].s |= 0x20;
             } else {
                 self[0x8 / 4].s &= ~0x20;
@@ -222,7 +222,7 @@ s32 func_8005CBD8(PcWord5C *self, Msg5CBD8 *message, f32 *arg2) {
                     D_800A59A0 = 1;
                 }
                 self[0x124 / 4].s = 4;
-                D_800A59A4 = 0.0f;
+                D_800A59A4 = 0.0;
             }
             break;
 

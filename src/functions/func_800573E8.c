@@ -63,7 +63,7 @@ void func_800573E8(u8 *arg0, u8 *arg1) {
     s32 limit;
     f32 f148;
     f32 f144;
-    char pad8[240];
+    char pad8[236];
     s32 t38;
     s32 sx;
     s32 t34;
@@ -71,6 +71,7 @@ void func_800573E8(u8 *arg0, u8 *arg1) {
     s32 t2C;
     s16 sy;
     s16 sy2;
+    s32 cnt0;
 
     (void)pad2;
     (void)pad4;
@@ -127,9 +128,9 @@ void func_800573E8(u8 *arg0, u8 *arg1) {
 
     s174 = 0;
     s178 = 0;
-    count = *(s32 *)(arg0 + 0x78);
-    if (count > 0) {
-        row = arg0 + count * 4;
+    cnt0 = *(s32 *)(arg0 + 0x78);
+    if (cnt0 > 0) {
+        row = arg0 + cnt0 * 4;
         f148 = *(f32 *)(row + 0x5C);
         f144 = *(f32 *)(row + 0x60);
         f144 = f144 * 0.25f;

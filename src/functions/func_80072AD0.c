@@ -65,10 +65,10 @@ void func_80072AD0(void *object, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     WORD_AT(object, 0x60) = 0;
     value = WORD_AT(POINTER_AT(object, 0x1E70), 0x4);
     if (value == 0x4C6F636C) {
-        WORD_AT(object, 0x60) = 0x20;
+        WORD_AT(object, 0x60) |= 0x20;
     } else if (value == 0x52656D6F) {
-        WORD_AT(object, 0x1E74) = -1;
         WORD_AT(object, 0x60) |= 0x40;
+        WORD_AT(object, 0x1E74) = -1;
     } else if (value == 0x41414949) {
         WORD_AT(object, 0x60) |= 0x80;
     }

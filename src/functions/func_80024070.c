@@ -146,8 +146,7 @@ void func_80024070(Unk80024070 *arg0) {
             style = D_801198A8[D_8011A240.unk30].unk0;
             func_8008A6B4(text, D_800A8F30, D_800A2DE0[style].unkC);
             func_8003EC40(0xA0, 0x19, 0x32, 0xFF, 0xFF, 0xFF, text);
-            D_8011A240.unk1C = 1;
-            D_8011A240.unk18 = 1;
+            D_8011A240.unk18 = D_8011A240.unk1C = 1;
             width = func_800129B8(text, 0);
             func_8002CC28((s32)(160.0 - (f64)width * 0.5), 0x1A, func_800129B8(text, 0));
         }

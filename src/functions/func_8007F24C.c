@@ -39,16 +39,16 @@ void func_8007F24C(PcTrack8007F24C *track, PcVec3 *vector) {
         if (reach < target) {
             value = track->unk08;
             track->unk08 = value + step;
-            moved = 1;
             func_8003B02C(track, matrix);
+            moved = 1;
             if (value != track->unk08) {
                 settled = 0;
             }
         }
     } while (settled == 0);
 
+    step = D_800ADC58;
     if (moved == 0) {
-        step = D_800ADC58;
         track->unk08 = track->unk08 - step;
         func_8003B02C(track, matrix);
         value = track->unk08;

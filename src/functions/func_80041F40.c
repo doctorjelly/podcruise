@@ -81,11 +81,11 @@ void func_80041F40(Actor *actor) {
     s32 flagA;
     f32 mtxB[4][4];
     f32 mtxA[4][4];
+    f32 vecP[3];
     f32 lean;
+    f32 cube;
     f32 x;
     f32 y;
-    f32 cube;
-    f32 vecP[3];
     f32 w;
     f32 dot;
     f32 vecQ[3];
@@ -93,10 +93,11 @@ void func_80041F40(Actor *actor) {
     f64 quarter;
     f32 euler[6];
     s32 notB;
-    f32 delta[3];
     f32 absCube;
-    f64 absQuarter;
     f32 unit;
+    f32 delta[3];
+    f64 absQuarter;
+    f64 offset;
 
     notB = 0;
     lean = 20.0f;
@@ -125,9 +126,9 @@ void func_80041F40(Actor *actor) {
     }
     actor->unk2B0 = 100.0f;
     if (notB != 0) {
-        quarter = pod->unk19B4 * 0.75;
+        offset = pod->unk19B4 * 0.75;
         x = D_800A5CA0[*pod->unk1E70->unk18].unk4C;
-        y = (f32)(D_800A5CA0[*pod->unk1E70->unk18].unk50 + quarter);
+        y = (f32)(D_800A5CA0[*pod->unk1E70->unk18].unk50 + offset);
     } else {
         actor->unk148 = D_800A5CA0[*pod->unk1E70->unk18].unk4C;
         x = actor->unk148;

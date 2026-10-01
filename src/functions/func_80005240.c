@@ -69,9 +69,10 @@ f32 func_80005240(void *object, View80005240 *view, f32 *out0, f32 *out1) {
             D_800AE928[2] = D_800AE8E8.a[2];
             D_800AE918[2] = mixed[2];
         }
+        state = 1;
         if (D_8009A270 != 0) {
-            D_8009A278 = 1;
-            D_8009A274 = 1;
+            D_8009A278 = state;
+            D_8009A274 = state;
         } else {
             state = func_80017E88((void *)(long)func_80017EDC(object), 1);
             if (state == 1 || state == 3) {

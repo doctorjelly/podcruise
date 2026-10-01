@@ -68,6 +68,7 @@ void func_80021F84(Struct80021F84 *arg0) {
     char buffer[52];
     s32 value;
     s32 kind;
+    void *obj;
 
     if (D_800A2550 != 0 || D_800A4BBC != 0) {
         D_800A254C = 0;
@@ -85,9 +86,10 @@ void func_80021F84(Struct80021F84 *arg0) {
 
     flags = D_800A254C;
     if (flags == 1) {
+        obj = D_8011A544[D_800A2190];
         flags = flags + 1;
         D_800A254C = flags;
-        func_80017C18(D_8011A544[D_800A2190], matrix);
+        func_80017C18(obj, matrix);
         func_80015288(D_800A4FEC, &matrix[12]);
         func_80015288(D_800A4FE0, &matrix[12]);
         D_800A4C00[251] = 0.0f;
