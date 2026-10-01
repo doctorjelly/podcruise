@@ -49,26 +49,26 @@ extern void *func_8007C4C8(PcTrigOwner *);
 extern void func_8007CD50(void *, PcTrigActor *, s32);
 
 void func_800665A4(PcTrigActor *actor, PcTrigOwner *owner) {
-    f32 spareTop[4];
-    f32 origin[3];
+    f32 lengthSquared;
+    f32 alongActor;
+    f32 spareB[3];
     f32 base[3];
+    f32 spareC[3];
+    f32 spareA[3];
+    f32 halfHeight;
+    f32 point[3];
+    f32 origin[3];
     f32 far[3];
     f32 near[3];
-    f32 point[3];
-    f32 spareA[3];
-    f32 spareB[3];
-    f32 spareC[3];
+    s32 blocked;
+    void *trigger;
     f32 delta[3];
+    f32 spareTop[4];
+    s16 flags;
     f32 halfLength;
-    f32 halfHeight;
-    f32 lengthSquared;
     f32 fraction;
     f32 alongAxis;
     f32 alongOwner;
-    f32 alongActor;
-    void *trigger;
-    s32 blocked;
-    s16 flags;
 
     while (owner != 0) {
         flags = owner->unk26;

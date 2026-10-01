@@ -43,16 +43,16 @@ extern void func_80037E9C(Node80038388 *node);
 extern s32 func_80038294(Node80038388 *node);
 
 void func_80038388(Node80038388 *node) {
-    s32 n;
-    s32 count[1];
-    f32 matrix[4][3];
-    s32 token;
     Node80038388 *child;
-    s32 kind;
+    s32 count[1];
     s32 ticks;
-    s32 none;
     s32 index;
+    s32 kind;
+    s32 none;
     s32 i;
+    f32 matrix[4][3];
+    s32 n;
+    s32 token;
 
     if (node == 0) {
         return;

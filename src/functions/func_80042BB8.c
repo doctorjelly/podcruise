@@ -40,13 +40,13 @@ extern s32 func_80051FF4(void);
 void func_80042BB8(Actor80042BB8 *actor) {
     f32 second[4][4];
     f32 first[4][4];
-    s16 alpha;
-    f32 spare[2];
-    Part80042BB8 *part;
-    f32 spread;
     f32 fade;
     f32 level;
+    s16 alpha;
     f32 value;
+    Part80042BB8 *part;
+    f32 spread;
+    f32 spare[2];
     f32 *g = &D_800A4AF0;
 
     (void)spare;

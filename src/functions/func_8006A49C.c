@@ -66,19 +66,19 @@ extern void func_80069A64(Racer *, Vec3 *, void *, f32, Vec3 *, void *, void *);
 extern void func_80069EC0(Racer *, Vec3 *, Vec3 *);
 
 f32 func_8006A49C(Racer *racer, Vec3 *point, void *ctx, Vec3 *out, Owner *owner) {
+    f32 level;
+    Vec3 delta;
+    f32 ratio;
     u8 scratchB[0x40];
     f32 result;
-    Vec3 spareA;
-    Vec3 spareB;
-    Vec3 delta;
-    Vec3 origin;
     Vec3 spareC;
+    Vec3 spareB;
+    u32 state;
+    Vec3 origin;
     u8 scratchA[0x40];
     u32 flags;
-    u32 state;
-    f32 ratio;
+    Vec3 spareA;
     Part *part;
-    f32 level;
 
     (void)spareA; (void)spareB; (void)spareC;
 

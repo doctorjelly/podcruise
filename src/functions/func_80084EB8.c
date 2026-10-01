@@ -15,16 +15,16 @@ extern void func_800390AC(void);
 #define GFX(w0, w1) { u32 *g = D_801217B0; D_801217B0 = g + 2; g[0] = (u32)(w0); g[1] = (u32)(w1); }
 
 void func_80084EB8(s32 arg0) {
-    s16 rgb[8];
-    s32 x0;
-    s32 y0;
-    s32 x1;
-    s32 y1;
     s32 siz;
     s32 color;
+    s32 y1;
+    s32 x0;
+    s16 rgb[8];
+    f64 sy;
+    s32 y0;
+    s32 x1;
     s32 i;
     f64 sx;
-    f64 sy;
 
     sx = (f64)D_80114470[0] / 320.0;
     x0 = D_80120DF0[8] * sx;

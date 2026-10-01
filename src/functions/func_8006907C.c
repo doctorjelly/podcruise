@@ -51,11 +51,11 @@ void func_8006907C(Obj6907C *object, f32 *arg1, f32 *position, f32 *direction) {
     f32 velocity[3];
     f32 amount;
     f32 dot;
-    f32 planar;
     f32 length;
     f32 previous[3];
     f32 scratch[3];
     f32 pad[6];
+    f32 planar;
 
     (void)pad;
     amount = func_80068410(object);

@@ -45,17 +45,17 @@ void func_8001C404(object, selected)
 Racer *object;
 unsigned char selected;
 {
-    f32 alpha;
-    s32 first;
-    s32 last;
-    Str16 buffer;
     s32 i;
-    s32 j;
-    s16 id;
-    s8 slot;
-    u8 lane;
     s32 elem;
+    s32 j;
+    Str16 buffer;
+    s32 first;
+    s16 id;
+    u8 lane;
+    s8 slot;
+    f32 alpha;
     s16 state;
+    s32 last;
 
     state = 0;
     buffer = D_800A8AD0;

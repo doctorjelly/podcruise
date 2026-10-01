@@ -46,14 +46,14 @@ extern ViContext *D_800A7F54;
 extern u32 func_80088360(u32);
 
 void func_800941E0(void) {
-    ViContext *next;
     ViMode *mode;
-    u32 field;
     u32 origin;
+    ViContext *next;
     u32 hStart;
-    u32 vStart;
-    u32 physical;
     ViFieldRegs *fld;
+    u32 vStart;
+    u32 field;
+    u32 physical;
 
     next = D_800A7F54;
     field = *(u32 *)0xA4400010 & 1;

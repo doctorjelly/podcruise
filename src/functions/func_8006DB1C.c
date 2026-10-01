@@ -56,13 +56,13 @@ extern f32 func_8007EE40(void);
 extern s32 func_80082BE0(void);
 
 void func_8006DB1C(Pod *pod) {
-    f32 spare[4];
-    f32 scaleA;
-    f32 scaleB;
-    f32 product;
     f32 value;
-    f32 limit;
+    f32 product;
     s32 count;
+    f32 scaleA;
+    f32 limit;
+    f32 scaleB;
+    f32 spare[4];
 
     (void)spare;
     pod->unk230 = D_800A5B64;

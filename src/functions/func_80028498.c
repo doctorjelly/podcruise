@@ -55,13 +55,13 @@ extern Blk8011A240 D_8011A240;
 extern f32 D_80120BF8;
 
 void func_80028498(Ctx80028498 *arg0) {
+    s32 slot;
     f32 work[3];
-    f32 span;
-    f32 outA;
     f32 outB;
+    f32 outA;
+    f32 span;
     f32 blend;
     s32 i;
-    s32 slot;
 
     span = 0.2f;
     if (D_800A4BCC < 0.0f) {

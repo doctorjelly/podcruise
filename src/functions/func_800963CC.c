@@ -62,20 +62,20 @@ extern Command800963CC *func_80095F34(
 Command800963CC *func_800963CC(
     Sequence800963CC *sequence, void *arg1, s32 sampleCount, s32 arg3,
     void *arg4) {
-    Command800963CC *cmd;
-    Command800963CC *out;
-    Voice800963CC *voice;
     s16 *start;
-    s16 *mirrorEnd;
     s16 *previousBoundary;
-    s16 *newCursor;
-    s16 *ringEnd;
-    s32 doubledCount;
+    s16 *mirrorEnd;
     u16 shortDoubledCount;
+    Command800963CC *out;
     s32 rightOffset;
+    s16 *ringEnd;
     s32 leftOffset;
     s32 swap;
+    s16 *newCursor;
+    Command800963CC *cmd;
+    Voice800963CC *voice;
     s16 index;
+    s32 doubledCount;
 
     previousBoundary = 0;
     out = sequence->outputSource->beginOutput(

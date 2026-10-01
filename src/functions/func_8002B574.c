@@ -36,17 +36,17 @@ extern void func_8000AB24(s16 index, u8 red, u8 green, u8 blue, u8 alpha);
 extern void func_8003EC40(s16 x, s16 y, u8 red, u8 green, u8 blue, u8 alpha, u8 *text);
 
 void func_8002B574(Unk8002B574 *obj) {
+    s32 handle;
     s32 slot[5];
-    char line[32];
+    Unk800A2618 table;
     char text[36];
+    s16 i;
+    char line[32];
+    s16 index;
     s32 mode;
     s16 x;
     s16 y;
     s32 message;
-    Unk800A2618 table;
-    s16 i;
-    s16 index;
-    s32 handle;
 
     mode = -1;
     table = D_800A2618;
