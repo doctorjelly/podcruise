@@ -2,7 +2,7 @@
 #include "podcruise/types.h"
 
 extern s32 D_800A4984;
-extern f32 D_800A59B0[];
+extern f32 D_800A59B0;
 extern f32 D_800AAB90;
 extern f32 D_800AAB94;
 extern s16 D_80118958[];
@@ -23,7 +23,6 @@ void func_8003E59C(void) {
     register f32 scale;
     f32 full;
     register s32 previous;
-    volatile f32 *level;
     register s32 index;
     register u32 mode;
     register s32 kind1;
@@ -47,25 +46,24 @@ void func_8003E59C(void) {
         func_80011EA4(0);
         func_800141EC(0x2E);
         full = 255.0f;
-        level = D_800A59B0;
         mode = 0x2E;
-        func_80011F04(0, 255, 0, full * alpha1 * level[0]);
+        func_80011F04(0, 255, 0, full * alpha1 * D_800A59B0);
         for (index = 0, previous = 0; index < D_800A4984; index++) {
             if (previous != D_80118C50[index]) {
                 previous = D_80118C50[index] & 0xFF;
                 if (kind1 == previous) {
-                    func_80011F04(0, 255, 255, full * level[0]);
+                    func_80011F04(0, 255, 255, full * D_800A59B0);
                 } else if (kind2 == previous) {
-                    func_80011F04(255, 255, 0, full * alpha2 * level[0]);
+                    func_80011F04(255, 255, 0, full * alpha2 * D_800A59B0);
                 } else if (previous >= 3 || previous < 5) {
                     if (other != mode) {
                         func_800141EC(0x58);
                         mode = 0x58;
                     }
                     if (previous == 3) {
-                        func_80011F04(0, 0, 255, full * level[0]);
+                        func_80011F04(0, 0, 255, full * D_800A59B0);
                     } else {
-                        func_80011F04(100, 255, 100, full * level[0] * alpha2);
+                        func_80011F04(100, 255, 100, full * D_800A59B0 * alpha2);
                     }
                 }
             }

@@ -52,7 +52,7 @@ u8 key;
     count = (key > 0) ? 1 : object->unk60;
 
     if (mode == 1) {
-        out[1] = func_80090AB0(out + count + count, -count * 2 + 0x100);
+        out[1] = func_80090AB0((u8 *)((unsigned long)out + count * 2), -count * 2 + 0x100);
     }
 
     for (index = 0, buffer = out; index < 8; index++) {
@@ -69,13 +69,13 @@ u8 key;
     }
 
     if (mode == 0) {
-        if ((u8)func_80090AB0(out + count + count, -count * 2 + 0x100) != out[1]) {
+        if ((u8)func_80090AB0((u8 *)((unsigned long)out + count * 2), -count * 2 + 0x100) != out[1]) {
             buffer = out;
             for (index = 0; index < 8; index++) {
                 func_80092050(object->unk04, object->unk08, object->unk58 + key * 8 + index, buffer);
                 buffer += 0x20;
             }
-            if ((u8)func_80090AB0(out + count + count, -count * 2 + 0x100) != out[1]) {
+            if ((u8)func_80090AB0((u8 *)((unsigned long)out + count * 2), -count * 2 + 0x100) != out[1]) {
                 return 3;
             }
             for (index = 0, buffer = out; index != 8; index++) {

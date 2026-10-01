@@ -157,6 +157,8 @@ void func_800374C4(Ctx800374C4 *context) {
         return;
     }
 
+    if (!item) {
+    }
     for (index = 0; index < context->unk14; index++) {
         item = context->unk18[index];
         if (count != 2) {
@@ -274,6 +276,7 @@ void func_800374C4(Ctx800374C4 *context) {
         }
         if (chunk != 0) {
             if (item->unk3E != 0) {
+                s16 id;
                 if (item->unk28 != 0) {
                     func_8003527C(item->unk28);
                 } else {
@@ -282,8 +285,9 @@ void func_800374C4(Ctx800374C4 *context) {
                 {
                     Gfx800374C4 *g;
                     g = D_80112C90++;
-                    g->w0 = (((u32)(item->unk3E & 0xFF) << 12) | 0x1000000) |
-                            ((u32)(item->unk3E & 0x7F) << 1);
+                    id = item->unk3E;
+                    g->w0 = (((u32)(id & 0xFF) << 12) | 0x1000000) |
+                            ((u32)(id & 0x7F) << 1);
                     g->w1 = item->unk34;
                 }
                 func_800352E4();

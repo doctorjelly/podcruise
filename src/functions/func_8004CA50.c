@@ -61,7 +61,6 @@ extern s32 D_800A21B0;
 extern s32 D_800A4B30;
 extern s16 D_800A4B36;
 extern s32 D_800A4B38;
-extern s16 D_800A4B3A;
 extern s16 D_800A4BC0;
 extern TrackNode8004CA50 D_800A4C00[];
 extern PcVec3f D_800A4C6C;
@@ -77,15 +76,6 @@ extern PcVec3f D_800A51A8;
 extern PcVec3f D_800A51B4;
 extern u8 D_800AAE4C[];
 extern u8 D_800AAE50[];
-extern f32 D_800AB1D0;
-extern f32 D_800AB1D4;
-extern f32 D_800AB1D8;
-extern f32 D_800AB228;
-extern f32 D_800AB240;
-extern f64 D_800AB248;
-extern f32 D_800AB250;
-extern f32 D_800AB254;
-extern f32 D_800AB258;
 extern u8 D_80113E60[];
 extern PcVec3fSlot D_80118D20[4];
 extern PcVec3fSlot D_80118D60[4];
@@ -144,11 +134,10 @@ void func_8004CA50(Context8004CA50 *context) {
     s32 firstChoice;
     s32 objectMode;
     s32 nextChoice;
-    s32 firstObject;
-    s32 secondObject;
+    s32 objects[3];
     f32 radius;
 
-    farPlane = D_800AB1D0;
+    farPlane = 11000.0f;
     savedDisplayValue = D_800A4B38;
     func_8000AC90(0x3800);
     D_800A4BC0 = 0;
@@ -172,7 +161,7 @@ void func_8004CA50(Context8004CA50 *context) {
     diffuse.z = 200.0f;
     direction.x = 0.0f;
     direction.y = 0.0f;
-    direction.z = D_800AB1D4;
+    direction.z = -40000.0f;
 
     func_80015268(&transformA.direction, 0, 1.0f, 0);
     func_80015268(&transformA.rotation, 0, 0, 0);
@@ -218,8 +207,8 @@ void func_8004CA50(Context8004CA50 *context) {
         angle = ((f32)func_80082BE0() / 2147483648.0f) * 360.0f;
         func_80063084(0x17, 0x2E, &position, &position, angle, angle);
         func_80015288(&position, &D_800A5160);
-        func_80063084(0x16, 0x2A, &position, &position, D_800AB1D8,
-                      D_800AB1D8);
+        func_80063084(0x16, 0x2A, &position, &position, 190.08f,
+                      190.08f);
     }
 
     switch ((u32)context->mode) {
@@ -254,7 +243,7 @@ void func_8004CA50(Context8004CA50 *context) {
         break;
 
     case 8:
-        farPlane = D_800AB228;
+        farPlane = 84000.0f;
         context->trackIndex = 0x14;
         D_8011A240.mode2C = 7;
         break;
@@ -292,8 +281,7 @@ void func_8004CA50(Context8004CA50 *context) {
             func_80015288(&position, &D_800A519C);
             angle = func_80014F54(position.x - D_801195F0.x,
                                   D_801195F0.y - position.y);
-            angle = angle -
-                    90.0f * ((f32)func_80082BE0() / 2147483648.0f);
+            angle -= 90.0f * ((f32)func_80082BE0() / 2147483648.0f);
         } else {
             func_80015288(&position, &D_800A51A8);
             angle = func_80014F54(position.x - D_801195F0.x,
@@ -339,10 +327,10 @@ void func_8004CA50(Context8004CA50 *context) {
         }
 
         for (i = 0; i < 4 - D_80113E60[0x1C]; i++) {
-            radius = 256.0f * D_800AB240;
+            radius = 256.0f; radius = radius * 1.1f;
             func_80014CC0((f32)(0x122 - i * 10), &sine, &cosine);
             func_80015268(&position, radius * cosine + 12.0f,
-                          radius * sine - 116.0f, -60.0f);
+                          radius * sine + -116.0f, -60.0f);
             angle = func_80014F54(position.x - 12.0f, -116.0f - position.y);
             func_80063084(i + 0x34, 5, &position, &position, angle, angle);
         }
@@ -360,10 +348,9 @@ void func_8004CA50(Context8004CA50 *context) {
             }
         }
 
-        i = 0;
-        while (i < context->riderCount) {
+        for (i = 0; i < context->riderCount; i++) {
             func_80015268(&position,
-                          (f32)((f64)i * 50.0 + D_800AB248), -569.0f,
+                          (f32)((f64)i * 50.0 + -214.0), -569.0f,
                           -145.0f);
             func_800513E0(context, i);
             angle = func_80014F54(D_800A4C00[context->trackIndex].heading.x -
@@ -372,7 +359,6 @@ void func_8004CA50(Context8004CA50 *context) {
                                       D_800A4C00[context->trackIndex].heading.y);
             func_80063084(i + 0x1C, 0x14, &position, &D_801195F0, angle,
                           angle + 180.0f);
-            i++;
         }
 
         func_80015288(&position, &D_800A4C6C);
@@ -391,7 +377,7 @@ void func_8004CA50(Context8004CA50 *context) {
         }
 
         func_80015288(&position, &D_800A51B4);
-        angle = 180.0f;
+        angle = 180;
         if (func_8002D968(D_80113E60, D_800AAE4C) != 0) {
             func_80063084(0x13, 0x28, &position, &position, angle, angle);
         } else if (func_8002D968(D_80113E60, D_800AAE50) != 0) {
@@ -403,14 +389,14 @@ void func_8004CA50(Context8004CA50 *context) {
 
     case 18:
         if (context->side == 0) {
-            firstObject = 0x38;
-            secondObject = 0x39;
+            objects[2] = 0x38;
+            objects[1] = 0x39;
         } else {
-            firstObject = 0x39;
-            secondObject = 0x38;
+            objects[2] = 0x39;
+            objects[1] = 0x38;
         }
         context->trackIndex = 0x27;
-        context->objectIndex = firstObject;
+        context->objectIndex = objects[2];
         D_8011A240.active = 1;
         D_8011A240.progress = 1.0f;
 
@@ -421,29 +407,29 @@ void func_8004CA50(Context8004CA50 *context) {
         func_80015288(&D_801195F0, &D_800A508C);
         angle = func_80014F54(position.x - D_801195F0.x,
                               D_801195F0.y - position.y);
-        object = func_8003F800(0x456C6D6F, firstObject);
+        object = func_8003F800(0x456C6D6F, objects[2]);
         if (object->state == 1) {
-            func_80063084(firstObject, 2, &position, &position, angle, angle);
+            func_80063084(objects[2], 2, &position, &position, angle, angle);
         } else {
-            func_80063084(firstObject, 0x11, &position, &position, angle,
+            func_80063084(objects[2], 0x11, &position, &position, angle,
                           angle);
             object->distance = 100.0f;
         }
 
         func_80015288(&position, &D_800A516C);
         angle = ((f32)func_80082BE0() / 2147483648.0f) * 360.0f;
-        object = func_8003F800(0x456C6D6F, secondObject);
+        object = func_8003F800(0x456C6D6F, objects[1]);
         if (object->state == 1) {
-            func_80063084(secondObject, 0, &position, &position, angle,
+            func_80063084(objects[1], 0, &position, &position, angle,
                           angle);
         } else {
-            func_80063084(secondObject, 0x11, &position, &position, angle,
+            func_80063084(objects[1], 0x11, &position, &position, angle,
                           angle);
         }
         break;
 
     case 15:
-        farPlane = D_800AB250;
+        farPlane = 84000.0f;
         context->trackIndex = 0x14;
         for (i = 0; i < 2; i++) {
             func_80015268(&D_801195F0, 200.0f, -300.0f, -157.0f);
@@ -455,7 +441,7 @@ void func_8004CA50(Context8004CA50 *context) {
         break;
 
     case 16:
-        farPlane = D_800AB254;
+        farPlane = 84000.0f;
         for (i = 0; i < 3; i++) {
             func_80015268(&D_801195F0, 0.0f, (f32)i * -150.0f, 0.0f);
             if (i == 2) {
@@ -467,7 +453,7 @@ void func_8004CA50(Context8004CA50 *context) {
         break;
 
     case 17:
-        farPlane = D_800AB258;
+        farPlane = 84000.0f;
         context->trackIndex = 0x1A;
         func_80015268(&position, 0.0f, -1000.0f, -157.0f);
         func_80063084(0x34, 0x10, &position, &position, 0.0f, 0.0f);
@@ -479,8 +465,8 @@ void func_8004CA50(Context8004CA50 *context) {
     func_8008635C(D_800A4B30, savedDisplayValue);
     func_8000B0E0((s16)savedDisplayValue, func_80017F28(D_800A4B30));
     func_8000AEFC(D_800A4B36, 1, (u32)(unsigned long)D_80118D20, 0);
-    func_8000AEFC(D_800A4B3A, 2, (u32)(unsigned long)D_80118D60, 0);
-    func_8000B02C(D_800A4B3A, (s32)(unsigned long)D_80118E20, 0);
+    func_8000AEFC((s16)D_800A4B38, 2, (u32)(unsigned long)D_80118D60, 0);
+    func_8000B02C((s16)D_800A4B38, (s32)(unsigned long)D_80118E20, 0);
     func_80086730(D_800A4B30, 45.0f, -1.0f, 100.0f, farPlane, -1.0f);
 
     if (context->trackIndex != -1) {

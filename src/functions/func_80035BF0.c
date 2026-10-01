@@ -83,9 +83,9 @@ void func_80035BF0(Obj80035BF0 *obj, s32 force) {
             {
                 Gfx80035BF0 *g;
                 g = D_80112C90++;
-                g->w0 = 0xFA000000 | (obj->unk20[0] << 8) | obj->unk20[1];
-                g->w1 = (obj->unk20[2] << 24) | (obj->unk20[3] << 16) |
-                        (obj->unk20[4] << 8) | obj->unk20[5];
+                g->w0 = 0xFA000000 | ((obj->unk20[0] & 0xFF) << 8) | (obj->unk20[1] & 0xFF);
+                g->w1 = ((obj->unk20[2] & 0xFF) << 24) | ((obj->unk20[3] & 0xFF) << 16) |
+                        ((obj->unk20[4] & 0xFF) << 8) | (obj->unk20[5] & 0xFF);
             }
         }
     }
@@ -96,8 +96,8 @@ void func_80035BF0(Obj80035BF0 *obj, s32 force) {
                 Gfx80035BF0 *g;
                 g = D_80112C90++;
                 g->w0 = 0xFB000000;
-                g->w1 = (obj->unk26[0] << 24) | (obj->unk26[1] << 16) |
-                        (obj->unk26[2] << 8) | obj->unk26[3];
+                g->w1 = ((obj->unk26[0] & 0xFF) << 24) | ((obj->unk26[1] & 0xFF) << 16) |
+                        ((obj->unk26[2] & 0xFF) << 8) | (obj->unk26[3] & 0xFF);
             }
         }
     }
@@ -114,8 +114,8 @@ void func_80035BF0(Obj80035BF0 *obj, s32 force) {
             Gfx80035BF0 *g;
             g = D_80112C90++;
             g->w0 = 0xF8000000;
-            g->w1 = (obj->unk2A[0] << 24) | (obj->unk2A[1] << 16) |
-                    (obj->unk2A[2] << 8) | obj->unk2A[3];
+            g->w1 = ((obj->unk2A[0] & 0xFF) << 24) | ((obj->unk2A[1] & 0xFF) << 16) |
+                    ((obj->unk2A[2] & 0xFF) << 8) | (obj->unk2A[3] & 0xFF);
         }
     }
 
@@ -125,8 +125,8 @@ void func_80035BF0(Obj80035BF0 *obj, s32 force) {
                 Gfx80035BF0 *g;
                 g = D_80112C90++;
                 g->w0 = 0xF9000000;
-                g->w1 = (obj->unk2E[0] << 24) | (obj->unk2E[1] << 16) |
-                        (obj->unk2E[2] << 8) | obj->unk2E[3];
+                g->w1 = ((obj->unk2E[0] & 0xFF) << 24) | ((obj->unk2E[1] & 0xFF) << 16) |
+                        ((obj->unk2E[2] & 0xFF) << 8) | (obj->unk2E[3] & 0xFF);
             }
         }
     }
