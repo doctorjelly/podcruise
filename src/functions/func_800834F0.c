@@ -8,10 +8,7 @@ typedef struct Vertex {
     s16 unk06;
     s16 unk08;
     s16 unk0A;
-    u8 unk0C;
-    u8 unk0D;
-    u8 unk0E;
-    u8 unk0F;
+    u32 color;
 } Vertex;
 
 typedef struct Command {

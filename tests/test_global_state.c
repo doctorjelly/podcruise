@@ -132,6 +132,7 @@ static s32 second_80087E80;
 static s32 third_80087E80;
 static void *argument_80039178;
 static s32 size_80039178;
+static u32 result_80039178;
 static s32 calls_8008C930;
 static void *argument_8008C930[2];
 static s32 second_8008C930;
@@ -157,9 +158,10 @@ s32 func_80087E80(void *argument, s32 second, s32 third) {
     third_80087E80 = third;
     return result_80087E80;
 }
-void func_80039178(void *argument, s32 size) {
+u32 func_80039178(u8 *argument, s32 size) {
     argument_80039178 = argument;
     size_80039178 = size;
+    return result_80039178;
 }
 void func_8008C930(void *argument, s32 second, s32 third) {
     argument_8008C930[calls_8008C930++] = argument;
@@ -327,7 +329,12 @@ int main(void) {
     assert(func_8002FDBC() == 1);
     assert(argument_80087E80 == D_800D9C70);
     assert(second_80087E80 == 0 && third_80087E80 == 0);
-    func_8003931C(object.bytes);
+    result_80039178 = 0;
+    assert(func_8003931C(object.bytes) == 0);
+    result_80039178 = 0x80000001;
+    assert(func_8003931C(object.bytes) == 0x80000001);
+    result_80039178 = 0xFFFFFFFF;
+    assert(func_8003931C(object.bytes) == 0xFFFFFFFF);
     assert(argument_80039178 == object.bytes + 4 && size_80039178 == 0x3EC);
     /* func_80039768 forwards only the records that differ from their shadow
        copy. With both tables zeroed nothing is forwarded, which is what makes

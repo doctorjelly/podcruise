@@ -51,7 +51,7 @@ void func_8008B190(void);
 void func_80090634(void);
 void func_80093864(void);
 void func_80011EA4(s16 argument);
-void func_8003931C(u8 *argument);
+u32 func_8003931C(u8 *argument);
 void func_80039890(void);
 void *func_8008D274(void **slot);
 

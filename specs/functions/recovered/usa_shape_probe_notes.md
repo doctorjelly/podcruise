@@ -427,7 +427,6 @@ Its corrected pointer return preserves the exact 32-byte wrapper and the
 504-byte exact loader. Other sampled void/s32 mismatches at `func_8001D05C`
 and `func_80028E78` discard their results and established no behavioral defect.
 
-
 An automation preflight for `func_80080A1C` verified its 464-byte ROM span
 at 0x8161C. The two text differences include `nop` versus `mov.s` at
 80080BB8 and a floating store-register change at 80080BD4. The stack-aware
@@ -438,3 +437,46 @@ register-only gate, so no timed search was launched and no source changed.
 Final US15 verification retains 1181 exact functions / 361112 bytes. The 32-job
 USA rebuild is byte-identical; full host/tool tests, repository safety,
 strict manifest and whitespace checks pass.
+
+## US16 bounded ABI and code-shape checks
+
+The 56 whole-USA declaration-versus-void-definition return pairs were
+checked for multiline, nested, and returned-call consumption. No additional
+consumed result was found: the source call sites discard the values, and
+canonical caller spot checks showed that later `$v0` uses came from a
+separate helper or control-flow path. The separately isolated
+`func_8003931C` case is documented in `runtime_leaf_wrappers.md`; its
+corrected contract preserves the wrapper's existing 36-byte exact match.
+
+An 11-entry global-type conflict scan did not establish 11 conflicting
+objects. The candidates are alternate byte views, mixed record views, or
+end-marker comparisons. For example, `D_801489C8` is a float-triple table in
+`func_80085EB0`, while `func_80085AB4` compares against it as an end marker.
+`D_800A23B0[3]` refers to `D_800A23BC`, a separately named global in another
+unit. No global declarations were changed from this scan.
+
+A private direct-final-field-store spelling for `func_80080A1C` grew to
+468/464 bytes, with 11 differing words and one extra word, versus the
+464/464-byte, two-difference baseline described above. The candidate was
+rejected.
+
+An unaligned-operation count scan isolated `func_800834F0`: the ROM has no
+unaligned word operations where the former compiled C had 304. The packed
+vertex color correction is documented in its dedicated spec. A private
+eight-byte-aligned vertex union emitted identical text to the retained
+four-byte-aligned record; no union was retained. A six-profile IDO 5.3 sweep
+of this changed source found no exact match.
+
+An arithmetic-opcode histogram exposed the missing comparison at 80040100
+in `func_80040050`. Its condition result is overwritten by the comparison
+at 80040108 before any conditional branch reads it. A private nonempty
+guard spelling (`current >= 0 && current >= 6`) did not recover it: the
+compiler retained extra control flow and emitted 448/428 bytes, 68 differing
+words and five extra words. That variant was rejected; no empty predicate
+or unrelated source steering was retained.
+
+
+Final US16 checks retain 1181 exact functions / 361112 bytes. The 32-job USA
+round trip is byte-identical; full host/tool tests, safety, the strict source
+manifest, and whitespace checks pass. A subsequent `func_800784F8` unordered
+clamp-predicate investigation remains private and is not part of this tranche.

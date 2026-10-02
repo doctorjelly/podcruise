@@ -65,11 +65,13 @@ Europe, and LRG.
 |---|---:|---|---:|---|
 | `func_8002FB18` | 52 | `8002FB40` / restore stack pointer | 2 | Return whether the unsigned supplied word is lower than the current result of `func_8002FAFC`. |
 | `func_8002FDBC` | 60 | `8002FDF0` / restore stack pointer | 5 | Call `func_80087E80` on `D_800D9C70` with two zero words, then return whether its result is not -1. |
-| `func_8003931C` | 36 | `80039334` / `nop` | 3 | Invoke `func_80039178` on the first argument plus four bytes, with 0x3EC. |
+| `func_8003931C` | 36 | `80039338` / `nop` | 3 | Return the CRC-32 of the 0x3EC bytes beginning four bytes into the supplied record. |
 | `func_80039890` | 40 | `800398A8` / `nop` | 1 | Invoke `func_80039768` first with zero and then with 0x400. |
 
-All four are direct USA `jal` targets. The first two retain their callee return
-value through the comparison; the last two have the `jr $ra` delay-slot nop.
+All four are direct USA `jal` targets. The first two return their callee's
+value through the comparison; `func_8003931C` forwards the checksum returned by
+`func_80039178`, while `func_80039890` is side-effect only. The last two have
+the `jr $ra` delay-slot nop.
 Japan maps them uniquely to `80030578`, `8003081C`, `80039CC0`, and
 `8003A234`; Europe maps them to `800330D8`, `8003337C`, `8003DBD0`, and
 `8003E154`. The counterpart callees and the one global relocate consistently.
@@ -135,3 +137,11 @@ resource structure; tagging the loader's existing structure preserves its
 504-byte exact body, and the corrected wrapper remains exact at 32 bytes.
 The existing host wrapper test now checks an index, an object pointer result,
 and a negative index with a NULL result.
+
+
+The current USA checksum-wrapper audit confirms that `func_8003931C` leaves
+its callee's `$v0` unchanged; consumers at 800395EC, 80039734, and 800398D0
+store or compare that checksum. Explicit `u32` returns in the wrapper and
+host double preserve all 36 canonical bytes. The wrapper regression checks
+zero, `0x80000001`, and `0xFFFFFFFF` while retaining the pointer-plus-four
+and 0x3EC-byte length checks.
