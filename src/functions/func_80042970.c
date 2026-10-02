@@ -52,6 +52,7 @@ void func_80042970(Target *target) {
     f32 lengthSquared;
     f32 baseProjection;
     f32 blend;
+    f32 ratio;
 
     (void)unusedA;
     (void)unusedB;
@@ -72,13 +73,14 @@ void func_80042970(Target *target) {
     delta[0] = probe[3][0] - target->frame[3][0];
     delta[1] = probe[3][1] - target->frame[3][1];
     delta[2] = probe[3][2] - target->frame[3][2];
-    baseProjection = target->frame[3][0] * delta[0] + target->frame[3][1] * delta[1] + delta[2] * target->frame[3][2];
+    baseProjection = target->frame[3][0] * delta[0] + target->frame[3][1] * delta[1] + target->frame[3][2] * delta[2];
     lengthSquared = delta[0] * delta[0] + delta[1] * delta[1] + delta[2] * delta[2];
     if (lengthSquared <= D_800AAC98) {
         blend = 0.0f;
     } else {
-        blend = (current[3][0] * delta[0] + current[3][1] * delta[1] + delta[2] * current[3][2] - baseProjection) / lengthSquared;
-        if (blend > 1.0f) {
+        ratio = (current[3][0] * delta[0] + current[3][1] * delta[1] + current[3][2] * delta[2] - baseProjection) / lengthSquared;
+        blend = ratio;
+        if (ratio > 1.0f) {
             blend = 1.0f;
         }
     }

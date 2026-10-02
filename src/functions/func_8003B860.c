@@ -64,8 +64,11 @@ void func_8003B860(PcGfx **listp, s32 ulx, s32 lrx, s32 uly, s32 lry, s32 x, s32
         vx = ulx;
         vy = lry;
     }
-    w = ((vx & 0xFFFF) << 16) | (vy & 0xFFFF);
-    PC_CMD(0x02180006, w)
+    {
+        PcGfx *g_ = gfx++;
+        g_->w0 = 0x02180006;
+        g_->w1 = ((vx & 0xFFFF) << 16) | (vy & 0xFFFF);
+    }
 
     tt = (u32)ult & 0xFFFF;
     bb = (u32)lrt & 0xFFFF;

@@ -18,12 +18,14 @@ extern Owner80007FC8 *func_80007CE4(s32 handle);
 extern s32 func_800894D0(void *, void *);
 
 s32 func_80007FC8(s32 arg0) {
+    s32 index;
     Owner80007FC8 *owner;
-    s32 result = -1;
+    s32 result;
 
+    result = -1;
     owner = func_80007CE4(arg0);
     if (owner != 0) {
-        s32 index = arg0 & 0x7FFF;
+        index = arg0 & 0x7FFF;
         if (index >= 0) {
             Table80007FC8 *table = owner->table;
             if (index < table->count) {

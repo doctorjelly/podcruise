@@ -111,18 +111,18 @@ void func_80074CDC(u8 *obj) {
     mixed = coef * D_800AD9B4;
     i++;
 
+    part = obj + 0x140;
     if (*(s32 *)(*(u8 **)(obj + 0x344) + 0x14) != 0) {
         func_80014CC0(*(f32 *)(obj + i * 4 + 0x199C) * mixed * 360.0f, &sc[1], &sc[0]);
-        part = obj + 0x140;
         func_800155EC((f32 *)(part + 0x380), (f32 *)(part + 0x380), power * sc[1], (f32 *)(part + 0x370));
     }
+    part = obj + 0xC0;
     if (*(s32 *)(*(u8 **)(obj + 0x344) + 0xC) != 0) {
-        part = obj + 0xC0;
         func_800155EC((f32 *)(part + 0x380), (f32 *)(part + 0x380), (wingA + wingA + wingB) * 0.5f,
                       (f32 *)(part + 0x370));
     }
+    part = obj + 0x100;
     if (*(s32 *)(*(u8 **)(obj + 0x344) + 0x10) != 0) {
-        part = obj + 0x100;
         func_800155EC((f32 *)(part + 0x380), (f32 *)(part + 0x380), (wingB + wingB + wingA) * 0.5f,
                       (f32 *)(part + 0x370));
     }

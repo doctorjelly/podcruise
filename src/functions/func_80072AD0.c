@@ -143,6 +143,7 @@ void func_80072AD0(void *object, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     FLOAT_AT(object, 0x138) = 0.0f;
     FLOAT_AT(object, 0x12C) = 0.0f;
     FLOAT_AT(object, 0x104) = D_800AD920;
+    FLOAT_AT(object, 0x108) = D_800AD924;
     HALF_AT(object, 0x10C) = 0;
     HALF_AT(object, 0x10E) = 0;
     WORD_AT(object, 0x114) = 0;
@@ -151,7 +152,6 @@ void func_80072AD0(void *object, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     FLOAT_AT(object, 0x33C) = 0.0f;
     FLOAT_AT(object, 0x340) = 0.0f;
     FLOAT_AT(object, 0x310) = 0.0;
-    FLOAT_AT(object, 0x108) = D_800AD924;
     for (index = 0; index < 4; index++) {
         WORD_AT(object, 0x314 + index * 4) = 0;
     }

@@ -57,6 +57,7 @@ extern void func_80096710(u8 *, u8 *, s32);
 void func_8008DEA0(State8008DEA0 *state, s32 mode, Src8008DEA0 *source) {
     Src8008DEA0 *src;
     s32 q;
+    Chan8008DEA0 *c;
 
     switch (mode) {
     case 5:
@@ -69,8 +70,9 @@ void func_8008DEA0(State8008DEA0 *state, s32 mode, Src8008DEA0 *source) {
             q = state->unk28->unk4 / 9 * 9;
             state->unk28->unk4 = q;
             state->unk2C = (state->unk28->unk10->unk0 << 4) * state->unk28->unk10->unk4;
-            if (state->unk28->unkC != 0) {
-                state->unk1C = state->unk28->unkC->unk0;
+            c = state->unk28->unkC;
+            if (c != 0) {
+                state->unk1C = c->unk0;
                 state->unk20 = state->unk28->unkC->unk4;
                 state->unk24 = state->unk28->unkC->unk8;
                 func_80096710(state->unk28->unkC->unkC, state->unk18, 0x20);

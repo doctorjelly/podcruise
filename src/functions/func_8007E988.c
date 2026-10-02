@@ -25,11 +25,11 @@ extern void func_800156DC(f32 [4][4], const f32 [4][4]);
 extern void func_8003B184(void *, void *, f32);
 
 void func_8007E988(Obj8007E988 *obj) {
+    s32 i;
+    f32 nv;
+    s32 count;
     f32 base[4][4];
     f32 target[4][4];
-    s32 i;
-    s32 count;
-    Vec3f8007E988 *point;
 
     func_80082BE0();
     func_80082BE0();
@@ -37,16 +37,16 @@ void func_8007E988(Obj8007E988 *obj) {
     i = 0;
     while (i != count) {
         if (D_800A66E0[i] <= 0.0f) {
-            point = &D_8011DC50[i];
             D_800A66E0[i] = (f32)func_80082BE0() / 2147483648.0f * 6.0f + 2.0f;
             func_800156DC(base, obj->unk20);
             func_8003B184(obj->unkAC, target,
                           D_800A66E0[i] / 3.5f * D_800ADC34 * (obj->unk1A0 / 300.0f));
-            point->z = target[3][2] - 8.0f;
-            point->x = target[3][0];
-            point->y = target[3][1];
-            point->x = (((f32)func_80082BE0() / 2147483648.0f) * 200.0f + -100.0f) + point->x;
-            point->y = (((f32)func_80082BE0() / 2147483648.0f) * 200.0f + -100.0f) + point->y;
+            D_8011DC50[i].x = target[3][0];
+            nv = target[3][2] - 8.0f;
+            D_8011DC50[i].z = nv;
+            D_8011DC50[i].y = target[3][1];
+            D_8011DC50[i].x = (((f32)func_80082BE0() / 2147483648.0f) * 200.0f + -100.0f) + D_8011DC50[i].x;
+            D_8011DC50[i].y = (((f32)func_80082BE0() / 2147483648.0f) * 200.0f + -100.0f) + D_8011DC50[i].y;
         }
         i++;
     }

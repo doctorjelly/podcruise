@@ -43,8 +43,7 @@ void func_800105DC(s16 *object) {
     s32 *second;
     s32 shade;
 
-    first = D_800D5F80;
-    second = D_800D5FA8;
+    first = D_800D5F80; second = D_800D5FA8;
     do {
         func_8000A920((s16)*first, 0);
         func_8000A920((s16)*second, 0);
@@ -104,14 +103,13 @@ void func_800105DC(s16 *object) {
         if (slot >= 10) {
             continue;
         }
-        first = &D_800D5F80[slot];
         second = &D_800D5FA8[slot];
-        if (*first != -1) {
-            func_8000A920((s16)*first, 1);
-            func_8000E680((s16)*first, (s16)(s32)screenX, (s16)(s32)screenY);
-            func_8000AAF8((s16)*first, radius);
-            func_8000AAC0((s16)*first, 1.0f, 1.0f);
-            func_8000AB24((s16)*first, 255, 255, 255, (u32)alpha);
+        if (D_800D5F80[slot] != -1) {
+            func_8000A920((s16)D_800D5F80[slot], 1);
+            func_8000E680((s16)D_800D5F80[slot], (s16)(s32)screenX, (s16)(s32)screenY);
+            func_8000AAF8((s16)D_800D5F80[slot], radius);
+            func_8000AAC0((s16)D_800D5F80[slot], 1.0f, 1.0f);
+            func_8000AB24((s16)D_800D5F80[slot], 255, 255, 255, (u32)alpha);
         }
         if (*second != -1) {
             shade = (u32)alpha & 0xFF;

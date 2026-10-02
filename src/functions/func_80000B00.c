@@ -14,15 +14,15 @@ extern void func_8000097C(f32 distance, Vec3f *probe, Vec3f *point, f32 *normal)
 extern void func_80081A2C(Vec3f *point, Vec3f *segmentStart, Vec3f *segmentEnd, Vec3f *out);
 
 void func_80000B00(Vec3f *point, Vec3f *cornerA, Vec3f *cornerB, Vec3f *cornerC, Vec3f *probe, f32 *normal) {
-    Vec3f edgeA;
-    Vec3f edgeB;
-    Vec3f edgeC;
-    Vec3f best;
     f32 bestDistance;
     f32 distance;
     f32 dz;
     f32 dx;
     f32 dy;
+    Vec3f edgeA;
+    Vec3f edgeB;
+    Vec3f edgeC;
+    Vec3f best;
 
     edgeA.x = cornerB->x - cornerA->x;
     edgeA.y = cornerB->y - cornerA->y;
@@ -38,16 +38,16 @@ void func_80000B00(Vec3f *point, Vec3f *cornerA, Vec3f *cornerB, Vec3f *cornerC,
     func_80081A2C(point, cornerB, cornerC, &edgeB);
     func_80081A2C(point, cornerC, cornerA, &edgeC);
 
-    dy = probe->y - edgeA.y;
-    dx = probe->x - edgeA.x;
     dz = probe->z - edgeA.z;
-    best.x = edgeA.x;
+    dx = probe->x - edgeA.x;
+    dy = probe->y - edgeA.y;
     best.y = edgeA.y;
+    best.x = edgeA.x;
     best.z = edgeA.z;
     bestDistance = dz * dz + (dx * dx + dy * dy);
 
-    distance = (probe->z - edgeB.z) * (probe->z - edgeB.z) + ((probe->x - edgeB.x) * (probe->x - edgeB.x) + (probe->y - edgeB.y) * (probe->y - edgeB.y));
-    if (distance < bestDistance) {
+    distance = ((probe->x - edgeB.x) * (probe->x - edgeB.x) + (probe->y - edgeB.y) * (probe->y - edgeB.y)) + (probe->z - edgeB.z) * (probe->z - edgeB.z);
+    if (bestDistance > distance) {
         best.x = edgeB.x;
         best.y = edgeB.y;
         bestDistance = distance;
@@ -59,10 +59,10 @@ void func_80000B00(Vec3f *point, Vec3f *cornerA, Vec3f *cornerB, Vec3f *cornerC,
     dz = probe->z - edgeC.z;
     distance = dz * dz + (dx * dx + dy * dy);
     if (distance < bestDistance) {
-        best.x = edgeC.x;
         best.y = edgeC.y;
-        bestDistance = distance;
         best.z = edgeC.z;
+        bestDistance = distance;
+        best.x = edgeC.x;
     }
 
     if (bestDistance <= D_800AE8B0) {

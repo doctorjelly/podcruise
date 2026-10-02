@@ -105,7 +105,6 @@ extern s32 func_800833B4(s32, u8 *);
 s32 func_800718DC(Racer *self, s32 *message, HitInfo *info) {
     s32 slots[5];
     s32 kind;
-    s32 code;
     s32 index;
     s32 count;
     s32 *cursor;
@@ -115,8 +114,8 @@ s32 func_800718DC(Racer *self, s32 *message, HitInfo *info) {
     f32 random;
     f32 alpha;
 
-    code = message[0];
-    switch (code) {
+    count = message[0];
+    switch (count) {
         case 0x52536574:
             func_8003FD7C(self);
             break;

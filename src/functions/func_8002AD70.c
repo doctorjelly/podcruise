@@ -30,6 +30,7 @@ extern void func_8002B3C8(Actor8002AD70 *);
 void func_8002AD70(Actor8002AD70 *actor) {
     s32 choice;
     f32 timer;
+    f32 new_var;
 
     choice = actor->unk34;
     if (-1.0f == D_800A2614) {
@@ -37,9 +38,11 @@ void func_8002AD70(Actor8002AD70 *actor) {
     }
     func_8002B3C8(actor);
     if (D_800A4BC0 != 1) {
-        timer = D_800A2610 + D_80120BF8;
+        timer = D_800A2610;
+        timer += D_80120BF8;
         D_800A2610_ABS = timer;
-        if (D_800A2614_ABS <= timer) {
+        new_var = D_800A2614_ABS;
+        if (new_var <= timer) {
             D_800A2610_ABS = 0.0f;
             D_800A2614_ABS = (f32)(((f32)func_80082BE0() / (f32)2147483648.0) * 4.0 + 3.0);
             do {

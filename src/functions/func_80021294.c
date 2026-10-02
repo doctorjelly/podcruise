@@ -63,26 +63,24 @@ extern void func_8001745C(f32 *matrix, f32 first, f32 second, f32 third);
 
 void func_80021294(PcTuneState *state) {
     f32 yaw;
-    f32 *cam;
-    s32 gate;
-    s32 stepped;
-    f32 text_y;
+    s32 moved;
+    s32 *flags;
     f32 previous;
-    s32 index;
+    s32 saturated;
     f32 matrix[4][4];
     PcVec3f offset;
-    s32 mode;
-    s32 *flags;
+    f32 *cam;
+    s32 gate;
     f32 pitch;
-    s32 moved;
-    s32 saturated;
-
+    s32 stepped;
+    s32 mode;
+    s32 index;
     /* pointer views of the camera globals keep IDO from hoisting their addresses */
     cam = &D_800D7388;
     flags = &D_800A2544;
     moved = 0;
-    saturated = 0;
     stepped = 0;
+    saturated = 0;
 
     if (D_800A2540 != 0 || D_800A4BBC != 0 || D_800A4BC0 == 4) {
         if (D_800A4BBC != 0) {
@@ -165,8 +163,8 @@ void func_80021294(PcTuneState *state) {
         break;
     }
 
-    text_y = 185.0f;
-    func_8003EC40(160, (s16)(s32)(text_y + 10.0f), 0, 255, 0, 255,
+    previous = 185.0f;
+    func_8003EC40(160, (s16)(s32)(previous + 10.0f), 0, 255, 0, 255,
                   (s32)(long)D_800D7288);
 
     for (index = 0; index < state->count; index++) {

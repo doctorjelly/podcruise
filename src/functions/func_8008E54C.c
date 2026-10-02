@@ -49,8 +49,8 @@ typedef struct {
 #define COMMAND(cursor, word0, word1) \
     { Cmd *cmd_ = (cursor); cmd_->w0 = (word0); cmd_->w1 = (word1); }
 
-static Cmd *func_8008E420(Cmd *p, s32 nbytes, Obj *a, u32 flags, s16 outp,
-                          s16 dmemIn, s32 nsam) {
+static Cmd *func_8008E420(Cmd *p, Obj *a, s32 nbytes, s16 outp, u32 flags,
+                          s32 nsam, s16 dmemIn) {
     s32 addr;
     s32 off;
 
@@ -117,8 +117,8 @@ Cmd *func_8008E54C(Obj *a, s16 *b, s32 n, s32 unused, Cmd *out) {
     blocks9 = blocks * 9;
 
     if (cond) {
-        cursor = func_8008E420(cursor, blocks9, a, (u32)a->unk40, (s16)*b, 0,
-                               avail);
+        cursor = func_8008E420(cursor, a, blocks9, (s16)*b, (u32)a->unk40,
+                               avail, 0);
         if (a->unk3C != 0) {
             *b = (s16)(*b + a->unk3C * 2);
         } else {
@@ -145,8 +145,8 @@ Cmd *func_8008E54C(Obj *a, s16 *b, s32 n, s32 unused, Cmd *out) {
             }
             blocks = (avail + 15) >> 4;
             blocks9 = blocks * 9;
-            cursor = func_8008E420(cursor, blocks9, a, (u32)a->unk40 | 2,
-                                   (s16)aligned, 0, avail);
+            cursor = func_8008E420(cursor, a, blocks9, (s16)aligned,
+                                   (u32)a->unk40 | 2, avail, 0);
             delta = len * 2;
             COMMAND(cursor, FIELD(10, 24, 8) | FIELD(a->unk3C * 2 + aligned, 0, 24),
                     FIELD(sample, 16, 16) | FIELD(delta, 0, 16));
@@ -172,8 +172,8 @@ Cmd *func_8008E54C(Obj *a, s16 *b, s32 n, s32 unused, Cmd *out) {
     len = blocks9 - len;
     if ((limit - (limit & 0xF)) < n) {
         flag = 1;
-        cursor = func_8008E420(cursor, len, a, (u32)a->unk40,
-                               (s16)*b, 0, blocks * 16 - limit);
+        cursor = func_8008E420(cursor, a, len, (s16)*b, (u32)a->unk40,
+                               blocks * 16 - limit, 0);
         if (a->unk3C != 0) {
             *b = (s16)(*b + a->unk3C * 2);
         } else {

@@ -148,7 +148,6 @@ void func_800228C0(PcController800228C0 *owner) {
     f32 bestCombined[2];
     f32 alpha;
     u8 variant;
-    u8 savedGroup;
     u8 drawAlpha;
     PcResult800228C0 *result;
     PcResult800228C0 *swap;
@@ -171,6 +170,7 @@ void func_800228C0(PcController800228C0 *owner) {
     s32 rawReward;
     s32 lastIndex;
     s32 unlock;
+    u8 savedGroup;
     s32 i;
     s32 j;
     s32 count;

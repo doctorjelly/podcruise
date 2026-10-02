@@ -418,16 +418,16 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
                 func_800834F0(*slot, &secondZero, &firstZero, phase, 1.0f,
                               0.0f, 50.0f, 0);
             }
-        }
-        if (*slot != 0) {
-            func_800181BC(*slot, 2, 3, 0x10, 2);
+            if (*slot != 0) {
+                func_800181BC(*slot, 2, 3, 0x10, 2);
+            }
         }
 
         slot = &object->beam[5];
         if (*slot != 0) {
+            func_80017C18(object->primary[5], secondMatrix);
             beamX = D_800A9B1C * scaleX;
             beamZ = D_800A9B20 * scaleZ;
-            func_80017C18(object->primary[5], secondMatrix);
             func_80015288(&firstPoint, (PcVec3f *)secondMatrix[3]);
             func_80017C18(object->primary[2], firstMatrix);
             func_80015288(&secondPoint, (PcVec3f *)firstMatrix[3]);
@@ -461,16 +461,16 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
                 func_800834F0(*slot, &secondZero, &firstZero, phase, 1.0f,
                               0.0f, 50.0f, 0);
             }
-        }
-        if (*slot != 0) {
-            func_800181BC(*slot, 2, 3, 0x10, 2);
+            if (*slot != 0) {
+                func_800181BC(*slot, 2, 3, 0x10, 2);
+            }
         }
 
         slot = &object->beam[6];
         if (*slot != 0) {
+            func_80017C18(object->primary[5], secondMatrix);
             beamX = D_800A9B28 * scaleX;
             beamZ = D_800A9B2C * scaleZ;
-            func_80017C18(object->primary[5], secondMatrix);
             func_80015288(&firstPoint, (PcVec3f *)secondMatrix[3]);
             func_80017C18(object->primary[3], firstMatrix);
             func_80015288(&secondPoint, (PcVec3f *)firstMatrix[3]);
@@ -502,16 +502,16 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
                 func_800834F0(*slot, &secondZero, &firstZero, phase, 1.0f,
                               0.0f, 50.0f, 0);
             }
-        }
-        if (*slot != 0) {
-            func_800181BC(*slot, 2, 3, 0x10, 2);
+            if (*slot != 0) {
+                func_800181BC(*slot, 2, 3, 0x10, 2);
+            }
         }
 
         slot = &object->beam[7];
         if (*slot != 0) {
+            func_80017C18(object->primary[5], secondMatrix);
             beamX = D_800A9B34 * scaleX;
             beamZ = D_800A9B38 * scaleZ;
-            func_80017C18(object->primary[5], secondMatrix);
             func_80015288(&firstPoint, (PcVec3f *)secondMatrix[3]);
             func_80017C18(object->primary[4], firstMatrix);
             func_80015288(&secondPoint, (PcVec3f *)firstMatrix[3]);
@@ -545,9 +545,9 @@ void func_80018480(Object80018480 *object, Matrix80018480 source, s32 scaleByTyp
                 func_800834F0(*slot, &secondZero, &firstZero, phase, 1.0f,
                               0.0f, 50.0f, 0);
             }
-        }
-        if (*slot != 0) {
-            func_800181BC(*slot, 2, 3, 0x10, 2);
+            if (*slot != 0) {
+                func_800181BC(*slot, 2, 3, 0x10, 2);
+            }
         }
 
         if (D_800A21AC == 4) {

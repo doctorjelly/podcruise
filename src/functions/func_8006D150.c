@@ -103,12 +103,13 @@ void func_8006D150(Racer *racer) {
         racer->unk018C = D_800AD638;
     }
 
-    if (racer->unk0104 < D_800AD63C) {
+    dot = 2.0f;
+    length = racer->unk0104;
+    if (length < D_800AD63C) {
         racer->unk0104 = D_800AD63C;
     }
-    length = racer->unk0104;
-    if (length > 2.0f) {
-        racer->unk0104 = 2.0f;
+    if (racer->unk0104 > dot) {
+        racer->unk0104 = dot;
     }
 
     if ((f32)func_80082BE0() / (f32)2147483648.0 * (f32)2.0 < 0.0f) {

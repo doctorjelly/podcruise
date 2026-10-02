@@ -39,19 +39,18 @@ u8 *arg2;
     status = func_800950F4(arg0, info);
     if (status == 0) {
         switch (info->unk0 & 0xC000) {
-        case 0xC000:
-            if ((arg1 + 0) >= 0x100) {
-                status = -1;
-            }
-            break;
         case 0x8000:
             if (arg1 >= 0x40) {
                 status = -1;
             }
             break;
+        case 0xC000:
+            if ((arg1 + 0) >= 0x100) {
+                status = -1;
+            }
+            break;
         default:
             status = 8;
-            break;
         }
     }
     if (status != 0) {
@@ -68,7 +67,7 @@ u8 *arg2;
         func_800907D0(0, D_8014C530);
         D_80149CB0 = 4;
         func_80087E80(arg0, 0, 1);
-        for (index = 0; index < 4; index++) {
+        for (index = 4; index != 0; index--) {
             source++;
         }
         block = *(Block80094C80 *)source;

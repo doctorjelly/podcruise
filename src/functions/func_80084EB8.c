@@ -44,15 +44,19 @@ void func_80084EB8(s32 arg0) {
     }
 
     GFX(0xE7000000, 0)
-    if (vp[2] == 0x20) {
-        siz = 3;
-    } else {
-        siz = 2;
+    {
+        Gfx *g = D_801217B0++;
+        if (D_80114470[2] == 0x20) {
+            siz = 3;
+        } else {
+            siz = 2;
+        }
+        g->a = 0xFF000000 | ((siz & 3) << 19) | ((D_80114470[0] - 1) & 0xFFF);
+        g->b = func_80088360(D_800D9DB4);
     }
-    GFX(0xFF000000 | ((siz & 3) << 19) | ((vp[0] - 1) & 0xFFF), func_80088360(D_800D9DB4))
 
     if (arg0 == 0) {
-        if (vp[2] == 0x10) {
+        if (D_80114470[2] == 0x10) {
             for (i = 0; i < 3; i++) {
                 rgb[i] = D_801488B8[i] + 4;
                 if (rgb[i] >= 0x100) { rgb[i] = 0xFF; }

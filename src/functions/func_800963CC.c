@@ -59,11 +59,12 @@ extern Command800963CC *func_80095F34(
     Sequence800963CC *, Voice800963CC *, u32, s32,
     Command800963CC *);
 
+#define CMD(p, a, b) { Command800963CC *_a = (p); _a->w0 = (a); _a->w1 = (b); }
+
 Command800963CC *func_800963CC(
     Sequence800963CC *sequence, void *arg1, s32 sampleCount, s32 arg3,
     void *arg4) {
     s16 *start;
-    s16 *previousBoundary;
     s16 *mirrorEnd;
     u16 shortDoubledCount;
     Command800963CC *out;
@@ -72,10 +73,7 @@ Command800963CC *func_800963CC(
     s32 leftOffset;
     s32 swap;
     s16 *newCursor;
-    Command800963CC *firstCmd;
-    Command800963CC *secondCmd;
-    Command800963CC *finalCmd;
-    Command800963CC *endCmd;
+    s16 *previousBoundary;
     Voice800963CC *voice;
     s16 index;
     s32 doubledCount;
@@ -86,20 +84,15 @@ Command800963CC *func_800963CC(
 
     doubledCount = sampleCount * 2;
     shortDoubledCount = (u16)doubledCount;
-    out[0].w0 = 0x08000000;
-    out[0].w1 = shortDoubledCount;
-    out[1].w0 = 0x0C00DA83;
-    out[1].w1 = 0x06C006C0;
-    out[2].w0 = 0x0C005A82;
-    out[2].w1 = 0x080006C0;
+    CMD(out++, 0x08000000, shortDoubledCount)
+    CMD(out++, 0x0C00DA83, 0x06C006C0)
+    CMD(out++, 0x0C005A82, 0x080006C0)
 
     leftOffset = 0;
     rightOffset = 0x140;
     out = func_80095C20(
-        sequence, sequence->cursor, 0x6C0, sampleCount, out + 3);
-    out->w0 = 0x02000800;
-    out->w1 = sampleCount * 2;
-    out++;
+        sequence, sequence->cursor, 0x6C0, sampleCount, out);
+    CMD(out++, 0x02000800, sampleCount * 2)
 
     for (index = 0; index < sequence->voiceCount; index++) {
         voice = &sequence->voices[index];
@@ -119,10 +112,7 @@ Command800963CC *func_800963CC(
             sequence, voice, rightOffset, sampleCount, out);
 
         if (voice->firstCommand != 0) {
-            firstCmd = out;
-            out++;
-            firstCmd->w0 = 0x0C000000 | (u16)voice->firstCommand;
-            firstCmd->w1 = ((u16)leftOffset << 16) | (u16)rightOffset;
+            CMD(out++, 0x0C000000 | (u16)voice->firstCommand, ((u16)leftOffset << 16) | (u16)rightOffset)
             if ((voice->envelope == 0) && (voice->channel == 0)) {
                 out = func_80095C20(
                     sequence, mirrorEnd, rightOffset, sampleCount, out);
@@ -130,10 +120,7 @@ Command800963CC *func_800963CC(
         }
 
         if (voice->secondCommand != 0) {
-            secondCmd = out;
-            out++;
-            secondCmd->w0 = 0x0C000000 | (u16)voice->secondCommand;
-            secondCmd->w1 = ((u16)rightOffset << 16) | (u16)leftOffset;
+            CMD(out++, 0x0C000000 | (u16)voice->secondCommand, ((u16)rightOffset << 16) | (u16)leftOffset)
             out = func_80095C20(
                 sequence, start, leftOffset, sampleCount, out);
         }
@@ -149,25 +136,19 @@ Command800963CC *func_800963CC(
         }
 
         if (voice->finalCommand != 0) {
-            finalCmd = out;
-            out++;
-            finalCmd->w0 = 0x0C000000 | (u16)voice->finalCommand;
-            finalCmd->w1 = ((u16)rightOffset << 16) | 0x0800;
+            CMD(out++, 0x0C000000 | (u16)voice->finalCommand, ((u16)rightOffset << 16) | 0x0800)
         }
 
         previousBoundary = sequence->cursor + voice->end;
     }
 
-    ringEnd = sequence->ringBase + sequence->ringLength;
     newCursor = (s16 *)((u8 *)sequence->cursor + doubledCount);
+    ringEnd = sequence->ringBase + sequence->ringLength;
     sequence->cursor = newCursor;
     if (ringEnd < newCursor) {
         sequence->cursor = newCursor - sequence->ringLength;
     }
 
-    endCmd = out;
-    out++;
-    endCmd->w0 = 0x0A000800;
-    endCmd->w1 = 0x06C00000 | shortDoubledCount;
+    CMD(out++, 0x0A000800, 0x06C00000 | shortDoubledCount)
     return out;
 }

@@ -52,6 +52,7 @@ static s32 func_8008EEE4(s32 steps, f64 target, f64 current, u16 *fraction) {
      */
     LogTable upper;
     LogTable lower;
+    f64 norm;
 
     if (steps == 0) {
         if (current <= target) {
@@ -73,8 +74,8 @@ static s32 func_8008EEE4(s32 steps, f64 target, f64 current, u16 *fraction) {
     ratio = target / current;
     mantissa = func_8008ED18(ratio, &exponent);
     index = (s32)(mantissa * buckets);
-    logvalue = (upper.unk00[index - 8] + exponent) * D_800ADF30
-               / ((f64)1.0f * scale);
+    norm = (f64)1.0f * scale;
+    logvalue = (upper.unk00[index - 8] + exponent) * D_800ADF30 / norm;
     accumulator = 1.0;
     factor = 1.0 + logvalue;
     for (;;) {

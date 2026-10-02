@@ -97,7 +97,6 @@ void func_80020030(void *state) {
     u8 *record;
     f32 *first_data;
     f32 *second_data;
-    s32 selected_resource;
     s32 random_word;
     s32 mode;
     s32 attempt;
@@ -266,14 +265,14 @@ void func_80020030(void *state) {
 
                     if (position[0] < 0.0f) {
                         D_800A2530.b = D_800A2194;
-                        selected_resource = left_resource;
+                        random_word = left_resource;
                     } else {
                         D_800A2530.b = D_800A2190;
-                        selected_resource = right_resource;
+                        random_word = right_resource;
                     }
-                    D_800A2530.a = selected_resource;
+                    D_800A2530.a = random_word;
                     func_80084A3C(POINTER_VALUE(resources[0]),
-                                  POINTER_VALUE(resources[selected_resource]),
+                                  POINTER_VALUE(resources[random_word]),
                                   position, 10, POINTER_VALUE(record),
                                   first_data, second_data);
                     func_80084BDC(projected, auxiliary, record, first_data,
