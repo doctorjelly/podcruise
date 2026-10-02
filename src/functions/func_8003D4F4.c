@@ -75,8 +75,8 @@ void func_8003D4F4(
     s32 rounded;
     f32 halfWidth;
     f32 halfHeight;
-    f32 sine;
     f32 cosine;
+    f32 sine;
     f32 left;
     f32 right;
     f32 top;
@@ -103,14 +103,14 @@ void func_8003D4F4(
     }
     strip = resource->strips;
 
-    if (flags & 0x800) {
-        func_80014CC0(angle, &cosine, &sine);
+    if (flags & 0x800000) {
+        func_80014CC0(angle, &sine, &cosine);
     } else {
+        cosine = 1.0f;
         sine = 0.0f;
-        cosine = 0.0f;
     }
 
-    if (flags & 0x2000) {
+    if (flags & 0x20000) {
         halfWidth = (f32)resource->width * 0.5f * scaleX;
         halfHeight = (f32)resource->height * 0.5f * scaleY;
     } else {
@@ -139,7 +139,7 @@ void func_8003D4F4(
         } else {
             modeFirst = 0x0C087008;
             modeSecond = 0x03027008;
-            if (oldFlags & 3) {
+            if ((oldFlags & 2) || ((oldFlags & 1) == 0)) {
                 modeChanged = 1;
             }
         }
@@ -316,7 +316,7 @@ void func_8003D4F4(
                 func_8003BAB0(
                     &output, resource, strip, left, top, right, bottom,
                     (s16)arg6, (s16)arg7, xTexture, yTexture, stepX,
-                    stepY, reverseX, reverseY == 0, cosine, sine, flags);
+                    stepY, reverseX, reverseY == 0, sine, cosine, flags);
                 bias = D_800AAB1C;
             }
 

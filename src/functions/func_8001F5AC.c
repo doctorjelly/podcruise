@@ -191,7 +191,7 @@ void func_8001F5AC(Actor8001F5AC *arg0) {
         func_8008A6B4(text, D_800A8DE8, player->unk0C);
         func_8003EC40(0xA0, 0x19, 0x32, 0xFF, 0xFF, 0xFF, text);
         lines = func_800129B8(text, 0);
-        func_8002CC28((s32)(100.0 - (f64)lines * 0.5), 0x1A, func_800129B8(text, 0));
+        func_8002CC28((s32)(160.0 - (f64)lines * 0.5), 0x1A, func_800129B8(text, 0));
     }
 
     func_80028498(arg0);
