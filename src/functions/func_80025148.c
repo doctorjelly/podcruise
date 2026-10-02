@@ -200,9 +200,13 @@ void func_80025148(Menu80025148 *menu) {
             case 0:
                 func_8002BBA4(menu, 0x1E, row, 0xA, D_800A2570,
                               option, D_800A9034);
-                func_8002BBA4(menu, 0x55, row, 0xA, D_800A2570,
-                              option,
-                              menu->unk6E != 0 ? D_800A9044 : D_800A904C);
+                if (menu->unk6E != 0) {
+                    func_8002BBA4(menu, 0x55, row, 0xA, D_800A2570,
+                                  option, D_800A9044);
+                } else {
+                    func_8002BBA4(menu, 0x55, row, 0xA, D_800A2570,
+                                  option, D_800A904C);
+                }
                 break;
             case 1:
                 if (menu->unk90 == 1) {
@@ -270,9 +274,13 @@ void func_80025148(Menu80025148 *menu) {
                 row += 0xA;
                 func_8002BBA4(menu, 0x1E, row, 0xA, D_800A2570,
                               option, D_800A9144);
-                func_8002BBA4(menu, 0x55, row, 0xA, D_800A2570,
-                              option,
-                              menu->unk64 != 0 ? D_800A9154 : D_800A915C);
+                if (menu->unk64 != 0) {
+                    func_8002BBA4(menu, 0x55, row, 0xA, D_800A2570,
+                                  option, D_800A9154);
+                } else {
+                    func_8002BBA4(menu, 0x55, row, 0xA, D_800A2570,
+                                  option, D_800A915C);
+                }
                 break;
             case 6:
                 if (menu->unk68 < 0) {
@@ -290,7 +298,11 @@ void func_80025148(Menu80025148 *menu) {
         }
     }
 
-    func_80064A88(D_800A2574 != 0 ? D_800A9D34 : D_800A9D38);
+    if (D_800A2574 != 0) {
+        func_80064A88(D_800A9D34);
+    } else {
+        func_80064A88(D_800A9D38);
+    }
     if (D_8011A240 > 0.0f) {
         entry = &D_800A21B8[menu->unk5D];
         func_800494D0(menu, entry->unk09,
@@ -366,8 +378,13 @@ void func_80025148(Menu80025148 *menu) {
         if (menu->unk6C != 0) {
             value = func_8002DB20(menu, D_8011A270);
             if (func_8002DA0C(menu->unk5E, (u8)value) != 0) {
-                func_8003EC40(0xA0, 0x73, 0xA3, 0xBE, 0x11, 0xFF,
-                              raceCount == 3 ? D_800A91FC : D_800A9228);
+                if (raceCount == 3) {
+                    func_8003EC40(0xA0, 0x73, 0xA3, 0xBE, 0x11, 0xFF,
+                                  D_800A91FC);
+                } else {
+                    func_8003EC40(0xA0, 0x73, 0xA3, 0xBE, 0x11, 0xFF,
+                                  D_800A9228);
+                }
             }
         }
 

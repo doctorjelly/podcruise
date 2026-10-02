@@ -392,7 +392,8 @@
           "rom": "0x8F6DC",
           "size": 520
         }
-      ]
+      ],
+      "rodata_vram": "0x800ADF18"
     },
     {
       "id": "func_80017F64",
@@ -22609,7 +22610,8 @@
           "rom": "0x81F60",
           "size": 456
         }
-      ]
+      ],
+      "rodata_vram": "0x800ADC90"
     },
     {
       "id": "func_80084EB8",
@@ -27739,7 +27741,8 @@
           "rom": "0x8FFFC",
           "size": 1352
         }
-      ]
+      ],
+      "rodata_vram": "0x800ADF40"
     },
     {
       "id": "func_800947F0",
