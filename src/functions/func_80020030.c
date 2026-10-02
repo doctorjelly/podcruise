@@ -1,5 +1,6 @@
 /* Independently written from specs/functions/recovered/func_80020030.md. */
 #include "podcruise/types.h"
+#include "podcruise/vector_math.h"
 
 typedef f32 Matrix80020030[4][4];
 typedef f32 Vector80020030[3];
@@ -19,7 +20,7 @@ typedef struct {
     f32 d;
 } Blk80020030;
 extern Blk80020030 D_800A2530;
-extern u8 D_800A31E0[];
+extern s32 D_800A31E0[];
 extern s32 D_800A4BBC;
 extern f32 D_800A4BF0;
 extern u8 D_800A4C00[];
@@ -40,8 +41,6 @@ extern void **D_8011A544;
 extern f32 D_80120BF8;
 
 extern f32 func_80014F54(f32 first, f32 second);
-extern void func_80015268(f32 *output, f32 x, f32 y, f32 z);
-extern void func_80015288(f32 *output, f32 *source);
 extern void func_8001745C(f32 *matrix, f32 first, f32 second, f32 third);
 extern void func_800174B8(f32 *matrix, f32 *source);
 extern void func_80017918(Matrix80020030 destination, f32 x, f32 y, f32 z,
@@ -53,7 +52,8 @@ extern s32 func_800181BC(void *object, s32 which, u32 value, s32 flags,
 extern void func_80018480(void *object, Matrix80020030 matrix, s32 mode,
                           f32 x, f32 y, f32 z, f32 depth, s32 flag,
                           f32 scale_a, f32 scale_b);
-extern void func_80021294(void *state);
+struct PcTuneState;
+extern void func_80021294(struct PcTuneState *state);
 extern void func_80021F84(void *state);
 extern void func_80033878(void *node, f32 *position);
 extern void *func_8003F800(u32 tag, s32 index);
@@ -126,12 +126,12 @@ void func_80020030(void *state) {
             placement[2] = 50.0f;
             placement[1] = (f32)(0.0 - (f64)(f32)i * 2500.0);
             placement[2] =
-                50.0f + (f32)(D_800A31E0[FIELD(s8, state, 0x72 + i) * 0x34 +
+                50.0f + (f32)(((u8 *)D_800A31E0)[FIELD(s8, state, 0x72 + i) * 0x34 +
                                          0x24] *
                               10);
 
             func_8001745C((f32 *)placement_matrix, 0.0f, 0.0f, 0.0f);
-            func_80015268(placement_matrix[3], placement[0], placement[1],
+            func_80015268((PcVec3f *)placement_matrix[3], placement[0], placement[1],
                           placement[2]);
 
             if (D_800A2530.c != -1) {
@@ -172,13 +172,13 @@ void func_80020030(void *state) {
             if (node != 0) {
                 func_800181BC(node, 2, (u32)-4, 0x10, 3);
             }
-            func_80015268(node_transform.position, 781.0f,
+            func_80015268((PcVec3f *)node_transform.position, 781.0f,
                           (f32)(i * 100 - 522), -157.0f);
-            func_80015268(node_transform.rotation, 0.0f, 0.0f, 0.0f);
+            func_80015268((PcVec3f *)node_transform.rotation, 0.0f, 0.0f, 0.0f);
             if (i == 3) {
-                func_80015268(node_transform.position, 781.0f,
+                func_80015268((PcVec3f *)node_transform.position, 781.0f,
                               (-389.0f), -103.0f);
-                func_80015268(node_transform.rotation, 0.0f, 45.0f, 0.0f);
+                func_80015268((PcVec3f *)node_transform.rotation, 0.0f, 45.0f, 0.0f);
             }
             func_800174B8((f32 *)resource_matrix, node_transform.position);
             func_80017918(resource_matrix, 0.5f, 0.5f, 0.5f,
@@ -192,9 +192,9 @@ void func_80020030(void *state) {
 
     if ((D_800A4BBC != 0) && (FIELD(s32, state, 0x3C) != 2)) {
         for (i = 0; i < FIELD(s8, state, 0x70); i++) {
-            func_80015288(position, D_800A4FC0);
+            func_80015288((PcVec3f *)position, (const PcVec3f *)D_800A4FC0);
             position[2] = -157.0f;
-            func_80015288(D_801195F0, D_800A4FCC);
+            func_80015288((PcVec3f *)D_801195F0, (const PcVec3f *)D_800A4FCC);
             D_801195F0[1] -= (f32)(i * 2500);
             first_angle =
                 func_80014F54(position[0] - FIELD(f32, D_800A4C00, 0x3CC),
@@ -260,7 +260,7 @@ void func_80020030(void *state) {
                         sign * (D_800D6DC0[0] +
                                 (D_800D6DC0[3] - D_800D6DC0[0]) *
                                     ((f32)random_word / 2147483648.0f));
-                    func_80015268(position, generated_x, generated_y,
+                    func_80015268((PcVec3f *)position, generated_x, generated_y,
                                   -157.0f);
 
                     if (position[0] < 0.0f) {
@@ -285,7 +285,7 @@ void func_80020030(void *state) {
                 } while (attempt < 20);
 
                 func_80017C18(resources[D_800A2530.b], resource_matrix);
-                func_80015288(position, projected);
+                func_80015288((PcVec3f *)position, (const PcVec3f *)projected);
                 first_angle =
                     func_80014F54(position[0] - resource_matrix[3][0],
                                   resource_matrix[3][1] - position[1]);
@@ -299,7 +299,7 @@ void func_80020030(void *state) {
                 sign = func_80051934();
                 random_value =
                     (f32)func_80082BE0() / 2147483648.0f;
-                func_80015268(position,
+                func_80015268((PcVec3f *)position,
                               sign * (D_800D6D90[0] - 30.0f),
                               D_800D6D90[1] +
                                   random_value *
@@ -310,7 +310,7 @@ void func_80020030(void *state) {
                               POINTER_VALUE(record), first_data, second_data);
                 func_80084BDC(projected, auxiliary, record, first_data,
                               second_data);
-                func_80015288(position, projected);
+                func_80015288((PcVec3f *)position, (const PcVec3f *)projected);
                 if (position[0] < 0.0f) {
                     position[0] -= 30.0f;
                 } else {
@@ -326,7 +326,7 @@ void func_80020030(void *state) {
                 random_value =
                     (f32)func_80082BE0() / 2147483648.0f;
                 func_80015268(
-                    position, D_800D6DC0[0] - 30.0f,
+                    (PcVec3f *)position, D_800D6DC0[0] - 30.0f,
                     (f32)((f64)random_value *
                               ((f64)D_800D6DC0[4] - bound_vertical) +
                           bound_vertical),
@@ -337,7 +337,7 @@ void func_80020030(void *state) {
                               second_data);
                 func_80084BDC(projected, auxiliary, record, first_data,
                               second_data);
-                func_80015288(position, projected);
+                func_80015288((PcVec3f *)position, (const PcVec3f *)projected);
                 position[0] -= 30.0f;
                 break;
 
@@ -349,7 +349,7 @@ void func_80020030(void *state) {
                 random_value =
                     (f32)func_80082BE0() / 2147483648.0f;
                 func_80015268(
-                    position, D_800D6DB4 + 30.0f,
+                    (PcVec3f *)position, D_800D6DB4 + 30.0f,
                     (f32)((f64)random_value *
                               ((f64)D_800D6DC0[4] - bound_vertical) +
                           bound_vertical),
@@ -360,14 +360,14 @@ void func_80020030(void *state) {
                               second_data);
                 func_80084BDC(projected, auxiliary, record, first_data,
                               second_data);
-                func_80015288(position, projected);
+                func_80015288((PcVec3f *)position, (const PcVec3f *)projected);
                 position[0] += 30.0f;
                 break;
             }
 
             if ((mode > 0) && (mode < 4)) {
                 position[2] -= 20.0f;
-                func_80015288(D_801195F0, position);
+                func_80015288((PcVec3f *)D_801195F0, (const PcVec3f *)position);
                 D_801195F0[0] *= -1.0f;
                 first_angle = func_80014F54(
                     position[0] - D_801195F0[0],
@@ -386,7 +386,7 @@ void func_80020030(void *state) {
         generated_y =
             random_value * (D_800D6DC0[4] + 1500.0f - vertical) +
             vertical;
-        func_80015268(position, generated_x, generated_y, -157.0f);
+        func_80015268((PcVec3f *)position, generated_x, generated_y, -157.0f);
         first_angle =
             ((f32)func_80082BE0() / 2147483648.0f) * 360.0f;
         func_80063084(20, 41, position, position, first_angle, first_angle);
@@ -401,7 +401,7 @@ void func_80020030(void *state) {
             vertical;
         generated_y =
             random_value * (D_800D6DC0[4] - -1000.0f) + -1000.0f;
-        func_80015268(position, generated_x, generated_y, -157.0f);
+        func_80015268((PcVec3f *)position, generated_x, generated_y, -157.0f);
         first_angle =
             ((f32)func_80082BE0() / 2147483648.0f) * 360.0f;
         func_80063084(19, 40, position, position, first_angle, first_angle);
@@ -413,7 +413,7 @@ void func_80020030(void *state) {
         first_data = (f32 *)((u8 *)D_800D7218 + i * 12);
         second_data = (f32 *)((u8 *)D_800D7248 + i * 12);
         func_80084BDC(projected, auxiliary, record, first_data, second_data);
-        func_80015288((f32 *)((u8 *)item + 0x44), projected);
+        func_80015288((PcVec3f *)((u8 *)item + 0x44), (const PcVec3f *)projected);
 
         switch (D_800D7170[i]) {
         case 0:

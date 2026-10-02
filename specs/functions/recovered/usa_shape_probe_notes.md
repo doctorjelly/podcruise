@@ -237,3 +237,25 @@ source in only one word, at offset 0x4F8: `3C01430C` becomes `3C01428C`.
 Both audits remain 3312/3312 bytes with 596 differing words because broad
 scheduling differences place that instruction differently from the target.
 A six-profile O1/O2/O3 MIPS II/MIPS III-32 sweep found no exact match.
+
+## Batch call and literal checks after the camera correction
+
+A direct-call sequence comparison across all 167 nonmatching USA functions
+found only the known `func_80088BFC` local-helper placement discrepancy:
+two calls target 80088B80 rather than canonical 80088B70. All other ordered
+direct-call target lists agree. This check does not establish branch behavior,
+indirect-call correctness, or argument values.
+
+A bounded materialized-float scan found no additional proven literal error.
+The apparent 320.0 candidate in 800879B8 and 255.0/256.0 pair in 80010B34
+also occur in their canonical bodies; differing order caused false positives.
+The -45.0 candidate in 8001DDA8 is insufficient evidence because the source
+contains both clamp signs and the ROM can derive signs through arithmetic.
+
+The camera routine's `cam[0]`, `[5]`, and `[6]` map to scalar globals 800D7388,
+800D739C and 800D73A0. Intermediate storage includes the independently used
+byte array at 800D7390; no homogeneous seven-float record is established.
+A private direct-scalar rewrite removes the cross-object pointer view but
+regresses from 3312 bytes/596 differing words to 3292/756, changing address
+materialization and scheduling. It was not retained; this layout concern
+remains open rather than being treated as a verified aggregate declaration.

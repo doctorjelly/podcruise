@@ -91,7 +91,25 @@ match. The standalone second function instead inserts four bytes between
 its table and doubles because its pool starts four bytes off an eight-byte
 boundary. Composition removes that padding naturally. Both function
 addresses and sizes are correct in the experiment, but the 11 case targets
-remain four bytes below canonical and text remains nonexact. No combined
-unit is retained: temporary declarations/global views still need reviewed
-reconciliation. This is a concrete future layout candidate, not an exact
-coverage claim.
+remain four bytes below canonical and text remains nonexact.
+
+The follow-up reconciliation retains `unit_80020030.c`, which includes the
+two original sources in ROM order. Vector-helper declarations now agree
+with `vector_math.h`; existing three-float array arguments use the established
+vector type. The shared table declaration is `s32[]`, with the original byte
+access explicitly preserved, and the state structure has a tag for its
+forward declaration. No duplicate symbol aliases or padding objects are
+needed. The configuration records both included sources and canonical
+function boundaries. Parent verification confirms all 100 numeric bytes.
+
+Both functions remain assembly-backed and nonexact: 4708/4708 bytes with
+962 differing words, and 3312/3312 bytes with 596 differing words. Changing
+the table declaration produces ten register-allocation changes in the first
+function without changing its aggregate mismatch count; the second source's
+standalone text is unchanged by the declaration reconciliation.
+
+The reconciled combined unit was also tested under six IDO 5.3 O1/O2/O3
+MIPS II/MIPS III-32 profiles. None matched. One concurrent O3/MIPS II
+compile failed transiently; its serial retry compiled both functions at
+4708/3312 bytes and remained nonexact. The accepted full ledger has no
+compile/link failures.

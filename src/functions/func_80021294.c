@@ -2,7 +2,7 @@
 #include "podcruise/types.h"
 #include "podcruise/vector_math.h"
 
-typedef struct {
+typedef struct PcTuneState {
     u8 pad00[0x34];
     s32 mode;
     u8 pad38[0x38];
