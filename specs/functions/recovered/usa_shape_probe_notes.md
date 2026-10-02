@@ -549,3 +549,29 @@ Final US18 validation retains 1181 exact functions / 361112 bytes. The
 32-job USA round trip is byte-identical. Full host/tool tests, safety,
 the strict source manifest, and whitespace checks pass. Both changed
 functions remain assembly-backed in the canonical rebuild.
+
+## Follow-on unary and integer triage
+
+An aligned one-word floating-arithmetic opcode scan found no candidates.
+A unary-opcode histogram isolated `func_8005F33C` and `func_80047DB0`:
+the former folds the canonical negation of positive 30 into a negative
+literal, while the latter uses unary negation where ROM multiplies the
+angle by negative one at 80048410. Neither establishes a finite-input or
+signed-zero behavior error. The existing positive-30 source experiment
+was not repeated. The current 47DB0 audit is 1884/1884 bytes with 390
+differing words.
+
+The extra negations in `func_80058058` come from adding a negative wobble
+where ROM subtracts the positive wobble. A private temporary that scales
+the middle row's horizontal wobble before selecting addition/subtraction
+produced 7392/7676 bytes, 1655 differing words and 71 missing words,
+versus the retained 7428-byte body with 1665 differences and 62 missing
+words. This behavior-equivalent shape trial was not retained.
+
+Signed division and integer-mask histogram checks found no new discrepancy.
+In 8528C, extra arithmetic shifts repeat a correctly rounded signed
+midpoint division. In 401FC, the two canonical ANDI-one sites at 403FC and
+40590 duplicate a flag predicate already represented in C. The indirect
+call scan found matching target counts across six functions and 19 JALRs.
+A private differential-execution pilot remains pending and is not evidence
+of additional recovered behavior or exact coverage.
