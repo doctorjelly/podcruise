@@ -131,3 +131,34 @@ AAF9C and double 3F689374BC6A7EFA at AAFA0, verified at instructions
 object inserts four bytes before the double while ROM has none. Moving
 the section alone cannot reproduce both addresses; compilation-unit
 composition remains a possible follow-up.
+
+## Exact function 8007C818 pool prefix
+
+The artificial eight-byte `padPool` in 8007C818 is removed, and the actual
+pool starts at 800ADB68 with alignment 8. Canonical loads at 8007CADC
+and 8007CB50 reference ADB68 and ADB70. The two emitted doubles are
+`3FC3333333333334` and `3FE99999A0000000`, matching all 16 ROM bytes.
+The preceding ROM bytes at ADB60 are `400CCCCD3A83126F`, not the fabricated
+1.0 double. Parent audit preserves the exact 1072-byte function. This
+function was already exact in the accepted ledger; the cleanup adds no
+coverage.
+
+## Exact 469B4 tables and bounded six-function composition
+
+The eight-byte zero prefix in 800469B4 is removed; its tables now start
+directly at 800AAEE8 with alignment 8. Parent verification preserves the
+exact 1040-byte body and confirms all 45 table words against ROM. The
+remaining 12 bytes in the isolated section are alignment padding, not part
+of those tables.
+
+A private composition of 469B4, 46DC4, 47920, 479A4, 47A78 and 47DB0
+reproduces the entire 192-byte pool: the 45 table words, the float at AAF9C
+and double at AAFA0. Four neighbors retain exact bodies in that experiment.
+However, clean declaration reconciliation exposes conflicting color-call
+prototypes: the u8 RGBA contract adds an instruction to 46DC4 and shifts
+later addresses. Changing the callee's formals to s32 is not a solution:
+it emits 140 rather than canonical 176 bytes. No wrapper, shared header,
+or declaration aliases are retained. Existing exact integrations remain
+standalone. A second private trial using named external constants in 47DB0
+emits 1892/1884 bytes and 438 differing words, versus 1884/390 before;
+it also was not retained.

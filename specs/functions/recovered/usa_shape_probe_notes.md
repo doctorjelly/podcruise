@@ -300,3 +300,29 @@ The 176-byte 8F34C body remains exact internally, but its address would no
 longer be canonical. No merged unit or replacement is retained. Existing
 standalone exact coverage is preserved; the remaining helper scheduling
 issue overlaps previously exhausted source experiments.
+
+## Further bounded scalar and expression-order audits
+
+The direct scalar-store audit checked 435 canonical store sites for declared
+s8/u8/s16/u16/s32/u32/f32/f64 globals and found no width mismatch. It
+excludes array, pointer, and aggregate accesses. A separate same-position
+load/store comparison with matching operand bits and nearby instructions
+found no width-change candidate among the same-size nonmatching functions.
+
+In 800547EC, the ROM computes `progress - 460` before materializing 280
+for the horizontal HUD coordinate, while C schedules those literals in the
+opposite order. Both values and the arithmetic are correct. A separate
+float intermediate regressed from 4864 bytes/929 differing words to 4864/936;
+reusing `screenX` left the original output unchanged. Both experiments were
+reverted. This is scheduling evidence, not another literal-value defect.
+
+## Signed initializer induction variable in 80072AD0
+
+The bounded loop index is now s32. The ROM's 75-entry vector loop compares
+its byte offset against 900 with signed `slti` at 800731E0; the former u32
+declaration emitted `sltiu`. All loops using this index begin at zero and
+have small fixed bounds. The type change alters six induction comparisons
+from unsigned to signed and changes no other compiled words. It restores
+the instruction at 800731E0 exactly; other changed comparisons remain in
+regions with separate operand/scheduling differences. The audit stays
+2452/2452 bytes and improves from 253 to 252 differing words.

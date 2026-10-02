@@ -37,7 +37,7 @@ extern s32 func_80083D80(void *node, f32 *bounds, s32 flags);
 
 void func_80072AD0(void *object, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                    f32 *arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9) {
-    u32 index;
+    s32 index;
     void *target;
     void *node;
     f32 rate;

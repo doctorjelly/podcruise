@@ -50,14 +50,6 @@ extern void func_8004BE90(Race *);
 extern void func_8004CA50(Race *);
 extern s32 func_8008A6B4(char *buffer, const char *format, ...);
 
-#define PADDING_ONE 1
-#define PADDING_TWO 2
-#ifndef PADDING_WORDS
-#define PADDING_WORDS PADDING_TWO
-#endif
-
-static const s32 padding[PADDING_WORDS] = { 0 };
-
 void func_800469B4(Race *race, s32 mode) {
     char message[256];
 

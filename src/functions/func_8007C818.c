@@ -44,10 +44,6 @@ typedef struct Notice {
     f32 value;
 } Notice;
 
-/* Stand-in for the eight bytes of neighbouring constant pool that precede
-   this function's own two double literals in the original translation unit. */
-static const f64 padPool[1] = {1.0};
-
 extern void *D_8011C910[];
 extern f64 D_80120BF0;
 
@@ -73,9 +69,6 @@ void func_8007C818(Holder *holder, Actor *actor) {
     f32 scale;
     f32 matrix[4][4];
 
-#if defined(__GNUC__)
-    (void)padPool;
-#endif
     (void)spare0;
     (void)spare1;
     (void)spare2;

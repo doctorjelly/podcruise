@@ -17099,7 +17099,7 @@
       "id": "func_8007C818",
       "source": "src/functions/func_8007C818.c",
       "link_vram": "0x8007C818",
-      "rodata_vram": "0x800ADB60",
+      "rodata_vram": "0x800ADB68",
       "flags": [
         "-G",
         "0",
@@ -17131,7 +17131,8 @@
           "rom": "0x7D418",
           "size": 1072
         }
-      ]
+      ],
+      "rodata_alignment": 8
     },
     {
       "id": "func_8007F914",
@@ -27466,7 +27467,7 @@
       "id": "func_800469B4",
       "source": "src/functions/func_800469B4.c",
       "link_vram": "0x800469B4",
-      "rodata_vram": "0x800AAEE0",
+      "rodata_vram": "0x800AAEE8",
       "absolute_symbols": {
         "D_800A2198": "0x800A2198",
         "D_800A219C": "0x800A219C",
@@ -27500,7 +27501,8 @@
           "rom": "0x475B4",
           "size": 1040
         }
-      ]
+      ],
+      "rodata_alignment": 8
     },
     {
       "id": "func_8004A880",
