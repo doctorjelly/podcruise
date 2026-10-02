@@ -568,7 +568,7 @@ void func_80058058(Actor80058058 *actor, s32 mode) {
     func_8000AB24(
         sprite, (u8)frontArrowRed, (u8)frontArrowGreen,
         (u8)frontArrowBlue,
-        (u8)(u32)((f32)frontArrowAlpha * (D_800A59C0[mode] * D_800A59C0[mode])));
+        (u8)(s32)((f32)frontArrowAlpha * (D_800A59C0[mode] * D_800A59C0[mode])));
 
     sprite = mode == 0 ? 0x22 : 0x2A;
     func_8000A920(sprite, 1);
@@ -576,7 +576,7 @@ void func_80058058(Actor80058058 *actor, s32 mode) {
     func_8000AAC0(sprite, 0.75f, 0.75f);
     func_8000AB24(
         sprite, (u8)rearArrowRed, (u8)rearArrowGreen, (u8)rearArrowBlue,
-        (u8)(u32)((f32)rearArrowAlpha * (D_800A59C0[mode] * D_800A59C0[mode])));
+        (u8)(s32)((f32)rearArrowAlpha * (D_800A59C0[mode] * D_800A59C0[mode])));
 }
 
 #undef RANDOM_UNIT

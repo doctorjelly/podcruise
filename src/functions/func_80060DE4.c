@@ -131,7 +131,7 @@ void func_80060DE4(Object80060DE4 *object, s32 nextState) {
         break;
     case 1:
         applyRange = 0;
-        choice = (s32)(RANDOM_UNIT() * 5.0f);
+        choice = (u32)(RANDOM_UNIT() * 5.0f);
         switch (choice) {
         case 0:
             object->unk88 = 0x1B;

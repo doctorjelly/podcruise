@@ -516,3 +516,36 @@ regressions pass against the corrected production functions and fail with
 original sources. The full host/tool suite, 32-job byte-identical USA rebuild,
 safety check, strict source manifest, and whitespace check pass. Subsequent
 conversion-opcode triage remains outside this committed tranche.
+
+## US18 floating conversion shapes
+
+The first random animation selection in `func_80060DE4` now uses the
+canonical unsigned conversion; its later signed selection is unchanged.
+The resulting IDO 5.3 and 7.1 bodies are both 5220/5260 bytes, with 949
+differing words and ten missing words, versus the previous 5100-byte body,
+1224 differences and 40 missing words. The USA random helper can round to
+the normalized upper endpoint in single precision, so choice five reaches
+the default arm. No ordinary finite-input behavior change is claimed.
+
+The two terminal arrow fades in `func_80058058` now use signed truncation,
+matching the instructions at 80059D20 and 80059DF4. The component fade keeps
+its unsigned conversion. This removes two incorrect unsigned conversion
+sequences, but does not recover an exact body: IDO 5.3 changes from
+7676/7676 bytes and 1708 differing words to 7428/7676, 1665 differences
+and 62 missing words. The old equal size was not evidence of a correct
+conversion shape. Both tuning values at 800ACF04/08 are positive 223.25f
+(435F4000 at ROM ADB04/08); an early private negative-value inference used
+incorrect ROM offsets and was discarded. Six-profile IDO 5.3 sweeps of
+both changed sources found no exact match.
+
+A private `func_80020030` variant separated modes 13 and 15 to reproduce
+the two canonical double-precision subtraction blocks. It worsened the
+body from 4708/4708 bytes and 962 differences to 4752/4708 and 1084,
+and displaced the adjacent `func_80021294` by 44 bytes. All 100 numeric
+bytes within the combined unit's 144-byte pool were unchanged. The
+variant was rejected; no compensating padding or shared edit was retained.
+
+Final US18 validation retains 1181 exact functions / 361112 bytes. The
+32-job USA round trip is byte-identical. Full host/tool tests, safety,
+the strict source manifest, and whitespace checks pass. Both changed
+functions remain assembly-backed in the canonical rebuild.
