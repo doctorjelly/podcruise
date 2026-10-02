@@ -595,3 +595,35 @@ Final validation retains 1181 exact functions / 361112 bytes, with no compile
 or link errors. The 32-job USA rebuild is byte-identical; the full host/tool
 suite, safety, strict source manifest, and whitespace checks pass. The packet
 function remains assembly-backed in that rebuild.
+
+## US20 packet execution and compiler-search triage
+
+The bounded `func_800125E4` pilot passes 1,792 matrix cases, nine independent
+ROM packet fixtures and seventeen interpreter microtests. Both outcomes of
+all five conditional branches were exercised. The dedicated spec separates
+defined inputs from negative-index and trailing-array extension cases and
+records the scratch-stack comparison boundary. The parent reran the complete
+pilot. No source correction was demonstrated.
+
+The fresh `func_80076B34` baseline is 1312/1312 bytes with nine differing
+words. Its linked-target scorer finds three reorderings, not register-only
+differences. Three private argument-temporary variants were unchanged or
+worse, and no timed search was launched. Its spec now distinguishes these
+current measurements from the earlier 12-byte deficit.
+
+Two ten-function preflight batches scored existing linked objects against
+verified raw-ROM targets with stack and branch differences enabled. Only
+53C08, 46DC4 and 963CC had exclusively register penalties (scores 290, 360
+and 375 respectively). The remaining seventeen candidates had stack,
+branch, reordering, insertion or deletion penalties and were not sent to
+a permutation search. These are triage scores, not exactness evidence.
+
+A 60-second, 32-worker `func_80053C08` pilot improved the scorer from 290
+to 100. Independent compilation confirms a 1088/1088-byte candidate with
+17 differing words, versus 52 in the current source. Its only change is an
+empty conditional after an already-proven record access. All seventeen
+remaining differences are register substitutions in two short regions;
+one region also swaps the operands of a symmetric BNE. A second and final
+60-second search seeded from that candidate produced no improvement. The
+nonexact empty conditional was not retained. Current production C, compiler
+configuration, and exact coverage are unchanged by this tranche.
