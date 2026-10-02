@@ -117,7 +117,7 @@ void func_80076180(Owner *owner, Panel *panel, f32 requestX, f32 requestY) {
 
     node = panel->unk70;
     if (node != 0) {
-        scale = ((f32)func_80082BE0() / 2147483648.0f) * 0.20000004f + 1.0f;
+        scale = ((f32)func_80082BE0() / 2147483648.0f) * 0.20000004768371582f + 1.0f;
         func_80082BE0();
         brightness = 1.0f;
         twist = (f32)D_80120C00 * 30.0f;
@@ -137,7 +137,7 @@ void func_80076180(Owner *owner, Panel *panel, f32 requestX, f32 requestY) {
             case 16:
                 twist = zero = 0.0f;
                 scale = 1.0f;
-                brightness = ((f32)func_80082BE0() / 2147483648.0f) * 0.10000002f + 0.9f;
+                brightness = ((f32)func_80082BE0() / 2147483648.0f) * 0.10000002384185791f + 0.9f;
                 break;
             default:
                 zero = 0.0f;
@@ -158,7 +158,7 @@ void func_80076180(Owner *owner, Panel *panel, f32 requestX, f32 requestY) {
 
     node = panel->unkA8;
     if (node != 0) {
-        scale = ((f32)func_80082BE0() / 2147483648.0f) * 0.20000004f + 1.0f;
+        scale = ((f32)func_80082BE0() / 2147483648.0f) * 0.20000004768371582f + 1.0f;
         func_80082BE0();
         brightness = 1.0f;
         twist = (f32)D_80120C00 * 30.0f;
@@ -178,7 +178,7 @@ void func_80076180(Owner *owner, Panel *panel, f32 requestX, f32 requestY) {
             case 16:
                 twist = zero = 0.0f;
                 scale = 1.0f;
-                brightness = ((f32)func_80082BE0() / 2147483648.0f) * 0.10000002f + 0.9f;
+                brightness = ((f32)func_80082BE0() / 2147483648.0f) * 0.10000002384185791f + 0.9f;
                 break;
             default:
                 zero = 0.0f;

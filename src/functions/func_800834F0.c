@@ -37,7 +37,7 @@ extern s32 func_80017DAC(Node *node);
 extern Vertex D_800A6808[6];
 extern Command D_800A6868[6];
 extern s32 D_800A6890;
-extern f64 D_800ADD10;
+extern f32 D_800ADD10;
 extern f64 D_800ADD18;
 extern f64 D_800ADD20;
 extern f64 D_800ADD28;

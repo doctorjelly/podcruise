@@ -393,7 +393,8 @@
           "size": 520
         }
       ],
-      "rodata_vram": "0x800ADF18"
+      "rodata_vram": "0x800ADF18",
+      "rodata_alignment": 8
     },
     {
       "id": "func_80017F64",
@@ -9444,7 +9445,8 @@
           "rom": "0x1B008",
           "size": 2508
         }
-      ]
+      ],
+      "rodata_alignment": 4
     },
     {
       "id": "func_8005337C",
@@ -9492,7 +9494,8 @@
           "rom": "0x53F7C",
           "size": 1880
         }
-      ]
+      ],
+      "rodata_alignment": 4
     },
     {
       "id": "func_80064034",
@@ -26174,7 +26177,8 @@
           "rom": "0x32DF0",
           "size": 3388
         }
-      ]
+      ],
+      "rodata_alignment": 4
     },
     {
       "id": "func_80044CD8",

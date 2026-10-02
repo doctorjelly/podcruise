@@ -183,3 +183,43 @@ found no exact match. The function remains assembly-backed.
   candidate. Its 372 target bytes were checked against the canonical ROM
   after linking at 8007531C. Search artifacts stayed outside the repository;
   the source remains unchanged. No unmeasured iteration count is claimed.
+
+## Three-component projection scratch in func_8001F5AC
+
+The `screen` local is now three floats. The helper `func_80033590` writes
+only x/y/z, including through `func_800155EC` and `func_80015268`; the ROM
+places its destination at sp+0xA4 next to the three-float world vector at
+sp+0x98. The former four-float declaration had no fourth-component use.
+Parent audit remains 2616/2692 bytes but moves from 614 to 613 differing
+words, and the frame now matches the canonical 440 bytes instead of 448.
+A declaration-order trial added no improvement and was reverted.
+
+## Single-precision mesh threshold in func_800834F0
+
+D_800ADD10 is now declared `f32`. Canonical `lwc1` at 80083668 and `c.lt.s`
+at 80083674 establish both load width and comparison precision. The ROM word
+is `3DCCCCCD` (approximately 0.1). The previous `f64` declaration read eight
+bytes as approximately 5.238690037323579e-11, selecting a different mesh
+branch for ordinary small positive factors. The type correction yields
+2704/2192 bytes, 544 differing overlap words and 128 extra words, compared
+to 2708/2192, 544 and 129 before. An unrelated loop rewrite was rejected.
+
+A six-profile IDO 5.3 O1/O2/O3 MIPS II/MIPS III-32 sweep of the three newly
+changed sources (1F5AC, 76180, 834F0) found no exact match. Three transient
+compile failures in the concurrent O3/MIPS III pass were rerun serially;
+all three then compiled and remained nonexact. The full accepted-profile
+ledger completed with no compile/link failures.
+
+The independent `func_80027150` audit retained no edit: signed-byte selectors,
+initialization order at 8002719C–800271AC, random-angle calculation at
+800271FC–80027228, six-case phase dispatch, and increment-before-effect
+ordering agree with C. Its audit remains 2200/2236 bytes, 543 differing words,
+and 9 missing words.
+
+`tests/test_mesh_threshold.c` checks the fallback path at factor 0.0396 and
+the expanded mesh at factor 0.19, with canaries around 27-vertex and
+26-command buffers. Both paths pass. In a temporary host comparison, the
+previous source supplied with the canonical bytes' former double
+interpretation fails the fallback vertex-copy assertion. The test does not
+claim a host-native double has the ROM's byte order; the old interpreted
+numeric value is supplied explicitly for that comparison.

@@ -172,6 +172,9 @@ host-test:
 	$(CC) -std=c11 -Wall -Wextra -Werror -I include \
 		tests/test_texture_coordinates.c -o build/host/test_texture_coordinates
 	build/host/test_texture_coordinates
+	$(CC) -std=c11 -Wall -Wextra -Werror -I include \
+		tests/test_mesh_threshold.c -o build/host/test_mesh_threshold -lm
+	build/host/test_mesh_threshold
 	$(PYTHON) tools/gen_host_stubs.py
 	$(CC) -std=c11 -Wall -Wextra -Werror -Wno-error=return-type \
 		-Wno-error=address -Wno-unused-const-variable -I include \

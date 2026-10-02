@@ -105,7 +105,7 @@ extern void func_8001F48C(void *arg0);
 
 void func_8001F5AC(Actor8001F5AC *arg0) {
     char text[0x104];
-    f32 screen[4];
+    f32 screen[3];
     f32 world[3];
     Entry801198A8 *entry;
     Entry800A2DE0 *player;

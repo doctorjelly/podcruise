@@ -26,3 +26,33 @@ reverted because they worsened the comparison.
 Whole-pool nonmatches were not assigned guessed addresses. Padding, immediate
 constant materialization, and source-generated jump-target offsets must be
 resolved before those units can establish a single correct pool placement.
+
+## Linker alignment and exact float values (2026-10-02)
+
+An audit of linked `.rodata` contents exposed leading padding at four already
+configured addresses. Setting section alignment to 8 for `func_8008EADC` and
+4 for `func_8001A408`, `func_8005337C`, and `func_800321F0` removes the
+unintended leading bytes. Canonical references independently confirm bases
+ADF18, A9B44, ACE6C and AA3AC: the three jump-table loads are at 8001A9B8,
+800533BC and 80032208. The complete 16-byte numeric pool for 8008EADC now
+matches the ROM, correcting the earlier placement-only audit's assumption
+that the configured section start also placed its first constant there.
+
+| Unit | Alignment | C/ROM bytes | Differing words before/after |
+| --- | ---: | ---: | ---: |
+| `func_8008EADC` | 8 | 508/520 | 127/127 |
+| `func_8001A408` | 4 | 2432/2508 | 603/603 |
+| `func_8005337C` | 4 | 1880/1880 | 160/159 |
+| `func_800321F0` | 4 | 3388/3388 | 386/374 |
+
+The remaining jump-table contents still reflect nonmatching code layouts;
+these alignment corrections do not establish exact functions.
+
+Four literals in `func_80076180` were one binary32 step too small. The ROM
+loads D_800AD9E0/ADA20 with bits `3E4CCCD0` and D_800ADA18/ADA58 with bits
+`3DCCCCD0`, confirmed at instructions 80076440, 80076640, 80076528 and
+80076720. Exact decimal spellings `0.20000004768371582f` and
+`0.10000002384185791f` now emit those words, instead of `3E4CCCCF` and
+`3DCCCCCF`. All four compiled pool words were checked against ROM. The text
+comparison is unchanged at 2484/2484 bytes and 167 differing words; fixing
+the numeric payload is necessary independently of text matching.
