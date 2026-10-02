@@ -144,3 +144,42 @@ predicates folded away; artificial local-variable versions grew from 4696 to
 4732/4752 bytes but remained nonexact. All were rejected and the original
 4696/4880-byte source restored (1164 differing words, 46 missing). These
 experiments establish no new semantic correction.
+
+## Transition aggregate in func_80064034
+
+The four words at D_8011A240 through D_8011A24C are now a typed local view
+of one transition record: float progress, two integer enable flags, float
+final progress. Canonical instructions at 80064034–8006403C form the record
+base and load its +4 flag. Later accesses at 800642C0, 800644A8/80064680,
+and 800648DC confirm the +4/+8/+12 fields. Source reads still occur at the
+original use sites, including after helpers; no snapshot replaces those reads.
+The phase selection uses a conditional expression and initializes the existing
+model-progress local after it. No literal-pool mapping changed.
+
+Isolated results (C/ROM bytes; differing/missing words): original 2476/2580,
+616/26; typed view 2476/2580, 613/26; moved initialization 2480/2580, 612/25;
+retained conditional selection 2484/2580, 594/24. Parent re-audit confirmed
+the final result. A six-profile IDO 5.3 O1/O2/O3, MIPS II/MIPS III-32 sweep
+found no exact match. The function remains assembly-backed.
+
+## Rejected and unchanged follow-ups after f519834
+
+- `func_80056844`: float `pos`/`column` declarations changed 548 to 546
+  differing words at the same 2472/2980-byte size, but parent review rejected
+  the inferred type. The ROM stores truncated `pos` at 800568B4 and reloads
+  it as a signed halfword at 80056910; no persistent float use was found.
+  Original signed-halfword declarations restored. Volatile constants were
+  also rejected (2636 bytes, 652 differing words).
+- `func_80041258`: 1812/1884 bytes, 446 differing words, 18 missing. Anchor
+  tests at 80041418/80041540, timed double arithmetic at 80041664–80041778,
+  and completion/helper ordering at 80041988–8004199C agree with C. The two
+  16-by-3 arrays match stack blocks separated by 0xC0; no smaller layout
+  was justified. No source change.
+- `func_80060DE4`: moving its initial speed read before the early guards
+  changed 5100 to 5092 bytes, 1242 differing words and 42 missing; the
+  experiment stayed in /tmp and was not retained.
+- `func_8007531C`: a 60-second, eight-worker decomp-permuter pilot with
+  stack differences enabled started at score 10 and produced no improved
+  candidate. Its 372 target bytes were checked against the canonical ROM
+  after linking at 8007531C. Search artifacts stayed outside the repository;
+  the source remains unchanged. No unmeasured iteration count is claimed.

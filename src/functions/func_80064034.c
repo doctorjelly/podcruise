@@ -20,10 +20,14 @@ extern f32 D_800AD42C;
 extern f32 D_800AD430;
 extern PcVec3f D_80118D90;
 extern PcVec3f D_80118E50;
-extern f32 D_8011A240;
-extern s32 D_8011A244;
-extern s32 D_8011A248;
-extern f32 D_8011A24C;
+typedef struct {
+    f32 progress;
+    s32 firstEnabled;
+    s32 secondEnabled;
+    f32 finalProgress;
+} Transition80064034;
+
+extern Transition80064034 D_8011A240;
 extern PcVec3f D_8011C800;
 extern PcVec3f D_8011C810;
 extern PcVec3f D_8011C820;
@@ -66,6 +70,7 @@ void func_80064034(s32 selection) {
     void *node;
     void *effect;
     void *scroll;
+    Transition80064034 *transition;
     f32 phase;
     f32 firstScale;
     f32 angle;
@@ -75,11 +80,10 @@ void func_80064034(s32 selection) {
     f32 scale;
     s32 randomValue;
 
-    phase = D_8011A240;
+    transition = &D_8011A240;
+    phase = (transition->firstEnabled == 0)
+        ? 0.0f : transition->progress;
     modelProgress = 0.0f;
-    if (D_8011A244 == 0) {
-        phase = 0.0f;
-    }
 
     ambientStart.x = 80.0f;
     ambientStart.y = 75.0f;
@@ -107,7 +111,7 @@ void func_80064034(s32 selection) {
                   &direction);
     func_80086A20(-1, &lightAmbient, &lightDiffuse, &lightDirection);
 
-    progress = D_8011A240;
+    progress = transition->progress;
     resource = func_8003F800(0x456C6D6F, 4);
     if (D_800A5B3C == -1) {
         D_800A5B3C = selection;
@@ -129,7 +133,7 @@ void func_80064034(s32 selection) {
 
     node = nodes[2];
     if (node != 0) {
-        if (D_8011A244 == 0) {
+        if (transition->firstEnabled == 0) {
             progress = 0.0f;
         }
         func_8001745C(transform, angle, 0.0f, 0.0f);
@@ -159,7 +163,7 @@ void func_80064034(s32 selection) {
 
     node = nodes[8];
     if (node != 0) {
-        if (D_8011A248 == 0) {
+        if (transition->secondEnabled == 0) {
             progress = 0.0f;
         }
         func_8001745C(transform, angle, 0.0f, 0.0f);
@@ -187,8 +191,8 @@ void func_80064034(s32 selection) {
         }
     }
 
-    if (D_8011A248 != 0) {
-        modelProgress = D_8011A240;
+    if (transition->secondEnabled != 0) {
+        modelProgress = transition->progress;
     }
     node = nodes[5];
     if (node != 0) {
@@ -229,7 +233,7 @@ void func_80064034(s32 selection) {
                       angle * 4.0f);
     }
 
-    finalProgress = D_8011A24C;
+    finalProgress = transition->finalProgress;
     node = nodes[4];
     if (node != 0) {
         func_80017874(transform);
