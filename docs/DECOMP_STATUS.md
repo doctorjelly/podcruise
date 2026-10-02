@@ -20,7 +20,7 @@ and why the earlier `0x99000` interval was wrong.
 
 | Build | Exact functions | Exact bytes | Share of CPU text | Configured functions | Hybrid substitutions |
 |---|---:|---:|---:|---:|---:|
-| USA retail | 1,163 | 340,884 | 54.85% | 1,348 | 1,163 |
+| USA retail | 1,180 | 358,036 | 57.60% | 1,348 | 1,179 |
 | Japan retail | 913 | 204,688 | 32.93% | 990 | 911 |
 | Europe retail | 915 | 212,960 | 34.26% | 990 | 913 |
 | USA LRG revision | 1,069 | 254,816 | 41.00% | 1,348 | 1,064 |
@@ -33,7 +33,7 @@ and again as standalone units. No matching source or USA substitution was lost.
 translation units. The gap between configured and exact is nonmatching C,
 including candidates with current compile/link failures. The USA manifest
 covers 1,348 functions and 616,920 original bytes in reviewed C, or 99.26% of
-CPU text; only the exact 54.85% is eligible for substitution in the canonical
+CPU text; only the exact 57.60% is eligible for substitution in the canonical
 rebuild.
 
 The strict manifest audit finds four explained, unconfigured source files: two
@@ -45,9 +45,14 @@ Exact counts come from per-version linked-byte comparison reports, rerun on
 the current worktree and deduplicated by function address. A USA match is
 never assumed to carry to Japan or Europe.
 
-The current USA worktree passed `make roundtrip-us` byte-identically with 1,163
+The current USA worktree passed `make roundtrip-us` byte-identically with 1,179
 C substitutions. The Japan, Europe and LRG rows come from earlier
 `make roundtrip-all` checks and were not rerun after these USA-only changes.
+
+`func_80093180` is exact but not substituted. Its unit compiles a file-local
+copy of its callee `func_80092B10` ahead of it, so the object starts at
+`0x80092B10`, while `func_80092B10` is already substituted from its own unit.
+Substituting it needs the two units combined.
 
 Two current USA candidates remain assembly-backed despite ROM-supported
 corrections. `func_80076180` now preserves four previously omitted RNG advances:
