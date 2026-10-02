@@ -169,6 +169,9 @@ host-test:
 	$(CC) -std=c11 -Wall -Wextra -Werror -I include \
 		tests/test_float_format_cursor.c -o build/host/test_float_format_cursor
 	build/host/test_float_format_cursor
+	$(CC) -std=c11 -Wall -Wextra -Werror -I include \
+		tests/test_texture_coordinates.c -o build/host/test_texture_coordinates
+	build/host/test_texture_coordinates
 	$(PYTHON) tools/gen_host_stubs.py
 	$(CC) -std=c11 -Wall -Wextra -Werror -Wno-error=return-type \
 		-Wno-error=address -Wno-unused-const-variable -I include \

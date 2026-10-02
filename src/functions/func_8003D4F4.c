@@ -278,8 +278,8 @@ void func_8003D4F4(
                     break;
                 }
 
-                top = (f32)y - halfHeight + (f32)yStart * scaleY;
-                bottom = (f32)y - halfHeight + (f32)yEnd * scaleY;
+                top = (f32)(s16)y - halfHeight + (f32)yStart * scaleY;
+                bottom = (f32)(s16)y - halfHeight + (f32)yEnd * scaleY;
                 yTexture = (yEnd - yStart - 1) << 5;
                 if (reverseY != 0) {
                     rounded = (s32)(top + bias);
@@ -296,8 +296,8 @@ void func_8003D4F4(
                 xEnd = span;
             }
 
-            left = (f32)x - halfWidth + (f32)xStart * scaleX;
-            right = (f32)x - halfWidth + (f32)xEnd * scaleX;
+            left = (f32)(s16)x - halfWidth + (f32)xStart * scaleX;
+            right = (f32)(s16)x - halfWidth + (f32)xEnd * scaleX;
             if (reverseX != 0) {
                 xTexture = (xEnd - xStart - 1) << 5;
                 if (fixedX != 0) {

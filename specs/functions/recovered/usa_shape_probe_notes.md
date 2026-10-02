@@ -81,3 +81,66 @@ this is a structural recovery, not an exact match. No split or matching
 configuration changes were made. The private mechanical draft was only a hint;
 addresses, table entries, stores and branch destinations were checked against
 the canonical USA binary and disassembly before retaining the source change.
+
+## Current-object reads in func_80060DE4
+
+The initial switch now reads `object->unk14` rather than the incoming argument.
+The canonical load is at 80060ED0, after the proximity helper and node flag
+loop. Both node loops now reread `object->unk34`, matching loads at 80060EBC
+and 80060F20, rather than retaining one pointer snapshot. The choice-count
+and special-set locals are initialized before the proximity call, matching
+80060E30/80060E34 and their pre-call spills at 80060E78/80060E7C.
+
+Sequential isolated results (C/ROM bytes; differing overlap/missing words):
+
+- Baseline after separate cases 4/5: 4856/5260; 1190/101.
+- Current-object switch: 5080/5260; 1235/45.
+- Node-table rereads: 5096/5260; 1223/41.
+- Pre-call local initialization: 5100/5260; 1224/40.
+
+All 56 direct call targets still match the ROM in order. These edits recover
+source structure and load timing; they do not establish a new exact match or
+prove that the existing helper changes the state field. The USA split remains
+assembly-backed.
+
+## Startup branches in func_8001ADD4
+
+Mode-two state initialization now has explicit zero/one store branches,
+matching 8001AE98–8001AEA8. The four assigned-entry checks and the lock check
+now each independently clear D_800A23AC, matching stores at 8001B068,
+8001B080, 8001B094, 8001B0A8 and 8001B0BC. The former combined OR collapsed
+these into a common store. Behavior is unchanged for the distinct nonvolatile
+objects, but the source now expresses the ROM's separate conditional effects.
+Parent verification reports 5432/5680 bytes, 1324 differing words and 62
+missing, versus 5384/5680, 1337 differing and 74 missing before the edit.
+A loop-spelling experiment had no additional effect and was reverted.
+
+## Signed texture coordinates in func_8003D4F4
+
+Before floating-point geometry, the original loads incoming Y with signed
+halfword load at 8003DCFC from sp+0x192, and X at 8003DE0C/8003DE28/8003DF10
+from sp+0x18E. Its frame is 0x188 bytes, so these are the low halfwords of
+the incoming argument homes at +0x190 and +0x18C. The C now explicitly casts
+both coordinates through `s16` before converting to float. Previously values
+outside the signed-halfword range produced different geometry.
+
+Parent verification remains 2664/2984 bytes, 664 differing overlap words and
+80 missing. The changed load width is a semantic correction; shifted code
+positions leave the overall word-difference count unchanged. This function
+remains assembly-backed.
+
+`tests/test_texture_coordinates.c` captures the production renderer's geometry
+for ordinary coordinates (2,4), positive wraparound (65537,65539), and signed
+wraparound (65535,32768). The corrected source emits (2,4), (1,3), and
+(-1,-32768); the prior source fails the wrapped-coordinate assertion.
+
+A post-edit IDO 5.3 sweep of these three units at O1/O2/O3, each with MIPS II
+or MIPS III plus `-32`, produced no exact match. No per-unit flags changed.
+Do not repeat those six profiles on these unchanged source hashes.
+
+For `func_8006E6F8`, canonical constant comparisons at 8006F5D0–8006F5E4 and
+8006F73C–8006F754 compare 0.5 against zero before flag updates. Direct literal
+predicates folded away; artificial local-variable versions grew from 4696 to
+4732/4752 bytes but remained nonexact. All were rejected and the original
+4696/4880-byte source restored (1164 differing words, 46 missing). These
+experiments establish no new semantic correction.

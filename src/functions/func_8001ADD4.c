@@ -212,7 +212,11 @@ void func_8001ADD4(Controller8001ADD4 *controller) {
         func_800503E8(controller, 0x24, -1, 0);
 
         if (controller->mode == 2) {
-            controller->state = D_80113E60[controller->currentStage].active != 0;
+            if (D_80113E60[controller->currentStage].active == 0) {
+                controller->state = 0;
+            } else {
+                controller->state = 1;
+            }
         } else if (controller->mode == 1 || controller->mode == 0x12) {
             controller->state = 0;
             controller->currentStage = 0;
@@ -251,11 +255,19 @@ void func_8001ADD4(Controller8001ADD4 *controller) {
         D_800A23B4 = 4;
         if (controller->mode == 1 || controller->mode == 0x12) {
             D_800A23AC = 4;
-            if (D_80113680[0].assignedEntry != -1
-                    || D_80113680[1].assignedEntry != -1
-                    || D_80113680[2].assignedEntry != -1
-                    || D_80113680[3].assignedEntry != -1
-                    || controller->locked != 0) {
+            if (D_80113680[0].assignedEntry != -1) {
+                D_800A23AC = 0;
+            }
+            if (D_80113680[1].assignedEntry != -1) {
+                D_800A23AC = 0;
+            }
+            if (D_80113680[2].assignedEntry != -1) {
+                D_800A23AC = 0;
+            }
+            if (D_80113680[3].assignedEntry != -1) {
+                D_800A23AC = 0;
+            }
+            if (controller->locked != 0) {
                 D_800A23AC = 0;
             }
         }

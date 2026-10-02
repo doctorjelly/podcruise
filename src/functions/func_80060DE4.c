@@ -73,7 +73,6 @@ extern s32 func_80082BE0(void);
 
 void func_80060DE4(Object80060DE4 *object, s32 nextState) {
     PcVec3f delta;
-    Node80060DE4 **nodes;
     Node80060DE4 **scan;
     Object80060DE4 *other;
     f32 valueA;
@@ -115,18 +114,19 @@ void func_80060DE4(Object80060DE4 *object, s32 nextState) {
     if (speed < 0.0f) {
         speed = -speed;
     }
+    choiceCount = 5;
+    specialSet = 0;
     func_800636D0(object);
 
-    nodes = object->unk34;
-    for (index = 0; nodes[index] != 0; index++) {
-        nodes[index]->unk100 |= 0x10000000;
+    for (index = 0; object->unk34[index] != 0; index++) {
+        object->unk34[index]->unk100 |= 0x10000000;
     }
 
-    switch (nextState) {
+    switch (object->unk14) {
     case 0:
         object->unk78 = 0.0f;
-        for (index = 0; nodes[index] != 0; index++) {
-            nodes[index]->unk100 &= 0xEFFFFFFF;
+        for (index = 0; object->unk34[index] != 0; index++) {
+            object->unk34[index]->unk100 &= 0xEFFFFFFF;
         }
         break;
     case 1:
@@ -298,8 +298,6 @@ void func_80060DE4(Object80060DE4 *object, s32 nextState) {
         }
         break;
     case 0x12:
-        choiceCount = 5;
-        specialSet = 0;
         if (object->unk50.x == D_800A4C00.unk2C &&
             object->unk50.y == D_800A4C00.unk30) {
             specialSet = 1;
