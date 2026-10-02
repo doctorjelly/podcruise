@@ -153,7 +153,9 @@
           "rom": "0xE1EC",
           "size": 496
         }
-      ]
+      ],
+      "rodata_vram": "0x800A863C",
+      "rodata_alignment": 4
     },
     {
       "id": "func_80013DC0",
@@ -29136,7 +29138,9 @@
           "rom": "0x2C174",
           "size": 1584
         }
-      ]
+      ],
+      "rodata_vram": "0x800A9E90",
+      "rodata_alignment": 4
     },
     {
       "id": "func_80074CDC",

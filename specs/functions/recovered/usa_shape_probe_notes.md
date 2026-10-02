@@ -259,3 +259,44 @@ A private direct-scalar rewrite removes the cross-object pointer view but
 regresses from 3312 bytes/596 differing words to 3292/756, changing address
 materialization and scheduling. It was not retained; this layout concern
 remains open rather than being treated as a verified aggregate declaration.
+
+## Unsigned selected rank in func_800228C0
+
+The selected scroll rank now explicitly converts the signed player rank to
+`u8`. Canonical 800231BC loads the stored primary rank with `lbu`; when
+the signed secondary rank is smaller, 800231E8 masks it with `andi 0xFF`.
+The selection comparison itself remains signed (`lb` at 800231CC and
+`slt` at 800231D8). Thus a negative byte still participates in the signed
+selection but becomes its unsigned low-byte value before the threshold and
+scroll calculation. Both assignments now preserve that distinction.
+
+Parent comparison finds only two changed compiled words: moves become byte
+masks at offsets 0x8D8 and 0x900. The audit remains 6064/6064 bytes with
+1446 differing words. The scalar integer-load scan's other candidate, the
+`lbu` for 8001A408's switch, is a valid bounds-check optimization; no change
+was warranted there.
+
+## Case-local index reloads in func_8002B574
+
+Each top-level case now loads `D_800A2620`, including distinct call/no-call
+paths in case 9. This reproduces canonical tails at 8002B72C, 8002B734 and
+8002B740. With the table configured at 800A9E90, all 18 used jump-table
+entries exactly match ROM. The compiled function remains 1584/1584 bytes:
+131 differing words before placement, 129 after placement alone, and 134
+after the recovered load structure. Stack and register differences remain;
+the exact table is not a claim of exact code. The emitted eight-byte tail
+padding is not part of the 72-byte canonical table.
+
+The six-profile IDO 5.3 O1/O2/O3 MIPS II/MIPS III-32 sweep of 228C0,
+2B574 and 0D5EC found no exact match. One concurrent O3/MIPS II compile
+failed; a serial retry compiled every unit and remained nonexact.
+
+## Real audio-helper composition experiment
+
+A private replacement of 8F3FC's fabricated 8EEE4 stand-in with its recovered
+implementation compiles the helper to 460 rather than canonical 464 bytes.
+The subsequent 8F0B4, 8F34C and 8F3FC bodies therefore start four bytes early.
+The 176-byte 8F34C body remains exact internally, but its address would no
+longer be canonical. No merged unit or replacement is retained. Existing
+standalone exact coverage is preserved; the remaining helper scheduling
+issue overlaps previously exhausted source experiments.

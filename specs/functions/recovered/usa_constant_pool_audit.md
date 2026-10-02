@@ -113,3 +113,21 @@ MIPS II/MIPS III-32 profiles. None matched. One concurrent O3/MIPS II
 compile failed transiently; its serial retry compiled both functions at
 4708/3312 bytes and remained nonexact. The accepted full ledger has no
 compile/link failures.
+
+## Selector table prefix and two rejected mappings
+
+`func_8000D5EC` no longer emits three artificial zero words before its jump
+table. Canonical dispatch at 8000D604/8000D60C references 800A863C directly,
+which is now the configured table start with alignment 4. Eight of nine
+entries match ROM; the final entry is 8000D7DC instead of 8000D7CC because
+the function still emits 512 bytes for a 496-byte target. Differing words
+improve from 71 to 69. No toggle or register experiments were repeated.
+
+No pool mapping is retained for 80064034: its emitted 0.1f word is an
+immediate in ROM at 80064524/80064528. A matching byte sequence elsewhere
+does not establish a pool address. For 80047DB0, ROM loads 3B808080 at
+AAF9C and double 3F689374BC6A7EFA at AAFA0, verified at instructions
+800481F0 and 80048280. Both source values are correct, but the isolated
+object inserts four bytes before the double while ROM has none. Moving
+the section alone cannot reproduce both addresses; compilation-unit
+composition remains a possible follow-up.

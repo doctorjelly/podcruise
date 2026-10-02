@@ -319,12 +319,12 @@ void func_800228C0(PcController800228C0 *owner) {
         secondaryRank = -1;
         D_800A255C = (s8)primaryRank;
         D_800A2560 = -1;
-        rank = primaryRank;
+        rank = (u8)primaryRank;
         if (owner->playerCount >= 2) {
             secondaryRank = (s8)results[1]->placement;
             D_800A2560 = (s8)secondaryRank;
             if (secondaryRank < primaryRank) {
-                rank = secondaryRank;
+                rank = (u8)secondaryRank;
             }
         }
         if (rank >= 4) {

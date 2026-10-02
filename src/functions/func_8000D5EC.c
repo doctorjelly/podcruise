@@ -7,14 +7,6 @@ typedef struct Holder {
     s32 unk1C;
 } Holder;
 
-/* The constant pool that precedes this function's jump table belongs to
-   neighbouring code; in an isolated probe unit this stand-in reserves the
-   same number of words so that the table keeps its ROM address. */
-#ifndef POOL_PAD_WORDS
-#define POOL_PAD_WORDS 3
-#endif
-static const u32 D_800A8630[POOL_PAD_WORDS] = { 0 };
-
 extern s32 D_8009B7D0;
 extern u32 D_8009B7D8;
 extern s32 D_800A52D0;
@@ -31,8 +23,6 @@ extern void func_8000C6C8(f32 *value, f32 rate, f32 scale, f32 lower, f32 upper)
 void func_8000D5EC(s32 selector, f32 value) {
     s32 *toggle;
     Holder *holder;
-
-    (void)D_800A8630;
 
     switch (selector) {
     case 0:

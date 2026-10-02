@@ -62,6 +62,7 @@ void func_8002B574(Unk8002B574 *obj) {
             mode = 0xA2;
             func_8008A6B4(line, D_800A9820);
         }
+        index = D_800A2620;
         break;
     case 8:
         if (obj->unk10 == 0) {
@@ -82,11 +83,15 @@ void func_8002B574(Unk8002B574 *obj) {
                 break;
             }
         }
+        index = D_800A2620;
         break;
     case 9:
         if (obj->unk10 == 0 && obj->unk70 == 1) {
             slot[0] = 0xA3;
             func_8008A6B4(line, D_800A9864);
+            index = D_800A2620;
+        } else {
+            index = D_800A2620;
         }
         break;
     case 0:
@@ -100,16 +105,16 @@ void func_8002B574(Unk8002B574 *obj) {
     case 15:
     case 16:
     case 17:
+        index = D_800A2620;
         break;
     case 6:
     case 10:
     case 11:
     case 14:
     default:
+        index = D_800A2620;
         break;
     }
-
-    index = D_800A2620;
 
     obj->unk58 = obj->unk58 + D_80120BF8;
     if (obj->unk58 >= 1.0f && obj->unk5C != 0) {
