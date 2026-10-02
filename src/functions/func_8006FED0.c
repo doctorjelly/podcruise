@@ -1,7 +1,5 @@
 /* Independently written from the specification for func_8006FED0. */
-/* Behavior-recovered only: this is a no-op guard whose 24 original bytes the
-   accepted IDO 5.3 -O2 profile cannot reproduce (it deletes the empty guard
-   entirely). See the specification for the shapes that were ruled out. */
+/* No-op flag guard: nested empty tests keep IDO -O2 from deleting the branch. */
 
 #include "podcruise/types.h"
 
@@ -12,5 +10,9 @@ typedef struct {
 
 void func_8006FED0(Func8006FED0Target *arg0) {
     if (arg0->unk60 & 0x80) {
+        if (arg0->unk60 & 0x40) {
+            if (arg0 != 0) {
+            }
+        }
     }
 }

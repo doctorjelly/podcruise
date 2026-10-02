@@ -83,8 +83,8 @@ void func_80049C14(s32 arg0, s32 index, f32 amount) {
     func_80015288((PcVec3f *)&matrix[3][0], &axis);
     func_80017BA8(object, matrix);
 
-    if (((s32 *)&D_800A51F4)[3] != index || D_800A4BC0 != 0) {
-        D_800A5200 = index;
+    if (D_800A5200 != (index | 0) || D_800A4BC0 != 0) {
+        ((s32 *)&D_800A51F4)[3] = index;
         if (func_80083D80(object, &D_8011AC48.x, 0) == 0) {
             func_80015268(&D_8011AC48, 0.0f, 0.0f, 0.0f);
             func_80015268(&D_8011AC54, -10.0f, -10.0f, -10.0f);

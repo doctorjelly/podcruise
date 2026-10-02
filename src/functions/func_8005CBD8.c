@@ -81,8 +81,6 @@ s32 func_8005CBD8(PcWord5C *self, Msg5CBD8 *message, f32 *arg2) {
             self[0x8 / 4].s = 0;
             self[0x30 / 4].s = 0;
             self[0x2C / 4].s = 0;
-            self[0x10 / 4].s = 0;
-            self[0x14 / 4].s = 0;
             self[0x64 / 4].f = 1.0f;
             self[0x68 / 4].f = 0.0f;
             self[0x6C / 4].f = 0.0f;
@@ -100,7 +98,7 @@ s32 func_8005CBD8(PcWord5C *self, Msg5CBD8 *message, f32 *arg2) {
             self[0x9C / 4].f = 0.0f;
             self[0xA0 / 4].f = 1.0f;
             self[0xC / 4].f = 0.0;
-            for (index = 2; index < 6; index++) {
+            for (index = 0; index < 6; index++) {
                 self[0x10 / 4 + index].s = 0;
             }
             self[0x28 / 4].s = 0;
@@ -152,8 +150,8 @@ s32 func_8005CBD8(PcWord5C *self, Msg5CBD8 *message, f32 *arg2) {
             message->id = 0x4E41736E;
             count = self[0x1BC / 4].s;
             for (index = 0; index < count; index++) {
-                if (D_8011B1B8[index].unk00 == message->unk08) {
-                    message->unk08 = D_8011B1B8[index].unk84;
+                if (message->unk08 == ((Entry5CBD8 *)((u8 *)D_8011B1B8 + index * 0x88))->unk00) {
+                    message->unk08 = ((Entry5CBD8 *)((u8 *)D_8011B1B8 + index * 0x88))->unk84;
                     func_8003F99C(message->unk0C, message);
                     count = self[0x1BC / 4].s;
                     index = count;

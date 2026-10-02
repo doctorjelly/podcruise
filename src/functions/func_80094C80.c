@@ -1,83 +1,90 @@
 /* Recovered from specification specs/functions/recovered/func_80094C80.md */
 #include "podcruise/types.h"
 
-typedef struct Info80094C80 {
-    u16 unk0;
-    u8 unk2;
-    u8 unk3;
-} Info80094C80;
+typedef struct ContStatus {
+    u16 type;
+    u8 status;
+    u8 errnum;
+} ContStatus;
 
-typedef struct Block80094C80 {
-    u8 unk0[12];
-} Block80094C80;
+typedef struct EepFormat {
+    u8 txsize;
+    u8 rxsize;
+    u8 cmd;
+    u8 addr;
+    u8 data[8];
+} EepFormat;
 
+struct PifRam80094C80 {
+    u32 ramarray[15];
+    u32 status;
+};
+
+extern struct PifRam80094C80 D_8014C530;
 extern u8 D_80149CB0;
-extern u8 D_8014C530[];
 
 extern void func_800905F0(void);
 extern void func_80090634(void);
-extern s32 func_800950F4(void *, Info80094C80 *);
-extern void func_80094E44(u8);
-extern s32 func_800907D0(s32, u8 *);
-extern void func_80087E80(void *, void *, s32);
+extern s32 func_800950F4(void *, ContStatus *);
+extern void func_80094E44(u8 address);
+extern s32 func_800907D0(s32 direction, void *block);
+extern s32 func_80087E80(void *queue, void *message, s32 mode);
 
-s32 func_80094C80(arg0, arg1, arg2)
-void *arg0;
-u8 arg1;
-u8 *arg2;
+s32 func_80094C80(mq, address, buffer)
+void *mq;
+u8 address;
+u8 *buffer;
 {
-    s32 status;
-    s32 unused;
-    u8 *source;
-    s32 index;
-    Info80094C80 info[1];
-    Block80094C80 block;
+    s32 ret;
+    s32 i;
+    u16 type;
+    u8 *ptr = (u8 *)&D_8014C530;
+    ContStatus sdata;
+    EepFormat eepromformat;
 
-    (void)unused;
-    source = D_8014C530;
     func_800905F0();
-    status = func_800950F4(arg0, info);
-    if (status == 0) {
-        switch (info->unk0 & 0xC000) {
-        case 0x8000:
-            if (arg1 >= 0x40) {
-                status = -1;
-            }
-            break;
-        case 0xC000:
-            if ((arg1 + 0) >= 0x100) {
-                status = -1;
-            }
-            break;
-        default:
-            status = 8;
+    ret = func_800950F4(mq, &sdata);
+
+    if (ret == 0) {
+        type = sdata.type & 0xC000;
+        switch (type) {
+            case 0x8000:
+                if (address >= 0x40) {
+                    ret = -1;
+                }
+                break;
+            case 0xC000:
+                if ((address + 0) >= 0x100) {
+                    ret = -1;
+                }
+                break;
+            default:
+                ret = 8;
         }
     }
-    if (status != 0) {
+    if (ret != 0) {
         func_80090634();
-        return status;
+        return ret;
     }
-    {
-        while (info->unk2 & 0x80) {
-            func_800950F4(arg0, info);
-        }
-        func_80094E44(arg1);
-        func_800907D0(1, D_8014C530);
-        func_80087E80(arg0, 0, 1);
-        func_800907D0(0, D_8014C530);
-        D_80149CB0 = 4;
-        func_80087E80(arg0, 0, 1);
-        for (index = 4; index != 0; index--) {
-            source++;
-        }
-        block = *(Block80094C80 *)source;
-        status = (block.unk0[1] & 0xC0) >> 4;
-        if (status == 0) {
-            for (index = 0; index < 8; index++) {
-                *arg2++ = block.unk0[index + 4];
-            }
+    while (sdata.status & 0x80) {
+        func_800950F4(mq, &sdata);
+    }
+    func_80094E44(address);
+    ret = func_800907D0(1, &D_8014C530);
+    func_80087E80(mq, 0, 1);
+    ret = func_800907D0(0, &D_8014C530);
+    D_80149CB0 = 4;
+    func_80087E80(mq, 0, 1);
+    for (i = 0; i < 4; i++) {
+        ptr++;
+    }
+    eepromformat = *(EepFormat *)ptr;
+    ret = (eepromformat.rxsize & 0xC0) >> 4;
+    if (ret == 0) {
+        for (i = 0; i < 8; i++) {
+            *buffer++ = eepromformat.data[i];
         }
     }
     func_80090634();
-    return status;
+    return ret;
 }

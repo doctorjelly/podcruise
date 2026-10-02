@@ -62,11 +62,12 @@ unsigned char selected;
     }
     for (i = selected; i < selected + 1; i++) {
         for (j = 0; j < D_800A21B4[i]; j++) {
-            elem = 0x37 + j * 0x23;
             if (object->unk_6C != 0) {
                 state = (D_80113E6C[i] >> (j * 2)) % 4;
             }
             id = 0x60 + i * 7 + j;
+            elem = 0x37 + j * 0x23;
+            number = j + 1;
             func_8000A920(id, 1);
             func_8000AA04(id, elem, 0x5E);
             func_8000AAC0(id, 0.6667f, 0.6667f);
@@ -89,7 +90,6 @@ unsigned char selected;
             } else if (state > 0) {
                 func_8000AB24(id, 0xFF, 0xFF, 0xFF, (u8)alpha);
             }
-            number = j + 1;
             func_8008A6B4((char *)&buffer, D_800A8AE0, number);
             if (object->unk_6C == 0 || func_8002DA0C((s8)i, (u8)j) != 0) {
                 if (func_8002DAD0(object, (s8)i, (u8)j) == 0) {

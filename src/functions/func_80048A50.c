@@ -21,10 +21,6 @@ typedef struct {
 extern Node D_80118D60;
 extern Node D_80118E20;
 extern u8 D_80113E7C;
-extern f32 D_800AAFB8;
-extern f32 D_800AAFBC;
-extern f32 D_800AAFC0;
-extern f32 D_800AAFC4;
 extern Info D_800A3090;
 extern void **D_8011A508[];
 
@@ -57,12 +53,12 @@ void func_80048A50(s32 arg0) {
 
     (void)arg0;
     spB4 = func_80014F54(D_80118D60.unk30 - D_80118E20.unk30, D_80118E20.unk34 - D_80118D60.unk34);
+    i = 0;
     spA4[0] = 80.0f;
     spA4[1] = 75.0f;
     spA4[2] = 50.0f;
     if (D_80113E7C > 0) {
-        i = 0;
-        scale = D_800AAFB8;
+        scale = 0.3f;
         do {
         value = (f32)((f64)((f32)func_80082BE0() / 2147483648.0f) * 2.5 + 2.0);
         func_80033590(D_8011A508[i + 52], spB8);
@@ -79,8 +75,10 @@ void func_80048A50(s32 arg0) {
             }
             func_8000EA4C(obj, 0, 0, 200, 200, 255, 255);
             item = func_8003F800(0x456C6D6F, i + 0x34);
-            if ((f32)D_800A3090.unk50 * D_800AAFBC <= func_80033B94(item->unk34)) {
-                if (func_80033B94(item->unk34) <= (f32)D_800A3090.unk52 * D_800AAFC0) {
+            if (item == 0) {
+            }
+            if ((f32)D_800A3090.unk50 * 0.0666f <= func_80033B94(item->unk34)) {
+                if (func_80033B94(item->unk34) <= (f32)D_800A3090.unk52 * 0.0666f) {
                     spA4[0] = 80.0f;
                     spA4[1] = 75.0f;
                     spA4[2] = (f32)((f64)((f32)func_80082BE0() / 2147483648.0f) * 120.0 + -30.0) + 50.0f;
@@ -138,6 +136,6 @@ void func_80048A50(s32 arg0) {
     sp98[2] = 200.0f;
     sp8C[0] = 0.0f;
     sp8C[1] = 0.0f;
-    sp8C[2] = D_800AAFC4;
+    sp8C[2] = -40000.0f;
     func_80086A20(-1, spA4, sp98, sp8C);
 }

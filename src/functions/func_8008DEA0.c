@@ -56,47 +56,51 @@ extern void func_80096710(u8 *, u8 *, s32);
 
 void func_8008DEA0(State8008DEA0 *state, s32 mode, Src8008DEA0 *source) {
     Src8008DEA0 *src;
-    s32 q;
+    Geom8008DEA0 *g;
     Chan8008DEA0 *c;
 
-    switch (mode) {
-    case 5:
-        state->unk28 = source;
-        state->unk44 = source->unk0;
-        state->unk38 = 0;
-        switch (source->unk8) {
-        case 0:
-            state->unk4 = func_8008E54C;
-            q = state->unk28->unk4 / 9 * 9;
-            state->unk28->unk4 = q;
-            state->unk2C = (state->unk28->unk10->unk0 << 4) * state->unk28->unk10->unk4;
-            c = state->unk28->unkC;
-            if (c != 0) {
-                state->unk1C = c->unk0;
-                state->unk20 = state->unk28->unkC->unk4;
-                state->unk24 = state->unk28->unkC->unk8;
-                func_80096710(state->unk28->unkC->unkC, state->unk18, 0x20);
-            } else {
+    if (mode != 4) {
+        if (mode == 5) {
+            state->unk28 = source;
+            state->unk44 = source->unk0;
+            state->unk38 = 0;
+            switch (source->unk8) {
+            case 0:
+                src = state->unk28;
+                state->unk4 = func_8008E54C;
+                src->unk4 = src->unk4 / 9 * 9;
+                src = state->unk28;
+                g = src->unk10;
+                state->unk2C = (g->unk0 << 4) * g->unk4;
+                c = src->unkC;
+                if (c != 0) {
+                    state->unk1C = c->unk0;
+                    state->unk20 = src->unkC->unk4;
+                    state->unk24 = src->unkC->unk8;
+                    func_80096710(src->unkC->unkC, state->unk18, 0x20);
+                    return;
+                }
                 state->unk24 = 0;
                 state->unk20 = 0;
                 state->unk1C = 0;
-            }
-            break;
-        case 1:
-            state->unk4 = func_8008E074;
-            if (state->unk28->unkC != 0) {
-                state->unk1C = state->unk28->unkC->unk0;
-                state->unk20 = state->unk28->unkC->unk4;
-                state->unk24 = state->unk28->unkC->unk8;
-            } else {
+                return;
+            case 1:
+                src = state->unk28;
+                state->unk4 = func_8008E074;
+                c = src->unkC;
+                if (c != 0) {
+                    state->unk1C = c->unk0;
+                    state->unk20 = src->unkC->unk4;
+                    state->unk24 = src->unkC->unk8;
+                    return;
+                }
                 state->unk24 = 0;
                 state->unk20 = 0;
                 state->unk1C = 0;
+                return;
             }
-            break;
         }
-        break;
-    case 4:
+    } else {
         src = state->unk28;
         state->unk3C = 0;
         state->unk40 = 1;
@@ -104,15 +108,16 @@ void func_8008DEA0(State8008DEA0 *state, s32 mode, Src8008DEA0 *source) {
         if (src != 0) {
             state->unk44 = src->unk0;
             if (src->unk8 == 0) {
-                if (src->unkC != 0) {
-                    state->unk24 = src->unkC->unk8;
+                c = src->unkC;
+                if (c != 0) {
+                    state->unk24 = c->unk8;
                 }
             } else if (src->unk8 == 1) {
-                if (src->unkC != 0) {
-                    state->unk24 = src->unkC->unk8;
+                c = src->unkC;
+                if (c != 0) {
+                    state->unk24 = c->unk8;
                 }
             }
         }
-        break;
     }
 }

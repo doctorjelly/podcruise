@@ -3,7 +3,9 @@
 
 extern s32 D_800A7EE0;
 extern u8 D_80149CB0;
-extern u8 D_8014D720[];
+typedef struct { u8 ramarray[0x3C]; u32 pifstatus; } PifRam;
+typedef struct { u8 dummy, txsize, rxsize, cmd, addrh, addrl, data[32], datacrc, end; } RamFmt;
+extern PifRam D_8014D720;
 
 extern void func_800905F0(void);
 extern void func_80090634(void);
@@ -16,13 +18,12 @@ extern s32 func_80087E80(void *queue, void **out, s32 blocking);
 
 s32 func_800928F0(void *arg0, s32 arg1, u16 arg2, u8 *arg3, s32 arg4) {
     s32 status;
-    u8 *p;
+    RamFmt *p;
     s32 retry;
-    s32 check;
+    u8 check;
     s32 index;
-    s32 tmp;
 
-    p = D_8014D720;
+    p = (RamFmt *)&D_8014D720;
     retry = 2;
     if (arg4 != 1 && arg2 < 7 && arg2 != 0) {
         return 0;
@@ -34,30 +35,31 @@ s32 func_800928F0(void *arg0, s32 arg1, u16 arg2, u8 *arg3, s32 arg4) {
         index = 0;
         while (index < arg1) {
             index++;
-            *p++ = 0;
+            *(u8 *)p = 0;
+            p = (RamFmt *)((u8 *)p + 1);
         }
-        index = tmp = *(s32 *)&D_8014D720[0x3C] = 1;
-        p[0] = 0xFF;
-        p[1] = 0x23;
-        p[2] = index;
-        p[3] = 3;
-        p[0x26] = 0xFF;
-        p[0x27] = 0xFE;
+        D_8014D720.pifstatus = 1;
+        p->dummy = 0xFF;
+        p->txsize = 0x23;
+        p->rxsize = 1;
+        p->cmd = 3;
+        p->datacrc = 0xFF;
+        p->end = 0xFE;
     } else {
-        p = &D_8014D720[arg1];
+        p = (RamFmt *)(D_8014D720.ramarray + arg1);
     }
-    p[4] = arg2 >> 3;
-    p[5] = func_80093A90(arg2) | (arg2 << 5);
-    func_80092250(arg3, &p[6], 0x20);
-    func_800907D0(1, D_8014D720);
-    check = func_80093B60(arg3) & 0xFF;
+    p->addrh = arg2 >> 3;
+    p->addrl = func_80093A90(arg2) | (arg2 << 5);
+    func_80092250(arg3, p->data, 0x20);
+    func_800907D0(1, &D_8014D720);
+    check = func_80093B60(arg3);
     func_80087E80(arg0, 0, 1);
     do {
-        func_800907D0(0, D_8014D720);
+        func_800907D0(0, &D_8014D720);
         func_80087E80(arg0, 0, 1);
-        status = (p[2] & 0xC0) >> 4;
+        status = (p->rxsize & 0xC0) >> 4;
         if (status == 0) {
-            if (p[0x26] != check) {
+            if (check != p->datacrc) {
                 status = func_80090880(arg0, arg1);
                 if (status != 0) {
                     break;

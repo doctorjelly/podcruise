@@ -15,8 +15,6 @@ typedef struct {
 } Entry8002AD70;
 
 extern f32 D_800A2610;
-#define D_800A2614_ABS (*(f32 *)0x800A2614)
-#define D_800A2610_ABS (*(f32 *)0x800A2610)
 extern f32 D_800A2614;
 extern Entry8002AD70 D_800A31E0[];
 extern s16 D_800A4BC0;
@@ -29,22 +27,21 @@ extern void func_8002B3C8(Actor8002AD70 *);
 
 void func_8002AD70(Actor8002AD70 *actor) {
     s32 choice;
-    f32 timer;
-    f32 new_var;
+    f32 *timer;
+    f32 *limit;
 
+    timer = &D_800A2610;
+    limit = &D_800A2614;
     choice = actor->unk34;
     if (-1.0f == D_800A2614) {
-        D_800A2614_ABS = (f32)(((f32)func_80082BE0() / (f32)2147483648.0) * 4.0 + 3.0);
+        *limit = (f32)(((f32)func_80082BE0() / (f32)2147483648.0) * 4.0 + 3.0);
     }
     func_8002B3C8(actor);
     if (D_800A4BC0 != 1) {
-        timer = D_800A2610;
-        timer += D_80120BF8;
-        D_800A2610_ABS = timer;
-        new_var = D_800A2614_ABS;
-        if (new_var <= timer) {
-            D_800A2610_ABS = 0.0f;
-            D_800A2614_ABS = (f32)(((f32)func_80082BE0() / (f32)2147483648.0) * 4.0 + 3.0);
+        *timer = *timer + D_80120BF8;
+        if (*limit <= *timer) {
+            *timer = 0.0f;
+            *limit = (f32)(((f32)func_80082BE0() / (f32)2147483648.0) * 4.0 + 3.0);
             do {
                 choice = (s32)(((f32)func_80082BE0() / (f32)2147483648.0) * 10.0f) + 0x15;
                 if ((choice >= 0x16) && (choice < 0x1A) && (D_800A31E0[actor->unk72].unk4 == 0x1E)) {

@@ -59,12 +59,12 @@ extern void func_80035BF0(Params *, s32);
 extern void func_80036314(void *, s16, s16);
 extern void func_800366DC(Slot *);
 
-#define GFX_PIPESYNC(pkt) { CommandWord *_g = (pkt)++; _g->lo = 0; _g->hi = 0xE7000000; }
-#define GFX_SETGEOM(pkt, w) { CommandWord *_g = (pkt)++; _g->lo = (u32)(w); _g->hi = 0xD9FFFFFF; }
+#define GFX_PIPESYNC(pkt) { CommandWord *_g = (pkt)++; _g->hi = 0xE7000000; _g->lo = 0; }
+#define GFX_SETGEOM(pkt, w) { CommandWord *_g = (pkt)++; _g->hi = 0xD9FFFFFF; _g->lo = (u32)(w); }
 #define GFX_CLEARGEOM(pkt, w) { CommandWord *_g = (pkt)++; _g->hi = 0xD9000000 | (~(u32)(w) & 0xFFFFFF); _g->lo = 0; }
-#define GFX_NOTEX(pkt) { CommandWord *_g = (pkt)++; _g->lo = 0; _g->hi = 0xD7000000; }
+#define GFX_NOTEX(pkt) { CommandWord *_g = (pkt)++; _g->hi = 0xD7000000; _g->lo = 0; }
 #define GFX_CALLDL(pkt, dl) { CommandWord *_g = (pkt)++; _g->hi = 0xDE000000; _g->lo = (u32)(dl); }
-#define GFX_ENDDL(pkt) { CommandWord *_g = (pkt)++; _g->lo = 0; _g->hi = 0xDF000000; }
+#define GFX_ENDDL(pkt) { CommandWord *_g = (pkt)++; _g->hi = 0xDF000000; _g->lo = 0; }
 
 void func_80036F98(Scene *scene) {
     Node *node;
@@ -74,10 +74,12 @@ void func_80036F98(Scene *scene) {
     s32 mode;
     u32 flags;
     Params params;
+    s32 slot;
     s32 index;
-    s32 n;
     CommandWord *saved;
+    s32 pad2;
 
+    pad2 = 0;
     saved = D_80112C90;
     D_80112C90 = D_800A3D30;
     if (D_800A3D60 != 0) {
@@ -86,10 +88,10 @@ void func_80036F98(Scene *scene) {
         scene->unk34 = D_800A3D30;
     }
 
-    n = scene->unk14;
-    for (index = 0; index < n; index++) {
+    for (index = 0; index < scene->unk14; index++) {
         node = scene->unk18[index];
         dl = node->unk30;
+        if (node == 0) { }
         GFX_PIPESYNC(D_80112C90);
         item = node->unk00;
         mode = D_80112DD8;
@@ -109,11 +111,12 @@ void func_80036F98(Scene *scene) {
             GFX_CLEARGEOM(D_80112C90, ~mode & 0x2F0605);
         }
         if (mode & 0xC0000) {
-            if (D_800A3D38 < 10) {
+            slot = D_800A3D38;
+            if (slot < 10) {
                 if (D_800A3D60 != 0) {
-                    scene->unk20 = D_800A3D38;
+                    scene->unk20 = slot;
                 } else {
-                    scene->unk1C = D_800A3D38;
+                    scene->unk1C = slot;
                 }
                 func_800366DC(&D_80112C98[D_800A3D38]);
                 scene->unk10 |= 0x80;
@@ -133,9 +136,9 @@ void func_80036F98(Scene *scene) {
         if (D_800A3D40 != 0) {
             D_80112E18 = (void *)-1; D_80112E14 = 0xFF;
         }
-        if ((D_800D697C & 0x10) == 0 && (item = node->unk00) != 0 && (tex = item->unk08) != 0) {
-            if (tex != D_80112E18 || (item->unk00 & 0x4000)) {
-                D_80112E18 = tex;
+        if ((D_800D697C & 0x10) == 0 && (item = node->unk00) != 0 && item->unk08 != 0) {
+            if (D_80112E18 != item->unk08 || (item->unk00 & 0x4000)) {
+                D_80112E18 = item->unk08;
                 GFX_PIPESYNC(D_80112C90);
                 item = node->unk00;
                 func_80036314(D_80112E18, item->unk04, item->unk06);
@@ -149,11 +152,13 @@ void func_80036F98(Scene *scene) {
         if (dl != 0) {
             GFX_CALLDL(D_80112C90, dl);
         }
-        n = scene->unk14;
     }
 
     D_800A3D30 = D_80112C90;
     GFX_ENDDL(D_800A3D30);
     D_80112C90 = saved;
     D_800A3D40 = 0;
+    if (0) { }
+    (void)pad2;
+    (void)tex;
 }

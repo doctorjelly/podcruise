@@ -2,8 +2,6 @@
 #include "podcruise/types.h"
 
 extern f32 D_800A3FDC[3];
-extern f32 D_800A86A0;
-extern f32 D_800A86A4;
 extern u8 D_800A8670[];
 extern u8 D_800A8678[];
 extern f32 D_800D59B8[20][3];
@@ -27,19 +25,17 @@ extern void func_8000E7F0(s32 x, s32 y, s32 red, s32 green, s32 blue,
                           s32 alpha, u8 *text);
 
 void func_80010080(s16 *arg0, s32 arg1) {
-    s32 maximum;
-    f32 distance;
-    f32 scale;
-    f32 alpha;
-    f32 depth;
     s32 index;
+    f32 distance;
     f32 screenX;
     f32 screenY;
+    f32 alpha;
     s32 limit;
-    f32 fade;
-    u8 text[16];
+    u8 text[8];
+    s32 maximum;
+    f32 scale;
+    f32 depth;
 
-    fade = D_800A86A0;
     for (index = 0; index < 20; index++) {
         if (arg1 == 0) {
             D_800D5AF8[index] = -1000;
@@ -50,11 +46,11 @@ void func_80010080(s16 *arg0, s32 arg1) {
         }
         if (D_800D5AA8[index] != -9999) {
             distance = func_80015470(D_800D59B8[index], D_800A3FDC);
-            if (distance > 40.0f && distance < fade) {
+            if (distance > 40.0f && distance < 1500.0f) {
                 if (distance < 400.0f) {
                     alpha = 255.0f;
                 } else {
-                    alpha = ((fade - distance) * (f32)255.0) / D_800A86A4;
+                    alpha = ((1500.0f - distance) * (f32)255.0) / 1100.0f;
                 }
                 if (alpha > 128.0f) {
                     alpha = 128.0f;

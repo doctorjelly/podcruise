@@ -47,7 +47,7 @@ extern PcRacer8005C36C *D_8011B1B8;
 extern PcSlot8005C36C *D_8011B1BC;
 extern PcSlot8005C36C *D_8011B1C0;
 
-extern void func_80008B14(s32 arg0, s16 arg1, f32 arg2, f32 arg3, s32 arg4);
+extern void func_80008B14(s32 arg0, s16 arg1, s32 arg2, s32 arg3, s32 arg4);
 extern void func_80009744(s32 mode, u32 seed);
 extern void func_8000A920(s16 mode, s32 flag);
 extern void func_8000AB24(s16 mode, u8 red, u8 green, u8 blue, u8 alpha);
@@ -67,9 +67,9 @@ extern void func_8005C210(void *object);
 
 void func_8005C36C(PcSession8005C36C *session) {
     char buffer[0x98];
-    PcRacer8005C36C **slot;
     s32 place;
     s32 mode;
+    f32 span;
     PcTriple8005C36C triple;
     PcRacer8005C36C *racer;
     PcRacer8005C36C *ranks[12];
@@ -78,15 +78,15 @@ void func_8005C36C(PcSession8005C36C *session) {
     if (D_800A5998 != 0) {
         func_80051D2C(session, 0);
         if (D_800A599C == 2) {
-            func_80008B14(0x90, 7, 0.25f, 1.0f, 1);
+            func_80008B14(0x90, 7, 0x3E800000, 0x3F800000, 1);
         } else if (D_800A599C == 3) {
-            func_80008B14(0x8E, 7, 0.25f, 1.0f, 1);
+            func_80008B14(0x8E, 7, 0x3E800000, 0x3F800000, 1);
         } else if (D_800A599C == 4) {
-            func_80008B14(0x91, 7, 0.25f, 1.0f, 1);
+            func_80008B14(0x91, 7, 0x3E800000, 0x3F800000, 1);
         } else if (D_800A599C == 5) {
-            func_80008B14(0x8F, 7, 0.25f, 1.0f, 1);
+            func_80008B14(0x8F, 7, 0x3E800000, 0x3F800000, 1);
         } else {
-            func_80008B14(0x8F, 7, 0.25f, 1.0f, 1);
+            func_80008B14(0x8F, 7, 0x3E800000, 0x3F800000, 1);
         }
     } else if ((session->unk008 & 0xF) != 6) {
         if (((session->unk008 & 0xF) == 1) || ((session->unk008 & 0xF) == 2)) {
@@ -125,16 +125,17 @@ void func_8005C36C(PcSession8005C36C *session) {
         }
     } else if ((session->unk008 & 0xF) == 5) {
         if (D_800ACFF4 < session->unk00C) {
-            f32 span = D_800ACFF8;
+            span = D_800ACFF8;
             func_8000AB24(-0x67, 0, 0, 0,
                           (u32)((1.0f - ((D_800ACFFC - session->unk00C) / span)) * 255.0f));
         } else {
             func_8000AB24(-0x67, 0, 0, 0, 0);
         }
     } else if (((session->unk008 & 0xF) == 1) && ((session->unk008 & 0x20) != 0)) {
-        if (session->unk00C < D_800AD000) {
+        span = D_800AD000;
+        if (session->unk00C < span) {
             func_8000AB24(-0x67, 0, 0, 0,
-                          (u32)(((D_800AD000 - session->unk00C) / D_800AD000) * 255.0f));
+                          (u32)(((span - session->unk00C) / span) * 255.0f));
         } else {
             func_8000A920(-0x67, 0);
         }
@@ -154,15 +155,15 @@ void func_8005C36C(PcSession8005C36C *session) {
     if ((session->unk008 & 0xF) != 1) {
         if (D_800A52D8 != 0) {
             if (D_800A52C4 != 0) {
-                func_8008A6B4(buffer, D_800ACE20);
+                func_8008A6B4(buffer, D_800ACE20, D_800A52D8);
                 func_8003ECB0(0x64, 0x64, buffer);
             }
         }
     }
     func_80052A08(session, 0);
 
-    for (slot = &ranks[0]; slot < &ranks[12]; slot++) {
-        *slot = 0;
+    for (mode = 0; mode < 12; mode++) {
+        ranks[mode] = 0;
     }
 
     for (mode = 0; mode < session->unk1BC; mode++) {
@@ -179,6 +180,7 @@ void func_8005C36C(PcSession8005C36C *session) {
         func_8000A920(0x43, 0);
     }
     func_8000A920(0x19, 0);
+    (void)ranks;
 
     mode = session->unk008 & 0xF;
     if (mode != 4) {

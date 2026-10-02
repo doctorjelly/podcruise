@@ -72,10 +72,6 @@ extern s32 func_8006C708(void *);
 extern f32 func_80081700(f32, f32);
 
 void func_8006B568(Obj8006B568 *obj) {
-    f32 v;
-    f32 *offset;
-    f32 *origin;
-    f32 half;
     f32 result[3];
     s32 detached;
     s32 handleA;
@@ -101,12 +97,8 @@ void func_8006B568(Obj8006B568 *obj) {
         obj->unk2E4 = 0.0f;
         obj->unk2E8 = 0.0f;
         obj->unk2EC = 0.0f;
-        origin = obj->unk30;
-        offset = &obj->unk2E4;
     } else {
         func_80065E18(obj);
-        origin = obj->unk30;
-        offset = &obj->unk2E4;
         func_80065CD0(obj->unk30, obj->unk20, obj->unk194, &obj->unk2E4);
     }
     obj->unk16C = obj->unk50;
@@ -123,8 +115,8 @@ void func_8006B568(Obj8006B568 *obj) {
         obj->unk1F0 *= (1.0f - ((obj->unk208 < 0.0f) ? -obj->unk208 : obj->unk208) * 0.5f);
     }
     if ((obj->unk64 & 0x400) != 0) {
-        obj->unk1F0 = obj->unk1F0 * 0.5f;
-        func_80033328(&obj->unk1EC, offset, obj->unk1F0, obj->unk70 * obj->unk22C, obj->unk1F4,
+        obj->unk1F0 = obj->unk1F0 / 2.0f;
+        func_80033328(&obj->unk1EC, &obj->unk2E4, obj->unk1F0, obj->unk70 * obj->unk22C, obj->unk1F4,
                       obj->unk1FC);
         if (obj->unk1F8 > 0.0f) {
             obj->unk2E4 = obj->unk2E4 + obj->unk1F8;
@@ -132,13 +124,11 @@ void func_8006B568(Obj8006B568 *obj) {
             obj->unk2E4 = obj->unk2E4 + obj->unk1F8;
         }
     } else {
-        func_80033328(&obj->unk1EC, offset, obj->unk1F0, obj->unk70 * obj->unk22C, obj->unk1F4,
+        func_80033328(&obj->unk1EC, &obj->unk2E4, obj->unk1F0, obj->unk70 * obj->unk22C, obj->unk1F4,
                       obj->unk1F8 + obj->unk1FC);
     }
-    v = obj->unk1F4 * func_80081700(1.5f, (f32)D_80120BF0);
-    obj->unk1F4 = v;
-    half = 0.5f;
-    if ((v < half) && (-v < half)) {
+    obj->unk1F4 *= func_80081700(1.5f, (f32)D_80120BF0);
+    if ((obj->unk1F4 < 0.5f) && (-obj->unk1F4 < 0.5f)) {
         obj->unk1F4 = 0.0f;
     }
     if (detached != 0) {
@@ -156,12 +146,12 @@ void func_8006B568(Obj8006B568 *obj) {
             }
         }
     }
-    func_8006907C(obj, &obj->unk16C, result, origin);
+    func_8006907C(obj, &obj->unk16C, result, obj->unk30);
     if (detached != 0) {
+        obj->unk140 = obj->unkEC;
         obj->unk64 = obj->unk64 | 0x20000000;
         obj->unk244 = 1.0f;
         obj->unk248 = 1.0f;
-        obj->unk140 = obj->unkEC;
     }
     obj->unk2CC = result[0];
     obj->unk2D0 = result[1];
