@@ -23,8 +23,8 @@ s32 func_800129E4(u8 *arg0, Font *arg1) {
     u8 *p;
     Glyph *glyph;
     s32 total;
-    s32 done;
-    s32 ch;
+    u8 done;
+    u8 ch;
     s32 c;
     u8 idx;
     u8 next;
@@ -34,10 +34,9 @@ s32 func_800129E4(u8 *arg0, Font *arg1) {
     p = arg0;
     total = 0;
     done = 0;
-
     do {
         ch = *p;
-        c = ch;
+        c = *p;
         if (ch == 0) {
             done = 1;
         }
@@ -64,8 +63,8 @@ s32 func_800129E4(u8 *arg0, Font *arg1) {
                 if (arg1->unk60 != 0) {
                     k = D_800A1D1C[idx - 0x96];
                     if (k != 0xFF) {
-                        idx = D_800A1CD8[k][1];
                         g = D_800A1CD8[k][0];
+                        idx = D_800A1CD8[k][1];
                         if (idx == 0xFF) {
                             glyph = (Glyph *)(arg1->unk60 + g * 16);
                             idx = 0;

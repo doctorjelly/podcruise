@@ -103,10 +103,11 @@ void func_8006D150(Racer *racer) {
         racer->unk018C = D_800AD638;
     }
 
+    turn = D_800AD63C;
     dot = 2.0f;
     length = racer->unk0104;
-    if (length < D_800AD63C) {
-        racer->unk0104 = D_800AD63C;
+    if (length < turn) {
+        racer->unk0104 = turn;
     }
     if (racer->unk0104 > dot) {
         racer->unk0104 = dot;
@@ -200,18 +201,18 @@ void func_8006D150(Racer *racer) {
 
         dot = racer->unk0194.z * axis.z +
               (axis.x * racer->unk0194.x + axis.y * racer->unk0194.y);
-        turn = 0.0f;
+        length = 0.0f;
         if (D_800AD68C < dot) {
-            turn = -dot / D_800AD690;
+            length = -dot / D_800AD690;
             if (D_800AD694 < dot) {
                 racer->unk018C = racer->unk018C * ((1.0f - dot) * 0.5f);
             }
         } else if (dot < D_800AD698) {
-            turn = -dot / D_800AD69C;
+            length = -dot / D_800AD69C;
             if (dot < D_800AD6A0) {
                 racer->unk018C = racer->unk018C * ((1.0f + dot) * 0.5f);
             }
         }
-        racer->unk01F0 = racer->unk0074 * turn * racer->unk022C;
+        racer->unk01F0 = racer->unk0074 * length * racer->unk022C;
     }
 }

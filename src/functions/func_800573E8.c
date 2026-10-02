@@ -47,10 +47,10 @@ void func_800573E8(u8 *arg0, u8 *arg1) {
     f32 f1D8;
     f32 f1D4;
     char pad2[56];
-    s32 s198;
-    s32 s194;
+    s32 t38;
+    s32 t30;
     u8 *row;
-    s32 s18C;
+    s32 t2C;
     char pad4[16];
     s32 s178;
     s32 s174;
@@ -63,12 +63,9 @@ void func_800573E8(u8 *arg0, u8 *arg1) {
     s32 limit;
     f32 f148;
     f32 f144;
-    char pad8[236];
-    s32 t38;
+    char pad8[248];
     s32 sx;
     s32 t34;
-    s32 t30;
-    s32 t2C;
     s16 sy;
     s16 sy2;
     s32 cnt0;
@@ -173,32 +170,20 @@ void func_800573E8(u8 *arg0, u8 *arg1) {
                             t30 = 0xFF;
                         }
                         if (D_800A26F4 == 0) {
-                            s18C = t30;
                             t38 = (s32)((f32)func_80082BE0()
                                         / (f32)2147483648.0 * 255.0f);
-                            t30 = s18C;
                         } else {
                             t38 = (s32)D_800ACEE8;
                         }
                         if (D_800A26F4 == 0) {
-                            s198 = t38;
-                            s18C = t30;
                             t2C = (s32)((f32)func_80082BE0()
                                         / (f32)2147483648.0 * 255.0f);
-                            t38 = s198;
-                            t30 = s18C;
                         } else {
                             t2C = (s32)D_800ACEEC;
                         }
                         if (D_800A26F4 == 0) {
-                            s198 = t38;
-                            s194 = t2C;
-                            s18C = t30;
                             t34 = (s32)((f32)func_80082BE0()
                                         / (f32)2147483648.0 * 255.0f);
-                            t38 = s198;
-                            t2C = s194;
-                            t30 = s18C;
                         } else {
                             t34 = (s32)D_800ACEF0;
                         }

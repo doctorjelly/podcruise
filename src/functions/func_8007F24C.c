@@ -22,12 +22,12 @@ extern f32 D_800ADC58;
 void func_8007F24C(PcTrack8007F24C *track, PcVec3 *vector) {
     f32 target;
     f32 reach;
-    f32 previous;
-    f32 value;
     f32 matrix[16];
+    f32 previous;
+    s8 moved;
+    s8 settled;
     f32 step;
-    s32 moved;
-    s32 settled;
+    f32 value;
 
     moved = 0;
     func_8003B02C(track, matrix);

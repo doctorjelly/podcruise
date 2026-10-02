@@ -29,6 +29,10 @@ typedef struct {
 } HitInfo;
 
 typedef struct {
+    s32 w[6];
+} V6;
+
+typedef struct {
     u8 pad0[8];
     s32 unk8;
     s32 unkC;
@@ -106,6 +110,7 @@ s32 func_800718DC(Racer *self, s32 *message, HitInfo *info) {
     s32 slots[5];
     s32 kind;
     s32 index;
+    s32 lodIndex;
     s32 count;
     s32 *cursor;
     Racer **target;
@@ -139,16 +144,11 @@ s32 func_800718DC(Racer *self, s32 *message, HitInfo *info) {
             if (self->unk1E74 >= 0) {
                 break;
             }
-            self->unk1E8C = self->unk8;
-            self->unk1E90 = self->unkC;
-            self->unk1E98 = self->unk14;
-            self->unk1E94 = self->unk10;
-            self->unk1E80 = 0;
             self->unk1E74 = message[1];
+            *(V6 *)&self->unk1E8C = *(V6 *)&self->unk8;
+            self->unk1E80 = 0;
             self->unk1E7C = 0.0f;
             self->unk1E78 = 0.0f;
-            self->unk1E9C = self->unk18;
-            self->unk1EA0 = self->unk1C;
             return 2;
 
         case 0x526D5468:
@@ -180,12 +180,7 @@ s32 func_800718DC(Racer *self, s32 *message, HitInfo *info) {
             if (self->unk1E74 != message[1]) {
                 break;
             }
-            self->unk1E8C = info->unk8;
-            self->unk1E90 = info->unkC;
-            self->unk1E94 = info->unk10;
-            self->unk1E98 = info->unk14;
-            self->unk1E9C = info->unk18;
-            self->unk1EA0 = info->unk1C;
+            *(V6 *)&self->unk1E8C = *(V6 *)&info->unk8;
             break;
 
         case 0x536E6170:
@@ -206,16 +201,16 @@ s32 func_800718DC(Racer *self, s32 *message, HitInfo *info) {
             if (self->unk344 == 0) {
                 break;
             }
-            index = message[1];
+            lodIndex = message[1];
             if (self->unk60 & 0x20) {
-                record = &D_800A5B9C[index * 32];
+                record = &D_800A5B9C[lodIndex * 32];
                 func_800833B4(self->unk344->unk14, record);
                 func_800833B4(self->unk344->unk4, record + 4);
                 func_800833B4(self->unk344->unk8, record + 4);
                 func_800833B4(self->unk344->unkC, record + 4);
                 func_800833B4(self->unk344->unk10, record + 4);
             } else {
-                record = &D_800A5C1C[index * 32];
+                record = &D_800A5C1C[lodIndex * 32];
                 func_800833B4(self->unk344->unk14, record);
                 func_800833B4(self->unk344->unk4, record + 4);
                 func_800833B4(self->unk344->unk8, record + 4);

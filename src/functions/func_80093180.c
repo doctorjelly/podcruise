@@ -199,9 +199,9 @@ s32 func_80093180(PrintEmit prout, u8 *arg, const u8 *fmt, char *ap) {
     for (;;) {
         for (s = fmt; (c = *s) != '\0' && c != '%'; ++s) {
         }
-        if (0 < (i = s - fmt)) {
-            if ((arg = (*prout)(arg, fmt, s - fmt)) != 0) {
-                x.nchar += i;
+        if (0 < s - fmt) {
+            if ((arg = (*prout)(arg, fmt, (u32)(s - fmt))) != 0) {
+                x.nchar += s - fmt;
             } else {
                 return x.nchar;
             }

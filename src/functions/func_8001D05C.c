@@ -146,24 +146,18 @@ void func_8001D05C(void *arg) {
                 }
             } else {
                 count = 0;
-                if (0xFF != D_800A23CC[0]) {
-                    record = &D_800A23CC[0];
-                    letter = record[0];
-                    do {
-                        if (D_800A23C4 != letter) {
-                            count++;
-                        } else if (key != record[1]) {
-                            count++;
-                        } else {
-                            D_800A23C4 = record[2];
-                            count = -1;
-                        }
-                        if (count < 0) {
-                            break;
-                        }
-                        record = &D_800A23CC[count * 3];
-                        letter = record[0];
-                    } while (0xFF != letter);
+                while (D_800A23CC[count * 3] != 0xFF) {
+                    if (D_800A23C4 != D_800A23CC[count * 3]) {
+                        count++;
+                    } else if (key != D_800A23CC[count * 3 + 1]) {
+                        count++;
+                    } else {
+                        D_800A23C4 = D_800A23CC[count * 3 + 2];
+                        count = -1;
+                    }
+                    if (count < 0) {
+                        break;
+                    }
                 }
                 if (count != -1) {
                     D_800A23C4 = 0;

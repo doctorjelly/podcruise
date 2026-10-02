@@ -132,17 +132,17 @@ void func_8005337C(Owner8005337C *owner) {
                 func_80009F6C();
             } else {
                 owner->timer0C = (f32)((f64)owner->timer0C - D_80120BF0);
-                if (owner->timer0C < 0) {
+                if (owner->timer0C < 0.0f) {
                     func_800530CC(owner);
                 }
             }
 
             cooldown = D_800A59AC;
-            if (cooldown > 0.0f) {
+            if (cooldown > 0) {
                 cooldown = (f32)((f64)cooldown - D_80120BF0);
             }
             *(f32 *)0x800A59AC = cooldown;
-            if (cooldown <= 0.0f && func_80051FF4() < 2 &&
+            if (cooldown <= 0 && func_80051FF4() < 2 &&
                 owner->count1BC >= 2 && func_80009524(0, 0x200000) == 0) {
                 found = 0;
                 hang = func_8003F800(0x48616E67, 0);

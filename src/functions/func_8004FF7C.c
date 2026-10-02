@@ -2,12 +2,14 @@
 
 #include "podcruise/types.h"
 
-extern s32 D_800A4B6C[4];
+extern s32 D_800A4B6C;
+extern u32 D_800A4B70;
+extern u32 D_800A4B74;
+extern u32 D_800A4B78;
 
 void func_8004FF7C(void) {
-    s32 i;
-
-    for (i = 3; i >= 0; i--) {
-        D_800A4B6C[i] = -1;
-    }
+    D_800A4B6C = -1;
+    D_800A4B78 = -1;
+    D_800A4B74 = -1;
+    D_800A4B70 = -1;
 }

@@ -322,7 +322,7 @@ void func_80058058(Actor80058058 *actor, s32 mode) {
 
             cr = (s32)(255.0f * level * 2.0f);
             cg =
-                (s32)((1.0 - (f64)level) * 2.0 * D_800ACF10);
+                (s32)((1.0 - (f64)level) * (2.0 * D_800ACF10));
             cb = 0;
             ca = 100;
             if (D_800ACF18 < (f64)level) {

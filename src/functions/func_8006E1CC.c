@@ -27,7 +27,8 @@ extern void func_8006D150(Actor *);
 extern void func_8006D9DC(Actor *, f32);
 
 void func_8006E1CC(Actor *actor) {
-    s32 flags;
+    s32 hi;
+    s32 lo;
     Event event;
 
     if (D_800A5998 != 0) {
@@ -38,10 +39,10 @@ void func_8006E1CC(Actor *actor) {
 
     if ((D_8009B7D8 & 0x100) != 0 && D_8009B7D0 != 0) {
         func_8006C6D0(actor, 1);
-        flags = D_800D76F0;
-        if ((flags & 0x800) != 0 || (flags & 0x400) != 0) {
+        hi = D_800D76F0 & 0x800; lo = D_800D76F0 & 0x400;
+        if (hi != 0 || lo != 0) {
             event.tag = 0x536E6170;
-            if ((flags & 0x800) != 0) {
+            if (hi != 0) {
                 event.value = -1;
             } else {
                 event.value = 1;

@@ -41,18 +41,17 @@ extern void func_8000955C(s32, s32);
 extern void func_800093B0(s32, s32, s32, s32, s32, s32, s32);
 
 void func_8006CA2C(Unk8006CA2C *obj) {
-    s32 i;
-    s32 tint;
+    f32 base;
+    s32 best;
     s32 result;
     s32 frontHit;
     s32 rearHit;
-    f32 peak;
-    s32 best;
-    f32 base;
+    f32 dt;
+    f32 g;
+    s32 i;
     s32 fired;
-    f32 half;
+    f32 peak;
 
-    half = 0.5f;
     result = 0;
     frontHit = 0;
     rearHit = 0;
@@ -76,7 +75,7 @@ void func_8006CA2C(Unk8006CA2C *obj) {
         if (best < 0) {
             peak = 0.0;
             for (i = 0; i < 6; i++) {
-                if (peak < obj->unk288[i] && obj->unk288[i] > half) {
+                if (peak < obj->unk288[i] && obj->unk288[i] > 0.5f) {
                     best = i;
                     peak = obj->unk288[i];
                 }
@@ -99,7 +98,9 @@ void func_8006CA2C(Unk8006CA2C *obj) {
     for (i = 0; i < 6; i++) {
         if (obj->unk2A0[i] & 4) {
             base = obj->unk288[i];
-            base += (obj->unk270[i] * half - obj->unk270[i]) * (half * obj->unk98) * (f32)D_80120BF0;
+            g = 0.5f * obj->unk98;
+            dt = (f32)D_80120BF0;
+            base += (obj->unk270[i] * 0.5f - obj->unk270[i]) * g * dt;
             obj->unk288[i] = base;
             fired = 1;
         }
@@ -116,22 +117,22 @@ void func_8006CA2C(Unk8006CA2C *obj) {
             if ((f32)func_80082BE0() / (f32)2147483648.0 < D_800AD630) {
                 if (func_80009524(obj->unk1E70->unk10, 0x10000) == 0) {
                     if (!(D_80000318 < 0x800000) || (obj->unk60 & 0x120)) {
-                        tint = obj->unk1E70->unk18[0];
+                        best = obj->unk1E70->unk18[0];
                     } else {
-                        tint = -1;
+                        best = -1;
                     }
-                    func_800093B0(1, tint, 10, 10, 10, 10, 10);
+                    func_800093B0(1, best, 10, 10, 10, 10, 10);
                     func_8000953C(obj->unk1E70->unk10, 0x10000);
                 }
             }
         } else {
             if (func_80009524(obj->unk1E70->unk10, 0x10000)) {
                 if (!(D_80000318 < 0x800000) || (obj->unk60 & 0x120)) {
-                    tint = obj->unk1E70->unk18[0];
+                    best = obj->unk1E70->unk18[0];
                 } else {
-                    tint = -1;
+                    best = -1;
                 }
-                func_800093B0(1, tint, 11, 11, 11, 11, 11);
+                func_800093B0(1, best, 11, 11, 11, 11, 11);
                 func_8000955C(obj->unk1E70->unk10, 0x10000);
             }
         }
@@ -158,7 +159,7 @@ void func_8006CA2C(Unk8006CA2C *obj) {
 
     if (obj->unk2C0 <= 0.0f) {
         if (frontHit && rearHit) {
-            if ((f32)func_80082BE0() / (f32)2147483648.0 < half) {
+            if ((f32)func_80082BE0() / (f32)2147483648.0 < 0.5f) {
                 result = 1;
             } else {
                 result = 2;

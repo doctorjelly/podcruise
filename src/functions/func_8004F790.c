@@ -65,9 +65,9 @@ Slot *func_8004F790(Holder *holder, s32 enable) {
     s32 index;
     s32 sub;
     s32 retry;
-    s32 best;
     Slot *slot;
     s16 counter;
+    Profile *src;
 
     mask = 0x0FFFFFFF;
     if (enable == 0) {
@@ -112,9 +112,10 @@ Slot *func_8004F790(Holder *holder, s32 enable) {
         }
         slot->unk00 = index;
         if (index < holder->unk70) {
-            slot->unk04 = 0x4C6F636C;
             if (holder->unk64 != 0) {
                 slot->unk04 = 0x41414949;
+            } else {
+                slot->unk04 = 0x4C6F636C;
             }
         } else {
             slot->unk04 = 0x41414949;
@@ -132,7 +133,7 @@ Slot *func_8004F790(Holder *holder, s32 enable) {
         slot->unk14 = order[index];
         slot->unk18 = &D_800A31E0[holder->unk72[index]];
         if (slot->unk04 == 0x41414949) {
-            slot->unk1C = D_800A3BF0;
+            D_80118F90[index].unk1C = D_800A3BF0;
             slot->unk1C.unk_00[10] =
                 D_800A368C[holder->unk72[index]].unk_00[10];
             slot->unk1C.unk_00[12] =
@@ -154,19 +155,19 @@ Slot *func_8004F790(Holder *holder, s32 enable) {
                     levels[sub] = 255;
                 }
             }
-            func_80032F2C(&slot->unk1C,
-                          &D_800A368C[holder->unk72[index]], modes, levels);
-            func_800320E0(D_80119838, &D_800A368C[holder->unk72[index]]);
-            func_800320E0(D_80119858, &slot->unk1C);
+            src = &D_800A368C[holder->unk72[index]];
+            func_80032F2C(&D_80118F90[index].unk1C, src, modes, levels);
+            func_800320E0(D_80119838, src);
+            func_800320E0(D_80119858, &D_80118F90[index].unk1C);
         }
     }
 
     for (index = 0; index < holder->unk70; index++) {
     }
 
-    best = func_8004FE30(holder);
+    mask = func_8004FE30(holder);
     for (index = 0, slot = D_80118F90; index < holder->unk71; index++, slot++) {
-        if (best == index) {
+        if (mask == index) {
             slot->unk08 = slot->unk08 | 0x20;
         } else {
             slot->unk08 = slot->unk08 & ~0x20;

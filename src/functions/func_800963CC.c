@@ -69,7 +69,7 @@ Command800963CC *func_800963CC(
     u16 shortDoubledCount;
     Command800963CC *out;
     s32 rightOffset;
-    s16 *ringEnd;
+    u32 ringLength;
     s32 leftOffset;
     s32 swap;
     s16 *newCursor;
@@ -143,10 +143,10 @@ Command800963CC *func_800963CC(
     }
 
     newCursor = (s16 *)((u8 *)sequence->cursor + doubledCount);
-    ringEnd = sequence->ringBase + sequence->ringLength;
+    ringLength = sequence->ringLength;
     sequence->cursor = newCursor;
-    if (ringEnd < newCursor) {
-        sequence->cursor = newCursor - sequence->ringLength;
+    if (sequence->ringBase + ringLength < newCursor) {
+        sequence->cursor = newCursor - ringLength;
     }
 
     CMD(out++, 0x0A000800, 0x06C00000 | shortDoubledCount)

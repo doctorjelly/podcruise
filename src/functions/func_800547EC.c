@@ -105,37 +105,37 @@ extern s32 func_80080DB4(void *graph, Vec800547EC *origin, f32 range, s32 limit,
 extern s32 func_8008A6B4(char *buffer, const char *format, ...);
 
 void func_800547EC(Session800547EC *session) {
-    s32 i;
-    s32 j;
     s32 icon;
+    s32 j;
+    s32 i;
     Vec800547EC origin;
+    Progress800547EC *prog;
     f32 progress;
     s32 kind;
-    Progress800547EC *prog;
     s32 hh = 238;
     f32 referenceProgress;
-    s32 place;
-    f32 horizontalRange;
-    f32 step;
-    f32 range;
-    f32 difference;
+    s32 mapVisible;
     f32 screenX;
+    f32 step;
     f32 screenY;
-    f32 scaledX;
+    f32 difference;
+    f32 range;
     f32 scaledY;
-    Racer800547EC *racer;
+    s32 dv = 90;
+    s32 place;
     Track800547EC *track;
+    Racer800547EC *racer;
     f32 scale;
-    Pair800547EC points[191];
+    f32 scaledX;
     s32 pointCount;
     s32 hlo = 164;
+    Pair800547EC points[191];
     f32 direction[3];
     f32 markerOffset;
     f32 perpendicular[2];
-    s32 mapVisible;
+    f32 horizontalRange;
     f32 relative[2];
     s32 hhi = 74;
-    s32 dv = 90;
     f32 baseX = 276.0f;
     f64 fade = 2.0;
     char text[16];
@@ -162,8 +162,8 @@ void func_800547EC(Session800547EC *session) {
                 racer = &D_8011B1B8[i];
                 if ((racer->flags & 1) && !(racer->flags & 2) &&
                     racer->tag == 0x4C6F636C) {
-                    track = racer->track;
-                    referenceProgress = func_8008035C(&track->progress);
+                    prog = &racer->track->progress;
+                    referenceProgress = func_8008035C(prog);
                 }
             }
 
@@ -173,9 +173,9 @@ void func_800547EC(Session800547EC *session) {
                     racer = &D_8011B1B8[i];
                     if ((f64)scale > 0.0 && (racer->flags & 1) &&
                         !(racer->flags & 2)) {
-                        track = racer->track;
+                        prog = &racer->track->progress;
                         difference = referenceProgress -
-                                     func_8008035C(&track->progress);
+                                     func_8008035C(prog);
                         if (difference > 0.5f) {
                             difference -= 1;
                         }
@@ -227,7 +227,8 @@ void func_800547EC(Session800547EC *session) {
             racer = &D_8011B1B8[i];
             if ((racer->flags & 1) && !(racer->flags & 2)) {
                 track = racer->track;
-                progress = func_8008035C(&track->progress) * 920.0f;
+                prog = &track->progress;
+                progress = func_8008035C(prog) * 920.0f;
                 kind = *racer->kind;
 
                 if (progress >= 0.0f && progress <= 260.0f) {

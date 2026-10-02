@@ -23,6 +23,8 @@ extern u32 func_80088360(void *);
 
 #define EMIT(a, b) { gfx = D_801217B0; D_801217B0 = gfx + 1; gfx->w0 = (a); gfx->w1 = (b); }
 #define EMITP(a, b) { gfx = D_801217B0++; gfx->w0 = (a); gfx->w1 = (b); }
+#define EMITL(a, b) { Gfx800857B0 *g = D_801217B0; D_801217B0 = g + 1; g->w0 = (a); g->w1 = (b); }
+#define EMITLP(a, b) { Gfx800857B0 *g = D_801217B0++; g->w0 = (a); g->w1 = (b); }
 
 void func_800857B0(index, red, green, blue)
 s32 index;
@@ -52,9 +54,9 @@ s16 blue;
     xy[1] = xy[1] * scaleX;
     xy[0] = xy[0] * scaleY;
 
-    EMITP(0xE7000000, 0);
-    EMITP(0xE3000A01, 0x00300000);
-    image = D_801217B0; D_801217B0 = image + 1;
+    EMITL(0xE7000000, 0);
+    EMIT(0xE3000A01, 0x00300000);
+    image = D_801217B0++;
 
     if (D_80114470[2] == 0x20) {
         size = 3;
@@ -83,9 +85,9 @@ s16 blue;
         fill = 0xFF;
     }
 
-    EMIT(0xF7000000, fill);
+    EMITLP(0xF7000000, fill);
     EMITP(0xF6000000 | (((xy[1] - 1) & 0x3FF) << 14) | (((xy[0] - 1) & 0x3FF) << 2), ((x0 & 0x3FF) << 14) | ((y0 & 0x3FF) << 2));
-    EMIT(0xE7000000, 0);
-    EMIT(0xE3000A01, 0);
-    EMIT(0xE7000000, 0);
+    EMITLP(0xE7000000, 0);
+    EMITLP(0xE3000A01, 0);
+    EMITP(0xE7000000, 0);
 }

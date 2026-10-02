@@ -89,8 +89,7 @@ u32 *func_80088538(u32 *commands, s32 *countOut, void *state, s32 samples) {
             }
             position = best[0]->unk10;
             mixer->unk1C = position;
-            now = mixer->unk20;
-        } while ((position - now) < samples);
+        } while ((position - mixer->unk20) < samples);
     }
 
     mixer->unk1C &= ~0xF;

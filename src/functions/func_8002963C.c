@@ -93,9 +93,9 @@ void func_8002963C(Owner8002963C *owner) {
     } else if (owner->unk8 == 4) {
         for (g = 0; g < 7; g++) {
             c = D_8011A240[11];
-            D_8011A240[11] = c + 1;
             D_801198A8[c].unk0 = D_8011A210[g].unk1 + g * 6;
             D_801198A8[c].unk1 = D_8011A210[g].unk2;
+            D_8011A240[11] = c + 1;
         }
     }
 

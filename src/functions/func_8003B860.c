@@ -9,6 +9,7 @@ typedef struct {
 extern u8 D_800A4920[];
 
 #define PC_CMD(a, b) { PcGfx *g_ = gfx++; g_->w0 = (u32)(a); g_->w1 = (u32)(b); }
+#define PC_CMD2(a, b) { PcGfx *g_ = gfx; gfx = g_ + 1; g_->w0 = (u32)(a); g_->w1 = (u32)(b); }
 
 void func_8003B860(PcGfx **listp, s32 ulx, s32 lrx, s32 uly, s32 lry, s32 x, s32 y,
                    s32 uls, s32 lrs, s32 ult, s32 lrt) {
@@ -64,19 +65,15 @@ void func_8003B860(PcGfx **listp, s32 ulx, s32 lrx, s32 uly, s32 lry, s32 x, s32
         vx = ulx;
         vy = lry;
     }
-    {
-        PcGfx *g_ = gfx++;
-        g_->w0 = 0x02180006;
-        g_->w1 = ((vx & 0xFFFF) << 16) | (vy & 0xFFFF);
-    }
+    PC_CMD(0x02180006, ((vx & 0xFFFF) << 16) | (vy & 0xFFFF))
 
     tt = (u32)ult & 0xFFFF;
     bb = (u32)lrt & 0xFFFF;
-    PC_CMD(0x02140000, ((u32)uls << 16) | tt)
-    PC_CMD(0x02140002, ((u32)lrs << 16) | tt)
-    PC_CMD(0x02140004, ((u32)lrs << 16) | bb)
-    PC_CMD(0x02140006, ((u32)uls << 16) | bb)
-    PC_CMD(0x06000402, 0x604)
+    gfx->w0 = 0x02140000; gfx->w1 = ((u32)uls << 16) | tt; gfx++;
+    PC_CMD2(0x02140002, ((u32)lrs << 16) | tt)
+    PC_CMD2(0x02140004, ((u32)lrs << 16) | bb)
+    PC_CMD2(0x02140006, ((u32)uls << 16) | bb)
+    PC_CMD2(0x06000402, 0x604)
 
     *listp = gfx;
 }
