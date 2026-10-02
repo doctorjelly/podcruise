@@ -60,8 +60,38 @@ the canonical comparison target.
 
 ## Status
 
-Behavior-recovered C, not byte-matching. An exact linked comparison found a
-2,288-byte IDO 5.3 body and a 2,264-byte IDO 7.1 body against the 5,728-byte
-canonical body; both first differ in byte `0x3`. The compact shared command
-construction intentionally does not reproduce the original source's expanded
-per-format macro shape.
+Behavior-recovered C, not byte-matching. The current linked IDO 5.3 comparison
+emits 5,728 bytes at the canonical address, with 1,255 differing words and
+first difference at byte `0x5F`. The earlier smaller-body measurements describe
+a superseded source, not the current expanded per-format macro output.
+
+## Bounded packet audit
+
+The four format branches begin at `8003BEAC`, `8003C2C8`, `8003C6E0`, and
+`8003CAF0` in `analysis/generated/us/asm/main_3BF24.s`. Let `W` be the aligned
+strip span and `H` the resource's default cross-span. Their packet arithmetic
+agrees with the current source:
+
+| Format | Width alignment | Pixels per load unit | Render F5 line |
+| --- | ---: | ---: | --- |
+| 0 | 16 | 4 | `ceil(W / 16)` |
+| 1 | 8 | 2 | `ceil(W / 8)` |
+| 2 | 4 | 1 | `ceil(W / 4)` |
+| 3 | 2 | 1 | `ceil(W / 4)` |
+
+F3 clamps `ceil(W * H / pixels_per_load_unit) - 1` to `0x7FF`.
+With flag `0x400`, DXT is zero; otherwise it is
+`ceil(2048 / (W / width_alignment))`. The first/load F5 has zero line bits,
+tile index 7, and size selector 2 for formats 0–2 or 3 for format 3.
+The second/render F5 uses the table's nine-bit line field and the actual
+format as its size selector. F2 packs `4 * (W - 1)` and `4 * (H - 1)`,
+each masked to twelve bits.
+
+A private host pilot compared these assembly-derived F3/F5/F2 fields and
+command counts in 864 cases: four formats, flag `0x400` off/on, cached/new
+strip data, widths `7,8,9,15,16,17`, and heights
+`1,7,8,9,15,16,17,257,1025`. All agree, including load-count saturation and
+twelve-bit height wrapping. The pilot held image type zero, ordinary clamp
+flags, and geometry inside the clipping rectangle; it does not establish
+the remaining clipping or transformed-quad behavior. No source correction
+or permanent regression test was warranted by this bounded audit.

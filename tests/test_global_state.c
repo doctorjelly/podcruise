@@ -109,12 +109,14 @@ extern u8 D_800D68C0[];
 
 static f32 result_80014D4C;
 static s32 calls_8002FF38;
-static void *argument_8002FF38;
+static s32 argument_8002FF38;
+static struct PcResourceObject *result_8002FF38;
 
 f32 func_80014D4C(void) { return result_80014D4C; }
-void func_8002FF38(void *argument) {
+struct PcResourceObject *func_8002FF38(s32 argument) {
     calls_8002FF38++;
     argument_8002FF38 = argument;
+    return result_8002FF38;
 }
 
 static s32 result_80030174;
@@ -281,13 +283,17 @@ int main(void) {
     D_800A2868 = 1;
     D_800D9DD8[1] = 37;
     assert(func_8002FC58() == 63);
-    /* func_80030154 forwards its argument untouched to func_8002FF38. */
-    func_80030154(&object);
+    /* The resource wrapper forwards an index and preserves pointer/NULL results. */
+    result_8002FF38 = (struct PcResourceObject *)&object;
+    assert(func_80030154(0x1A) == result_8002FF38);
+    assert(calls_8002FF38 == 1 && argument_8002FF38 == 0x1A);
+    result_8002FF38 = 0;
+    assert(func_80030154(-1) == 0);
     /* func_80031924 forwards its index untouched to func_80031BBC, which marks
        the slot and then clears the matching record; both are recovered source
        now, so the effect is observable directly. */
     func_80031924(0);
-    assert(calls_8002FF38 == 1 && argument_8002FF38 == &object);
+    assert(calls_8002FF38 == 2 && argument_8002FF38 == -1);
     assert(D_800A290C[0] == -1);
     result_80030174 = 9;
     assert(func_80030274(13) == 22);

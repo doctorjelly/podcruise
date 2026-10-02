@@ -1,5 +1,5 @@
 /* Recovered from specs/functions/recovered/medium_core_tranche.md. */
-#include "podcruise/types.h"
+#include "podcruise/runtime_leaves.h"
 
 #define PTR2INT(p) ((u32)(unsigned long)(p))
 #define INT2PTR(x) ((u8 *)(unsigned long)(x))
@@ -9,7 +9,7 @@ typedef struct {
     s32 unk_4;
 } Entry8002FF38;
 
-typedef struct {
+typedef struct PcResourceObject {
     s32 unk_0;
     u8 unk_4;
     u8 unk_5;

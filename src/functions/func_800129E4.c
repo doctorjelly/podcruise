@@ -1,6 +1,6 @@
 /* Independently written from scratchpad spec specs/func_800129E4.md. */
 
-#include "podcruise/types.h"
+#include "podcruise/text_metrics.h"
 
 typedef struct {
     u8 unk00[2];
@@ -8,7 +8,7 @@ typedef struct {
     u8 unk04[12];
 } Glyph;
 
-typedef struct {
+typedef struct PcFont {
     u8 unk00[0x5A];
     u8 unk5A;
     u8 unk5B;

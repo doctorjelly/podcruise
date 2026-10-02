@@ -384,3 +384,57 @@ scan over the 167 nonmatching functions found no further candidates with
 at least four identical surrounding instructions. Full USA validation retains
 1181 exact functions / 361112 bytes and a byte-identical 32-job ROM rebuild.
 Host tests, repository safety, and the strict source manifest pass.
+
+## US15 caller contracts and semantic audits
+
+A bounded declaration scan compared scalar signatures in nonmatching callers
+with retained exact callees. It identified 85 candidate declarations, many
+of which differ only in ignored returns, signedness of raw bits, or integer
+argument widths. It is a triage list, not a complete ABI verifier.
+
+The real text-width return contract of `func_800129B8` is now explicit; see
+its dedicated spec. Its 44-byte exact body is preserved. The associated
+font tag and shared declarations leave `func_800129E4` text unchanged at
+376/376 bytes with 33 differing words. A focused callee audit confirmed the
+character/control predicates, extended glyph selection, load widths, and
+signed glyph advances; only register allocation and scheduling remain.
+The prior 26-call unsuccessful attempt was respected, so no new variants
+were tried.
+
+`func_8000F0DC` now declares `D_800D57E8` and the fourth argument of
+`func_8000EEE0` as `f32`. The setter `func_8000FD74` stores its float argument
+into that table, and `func_8000EEE0` multiplies the supplied scale as a float.
+The caller at 8000F544 loads those bits into the fourth ABI argument register
+before the call at 8000F558; a GPR load here does not imply an integer C
+parameter. Correcting both declarations leaves the entire compiled text
+unchanged: 1236/1220 bytes, 257 differing words and four extra words.
+
+No additional behavior defect was established by the bounded return-width
+checks. `func_8002D9D0` returns only 3 or 4, and `func_80025148` stores its
+result as a byte. The sampled signed declarations of `func_80017DA4` feed
+equality or bit-mask tests, while `func_80088360` supplies graphics payload
+bits directly. These mismatches remain declaration cleanup opportunities,
+not evidence of arithmetic or control-flow errors.
+
+The separate 864-case texture packet oracle and its limits are recorded in
+`func_8003BAB0.md`. It found no source defect. The sine/cosine formal names
+in that callee and `func_8003B324` remain historically swapped, but their
+actual values and formulas are correct; no behavioral rewrite was made.
+
+The consumed-return scan additionally recovered the actual index-to-resource
+contract of `func_80030154`, documented in `runtime_leaf_wrappers.md`.
+Its corrected pointer return preserves the exact 32-byte wrapper and the
+504-byte exact loader. Other sampled void/s32 mismatches at `func_8001D05C`
+and `func_80028E78` discard their results and established no behavioral defect.
+
+
+An automation preflight for `func_80080A1C` verified its 464-byte ROM span
+at 0x8161C. The two text differences include `nop` versus `mov.s` at
+80080BB8 and a floating store-register change at 80080BD4. The stack-aware
+permuter baseline scored 205: zero stack/branch/reordering penalties, one
+register difference, one insertion and one deletion. It failed the planned
+register-only gate, so no timed search was launched and no source changed.
+
+Final US15 verification retains 1181 exact functions / 361112 bytes. The 32-job
+USA rebuild is byte-identical; full host/tool tests, repository safety,
+strict manifest and whitespace checks pass.

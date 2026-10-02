@@ -173,6 +173,9 @@ host-test:
 		tests/test_texture_coordinates.c -o build/host/test_texture_coordinates
 	build/host/test_texture_coordinates
 	$(CC) -std=c11 -Wall -Wextra -Werror -I include \
+		tests/test_text_metrics.c -o build/host/test_text_metrics
+	build/host/test_text_metrics
+	$(CC) -std=c11 -Wall -Wextra -Werror -I include \
 		tests/test_mesh_threshold.c -o build/host/test_mesh_threshold -lm
 	build/host/test_mesh_threshold
 	$(PYTHON) tools/gen_host_stubs.py

@@ -1,9 +1,6 @@
-/* Specification: $S/specs/func_800129BC.md (boundary corrected to 0x800129B8) */
-#include "podcruise/types.h"
+/* Specification: specs/functions/recovered/func_800129B8.md. */
+#include "podcruise/text_metrics.h"
 
-extern s32 D_800D6940[];
-extern void func_800129E4(s32, s32);
-
-void func_800129B8(s32 arg0, s32 arg1) {
-    func_800129E4(arg0, D_800D6940[arg1]);
+s32 func_800129B8(u8 *text, s32 fontIndex) {
+    return func_800129E4(text, D_800D6940[fontIndex]);
 }

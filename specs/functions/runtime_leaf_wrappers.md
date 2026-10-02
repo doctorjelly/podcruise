@@ -9,7 +9,7 @@ delay slot establish its boundary; callers are direct USA `jal` references.
 |---|---:|---|---:|---|
 | `func_80014F2C` | 40 | `80014F4C` / subtract | 8 | Return 90.0 minus the float returned by `func_80014D4C`. |
 | `func_8002FC58` | 40 | `8002FC78` / subtract | 5 | Return word `D_800D9DBC` minus the signed result of `func_8002FAFC`. |
-| `func_80030154` | 32 | `8003016C` / `nop` | 104 | Invoke `func_8002FF38`, then return. |
+| `func_80030154` | 32 | `8003016C` / `nop` | 104 | Load the indexed resource with `func_8002FF38` and return its object pointer or NULL. |
 | `func_80031924` | 32 | `8003193C` / `nop` | 2 | Invoke `func_80031BBC`, then return. |
 
 Japan maps these bodies uniquely to `8001505C`, `800306B8`, `80030BB4`, and
@@ -122,3 +122,16 @@ boundary and delay slot are directly verified. Japan maps the body to
 `80040304` with callee `8004028C`; Europe maps it to `80044314` with callee
 `8004429C`. Direct IDO 5.3 `-O2` comparison proves the independently written
 C byte-for-byte in all four unique images.
+
+
+The USA return contract of `func_80030154` is now explicit. Its call at
+8003015C leaves the loader's `$v0` untouched through the return at 8003016C.
+`func_8004BE90` consumes that value as a resource handle, including stores
+into its state fields and arguments to `func_8000A44C`. The loader accepts
+a signed resource index and returns an object pointer or NULL, so the former
+void-pointer argument and void return declarations were incorrect.
+The shared runtime header now describes this contract and names the opaque
+resource structure; tagging the loader's existing structure preserves its
+504-byte exact body, and the corrected wrapper remains exact at 32 bytes.
+The existing host wrapper test now checks an index, an object pointer result,
+and a negative index with a NULL result.
