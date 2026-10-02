@@ -421,3 +421,22 @@ function, not by reading worker prose.
   more when its partial outputs were handed to a worker as hints).
 - Re-run the flag sweep after every wave. Two functions became exact at `-O3`
   only after a worker had fixed their source shape at the default flags.
+- A later pass the same day used Sonnet at high effort. Once small register
+  and schedule tweaks had stalled, handing each worker an `m2c` draft of the
+  ROM body and asking it to rebuild the C's control flow, loop form and
+  temporaries toward that draft did much better than more tweaking. On 33
+  functions that had made no progress in three rounds it produced 8 exact
+  matches. A following wave over the whole remaining queue (182 functions,
+  most on this path) found 17 more exact sources, 16 of them substitutable.
+  The draft only serves as a structural hint; behaviour must still follow
+  the reviewed source.
+- Workers sometimes add constructs that exist only to steer IDO: empty or
+  nested empty `if` bodies, dead pad locals, `(void)0,` comma returns,
+  overlapping array aliases of one global, or redundant masks. Accept these
+  only in an exact match, and expect workers to rediscover rejected ones
+  unless the rejection is recorded in the next assignment.
+- The function probe compares `.text` only. When a worker turns pooled
+  externs into literals, read the pool words from `baserom.us.z64` (not the
+  revision ROM) before trusting the values; one worker wrote -37952.0f where
+  the ROM holds -40000.0f. The hybrid round trip links the unit's `.rodata`,
+  so it catches a wrong value, but only at the gate.
