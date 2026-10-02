@@ -173,6 +173,10 @@ host-test:
 		tests/test_texture_coordinates.c -o build/host/test_texture_coordinates
 	build/host/test_texture_coordinates
 	$(CC) -std=c11 -Wall -Wextra -Werror -I include \
+		-fsanitize=shift -fno-sanitize-recover=shift \
+		tests/test_vertex_packet.c -o build/host/test_vertex_packet
+	build/host/test_vertex_packet
+	$(CC) -std=c11 -Wall -Wextra -Werror -I include \
 		tests/test_text_metrics.c -o build/host/test_text_metrics
 	build/host/test_text_metrics
 	$(CC) -std=c11 -Wall -Wextra -Werror -I include \

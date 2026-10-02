@@ -575,3 +575,23 @@ midpoint division. In 401FC, the two canonical ANDI-one sites at 403FC and
 call scan found matching target counts across six functions and 19 JALRs.
 A private differential-execution pilot remains pending and is not evidence
 of additional recovered behavior or exact coverage.
+
+## US19 bounded execution and vertex packing
+
+The private integer-only execution pilot for `func_8003B860` completed
+4,884 cases and four independent packet fixtures without a machine-code
+discrepancy. Its dedicated spec records the opcode limits, instruction
+microtests, branch coverage and separated original-C undefined-input domain.
+The retained four unsigned casts define offscreen coordinate packing while
+preserving all 592 compiled bytes. A nine-case actual-function regression
+passes shift sanitization and fails with the original signed shifts.
+Six IDO 5.3 compiler profiles found no exact match after the correction.
+
+An independent `func_80090B24` alias audit found the input load, total store,
+and complementary-total reload in the same order as C, including overlapping
+accumulator/input pointers. No source variant was justified.
+
+Final validation retains 1181 exact functions / 361112 bytes, with no compile
+or link errors. The 32-job USA rebuild is byte-identical; the full host/tool
+suite, safety, strict source manifest, and whitespace checks pass. The packet
+function remains assembly-backed in that rebuild.

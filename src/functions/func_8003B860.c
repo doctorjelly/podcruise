@@ -35,7 +35,7 @@ void func_8003B860(PcGfx **listp, s32 ulx, s32 lrx, s32 uly, s32 lry, s32 x, s32
         vx = ulx;
         vy = uly;
     }
-    w = ((vx & 0xFFFF) << 16) | (vy & 0xFFFF);
+    w = ((u32)(vx & 0xFFFF) << 16) | (vy & 0xFFFF);
     PC_CMD(0x02180000, w)
 
     if (x >= ulx && y < uly) {
@@ -45,7 +45,7 @@ void func_8003B860(PcGfx **listp, s32 ulx, s32 lrx, s32 uly, s32 lry, s32 x, s32
         vx = lrx;
         vy = uly;
     }
-    w = ((vx & 0xFFFF) << 16) | (vy & 0xFFFF);
+    w = ((u32)(vx & 0xFFFF) << 16) | (vy & 0xFFFF);
     PC_CMD(0x02180002, w)
 
     if (x >= ulx && y >= uly) {
@@ -55,7 +55,7 @@ void func_8003B860(PcGfx **listp, s32 ulx, s32 lrx, s32 uly, s32 lry, s32 x, s32
         vx = lrx;
         vy = lry;
     }
-    w = ((vx & 0xFFFF) << 16) | (vy & 0xFFFF);
+    w = ((u32)(vx & 0xFFFF) << 16) | (vy & 0xFFFF);
     PC_CMD(0x02180004, w)
 
     if (x < ulx && y >= uly) {
@@ -65,7 +65,7 @@ void func_8003B860(PcGfx **listp, s32 ulx, s32 lrx, s32 uly, s32 lry, s32 x, s32
         vx = ulx;
         vy = lry;
     }
-    PC_CMD(0x02180006, ((vx & 0xFFFF) << 16) | (vy & 0xFFFF))
+    PC_CMD(0x02180006, ((u32)(vx & 0xFFFF) << 16) | (vy & 0xFFFF))
 
     tt = (u32)ult & 0xFFFF;
     bb = (u32)lrt & 0xFFFF;
