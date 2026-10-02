@@ -159,6 +159,9 @@ void func_80060DE4(Object80060DE4 *object, s32 nextState) {
         applyRange = 0;
         break;
     case 4:
+        object->unk88 = 0x10;
+        applyRange = 0;
+        break;
     case 5:
         object->unk88 = 0x10;
         applyRange = 0;

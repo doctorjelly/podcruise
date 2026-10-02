@@ -63,3 +63,21 @@ that is exact in Japan or Europe. A programmatic scan of the first 25 ranked
 USA candidates found no predominantly stack-offset-only equal-size miss
 (highest was 7 such words among 77 differences), so a broad declaration-order
 sweep has no current evidence basis.
+
+## Separate state-four/state-five blocks in func_80060DE4
+
+The canonical switch at 80060ED0 indexes `jtbl_800AD0B8`. ROM entries 4/5
+(at ROM ADCC8/ADCCC) target
+80061074/80061088 respectively. Each block independently stores 0x10 to
+object+0x88 and clears the apply-range flag. The old C grouped the cases;
+its linked jump table sent both to 80060FD4. Separate source cases now produce
+distinct targets 80060FD4/80060FE4, recovering the evidenced branch structure
+without changing their common behavior.
+
+The isolated comparison changes from 4840/5260 bytes, 1158 differing overlap
+words and 105 missing words, to 4856/5260 bytes, 1190 differing overlap words
+and 101 missing words. The larger overlap diff includes shifted instructions;
+this is a structural recovery, not an exact match. No split or matching
+configuration changes were made. The private mechanical draft was only a hint;
+addresses, table entries, stores and branch destinations were checked against
+the canonical USA binary and disassembly before retaining the source change.
