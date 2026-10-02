@@ -166,6 +166,9 @@ host-test:
 		src/functions/func_80096AD0.c tests/test_buffer_equality.c \
 		-o build/host/test_buffer_equality
 	build/host/test_buffer_equality
+	$(CC) -std=c11 -Wall -Wextra -Werror -I include \
+		tests/test_float_format_cursor.c -o build/host/test_float_format_cursor
+	build/host/test_float_format_cursor
 	$(PYTHON) tools/gen_host_stubs.py
 	$(CC) -std=c11 -Wall -Wextra -Werror -Wno-error=return-type \
 		-Wno-error=address -Wno-unused-const-variable -I include \

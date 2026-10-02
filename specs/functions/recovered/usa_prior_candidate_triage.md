@@ -31,3 +31,14 @@ are permanent. Reopen a candidate only with new ROM or source evidence.
 | `func_8004F358` | Focused wrong-size audit found no retained correction. |
 | `func_8008E54C` | Earlier eight-function tranche found no localized lever. |
 | `func_8000F0DC` | Earlier wrong-size tranche found no bounded hypothesis. |
+
+## Bounded follow-up after e2724c4
+
+The following isolated USA audits retained no source changes. Sizes are C/ROM;
+word differences compare aligned instructions in the overlapping span.
+
+| Function | Verified baseline and rejected variants |
+| --- | --- |
+| `func_80006C00` | 324/348 bytes, 75 words differ. Direct switch expression with type reread: 328 bytes/79 words; separate 11/12 cases: 308/66; volatile count: unchanged. ROM repeats global-count address/load work that C shares. No omitted handler or count-refresh behavior established. |
+| `func_800125E4` | 948/980 bytes, 229 words differ. Consistent local alias and removal of `register`: unchanged; mode switch: 944/232. ROM's frame/save/index-home overhead remains unexplained; fabricated volatile or address-taking semantics were not retained. |
+| `func_80027D24` | 836/844 bytes, 92 words differ. Pointer alias for the four cap-sufficient writes compiled identically. Two prior low-worker attempts also found no match; no register-only retry retained. |

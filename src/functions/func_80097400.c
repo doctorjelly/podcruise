@@ -154,10 +154,10 @@ void func_80097400(Struct80097400 *state, u8 conversion) {
                     *cursor = '0';
                     shift--;
                 }
+                cursor += 8;
                 if (remaining <= 0) {
                     break;
                 }
-                cursor += 8;
             }
         }
 
