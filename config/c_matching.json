@@ -30533,7 +30533,9 @@
           "rom": "0x20C30",
           "size": 4708
         }
-      ]
+      ],
+      "rodata_vram": "0x800A9C40",
+      "rodata_alignment": 8
     },
     {
       "id": "func_8003BAB0",

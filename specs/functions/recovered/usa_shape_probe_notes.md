@@ -223,3 +223,17 @@ previous source supplied with the canonical bytes' former double
 interpretation fails the fallback vertex-copy assertion. The test does not
 claim a host-native double has the ROM's byte order; the old interpreted
 numeric value is supplied explicitly for that comparison.
+
+## Camera yaw coefficient in func_80021294
+
+The horizontal-motion factor is now `70.0f`, correcting `140.0f`. The raw
+USA ROM word at 800217A0 is `3C01428C`, materializing binary32 70.0. The
+following arithmetic multiplies by the time step (800217B8), then the axis
+(800217C8), converts to double, multiplies by 1.5 (800217D4), and adds to
+the previous yaw. No compensating factor of two appears.
+
+Parent comparison confirms the entire compiled text differs from the prior
+source in only one word, at offset 0x4F8: `3C01430C` becomes `3C01428C`.
+Both audits remain 3312/3312 bytes with 596 differing words because broad
+scheduling differences place that instruction differently from the target.
+A six-profile O1/O2/O3 MIPS II/MIPS III-32 sweep found no exact match.

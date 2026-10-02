@@ -76,3 +76,22 @@ order to the ROM, but their references preserve the correct signs and
 short-circuit predicate order. Local bounds optimized back to baseline;
 array and scalar static objects added unsupported layout/code changes and
 were reverted. Final baseline: 1120/1120 bytes, 266 differing words.
+
+## Adjacent camera-unit pools
+
+`func_80020030` now places its pool at 800A9C40 with alignment 8. All 60
+used numeric bytes match the USA ROM. Parent audit remains 4708/4708 bytes
+and improves from 969 to 962 differing words. This address was previously
+unconfigured, placing the isolated pool after the compiled text.
+
+A private combined compilation of 80020030 and 80021294 emits a 144-byte
+pool with the same structure as the ROM: 60 numeric bytes, an 11-entry
+jump table at A9C7C, then 40 numeric bytes at A9CA8. All 100 numeric bytes
+match. The standalone second function instead inserts four bytes between
+its table and doubles because its pool starts four bytes off an eight-byte
+boundary. Composition removes that padding naturally. Both function
+addresses and sizes are correct in the experiment, but the 11 case targets
+remain four bytes below canonical and text remains nonexact. No combined
+unit is retained: temporary declarations/global views still need reviewed
+reconciliation. This is a concrete future layout candidate, not an exact
+coverage claim.

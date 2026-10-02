@@ -191,7 +191,7 @@ void func_80021294(PcTuneState *state) {
         if ((f64)D_800D7720[index] > 0.1 || (f64)D_800D7720[index] < -0.1) {
             if (flags[0] == 0) {
                 cam[5] = (f32)((f64)cam[5] +
-                                   (f64)(140.0f * D_80120BF8 *
+                                   (f64)(70.0f * D_80120BF8 *
                                          D_800D7720[index]) * 1.5);
                 moved = 1;
             }
