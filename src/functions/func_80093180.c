@@ -4,6 +4,7 @@
 
 #include "podcruise/types.h"
 
+#ifndef PODCRUISE_COMBINED_FORMAT
 typedef union {
     long long li;
     unsigned long long lu;
@@ -170,6 +171,7 @@ static void func_80092B10(FieldState *px, char **pap, u8 code, u8 *ac) {
         break;
     }
 }
+#endif /* !PODCRUISE_COMBINED_FORMAT */
 
 
 extern u8 D_800A7F60[33];  /* blanks */
@@ -282,4 +284,3 @@ s32 func_80093180(PrintEmit prout, u8 *arg, const u8 *fmt, char *ap) {
         fmt = s + 1;
     }
 }
-

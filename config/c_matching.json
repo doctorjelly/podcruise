@@ -5031,7 +5031,8 @@
         "func_80063D0C": "0x80063D0C",
         "func_80063E4C": "0x80063E4C",
         "func_80063EF4": "0x80063EF4",
-        "func_80082BE0": "0x80082BE0"
+        "func_80082BE0": "0x80082BE0",
+        "D_80118D60": "0x80118D60"
       },
       "functions": [
         {
@@ -8199,7 +8200,10 @@
       "source": "src/functions/func_8004FF7C.c",
       "link_vram": "0x8004FF7C",
       "absolute_symbols": {
-        "D_800A4B6C": "0x800A4B6C"
+        "D_800A4B6C": "0x800A4B6C",
+        "D_800A4B78": "0x800A4B78",
+        "D_800A4B74": "0x800A4B74",
+        "D_800A4B70": "0x800A4B70"
       },
       "functions": [
         {
@@ -8460,10 +8464,9 @@
       ]
     },
     {
-      "id": "func_80092B10",
-      "source": "src/functions/func_80092B10.c",
+      "id": "unit_80092B10",
+      "source": "src/functions/unit_80092B10.c",
       "link_vram": "0x80092B10",
-      "rodata_vram": "0x800AE030",
       "flags": [
         "-G",
         "0",
@@ -8475,7 +8478,13 @@
         "-Wab,-r4300_mul"
       ],
       "absolute_symbols": {
+        "D_800A7F60": "0x800A7F60",
+        "D_800A7F84": "0x800A7F84",
+        "D_800AE010": "0x800AE010",
+        "D_800AE014": "0x800AE014",
+        "D_800AE01C": "0x800AE01C",
         "func_8008C31C": "0x8008C31C",
+        "func_8008C344": "0x8008C344",
         "func_80096BF0": "0x80096BF0",
         "func_80097400": "0x80097400"
       },
@@ -8486,7 +8495,18 @@
           "rom": "0x93710",
           "size": 1648,
           "text_offset": "0x0"
+        },
+        {
+          "name": "func_80093180",
+          "vram": "0x80093180",
+          "rom": "0x93D80",
+          "size": 1608
         }
+      ],
+      "rodata_vram": "0x800AE030",
+      "included_sources": [
+        "src/functions/func_80092B10.c",
+        "src/functions/func_80093180.c"
       ]
     },
     {
@@ -22568,7 +22588,9 @@
         "D_80120BF0": "0x80120BF0",
         "D_80120BF8": "0x80120BF8",
         "D_80120C00": "0x80120C00",
-        "D_80120C20": "0x80120C20"
+        "D_80120C20": "0x80120C20",
+        "func_8008AB48": "0x8008AB48",
+        "func_8008AC48": "0x8008AC48"
       },
       "flags": [
         "-G",
@@ -23070,41 +23092,6 @@
       ]
     },
     {
-      "id": "func_80093180",
-      "source": "src/functions/func_80093180.c",
-      "link_vram": "0x80092B10",
-      "flags": [
-        "-G",
-        "0",
-        "-O3",
-        "-mips2",
-        "-non_shared",
-        "-Xcpluscomm",
-        "-signed",
-        "-Wab,-r4300_mul"
-      ],
-      "absolute_symbols": {
-        "D_800A7F60": "0x800A7F60",
-        "D_800A7F84": "0x800A7F84",
-        "D_800AE010": "0x800AE010",
-        "D_800AE014": "0x800AE014",
-        "D_800AE01C": "0x800AE01C",
-        "func_8008C31C": "0x8008C31C",
-        "func_8008C344": "0x8008C344",
-        "func_80096BF0": "0x80096BF0",
-        "func_80097400": "0x80097400"
-      },
-      "functions": [
-        {
-          "name": "func_80093180",
-          "vram": "0x80093180",
-          "rom": "0x93D80",
-          "size": 1608
-        }
-      ],
-      "rodata_vram": "0x800AE030"
-    },
-    {
       "id": "func_800952A0",
       "source": "src/functions/func_800952A0.c",
       "link_vram": "0x800952A0",
@@ -23398,7 +23385,9 @@
         "func_8004E4F4": "0x8004E4F4",
         "func_800503E8": "0x800503E8",
         "func_800519C0": "0x800519C0",
-        "func_8008A6B4": "0x8008A6B4"
+        "func_8008A6B4": "0x8008A6B4",
+        "D_800A2DE3": "0x800A2DE3",
+        "D_800A2DEC": "0x800A2DEC"
       },
       "functions": [
         {
@@ -25813,7 +25802,6 @@
       "source": "src/functions/func_800290A4.c",
       "link_vram": "0x800290A4",
       "absolute_symbols": {
-        "D_80099DEC": "0x80099DEC",
         "D_800A2604": "0x800A2604",
         "D_800A2608": "0x800A2608",
         "D_800A260C": "0x800A260C",
@@ -25821,7 +25809,8 @@
         "D_800A4BDC": "0x800A4BDC",
         "D_80120BF8": "0x80120BF8",
         "func_8000A920": "0x8000A920",
-        "func_8000AB24": "0x8000AB24"
+        "func_8000AB24": "0x8000AB24",
+        "D_800A9DEC": "0x800A9DEC"
       },
       "functions": [
         {
@@ -28512,7 +28501,8 @@
         "func_80087080": "0x80087080",
         "func_800870D0": "0x800870D0",
         "func_800879B8": "0x800879B8",
-        "func_80088360": "0x80088360"
+        "func_80088360": "0x80088360",
+        "D_800A6970": "0x800A6970"
       },
       "functions": [
         {

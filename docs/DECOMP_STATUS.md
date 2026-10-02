@@ -20,7 +20,7 @@ and why the earlier `0x99000` interval was wrong.
 
 | Build | Exact functions | Exact bytes | Share of CPU text | Configured functions | Hybrid substitutions |
 |---|---:|---:|---:|---:|---:|
-| USA retail | 1,181 | 361,112 | 58.10% | 1,348 | 1,180 |
+| USA retail | 1,181 | 361,112 | 58.10% | 1,348 | 1,181 |
 | Japan retail | 913 | 204,688 | 32.93% | 990 | 911 |
 | Europe retail | 915 | 212,960 | 34.26% | 990 | 913 |
 | USA LRG revision | 1,069 | 254,816 | 41.00% | 1,348 | 1,064 |
@@ -45,14 +45,21 @@ Exact counts come from per-version linked-byte comparison reports, rerun on
 the current worktree and deduplicated by function address. A USA match is
 never assumed to carry to Japan or Europe.
 
-The current USA worktree passed `make roundtrip-us` byte-identically with 1,180
+The current USA worktree passed `make roundtrip-us` byte-identically with 1,181
 C substitutions. The Japan, Europe and LRG rows come from earlier
 `make roundtrip-all` checks and were not rerun after these USA-only changes.
 
-`func_80093180` is exact but not substituted. Its unit compiles a file-local
-copy of its callee `func_80092B10` ahead of it, so the object starts at
-`0x80092B10`, while `func_80092B10` is already substituted from its own unit.
-Substituting it needs the two units combined.
+All exact USA functions are now substituted. The formatter helper
+`func_80092B10` and driver `func_80093180` compile together in
+`unit_80092B10.c`; both contiguous bodies match at `-O3`. Grouping them removes
+the previous overlapping-object obstacle to substituting the driver.
+
+All six formerly failing USA units now link after missing canonical absolute
+symbols were restored. They remain nonmatching: `func_80062270` (4 differing
+words), `func_8004FF7C` (7), `func_80081360` (16), `func_800290A4` (96), and
+`func_80087198` (14), and `func_80021F84` (16), all at the correct size. The
+last unit needed two nearby symbols; an unresolved one caused the old linker
+to terminate with a segmentation fault instead of reporting its name.
 
 Two current USA candidates remain assembly-backed despite ROM-supported
 corrections. `func_80076180` now preserves four previously omitted RNG advances:

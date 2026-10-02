@@ -30,12 +30,16 @@ extern void func_80096BF0(FieldState *px, u8 code);
 extern void func_80097400(FieldState *px, u8 code);
 
 /* The original translation unit emits four bytes of read-only data ahead of
-   this function's switch table; this stand-in reproduces that offset so the
-   table lands at its canonical address. */
+   this function's switch table; preserve that pool offset in the combined
+   USA unit without adding text after its matched functions. */
+#ifdef PODCRUISE_COMBINED_FORMAT
+const char func_80092B10_pool_head[] = "pad";
+#else
 const char *func_80092B10_pool_head(void);
 const char *func_80092B10_pool_head(void) {
     return "pad";
 }
+#endif
 
 #define STEP4(pap) (*(pap) = (char *)(((unsigned long)*(pap) + 3) & ~3UL) + 4)
 #define STEP8(pap) (*(pap) = (char *)(((unsigned long)*(pap) + 7) & ~7UL) + 8)
@@ -180,6 +184,7 @@ static void func_80092B10(FieldState *px, char **pap, u8 code, u8 *ac) {
     }
 }
 
+#ifndef PODCRUISE_COMBINED_FORMAT
 void func_80092B10_call_context(FieldState *px, char **pap, const char *fmt, u8 *ac);
 
 void func_80092B10_call_context(FieldState *px, char **pap, const char *fmt, u8 *ac) {
@@ -199,3 +204,4 @@ void func_80092B10_call_context(FieldState *px, char **pap, const char *fmt, u8 
         }
     }
 }
+#endif /* !PODCRUISE_COMBINED_FORMAT */

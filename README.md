@@ -37,8 +37,8 @@ not a substitute for owning it.
   per-version comparison reports, and fails if any unconfigured source lacks
   a recorded reason.
 - Exact IDO 5.3 matches for 1,181 of them (361,112 bytes, 58.10% of main-CPU
-  text) in the canonical USA image. The USA hybrid rebuild substitutes 1,180 of
-  those functions and remains byte-identical to the retail ROM. Regional matches are
+  text) in the canonical USA image. The USA hybrid rebuild substitutes all 1,181
+  exact functions and remains byte-identical to the retail ROM. Regional matches are
   tracked independently; see [`docs/DECOMP_STATUS.md`](docs/DECOMP_STATUS.md)
   for the current per-version ledger and matching terminology.
 
