@@ -1,4 +1,5 @@
 PYTHON ?= python3
+JOBS ?= 1
 VENV_PYTHON := .venv/bin/python
 US_ROM := roms/originals/baserom.us.z64
 JP_ROM := roms/originals/baserom.jp.z64
@@ -133,7 +134,7 @@ split-lrg:
 	$(VENV_PYTHON) -m splat split config/lrg_rev1.yaml
 
 roundtrip-us: split-us
-	$(PYTHON) tools/rebuild_roundtrip.py --version us --output analysis/rebuild.us.json
+	$(PYTHON) tools/rebuild_roundtrip.py --version us --output analysis/rebuild.us.json --jobs $(JOBS)
 
 roundtrip-jp: split-jp
 	$(PYTHON) tools/rebuild_roundtrip.py --version jp --output analysis/rebuild.jp.json
@@ -161,6 +162,10 @@ host-check:
 # constant-pool padding solely to reproduce the original object layout.
 host-test:
 	mkdir -p build/host
+	$(CC) -std=c11 -Wall -Wextra -Werror -I include \
+		src/functions/func_80096AD0.c tests/test_buffer_equality.c \
+		-o build/host/test_buffer_equality
+	build/host/test_buffer_equality
 	$(PYTHON) tools/gen_host_stubs.py
 	$(CC) -std=c11 -Wall -Wextra -Werror -Wno-error=return-type \
 		-Wno-error=address -Wno-unused-const-variable -I include \

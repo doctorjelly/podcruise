@@ -5,7 +5,7 @@ from pathlib import Path
 
 from tools.audit_c_unit import word_differences
 from tools.analyze_mips import jal_target, post_return_candidate, sign16
-from tools.build_matching_object import contiguous_span
+from tools.build_matching_object import compiler_flags, contiguous_span
 from tools.compiler_probe import probe
 from tools.cross_version_map import normalize_instruction
 from tools.classify_non_c import classify_body
@@ -23,6 +23,11 @@ from tools.verify_c_matches import (
 
 
 class MipsAnalysisTests(unittest.TestCase):
+    def test_compiler_flags_accept_list_and_shell_string(self) -> None:
+        flags = ["-O2", "-mips2", "-DNAME=two words"]
+        self.assertEqual(compiler_flags(flags), flags)
+        self.assertEqual(compiler_flags('-O2 -mips2 "-DNAME=two words"'), flags)
+
     def test_audit_word_differences_separate_size_from_content(self) -> None:
         first = bytes.fromhex("11223344 AABBCCDD")
         second = bytes.fromhex("11223344 00000000")

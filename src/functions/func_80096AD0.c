@@ -23,30 +23,28 @@ s32 func_80096AD0(const u8 *left, const u8 *right, s32 count) {
             count -= lead;
             if (lead != 0) {
                 stop = lead + left;
-                x = *left;
                 do {
+                    x = *left;
                     y = *right;
                     left++;
                     right++;
                     if (x != y) {
                         goto unequal;
                     }
-                    x = *left;
                 } while (left != stop);
             }
             words = count & ~3;
             count -= words;
             if (words != 0) {
                 stop = words + left;
-                x = *(const u32 *)left;
                 do {
+                    x = *(const u32 *)left;
                     y = *(const u32 *)right;
                     left += 4;
                     right += 4;
                     if (x != y) {
                         goto unequal;
                     }
-                    x = *(const u32 *)left;
                 } while (left != stop);
             }
         } else {
@@ -54,45 +52,42 @@ s32 func_80096AD0(const u8 *left, const u8 *right, s32 count) {
             count -= lead;
             if (lead != 0) {
                 stop = lead + left;
-                x = *left;
                 do {
+                    x = *left;
                     y = *right;
                     left++;
                     right++;
                     if (x != y) {
                         goto unequal;
                     }
-                    x = *left;
                 } while (left != stop);
             }
             words = count & ~3;
             count -= words;
             if (words != 0) {
                 stop = words + left;
-                x = ((const UnalignedWord *)left)->word;
                 do {
+                    x = ((const UnalignedWord *)left)->word;
                     y = *(const u32 *)right;
                     left += 4;
                     right += 4;
                     if (x != y) {
                         goto unequal;
                     }
-                    x = ((const UnalignedWord *)left)->word;
                 } while (left != stop);
             }
         }
     }
     if (count > 0) {
         stop = count + left;
-        x = *left;
         do {
+            x = *left;
             y = *right;
             left++;
             right++;
             if (x != y) {
                 goto unequal;
             }
-            x = *left;
         } while (left != stop);
     }
     return 0;

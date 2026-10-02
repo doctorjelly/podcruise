@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+from concurrent.futures import ThreadPoolExecutor
 import hashlib
 import json
 import pathlib
@@ -201,12 +202,20 @@ def verify_profile(
     compiler: Path,
     binutils: dict[str, Path],
     binutils_env: dict[str, str],
+    jobs: int = 1,
 ) -> dict:
+    if jobs < 1:
+        raise ValueError("jobs must be at least 1")
+    unit_ids = [unit["id"] for unit in units]
+    if len(unit_ids) != len(set(unit_ids)):
+        raise ValueError("matching config contains duplicate unit ids")
+
     profile_root = build_root / profile["id"]
     profile_root.mkdir(parents=True, exist_ok=True)
     function_results: list[dict] = []
 
-    for unit in units:
+    def verify_unit(unit: dict) -> tuple[list[dict], str | None]:
+        unit_results: list[dict] = []
         try:
             source = root / unit["source"]
             unit_root = profile_root / unit["id"]
@@ -308,7 +317,7 @@ def verify_profile(
                     # becomes `static` (no ELF symbol) without the unit gaining the
                     # `text_offset` that would locate it. Record the failure and
                     # carry on; the summary reports it as a non-matching function.
-                    function_results.append(
+                    unit_results.append(
                         {
                             "byte_identical": False,
                             "canonical_address": False,
@@ -330,7 +339,7 @@ def verify_profile(
                 canonical_vram = int(function["vram"], 0)
                 byte_identical = difference is None
                 canonical_address = actual_vram == canonical_vram
-                function_results.append(
+                unit_results.append(
                     {
                         "actual_sha256": sha256_bytes(actual),
                         "actual_size": actual_size,
@@ -354,9 +363,9 @@ def verify_profile(
             # run. Workers add units to the configuration directly, so a
             # half-written or unresolvable one can appear at any time;
             # aborting would hide the state of every other unit behind it.
-            print(f"!! {unit['id']}: {failure}", file=sys.stderr)
+            error = str(failure)
             for function in unit["functions"]:
-                function_results.append({
+                unit_results.append({
                     "name": function["name"],
                     "expected_vram": function["vram"],
                     "expected_size": int(function["size"]),
@@ -371,7 +380,18 @@ def verify_profile(
                     "first_difference": None,
                     "build_error": str(failure)[:200],
                 })
-            continue
+            return unit_results, error
+        return unit_results, None
+
+    if jobs == 1:
+        unit_outcomes = [verify_unit(unit) for unit in units]
+    else:
+        with ThreadPoolExecutor(max_workers=jobs) as executor:
+            unit_outcomes = list(executor.map(verify_unit, units))
+    for unit, (unit_results, error) in zip(units, unit_outcomes):
+        if error is not None:
+            print(f"!! {unit['id']}: {error}", file=sys.stderr)
+        function_results.extend(unit_results)
     return {
         "compiler_tree_sha256": sha256_tree(compiler.parent),
         "flags": profile["flags"],
@@ -394,9 +414,13 @@ def main() -> int:
                              "collide with a concurrent build")
     parser.add_argument("--output", type=Path, default=Path("analysis/c_matches.us.json"))
     parser.add_argument("--profile", action="append", dest="profiles")
+    parser.add_argument("--jobs", type=int, default=1,
+                        help="parallel unit builds per profile (default: 1)")
     parser.add_argument("--ido-root", type=Path)
     parser.add_argument("--binutils-root", type=Path)
     args = parser.parse_args()
+    if args.jobs < 1:
+        raise SystemExit("--jobs must be at least 1")
 
     root = Path(__file__).resolve().parent.parent
     config_path = root / args.config
@@ -432,6 +456,7 @@ def main() -> int:
             compiler,
             binutils,
             binutils_env,
+            args.jobs,
         )
         results.append(result)
         print(

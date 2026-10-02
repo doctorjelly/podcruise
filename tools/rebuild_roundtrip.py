@@ -10,6 +10,7 @@ import os
 import shutil
 import subprocess
 import sys
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 if __package__:
@@ -60,7 +61,11 @@ def main() -> int:
         "--version", choices=("us", "jp", "eu", "lrg_rev1"), required=True
     )
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--jobs", type=int, default=1,
+                        help="number of independent objects to build concurrently")
     args = parser.parse_args()
+    if args.jobs < 1:
+        parser.error("--jobs must be positive")
 
     root = Path(__file__).resolve().parent.parent
     config = json.loads((root / "config/versions.json").read_text(encoding="utf-8"))
@@ -102,11 +107,12 @@ def main() -> int:
     )
 
     objects: list[Path] = []
+    commands: list[list[str]] = []
     for source in sorted((generated / "asm").glob("*.s")):
         output = asm_objects / f"{source.stem}.o"
         if relative_argument(output, root) not in generated_linker:
             continue
-        run(
+        commands.append(
             [
                 tools["as"],
                 "-no-pad-sections",
@@ -117,9 +123,7 @@ def main() -> int:
                 "-o",
                 str(output),
                 str(source),
-            ],
-            root,
-            tool_env,
+            ]
         )
         objects.append(output)
 
@@ -127,7 +131,7 @@ def main() -> int:
         output = asset_objects / f"{source.stem}.o"
         if relative_argument(output, root) not in generated_linker:
             continue
-        run(
+        commands.append(
             [
                 tools["ld"],
                 "-r",
@@ -136,9 +140,7 @@ def main() -> int:
                 "-o",
                 str(output),
                 str(source),
-            ],
-            root,
-            tool_env,
+            ]
         )
         objects.append(output)
 
@@ -150,13 +152,16 @@ def main() -> int:
         else root / "config/c_matching.json"
     )
     matching_config = load_matching_config(root, matching_config_path)
+    unit_ids = [unit["id"] for unit in matching_config["units"]]
+    if len(set(unit_ids)) != len(unit_ids):
+        raise SystemExit("duplicate C unit scratch directories in rebuild")
     matching_config_argument = matching_config_path.relative_to(root).as_posix()
     for unit in matching_config["units"]:
         c_object = build / Path(unit["source"]).with_suffix(".o")
         relative_c_object = c_object.relative_to(root).as_posix()
         if relative_c_object not in generated_linker:
             continue
-        run(
+        commands.append(
             [
                 sys.executable,
                 "-m",
@@ -169,12 +174,18 @@ def main() -> int:
                 "ido53_o2",
                 "--output",
                 relative_c_object,
-            ],
-            root,
-            tool_env,
+            ]
         )
         objects.append(c_object)
         c_function_count += len(unit["functions"])
+
+    if len(set(objects)) != len(objects):
+        raise SystemExit("duplicate object output paths in rebuild")
+    with ThreadPoolExecutor(max_workers=args.jobs) as executor:
+        # Consume in submission order; linking starts only after every build
+        # succeeds. Each command owns a distinct output and scratch directory.
+        for _ in executor.map(lambda command: run(command, root, tool_env), commands):
+            pass
 
     elf_path = build / f"podcruise.{args.version}.elf"
     map_path = build / f"podcruise.{args.version}.map"

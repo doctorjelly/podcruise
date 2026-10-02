@@ -65,3 +65,22 @@ unit alone. The recovered set already contains objects built at `-O1`, at
 support routines. A unit may also carry `rodata_vram` when the original object
 had its own floating-point constant pool, so the load displacements resolve
 against the address the original build used.
+
+## Parallel USA verification
+
+Independent translation units can be compiled concurrently. Both tools default
+to one job; on a machine with spare CPU capacity, use a bounded job count:
+
+```sh
+python3 tools/verify_c_matches.py --config config/c_matching.json \
+  --profile ido53_o2 --jobs 16 --output analysis/c_matches.us.json
+make -s roundtrip-us JOBS=16 > /tmp/podcruise-roundtrip-us.log 2>&1
+```
+
+The verifier preserves configuration order in its results and keeps failed-unit
+records. The rebuild waits for every independent object before linking. Each
+worker uses its own unit directory; duplicate unit IDs or object output paths
+are rejected. Do not run separate builds into the same output tree concurrently.
+The parallel verifier was checked against serial results, and the 16-job USA
+rebuild reproduces the canonical ROM hash. Current coverage is recorded in
+`DECOMP_STATUS.md`.
