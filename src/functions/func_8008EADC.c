@@ -54,8 +54,9 @@ u32 *func_8008EADC(Stream *stream, s16 *arg1, s32 arg2, s32 arg3, u32 *list) {
     stream->unk20 = value - (f32)samples;
 
     dl = source->unk04(source, &count, samples, arg3, list);
+    samples = (s32)(stream->unk18 * (f32)32768.0);
     GFX(((u32)count & 0xFFFF) | 0x08000000, ((u32)*arg1 << 16) | ((u32)(arg2 * 2) & 0xFFFF))
-    GFX((((u32)stream->unk24 & 0xFF) << 16) | 0x05000000 | ((u32)(s32)(stream->unk18 * (f32)32768.0) & 0xFFFF), func_80088360(stream->unk14))
+    GFX((((u32)stream->unk24 & 0xFF) << 16) | 0x05000000 | ((u32)samples & 0xFFFF), func_80088360(stream->unk14))
     stream->unk24 = 0;
     return dl;
 }

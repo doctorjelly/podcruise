@@ -36,8 +36,6 @@ extern void func_80086B8C(s32, s32, f32 *, f32 *);
 
 extern f64 D_80120BF0;
 
-static const f32 D_800AAC30[2] = {0.0f, 0.0f};
-
 #define TRUNCF(x) ((x) < 0.0f ? (s32)((x) - 0.999999f) : (s32)(x))
 
 void func_800401FC(Obj800401FC *object, Ctx800401FC *context) {
@@ -54,9 +52,6 @@ void func_800401FC(Obj800401FC *object, Ctx800401FC *context) {
     f32 blend;
     f32 rest;
 
-#if defined(__GNUC__)
-    (void)D_800AAC30;
-#endif
     (void)sp78;
     changed = 0;
     if (context->unk0300 < 0) {

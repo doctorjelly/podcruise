@@ -56,3 +56,23 @@ loads D_800AD9E0/ADA20 with bits `3E4CCCD0` and D_800ADA18/ADA58 with bits
 `3DCCCCCF`. All four compiled pool words were checked against ROM. The text
 comparison is unchanged at 2484/2484 bytes and 167 differing words; fixing
 the numeric payload is necessary independently of text matching.
+
+## Unrelated prefix removal and width audit (2026-10-02)
+
+`func_800401FC` no longer emits an unused eight-byte zero array before its
+constants. Those ROM bytes at 800AAC30 contain an unrelated string; canonical
+loads at 8004046C and 80040700 reference AAC38 and AAC40. Configuring the
+pool at AAC38 preserves every compiled text byte and matches all 16 pool
+bytes (`3F7FFFEF 3F7FFFEF 3DCCCCCD 00000000`). The function remains nonexact.
+
+A bounded scalar-extern audit covered all 167 nonmatching USA function
+intervals, deduplicating generated assembly addresses and excluding arrays,
+pointers, and structures. It found 1,383 direct symbolic `lwc1` loads of
+declared `f32` globals and 459 `ldc1` loads of declared `f64` globals, with
+no opposite-width loads. This does not cover indirect or aggregate accesses.
+
+In `func_80066144`, the first two compiled pool words have the opposite
+order to the ROM, but their references preserve the correct signs and
+short-circuit predicate order. Local bounds optimized back to baseline;
+array and scalar static objects added unsupported layout/code changes and
+were reverted. Final baseline: 1120/1120 bytes, 266 differing words.

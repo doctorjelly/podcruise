@@ -29283,7 +29283,7 @@
       "id": "func_800401FC",
       "source": "src/functions/func_800401FC.c",
       "link_vram": "0x800401FC",
-      "rodata_vram": "0x800AAC30",
+      "rodata_vram": "0x800AAC38",
       "rodata_alignment": 8,
       "absolute_symbols": {
         "D_80120BF0": "0x80120BF0",
