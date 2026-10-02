@@ -39,9 +39,8 @@ void func_8008FC3C(Head8008FC3C *arg0, void *arg1, s32 arg2) {
     if (arg2 == 0x7FFFFFFF) {
         flag = -1;
     }
-    for (p = &arg0->list; p != 0; p = t) {
-        t = p->next;
-        if (t == 0) {
+    for (p = &arg0->list; p != 0; p = p->next) {
+        if (p->next == 0) {
             if (flag != 0) {
                 node->count = 0;
             } else {
@@ -50,9 +49,10 @@ void func_8008FC3C(Head8008FC3C *arg0, void *arg1, s32 arg2) {
             func_80088050(node, p);
             break;
         }
+        t = p->next;
         if (arg2 < t->count) {
             node->count = arg2;
-            p->next->count = t->count - arg2;
+            t->count = t->count - arg2;
             func_80088050(node, p);
             break;
         }

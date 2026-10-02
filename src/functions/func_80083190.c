@@ -19,6 +19,8 @@ void func_80083190(Node80083190 **list, f32 (*out)[4]) {
     f32 pad1[17];
     f32 matrix[4][4];
     s32 type;
+    Node80083190 *tmp;
+    Node80083190 **nv;
 
     (void)pad1;
     out[0][1] = 0.0f;
@@ -33,18 +35,20 @@ void func_80083190(Node80083190 **list, f32 (*out)[4]) {
     out[3][0] = 0.0f;
     out[3][1] = 0.0f;
     out[3][2] = 0.0f;
+    nv = list;
     out[0][0] = 1.0f;
     out[1][1] = 1.0f;
     out[2][2] = 1.0f;
     out[3][3] = 1.0f;
-    while (*list != 0) {
-        type = func_80017DA4(*list);
+    while (*nv != 0) {
+        type = func_80017DA4(*nv);
         if (type & 0x8000) {
             if (type == 0xD065) {
-                obj = *list;
+                obj = *nv;
                 src = obj->unk1C;
             } else {
-                src = (*list)->unk1C;
+                tmp = *nv;
+                src = tmp->unk1C;
             }
             matrix[0][0] = src[0][0];
             matrix[0][1] = src[0][1];
@@ -58,9 +62,11 @@ void func_80083190(Node80083190 **list, f32 (*out)[4]) {
             matrix[3][0] = src[3][0];
             matrix[3][1] = src[3][1];
             matrix[3][2] = src[3][2];
-            matrix[0][3] = matrix[1][3] = matrix[2][3] = 0.0;
+            matrix[0][3] = 0.0;
+            matrix[1][3] = 0.0;
+            matrix[2][3] = 0.0;
             matrix[3][3] = 1.0;
-            if ((*list)->unk0C & 0x10) {
+            if ((*nv)->unk0C & 0x10) {
                 for (i = 0; i < 3; i++) {
                     matrix[3][i] += -obj->unk4C[0] * src[0][i];
                     matrix[3][i] += -obj->unk4C[1] * src[1][i];
@@ -70,6 +76,6 @@ void func_80083190(Node80083190 **list, f32 (*out)[4]) {
             }
             func_80015724(out, matrix, out);
         }
-        list++;
+        nv++;
     }
 }

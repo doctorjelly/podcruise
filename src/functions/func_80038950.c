@@ -10,6 +10,7 @@ typedef struct {
     u32 words[13];
 } RenderConfig;
 
+#define SHIFTL(v, s, w) (((u32)(v) & ((0x01 << (w)) - 1)) << (s))
 #define GFX_CMD(pkt, a, b) { Gfx *gp = (Gfx *)(pkt); gp->w0 = (u32)(a); gp->w1 = (u32)(unsigned long)(b); }
 
 extern RenderConfig D_800A3D68;
@@ -33,7 +34,6 @@ extern void func_80035BF0(RenderConfig *, s32);
 
 void func_80038950(Gfx **arg0) {
     Gfx *gfx;
-    s32 range;
 
     D_80112DD8 = 0x00200405;
     D_80112DE0 = D_800A3D68;
@@ -52,20 +52,19 @@ void func_80038950(Gfx **arg0) {
     GFX_CMD(gfx++, 0xE3001A01, D_80114470[7]);
 
     if (!(D_800D697C & 0x40)) {
-        range = D_800A3D50 - D_800A3D4C;
-        GFX_CMD(gfx++, 0xDB080000, ((128000 / range) << 16) | ((((-D_800A3D4C) << 8) + 128000) / range & 0xFFFF));
+        GFX_CMD(gfx++, 0xDB080000, SHIFTL(128000 / (D_800A3D50 - D_800A3D4C), 16, 16) | SHIFTL(((500 - D_800A3D4C) * 256) / (D_800A3D50 - D_800A3D4C), 0, 16));
         GFX_CMD(gfx++, 0xF8000000,
                 (((D_800A3D44[0] & 0xFF) << 24) | ((D_800A3D44[1] & 0xFF) << 16) |
                  ((D_800A3D44[2] & 0xFF) << 8) | (D_800A3D44[3] & 0xFF)));
     }
 
     if (!(D_800D697C & 0x20)) {
-        GFX_CMD(gfx++, 0xDB020000, 0x18);
-        GFX_CMD(gfx++, 0xDC08060A, D_800A3DB8);
+        GFX_CMD(gfx++, 0xDB020000, 0x18); GFX_CMD(gfx++, 0xDC08060A, D_800A3DB8);
         GFX_CMD(gfx++, 0xDC08090A, D_800A3DB0);
     }
 
     D_80112C90 = gfx;
     func_80035BF0(&D_800A3D68, 1);
-    *arg0 = D_80112C90;
+    gfx = D_80112C90;
+    *arg0 = gfx;
 }

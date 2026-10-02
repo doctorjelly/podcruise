@@ -33,6 +33,7 @@ extern void func_80015268(ColorVector8002BBA4 *, f32, f32, f32);
 extern void func_8000AB24(s16, u8, u8, u8, u8);
 extern void func_8003EC40(s16, s16, u8, u8, u8, u8, s32);
 
+#define ROW_Y (s16)(rowSpacing * labelIndex + (u32)y)
 #define COLOR_BYTE(value) ((u8)(u32)(value))
 
 void func_8002BBA4(
@@ -47,7 +48,6 @@ void func_8002BBA4(
     s32 randomBlue;
     s32 randomGreen;
     s32 randomRed;
-    s16 drawY;
 
     primary = D_800A2624;
     secondary = D_800A2630;
@@ -81,13 +81,11 @@ void func_8002BBA4(
         (context->flag6C != 0) && (activeIndex == 4) && (labelIndex == 4)) {
         func_8003EC40(
             (s16)(x - 30),
-            (s16)(rowSpacing * labelIndex + (u32)y),
+            ROW_Y,
             COLOR_BYTE(primary.red),
             COLOR_BYTE(primary.green), COLOR_BYTE(primary.blue), 255,
             (s32)(unsigned long)D_800A987C);
     }
-
-    drawY = (s16)(rowSpacing * labelIndex + (u32)y);
 
     if ((context->state == 3) && (context->substate == 1)) {
         if ((activeIndex == 0) && (activeIndex == labelIndex)) {
@@ -104,12 +102,12 @@ void func_8002BBA4(
 
     if (activeIndex == labelIndex) {
         func_8003EC40(
-            (s16)x, drawY, COLOR_BYTE(primary.red),
+            (s16)x, ROW_Y, COLOR_BYTE(primary.red),
             COLOR_BYTE(primary.green), COLOR_BYTE(primary.blue), 255,
             (s32)(unsigned long)label);
     } else {
         func_8003EC40(
-            (s16)x, drawY, COLOR_BYTE(secondary.red),
+            (s16)x, ROW_Y, COLOR_BYTE(secondary.red),
             COLOR_BYTE(secondary.green), COLOR_BYTE(secondary.blue), 255,
             (s32)(unsigned long)label);
     }

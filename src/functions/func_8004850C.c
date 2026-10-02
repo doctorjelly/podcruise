@@ -71,10 +71,13 @@ void func_8004850C(s32 argument) {
 
     for (index = 0; index < D_8011A26C; index++) {
         target = *D_8011A508[index + 0x62];
-        if (target == 0) {
-            continue;
+        if (1) {
+            if (target == 0) {
+                continue;
+            }
+            scale = D_800AAFA8;
         }
-        scale = D_800AAFA8; if (target != 0) { func_800181BC(target, 2, -4, 0x10, 3); }
+        if (target != 0) { func_800181BC(target, 2, -4, 0x10, 3); }
         func_80015288(anchor, D_801198A8[index].unk04);
         func_80015268(place, D_801198A8[index].unk28, D_801198A8[index].unk2C, 0.0f);
         func_800174B8(work[0], anchor);
@@ -96,7 +99,9 @@ void func_8004850C(s32 argument) {
         func_80017918(work[0], scale, scale, scale, work[0]);
         func_80017BA8(target, work[0]);
         if (target != 0) {
-            func_800181BC(target, 2, 3, 0x10, 2);
+            if (1) {
+                func_800181BC(target, 2, 3, 0x10, 2);
+            }
         }
     }
 

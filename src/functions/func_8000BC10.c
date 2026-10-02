@@ -56,7 +56,6 @@ void func_8000BC10(void) {
     s32 slot;
     s16 i;
 
-    (void)spare;
     object = 0;
     for (i = 0; i < 32; i++) {
         D_8009B790[i].unk0 &= ~2;
@@ -144,10 +143,11 @@ void func_8000BC10(void) {
                     target[1] = local[3][1] + node->unk6C[1];
                     target[2] = local[3][2] + node->unk6C[2];
                     if (node->unk4 == 4) {
-                        lean = local[1][2];
-                        target[0] = local[1][0] * (1.0 + 40.0 * ABSOLUTE(lean)) + target[0];
-                        target[1] = local[1][1] * (1.0 + 40.0 * ABSOLUTE(lean)) + target[1];
-                        target[2] = lean * (1.0 + 40.0 * ABSOLUTE(lean)) + target[2];
+                        lean = ABSOLUTE(local[1][2]);
+                        target[0] = target[0] + (1.0 + 40.0 * lean) * local[1][0];
+                        spare = ABSOLUTE(local[1][2]);
+                        target[1] = target[1] + (1.0 + 40.0 * spare) * local[1][1];
+                        target[2] = target[2] + (1.0 + 40.0 * ABSOLUTE(local[1][2])) * local[1][2];
                     }
                 }
                 func_80082624(&node->unk14[12], target, node->unk14, angles, angles[5]);

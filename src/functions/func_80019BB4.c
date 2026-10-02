@@ -49,25 +49,32 @@ void func_80019BB4(Controller80019BB4 *controller) {
     s32 mode;
     u8 raw;
     s32 y;
-    f32 fade;
+    s32 *delay;
+    s32 cnt;
+    f32 *alpha;
+    f32 *timer;
 
 
     if (D_80000300 == 0) {
         func_8003ECB0(D_80114470[0] / 2, D_80114470[1] / 2, D_800A8820);
     } else {
+        timer = &D_800A2378;
+        alpha = &D_800A237C;
+        delay = &D_800A2384;
         if (D_800A4BBC != 0) {
             D_800A4BBC = 0;
             D_800A2374++;
             if (D_800A2374 == 2) {
                 func_80008B14(0x74, 6, 0.25f, 0.5f, 0);
-                D_800A2378 = 2.5f;
+                *timer = 2.5f;
             }
-            D_800A237C = 255.0f;
+            *alpha = 255.0f;
         }
 
         if ((D_800D697C & 0x1000) != 0 || func_8002E8D4(0) == 0) {
             raw = (u32)(D_800A4B50 * 5.0f);
-            func_8003EC40(0xA0, 0xB4, 0xFF, raw % 0x100, raw % 0x100, 0xFF, D_800A8838);
+            raw = raw % 0x100;
+            func_8003EC40(0xA0, 0xB4, 0xFF, raw, raw, 0xFF, D_800A8838);
             func_8000AAC0(0x4D, 1.0f, 1.0f);
             func_8000AA04(0x4D, 0x57, 0x2E);
             func_8000A920(0x4D, 1);
@@ -75,11 +82,11 @@ void func_80019BB4(Controller80019BB4 *controller) {
         } else {
             switch (D_800A2374) {
             case 0:
-                if (D_800A2384 > 0) {
-                    D_800A2384--;
-                    break;
-                }
-                {
+                cnt = *delay;
+                if (cnt > 0) {
+                    cnt--;
+                    *delay = cnt;
+                } else {
                     y = 0x1E;
                     func_8003ECB0(0x1E, y, D_800A8850);
                     y += 0x14;
@@ -118,10 +125,9 @@ void func_80019BB4(Controller80019BB4 *controller) {
                 break;
             case 2:
                 if (D_800A4BDC != 1 || D_800A2380 != 0) {
-                    fade = D_800A237C - 255.0f * D_80120BF8;
-                    D_800A237C = fade;
-                    if (fade < 0.0f) {
-                        D_800A237C = 0.0f;
+                    *alpha = *alpha - 255.0f * D_80120BF8;
+                    if (*alpha < 0.0f) {
+                        *alpha = 0.0f;
                         if (D_800A2380 != 0) {
                             func_8000AB24(-0x67, 0, 0, 0, 0xFF);
                             func_800469B4(controller, D_800A2198);
@@ -134,14 +140,14 @@ void func_80019BB4(Controller80019BB4 *controller) {
                 if (D_800A2380 == 0) {
                     func_8000A920(0x53, 1);
                 }
-                func_8000AB24(0x53, 0xFF, 0xFF, 0xFF, (u32)D_800A237C);
+                func_8000AB24(0x53, 0xFF, 0xFF, 0xFF, (u32)*alpha);
                 if (D_800A4BDC != 1) {
                     func_8000AA04(0x52, 0x52, 0xF);
                     func_8000AAC0(0x52, 1.0f, 1.0f);
                     func_8000A920(0x52, 1);
                     if (D_800A2380 != 0) {
                         func_8000AB24(0x52, 0xFF, 0xFF, 0xFF,
-                                      (u32)D_800A237C);
+                                      (u32)*alpha);
                     } else {
                         func_8000AB24(0x52, 0xFF, 0xFF, 0xFF, 0xFF);
                     }
@@ -150,28 +156,31 @@ void func_80019BB4(Controller80019BB4 *controller) {
             }
         }
 
-        mode = D_800A4BDC;
-        if (mode == 0) {
-            if (D_800A2378 > 0.0f) {
-                D_800A2378 = D_800A2378 - D_80120BF8;
+        if (D_800A4BDC == 0) {
+            if (*timer > 0.0f) {
+                *timer = *timer - D_80120BF8;
             }
         }
-        if (D_800A2378 <= 0.0f) {
-            D_800A2378 = D_800A9B40;
+        if (*timer <= 0.0f) {
+            *timer = D_800A9B40;
             mode = D_800A2374;
             if (mode < 2) {
                 D_800A4BDC = -1;
             } else {
                 D_800A2380 = 1;
-                D_800A237C = 255.0f;
+                *alpha = 255.0f;
             }
-            if (mode == 0) {
+            switch (mode) {
+            case 0:
                 D_800A2198 = 0;
-            } else if (mode == 1) {
+                break;
+            case 1:
                 D_800A2198 = 0;
-            } else if (mode == 2) {
+                break;
+            case 2:
                 D_800A2198 = 0xE;
                 controller->state = 0xF;
+                break;
             }
         }
     }

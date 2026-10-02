@@ -19,6 +19,8 @@ extern SlotRecord D_800DB8A0[4];
 extern s32 D_800DB910[4];
 extern s32 D_800A290C[4];
 extern s32 D_800A291C;
+extern s32 D_800A2918[2];
+extern s32 D_800A2910[4];
 
 extern void func_8002E82C(s32 index);
 extern s32 func_8002F054(void);
@@ -26,12 +28,12 @@ extern s32 func_8008B1B0(void *record, s32 value);
 
 void func_800316A8(void) {
     SlotRecord *slot;
-    s32 *state;
     s32 index;
+    s32 one;
     s32 changed;
-    s16 phase;
-    u32 bits;
+    u16 bits;
 
+    one = 1;
     for (index = 0; index < 4; index++) {
         if (D_800DB910[index] != 0) {
             func_8002E82C(index);
@@ -39,21 +41,21 @@ void func_800316A8(void) {
         }
         slot = &D_800DB8A0[index];
         if (slot->unk10 != 0) {
-            if (func_8002F054() != 1) {
-                D_800A291C = 0;
-            } else if (D_800A291C == 0) {
-                D_800A291C = 1;
-                func_8002E82C(-1);
+            if (func_8002F054() == 1) {
+                if (D_800A291C == 0) {
+                    D_800A2918[1] = one;
+                    func_8002E82C(-1);
+                }
+            } else {
+                D_800A2910[3] = 0;
             }
             if (func_8002F054() == 1 || slot->unk0C == 0) {
-                phase = slot->unk0A;
                 slot->unk08 = 0;
-                if (phase != 0) {
-                    state = &D_800A290C[index];
+                if (slot->unk0A != 0) {
                     func_8008B1B0(slot->unk18, 0);
                     func_8008B1B0(slot->unk18, 0);
                     func_8008B1B0(slot->unk18, 0);
-                    *state = -1;
+                    D_800A290C[index] = -1;
                     if (slot->unk0A > 0) {
                         slot->unk0A = -2;
                     } else {
@@ -70,8 +72,8 @@ void func_800316A8(void) {
                     } else {
                         changed = 0;
                     }
-                    slot->unk06 = bits >> 1;
-                    if ((u16)(bits >> 1) == 0) {
+                    slot->unk06 = (u32)bits >> 1;
+                    if (slot->unk06 == 0) {
                         if (slot->unk08 == 1) {
                             slot->unk06 = 0x8000;
                         } else {
@@ -79,11 +81,12 @@ void func_800316A8(void) {
                         }
                     }
                 } else {
-                    changed = 0;
                     slot->unk14 = slot->unk14 + slot->unk16;
                     if (slot->unk14 > 0x400) {
                         slot->unk14 = slot->unk14 - 0x400;
                         changed = 1;
+                    } else {
+                        changed = 0;
                     }
                 }
                 if (changed == 0) {
@@ -91,11 +94,10 @@ void func_800316A8(void) {
                         slot->unk0A = -3;
                     }
                     if (slot->unk0A < 0) {
-                        state = &D_800A290C[index];
                         func_8008B1B0(slot->unk18, 0);
                         func_8008B1B0(slot->unk18, 0);
                         func_8008B1B0(slot->unk18, 0);
-                        *state = -1;
+                        D_800A290C[index] = -1;
                         slot->unk0A = slot->unk0A + 1;
                     }
                 } else {

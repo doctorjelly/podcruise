@@ -32,11 +32,13 @@ void func_80007488(Task80007488 *task) {
     u32 available;
     s32 count;
     u32 *end;
+    s16 nv;
 
     func_80006FDC();
     physical = func_80088360(task->unk00);
     available = func_800883E0();
-    task->unk04 = ((D_800AFE90 - (available >> 2)) + 0x60) & 0xFFF0;
+    nv = available >> 2;
+    task->unk04 = ((D_800AFE90 - nv) + 0x60) & 0xFFF0;
     if (task->unk04 < D_800AFE8C) {
         task->unk04 = D_800AFE8C;
     }

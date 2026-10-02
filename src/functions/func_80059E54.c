@@ -142,8 +142,6 @@ void func_80059E54(PcSession80059E54 *session, PcRacer80059E54 *racer,
         rowY += 14;
     }
 
-    green = 0xFF;
-    red = 0x32;
     value = racer->unk74;
     if (value <= session->unk1D4) {
         session->unk1D4 = value;
@@ -165,6 +163,8 @@ void func_80059E54(PcSession80059E54 *session, PcRacer80059E54 *racer,
         }
         blue = 0;
     } else {
+        red = 0x32;
+        green = 0xFF;
         blue = 5;
     }
     func_8008A6B4(text, D_800ACDA0, D_800ACDA8);

@@ -16,6 +16,10 @@ typedef struct {
 
 extern s32 D_800A23BC;
 extern u8 D_800A23C0;
+/* Same words as D_800A23BC/D_800A23C0, spelled by array offset (matches the ROM). */
+extern s32 D_800A23B8[];
+extern s32 D_800A23B0[];
+extern u8 D_800A23B2[];
 extern s32 D_800A4B94[];
 extern s32 D_800A4BA4[];
 extern u8 D_800A8B54[];
@@ -40,7 +44,7 @@ s32 func_8001CCC4(ObjB05 *arg0, s32 arg1) {
     u8 letters[3];
     s32 i;
     s32 flags;
-    s32 idx;
+    s32 off;
 
     if (arg1 == 4) {
         func_8003EC40(0xA0, 0x38, 0xA3, 0xBE, 0x11, 0xFF, D_800A8B54);
@@ -52,17 +56,17 @@ s32 func_8001CCC4(ObjB05 *arg0, s32 arg1) {
         func_8003EC40(0xA0, 0x38, 0xA3, 0xBE, 0x11, 0xFF, text);
     }
 
-    if (D_800A23C0 == 1) {
+    if (D_800A23B2[14] == 1) {
         func_8003EC40(0xA0, 0x4B, 0xA3, 0xBE, 0x11, 0xFF, D_800A8B88);
         func_8003EC40(0xA0, 0xA0, 0xA3, 0xBE, 0x11, 0xFF, D_800A8BA0);
         func_8003EC40(0xA0, 0xB9, 0xA3, 0xBE, 0x11, 0xFF, D_800A8BB8);
     }
 
-    func_8002BBA4(arg0, 0xA0, 0x64, 0x1E, D_800A23BC == 0, 0, D_800A8BD4);
-    func_8002BBA4(arg0, 0xA0, 0x64, 0x1E, D_800A23BC == 0, 1, D_800A8BE4);
+    func_8002BBA4(arg0, 0xA0, 0x64, 0x1E, D_800A23B8[1] == 0, 0, D_800A8BD4);
+    func_8002BBA4(arg0, 0xA0, 0x64, 0x1E, D_800A23B8[1] == 0, 1, D_800A8BE4);
 
-    idx = arg0->unk6F;
-    flags = D_800A4BA4[idx];
+    off = arg0->unk6F * 4;
+    flags = *(s32 *)((u8 *)D_800A4BA4 + off);
     if (flags & 1) {
         func_8002D4C4(0x55);
         if (D_800A23C0 == 0) {
@@ -70,14 +74,14 @@ s32 func_8001CCC4(ObjB05 *arg0, s32 arg1) {
                 arg0->unk10 = 0;
                 return 0;
             }
-            D_800A23BC = 0;
-            D_800A23C0 = 1;
+            D_800A23B8[1] = 0;
+            D_800A23B2[14] = 1;
             return 0;
         }
-        D_800A23C0 = 0;
+        D_800A23B2[14] = 0;
         arg0->unk10 = 0;
-        if (D_800A23BC != 0) {
-            D_800A23BC = 0;
+        if (D_800A23B8[1] != 0) {
+            D_800A23B0[3] = 0;
             if (arg1 == 4) {
                 func_8003964C();
             } else {
@@ -94,21 +98,21 @@ s32 func_8001CCC4(ObjB05 *arg0, s32 arg1) {
         func_8002D4C4(0x4D);
         arg0->unk10 = 0;
         D_800A23BC = 0;
-        D_800A23C0 = 0;
+        D_800A23B2[14] = 0;
         return 0;
     }
 
-    if (D_800A23BC == 0) {
-        if (D_800A4B94[idx] & 0x4000) {
+    if (D_800A23B8[1] == 0) {
+        if (*(s32 *)((u8 *)D_800A4B94 + off) & 0x4000) {
             func_8002D4C4(0x57);
             D_800A23BC = 1;
         }
     }
 
     if (D_800A23BC != 0) {
-        if (D_800A4B94[idx] & 0x8000) {
+        if (D_800A4B94[arg0->unk6F] & 0x8000) {
             func_8002D4C4(0x57);
-            D_800A23BC = 0;
+            D_800A23B8[1] = 0;
         }
     }
     return 0;

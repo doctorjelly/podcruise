@@ -24,11 +24,9 @@ void func_800747E4(u8 *obj) {
     if (*(u32 *)(obj + 0x64) & 0x8000) {
         dir = -1.0f;
     } else if (*(u32 *)(obj + 0x64) & 0x10000) {
-        dir = 1.0f;
+        dir = 1;
     } else {
         dir = 0.0f;
-    }
-    if (dir == 0.0f) {
         *(f32 *)(obj + 0x340) = 0.0f;
         *(f32 *)(obj + 0x33C) = 0.0f;
         *(f32 *)(obj + 0x338) = 0.0f;
@@ -36,21 +34,19 @@ void func_800747E4(u8 *obj) {
     if (dir == 0.0f) {
         return;
     }
-
-
     *(f32 *)(obj + 0x340) = *(f32 *)(obj + 0x340) + D_80120BF0 * 0.5;
-    if (1.0f < *(f32 *)(obj + 0x340)) {
-        *(f32 *)(obj + 0x340) = 1.0f;
+    if (1 < *(f32 *)(obj + 0x340)) {
+        *(f32 *)(obj + 0x340) = 1;
     }
     if (dir > 0.0f) {
         index = 1;
     } else {
         index = 2;
     }
-    *(f32 *)(obj + 0x338) = *(f32 *)(obj + 0x338) +
-        dir * D_800AD988 * *(f32 *)(obj + 0x340) * D_80120BF0;
+    *(f32 *)(obj + 0x338) += dir * D_800AD988 * *(f32 *)(obj + 0x340) * D_80120BF0;
 
-    part = obj + index * 0x40;
+    part = obj;
+    part += index * 0x40;
     func_800156DC(mtx, (PcVec3fSlot *)(part + 0x350));
     func_800155EC(&axis, &mtx[1].value, 0.0f, &mtx[0].value);
     func_80015288(&axis, &mtx[1].value);
@@ -64,8 +60,7 @@ void func_800747E4(u8 *obj) {
         func_80017BA8(*(u8 **)(*(u8 **)(obj + 0x344) + index * 4), part + 0x350);
     }
 
-    *(f32 *)(obj + 0x33C) = *(f32 *)(obj + 0x33C) +
-        dir * D_800AD990 * *(f32 *)(obj + 0x340) * D_80120BF0;
+    *(f32 *)(obj + 0x33C) += dir * D_800AD990 * *(f32 *)(obj + 0x340) * D_80120BF0;
 
     part = obj + 0x140;
     func_800156DC(mtx, (PcVec3fSlot *)(part + 0x350));
