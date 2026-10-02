@@ -46,7 +46,7 @@ extern void func_800834F0(void *node, f32 *first, f32 *second, f32 scale,
 #define MATRIX(base, offset) ((Matrix800784F8 *)((u8 *)(base) + (offset)))
 #define TYPE(c) (**(s32 **)((u8 *)POINTER(c, 0x1E70) + 0x18))
 #define CLAMP(value, low, high) \
-    ((value) < (low) ? (low) : ((value) > (high) ? (high) : (value)))
+    ((low) <= (value) ? ((value) <= (high) ? (value) : (high)) : (low))
 
 void func_800784F8(void *craft) {
     volatile u8 *_pad = 0;

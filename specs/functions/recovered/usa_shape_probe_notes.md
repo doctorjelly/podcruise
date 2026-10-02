@@ -480,3 +480,39 @@ Final US16 checks retain 1181 exact functions / 361112 bytes. The 32-job USA
 round trip is byte-identical; full host/tool tests, safety, the strict source
 manifest, and whitespace checks pass. A subsequent `func_800784F8` unordered
 clamp-predicate investigation remains private and is not part of this tranche.
+
+
+## US17 ordered predicates and vector parameters
+
+The floating-comparison histogram isolated three functions whose canonical
+bodies use more ordered inclusive comparisons than the recovered code:
+`func_800784F8`, `func_80079824`, and `func_8001ADD4`. The first two had
+real unordered-input discrepancies; their dedicated specs record the ROM
+branch proofs, retained corrections, and actual-function regressions.
+Parent checks independently reproduce both original-source failures and
+pass the corrected tests with floating-conversion sanitization. The nine
+exhaust tuning floats were checked against their raw canonical ROM words.
+A stricter aligned one-word comparison-opcode scan found no further sites.
+
+`func_8001ADD4` has no demonstrated NaN error. The comparisons at 8001BA10
+and 8001BA8C are lower range guards following the earlier `<540` and `<900`
+tests. Unordered values continue toward the final arm, as they do in the
+current source chain. A private explicit range-guard variant grew from
+5432/5680 bytes and 1324 differing words to 5488/5680 and 1337; it was
+rejected without a shared source edit.
+
+The second and third `func_800834F0` parameters are now vector pointers,
+matching all recovered caller groups and their canonical stack-address
+arguments. They are only forwarded recursively. This contract correction
+leaves the emitted 2096-byte body unchanged; its dedicated spec records the
+call-site evidence.
+
+Six-profile IDO 5.3 sweeps of each changed clamp source found no exact match.
+No profile change, dummy local, or empty conditional was retained.
+
+
+Final US17 validation retains 1181 exact functions / 361112 bytes. Both new
+regressions pass against the corrected production functions and fail with
+original sources. The full host/tool suite, 32-job byte-identical USA rebuild,
+safety check, strict source manifest, and whitespace check pass. Subsequent
+conversion-opcode triage remains outside this committed tranche.

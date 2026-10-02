@@ -178,6 +178,12 @@ host-test:
 	$(CC) -std=c11 -Wall -Wextra -Werror -I include \
 		tests/test_mesh_threshold.c -o build/host/test_mesh_threshold -lm
 	build/host/test_mesh_threshold
+	$(CC) -std=c11 -Wall -Wextra -Werror -I include \
+		tests/test_exhaust_clamps.c -o build/host/test_exhaust_clamps -lm
+	build/host/test_exhaust_clamps
+	$(CC) -std=c11 -Wall -Wextra -Werror -I include \
+		tests/test_steering_clamp.c -o build/host/test_steering_clamp -lm
+	build/host/test_steering_clamp
 	$(PYTHON) tools/gen_host_stubs.py
 	$(CC) -std=c11 -Wall -Wextra -Werror -Wno-error=return-type \
 		-Wno-error=address -Wno-unused-const-variable -I include \

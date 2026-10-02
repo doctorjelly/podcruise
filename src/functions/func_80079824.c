@@ -113,9 +113,9 @@ void func_80079824(Object80079824 *object) {
     }
 
     normalizedSteering = (f32)((f64)object->steering * D_800ADAC8);
-    if (normalizedSteering < -1.0f) {
+    if (!(-1.0f <= normalizedSteering)) {
         normalizedSteering = -1.0f;
-    } else if (1.0f < normalizedSteering) {
+    } else if (!(normalizedSteering <= 1.0f)) {
         normalizedSteering = 1.0f;
     }
     lowerSteering = -(1.0f + normalizedSteering) / 2.0f;

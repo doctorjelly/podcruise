@@ -41,7 +41,7 @@ extern f64 D_800ADD28;
 extern f64 D_800ADD30;
 extern f32 D_80120C40[64];
 
-void func_800834F0(Node *node, s32 arg1, s32 arg2, f32 arg3, f32 arg4, f32 arg5,
+void func_800834F0(Node *node, f32 *arg1, f32 *arg2, f32 arg3, f32 arg4, f32 arg5,
                    f32 arg6, s32 arg7) {
     f32 scratch;
     s32 steps;
