@@ -1040,3 +1040,71 @@ canonical roundtrip is byte-identical. `make test` (32 Python tests and host
 targets), safety, strict manifest, USA-only inventory, and diff check pass.
 No new test or Makefile change was needed; the generated host stubs dropped
 the ten unused globals.
+
+## US30 bounded lifetime, table and pool checks
+
+The private `func_80060DE4` case-`0x14` lifetime reconstruction was rejected:
+5228/5260 symbol bytes and eight missing words stayed unchanged, while
+aligned word differences rose from 780 to 810. The frame stayed `0xA0`
+versus ROM `0x98`; delta moved from `sp+0x94` to `sp+0x54`, versus ROM
+`sp+0x4C`. All 56 ordered calls and the 352-byte generated rodata were
+unchanged. The 5232-byte text section includes four padding bytes excluded
+from symbol comparison. Artifacts: `/tmp/us30-60de4-frame-sol/case14/`.
+
+A read-only alias audit found all 61 raw and compiled target words identical
+across four tables in three functions: `8005337C` (7), `8008F3FC` (17), and
+`8004BE90` (19 plus 18). No case-grouping hypothesis or compile followed.
+Details: `/tmp/us30-table-alias-triage/report.md`.
+
+The retained `func_8000D5EC` field cache follows ROM's single-read bit-toggle
+lifetime and removes its redundant else-path load. Its symbol shrinks from
+512 to 504 bytes for ROM's 496; differing overlap words rise from 69 to 70,
+and extra words fall from four to two. Frame `0x20` and all five ordered
+calls agree with ROM. The explicit cached-field pointer form emits identical
+bytes and was not retained. The earlier toggle audit reported 71/68 words
+before the accepted pool correction; its separately identified pointer-trial
+input is unavailable, so that historical coverage relies on the recorded
+notes. Available direct-global and later source copies contain neither new
+cache form. The 504-byte symbol excludes eight bytes of section padding.
+The semantic table is 36 bytes at `0x800A863C`, with one differing target;
+twelve artifact padding bytes follow and overlap raw ROM words
+`C0C387FE B851EB85 00000000`, not an established 48-byte owned pool.
+
+The changed cache source was checked under six IDO 5.3 profiles, with actual
+commands checked against per-unit flags. None matched. O1/MIPS II and
+O1/MIPS III-32 each emit 528 bytes, 118 overlap differences and eight extra
+words; O2/O3 MIPS II each emit 504 bytes, 70 differences and two extra
+words; O2/O3 MIPS III-32 each emit 504 bytes, 71 differences and two extra
+words. All use canonical `0x8000D5EC` and have no missing words. O2/MIPS II
+reused the identical prior effective flags/source result. Artifacts:
+`/tmp/us30-wrongsize-sol/cached-toggle/`, `cached-pointer/`, and
+`cached-toggle/profile-check/summary.json` under that same parent.
+
+The private `func_800320E0` literal form was rejected: symbol size stayed
+272 bytes and overlap differences rose from nine to twelve. Its twelve
+correct payload bytes are at full VRAM `0x800AA3A0`, `0x800AA3A4`, and
+`0x800AA3A8`; four section-padding bytes overlap the neighboring word at
+`0x800AA3AC` (raw `80032214`). Artifacts:
+`/tmp/us30-small-pools/320e0-pilot/`. `func_80014F54` received only a
+read-only verification of its eleven-value pool; it was not compiled, and
+this establishes no immutability claim. Raw pool artifacts:
+`/tmp/us30-small-pools-320e0.bin` and `/tmp/us30-small-pools-14f54.bin`.
+
+The final `func_8000F0DC` read-only follow-up stopped at 1236/1220 bytes
+and frames `0x78/0x60`. Extra `$s8` and `$f20` preservation accounts for
+four additional words, but the input, volume and intensity lifetimes agree
+with ROM's stack-held values. No natural source hypothesis or compile
+followed. Evidence: `/tmp/us30-0f0dc-live/assessment.txt`.
+
+Final validation passes. The isolated approved `func_8000D5EC` source
+produces 504/496 symbol bytes, 70 overlap differences and two extra words;
+source SHA256 is
+`5994e7d3f117a3351690794cc1b851684c50473bc612f1a5d126a0397bb5fca0`.
+The canonical ledger explicitly uses `ido53_o2`, with all 1,348 source
+hashes and its configuration hash current. Its exact name/hash/size set is
+unchanged at 1,183 functions / 363,220 bytes. The USA32 canonical roundtrip
+is byte-identical at SHA1 `3542d5597c8a56ea8f5c63bceae97a24c4c08d58`.
+All 32 tests, safety, strict manifest, USA-only inventory and diff check pass.
+Logs are `/tmp/us30-0d5ec-validation/{isolated,ledger,roundtrip,test,safety,manifest,inventory}.log`.
+This is a natural single-read source recovery, not an exact match or a
+runtime-bug claim; no exact bytes were added.

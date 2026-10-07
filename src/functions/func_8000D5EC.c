@@ -23,6 +23,7 @@ extern void func_8000C6C8(f32 *value, f32 rate, f32 scale, f32 lower, f32 upper)
 void func_8000D5EC(s32 selector, f32 value) {
     s32 *toggle;
     Holder *holder;
+    s32 bits;
 
     switch (selector) {
     case 0:
@@ -63,10 +64,11 @@ void func_8000D5EC(s32 selector, f32 value) {
     case 7:
         if (D_8009B7D8 & 0x20) {
             holder = &D_800D6960;
-            if (holder->unk1C & 0x4000) {
-                holder->unk1C = holder->unk1C & ~0x4000;
+            bits = holder->unk1C;
+            if (bits & 0x4000) {
+                holder->unk1C = bits & ~0x4000;
             } else {
-                holder->unk1C = holder->unk1C | 0x4000;
+                holder->unk1C = bits | 0x4000;
             }
         }
         break;
