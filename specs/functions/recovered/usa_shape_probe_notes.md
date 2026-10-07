@@ -999,3 +999,44 @@ bytes were added, so the chart is unchanged.
 Private evidence paths: 21F84 captures `/tmp/us28-21f84-flags/` and
 `/tmp/us28-21f84-last2/`; 42970 pointer forms 1 and 2 are in
 `/tmp/us27-42970-pointer-locals/`.
+
+## US29 transition-dispatch follow-up
+
+The later third pointer form for `func_80042970` was also nonexact and falls
+outside the US28 token interval. It measured 592/584 bytes, with 144 differing
+words and two extra words; its frame is `0x158` and saves an additional `$s1`.
+The private form is under `/tmp/us27-42970-pointer-locals/form3/`. No fresh
+source forms were run for `func_80031324` or `func_80040050` in this tranche.
+
+For `func_80060DE4`, the label-only table layout emitted 320 rodata bytes;
+the internal-literal form emitted 352 bytes but still had 42 differing words
+in the primary table. A full-pool form also internalized the initial `0.1f` /
+`0.2f` reads, but its first two emitted words reversed that order (`0.2f`, then
+`0.1f`). It placed generated rodata at `0x800AD0B0` and emitted a 360-byte
+payload plus 8 bytes of alignment padding.
+The raw words immediately after the compared 352-byte span, at ROM
+`0xADE18/0xADE1C`, are `0x80062C64/0x80062328`; the full-pool padding would
+extend past that span, so that form was rejected. These generated spans do not
+establish the original unit boundary.
+
+The retained C uses the ten verified ROM pool values as typed literals,
+adds explicit case-4 labels before the two nested switch defaults, and keeps
+the ROM-evidenced duplicate `unk88 = 0` store from case `0x22` falling through
+to case `0x1E`. Its generated 352-byte rodata spans `0x800AD0B8..0x800AD218`;
+the two nested five-word tables and both literal pools match ROM, while 42
+primary-table words differ. The exact function symbol is 5,228/5,260 bytes,
+780 words differ and 8 words are missing (32 bytes); the frame is `0xA0` versus
+ROM `0x98`. Its function-slice SHA256 is
+`8ea121a4d821fbb8017df4a85654be419209976a2b9db7c497233a56ab58c136`; source
+SHA256 is `05b83f4540268a3b76cefe2ff0d79f4b5fc9cd9ae5ac086a5cdbf59a1740c6e9`.
+A fixed ten-case actual-function UBSan fixture passes with `-Wall -Wextra
+-Werror`; it is private at `/tmp/us29-60de4-harness/test_fallthrough.c`.
+Stage artifacts remain under `/tmp/us29-60de4-case4/`.
+
+Final validation artifacts are under `/tmp/us29-60de4-validation/`. The
+authoritative IDO 5.3 O2 ledger has all 1,348 source hashes current; the exact
+name/hash/size tuple remains 1,183 functions / 363,220 bytes. The USA32
+canonical roundtrip is byte-identical. `make test` (32 Python tests and host
+targets), safety, strict manifest, USA-only inventory, and diff check pass.
+No new test or Makefile change was needed; the generated host stubs dropped
+the ten unused globals.

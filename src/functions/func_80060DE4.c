@@ -42,16 +42,6 @@ typedef struct {
 extern Reference80060DE4 D_800A4C00;
 extern f32 D_800AD0B0;
 extern f32 D_800AD0B4;
-extern f64 D_800AD1D8;
-extern f32 D_800AD1E0;
-extern f32 D_800AD1E4;
-extern f32 D_800AD1E8;
-extern f32 D_800AD1EC;
-extern f32 D_800AD204;
-extern f32 D_800AD208;
-extern f32 D_800AD20C;
-extern f32 D_800AD210;
-extern f32 D_800AD214;
 extern s8 D_80113E67;
 extern s32 D_80118EF8;
 
@@ -145,6 +135,7 @@ void func_80060DE4(Object80060DE4 *object, s32 nextState) {
         case 3:
             object->unk88 = 0x19;
             break;
+        case 4:
         default:
             object->unk88 = 0x1A;
             break;
@@ -178,7 +169,7 @@ void func_80060DE4(Object80060DE4 *object, s32 nextState) {
         applyRange = 0;
         break;
     case 8:
-        if ((f64)RANDOM_UNIT() < D_800AD1D8) {
+        if ((f64)RANDOM_UNIT() < 0.3) {
             func_80008B14(0x31, 6, 0.25f, 0.5f, 0);
         } else {
             func_80008B14(0x32, 6, 0.25f, 0.5f, 0);
@@ -273,8 +264,8 @@ void func_80060DE4(Object80060DE4 *object, s32 nextState) {
             switch (D_80118EF8) {
             case 4:
             case 7:
-                if (RANDOM_UNIT() < D_800AD1E0) {
-                    if (RANDOM_UNIT() <= D_800AD1E4) {
+                if (RANDOM_UNIT() < 0.15f) {
+                    if (RANDOM_UNIT() <= 0.998f) {
                         func_800093B0(0, D_80113E67, 1, 5, 0x12, 0xE,
                                       8);
                     } else {
@@ -283,14 +274,14 @@ void func_80060DE4(Object80060DE4 *object, s32 nextState) {
                 }
                 break;
             case 8:
-                if (RANDOM_UNIT() < D_800AD1E8) {
+                if (RANDOM_UNIT() < 0.05f) {
                     if (RANDOM_UNIT() < 0.5f) {
                         func_800093B0(0, D_80113E67, 0xC, 7, 5, 1,
                                       0xB);
                     } else {
                         func_800093B0(0, D_80113E67, 8, 7, 5, 3, 0xC);
                     }
-                } else if (RANDOM_UNIT() < D_800AD1EC) {
+                } else if (RANDOM_UNIT() < 0.001f) {
                     func_800093B0(0, D_80113E67, 6, 9, 6, 9, 6);
                 }
                 break;
@@ -324,6 +315,7 @@ void func_80060DE4(Object80060DE4 *object, s32 nextState) {
         case 3:
             object->unk88 = 4;
             break;
+        case 4:
         default:
             object->unk88 = 8;
             break;
@@ -380,7 +372,7 @@ void func_80060DE4(Object80060DE4 *object, s32 nextState) {
             func_80060D70(0x30, 0x31, 0x32, 0x22, 0x2B);
         } else if (RANDOM_UNIT() < 0.5f) {
             func_80060D70(0x23, 0x24, 0x25, 0x26, 0x27);
-        } else if (RANDOM_UNIT() < D_800AD204 || D_80113E67 == 2) {
+        } else if (RANDOM_UNIT() < 0.8f || D_80113E67 == 2) {
             func_80060D70(0x18, 0x2E, 0x13, 0x29, 0x2B);
         } else {
             func_80060D70(0x19, 0x20, 0x2C, 0x19, 0x20);
@@ -391,6 +383,8 @@ void func_80060DE4(Object80060DE4 *object, s32 nextState) {
         object->unk1C = (RANDOM_UNIT() * 2.0f) + 3.0f;
         break;
     case 0x22:
+        object->unk88 = 0;
+        /* fall through */
     case 0x1E:
         object->unk88 = 0;
         valueC = 0.0f;
@@ -440,7 +434,7 @@ void func_80060DE4(Object80060DE4 *object, s32 nextState) {
         break;
     case 0x27:
         if (RANDOM_UNIT() < 0.25f) {
-            if (RANDOM_UNIT() < D_800AD208 || D_80113E67 == 2) {
+            if (RANDOM_UNIT() < 0.8f || D_80113E67 == 2) {
                 func_80060D70(0x2A, 0x32, 0x31, 0x33, 0x13);
             } else {
                 func_80060D70(0x2C, 0x19, 0x20, 0x2C, 0x19);
@@ -573,12 +567,12 @@ void func_80060DE4(Object80060DE4 *object, s32 nextState) {
 
     if (object->unk08 == 3) {
         valueC = 0.0f;
-        valueB = D_800AD20C;
+        valueB = 0.1f;
     }
-    rangeOffset = D_800AD210;
+    rangeOffset = 0.1f;
     if (object->unk14 != 0) {
         func_80063344(object, &lower, &upper);
-        rangeOffset = D_800AD214;
+        rangeOffset = 0.1f;
         valueA = lower;
     }
     if (object->unk14 == 0x1B && object->unk88 != 0xD) {
