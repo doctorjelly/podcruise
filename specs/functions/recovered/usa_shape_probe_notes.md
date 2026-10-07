@@ -1183,3 +1183,81 @@ tests, including the projection-order UBSan regression, pass, as do safety,
 strict manifest, USA-only inventory and diff check. Validation logs are under
 `/tmp/us31-81fb0-validation/`. No unexpected generated tracked changes were
 introduced. No exact bytes were added or known geometric caller bug claimed.
+
+## US32 bounded ABI, operation and field-width recovery
+
+All saved read-only scan inputs and their source/linked hash checks refer to
+baseline HEAD `2879506` before the retained `25148` correction. Its saved
+input is consequently no longer current. The old 165-slice pack also predates
+the US31 `81FB0` correction; that function was excluded from both 164-slice
+scans.
+
+Six branch islands were traced through both successors and delay-slot effects:
+`50C00`, `58058`, `401FC`, `72AD0`, `6E6F8`, and `43CD0`. The last five
+preserve the same loop/short-circuit/FP or helper-visible behavior; branch
+polarity or likely-slot scheduling alone supplies no source correction.
+One private `50C00` empty-predicate polarity form changed two opcode words,
+but remained 904/904 bytes and 54 differing words, with frame `0x78`, 13
+ordered calls and no rodata. It was rejected under the exact-only retention
+criterion. Evidence: `/tmp/us32-branches-sol/`, `/tmp/us32-branches-luna/`,
+and `/tmp/us32-50c00-polarity/`.
+
+The scalar argument audit covered 165 baseline nonmatch sources, 1,026 explicit
+declarations, 1,259 parsed definitions and 154 header contracts. It ranked 39
+scalar disagreements (three float/integer and 36 integer-width), then traced
+five calls: floating/integer positions were ignored one-word arguments; other
+cases consumed only equivalent low bytes or ignored correctly extended inputs.
+The extractor skips pointer/unknown aggregate contracts, K&R and complex
+function-pointer forms; it is not an exhaustive ABI verifier. The separate
+return audit sampled five caller bodies: three float returns were unused, and
+two audio declarations belonged to documented stand-ins. No new ABI form was
+compiled. US15's 85 declarations and US16's 56 void pairs are prior coverage,
+not fresh recovery. Evidence: `/tmp/us32-abi-args/` and
+`/tmp/us32-abi-returns/review.md`.
+
+The typed arithmetic count scan verified 164 baseline source/raw/true linked
+slices and found 39 function-wide residuals. `81FB0` was excluded because the
+old 165-slice pack predates its US31 source change. Three bounded inspections
+closed `85FB0` (known width/height commoning), `6DB1C` (product duplication on
+exclusive paths), and `8E074` (length-times-two duplication at a branch join).
+Whole-function counts cancel moved operations but do not establish CFG or
+dataflow equivalence. No arithmetic form was compiled. Evidence:
+`/tmp/us32-typed-ops/`.
+
+The reordered field-load scan reused those 164 verified slices and ranked 12
+provisional paired offset/load-family residuals after subtracting matching
+function-wide counts. Stack and identifiable LUI-derived global loads were
+excluded; linear provenance and equal field offsets alone do not prove object
+identity. Only two sites were manually reviewed. `1ADD4`'s signed/unsigned
+locked-byte difference feeds only a zero test and supplies no correction.
+`25148` confirmed the same stride-12 entry object and a signed field consumed
+as a stride-52 metadata index. The retained shared `s32 metaIndex` preserves
+earlier unsigned table inputs and the final signed field: raw `LBU` at
+`0x80025D18/0x80025E48`, raw `LB` at `0x80025F50`; candidate final `LB` at
+`0x80025EB0`. All 25 ROM rows have final indices 0..22, so no reachable
+negative-index bug is claimed. Historical retained sources keep the old
+unsigned local; unavailable older private inputs limit dedup coverage.
+
+The retained trial remains 5,100/5,372 actual function bytes, 1,243 differing
+words, 68 missing, no extra, C frame `0x110` versus ROM `0xE8`, and 91 ordered
+calls. Seven words changed: six stack homes and the final load extension.
+The 96-byte rodata artifact/address is unchanged; 5,104 section bytes include
+four padding bytes outside the function. Source SHA256:
+`c3cca1b4aaa371862dccba0722f6d1ecb2eb82b7d667873edcbe91947ac3d6b9`;
+symbol SHA256:
+`cb89efd2a531ee9f119185ab4e859e060028f1a2f8ed6df30b032c7be662758b`.
+Evidence: `/tmp/us32-field-widths/`, `/tmp/us32-25148-metaindex/`, and the
+independent `/tmp/us32-25148-independent/`. No exact coverage was added.
+Only the approved source and documentation changed; configuration, USA split,
+tests and Makefile remain unchanged. No chart or new test was added. These
+bounded stops do not prove that all recovery is exhausted.
+
+Final validation passes: all seven gates exit zero. The authoritative
+`ido53_o2` ledger has 1,348 current source hashes and current configuration;
+only the `25148` measurement changed. The exact name/hash/size set remains
+1,183 functions / 363,220 bytes. The canonical USA32 roundtrip is byte-identical
+at SHA1 `3542d5597c8a56ea8f5c63bceae97a24c4c08d58`. All 32 tests pass, as do
+safety, strict manifest, USA-only inventory and diff check. Evidence is under
+`/tmp/us32-25148-validation/`. Full test output remains only in tool session
+42508; `test.log` explicitly contains only the final summary, not a full test
+log. No unexpected generated tracked changes were introduced.

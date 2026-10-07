@@ -145,7 +145,7 @@ void func_80025148(Menu80025148 *menu) {
     s32 blue;
     s16 sprite;
     u8 raceCount;
-    u8 metaIndex;
+    s32 metaIndex;
 
     if (D_800A2578 == 0) {
         D_800A2578 = 0xC;
