@@ -138,17 +138,9 @@ s32 func_80036A1C(f32 *bounds, s32 trackInside) {
             }
         }
 
+        /* Keep this comparison grouped for IDO instruction scheduling. */
         if (in2 != 0 || sz != 0) {
-            if (0.0f < w) {
-                v = (p2[(i & 4) >> 2][0] + p2[(i & 2) >> 1][1] + p2[i & 1][2]) + D_80112E60[3][2];
-                if (w < v) {
-                    cmp = 1;
-                } else {
-                    cmp = 0;
-                }
-            } else {
-                cmp = -1;
-            }
+            if (0.0f < w) { v = (p2[(i & 4) >> 2][0] + p2[(i & 2) >> 1][1] + p2[i & 1][2]) + D_80112E60[3][2]; if (w < v) { cmp = 1; } else { cmp = 0; } } else { cmp = -1; }
             if (cmp == 0) {
                 sz = 0;
                 if (in2 != 0) {

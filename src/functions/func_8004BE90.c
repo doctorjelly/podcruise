@@ -174,7 +174,7 @@ void func_8004BE90(PcRaceState *state) {
         } while (((1 << racer) & D_80113680.unk10) == 0);
         record = (PcRacerRecord *)((u8 *)D_800A31E0 + racer * stride);
         func_800517D8(record->unk30, 0x38, 2, record->unk20);
-        if ((D_80113680.unk10 << 13) != 0) {
+        if ((D_80113680.unk10 & 0x7FFFF) != 0) {
             func_800517D8(0x6D, 0x39, 1, -1.0f);
         } else {
             do {

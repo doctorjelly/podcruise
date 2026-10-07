@@ -575,7 +575,7 @@ segments:
       - [0x36C9C, c, functions/func_8003609C]
       - [0x36F14, asm, main_36F14]
       - [0x372DC, c, functions/func_800366DC]
-      - [0x3761C, asm, main_3761C]
+      - [0x3761C, c, functions/func_80036A1C]
       - [0x37B7C, c, functions/func_80036F7C]
       - [0x37B98, c, functions/func_80036F98]
       - [0x380C4, c, functions/func_800374C4]

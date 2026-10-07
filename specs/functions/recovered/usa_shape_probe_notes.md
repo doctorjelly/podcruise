@@ -627,3 +627,63 @@ one region also swaps the operands of a symmetric BNE. A second and final
 60-second search seeded from that candidate produced no improvement. The
 nonexact empty conditional was not retained. Current production C, compiler
 configuration, and exact coverage are unchanged by this tranche.
+
+## US21 bounded searches and racer-selection definedness
+
+Three timed, private permutation pilots remained nonexact. The 963CC search
+ran for 60 seconds with 32 workers; its best 832-byte candidate reduced
+differing words from 56 to 45 by adding redundant masks. The 4BE90 and
+5EF08 searches each ran for 60 seconds with 16 workers. Their best candidates
+reduced differences from 72 to 34 and from 66 to 53 respectively, but used
+shift splitting and an uninitialized pointer read. None was retained or
+continued. The dedicated specs record parser-preserved same-line groups.
+A fresh ten-function linked-object scoring batch qualified only 4BE90 and
+5EF08 for these register-only searches.
+
+Inspection of 4BE90 exposed a separate signed-shift defect. The canonical
+SLL by 13 followed by a zero test checks the low 19 flag bits. Expressing
+that predicate as `flags & 0x7FFFF` defines it for ordinary mask 0x40002
+and negative flag words, while preserving all 3008 compiled bytes exactly.
+The function remains nonmatching at 72 differing words. Six IDO 5.3
+optimization/ISA profiles found no exact match after this correction.
+
+Two private 46DC4 interface probes changed its color-helper declaration to
+the callee's byte-width parameters, then cached the existing narrowed alpha.
+Both produced 2912 bytes against 2908, with 613 differing words and one extra
+instruction. The canonical caller already narrows its main alpha explicitly;
+the new instruction was register preservation, not a missing truncation.
+Neither variant was retained, and this contract mismatch remains unresolved.
+
+
+On resumption, the six-case actual-function racer-selection regression passes
+shift sanitization and the original source fails at mask 0x40002. Singleton
+bits 18 and 19 explicitly cover the predicate boundary. The saved USA ledger
+has the current source hash, and its 32-job round trip completed byte-identically.
+The parent independently repeated the isolated 4BE90 audit with unchanged
+3008-byte/72-word metrics. USA ROM inventory, safety and strict manifest pass.
+
+A fresh 494D0 audit locates five mismatched live-pointer spill offsets while
+its matrix and vector stack addresses already agree. Three declaration-order
+variants worsen the current 1860-byte, 76-word baseline to 83, 83 and 79
+words. No source variant was retained; its spec records the stopping point.
+
+
+## Resumed exact clipping recovery
+
+`func_80036A1C` now matches all 1376 canonical bytes after grouping an existing
+conditional on one source line. Non-whitespace source tokens are unchanged.
+The independent parent audit, USA ledger and 32-job byte-identical rebuild
+confirm the match; the linker map selects its C object at 80036A1C. Exact
+coverage is now 1182 functions / 362488 bytes (58.32%), with every exact
+function substituted. Its dedicated spec records the schedule, rejected
+probes and bounded grouping minimization.
+
+Ten further linked-object preflights found no register-only candidates.
+Three concrete frustum-lifetime variants for 85FB0 also remained nonexact
+and were discarded. Its dedicated spec records those experiments. No other
+production source or compiler configuration was changed by these probes.
+
+Final full host/tool tests, safety and strict source manifest pass. The USA
+ledger has no compile/link errors or stale source hashes. The six-case racer
+regression was independently rerun against original and corrected sources.
+The progress chart was regenerated for the new exact coverage.
