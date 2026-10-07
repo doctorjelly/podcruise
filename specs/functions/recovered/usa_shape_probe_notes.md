@@ -957,3 +957,45 @@ computed switch dispatches backed by raw tables at `0x800AD0B8`, `0x800AD1C4`,
 and `0x800AD1F0`, not missed callbacks. Private artifacts: `/tmp/us27-06c00/`,
 `/tmp/us27-88bfc-layout/`, `/tmp/us27-56844-o0/`, `/tmp/us27-125e4-o0/`,
 `/tmp/us27-indirect-audit/`, and `/tmp/us26-struct-triage/`.
+
+## US28 stack-lifetime and definedness follow-up
+
+Three private captures for `func_80021F84` were nonexact. Its active source is
+`src/functions/func_80021F8C.c`; the legacy `src/functions/func_80021F84.c` is
+unrelated. The baseline was 2,068/2,068 bytes, 16 differing words, frame
+`0xB0`. Capturing the selected index in `value` produced 19 differences and a
+spill at `+0x34`, while reuse of `kind` also produced 19 and moved it to
+`+0x30`. Reusing `flags` produced
+2,084/2,068 bytes, 505 differing words, and frame `0xB8`. The canonical spill
+is `+0x2C`. MIPS debug data provided no local-location mapping, so these trials
+do not identify a named original local.
+
+Two private pointer-capture forms for `func_80042970` each measured 592/584
+bytes, 145 differing words, and two extra words; the C/ROM frames were
+`0x160`/`0x158`. Their compiled texts differ by one word at `+0x94`, so the
+forms are not duplicates. Historical source coverage remains unknown: 219
+archived outputs yielded 56 distinct outputs, but their source inputs are
+absent.
+
+`func_80042BB8` retains a block-scoped pointer to `actor->unk050` across the
+two helpers that consume that embedded vector. Its linked 820-byte function
+matches the canonical pointer spill/reload at `0x80042CC8` and `0x80042D24`,
+and remains nonexact at 73 differing words versus the 75-word baseline. The
+frame (`0xD0`) and matrix homes are unchanged. Its signed left shift is now a
+defined `u32` bit-27 test: canonical `SLL 4` / `BGEZL` at `0x80042C98` /
+`0x80042C9C` tests that bit and discards higher bits. The seven-case actual
+function shift-sanitizer test passes, including a helper mutation observed by
+the later copy through the same vector address; the original fails UBSan on
+`0x08000000`. The symbol-prefix SHA256 is
+`4989f16439a9c114f038459084656765fd3fafc1a73a4608b55c7a37aaefbc2f`.
+
+Full validation artifacts are under `/tmp/us28-42bb8-validation/`. All 1,348
+current USA source hashes were checked; the exact name/hash/size set is
+unchanged at 1,183 functions / 363,220 bytes, with a byte-identical USA
+roundtrip (SHA1 `3542d5597c8a56ea8f5c63bceae97a24c4c08d58`). Host regressions,
+32 Python tests, safety, strict manifest, and USA-only inventory pass. No exact
+bytes were added, so the chart is unchanged.
+
+Private evidence paths: 21F84 captures `/tmp/us28-21f84-flags/` and
+`/tmp/us28-21f84-last2/`; 42970 pointer forms 1 and 2 are in
+`/tmp/us27-42970-pointer-locals/`.

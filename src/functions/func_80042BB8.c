@@ -1,4 +1,4 @@
-/* Recovered from specification specs/func_80042BB8.md (worker batch 04, reworked in batch 25). */
+/* Recovered from specification specs/functions/recovered/func_80042BB8.md (worker batch 04, reworked in batch 25). */
 #include "podcruise/types.h"
 
 typedef struct Part80042BB8 {
@@ -62,16 +62,19 @@ void func_80042BB8(Actor80042BB8 *actor) {
         D_800A4AF0 = -1.0f;
     }
     part = actor->unk0F4;
-    if (part != 0 && (part->unk060 << 4) < 0 && part->unk254 != 0) {
+    if (part != 0 && (((u32)part->unk060 & 0x08000000u) != 0) && part->unk254 != 0) {
+        f32 *actor050;
+
         func_80017874(first);
-        func_8001535C(first[1], actor->unk138, actor->unk050);
+        actor050 = actor->unk050;
+        func_8001535C(first[1], actor->unk138, actor050);
         func_80015288(first[2], actor->unk040);
         func_80015538(first[0], first[1], first[2]);
         func_80015538(first[2], first[0], first[1]);
         func_800154D0(first[0]);
         func_800154D0(first[1]);
         func_800154D0(first[2]);
-        func_80015288(first[3], actor->unk050);
+        func_80015288(first[3], actor050);
         if (part->unk254 != 0) {
             func_800181BC(part->unk254, 2, 3, 0x10, 2);
         }

@@ -185,6 +185,10 @@ host-test:
 		tests/test_racer_selection.c -o build/host/test_racer_selection
 	build/host/test_racer_selection
 	$(CC) -std=c11 -Wall -Wextra -Werror -I include \
+		-fsanitize=shift -fno-sanitize-recover=shift \
+		tests/test_actor_matrix_flag.c -o build/host/test_actor_matrix_flag
+	build/host/test_actor_matrix_flag
+	$(CC) -std=c11 -Wall -Wextra -Werror -I include \
 		tests/test_text_metrics.c -o build/host/test_text_metrics
 	build/host/test_text_metrics
 	$(CC) -std=c11 -Wall -Wextra -Werror -I include \
