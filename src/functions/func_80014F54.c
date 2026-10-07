@@ -1,17 +1,6 @@
 /* Independently written from specs/func_80014F54.md (worker specification). */
 #include "podcruise/types.h"
 
-extern f32 D_800A87C0;
-extern f32 D_800A87C4;
-extern f32 D_800A87C8;
-extern f32 D_800A87CC;
-extern f32 D_800A87D0;
-extern f32 D_800A87D4;
-extern f32 D_800A87D8;
-extern f32 D_800A87DC;
-extern f64 D_800A87E0;
-extern f32 D_800A87E8;
-extern f32 D_800A87EC;
 
 f32 func_80014F54(f32 x, f32 y) {
     f32 ax;
@@ -25,9 +14,9 @@ f32 func_80014F54(f32 x, f32 y) {
     f32 result;
     s32 swapped;
 
-    if (y < D_800A87C0 && y >= D_800A87C4) {
+    if (y < 0.0001f && y >= -0.0001f) {
         result = 90.0f;
-    } else if (x < D_800A87C0 && x >= D_800A87C8) {
+    } else if (x < 0.0001f && x >= -0.0001f) {
         result = 0.0f;
     } else {
         swapped = 0;
@@ -39,24 +28,24 @@ f32 func_80014F54(f32 x, f32 y) {
         } else {
             t = ax / ay;
         }
-        if (t < D_800A87C0 && t >= D_800A87CC) {
+        if (t < 0.0001f && t >= -0.0001f) {
             result = 0.0f;
         } else {
             t2 = t * t;
             t3 = t * t2;
             t5 = t3 * t2;
             t7 = t5 * t2;
-            s = t - t3 * D_800A87D0 + t5 * D_800A87D4 - t7 * D_800A87D8 + t7 * t2 * D_800A87DC;
-            result = (f32)((f64)(s * 180.0f) / D_800A87E0);
+            s = t - t3 * 0.33333334f + t5 * 0.2f - t7 * 0.14285715f + t7 * t2 * 0.063235f;
+            result = (f32)((f64)(s * 180.0f) / 3.141592653589793);
         }
         if (swapped != 0) {
             result = 90.0f - result;
         }
     }
-    if (y < D_800A87E8) {
+    if (y < -0.0001f) {
         result = 180.0f - result;
     }
-    if (x < D_800A87EC) {
+    if (x < -0.0001f) {
         result = -result;
     }
     return result;

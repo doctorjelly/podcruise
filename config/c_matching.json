@@ -26050,19 +26050,9 @@
       "id": "func_80014F54",
       "source": "src/functions/func_80014F54.c",
       "link_vram": "0x80014F54",
-      "absolute_symbols": {
-        "D_800A87C0": "0x800A87C0",
-        "D_800A87C4": "0x800A87C4",
-        "D_800A87C8": "0x800A87C8",
-        "D_800A87CC": "0x800A87CC",
-        "D_800A87D0": "0x800A87D0",
-        "D_800A87D4": "0x800A87D4",
-        "D_800A87D8": "0x800A87D8",
-        "D_800A87DC": "0x800A87DC",
-        "D_800A87E0": "0x800A87E0",
-        "D_800A87E8": "0x800A87E8",
-        "D_800A87EC": "0x800A87EC"
-      },
+      "absolute_symbols": {},
+      "rodata_vram": "0x800A87C0",
+      "rodata_alignment": 16,
       "functions": [
         {
           "name": "func_80014F54",

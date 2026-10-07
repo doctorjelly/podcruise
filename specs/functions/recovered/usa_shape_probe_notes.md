@@ -1261,3 +1261,68 @@ safety, strict manifest, USA-only inventory and diff check. Evidence is under
 `/tmp/us32-25148-validation/`. Full test output remains only in tool session
 42508; `test.log` explicitly contains only the final summary, not a full test
 log. No unexpected generated tracked changes were introduced.
+
+## US33 bounded field, call-constant and exact literal recovery
+
+Four remaining provisional field-width leads were traced at baseline HEAD
+`c4c48b6`: `3D4F4`, `12BF0`, `6E6F8`, and `1F5AC`. Equal offsets/family
+counts mixed resource palette versus next strip span, private stack-derived
+metrics copies versus glyph halves, global double clock versus controller
+flags, and input flags versus projection floats. No width correction was
+supported. Current source/raw/true linked hashes were verified before reuse;
+no old stale `81FB0/25148` slices were reused. Evidence:
+`/tmp/us33-field-widths-sol/`, `/tmp/us33-field-widths-luna/`.
+
+The fresh 165-slice pack was verified at pre-edit HEAD `c4c48b6` and includes
+refreshed `81FB0/25148`. Its saved `14F54` baseline slice is now stale after
+retention. All US33 read-only audit hash claims refer to that pre-edit state.
+Excluding the known
+`88BFC` target mismatch, conservative direct-call constant tracking paired
+3,047 calls in 164 functions: 1,532 known low-bit argument pairs agree,
+10,329 are unknown and 327 high-bit pairs were excluded as pointer/negative
+scalar/FP ambiguous. No stack or FPR inference, and no exhaustive ABI claim.
+Branches/targets clear uncertain facts; JAL includes its delay slot after
+invalidating RA. Repeated targets in 120 functions remain a context limitation.
+Independent real samples verify `228C0`'s a1=2 JAL delay slot and `60DE4`'s
+annulled likely-slot value remaining unknown. Prior US15 ABI/materialized
+literal stops were deduplicated. Evidence: `/tmp/us33-call-constants/`.
+
+The `8EEE4` single-16-double table representation is legal for the verified
+finite s16 caller domain (mantissa bucket 8..15, only upper eight copied).
+Retained Git/US12 sources use separate halves; thirty earlier inputs are
+missing, so historical coverage is unknown. The standard-header attempt
+failed on host glibc dependencies. An authorized same-form freestanding
+ordinary `memcpy` setup retry compiled an object but retained an external copy
+call and failed linking. Actual helper object extent is 420 bytes through its
+JR delay slot, frame `0xE8`, copy 64 bytes to sp+0x68 and exponent sp+0xB0,
+with two calls instead of canonical one. No invented memcpy address, allocator
+expansion or source retention. Evidence: `/tmp/us33-8eee4-table-gate/` and
+`/tmp/us33-8eee4-flat/outcome.md`; no linked exactness claim follows.
+
+The retained `14F54` typed-literal leaf is exact: 504 function bytes at
+`0x80014F54`, text SHA256
+`1b066b9a7b6e17e7c4b5388113e4fd4389a413b6f2c71c953339c2037ff78a90`.
+All 48 pool bytes at `0x800A87C0` match, SHA256
+`801e4166d7d3ea599175beef102633a8579090db7a6f52334821ce2d10e91273`;
+source SHA256
+`15255caba9bf054d5be016ae735b5eff7eb2d05fe186574548c1ba56ad3b45bb`.
+Eleven obsolete aliases were removed and rodata alignment16/anchor restored.
+The USA C span ROM0x15B54..0x15D4C ends at the existing next C boundary, with
+no adjacent promotion. No new runtime defect or test is claimed. Private
+reproduction: `/tmp/us33-14f54-literals/`. The verified exact rise is 504 bytes.
+
+Full integration validation passes. The successful authoritative ledger is
+`/tmp/us33-14f54-validation/ledger-fixed-schema.log` (exit zero), with all
+1,348 source hashes and configuration current; exact coverage is 1,184
+functions / 363,724 bytes, with 164 nonmatches. The initial missing required
+empty `absolute_symbols` dictionary failure remains preserved as setup
+evidence in `ledger.failed-schema.log`; it was fixed without source changes.
+After `split-us` refresh, `roundtrip-fixed.log` and its canonical rebuild
+report verify 1,184 substitutions and byte-identical USA ROM SHA1
+`3542d5597c8a56ea8f5c63bceae97a24c4c08d58`. The stale-map first run is not
+validation evidence. The actual C object/map places the 504-byte text at
+`0x80014F54` through the next `0x8001514C` boundary. The hybrid packer
+substitutes C text only: it retains the existing ROM pool bytes. The isolated
+compiler's 48-byte pool is independently exact, rather than owned by a hybrid
+C rodata object. All 32 tests, safety, strict manifest, USA-only inventory and
+diff check pass; full logs are under `/tmp/us33-14f54-validation/`.

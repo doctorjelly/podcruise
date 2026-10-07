@@ -300,7 +300,7 @@ segments:
       - [0x15920, c, functions/func_80014D20]
       - [0x1594C, c, functions/func_80014D4C]
       - [0x15B2C, c, functions/func_80014F2C]
-      - [0x15B54, asm, main_15B54]
+      - [0x15B54, c, functions/func_80014F54]
       - [0x15D4C, c, functions/func_8001514C]
       - [0x15DC0, c, functions/func_800151C0]
       - [0x15DE0, c, functions/func_800151E0]

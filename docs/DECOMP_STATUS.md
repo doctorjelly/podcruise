@@ -20,7 +20,7 @@ and why the earlier `0x99000` interval was wrong.
 
 | Build | Exact functions | Exact bytes | Share of CPU text | Configured functions | Hybrid substitutions |
 |---|---:|---:|---:|---:|---:|
-| USA retail | 1,183 | 363,220 | 58.44% | 1,348 | 1,183 |
+| USA retail | 1,184 | 363,724 | 58.52% | 1,348 | 1,184 |
 | Japan retail | 913 | 204,688 | 32.93% | 990 | 911 |
 | Europe retail | 915 | 212,960 | 34.26% | 990 | 913 |
 | USA LRG revision | 1,069 | 254,816 | 41.00% | 1,348 | 1,064 |
@@ -33,7 +33,7 @@ and again as standalone units. No matching source or USA substitution was lost.
 translation units. The gap between configured and exact is nonmatching C,
 including candidates with current compile/link failures. The USA manifest
 covers 1,348 functions and 616,920 original bytes in reviewed C, or 99.26% of
-CPU text; only the exact 58.44% is eligible for substitution in the canonical
+CPU text; only the exact 58.52% is eligible for substitution in the canonical
 rebuild.
 
 The strict manifest audit finds four explained, unconfigured source files: two
@@ -45,7 +45,7 @@ Exact counts come from per-version linked-byte comparison reports, rerun on
 the current worktree and deduplicated by function address. A USA match is
 never assumed to carry to Japan or Europe.
 
-The current USA worktree passed `make roundtrip-us` byte-identically with 1,183
+The current USA worktree passed `make roundtrip-us` byte-identically with 1,184
 C substitutions. The Japan, Europe and LRG rows come from earlier
 `make roundtrip-all` checks and were not rerun after these USA-only changes.
 
@@ -86,3 +86,9 @@ ROM bytes); `func_8001D05C` now copies an 18-byte zero initializer from the
 canonical `0x800A8BF4` data address (`3,304/3,308` bytes); and
 `func_80021294` links its switch table at `0x800A9C7C` (`3,184/3,312`
 bytes). Their USA split entries still name assembly, not matching C.
+
+US33 verified one additional USA exact leaf, `func_80014F54`: 504 bytes,
+bringing the current USA ledger to 1,184 exact functions / 363,724 bytes
+(58.52% of 621,540 CPU-text bytes), with 164 nonmatches among 1,348 reviewed
+functions. The refreshed canonical hybrid roundtrip remains byte-identical.
+This USA-only result does not update foreign-region coverage.
