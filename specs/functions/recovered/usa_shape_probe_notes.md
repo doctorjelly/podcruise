@@ -885,3 +885,75 @@ roundtrip substitutions were byte-identical (SHA1
 `3542d5597c8a56ea8f5c63bceae97a24c4c08d58`). `make test` passed 32 tests,
 along with safety, strict-manifest, and USA-only inventory gates. Validation
 artifacts are in `/tmp/us26-structure-two/validation/`.
+
+
+## US27 bounded no-match tranche
+
+No source or configuration candidate was retained; exact coverage remains 1,183
+functions / 363,220 bytes. The following observations are from isolated probes
+and do not establish broader source or ABI conclusions.
+
+- `func_80006C00`: both natural loop forms over the unchanged global bounds
+  emitted 328 bytes against the 348-byte ROM, each with 76 differing words.
+  Both use a `0x38` frame against ROM `0x30`; bound reloads were already
+  separate, so neither form is exact.
+- `func_80088BFC`: two orders of two empty function definitions put the empty
+  functions at `0x80088B70`/`0x80088B78`; the helper slice at `0x80088B80`
+  verified as 124 bytes. The main at `0x80088BFC` measured 1,352 bytes with 20
+  differing words. In both orders, its two calls still target `0x80088B80`,
+  while ROM calls `0x80088B70`; both preserve the 0x40-byte rodata at
+  `0x800ADD90`. The ELF did not establish named helper `STT_FUNC` symbols, and
+  definition order did not recover the layout.
+- Five-unit structural comparison used each configured raw ROM offset and full
+  function size, disassembled as MIPS big-endian, then compared complete linked
+  ELF function symbols. The corrected `func_80027D24` raw span includes its
+  full 844-byte prefix/body (`0x80027D24..0x80028070`); generated assembly's
+  interior label is not a safe extraction boundary.
+
+| Function | ROM / C symbol bytes | ROM → C frame |
+| --- | ---: | ---: |
+| `func_800125E4` | 980 / 948 | `-8` → none |
+| `func_80010B34` | 876 / 840 | `-0xE0` → `-0xE0` |
+| `func_80027D24` | 844 / 836 | `-0x48` → `-0x48` |
+| `func_8008BC30` | 396 / 400 | `-0x50` → `-0x60` |
+| `func_8008EADC` | 520 / 504 | `-0x50` → `-0x58` |
+
+The direct-call sequences match for these five; `8EADC` also has two matching
+indirect calls. The stack/save differences in `8BC30` and `8EADC` confirm known
+compiler-lifetime mismatches, while `125E4`, `10B34`, and `27D24` add no new
+source hypothesis. Raw disassembly and corrected metrics are in
+`/tmp/us26-struct-triage/audited-raw-report.md`; the earlier invalid
+label-based extraction is retained separately for diagnosis.
+
+The one IDO 5.3 `-O0` trial on unchanged `func_800125E4.c` emitted a 1,656-byte
+function (980-byte ROM; 244 differing overlapping words, 169 extra words).
+It allocates an 8-byte frame but saves no `$s0` and does not home incoming
+`$a1`, unlike ROM's `$s0` save and `sp+0xC` argument home. Source SHA256 was
+unchanged (`2595c214872993fa7075dc6a30be53fe8379fcf2fff6fe162ef7eb94072f3620`).
+This targeted compiler hypothesis failed; no additional O0 trial is indicated.
+
+For `func_80056844`, the baseline IDO 5.3 O0 form measured 2,896/2,980 bytes
+(709 differing words, 21 missing); inlining the exact initializer expressions
+for its 23 never-reassigned float aliases emitted 2,448/2,980 bytes (596
+differing, 133 missing). All 76 direct calls remained in canonical order. The
+literal form's 0x40 frame is smaller than ROM's 0x1B8; baseline frame was
+0x98. This is not a size/frame improvement and no third form was tested.
+Earlier `pos`/`column` and volatile-constant results remain recorded above.
+
+The USA indirect-call scan checked source and accepted function-slice hashes
+for 165 functions. For `func_8008F0B4`, the accepted compiled span starts at
+`0x8008F03C`, 0x78 bytes before the canonical `0x8008F0B4`; the scan uses the
+accepted actual address and size reported for the compiled span. Its callback
+is at relative `+0x3C` in both. This does not establish canonical placement or
+ELF symbol size. Across all 165 functions, the scan found 3,070 direct JALs
+and 19 link-register JALRs in both ROM and C; the JALRs occur in six functions.
+The event-stream comparison checks direct-target and call-kind ordering; 164
+functions matched, with `func_80088BFC` the one event-interleaving mismatch. A
+separate operand tally confirms all 19 JALRs use `rs25/rd31` (`$t9`/`$ra`), but
+neither tally proves runtime target identity, callback dataflow, or ABI
+equivalence.
+`func_80060DE4` has three ROM `jr` dispatch sites versus one C site; they are
+computed switch dispatches backed by raw tables at `0x800AD0B8`, `0x800AD1C4`,
+and `0x800AD1F0`, not missed callbacks. Private artifacts: `/tmp/us27-06c00/`,
+`/tmp/us27-88bfc-layout/`, `/tmp/us27-56844-o0/`, `/tmp/us27-125e4-o0/`,
+`/tmp/us27-indirect-audit/`, and `/tmp/us26-struct-triage/`.
