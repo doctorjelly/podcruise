@@ -47,30 +47,29 @@ consecutive words. Nothing is read and nothing is returned.
 
 Behaviour recovered; not byte-identical.
 
-The recovered C produces the same four stores with the same four distinct
-constant registers as the original, and the first five instructions are
-identical, but the original packs the last three stores under a single address
-register while the isolated build emits one address setup per store (52 bytes
-against the original 44).
+The current shared matching ledger reports a 44-byte symbol at the canonical
+address, with first difference at `+0x0C` and seven differing words. Its
+compiled symbol hash is
+`49250b848941297f071583d62d8539f437a81ddb8fa5ac1249ba32eb235ec5dc`. The
+ledger's source hash matches the current `src/functions/func_8004FF7C.c`
+(`0837802dfc1dbc35ee92216f6b15899761081095c311475523f9057fa8223420`).
 
-Cause, established by experiment rather than guessed: the IDO assembler only
-folds several `%hi` address setups into one when the symbols being stored to are
-**section-local to the translation unit being assembled** (a `static`
-file-scope object, assembled as `.lcomm`). With `.comm` symbols, with `.extern`
-symbols, and with globals that carry an initialiser, the assembler emits a fresh
-address setup for every store, whatever the compiler's instruction order is —
-this was checked directly by assembling hand-written input in each of those
-forms. The original module therefore declared this block of state `static`.
+A private initialized-static probe tested whether defining the four words
+locally and placing their data section could recover the body. It used a custom
+linker script to put `.data` at `0x800A4B6C`, with the function at its canonical
+address and no absolute symbol aliases for the slots.
 
-The matching harness supplies every referenced symbol as an absolute address at
-link time, which forces the C to declare them `extern`, which in turn forbids
-the fold. Reproducing this function byte-for-byte needs a unit that *defines*
-the block as file-static and a link that places the unit's `.bss` at
-`0x800A4B6C`; that is a change to the shared verification tooling, so it is
-recorded here instead of made. Note that the same fold does not affect the other
-four functions in this group: they address the same block through ordinary
-address registers, which the assembler treats identically for local and external
-symbols, and all four are exact.
+The mixed-type initialized candidate emitted 44 text bytes, with seven
+differing instruction words at offsets `0x0C`, `0x10`, `0x14`, `0x18`, `0x1C`,
+`0x20`, and `0x28`. Its 16-byte `.data` block was all `0xFF` and matched the
+ROM range `[0xA576C, 0xA577C)`. A second candidate using signed declarations
+for all four words emitted 40 text bytes with eight differing words; its
+16-byte data block matched the same ROM range. Both probes are under
+`/tmp/us25-4ff7c-data/` and remain private.
 
-Also checked: the mismatch is not compiler-version related — the IDO 7.1 profile
-produces the same output as 5.3 for both candidate source shapes.
+These probes show that a local initialized block can reproduce the required
+data at a chosen address, but neither source shape reproduces the instruction
+schedule. The earlier BSS-only placement explanation was too narrow; exact C
+recovery remains unresolved. The mismatch is not compiler-version related:
+the IDO 7.1 profile produced the same output as 5.3 for the earlier candidate
+shapes. The other four functions that address this block remain exact.

@@ -729,3 +729,33 @@ passes undefined-behavior sanitization and fails against the original source
 on seed two. Full host/tool tests, current-source USA ledger, strict manifest,
 safety, USA ROM inventory and whitespace checks pass. The progress chart was
 regenerated for the new exact coverage.
+
+## US25 further grouping boundaries
+
+Three additional near-match grouping searches found no changed compiled text.
+The 7531C search enumerated all 64 layouts across six initialization/guard
+boundaries and retained the same two-word register-clear swap. The two 69A64
+windows enumerated 32 and 128 layouts and retained seven differing words.
+All 64 layouts in the 76B34 helper-call window retained its nine differences.
+Together these were 288 source-line layouts (64 + 160 + 64); none changed exact
+USA coverage.
+The dedicated specs identify these exhausted windows and current baselines.
+No source changes were retained, and independent windows with no individual
+improvement were not multiplied into a larger combined search.
+
+A private attempt to obtain compiler line mappings found that the default
+linked object's debug information provides no source lines through objdump.
+Adding `-g3` changes 7531C from 372 to 376 bytes with 90 differing words;
+this does not provide an unchanged-code mapping and was not retained.
+
+For 4FF7C, two private initialized-static probes used a custom linker script to
+place a 16-byte `.data` block at the canonical state address. Both data images
+match the ROM's all-ones block. The mixed-type source emits 44 text bytes with
+seven differing words; the all-signed source emits 40 bytes with eight
+differing words. Neither is exact, and no shared source or linker configuration
+changed.
+
+A ten-function score preflight found no candidate satisfying the register-only
+search gate (`/tmp/us25-score-gates/result.json`). No exact bytes were added,
+and current exact USA coverage remains 1183 functions / 363220 bytes, unchanged
+from the `a217897` baseline.
