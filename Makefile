@@ -174,6 +174,10 @@ host-test:
 		tests/test_float_format_cursor.c -o build/host/test_float_format_cursor
 	build/host/test_float_format_cursor
 	$(CC) -std=c11 -Wall -Wextra -Werror -I include \
+		-fsanitize=undefined -fno-sanitize-recover=undefined \
+		tests/test_projection_order.c -o build/host/test_projection_order
+	build/host/test_projection_order
+	$(CC) -std=c11 -Wall -Wextra -Werror -I include \
 		tests/test_texture_coordinates.c -o build/host/test_texture_coordinates
 	build/host/test_texture_coordinates
 	$(CC) -std=c11 -Wall -Wextra -Werror -I include \

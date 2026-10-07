@@ -69,8 +69,8 @@ f32 func_80081FB0(Vec3f *point, Vec3f *a, Vec3f *b, Vec3f *c, f32 radius, Vec3f 
         func_80081A2C(out, b, c, &edgeB);
         func_80081A2C(out, c, a, &edgeC);
 
-        out->x = edgeA.x;
         best = (point->z - edgeA.z) * (point->z - edgeA.z) + ((point->x - edgeA.x) * (point->x - edgeA.x) + (point->y - edgeA.y) * (point->y - edgeA.y));
+        out->x = edgeA.x;
         out->y = edgeA.y;
         out->z = edgeA.z;
 

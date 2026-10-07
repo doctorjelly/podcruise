@@ -1108,3 +1108,78 @@ All 32 tests, safety, strict manifest, USA-only inventory and diff check pass.
 Logs are `/tmp/us30-0d5ec-validation/{isolated,ledger,roundtrip,test,safety,manifest,inventory}.log`.
 This is a natural single-read source recovery, not an exact match or a
 runtime-bug claim; no exact bytes were added.
+
+## US31 normalized-operation islands and projection ordering
+
+The initial history gate covered `0F5A0`, `97400`, `41258`, `27150`,
+`1DDA8`, `64034`, `1F5AC`, and `3D4F4`. Recorded local stops yielded no
+fresh source hypothesis, so no builds followed that gate. This is bounded
+history dedup, not proof that all recovery is exhausted. Reports:
+`/tmp/us31-struct-sol/history-stop.md` and `/tmp/us31-struct-luna/report.md`.
+
+A private input pack verifies all 165 baseline nonmatches at `263cf84`,
+before the `81FB0` source change: source hashes, raw ROM hashes and true
+linked-function slice hashes/lengths. `8008EEE4` and `8008F0B4`
+use accepted report spans rather than named ELF symbols: the latter is
+664 bytes at actual `0x8008F03C`, text offset `0x158`; the former is
+464 bytes at `0x8008EEE4`, offset zero. Padding is excluded. Provenance:
+`/tmp/us31-op-islands/inputs/{manifest,validation}.json`.
+
+The normalized-operation ranking preserves opcodes, semantic immediates,
+memory widths/offsets, FPU format and direct call targets, with local register
+identity normalization and zero/sp/ra distinctions. Deterministic sequence
+alignment drops CFG, cross-instruction dataflow and branch destinations;
+stack displacements are normalized separately. It ranks leads rather than
+proving equivalent semantics. The first three apparent insertion/store
+islands (`718DC`, `6DB1C`, `28E78`) were existing stores moved elsewhere,
+not missing operations. The bounded `228C0` debug-load/setup and `21294`
+load reviews likewise closed without an omitted operation. Details:
+`/tmp/us31-op-islands/analysis/{report,manual-review}.md`,
+`/tmp/us31-op-islands/review-sol/`, and `review-luna/` under that parent.
+
+The single `28498` progress-cache form recovered a retained coefficient
+but was rejected: symbol size changed 2248 to 2240 for ROM's 2248 bytes;
+overlap differences fell 187 to 164, but two words became missing and frame
+size rose `0xA8` to `0xB0`. All 28 ordered calls and the 48-byte generated
+rodata section were unchanged. This section comparison does not establish
+an owned pool boundary. Artifacts: `/tmp/us31-28498-progress/`.
+
+For `79824`, raw code has 114 object-parts loads at offset `+0x344`: two
+guard loads plus the 112 `APPLY_PART` source sites. Its accepted baseline remains 4688/5320 bytes, 1123 overlap
+differences, 158 missing words and frame `0x150`. Three private pointer forms
+each emit 5104/5320 bytes, 1207 differences and 54 missing words, with frames
+`0x2D8`, `0x118`, and `0x120` respectively. Each preserves 167 calls and
+114 parts loads. None was retained; the increased load count is not a
+runtime-bug finding. Artifacts: `/tmp/us31-79824-parts/`, including
+`direct-macro/` and `shared-part/`.
+
+The retained `81FB0` change computes the initial edge distance before writing
+output x. Raw point z/x/y loads at `0x800821E4`, `0x800821EC`, and
+`0x800821FC` precede the first output-x store at `0x80082204`. The actual-source
+fixture with initialized captured helper outputs returns 1134 for disjoint
+buffers in both versions; with `point == out`, the former source returns
+1053 and fails the canonical 1134 assertion, while the corrected source
+returns 1134. This establishes bounded helper-contract ordering, not a real
+geometric caller defect. The projection stub copies the complete vector with
+`memmove`; the durable test is `tests/test_projection_order.c`.
+
+The isolated comparison remains 1028/1012 symbol bytes, 192 overlap
+differences and four extra words, frame `0xB8`, and six matching ordered
+calls. Its 1040-byte text section includes twelve padding bytes excluded
+from symbol comparison; neither source has rodata. Source SHA256:
+`376f0551d04dcfc6ff8c30d37919328f95c33c12932fa866c95b1455bc1910dd`;
+function-slice SHA256:
+`2243c6ec88a87828fb1b6bd0df84638bdcd8f9999e456dd96ec735cec31767b2`.
+Private source-order and behavior evidence: `/tmp/us31-81fb0-order/`.
+Historical private inputs for broad earlier stops were not available for
+independent rechecking. Matching configuration and USA split remain unchanged.
+
+Final validation passes. The authoritative `ido53_o2` ledger has all 1,348
+source hashes and its configuration hash current; only the `81FB0` function
+record changed. The exact name/hash/size set remains 1,183 functions /
+363,220 bytes. The USA32 canonical roundtrip is byte-identical at SHA1
+`3542d5597c8a56ea8f5c63bceae97a24c4c08d58`. All 32 Python tests and host
+tests, including the projection-order UBSan regression, pass, as do safety,
+strict manifest, USA-only inventory and diff check. Validation logs are under
+`/tmp/us31-81fb0-validation/`. No unexpected generated tracked changes were
+introduced. No exact bytes were added or known geometric caller bug claimed.

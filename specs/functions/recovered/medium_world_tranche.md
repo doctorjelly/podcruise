@@ -91,3 +91,39 @@ mask materialization. The latter places its two trailing scalar declarations
 before the aggregate locals, reproducing every canonical stack offset. The
 other four functions remain behavior-recovered; no byte match is claimed for
 them.
+
+## Triangle projection read/write ordering
+
+For `func_80081FB0`, the initial edge-distance calculation now precedes the
+`out->x = edgeA.x` store. The USA edge path follows the containment result
+branch at `0x800821A4` and three edge-projection calls at `0x800821B4`,
+`0x800821C8`, and `0x800821DC`. With `point` in `$s2` and `out` in `$s0`,
+ROM reads point z/x/y at `0x800821E4` (`C6460008`), `0x800821EC`
+(`C6440000`), and `0x800821FC` (`C6460004`), before its first output-x
+store at `0x80082204` (`E6080000`). This establishes the original point
+coordinates' lifetime through the initial distance calculation, including
+when the two input/output pointers alias. The source's former early x-store
+could replace point.x before that calculation.
+
+`tests/test_projection_order.c` includes the production source and its types.
+Fixed, initialized helper outputs isolate the ordering with disjoint buffers
+and `point == out`. Independent squared-distance arithmetic gives
+`9*9 + 18*18 + 27*27 = 1134`; both corrected paths return 1134 and the
+expected projected point and normal. The previous source's alias path returns
+1053 and fails the canonical expectation, while its disjoint path returns
+1134. This captured-helper diagnostic passes with UBSan and
+`-Wall -Wextra -Werror`; it does not establish a real geometric caller defect.
+The projection stub uses `memmove` for the complete vector object.
+
+The isolated IDO 5.3 O2 comparison remains nonexact: 1028/1012 symbol bytes,
+192 differing overlapping words, four extra words, frame `0xB8`, and all six
+ordered direct calls matching ROM. The candidate now follows the canonical
+local point-read/output-write order and loads edgeA.x once. The 1040-byte
+text section includes twelve padding bytes excluded from symbol comparison;
+neither baseline nor candidate has rodata. The USA assembly split and matching
+configuration are unchanged. Approved source SHA256:
+`376f0551d04dcfc6ff8c30d37919328f95c33c12932fa866c95b1455bc1910dd`.
+Private source-order and diagnostic evidence is under
+`/tmp/us31-81fb0-order/`; the earlier two-tranche no-lever records did not
+identify this exact store-order mechanism, and their private input coverage
+was unavailable for independent rechecking.
