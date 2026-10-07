@@ -23,8 +23,9 @@
 | `D_800A4B78` | 32-bit | selection slot 3 |
 
 The four words are contiguous and are immediately followed by the four-word
-table used by `func_8004F6E8` (`D_800A4B7C`), so this region is one block of
-module-private state.
+table used by `func_8004F6E8` (`D_800A4B7C`). This establishes a contiguous
+selection-state region adjacent to that table; contiguity alone does not prove
+the original C linkage or ownership of either object.
 
 ## Regional addresses
 

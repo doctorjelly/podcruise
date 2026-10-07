@@ -67,6 +67,8 @@ void func_8001E6C0(MenuContext *context) {
     s16 id;
     f64 value;
     f64 step;
+    f64 upper;
+    f64 deltaScale;
 
     D_800D7120 = 70.0f;
     D_800D711C = 165.0f;
@@ -126,6 +128,8 @@ void func_8001E6C0(MenuContext *context) {
     press = 0x10000;
     hold = 0x20000;
     if (context->unk70 > 0) {
+        upper = D_800A9C30;
+        deltaScale = D_800A9C38;
         do {
             if (buttons[0] & 1) {
                 func_8002D4C4(0x4D);
@@ -178,8 +182,8 @@ void func_8001E6C0(MenuContext *context) {
                 if (D_800A4B94[offset] & 0x20000) {
                     amount = state->unk6;
                     if (amount < 0xFF) {
-                        value = (f64)(u32)amount + D_800A9C38 * (f64)*rate;
-                        if (D_800A9C30 < value) {
+                        value = (f64)(u32)amount + deltaScale * (f64)*rate;
+                        if (upper < value) {
                             state->unk6 = 0xFF;
                         } else {
                             state->unk6 = (u32)value;
@@ -190,7 +194,7 @@ void func_8001E6C0(MenuContext *context) {
                     amount = state->unk6;
                     if (amount > 0) {
                         value = (f64)(u32)amount;
-                        step = D_800A9C38 * (f64)*rate;
+                        step = deltaScale * (f64)*rate;
                         if (value < step) {
                             state->unk6 = 0;
                         } else {
@@ -203,8 +207,8 @@ void func_8001E6C0(MenuContext *context) {
                 if (D_800A4B94[offset] & 0x20000) {
                     amount = state->unk5;
                     if (amount < 0xFF) {
-                        value = (f64)(u32)amount + D_800A9C38 * (f64)*rate;
-                        if (D_800A9C30 < value) {
+                        value = (f64)(u32)amount + deltaScale * (f64)*rate;
+                        if (upper < value) {
                             state->unk5 = 0xFF;
                         } else {
                             state->unk5 = (u32)value;
@@ -215,7 +219,7 @@ void func_8001E6C0(MenuContext *context) {
                     amount = state->unk5;
                     if (amount > 0) {
                         value = (f64)(u32)amount;
-                        step = D_800A9C38 * (f64)*rate;
+                        step = deltaScale * (f64)*rate;
                         if (value < step) {
                             state->unk5 = 0;
                         } else {

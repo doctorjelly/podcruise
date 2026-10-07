@@ -759,3 +759,129 @@ A ten-function score preflight found no candidate satisfying the register-only
 search gate (`/tmp/us25-score-gates/result.json`). No exact bytes were added,
 and current exact USA coverage remains 1183 functions / 363220 bytes, unchanged
 from the `a217897` baseline.
+
+## US26 bounded source-line grouping batch A
+
+Five functions received isolated baseline audits followed by token-preserving
+source-line grouping only in the listed windows. Candidate inputs changed no
+non-whitespace source tokens. Source-layout counts are distinct generated
+sources; compiled-text diversity hashes exactly the measured function-symbol
+bytes, excluding any output-section padding. Across all 624 audits, no output
+reduced the baseline word differences or matched the ROM.
+
+| Function | Exhausted source windows (1-based lines) | Layouts | Distinct compiled symbol hashes | Best / baseline word differences |
+| --- | --- | ---: | ---: | ---: |
+| `func_800320E0` | 20–27 settings assignments; 31–38 clamp loop | 254 | 1 | 9 / 9 |
+| `func_800801B8` | 42–48 status `-2` and first node loop | 63 | 1 | 9 / 9 |
+| `func_80067AB4` | 75–87 final `unk208` blend | 78 | 1 | 14 / 14 |
+| `func_80075490` | 30–42 main loop; 44–48 recursive branch | 93 | 2 | 15 / 15 |
+| `func_80030328` | 37–53 staged-copy success path | 136 | 3 | 16 / 16 |
+
+The grouped layouts changed no production source, and none is retained. The
+matching-object verifier confirmed the respective canonical symbol sizes of
+272, 408, 444, 364, and 276 bytes. Hashes were computed over each candidate's
+first symbol-size bytes; 370 of the 624 `.text.bin` files also contain padding.
+The full private reports are under `/tmp/us26-group-batch-a/`. These windows
+are exhausted for this whitespace-grouping dimension; no combinations across
+windows were expanded because none improved individually.
+
+## US26 `func_80046DC4` pilot
+
+The fresh USA linked-object gate again measured 2,908 bytes and score 360,
+consisting only of 72 register differences. Stack and branch differences,
+reorderings, insertions, and deletions were all zero. A single 60-second,
+16-worker private pilot produced a best score of 110; its candidate uses an
+artificial `y * 1.0f` term in the selected-row Y expression. The independent
+canonical audit measured 2,908 bytes and 21 differing words, first at `+0x56`
+versus the baseline's 61 words. The candidate was rejected and no production
+change was made. Iterations were not measured. The dedicated spec records the
+audit and private artifact location.
+
+No exact USA bytes were added by these probes. Current exact USA coverage
+remains 1183 functions / 363220 bytes.
+
+## US26 bounded source-line grouping batch B
+
+Five USA functions received isolated baseline audits followed by token-preserving
+source-line grouping in the listed 1-based windows. All window lines contain no
+line comments or preprocessor directives. Layout counts describe distinct
+boundary cases; each source retains its non-whitespace token stream. Best word
+differences tie the baseline for every target, so no candidate matched or
+improved the ROM output.
+
+| Function | Exhausted source windows | Layouts | Distinct generated sources | Compiled function-byte hashes | Best / baseline word differences |
+| --- | --- | ---: | ---: | ---: | ---: |
+| `func_8006AF48` | 64–70 clamp; 77–82 adjustment | 96 | 95 | 1 | 9 / 9 |
+| `func_80008090` | 80–82 global setup; 84–93 timeout clear; 144–159 sound-start branch | 169 | 169 | 4 | 17 / 17 |
+| `func_80007FC8` | 25–33 owner/index/table guard; 33–38 return path | 288 | 287 | 1 | 18 / 18 |
+| `func_80030964` | 21–34 sentinel/Data parsing; 35–47 Anim stream loop | 169 | 169 | 2 | 20 / 20 |
+| `func_8008E54C` | 120–153 first target loop; 162–200 target-loop tail | 1302 | 1302 | 4 | 16 / 16 |
+
+The final window plan contains 2,024 distinct layout cases and 2,022 distinct
+source files. There were 2,721 audit executions because an initial 8E54C probe
+of narrower windows was followed by the expanded 8E54C tail window; 697 window
+cases were repeated between those runs. For 8E54C, the full translation unit
+and its preceding helper prefix were preserved. The target begins at text offset
+`0x12C`, and the configured
+`-O3` flags remained in effect. The verifier compared the configured 1,184-byte
+target span beginning at that offset; the function-byte hashes likewise use
+that target slice and do not claim an ELF symbol-size measurement. The other
+hashes cover their configured function-size bytes, excluding section padding.
+All candidates returned the expected configured function sizes. No source,
+configuration, or test changes were retained. Private reports and inputs are
+under `/tmp/us26-group-batch-b/` (`results-first-complete.json` for the initial
+run and `results.json` for the expanded 8E54C run).
+
+## US26 bounded structural triage: func_80010EA0 and func_8001E6C0
+
+`func_80010EA0` measured 2,156/2,120 bytes with 453 differing words. Three
+private guard spellings around its state branch measured 2,164 bytes/453
+differences (word guard), 2,144/455 (value guard), and 2,148/447 (combined
+guards). None matched; all stayed private. The canonical speed checks at
+80011408 and 80011444 confirm the source's 100-then-300 thresholds, so they
+were not reversed or otherwise changed.
+
+`func_8001E6C0` initially measured 3,436/3,492 bytes with 855 differing words.
+The USA assembly loads `D_800A9C30` and `D_800A9C38` once before the controller
+loop and keeps their values live across its backedge. The source now snapshots
+those two doubles before the loop and reuses them in its byte-setting updates.
+The corrected C frame is `0x58`, matching the ROM rather than the former
+`0x48`; the function retains the same 33 ordered direct calls. The fresh
+isolated result is 3,424/3,492 bytes, 835 differing words, 17 missing and no
+extra words. This is a ROM-supported source-lifetime recovery, not an exact
+match or a demonstrated runtime bug. Both ROM values are 255.0 in the
+unclassified raw remainder segment; no global immutability or ownership is
+claimed. Details and load sites are in `func_8001E6C0.md`.
+
+A private host harness with helper stubs and ten fixed state cases passed for
+both the original and updated function under UBSan, including zero/multiple
+controllers, upper/lower clamps, ordinary decreases, and early quit. Reproduce
+from the repository root with:
+
+```sh
+gcc -std=c99 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=all -I include /tmp/us26-structure-two/behavior/harness.c /tmp/us26-structure-two/behavior/old-func.c -o /tmp/us26-structure-two/behavior/test-old
+/tmp/us26-structure-two/behavior/test-old
+gcc -std=c99 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=all -I include /tmp/us26-structure-two/behavior/harness.c src/functions/func_8001E6C0.c -o /tmp/us26-structure-two/behavior/test-new
+/tmp/us26-structure-two/behavior/test-new
+```
+
+The updated source's isolated canonical audit is reproducible with
+`python3 tools/audit_c_unit.py --config config/c_matching.json --unit func_8001E6C0 --build-root /tmp/us26-structure-two/final-audit`.
+No compiler configuration or test files changed. A six-profile IDO 5.3 sweep
+(O1/O2/O3 × MIPS II/MIPS III-32) found no exact build:
+
+| Profile | C bytes | Word differences | Size delta (words) |
+| --- | ---: | ---: | ---: |
+| O1 MIPS II | 3676 | 859 | 46 extra |
+| O1 MIPS III-32 | 3344 | 827 | 37 missing |
+| O2 MIPS II | 3424 | 835 | 17 missing |
+| O2 MIPS III-32 | 2956 | 721 | 134 missing |
+| O3 MIPS II | 3424 | 835 | 17 missing |
+| O3 MIPS III-32 | 2956 | 721 | 134 missing |
+
+No flags or configuration changes were retained. The complete USA ledger,
+run with 32 jobs, reports 1,183 exact functions / 363,220 bytes; all 1,183 canonical
+roundtrip substitutions were byte-identical (SHA1
+`3542d5597c8a56ea8f5c63bceae97a24c4c08d58`). `make test` passed 32 tests,
+along with safety, strict-manifest, and USA-only inventory gates. Validation
+artifacts are in `/tmp/us26-structure-two/validation/`.
