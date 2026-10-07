@@ -1,4 +1,4 @@
-/* Independently written from the specification in specs/func_80070BBC.md. */
+/* Independently written from the specification in specs/functions/recovered/func_80070BBC.md. */
 #include "podcruise/types.h"
 
 typedef struct Vec70BBC {
@@ -118,10 +118,8 @@ void func_80070BBC(Object70BBC *object, f32 *frame, s32 active) {
         if (done == 0) {
             if (rewinding != 0) {
                 rewinding = 0;
-                active = 0;
-                scaled = object->track.unk08 * -10.0f;
-                if (scaled < 0) {
-                    whole = (s32)(scaled - D_800AD840);
+                /* Keep these statements grouped for IDO scheduling. */
+                active = 0; scaled = object->track.unk08 * -10.0f; if (scaled < 0) { whole = (s32)(scaled - D_800AD840);
                 } else {
                     whole = (s32)scaled;
                 }

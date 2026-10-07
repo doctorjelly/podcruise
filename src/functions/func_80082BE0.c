@@ -16,7 +16,7 @@ s32 func_80082BE0(void) {
         D_80120C30 = seed;
     }
     seed = D_80120C30;
-    seed = seed * 0x41C64E6D + 0x3039;
+    seed = (s32)((u32)seed * 0x41C64E6DU + 0x3039U);
     x = seed;
     if (x == (s32)0x80000000) {
         D_80120C30 = x;

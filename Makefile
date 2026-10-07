@@ -163,6 +163,10 @@ host-check:
 host-test:
 	mkdir -p build/host
 	$(CC) -std=c11 -Wall -Wextra -Werror -I include \
+		-fsanitize=undefined -fno-sanitize-recover=undefined \
+		tests/test_rng.c -o build/host/test_rng
+	build/host/test_rng
+	$(CC) -std=c11 -Wall -Wextra -Werror -I include \
 		src/functions/func_80096AD0.c tests/test_buffer_equality.c \
 		-o build/host/test_buffer_equality
 	build/host/test_buffer_equality

@@ -687,3 +687,45 @@ Final full host/tool tests, safety and strict source manifest pass. The USA
 ledger has no compile/link errors or stale source hashes. The six-case racer
 regression was independently rerun against original and corrected sources.
 The progress chart was regenerated for the new exact coverage.
+
+
+## US24 focused source-line grouping
+
+The actual-function 70BBC candidate matches all 732 USA bytes after grouping
+three consecutive source boundaries in its rewind correction. The expressions
+and statements are unchanged. Its dedicated spec records the two original
+instruction-scheduling differences, corrected search generator and exact form.
+
+Other bounded formatting searches found no improvement:
+
+| Function | Candidate layouts | Baseline differing words | Result |
+|---|---:|---:|---|
+| 62270 | 78 | 4 | Every text byte unchanged. |
+| 073A4 | 10 | 7 | Baseline or worse. |
+| 48F74 | 45 | 7 | Baseline or worse. |
+| 81360 | 91 | 6 | Every text byte unchanged. |
+| 6907C | 57 | 6 | Every text byte unchanged. |
+| 33140 | 136 | 8 | Every text byte unchanged. |
+| 30FF8 | 32 | 9 | Every text byte unchanged. |
+
+These are local source-boundary searches, not new behavior recoveries. The
+30FF8 search enumerates all boundary combinations in the six-line framebuffer
+array initialization block. The five-function batch covers the measured
+store, loop, clamp and vector-copy mismatch regions. No variant was retained.
+For 6D150, reversing the mode comparison operands, dot-product factors, or
+both also reproduces the baseline exactly; its spec now records those stops.
+
+Separately, 82BE0 now expresses the LCG multiply and addition as unsigned
+32-bit operations, then converts the state to the target signed representation.
+Canonical MULTU/MFLO/ADDIU establish wrapping low-word arithmetic. The
+independent audit preserves all 152 compiled function bytes and the five
+existing mismatches. Six IDO 5.3 optimization/ISA profiles find no exact match.
+
+
+The parent independently confirmed 70BBC's exact bytes and its linker-map C
+substitution. The 32-job USA rebuild remains byte-identical with 1183 exact
+functions / 363220 bytes (58.44%). The eight fixed-vector RNG regression
+passes undefined-behavior sanitization and fails against the original source
+on seed two. Full host/tool tests, current-source USA ledger, strict manifest,
+safety, USA ROM inventory and whitespace checks pass. The progress chart was
+regenerated for the new exact coverage.
