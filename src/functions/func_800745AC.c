@@ -1,9 +1,6 @@
 /* Implements specs/functions/recovered/remaining_medium_audit_tranche.md. */
 #include "podcruise/types.h"
 
-extern f32 D_800AD97C;
-extern f32 D_800AD980;
-extern f32 D_800AD984;
 extern void func_80017824(void *dst, f32 angle, f32 x, f32 y, f32 z, void *src);
 
 void func_800745AC(u8 *obj) {
@@ -20,7 +17,7 @@ void func_800745AC(u8 *obj) {
     if (*(f32 *)(obj + 0x1A0) < 100.0f) {
         level = 0.0f;
     }
-    level = *(f32 *)(obj + 0x19B8) + (level - *(f32 *)(obj + 0x19B8)) * D_800AD97C;
+    level = *(f32 *)(obj + 0x19B8) + (level - *(f32 *)(obj + 0x19B8)) * 0.1f;
     *(f32 *)(obj + 0x19B8) = level;
 
     a = *(f32 *)(obj + 0x204) / 45.0f;
@@ -39,11 +36,11 @@ void func_800745AC(u8 *obj) {
     if (*(s32 *)(*(u8 **)(obj + 0x344) + 0x4) != 0) {
         part[0] = obj + 0x40;
         func_80017824(part[0] + 0x350, (a * 0.5f + 1) * level, 1.0f, 0, 0, part[0] + 0x350);
-        *(f32 *)(part[0] + 0x388) = *(f32 *)(part[0] + 0x388) + level * D_800AD980;
+        *(f32 *)(part[0] + 0x388) = *(f32 *)(part[0] + 0x388) + level * 0.01f;
     }
     if (*(s32 *)(*(u8 **)(obj + 0x344) + 0x8) != 0) {
         part[0] = obj + 0x80;
-        add = level * D_800AD984;
+        add = level * 0.01f;
         func_80017824(part[0] + 0x350, (b * 0.5f + 1.0f) * level, 1.0f, 0, 0, part[0] + 0x350);
         *(f32 *)(part[0] + 0x388) = *(f32 *)(part[0] + 0x388) + add;
     }

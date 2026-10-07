@@ -1326,3 +1326,65 @@ substitutes C text only: it retains the existing ROM pool bytes. The isolated
 compiler's 48-byte pool is independently exact, rather than owned by a hybrid
 C rodata object. All 32 tests, safety, strict manifest, USA-only inventory and
 diff check pass; full logs are under `/tmp/us33-14f54-validation/`.
+
+## US34 typed pool gate and partial-pool exact recovery
+
+Ten targets were checked at baseline HEAD `e7595292`, with source/raw/true
+linked-symbol hashes verified. Saved baseline slices become stale for retained
+`745AC/6AF48`; mutable clocks/state stay external. Config anchors and absent
+recovered writers do not prove immutability. Lost historical private inputs
+leave identical old literal-trial coverage unknown.
+
+| Target | Literal trial versus ROM / baseline differences | Result |
+|---|---|---|
+| 80A1C | 464/464, 2 unchanged | Exact 16-byte pool; text unchanged. |
+| 7F24C | 480/484, 24→75 | Duplicate step commoned; rejected. |
+| 745AC | 568/568, 36→19 | Retained natural pool recovery, nonexact. |
+| 68D04 | 888/888, 23 unchanged | Text unchanged. |
+| 50C00 | 900/904, 54→199 | Rejected regression. |
+| 33140 | 488/488, 8 unchanged | Text unchanged. |
+| 67AB4 | 444/444, 14 unchanged | Text unchanged. |
+| 44A7C | 596/604, 72→145, 2 missing / 0 extra | Rejected regression. |
+| 738D4 | 900/900, 29→30 | Exact mixed referenced pool, text worsened. |
+| 6AF48 | Full pool 956/956, 9→3; partial pool 956/956, 0 | Partial form exact. |
+
+The full `6AF48` form naturally emits three `.01f` words, matching ROM.
+A compiler alignment zero at `0x800AD5D0` then shifts the two doubles and final
+float by four bytes, explaining its three differing load addresses. The
+approved simpler partial form restores those three external symbols while
+keeping the four leading scalar literals. Exact 956-byte text SHA256:
+`1fc8991a5af3119ef3cadf9027b598c730615da974a061fef9faa7e69d9d196e`;
+source SHA256 `7313b36aa132b64464e1a6866d4c656c94be653a602c0e64de6b81e03c96b1ba`.
+Frame `0xC8` and 17 calls match. Twenty real prefix bytes at `0x800AD5BC`
+match (SHA256 `d1838b97f8b445de6aaca66a455057cf3f73733b28472effa955a869caaf91b1`),
+with 12 unreferenced isolated tail padding bytes discarded. Text-only hybrid
+packing preserves the external ROM double/float data; no standalone ELF data
+correctness or whole 32-byte owned pool is claimed. ROM `0x6BB48..0x6BF04`
+is promoted to C, ending at the existing next C boundary. A neighboring unit
+representation was only gated read-only, not compiled after the partial form
+became exact.
+
+`745AC` has 12 real exact payload bytes and four unreferenced tail padding
+bytes over live neighbor `0x800AD988`. C frame `0x40` versus ROM `0x50` and
+both calls are unchanged. Six fixed-source profiles remain nonexact:
+O1 MIPS2 708/141 differences, O1 MIPS3-32 680/139, O2 MIPS2 568/19,
+O2 MIPS3-32 548/118, O3 MIPS2 568/134, O3 MIPS3-32 548/137.
+Root/coordinator independently verified both retained forms. No allocator,
+forced stack homes, dummy data, extra source reshuffle or new test was added.
+Private evidence: `/tmp/us34-pools-sol/`, `/tmp/us34-pools-luna/`, and
+`/tmp/us34-6af48-partial/`.
+
+Full validation passes. The authoritative `ido53_o2` ledger has all 1,348
+current source hashes, normalized configuration SHA256
+`52d55d3017156e83e6e627476aef2e5172207c0bc38f1a1519d8814a1af9cbe6`,
+and zero build errors. Only `6AF48/745AC` measurement rows changed; every old
+exact name/hash/size tuple is preserved plus `6AF48`. Coverage is 1,185 exact
+functions / 364,680 bytes, 163 nonmatches, 58.67% of CPU text. Successful
+`split-us` and canonical roundtrip verify 1,185 substitutions and byte-identical
+USA SHA1 `3542d5597c8a56ea8f5c63bceae97a24c4c08d58`. The map places C text at
+`0x8006AF48`, size `0x3BC`, ending `0x8006B304`; previous `6ABD0` remains ASM
+and next C is preserved. Text-only hybrid packing preserves the external ROM
+constants and does not import isolated pool tail padding. All 32 tests,
+safety, strict manifest, USA-only inventory, progress chart and diff check
+pass. The existing chart has 98 milestones and 58.67%; it was not regenerated
+in this final accounting pass. Complete logs/exits: `/tmp/us34-validation/`.

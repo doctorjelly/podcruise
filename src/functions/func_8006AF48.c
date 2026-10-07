@@ -36,10 +36,6 @@ typedef struct {
 } Obj8006AF48;
 
 extern f64 D_80120BF0;
-extern f32 D_800AD5BC;
-extern f32 D_800AD5C4;
-extern f32 D_800AD5C8;
-extern f32 D_800AD5CC;
 extern f64 D_800AD5D0;
 extern f64 D_800AD5D8;
 extern f32 D_800AD5E0;
@@ -61,7 +57,7 @@ void func_8006AF48(Obj8006AF48 *obj, PcVec3f *arg1) {
     PcVec3f workA;
     f32 matrix[16];
 
-    adjust = D_800AD5BC;
+    adjust = 0.01f;
     if (obj->unk104 < adjust) {
         obj->unk104 = adjust;
     }
@@ -74,10 +70,10 @@ void func_8006AF48(Obj8006AF48 *obj, PcVec3f *arg1) {
     workA.y = matrix[13];
     workA.z = matrix[14];
     func_8003B184(obj->unkAC, matrix, obj->unk104);
-    adjust = D_800AD5C4;
-    if (((workA.x - matrix[12]) * (workA.x - matrix[12]) + (workA.y - matrix[13]) * (workA.y - matrix[13]) + (workA.z - matrix[14]) * (workA.z - matrix[14])) < D_800AD5C8) {
+    adjust = 0.01f;
+    if (((workA.x - matrix[12]) * (workA.x - matrix[12]) + (workA.y - matrix[13]) * (workA.y - matrix[13]) + (workA.z - matrix[14]) * (workA.z - matrix[14])) < 18000.0f) {
         obj->unk104 = obj->unk104 + adjust;
-    } else if (D_800AD5CC < ((workA.x - matrix[12]) * (workA.x - matrix[12]) + (workA.y - matrix[13]) * (workA.y - matrix[13]) + (workA.z - matrix[14]) * (workA.z - matrix[14]))) {
+    } else if (90000.0f < ((workA.x - matrix[12]) * (workA.x - matrix[12]) + (workA.y - matrix[13]) * (workA.y - matrix[13]) + (workA.z - matrix[14]) * (workA.z - matrix[14]))) {
         obj->unk104 = obj->unk104 - adjust;
     }
 

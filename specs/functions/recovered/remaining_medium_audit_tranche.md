@@ -48,7 +48,7 @@ USA IDO 5.3 `-O2` comparisons give:
 | --- | ---: | ---: | ---: | ---: | ---: |
 | `func_800941E0` | 760 | 760 | 768 | `0x05` | 138 |
 | `func_800857B0` | 772 | 760 | 768 | `0x00` | 189 |
-| `func_800745AC` | 568 | 552 | 560 | `0x03` | 137 |
+| `func_800745AC` | 568 | 568 | 576 | `0x03` | 19 |
 
 None is byte-matching. Caching field-register accesses and reordering locals did
 not improve `func_800941E0`. Swapping the two display-list pointer locals did
@@ -56,3 +56,21 @@ not improve `func_800857B0`. Replacing `func_800745AC`'s one-element part
 pointer array with direct address expressions reduced its compiler body to 528
 bytes, farther from the 568-byte ROM body, so it was restored. No exact match
 is claimed.
+
+### US34 retained typed pool in 745AC
+
+Same-position `0.1f`, `0.01f`, `0.01f` recover the 12 real pool bytes at
+`0x800AD97C`. Four unreferenced section-tail bytes overlap raw neighbor
+`0x800AD988`; they do not represent owned neighbor data. Text remains 568/568
+bytes, improving current baseline 36 differing words to 19, still nonexact.
+C frame `0x40` differs from ROM `0x50`; both ordered helper calls are unchanged.
+Source SHA256: `9bac975ea394a526bf526a83f20006f67ea3357936ee5064e414bc910deac302`.
+Text SHA256: `65d3d27aad96292cd518fba8922f1b4df231f581e2ea156cb9e72b46b7e11126`.
+Six effective IDO5.3 profiles on this fixed source are all nonexact: O1 MIPS2
+708 bytes/141 differences, O1 MIPS3-32 680/139, O2 MIPS2 568/19,
+O2 MIPS3-32 548/118, O3 MIPS2 568/134, O3 MIPS3-32 548/137.
+The assembly split remains unchanged; prior direct-address/local trials above
+remain historical stops. Root/coordinator independently reviewed this natural
+source/pool recovery. Full integration validation passes with its nonexact
+status preserved; complete logs/exits: `/tmp/us34-validation/`. Artifacts:
+`/tmp/us34-pools-sol/745ac-literals/` and `745ac-profiles/`.

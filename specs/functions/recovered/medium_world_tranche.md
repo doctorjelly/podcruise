@@ -72,7 +72,7 @@ comparison against the canonical USA ROM reports:
 | Function | Target bytes | C bytes | First difference | Status |
 | --- | ---: | ---: | ---: | --- |
 | `func_80006848` | 952 | 952 | none | **byte-matching** |
-| `func_8006AF48` | 956 | 964 | `0x19` | behavior-recovered |
+| `func_8006AF48` | 956 | 956 | none | **byte-matching USA** |
 | `func_80081FB0` | 1,012 | 1,028 | `0x05` | behavior-recovered |
 | `func_80037E9C` | 1,016 | 1,016 | none | **byte-matching** |
 | `func_800049FC` | 1,024 | 1,024 | `0x93` | behavior-recovered |
@@ -127,3 +127,25 @@ Private source-order and diagnostic evidence is under
 `/tmp/us31-81fb0-order/`; the earlier two-tranche no-lever records did not
 identify this exact store-order mechanism, and their private input coverage
 was unavailable for independent rechecking.
+
+### US34 exact USA partial literal pool
+
+The four leading scalar constants are now ordinary typed literals. Actual
+956-byte text at `0x8006AF48` is exact, SHA256
+`1fc8991a5af3119ef3cadf9027b598c730615da974a061fef9faa7e69d9d196e`;
+frame `0xC8` and all 17 ordered calls match. Source SHA256:
+`7313b36aa132b64464e1a6866d4c656c94be653a602c0e64de6b81e03c96b1ba`.
+The generated leading 20 real bytes at `0x800AD5BC` are three naturally emitted
+`0.01f` values, `18000.0f` and `90000.0f`; prefix SHA256
+`d1838b97f8b445de6aaca66a455057cf3f73733b28472effa955a869caaf91b1`.
+The 32-byte section also has 12 unreferenced tail zero bytes. The trailing
+binary64 constants at `0x800AD5D0/D8`, float at `0x800AD5E0`, and mutable
+clock stay external. The text-only hybrid discards isolated pool tail padding
+and preserves their ROM data; neither whole-pool ownership nor standalone
+ELF data correctness is claimed. USA C promotion spans ROM `0x6BB48` through
+the existing next C boundary `0x6BF04`. No adjacent code is promoted.
+Root and coordinator independently verified the exact candidate. Full
+integration validation passes; canonical map text is `0x8006AF48`, size
+`0x3BC`, ending `0x8006B304`, with previous `6ABD0` ASM and next C preserved.
+Private reproduction: `/tmp/us34-6af48-partial/`; complete validation logs and
+exits: `/tmp/us34-validation/`.

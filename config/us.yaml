@@ -904,6 +904,7 @@ segments:
       - [0x6B09C, asm, main_6B09C]
       - [0x6B5D4, c, functions/func_8006A9D4]
       - [0x6B7D0, asm, main_6B7D0]
+      - [0x6BB48, c, functions/func_8006AF48]
       - [0x6BF04, c, functions/func_8006B304]
       - [0x6C168, c, functions/func_8006B568]
       - [0x6C5C8, c, functions/func_8006B9C8]
