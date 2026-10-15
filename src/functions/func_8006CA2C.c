@@ -97,11 +97,10 @@ void func_8006CA2C(Unk8006CA2C *obj) {
 
     for (i = 0; i < 6; i++) {
         if (obj->unk2A0[i] & 4) {
-            base = obj->unk288[i];
+            base = obj->unk270[i] * 0.5f - obj->unk270[i];
             g = 0.5f * obj->unk98;
             dt = (f32)D_80120BF0;
-            base += (obj->unk270[i] * 0.5f - obj->unk270[i]) * g * dt;
-            obj->unk288[i] = base;
+            obj->unk288[i] += base * g * dt;
             fired = 1;
         }
         if (obj->unk2A0[i] & 0x10) {

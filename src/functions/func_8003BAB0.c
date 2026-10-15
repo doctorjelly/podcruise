@@ -72,8 +72,8 @@ extern void func_8003B860(
             ((u32)((tileLineExpr) & 0x1FF) << 9),                              \
             TILE_A | TILE_B | TILE_C | TILE_D);                                \
         EMIT_COMMAND(0xF2000000,                                               \
-            ((u32)(((alignedWidth - 1) * 4) & 0xFFF) << 12) |                  \
-            (u32)(((tileHeight - 1) * 4) & 0xFFF));                            \
+            ((u32)(((alignedWidth - 1) << 2) & 0xFFF) << 12) |                  \
+            (u32)(((tileHeight - 1) << 2) & 0xFFF));                            \
     } while (0)
 
 void func_8003BAB0(

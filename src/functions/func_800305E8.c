@@ -39,7 +39,6 @@ void *func_800305E8(s32 index) {
     s32 started;
     s32 size;
     s32 packed;
-    u32 word;
 
     (void)padA;
     (void)pad4;
@@ -92,8 +91,7 @@ void *func_800305E8(s32 index) {
     cursor = (u32 *)data;
     for (i = 0; i < (size >> 2); i++) {
         s32 shift = 31 - (i & 31);
-        word = bitmap[i >> 5] & (1U << shift);
-        if (word != 0) {
+        if ((bitmap[i >> 5] & (1U << shift)) != 0) {
             u32 masked = *cursor & 0xFFFFFF;
             u32 field = *cursor & 0xFF000000;
             if (field == 0x0A000000) {

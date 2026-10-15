@@ -21,18 +21,16 @@ extern void func_8000C724(s32 *value, f32 rate, f32 scale, s32 lower, s32 upper)
 extern void func_8000C6C8(f32 *value, f32 rate, f32 scale, f32 lower, f32 upper);
 
 void func_8000D5EC(s32 selector, f32 value) {
-    s32 *toggle;
-    Holder *holder;
-    s32 bits;
+    s32 v;
 
     switch (selector) {
     case 0:
         func_8000C724(&D_8009B7D0, value, 1.0f, 0, 6);
         break;
     case 1:
-        toggle = &D_800A52D4;
         if (D_8009B7D8 & 4) {
-            *toggle = (*toggle == 0);
+            v = D_800A52D4;
+            D_800A52D4 = (v == 0);
         }
         break;
     case 2:
@@ -56,19 +54,18 @@ void func_8000D5EC(s32 selector, f32 value) {
         }
         break;
     case 6:
-        toggle = &D_800A52D0;
         if (D_8009B7D8 & 0x10) {
-            *toggle = (*toggle == 0);
+            v = D_800A52D0;
+            D_800A52D0 = (v == 0);
         }
         break;
     case 7:
+        v = D_800D6960.unk1C;
         if (D_8009B7D8 & 0x20) {
-            holder = &D_800D6960;
-            bits = holder->unk1C;
-            if (bits & 0x4000) {
-                holder->unk1C = bits & ~0x4000;
+            if (v & 0x4000) {
+                D_800D6960.unk1C = v & ~0x4000;
             } else {
-                holder->unk1C = bits | 0x4000;
+                D_800D6960.unk1C = v | 0x4000;
             }
         }
         break;

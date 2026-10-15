@@ -77,18 +77,17 @@ s32 func_80004160(PcVec3f *a, f32 b, PcVec3f *c, f32 d, f32 e, PcVec3f *f,
                 g->y = -f->y;
                 g->z = -f->z;
             } else {
-                dot = f->z * c->z + (c->x * f->x + c->y * f->y);
-                if (0.0f < dot) {
-                    r[0] = z.x + a->x;
-                    r[1] = z.y + a->y;
-                    r[2] = z.z + a->z;
+                if (!(0.0f < f->z * c->z + (c->x * f->x + c->y * f->y))) {
+                    r[0] = x.x + a->x;
+                    r[1] = x.y + a->y;
+                    r[2] = x.z + a->z;
                     g->x = z.x;
                     g->y = z.y;
                     g->z = z.z;
                 } else {
-                    r[0] = x.x + a->x;
-                    r[1] = x.y + a->y;
-                    r[2] = x.z + a->z;
+                    r[0] = z.x + a->x;
+                    r[1] = z.y + a->y;
+                    r[2] = z.z + a->z;
                     g->x = z.x;
                     g->y = z.y;
                     g->z = z.z;

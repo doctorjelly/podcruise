@@ -48,13 +48,13 @@ s16 blue;
     xy[1] = rect->unk28;
     xy[0] = rect->unk2C;
     scaleX = (f64)D_80114470[0] / 320.0;
+    xy[1] = xy[1] * scaleX;
     x0 = rect->unk20 * scaleX;
     scaleY = (f64)D_80114470[1] / 240.0;
-    y0 = rect->unk24 * scaleY;
-    xy[1] = xy[1] * scaleX;
     xy[0] = xy[0] * scaleY;
+    y0 = rect->unk24 * scaleY;
 
-    EMITL(0xE7000000, 0);
+    EMITLP(0xE7000000, 0);
     EMIT(0xE3000A01, 0x00300000);
     image = D_801217B0++;
 
@@ -63,7 +63,7 @@ s16 blue;
     } else {
         size = 2;
     }
-    image->w0 = 0xFF000000 | ((size & 3) << 19) | ((D_80114470[0] - 1) & 0xFFF);
+    image->w0 = ((size & 3) << 19) | 0xFF000000 | ((D_80114470[0] - 1) & 0xFFF);
     image->w1 = func_80088360(D_800D9DB4);
 
     if (D_80114470[2] == 0x10) {
@@ -79,14 +79,14 @@ s16 blue;
         if (c[2] >= 0x100) {
             c[2] = 0xFF;
         }
-        fill = (((c[2] >> 2) & 0x3E) | ((c[0] << 8) & 0xF800)) | ((c[1] << 3) & 0x7C0) | 1;
+        fill = 1 | ((c[2] >> 2) & 0x3E) | ((c[0] << 8) & 0xF800) | ((c[1] << 3) & 0x7C0);
         fill = fill | (fill << 16);
     } else {
         fill = 0xFF;
     }
 
     EMITLP(0xF7000000, fill);
-    EMITP(0xF6000000 | (((xy[1] - 1) & 0x3FF) << 14) | (((xy[0] - 1) & 0x3FF) << 2), ((x0 & 0x3FF) << 14) | ((y0 & 0x3FF) << 2));
+    EMITLP(0xF6000000 | (((xy[0] - 1) & 0x3FF) << 2) | (((xy[1] - 1) & 0x3FF) << 14), ((x0 & 0x3FF) << 14) | ((y0 & 0x3FF) << 2));
     EMITLP(0xE7000000, 0);
     EMITLP(0xE3000A01, 0);
     EMITP(0xE7000000, 0);

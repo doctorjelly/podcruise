@@ -15,7 +15,7 @@ void func_8000EBE8(s16 *obj, f32 *pos, f32 *outX, f32 *outY, f32 *outZ, f32 *out
     f32 point[3];
     f32 y;
     f32 x;
-    s32 c;
+    s32 flags;
     s32 e;
     f32 q[2];
     f32 dA;
@@ -36,9 +36,8 @@ void func_8000EBE8(s16 *obj, f32 *pos, f32 *outX, f32 *outY, f32 *outZ, f32 *out
     sz[0] = (f32)b;
     q[1] = sz[1] * 0.5f;
     q[0] = sz[0] * 0.5f;
-    c = obj[12];
     e = obj[13];
-    dA = (f32)(c / 4) - q[1];
+    dA = (f32)(obj[12] / 4) - q[1];
     dB = (f32)(e / 4) - q[0];
     *outX = -1000.0f;
     *outY = -1000.0f;
@@ -50,7 +49,8 @@ void func_8000EBE8(s16 *obj, f32 *pos, f32 *outX, f32 *outY, f32 *outZ, f32 *out
     } else {
         func_80081730(res, pos, (f32 (*)[4])m);
     }
-    if (D_800D697C & 0x4000) {
+    flags = D_800D697C;
+    if (flags & 0x4000) {
         res[0] = -res[0];
     }
     if (res[3] > D_800A8680) {

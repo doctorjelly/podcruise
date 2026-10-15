@@ -66,7 +66,6 @@ void func_80021F84(Struct80021F84 *arg0) {
     s32 flags;
     f32 matrix[16];
     char buffer[52];
-    s32 value;
     s32 kind;
     void *obj;
 
@@ -182,9 +181,8 @@ void func_80021F84(Struct80021F84 *arg0) {
         func_80047920();
         if (D_800A4BE8 < 7) {
             func_800519C0(arg0->unk_72, D_800A2DE3[D_8011A050[D_800A4BE8 * 56] * 16], 0, 255);
-            value = D_800A4BE8 % 4 + 31;
-            if (value != arg0->unk_34) {
-                func_800503E8(arg0, value, -1, 0);
+            if (arg0->unk_34 != D_800A4BE8 % 4 + 31) {
+                func_800503E8(arg0, D_800A4BE8 % 4 + 31, -1, 0);
             }
         } else {
             func_800519C0(arg0->unk_72, D_800A4BE8, 0, 255);

@@ -80,7 +80,7 @@ void func_80068D04(Body68D04 *body, f32 amount, PcVec3f *direction,
     velocity->z = body->unk1B8.z;
 
     func_800154D0((f32 *)velocity);
-    func_800155C0(velocity, (amount < 0.0f) ? -amount : amount, velocity);
+    func_800155C0(velocity, (amount < 0) ? -amount : amount, velocity);
 
     if (body->unk64 & 0x10) {
         return;

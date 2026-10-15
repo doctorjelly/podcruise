@@ -35,6 +35,7 @@ u32 *func_80088538(u32 *commands, s32 *countOut, void *state, s32 samples) {
     s16 flag[6];
     Mixer80088538 *mixer;
     Voice80088538 *node;
+    Voice80088538 *node2;
     Driver80088538 *driver;
     u32 *cursor;
     u32 *out;
@@ -43,7 +44,7 @@ u32 *func_80088538(u32 *commands, s32 *countOut, void *state, s32 samples) {
     s32 delta2;
     s32 chunk;
     s32 now;
-    s32 spare[10];
+    s32 spare[8];
     s32 inc;
 
     (void)spare;
@@ -78,14 +79,14 @@ u32 *func_80088538(u32 *commands, s32 *countOut, void *state, s32 samples) {
             best[0]->unk10 += inc;
 
             best[0] = 0;
-            node = mixer->head;
+            node2 = mixer->head;
             delta2 = 0x7FFFFFFF;
-            while (node != 0) {
-                if ((node->unk10 - mixer->unk20) < delta2) {
-                    best[0] = node;
-                    delta2 = node->unk10 - (now = mixer->unk20);
+            while (node2 != 0) {
+                if ((node2->unk10 - mixer->unk20) < delta2) {
+                    best[0] = node2;
+                    delta2 = node2->unk10 - (now = mixer->unk20);
                 }
-                node = node->next;
+                node2 = node2->next;
             }
             position = best[0]->unk10;
             mixer->unk1C = position;

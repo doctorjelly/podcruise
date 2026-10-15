@@ -62,9 +62,7 @@ void func_8006DB1C(Pod *pod) {
     f32 scaleA;
     f32 limit;
     f32 scaleB;
-    f32 spare[4];
 
-    (void)spare;
     pod->unk230 = D_800A5B64;
     if (pod->unk64 & 0x2000000) {
         if (pod->unk108 > D_800AD6B8) {
@@ -96,14 +94,14 @@ void func_8006DB1C(Pod *pod) {
                 pod->unk234 = ((f32)func_80082BE0() / (f32)2147483648.0) * 10.0f + 8.0f;
                 value = (f32)func_80082BE0() / (f32)2147483648.0;
                 if (value < D_800AD6D8) {
-                    count = pod->unk23C - 1;
-                    pod->unk23C = count;
+                    pod->unk23C = pod->unk23C - 1;
+                    count = pod->unk23C;
                     if (count < 2 || count - pod->unk238 >= 3 || -(count - pod->unk238) >= 3) {
                         pod->unk23C = count + 1;
                     }
                 } else if (D_800AD6DC < value) {
-                    count = pod->unk23C + 1;
-                    pod->unk23C = count;
+                    pod->unk23C = pod->unk23C + 1;
+                    count = pod->unk23C;
                     if (count - pod->unk238 >= 3 || -(count - pod->unk238) >= 3) {
                         pod->unk23C = count - 1;
                     }
