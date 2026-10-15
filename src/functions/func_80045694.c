@@ -99,38 +99,37 @@ void func_80045694(PcStage *stage) {
     quad = D_800A4B20;
     unit = D_800AAD14;
 
+    if (1) {
     for (i = 0; i < 6; i++) {
-        kind = stage->unkD4[i];
-        if (-1 == kind) {
+        if (-1 == stage->unkD4[i]) {
             stage->unkEC[i] = 0;
         } else {
-            kind &= 0x0FFFFFFF;
-            stage->unkD4[i] = kind;
-            if (kind == 2) {
+            stage->unkD4[i] &= 0x0FFFFFFF;
+            if (stage->unkD4[i] == 2) {
                 model = func_800305E8(6);
                 helper = func_800305E8(5);
-            } else if (kind == 3) {
+            } else if (stage->unkD4[i] == 3) {
                 model = func_800305E8(8);
                 helper = func_800305E8(7);
-            } else if (kind == 11) {
+            } else if (stage->unkD4[i] == 11) {
                 model = func_800305E8(0x18);
                 helper = func_800305E8(0x17);
-            } else if (kind == 5) {
+            } else if (stage->unkD4[i] == 5) {
                 model = func_800305E8(0xC);
                 helper = func_800305E8(0xB);
-            } else if (kind == 0) {
+            } else if (stage->unkD4[i] == 0) {
                 model = func_800305E8(2);
                 helper = func_800305E8(0);
-            } else if (1 == kind) {
+            } else if (1 == stage->unkD4[i]) {
                 model = func_800305E8(4);
                 helper = func_800305E8(3);
-            } else if (kind == 10) {
+            } else if (stage->unkD4[i] == 10) {
                 model = func_800305E8(0x16);
                 helper = func_800305E8(0x15);
-            } else if (kind == 4) {
+            } else if (stage->unkD4[i] == 4) {
                 model = func_800305E8(9);
                 helper = func_800305E8(0xA);
-            } else if (kind > 100) {
+            } else if (stage->unkD4[i] > 100) {
                 stage->unkD4[i] = -1;
             } else {
                 stage->unkD4[i] = -1;
@@ -195,4 +194,6 @@ void func_80045694(PcStage *stage) {
             }
         }
     }
+    }
+    (void)kind;
 }

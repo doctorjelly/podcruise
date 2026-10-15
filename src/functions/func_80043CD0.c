@@ -40,17 +40,16 @@ extern f32 D_800AACF4;
 extern f32 D_800AACF8;
 
 s32 func_80043CD0(PcWord *self, Msg43CD0 *message, f32 *shake) {
-    Actor43CD0 *actor;
-    s32 state;
-    s32 index;
     f32 scratch[30];
+    Actor43CD0 *actor;
+    s32 index;
 
-    (void)scratch;
+    (void)&scratch;
 
     switch (message->id) {
         case 0x4C6F6164:
-            func_80015268(&self[0x8 / 4].f, 0.0f, 0.0f, 0.0f);
-            func_80015268(&self[0x14 / 4].f, 0.0f, 0.0f, 0.0f);
+            func_80015268(&self[0x8 / 4].f, 0.0, 0.0, 0.0);
+            func_80015268(&self[0x14 / 4].f, 0.0, 0.0, 0.0);
             func_80017874(&self[0x20 / 4].f);
             self[0x60 / 4].s = 0;
             self[0x64 / 4].s = 0;
@@ -64,7 +63,7 @@ s32 func_80043CD0(PcWord *self, Msg43CD0 *message, f32 *shake) {
             for (index = 0; index < 2; index++) {
                 self[0xF4 / 4 + index].s = 0;
             }
-            func_80015268(&self[0xFC / 4].f, 0.0f, 0.0f, 0.0f);
+            func_80015268(&self[0xFC / 4].f, 0.0, 0.0, 0.0);
             func_80017874(&self[0x108 / 4].f);
             self[0x154 / 4].s = 0;
             self[0x158 / 4].s = 0;
@@ -83,10 +82,10 @@ s32 func_80043CD0(PcWord *self, Msg43CD0 *message, f32 *shake) {
 
         case 0x4E41736E:
             self[0x74 / 4].s = message->unk04;
+            self[0xF4 / 4].p = message->unk08;
+            actor = self[0xF4 / 4].p;
             self[0x7C / 4].s = 1;
             self[0x80 / 4].s = 1;
-            actor = message->unk08;
-            self[0xF4 / 4].p = actor;
             func_8004110C(self, 1);
             self[0x6C / 4].s = 0;
             self[0x70 / 4].f = -1.0f;
@@ -109,6 +108,7 @@ s32 func_80043CD0(PcWord *self, Msg43CD0 *message, f32 *shake) {
             self[0x2B0 / 4].f = 100.0f;
             self[0x2D4 / 4].f = D_800AACF4;
             self[0x2D8 / 4].f = -1.0f;
+            self[0x2DC / 4].f = D_800AACF8;
             self[0x2E0 / 4].f = -1.0f;
             self[0x84 / 4].s = 0;
             self[0x2A8 / 4].s = 16;
@@ -116,7 +116,6 @@ s32 func_80043CD0(PcWord *self, Msg43CD0 *message, f32 *shake) {
             self[0x2A4 / 4].s = 0;
             self[0x2E4 / 4].u = 0x80000000;
             self[0x364 / 4].s = 0;
-            self[0x37C / 4].f = -1.0f;
             self[0x150 / 4].f = 0.0f;
             self[0x398 / 4].f = 0.0f;
             self[0x378 / 4].f = 0.0f;
@@ -126,8 +125,8 @@ s32 func_80043CD0(PcWord *self, Msg43CD0 *message, f32 *shake) {
             self[0x3A4 / 4].f = 0.0f;
             self[0x3A0 / 4].f = 0.0f;
             self[0x39C / 4].f = 0.0f;
-            self[0x2DC / 4].f = D_800AACF8;
             self[0x368 / 4].f = 64.0f;
+            self[0x37C / 4].f = -1.0f;
             self[0x36C / 4].f = 64.0f;
             self[0x370 / 4].f = 64.0f;
             self[0x380 / 4].f = 255.0f;
@@ -148,7 +147,7 @@ s32 func_80043CD0(PcWord *self, Msg43CD0 *message, f32 *shake) {
             break;
 
         case 0x44657468:
-            if (self[0xF4 / 4].s == message->unk04) {
+            if (self[0xF4 / 4].s == ((s32 *)message)[1]) {
                 if (message->unk08 == 0) {
                     self[0x7C / 4].s = 8;
                 } else {
@@ -156,10 +155,10 @@ s32 func_80043CD0(PcWord *self, Msg43CD0 *message, f32 *shake) {
                 }
                 self[0x15C / 4].f = message->unk0C[0];
                 self[0x160 / 4].f = message->unk0C[1];
+                self[0x164 / 4].f = message->unk0C[2];
                 self[0x168 / 4].f = self[0x50 / 4].f;
                 self[0x16C / 4].f = self[0x54 / 4].f;
                 self[0x170 / 4].f = self[0x58 / 4].f;
-                self[0x164 / 4].f = message->unk0C[2];
                 self[0x174 / 4].f = message->unk10[0];
                 self[0x178 / 4].f = message->unk10[1];
                 self[0x17C / 4].f = message->unk10[2];
@@ -176,35 +175,28 @@ s32 func_80043CD0(PcWord *self, Msg43CD0 *message, f32 *shake) {
 
         case 0x5368616B:
             self[0x3A4 / 4].f = shake[1];
-            self[0x39C / 4].f = 0.0f;
             self[0x3A0 / 4].f = shake[2];
+            self[0x39C / 4].f = 0.0f;
             break;
 
         case 0x43427574:
-            if (self[0xF4 / 4].s == message->unk04) {
-                state = self[0x7C / 4].s;
+            if (self[0xF4 / 4].s == ((s32 *)message)[1]) {
                 self[0x84 / 4].s = 0;
-                if (state == 7) {
+                if (self[0x7C / 4].s == 7) {
                     func_8004110C(self, 1);
-                    state = self[0x7C / 4].s;
                 }
-                if (1 == state) {
-                    state = 4;
-                    self[0x7C / 4].s = state;
-                } else if (state == 3) {
-                    state = 4;
-                    self[0x7C / 4].s = state;
-                } else if (state == 4) {
-                    state = 5;
-                    self[0x7C / 4].s = state;
-                } else if (state == 5) {
+                if (1 == self[0x7C / 4].s) {
+                    self[0x7C / 4].s = 4;
+                } else if (self[0x7C / 4].s == 3) {
+                    self[0x7C / 4].s = 4;
+                } else if (self[0x7C / 4].s == 4) {
+                    self[0x7C / 4].s = 5;
+                } else if (self[0x7C / 4].s == 5) {
                     func_8004110C(self, 2);
-                    state = self[0x7C / 4].s;
-                } else if (state == 2) {
+                } else if (self[0x7C / 4].s == 2U) {
                     func_8004110C(self, 1);
-                    state = self[0x7C / 4].s;
                 }
-                self[0x80 / 4].s = state;
+                self[0x80 / 4].s = self[0x7C / 4].s;
             }
             break;
 

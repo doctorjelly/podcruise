@@ -13,7 +13,7 @@ typedef struct Actor {
 typedef struct Event {
     /* 0x00 */ s32 tag;
     /* 0x04 */ s32 value;
-    /* 0x08 */ u8 pad08[0x20];
+    /* 0x08 */ u8 pad08[0x1C];
 } Event;
 
 extern s32 D_800A5998;

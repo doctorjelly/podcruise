@@ -19,13 +19,10 @@ extern void func_80006848(Entry80006C00 *);
 
 void func_80006C00(void) {
     Entry80006C00 *entry;
-    s32 count;
     s32 index;
-    s32 type;
 
-    count = D_8009A2A0;
     index = 0;
-    if (count <= 0) {
+    if (D_8009A2A0 <= 0) {
         return;
     }
     do {
@@ -33,14 +30,13 @@ void func_80006C00(void) {
         if (entry != 0 && !(entry->unk100 & 0x80000000) &&
             (entry->unk100 & 0x10000000)) {
             func_80006848(entry);
-            type = entry->unk100 & 0xF;
-            switch (type) {
+            switch (entry->unk100 & 0xF) {
             case 2:
                 func_8000646C(entry);
                 break;
             case 11:
             case 12:
-                if (type == 11) {
+                if ((entry->unk100 & 0xF) == 11) {
                     func_8000651C(entry, 0);
                 } else {
                     func_8000651C(entry, 1);
@@ -55,9 +51,10 @@ void func_80006C00(void) {
             case 10:
                 func_80006200(entry);
                 break;
+            default:
+                break;
             }
-            count = D_8009A2A0;
         }
         index++;
-    } while (index < count);
+    } while (index < D_8009A2A0);
 }

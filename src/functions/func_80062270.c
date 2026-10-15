@@ -319,9 +319,10 @@ void func_80062270(Object80062270 *object) {
         break;
     }
 
-    mode = object->mode08;
+    if (object->mode08 == 2) {
+    }
     if (object->state14 != 27) {
-        switch (mode) {
+        switch (object->mode08) {
         case 2:
             func_80033780(object->node30, object->scale94,
                           object->angle68 -
