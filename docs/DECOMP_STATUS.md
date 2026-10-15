@@ -20,7 +20,7 @@ and why the earlier `0x99000` interval was wrong.
 
 | Build | Exact functions | Exact bytes | Share of CPU text | Configured functions | Hybrid substitutions |
 |---|---:|---:|---:|---:|---:|
-| USA retail | 1,185 | 364,680 | 58.67% | 1,348 | 1,185 |
+| USA retail | 1,192 | 374,908 | 60.32% | 1,348 | 1,192 |
 | Japan retail | 913 | 204,688 | 32.93% | 990 | 911 |
 | Europe retail | 915 | 212,960 | 34.26% | 990 | 913 |
 | USA LRG revision | 1,069 | 254,816 | 41.00% | 1,348 | 1,064 |
@@ -33,7 +33,7 @@ and again as standalone units. No matching source or USA substitution was lost.
 translation units. The gap between configured and exact is nonmatching C,
 including candidates with current compile/link failures. The USA manifest
 covers 1,348 functions and 616,920 original bytes in reviewed C, or 99.26% of
-CPU text; only the exact 58.67% is eligible for substitution in the canonical
+CPU text; only the exact 60.32% is eligible for substitution in the canonical
 rebuild.
 
 The strict manifest audit finds four explained, unconfigured source files: two
@@ -46,7 +46,7 @@ the current worktree and deduplicated by function address. A USA match is
 never assumed to carry to Japan or Europe.
 
 The current USA worktree passed `make roundtrip-us` byte-identically with
-1,185 C substitutions. The Japan, Europe and LRG rows come from earlier
+1,192 C substitutions. The Japan, Europe and LRG rows come from earlier
 `make roundtrip-all` checks and were not rerun after these USA-only changes.
 
 All exact USA functions are now substituted. The formatter helper
@@ -100,3 +100,13 @@ assembly-backed. The authoritative ledger, refreshed split and canonical
 roundtrip, 32 tests, safety, strict manifest, USA-only inventory, progress chart
 and diff check pass. Complete logs/exits: `/tmp/us34-validation/`. Prior
 foreign-region figures are unchanged.
+
+A coordinated worker pass on 2026-10-15 adds seven exact USA functions:
+`func_80062270`, `func_8006E1CC`, `func_80045694`, `func_8004BE90`,
+`func_80006C00`, `func_80043CD0` and `func_80008090` (literal pool placed at
+`0x800A81D0`, values read from the retail ROM). That brings the USA ledger to
+1,192 exact functions / 374,908 bytes, 60.32% of 621,540 CPU-text bytes, and
+156 nonmatches. Thirteen nonmatching sources moved closer to the ROM; three
+proposed changes were rejected for compiler-steering constructs or a changed
+global linkage. The canonical roundtrip stays byte-identical with 1,192
+substitutions; 32 tests and the safety check pass.
