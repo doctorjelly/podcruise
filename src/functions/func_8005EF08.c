@@ -66,24 +66,19 @@ extern void func_80087754(void *arg);
 extern void func_800877AC(s32 selector, s32 value);
 
 void func_8005EF08(CtxEF08 *ctx) {
-    void **cursor;
     s32 j;
-    void *temp;
     ResEF08 *first;
     ResEF08 *second;
     ResEF08 *third;
     ResEF08 *fourth;
     void *entity;
-    void **end;
     s32 style;
     s32 flags;
     void *player;
 
-    cursor = D_8011AC80; end = (void **)&D_8011ACBC;
-    do {
-        *cursor = 0;
-        cursor++;
-    } while (cursor < end);
+    for (j = 0; j < 15; j++) {
+        D_8011AC80[j] = 0;
+    }
     func_80018324(&D_8011AC60, 0x5064);
     D_8011AC74 = 0xF;
     D_8011AC78 = &D_8011AC80[0];
@@ -91,11 +86,10 @@ void func_8005EF08(CtxEF08 *ctx) {
     func_80008F28();
     first = func_800305E8(ctx->unk1B0);
     player = func_80030964(first);
-    temp = first->unk08;
-    D_8011AC80[0] = temp;
+    D_8011AC80[0] = first->unk08;
     D_8011AC80[3] = first->unk00;
     if (D_800A6950 != 0) {
-        D_800A6964 = temp;
+        D_800A6964 = D_8011AC80[0];
     }
     func_80030B68(&D_8011B1D4, &D_8011B1D8, &D_8011B1DC);
     D_8011B1E0 = func_8002FAFC() - D_8011B1E0;
@@ -118,10 +112,9 @@ void func_8005EF08(CtxEF08 *ctx) {
     second = func_800305E8(0x72);
     D_8011AC80[9] = second->unk00;
     for (j = 0; j < 6; j++) {
-        entity = second->unk00->unk18[j];
-        ctx->slots[j] = entity;
-        if (entity != 0) {
-            func_800181BC(entity, 2, -4, 0x10, 3);
+        ctx->slots[j] = second->unk00->unk18[j];
+        if (ctx->slots[j] != 0) {
+            func_800181BC(ctx->slots[j], 2, -4, 0x10, 3);
         }
     }
     third = func_800305E8(0x126);

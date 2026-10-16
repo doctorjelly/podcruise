@@ -50,12 +50,14 @@ void func_80042BB8(Actor80042BB8 *actor) {
     s32 cnt;
 
     if (func_80051FF4() == 1) {
+        fade = D_800A4AF0;
         spread = 2.0f;
-        fade = D_800A4AF0 + 3.0 * D_80120BF0;
+        fade += D_80120BF0 * 3.0;
     } else {
         spread = 1.5f;
         cnt = func_80051FF4();
-        fade = D_800A4AF0 + D_80120BF0 * (3.0f / (f32)cnt);
+        fade = D_800A4AF0;
+        fade += D_80120BF0 * (3.0f / (f32)cnt);
     }
     *g = fade;
     if (fade > 1.0f) {

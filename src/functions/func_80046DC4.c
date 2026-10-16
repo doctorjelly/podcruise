@@ -56,12 +56,14 @@ void func_80046DC4(s32 *arg0, f32 x, f32 y) {
     xi = (s16)(x + 5.0f);
     func_8003EC40(xi, y - 4.0f, 0x32, 0xFF, 0xFF, (u8)level, D_800AADC4);
 
-    for (i = 0x55; i < 0x5C; i++) {
+    i = 0x55;
+    do {
         id = (s16)i;
         func_8000A920(id, 1);
         func_8000AA04(id, xi, (y + 5.0f) + 9.5f * (f32)(i - 0x55));
         func_8000AB24(id, 0x32, 0xFF, 0xFF, (u8)level);
-    }
+        i++;
+    } while (i < 0x5C);
 
     func_8003EC40(xi, (y + 7.0f), 0x32, 0xFF, 0xFF, (u8)level, D_800AADDC);
     func_8003EC40(xi, (y + 7.0f) + 9.5f, 0x32, 0xFF, 0xFF, (u8)level, D_800AADEC);

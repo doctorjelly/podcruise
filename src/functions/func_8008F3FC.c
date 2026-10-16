@@ -236,7 +236,6 @@ Acmd *func_8008F3FC(Obj *obj, s32 arg1, s32 count, s32 time, Acmd *cmd) {
     Event *event;
     Event *note;
     Event *done;
-    Event *next;
     Event *ev3;
     union {
         f32 f;
@@ -365,9 +364,8 @@ Acmd *func_8008F3FC(Obj *obj, s32 arg1, s32 count, s32 time, Acmd *cmd) {
         dmemBase += delta * 2;
         count -= delta;
         done = o->unk3C;
-        next = done->next;
-        o->unk3C = next;
-        if (next == 0) {
+        o->unk3C = done->next;
+        if (o->unk3C == 0) {
             o->unk40 = 0;
         }
         func_800884E8(done);
