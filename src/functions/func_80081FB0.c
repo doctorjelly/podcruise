@@ -25,29 +25,29 @@ f32 func_80081FB0(Vec3f *point, Vec3f *a, Vec3f *b, Vec3f *c, f32 radius, Vec3f 
     Vec3f edgeB;
     Vec3f edgeC;
     f32 delta[3];
-    f32 spare[3];
-    Vec4f plane;
+    f32 d;
+    f32 u1;
+    f32 u2;
+    f32 plane[4];
     f32 side;
     f32 best;
     s32 flipped;
-    f32 refX;
-    f32 refY;
-    f32 refZ;
 
-    (void)spare;
-    func_800179EC(&plane, a, b, c);
+    (void)side;
+    (void)u1;
+    (void)u2;
+    func_800179EC((Vec4f *)plane, a, b, c);
 
     delta[0] = point->x - a->x;
     delta[1] = point->y - a->y;
     delta[2] = point->z - a->z;
-    side = delta[0] * plane.x + delta[1] * plane.y + plane.z * delta[2];
-    if (side < 0.0f) {
+    if (delta[0] * plane[0] + delta[1] * plane[1] + delta[2] * plane[2] < 0.0f) {
         flipped = 1;
     } else {
         flipped = 0;
     }
 
-    func_800819A4((f32 *)&plane, (f32 *)point, (f32 *)out);
+    func_800819A4((f32 *)plane, (f32 *)point, (f32 *)out);
 
     best = (point->z - out->z) * (point->z - out->z) + ((point->x - out->x) * (point->x - out->x) + (point->y - out->y) * (point->y - out->y));
     if (radius > 0.0f && best > radius) {
@@ -74,35 +74,31 @@ f32 func_80081FB0(Vec3f *point, Vec3f *a, Vec3f *b, Vec3f *c, f32 radius, Vec3f 
         out->y = edgeA.y;
         out->z = edgeA.z;
 
-        refX = point->x;
-        refY = point->y;
-        refZ = point->z;
-        if ((refZ - edgeB.z) * (refZ - edgeB.z) + ((refX - edgeB.x) * (refX - edgeB.x) + (refY - edgeB.y) * (refY - edgeB.y)) < best) {
+        d = (point->z - edgeB.z) * (point->z - edgeB.z) + ((point->x - edgeB.x) * (point->x - edgeB.x) + (point->y - edgeB.y) * (point->y - edgeB.y));
+        if (d < best) {
             out->x = edgeB.x;
-            best = (refZ - edgeB.z) * (refZ - edgeB.z) + ((refX - edgeB.x) * (refX - edgeB.x) + (refY - edgeB.y) * (refY - edgeB.y));
+            best = d;
             out->y = edgeB.y;
             out->z = edgeB.z;
-            refX = point->x;
-            refY = point->y;
-            refZ = point->z;
         }
 
-        if ((refZ - edgeC.z) * (refZ - edgeC.z) + ((refX - edgeC.x) * (refX - edgeC.x) + (refY - edgeC.y) * (refY - edgeC.y)) < best) {
+        d = (point->z - edgeC.z) * (point->z - edgeC.z) + ((point->x - edgeC.x) * (point->x - edgeC.x) + (point->y - edgeC.y) * (point->y - edgeC.y));
+        if (d < best) {
             out->x = edgeC.x;
-            best = (refZ - edgeC.z) * (refZ - edgeC.z) + ((refX - edgeC.x) * (refX - edgeC.x) + (refY - edgeC.y) * (refY - edgeC.y));
+            best = d;
             out->y = edgeC.y;
             out->z = edgeC.z;
         }
     }
 
     if (flipped != 0) {
-        outNormal->x = -plane.x;
-        outNormal->y = -plane.y;
-        outNormal->z = -plane.z;
+        outNormal->x = -plane[0];
+        outNormal->y = -plane[1];
+        outNormal->z = -plane[2];
     } else {
-        outNormal->x = plane.x;
-        outNormal->y = plane.y;
-        outNormal->z = plane.z;
+        outNormal->x = plane[0];
+        outNormal->y = plane[1];
+        outNormal->z = plane[2];
     }
     return best;
 }

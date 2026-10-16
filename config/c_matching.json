@@ -13209,21 +13209,11 @@
       "source": "src/functions/func_8007531C.c",
       "link_vram": "0x8007531C",
       "absolute_symbols": {
-        "func_80017DA4": "0x80017DA4",
-        "func_80017DAC": "0x80017DAC",
         "D_8011C8B0": "0x8011C8B0",
-        "D_8011C8D8": "0x8011C8D8"
+        "D_8011C8D8": "0x8011C8D8",
+        "func_80017DA4": "0x80017DA4",
+        "func_80017DAC": "0x80017DAC"
       },
-      "flags": [
-        "-G",
-        "0",
-        "-O2",
-        "-mips2",
-        "-non_shared",
-        "-Xcpluscomm",
-        "-signed",
-        "-Wab,-r4300_mul"
-      ],
       "functions": [
         {
           "name": "func_8007531C",
@@ -14488,9 +14478,9 @@
       "source": "src/functions/func_80033140.c",
       "link_vram": "0x80033140",
       "absolute_symbols": {
+        "D_800AA474": "0x800AA474",
         "func_80004FB0": "0x80004FB0",
-        "func_800153C0": "0x800153C0",
-        "D_800AA474": "0x800AA474"
+        "func_800153C0": "0x800153C0"
       },
       "functions": [
         {
@@ -22252,16 +22242,6 @@
         "D_8011A508": "0x8011A508",
         "func_80014CC0": "0x80014CC0"
       },
-      "flags": [
-        "-G",
-        "0",
-        "-O2",
-        "-mips2",
-        "-non_shared",
-        "-Xcpluscomm",
-        "-signed",
-        "-Wab,-r4300_mul"
-      ],
       "functions": [
         {
           "name": "func_80048F74",

@@ -31,10 +31,8 @@ s32 func_80033140(f32 *arg0, f32 *arg1, s32 arg2, f32 *arg3) {
         dir[1] = (1.0f / ray[6]) * dir[1];
         dir[2] = (1.0f / ray[6]) * dir[2];
         if (0.0f <= func_80004FB0(arg2, ray, hitNormal, hitPlane)) {
-            hitPlane[3] = hitPlane[2] * hitNormal[2] +
-                          (hitNormal[1] * hitPlane[1] + hitPlane[0] * hitNormal[0]);
-            planeDot = hitPlane[2] * arg0[2] +
-                     (arg0[1] * hitPlane[1] + arg0[0] * hitPlane[0]);
+            hitPlane[3] = hitNormal[0] * hitPlane[0] + hitNormal[1] * hitPlane[1] + hitNormal[2] * hitPlane[2];
+            planeDot = arg0[0] * hitPlane[0] + arg0[1] * hitPlane[1] + arg0[2] * hitPlane[2];
             push = hitPlane[3] - planeDot + 2.0f;
             moved[0] = hitPlane[0] * push;
             moved[1] = hitPlane[1] * push;

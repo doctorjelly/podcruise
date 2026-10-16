@@ -36,23 +36,21 @@ extern void func_8000AB24(s16 index, u8 red, u8 green, u8 blue, u8 alpha);
 extern void func_8003EC40(s16 x, s16 y, u8 red, u8 green, u8 blue, u8 alpha, u8 *text);
 
 void func_8002B574(Unk8002B574 *obj) {
-    s32 handle;
-    s32 slot[5];
-    Unk800A2618 table;
-    char text[36];
-    s16 i;
-    char line[32];
     s16 index;
+    s32 slot[5];
+    char line[32];
+    char text[36];
     s32 mode;
     s16 x;
     s16 y;
     s32 message;
+    Unk800A2618 table;
 
     mode = -1;
     table = D_800A2618;
 
-    for (i = 0; i < 5; i++) {
-        slot[i] = -1;
+    for (index = 0; index < 5; index++) {
+        slot[index] = -1;
     }
 
     switch (obj->unk08) {
@@ -62,14 +60,14 @@ void func_8002B574(Unk8002B574 *obj) {
             mode = 0xA2;
             func_8008A6B4(line, D_800A9820);
         }
-        index = D_800A2620;
         break;
     case 8:
         if (obj->unk10 == 0) {
+            index = D_800A2620;
             slot[0] = 0xA1;
             slot[1] = 0xA3;
             slot[2] = 0xA5;
-            switch (D_800A2620) {
+            switch (index) {
             case 0:
                 func_8008A6B4(line, D_800A9830);
                 break;
@@ -83,15 +81,13 @@ void func_8002B574(Unk8002B574 *obj) {
                 break;
             }
         }
-        index = D_800A2620;
         break;
     case 9:
         if (obj->unk10 == 0 && obj->unk70 == 1) {
             slot[0] = 0xA3;
             func_8008A6B4(line, D_800A9864);
-            index = D_800A2620;
         } else {
-            index = D_800A2620;
+            break;
         }
         break;
     case 0:
@@ -105,16 +101,16 @@ void func_8002B574(Unk8002B574 *obj) {
     case 15:
     case 16:
     case 17:
-        index = D_800A2620;
         break;
     case 6:
     case 10:
     case 11:
     case 14:
     default:
-        index = D_800A2620;
         break;
     }
+
+    index = D_800A2620;
 
     obj->unk58 = obj->unk58 + D_80120BF8;
     if (obj->unk58 >= 1.0f && obj->unk5C != 0) {
@@ -127,10 +123,10 @@ void func_8002B574(Unk8002B574 *obj) {
     } else if (obj->unk58 >= 3.0f && obj->unk5C == 0) {
         obj->unk54 = obj->unk54 - (254.0f * D_80120BF8);
         if (obj->unk54 <= 0.0f) {
-            index++;
             obj->unk54 = 0.0f;
             obj->unk58 = 0.0f;
             obj->unk5C = 1;
+            index++;
             if (index == 5) {
                 index = 0;
             }
@@ -146,27 +142,24 @@ void func_8002B574(Unk8002B574 *obj) {
         return;
     }
 
-    y = 25;
-    x = 25;
-    handle = (s16)message;
-    func_8000A920(handle, 1);
-    func_8000AA04(handle, x, y);
-    func_8000AB24(handle, 255, 255, 255, (u32)obj->unk54);
+    x = 25; y = 25;
+    func_8000A920(message, 1);
+    func_8000AA04(message, x, y);
+    func_8000AB24(message, 255, 255, 255, (u32)obj->unk54);
     if (mode != 0xA4) {
         x = table.b[message - 0x9F] + 0x1B;
     }
     if (mode != -1) {
-        handle = mode;
-        func_8000A920(handle, 1);
-        func_8000AA04(handle, x, 25);
+        func_8000A920(mode, 1);
+        func_8000AA04(mode, x, 25);
         if (mode == 0xA4) {
-            func_8000AA04(handle, x, 0x23);
+            func_8000AA04(mode, x, 0x23);
             y = 0x1E;
         }
         if (mode == 0xA2) {
-            func_8000AA04(handle, x, y + 5);
+            func_8000AA04(mode, x, y + 5);
         }
-        func_8000AB24(handle, 255, 255, 255, (u32)obj->unk54);
+        func_8000AB24(mode, 255, 255, 255, (u32)obj->unk54);
         x += table.b[mode - 0x9F];
     }
     x += 5;

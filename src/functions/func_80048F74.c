@@ -24,7 +24,7 @@ void func_80048F74(s32 arg0) {
     s32 tail;
     f32 sine;
     f32 cosine;
-    s32 last;
+    s32 tmp;
     KeyBlock key;
 
     key = D_800A51DC;
@@ -32,8 +32,7 @@ void func_80048F74(s32 arg0) {
         order[outer] = -1;
     }
 
-    last = D_800D6DD8[arg0][1];
-    count = last - D_800D6DD8[arg0][0] + 1;
+    count = D_800D6DD8[arg0][1] - D_800D6DD8[arg0][0] + 1;
     limit = count + 2;
     tail = count + 1;
     head = 0;
@@ -58,9 +57,9 @@ void func_80048F74(s32 arg0) {
     for (outer = 0; outer < head - 3; outer++) {
         for (inner = outer + 1; inner < head - 2; inner++) {
             if (key.value[outer] < key.value[inner]) {
-                taken = order[outer];
+                tmp = order[outer];
                 order[outer] = order[inner];
-                order[inner] = taken;
+                order[inner] = tmp;
             }
         }
     }
@@ -68,9 +67,9 @@ void func_80048F74(s32 arg0) {
     for (outer = tail; outer < count + 1; outer++) {
         for (inner = outer + 1; inner < count + 2; inner++) {
             if (key.value[inner] < key.value[outer]) {
-                taken = order[outer];
+                tmp = order[outer];
                 order[outer] = order[inner];
-                order[inner] = taken;
+                order[inner] = tmp;
             }
         }
     }
