@@ -33,9 +33,12 @@ void func_8002DD7C(Obj8002DD7C *arg0) {
     *(u32 *)(D_80113680 + 8) |= 0x40;
     arg0->unk14 |= 8;
     total = 0;
+    goto start;
+start:
     useA = 0;
 
-    if (func_8002D968(D_80113E60, D_800A9ACC) != 0) {
+    found = func_8002D968(D_80113E60, D_800A9ACC);
+    if (found != 0) {
         if ((D_800A4B94 & 4) != 0) {
             D_80119668[total] = arg0->unk5D;
             total = 1;
