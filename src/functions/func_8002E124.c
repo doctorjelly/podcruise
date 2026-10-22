@@ -1,10 +1,11 @@
 /* Implements specs/functions/recovered/timing_and_input_tranche.md. */
 #include "podcruise/types.h"
 
-extern u64 D_800A26A8;
+u64 D_800A26A8;
 extern u64 D_800A26A0;
 extern u64 D_800A26B0;
 extern s32 D_800A26BC;
+extern s32 D_800A26B8[];
 
 extern u64 func_800811DC(void);
 extern u64 func_8008AC48(u64, u64);
@@ -24,9 +25,9 @@ void func_8002E124(void) {
     }
     if (D_800A26A0 > D_800A26B0) {
         if (D_800A26A0 - D_800A26B0 > 0xBEB6) {
-            D_800A26BC++;
+            D_800A26B8[1] = D_800A26BC + 1;
         }
-        if (func_8008ADA0() < 0) {
+        if ((func_8008ADA0() & 0x80000000) != 0) {
             D_800A26B0 += 0x5F5B;
         } else {
             func_800073A4();

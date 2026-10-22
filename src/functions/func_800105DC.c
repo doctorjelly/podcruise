@@ -11,7 +11,6 @@ extern s32 D_800D5E40[40];
 extern s32 D_800D5EE0[40];
 extern s32 D_800D5F80[10];
 extern s32 D_800D5FA8[10];
-extern s32 D_800D5FD0;
 extern s32 D_800D60A0[40];
 extern s16 D_80114470;
 extern s16 D_80114472;
@@ -39,20 +38,16 @@ void func_800105DC(s16 *object) {
     s32 i;
     f32 depth;
     f32 scale;
-    s32 *first;
-    s32 *second;
+    s32 sx;
+    s32 sy;
 
-    first = D_800D5F80; second = D_800D5FA8;
-    do {
-        func_8000A920((s16)*first, 0);
-        func_8000A920((s16)*second, 0);
-        first++;
-        second++;
-    } while (second < &D_800D5FD0);
+    for (i = 0; i < 10; i++) {
+        func_8000A920((s16)D_800D5F80[i], 0);
+        func_8000A920((s16)D_800D5FA8[i], 0);
+    }
 
-    i = 0;
     slot = 0;
-    for (; i < 40; i++) {
+    for (i = 0; i < 40; i++) {
         D_800D5E40[i] = -1000;
         D_800D5EE0[i] = -1000;
         if (D_800D5C38[i] == 0) {
@@ -88,8 +83,10 @@ void func_800105DC(s16 *object) {
         if (!(screenY < (f32)D_80114472)) {
             continue;
         }
-        D_800D5E40[i] = (s32)screenX;
-        D_800D5EE0[i] = (s32)screenY;
+        sx = (s32)screenX;
+        sy = (s32)screenY;
+        D_800D5E40[i] = sx;
+        D_800D5EE0[i] = sy;
         pixel = (s32)((depth * (f32)object[10] + (f32)object[14]) * 256.0f);
         if (D_800D60A0[i] == -1000) {
             continue;
