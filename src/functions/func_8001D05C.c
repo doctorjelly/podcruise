@@ -9,7 +9,7 @@ extern u32 D_8009B7D8;
 extern s32 D_800A23C4;
 extern s32 D_800A23C8;
 extern u8 D_800A23CC[];
-extern char D_800A2508[];
+extern u8 D_800A2508[];
 extern s32 D_800A2514;
 extern f32 D_800A2518;
 extern s32 D_800A4BA4[];
@@ -299,8 +299,8 @@ void func_8001D05C(void *arg) {
                 D_80113E60[BS(arg, 0x6F) * 0x2C + index] = D_800A2508[index];
             }
             if (D_8009B7D0 > 0) {
-                if (func_8002D968(D_800A2508, D_800A8C98) != 0) {
-                    *(s32 *)((u8 *)&D_80113E78 + BS(arg, 0x6F) * 0x2C) = 0x2710;
+                if (func_8002D968((const char *)D_800A2508, D_800A8C98) != 0) {
+                    *(s32 *)(D_80113E60 + 0x18 + BS(arg, 0x6F) * 0x2C) = 0x2710;
                 }
             }
             if (BW(arg, 0xC) == 9) {

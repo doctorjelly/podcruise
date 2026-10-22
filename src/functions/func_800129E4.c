@@ -54,8 +54,8 @@ s32 func_800129E4(u8 *arg0, Font *arg1) {
             }
         }
         if (c != 0 && !done) {
-            glyph = 0;
             idx = ch;
+            glyph = 0;
             if (c >= 0x61 && c < 0x7B && arg1->unk5B < 0x61) {
                 idx = c - 0x20;
             }

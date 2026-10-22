@@ -40,7 +40,7 @@ extern f32 D_800AD560;
 extern f32 D_8011C854;
 extern f64 D_80120BF0;
 
-void func_800695D4(Obj *obj, f32 arg1, f32 arg2, f32 arg3, Vec3 *arg4, Vec3 *arg5, Vec3 *arg6) {
+void func_800695D4(Obj *obj, f32 arg1, f32 arg2, f32 arg3, Vec3 *arg4, f32 *arg5, Vec3 *arg6) {
     Vec3 sp88[2];
     f32 dead1;
     f32 v;
@@ -60,15 +60,15 @@ void func_800695D4(Obj *obj, f32 arg1, f32 arg2, f32 arg3, Vec3 *arg4, Vec3 *arg
 
     d = obj->unk19C * arg4->z + (arg4->x * obj->unk194 + arg4->y * obj->unk198);
     if ((f64)d < D_800AD540 || (f64)d > D_800AD548) {
-        func_80015268(arg5, 0.0f, 0.0f, 0.0f);
+        func_80015268((Vec3 *)arg5, 0.0f, 0.0f, 0.0f);
         func_800155C0(&obj->unk1C4, 0.9f, &obj->unk1C4);
         func_80015288(arg6, &obj->unk1C4);
         obj->unk1F8 = 0.0f;
     } else {
         func_80015538(&sp88[1], arg4, (Vec3 *)&obj->unk194);
-        func_80015538(arg5, arg4, &sp88[1]);
-        func_800154D0(arg5);
-        v = obj->unk19C * arg5->z + (arg5->x * obj->unk194 + arg5->y * obj->unk198);
+        func_80015538((Vec3 *)arg5, arg4, &sp88[1]);
+        func_800154D0((Vec3 *)arg5);
+        v = arg5[0] * obj->unk194 + arg5[1] * obj->unk198 + obj->unk19C * arg5[2];
         D_8011C854 = func_80014D4C(v);
         if (50.0f < arg3) {
             v = 0.0f;
@@ -76,7 +76,7 @@ void func_800695D4(Obj *obj, f32 arg1, f32 arg2, f32 arg3, Vec3 *arg4, Vec3 *arg
             v = (1.0f - arg3 / 50.0f) * v;
         }
         t = v * v * 400.0f;
-        func_800155C0(&sp88[0], -t, arg5);
+        func_800155C0(&sp88[0], -t, (Vec3 *)arg5);
         func_800155EC(arg6, &obj->unk1C4, (f32)D_80120BF0 * (f32)2.0, &sp88[0]);
         ret = func_800153C0(arg6);
         if (ret < 0.0f) {
@@ -99,8 +99,8 @@ void func_800695D4(Obj *obj, f32 arg1, f32 arg2, f32 arg3, Vec3 *arg4, Vec3 *arg
             func_800155C0(arg6, d, arg6);
         }
         func_80015288(&obj->unk1C4, arg6);
-        vec[0].x = arg5->x;
-        vec[0].y = arg5->y;
+        vec[0].x = arg5[0];
+        vec[0].y = arg5[1];
         vec[0].z = 0.0f;
         vec[1].x = obj->unk30;
         vec[1].y = obj->unk34;
@@ -120,9 +120,9 @@ void func_800695D4(Obj *obj, f32 arg1, f32 arg2, f32 arg3, Vec3 *arg4, Vec3 *arg
                 d = ((1.0f - d) / D_800AD558) * D_800AD554;
             }
             if (vec[1].x * vec[0].y < vec[1].y * vec[0].x) {
-                f = ((vec[0].x * arg5->x + vec[0].y * arg5->y + vec[0].z * arg5->z) * d) / 0.5f;
+                f = ((vec[0].x * arg5[0] + vec[0].y * arg5[1] + vec[0].z * arg5[2]) * d) / 0.5f;
             } else {
-                f = -((vec[0].x * arg5->x + vec[0].y * arg5->y + vec[0].z * arg5->z) * d) / 0.5f;
+                f = -((vec[0].x * arg5[0] + vec[0].y * arg5[1] + vec[0].z * arg5[2]) * d) / 0.5f;
             }
         }
         v = v + D_800AD55C;

@@ -26,17 +26,17 @@ extern s16 D_80119898[];
 void func_80046DC4(s32 *arg0, f32 x, f32 y) {
     f32 level;
     s32 xi;
-    s32 xb;
     s16 id;
     s32 sel;
-    f32 scale;
     s32 i;
+    f32 scale;
+    f32 t;
 
     sel = -1;
     level = 255.0f;
     scale = 1.0f;
-    xb = arg0[2];
-    if (xb == 8) {
+    xi = arg0[2];
+    if (xi == 8) {
         scale = D_800A4BF0 * 2.5f;
     }
     level = level * scale;
@@ -83,16 +83,17 @@ void func_80046DC4(s32 *arg0, f32 x, f32 y) {
 
     if (sel >= 0) {
         func_8000A920(0x5E, 1);
-        func_8000AA04(0x5E, x - 6.0f, y + 9.5f * (f32)sel);
+        t = (f32)sel;
+        func_8000AA04(0x5E, x - 6.0f, y + 9.5f * t);
         func_8000AB24(0x5E, 0x32, 0xFF, 0xFF, (u8)level);
     }
 
-    xb = (s16)(x + 67.0f);
+    sel = (s16)(x + 67.0f);
     for (i = 0; i < 7; i++) {
         id = (s16)(D_800A4BB4++ + 0x7F);
         func_8000A920(id, 1);
         xi = (s16)((f32)i * 9.5f + (y + 7.0f));
-        func_8000AA04(id, xb, xi);
+        func_8000AA04(id, sel, xi);
         if (D_80119858[i] == D_80119878[i]) {
             func_8000AAC0(id, D_80119858[i] * 96.0f * 0.125f, 0.625f);
             func_8000AB24(id, 0x32, 0xFF, 0xFF, (u8)level);

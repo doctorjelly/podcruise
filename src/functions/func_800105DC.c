@@ -19,7 +19,7 @@ extern s16 D_80114472;
 extern void func_8000A920(s16 index, s32 flag);
 extern void func_8000AAC0(s16 index, f32 x, f32 y);
 extern void func_8000AAF8(s16 index, f32 value);
-extern void func_8000AB24(s16 index, s32 red, s32 green, s32 blue, s32 alpha);
+extern void func_8000AB24(s16 index, u8 red, u8 green, u8 blue, u8 alpha);
 extern void func_8000E680(s16 arg0, s16 arg1, s16 arg2);
 extern void func_8000EBE8(s16 *object, f32 *position, f32 *outX, f32 *outY,
                           f32 *outZ, f32 *outW, s32 mode);
@@ -41,7 +41,6 @@ void func_800105DC(s16 *object) {
     f32 scale;
     s32 *first;
     s32 *second;
-    s32 shade;
 
     first = D_800D5F80; second = D_800D5FA8;
     do {
@@ -103,7 +102,6 @@ void func_800105DC(s16 *object) {
         if (slot >= 10) {
             continue;
         }
-        second = &D_800D5FA8[slot];
         if (D_800D5F80[slot] != -1) {
             func_8000A920((s16)D_800D5F80[slot], 1);
             func_8000E680((s16)D_800D5F80[slot], (s16)(s32)screenX, (s16)(s32)screenY);
@@ -111,13 +109,12 @@ void func_800105DC(s16 *object) {
             func_8000AAC0((s16)D_800D5F80[slot], 1.0f, 1.0f);
             func_8000AB24((s16)D_800D5F80[slot], 255, 255, 255, (u32)alpha);
         }
-        if (*second != -1) {
-            shade = (u32)alpha & 0xFF;
-            func_8000A920((s16)*second, 1);
-            func_8000E680((s16)*second, (s16)(s32)screenX, (s16)(s32)screenY);
-            func_8000AAF8((s16)*second, radius);
-            func_8000AAC0((s16)*second, brightness, brightness);
-            func_8000AB24((s16)*second, 255, 255, 255, shade);
+        if (D_800D5FA8[slot] != -1) {
+            func_8000A920((s16)D_800D5FA8[slot], 1);
+            func_8000E680((s16)D_800D5FA8[slot], (s16)(s32)screenX, (s16)(s32)screenY);
+            func_8000AAF8((s16)D_800D5FA8[slot], radius);
+            func_8000AAC0((s16)D_800D5FA8[slot], brightness, brightness);
+            func_8000AB24((s16)D_800D5FA8[slot], 255, 255, 255, (u32)alpha);
         }
         slot++;
     }

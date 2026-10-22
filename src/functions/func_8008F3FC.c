@@ -234,6 +234,7 @@ Acmd *func_8008F3FC(Obj *obj, s32 arg1, s32 count, s32 time, Acmd *cmd) {
     Obj *ev2;
     s16 dmemBase;
     Event *event;
+    s32 sq11;
     Event *note;
     Event *done;
     Event *ev3;
@@ -242,7 +243,7 @@ Acmd *func_8008F3FC(Obj *obj, s32 arg1, s32 count, s32 time, Acmd *cmd) {
         s32 i;
     } bits;
     Event *ev4;
-    Event *ev5;
+    s32 sq13;
     void *tbl;
     s32 delta;
 
@@ -272,7 +273,8 @@ Acmd *func_8008F3FC(Obj *obj, s32 arg1, s32 count, s32 time, Acmd *cmd) {
             o->unk38 = 1;
             o->unk30 = 0;
             o->unk34 = note->arg14;
-            o->unk1A = (s16)((note->arg10.b.h * note->arg10.b.h) >> 15);
+            sq13 = (note->arg10.b.h * note->arg10.b.h) >> 15;
+            o->unk1A = (s16)sq13;
             o->unk18 = note->arg10.b.b2;
             o->unk20 = D_800A7D80[note->arg10.b.b3];
             o->unk22 = D_800A7D80[127 - note->arg10.b.b3];
@@ -319,8 +321,8 @@ Acmd *func_8008F3FC(Obj *obj, s32 arg1, s32 count, s32 time, Acmd *cmd) {
             }
             if ((s16)o->unk3C->type == 11) {
                 o->unk30 = 0;
-                o->unk1A = (s16)((o->unk3C->arg0C.i * o->unk3C->arg0C.i)
-                                   >> 15);
+                sq11 = (o->unk3C->arg0C.i * o->unk3C->arg0C.i) >> 15;
+                o->unk1A = (s16)sq11;
                 o->unk34 = o->unk3C->arg10.w;
             }
             if ((s16)o->unk3C->type == 16) {
@@ -336,8 +338,7 @@ Acmd *func_8008F3FC(Obj *obj, s32 arg1, s32 count, s32 time, Acmd *cmd) {
             if (note->flag != 0) {
                 o->unk08(o, 8, 0);
             }
-            ev5 = note;
-            o->unk08(o, 5, ev5->arg0C.i);
+            o->unk08(o, 5, note->arg0C.i);
             o->unk08(o, 9, 0);
             break;
 

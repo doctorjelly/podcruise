@@ -66,7 +66,7 @@ s32 func_80091630(Dev80091630 *device) {
     u8 curKey;
     u8 iteration;
     u8 lastLoaded;
-    s32 status2;
+    s32 offset;
     Entry80091630 temp;
 
     repaired = 0;
@@ -153,17 +153,17 @@ s32 func_80091630(Dev80091630 *device) {
     }
 
     for (iteration = 0; iteration < device->unk64; iteration++) {
-        status2 = func_80091354(device, table2, 0, iteration);
-        if (status2 != 0 && status2 != 3) {
-            return status2;
+        status = func_80091354(device, table2, 0, iteration);
+        if (status != 0 && status != 3) {
+            return status;
         }
         curKey = iteration;
         if (iteration > 0) {
-            mismatch = 1;
+            offset = 1;
         } else {
-            mismatch = device->unk60.word;
+            offset = device->unk60.word;
         }
-        for (index = 0; index < mismatch; index++) {
+        for (index = 0; index < offset; index++) {
             table3[index].half = table2[index].half;
         }
         for (; index < 128; index++) {
@@ -176,9 +176,9 @@ s32 func_80091630(Dev80091630 *device) {
                 slots[index] = temp;
             }
         }
-        status2 = func_80091354(device, table3, 1, iteration);
-        if (status2 != 0) {
-            return status2;
+        status = func_80091354(device, table3, 1, iteration);
+        if (status != 0) {
+            return status;
         }
     }
 
