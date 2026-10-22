@@ -90,12 +90,14 @@ void func_8006D150(Racer *racer) {
     Vec3 axis;
     Vec3 point;
     Vec3 offset;
-    Vec3 previous;
-    Vec3 delta[1]; /* one-element array: the original keeps these stores live */
+    struct {
+        Vec3 delta;
+        Vec3 previous;
+    } vec; /* delta and previous share one frame object */
     f32 length;
     f32 dot;
     f32 turn;
-    s32 mode;
+    s32 one;
 
     if (racer->unk0060 & 0x10) {
         racer->unk018C = D_800AD634;
@@ -122,36 +124,36 @@ void func_8006D150(Racer *racer) {
             (s32)((f32)func_80082BE0() / (f32)2147483648.0 * (f32)2.0);
     }
 
-    mode = D_800A5B6C;
-    if (mode > 0) {
-        if (1 == mode) {
+    one = 1;
+    if (D_800A5B6C > 0) {
+        if (one == D_800A5B6C) {
             if (racer->unk00E8 < D_800AD644 ||
                 (D_800AD648 < racer->unk00E0 &&
                  racer->unk00E0 < D_800AD64C)) {
                 racer->unk00D4 = 0;
             }
-        } else if (mode == 2) {
+        } else if (D_800A5B6C == 2) {
             if ((D_800AD650 < racer->unk00E0 &&
                  racer->unk00E0 < D_800AD654) ||
                 (D_800AD658 < racer->unk00E0 &&
                  racer->unk00E0 < D_800AD65C)) {
                 racer->unk00D4 = 0;
             }
-        } else if (mode == 3) {
+        } else if (D_800A5B6C == 3) {
             if (D_800AD660 < racer->unk00E0 && racer->unk00E0 < D_800AD664) {
                 racer->unk00D4 = 0;
             }
-        } else if (mode == 4) {
+        } else if (D_800A5B6C == 4) {
             if (D_800AD668 < racer->unk00E0 && racer->unk00E0 < D_800AD66C) {
                 racer->unk00D4 = 0;
             }
-        } else if (mode == 5) {
+        } else if (D_800A5B6C == 5) {
             if (D_800AD670 < racer->unk00E0 && racer->unk00E0 < D_800AD674) {
-                racer->unk00D4 = 1;
+                racer->unk00D4 = one;
             }
-        } else if (mode == 6) {
+        } else if (D_800A5B6C == 6) {
             if (D_800AD678 < racer->unk00E0 && racer->unk00E0 < D_800AD67C) {
-                racer->unk00D4 = 1;
+                racer->unk00D4 = one;
             }
         }
     }
@@ -180,18 +182,18 @@ void func_8006D150(Racer *racer) {
     point.x = motion.unk30.x;
     point.y = motion.unk30.y;
     point.z = motion.unk30.z;
-    delta[0].x = racer->unk0050.x - motion.unk30.x;
-    delta[0].y = racer->unk0050.y - motion.unk30.y;
-    delta[0].z = racer->unk0050.z - motion.unk30.z;
-    dot = delta[0].x * racer->unk0194.x + delta[0].y * racer->unk0194.y +
-          racer->unk0194.z * delta[0].z;
-    func_800155EC(&previous, &point,
+    vec.delta.x = racer->unk0050.x - motion.unk30.x;
+    vec.delta.y = racer->unk0050.y - motion.unk30.y;
+    vec.delta.z = racer->unk0050.z - motion.unk30.z;
+    dot = vec.delta.z * racer->unk0194.z +
+          (vec.delta.x * racer->unk0194.x + vec.delta.y * racer->unk0194.y);
+    func_800155EC(&vec.previous, &point,
                   dot,
                   &racer->unk0194);
 
-    offset.x = previous.x - racer->unk0050.x;
-    offset.y = previous.y - racer->unk0050.y;
-    offset.z = previous.z - racer->unk0050.z;
+    offset.x = vec.previous.x - racer->unk0050.x;
+    offset.y = vec.previous.y - racer->unk0050.y;
+    offset.z = vec.previous.z - racer->unk0050.z;
     length = func_800153C0(&offset);
     if (D_800AD688 < length) {
         offset.x *= 1.0f / length;

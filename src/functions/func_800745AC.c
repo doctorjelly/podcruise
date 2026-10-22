@@ -4,20 +4,26 @@
 extern void func_80017824(void *dst, f32 angle, f32 x, f32 y, f32 z, void *src);
 
 void func_800745AC(u8 *obj) {
+    f32 vel;
     f32 level;
-    f32 add;
+    f32 prev;
     f32 a;
+    s32 i;
+    u8 *part;
+    f32 add;
     f32 b;
-    u8 *part[1];
 
+    i = 1;
     level = 0;
-    if (*(f32 *)(obj + 0x2FC) < 0.0f) {
-        level = *(f32 *)(obj + 0x2FC) * -15.0f;
+    vel = *(f32 *)(obj + 0x2FC);
+    if (vel < 0.0f) {
+        level = vel * -15.0f;
     }
     if (*(f32 *)(obj + 0x1A0) < 100.0f) {
         level = 0.0f;
     }
-    level = *(f32 *)(obj + 0x19B8) + (level - *(f32 *)(obj + 0x19B8)) * 0.1f;
+    prev = *(f32 *)(obj + 0x19B8);
+    level = prev + (level - prev) * 0.1f;
     *(f32 *)(obj + 0x19B8) = level;
 
     a = *(f32 *)(obj + 0x204) / 45.0f;
@@ -33,15 +39,16 @@ void func_800745AC(u8 *obj) {
         b = 2.0f - b;
     }
 
-    if (*(s32 *)(*(u8 **)(obj + 0x344) + 0x4) != 0) {
-        part[0] = obj + 0x40;
-        func_80017824(part[0] + 0x350, (a * 0.5f + 1) * level, 1.0f, 0, 0, part[0] + 0x350);
-        *(f32 *)(part[0] + 0x388) = *(f32 *)(part[0] + 0x388) + level * 0.01f;
+    if (*(s32 *)(*(u8 **)(obj + 0x344) + i * 4) != 0) {
+        part = obj + i * 0x40;
+        func_80017824(part + 0x350, (a * 0.5f + 1) * level, 1.0f, 0, 0, part + 0x350);
+        *(f32 *)(part + 0x388) = *(f32 *)(part + 0x388) + level * 0.01f;
     }
-    if (*(s32 *)(*(u8 **)(obj + 0x344) + 0x8) != 0) {
-        part[0] = obj + 0x80;
+    i = 2;
+    if (*(s32 *)(*(u8 **)(obj + 0x344) + i * 4) != 0) {
+        part = obj + i * 0x40;
         add = level * 0.01f;
-        func_80017824(part[0] + 0x350, (b * 0.5f + 1.0f) * level, 1.0f, 0, 0, part[0] + 0x350);
-        *(f32 *)(part[0] + 0x388) = *(f32 *)(part[0] + 0x388) + add;
+        func_80017824(part + 0x350, (b * 0.5f + 1.0f) * level, 1.0f, 0, 0, part + 0x350);
+        *(f32 *)(part + 0x388) = *(f32 *)(part + 0x388) + add;
     }
 }

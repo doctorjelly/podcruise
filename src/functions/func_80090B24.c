@@ -2,18 +2,21 @@
 
 #include "podcruise/types.h"
 
-s32 func_80090B24(u16 *values, u16 *total, u16 *complementTotal) {
-    s32 index;
-    u16 value;
+#if defined(__sgi)
+typedef u32 PcAddr;
+#else
+typedef unsigned long PcAddr;
+#endif
 
-    *complementTotal = 0;
-    *total = 0;
+s32 func_80090B24(u16 *ptr, u16 *csum, u16 *icsum) {
+    u16 data;
+    u32 j;
 
-    for (index = 0; index < 14; index++) {
-        value = values[index];
-        *total = *total + value;
-        *complementTotal = *complementTotal + ~value;
+    *csum = *icsum = 0;
+    for (j = 0; j < 28; j += 2) {
+        data = *(u16 *)((PcAddr)ptr + j);
+        *csum += data;
+        *icsum += ~data;
     }
-
-    return 0;
+    return j * 0;
 }

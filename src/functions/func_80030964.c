@@ -17,6 +17,7 @@ struct PcEntity **func_80030964(s32 *stream) {
     s32 *word;
     u32 lowest;
     s32 count;
+    s32 i;
 
     word = stream;
     lowest = 0xFFFFFFFFU;
@@ -27,14 +28,14 @@ struct PcEntity **func_80030964(s32 *stream) {
     if (*word == 0x44617461) {
         count = word[1];
         word += 2;
-        while (count > 0) {
-            count--;
+        for (i = count; i > 0; i--) {
             word++;
         }
     }
     if (*word == 0x416E696D) {
-        list[0] = (struct PcEntity **)(word + 1);
-        cursor = list[0];
+        word++;
+        cursor = (struct PcEntity **)word;
+        list[0] = cursor;
         if (*cursor != 0) {
             do {
                 entity = *cursor;

@@ -30,6 +30,7 @@ extern Cmd8008528C *D_801217B0;
 extern u32 func_80088360(u32);
 extern void func_800390AC(void);
 
+#define CMDP(p, a, b) { p = D_801217B0++; p->w0 = (u32)(a); p->w1 = (u32)(b); }
 #define CMD(a, b) { Cmd8008528C *_c = D_801217B0++; _c->w0 = (u32)(a); _c->w1 = (u32)(b); }
 
 void func_8008528C(flag0, flag1, flag2, red0, green0, blue0, red1, green1, blue1)
@@ -44,16 +45,12 @@ s16 green1;
 s16 blue1;
 {
     f64 scale;
-    s16 b;
-    s16 g;
-    s16 r;
+    s16 c[3];
     s32 x0;
     s32 y0;
     s32 x1;
     s32 y1;
-    s32 depth;
-    u32 fill;
-    Cmd8008528C *cmd;
+    s32 mid;
 
     scale = (f64)D_80114470.unk00 / 320.0;
     x0 = D_80120DF0.unk20;
@@ -65,6 +62,7 @@ s16 blue1;
     x1 = (s32)(x1 * scale);
     y1 = (s32)(y1 * ((f64)D_80114470.unk02 / 240.0));
 
+    mid = (y0 + y1) / 2;
     if (D_800A4740 != 0) {
         CMD(0xE7000000, 0)
         CMD(0xE3000A01, 0x00300000)
@@ -75,47 +73,42 @@ s16 blue1;
     }
 
     CMD(0xE7000000, 0)
-    cmd = D_801217B0++;
-    if (D_80114470.unk04 == 0x20) {
-        depth = 3;
-    } else {
-        depth = 2;
-    }
-    cmd->w0 = (u32)(0xFF000000 | ((depth & 3) << 19) | ((D_80114470.unk00 - 1) & 0xFFF));
-    cmd->w1 = (u32)(func_80088360(D_800D9DB4));
+    CMD(0xFF000000 | (((D_80114470.unk04 == 0x20 ? 3 : 2) & 3) << 19) | ((D_80114470.unk00 - 1) & 0xFFF), func_80088360(D_800D9DB4))
 
     if (flag0 == 0) {
+        u32 fill;
         if (flag1 == 0) {
             if (D_80114470.unk04 == 0x10) {
-                r = red0; g = green0; b = blue0;
-                r += 4; g += 4; b += 4;
-                if (r >= 0x100) { r = 0xFF; }
-                if (g >= 0x100) { g = 0xFF; }
-                if (b >= 0x100) { b = 0xFF; }
-                fill = (((r << 8) & 0xF800) | ((g << 3) & 0x7C0) | ((b >> 2) & 0x3E)) | 1;
-                fill = fill | (fill << 16);
+                c[0] = red0 + 4;
+                if (c[0] >= 0x100) { c[0] = 0xFF; }
+                c[1] = green0 + 4;
+                if (c[1] >= 0x100) { c[1] = 0xFF; }
+                c[2] = blue0 + 4;
+                if (c[2] >= 0x100) { c[2] = 0xFF; }
+                fill = (((((c[0] << 8) & 0xF800) | ((c[1] << 3) & 0x7C0) | ((c[2] >> 2) & 0x3E)) | 1) << 16) | ((((c[0] << 8) & 0xF800) | ((c[1] << 3) & 0x7C0) | ((c[2] >> 2) & 0x3E)) | 1);
             } else {
                 fill = 0xFF;
             }
             CMD(0xF7000000, fill)
-            CMD(0xF6000000 | (((x1 - 1) & 0x3FF) << 14) | (((((y0 + y1) / 2) - 1) & 0x3FF) << 2),
+            CMD(0xF6000000 | (((x1 - 1) & 0x3FF) << 14) | (((mid - 1) & 0x3FF) << 2),
                 ((x0 & 0x3FF) << 14) | ((y0 & 0x3FF) << 2))
         }
         if (flag2 == 0) {
+            Cmd8008528C *cmd;
             if (D_80114470.unk04 == 0x10) {
-                r = red1; g = green1; b = blue1;
-                r += 4; g += 4; b += 4;
-                if (r >= 0x100) { r = 0xFF; }
-                if (g >= 0x100) { g = 0xFF; }
-                if (b >= 0x100) { b = 0xFF; }
-                fill = (((r << 8) & 0xF800) | ((g << 3) & 0x7C0) | ((b >> 2) & 0x3E)) | 1;
-                fill = fill | (fill << 16);
+                c[0] = red1 + 4;
+                if (c[0] >= 0x100) { c[0] = 0xFF; }
+                c[1] = green1 + 4;
+                if (c[1] >= 0x100) { c[1] = 0xFF; }
+                c[2] = blue1 + 4;
+                if (c[2] >= 0x100) { c[2] = 0xFF; }
+                fill = (((((c[0] << 8) & 0xF800) | ((c[1] << 3) & 0x7C0) | ((c[2] >> 2) & 0x3E)) | 1) << 16) | ((((c[0] << 8) & 0xF800) | ((c[1] << 3) & 0x7C0) | ((c[2] >> 2) & 0x3E)) | 1);
             } else {
                 fill = 0xFF;
             }
-            CMD(0xF7000000, fill)
-            CMD(0xF6000000 | (((x1 - 1) & 0x3FF) << 14) | (((y1 - 1) & 0x3FF) << 2),
-                ((x0 & 0x3FF) << 14) | ((((y0 + y1) / 2) & 0x3FF) << 2))
+            CMDP(cmd, 0xF7000000, fill)
+            CMDP(cmd, 0xF6000000 | (((x1 - 1) & 0x3FF) << 14) | (((y1 - 1) & 0x3FF) << 2),
+                ((x0 & 0x3FF) << 14) | (((mid) & 0x3FF) << 2))
         }
     }
 

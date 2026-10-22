@@ -20,13 +20,12 @@ extern u32 *D_801217B0;
 
 #define SHIFTL(v, s, w) (((u32)((v) & ((1 << (w)) - 1))) << (s))
 #define SCALE(v) ((s32)((f32)(v) * 4.0f))
-#define PUSH(w0, w1) { gfx = D_801217B0; D_801217B0 = gfx + 2; gfx[0] = (u32)(w0); gfx[1] = (u32)(w1); }
+#define PUSH(w0, w1) { u32 *gfx = D_801217B0; D_801217B0 += 2; gfx[0] = (u32)(w0); gfx[1] = (u32)(w1); }
 #define VIEWPORT(v) PUSH(0xDC080008, (u32)(unsigned long)(v))
 #define SCISSOR(ulx, uly, lrx, lry) PUSH(0xED000000 | SHIFTL(SCALE(ulx), 12, 12) | SHIFTL(SCALE(uly), 0, 12), SHIFTL(SCALE(lrx), 12, 12) | SHIFTL(SCALE(lry), 0, 12))
 #define PERSPNORM(s) PUSH(0xDB0E0000, (u32)(s))
 
 void func_80086EB4(s32 arg0) {
-    u32 *gfx;
     View *view;
     f64 xScale;
     f64 yScale;
@@ -38,11 +37,15 @@ void func_80086EB4(s32 arg0) {
     view = &D_80120DF0[arg0];
     VIEWPORT(view->vp);
     xScale = (f64)D_80114470[0] / 320.0;
-    ulx = (s32)((f64)view->ulx * xScale);
+    ulx = view->ulx;
+    ulx = (s32)((f64)ulx * xScale);
     yScale = (f64)D_80114470[1] / 240.0;
-    uly = (s32)((f64)view->uly * yScale);
-    lrx = (s32)((f64)view->lrx * xScale);
-    lry = (s32)((f64)view->lry * yScale);
+    uly = view->uly;
+    uly = (s32)((f64)uly * yScale);
+    lrx = view->lrx;
+    lrx = (s32)((f64)lrx * xScale);
+    lry = view->lry;
+    lry = (s32)((f64)lry * yScale);
     SCISSOR(ulx, uly, lrx, lry);
     PERSPNORM(view->perspNorm);
     func_80038D5C(&D_801217B0);
